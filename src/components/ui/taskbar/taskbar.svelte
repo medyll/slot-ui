@@ -13,11 +13,21 @@
 
 </script>
 
-<div>
+<div class="bar">
     {#each [...countValue] as [key, value]}
         <div>
-            <button on:click="{()=>{toggleWindow(value)}}">test</button>
+            <button on:click="{()=>{toggleWindow(value)}}">{key}</button>
         </div>
     {/each}
 </div>
+
+<style>
+    .bar {
+        display: flex;
+        grid-gap: 8px;
+        background-color: #ededed;
+        border-bottom: 1px solid #ccc;
+        padding: 0.5rem 0.25rem;
+    }
+</style>
 

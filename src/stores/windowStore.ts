@@ -1,4 +1,4 @@
-import {writable,get,readable} from 'svelte/store';
+import {writable, get, readable} from 'svelte/store';
 
 
 export type IChromeArgs<T = Record<string, any>> = {
@@ -23,16 +23,20 @@ export const windowListObjects = new Map<string | number, IChromeArgs>([]);
 export function useWindowList() {
   
   const {subscribe, set, update} = writable<listW>(windowListObjects);
+  const activeFrame              = writable<string|number>(null);
   
   return {
     subscribe,
+    activeFrame,
     create  : (payload: IChromeArgs) => update((n) => n.set(payload.frameId, payload)),
     open    : (payload: IChromeArgs) => update((n) => {
+      activeFrame.set(payload.frameId)
+      console.log(activeFrame)
       return n.set(payload.frameId, {open: true, minimized: false, maximized: true, ...payload});
     }),
     close   : (frameId: string | number) => update((n) => {
       const payload = n.get(frameId);
-      return n.set(frameId, {open: true, minimized: false, maximized: true, ...payload});
+      return n.set(frameId, {open: false, ...payload});
     }),
     minimize: (frameId: string | number) => update((n) => {
       const payload = n.get(frameId);
@@ -46,6 +50,7 @@ export function useWindowList() {
       n.delete(frameId);
       return n;
     }),
+    reset: () => set(new Map([]))
   };
 }
 

@@ -4,7 +4,7 @@
   import Window from '/src/components/ui/window.svelte';
 
   function addWindow(frameId: string) {
-    windowList.create({
+    windowList.open({
       frameId: frameId,
       title  : `the ${frameId}`
     });
@@ -29,3 +29,4 @@
 <pre>
     <!--{JSON.stringify($countValue, null, " ")}-->
 </pre>
+
