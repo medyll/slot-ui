@@ -1,58 +1,68 @@
 <script lang="ts">
   import {draggable} from '@neodrag/svelte';
-  import {listW, windowList} from '/src/stores/windowStore';
+  import {WindowStoreListType, windowsStore, getAppWindowStore, IChromeArgs} from '/src/stores/windowStore';
 
-  export let frameId;
+  export let frameId = '';
 
-  let countValue: listW;
   let activeFrame: string | number;
-  let offsetX: number;
-  let offsetY: number;
+  let x: number = 50;
+  let y: number = 50;
 
+  $: appWindowStore = getAppWindowStore(frameId);
+  $: appWindow = $appWindowStore as IChromeArgs;
+  $: position = {
+    position: $appWindowStore?.position,
+  };
 
-  windowList.subscribe((value: listW) => {
-    countValue = value;
-  });
-
-  windowList.activeFrame.subscribe((value: string | number) => {
+  windowsStore.activeFrame.subscribe((value: string | number) => {
     activeFrame = value;
   });
 
-  $: frame = countValue.get(frameId);
-
-  const listeners = {
+  const dragOptions = {
     handle         : '.handle',
-    position       : {x: offsetX, y: offsetY},
-    defaultPosition: {x: offsetX, y: offsetY},
-    onDragStart    : (args) => {
-      windowList.activeFrame.set(frameId);
+    defaultPosition: {x: 50, y: 50},
+    onDragStart    : (args: {
+      offsetX: number;
+      offsetY: number;
+      domRect: DOMRect;
+    }) => {
+      updatePos(args);
     },
     onDrag         : (args) => {
     },
-    onDragEnd      : (args) => {
-      offsetX = args.offsetX;
-      offsetY = args.offsetY;
+    onDragEnd      : (args: {
+      offsetX: number;
+      offsetY: number;
+      domRect: DOMRect;
+    }) => {
+      updatePos(args);
     },
-
   };
 
+  function updatePos(args: any) {
+    appWindowStore.updatePos({
+      x: args.offsetX,
+      y: args.offsetY
+    });
+  }
+
   function handleClick(args: PointerEvent) {
-    windowList.activeFrame.set(frameId);
+    windowsStore.activeFrame.set(frameId);
   }
 
   function handleClose(args: PointerEvent) {
-    windowList.remove(frameId);
+    appWindowStore.remove();
   }
 
 </script>
 
-<div use:draggable={{...listeners }}
+<div use:draggable={{...dragOptions,...position }}
      on:click={handleClick}
-     style="z-index:{activeFrame===frameId? '100': 0}"
+     style="z-index:{$appWindowStore?.active ? '100': 0}"
      class="window">
     <div class="bar">
         <div>icon</div>
-        <div class="handle">{frame.title}</div>
+        <div class="handle">{$appWindowStore?.title}</div>
         <div class="iconZone">
             <div>min</div>
             <div>max</div>
@@ -61,11 +71,11 @@
     </div>
     <div>
         <pre>
-            {JSON.stringify(frame, null, " ")}
+            {JSON.stringify($appWindowStore, null, " ")}
         </pre>
     </div>
-    <div>
-        <button on:click={handleClose}>Close</button>
+    <div class="buttonZone">
+        <button on:click={handleClose}>Close {frameId}</button>
     </div>
 </div>
 
@@ -89,6 +99,13 @@
         padding: 0.5rem;
         flex: 1;
       }
+    }
+
+    .buttonZone {
+      border-top: 1px solid #ccc;
+      padding: 0.5rem;
+      display: flex;
+      justify-content: end;
     }
   }
 

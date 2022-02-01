@@ -1,33 +1,36 @@
 <script lang="ts">
-  import {listW, windowList} from '/src/stores/windowStore';
+  import {sx4u} from '../../../use/sx4u';
 
-  function toggleWindow(frame: listW) {
+  import {getContext} from 'svelte';
+  import {WindowStoreListType, windowsStore, IChromeArgs} from '/src/stores/windowStore';
+
+  let {toggle, current, theme} = getContext('theme');
+
+  function toggleWindow(frame: IChromeArgs) {
     console.log({frame});
+    let frameId = frame.frameId;
+    windowsStore.toggle(frameId);
   }
 
-  let countValue: listW;
+  $: windows = $windowsStore as WindowStoreListType;
 
-  windowList.subscribe((value: listW) => {
-    countValue = value;
-  });
+  console.log({theme});
 
 </script>
 
-<div class="bar">
-    {#each [...countValue] as [key, value]}
-        <div>
-            <button on:click="{()=>{toggleWindow(value)}}">{key}</button>
-        </div>
+<div use:sx4u="{{brd:3  }}" class="bar" >
+    {#each [...windows] as [key, value]}
+        <button on:click="{()=>{toggleWindow(value)}}">{key}</button>
     {/each}
 </div>
 
-<style>
+<style >
     .bar {
         display: flex;
         grid-gap: 8px;
-        background-color: #ededed;
-        border-bottom: 1px solid #ccc;
-        padding: 0.5rem 0.25rem;
+        /*background-color: #ededed;*/
+        min-height: 48px;
+        align-items: center;
+        box-sizing: border-box
     }
 </style>
-

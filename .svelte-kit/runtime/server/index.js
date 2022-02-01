@@ -76,7 +76,7 @@ function is_string(s) {
 const text_types = new Set([
 	'application/xml',
 	'application/json',
-	'application/x-www-form-urlencoded',
+	'application/offsetX-www-form-urlencoded',
 	'multipart/form-data'
 ]);
 
@@ -1222,7 +1222,7 @@ async function render_response({
 				}
 
 				if (styles.has(dep)) {
-					attributes.push('disabled', 'media="(max-width: 0)"');
+					attributes.push('disabled', 'media="(max-w: 0)"');
 				}
 
 				return `\n\t<link ${attributes.join(' ')}>`;

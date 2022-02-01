@@ -350,7 +350,7 @@ class Router {
 	/**
 	 * @param {{
 	 *   url: URL;
-	 *   scroll: { x: number, y: number } | null;
+	 *   scroll: { offsetX: number, offsetY: number } | null;
 	 *   keepfocus: boolean;
 	 *   chain: string[];
 	 *   details: {
@@ -742,7 +742,7 @@ class Renderer {
 	 * @param {import('./types').NavigationInfo} info
 	 * @param {string[]} chain
 	 * @param {boolean} no_cache
-	 * @param {{hash?: string, scroll: { x: number, y: number } | null, keepfocus: boolean}} [opts]
+	 * @param {{hash?: string, scroll: { offsetX: number, offsetY: number } | null, keepfocus: boolean}} [opts]
 	 */
 	async handle_navigation(info, chain, no_cache, opts) {
 		if (this.started) {
@@ -759,7 +759,7 @@ class Renderer {
 	 * @param {import('./types').NavigationInfo} info
 	 * @param {string[]} chain
 	 * @param {boolean} no_cache
-	 * @param {{hash?: string, scroll: { x: number, y: number } | null, keepfocus: boolean}} [opts]
+	 * @param {{hash?: string, scroll: { offsetX: number, offsetY: number } | null, keepfocus: boolean}} [opts]
 	 */
 	async update(info, chain, no_cache, opts) {
 		const token = (this.token = {});
@@ -821,7 +821,7 @@ class Renderer {
 					scrollTo(scroll.x, scroll.y);
 				} else if (deep_linked) {
 					// Here we use `scrollIntoView` on the element instead of `scrollTo`
-					// because it natively supports the `scroll-margin` and `scroll-behavior`
+					// because it natively supports the `scroll-m` and `scroll-behavior`
 					// CSS properties.
 					deep_linked.scrollIntoView();
 				} else {

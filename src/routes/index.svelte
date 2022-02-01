@@ -1,10 +1,10 @@
 <script lang="ts">
-  import {listW, windowList} from '/src/stores/windowStore';
-  import Taskbar from '/src/components/ui/taskbar/taskbar.svelte';
+  import {ThemeWrapper, ThemeToggle} from 'svelte-themer';
+  import {WindowStoreListType, windowsStore} from '/src/stores/windowStore';
   import Window from '/src/components/ui/window.svelte';
 
   function addWindow(frameId: string) {
-    windowList.open({
+    windowsStore.open({
       frameId: frameId,
       title  : `the ${frameId}`
     });
@@ -12,21 +12,31 @@
 
   let countValue;
 
-  windowList.subscribe((value: listW) => {
+  windowsStore.subscribe((value: WindowStoreListType) => {
     countValue = value;
   });
 
 </script>
 
-<a on:click="{()=>{addWindow('red - point')}}">test</a>
-<a on:click="{()=>{addWindow('roudde')}}">test</a>
-<a on:click="{()=>{addWindow('456456')}}">test</a>
 
-<Taskbar/>
+<a on:click="{()=>{addWindow('1st')}}">1st</a>
+<a on:click="{()=>{addWindow('2nd')}}">2nd</a>
+<a on:click="{()=>{addWindow('3rd')}}">3rd</a>
 {#each [...countValue] as [key, value]}
-    <Window frameId="{key}" />
+    <Window frameId="{key}"/>
 {/each}
-<pre>
-    <!--{JSON.stringify($countValue, null, " ")}-->
-</pre>
 
+<style lang="scss" global>
+  @import 'node_modules/ress/ress';
+
+  button {
+    border: 0.5px solid #ccc;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    background-color: white;
+
+    &:hover {
+      background-color: #ededed;
+    }
+  }
+</style>
