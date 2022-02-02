@@ -1,15 +1,13 @@
-export interface SxProps extends Partial<CSSStyleDeclaration> {
+export interface Sx4uProps extends Partial<CSSStyleDeclaration> {
   p?: number[];
-  px: number,
-  py: number,
+  px?: number,
+  py?: number,
   m?: number[];
-  mx: number,
-  my: number,
+  mx?: number,
+  my?: number,
   w?: number;
   h?: number;
   debug?: boolean;
-  // rotate?: number;
-  pointer?: boolean;
   radius?: number;
   brd?: number;
   brdb?: number;
@@ -19,32 +17,30 @@ export interface SxProps extends Partial<CSSStyleDeclaration> {
   brdx?: number;
   brdy?: number;
   alignCenter?: boolean;
-  shadow?: boolean;
+  shad?: boolean;
+  rot?: number;
+  dsp?: CSSStyleDeclaration['display'];
+  sm?: Sx4uProps
+  md?: Sx4uProps
+  lg?: Sx4uProps
 }
 
 /**
  *
  * @param {HTMLElement} node
- * @param {SxProps} sty
+ * @param {Sx4uProps} sxArgs
  */
-export function sx4u(node: HTMLElement, sty: SxProps) {
+export function sx4u(node: HTMLElement, sxArgs: Sx4uProps) {
+  let sxTransformRules: Partial<Record<keyof Sx4uProps, any>> = {};
+  const sx4uClassPrefix                                       = node.classList[0] ?? 'random-letter-number';
+  const sx4uClassName                                         = 'sx4u-' + node.tagName.toLowerCase() + '-' + sx4uClassPrefix;
   
-  const sx4uClassPrefix = node.classList[0] ?? 'random-letter-number';
-  const sx4uClassName   = 'sx4u-' + node.tagName.toLowerCase()+'-'+sx4uClassPrefix;
-  
-  const test            = node.className.includes('sx4u-');
+  const test = node.className.includes('sx4u-');
   if (test) return;
   // add sx4uClassName
   node.classList.add(sx4uClassName);
-  // create style fragment
-  const styleEl = document.createElement('style', {is: 'new'});
-  styleEl.setAttribute('type', 'text/css');
-  document.head.appendChild(styleEl);
-  // Grab style element's sheet
-  let styleSheet = styleEl.sheet;
   
-  const style: Record<string, any>                         = {};
-  const transformKeys: Partial<Record<keyof SxProps, any>> = {
+  const transformKeys: Partial<Record<keyof Sx4uProps, any>> = {
     p   : 'padding',
     px  : ['paddingLeft', 'paddingRight'],
     py  : ['paddingTop', 'paddingBottom'],
@@ -58,17 +54,23 @@ export function sx4u(node: HTMLElement, sty: SxProps) {
     brdl: ['borderLeft'],
     brdx: ['borderLeft', 'borderRight'],
     brdy: ['borderTop', 'borderBottom'],
+    sm  : '(max-width: 1250px)',
   };
   
-  const transform: Partial<Record<keyof SxProps, any>> = {
-    p   : (p) => reducePad(p, transformKeys['p']),
-    px  : (px) => transNumericProps(px, transformKeys['px']),
-    py  : (py) => transNumericProps(py, transformKeys['py']),
-    m   : (m) => reducePad(m, transformKeys['m']),
-    mx  : (mx) => transNumericProps(mx, transformKeys['mx']),
-    my  : (my) => transNumericProps(my, transformKeys['my']),
-    w   : (w) => transNumericProps(w, ['width']),
-    h   : (h) => transNumericProps(h, ['height']),
+  // dimensions
+  sxTransformRules = {
+    p : (p) => transDimensions(p, transformKeys['p']),
+    px: (px) => transNumericProps(px, transformKeys['px']),
+    py: (py) => transNumericProps(py, transformKeys['py']),
+    m : (m) => transDimensions(m, transformKeys['m']),
+    mx: (mx) => transNumericProps(mx, transformKeys['mx']),
+    my: (my) => transNumericProps(my, transformKeys['my']),
+    w : (w) => transNumericProps(w, ['width']),
+    h : (h) => transNumericProps(h, ['height']),
+  };
+  // add borders
+  sxTransformRules = {
+    ...sxTransformRules,
     brd : (brd) => transBorderProps(brd, transformKeys['brd']),
     brdt: (brdt) => transBorderProps(brdt, transformKeys['brdt']),
     brdr: (brdr) => transBorderProps(brdr, transformKeys['brdr']),
@@ -76,30 +78,44 @@ export function sx4u(node: HTMLElement, sty: SxProps) {
     brdl: (brdl) => transBorderProps(brdl, transformKeys['brdl']),
     brdx: (brdx) => transBorderProps(brdx, transformKeys['brdx']),
     brdy: (brdy) => transBorderProps(brdy, transformKeys['brdy']),
-    // rotate : (rotate) => style.transform = `rotate(${rotate}deg)`,
-    pointer: (pointer) => style.cursor = pointer ? 'pointer' : '',
-    radius : (radius) => style.borderRadius = `${radius}px`,
-    shadow : (shadow) => style.boxShadow = `0px 0px ${shadow}px rgba(196, 211, 241, 0.85)`,
+  };
+  // add media queries
+  sxTransformRules = {
+    ...sxTransformRules,
+    sm: (sm) => doMediaQuy('sm', sm),
+    md: (md) => doMediaQuy('md', md),
+    lg: (lg) => doMediaQuy('lg', lg),
+  };
+  // add helpers
+  sxTransformRules = {
+    ...sxTransformRules,
+    rot   : (rotate) => {return {transform: `rotate(${rotate}deg)`};},
+    radius: (radius) => {return {borderRadius: typeof (radius) === 'number' ? `${radius}px` : radius};},
+    shad  : (shadow) => {return {boxShadow: `0px 0px ${shadow}px rgba(196, 211, 241, 0.85)`};},
   };
   
-  const diff = doTransform(sty);
-  applySheet(diff);
+  const diff = sx4uTransform(sxArgs);
+  insertSxStyleSheet(diff);
   
-  
-  function doTransform(args: SxProps) {
-    return Object.keys(args).reduce(function (previousValue, styKey, index) {
+  function sx4uTransform(sxArgs: Sx4uProps): Record<string, any> {
+    return Object.keys(sxArgs).reduce(function (previousValue, sx4uKey, index) {
       let newVal;
-      if (transform[styKey]) {
-        newVal = Object.assign(previousValue, transform[styKey](args[styKey as any]));
+      if (sxTransformRules[sx4uKey]) {
+        newVal = {...previousValue, ...sxTransformRules[sx4uKey](sxArgs[sx4uKey as any])};
       } else {
-        newVal = {...previousValue, [styKey]: args[styKey]};
+        // common CSSStyleDeclaration
+        newVal = {...previousValue, [sx4uKey]: sxArgs[sx4uKey]};
       }
       
       return newVal;
     }, {});
   }
   
-  function reducePad(values: number | number[], arg?: string) {
+  function doMediaQuy(mqy: string, qyargs: Sx4uProps) {
+    return {[`@media ${transformKeys[mqy]}`]: sx4uTransform(qyargs)};
+  }
+  
+  function transDimensions(values: number | number[], arg?: string) {
     if (Array.isArray(values)) {
       const res = values.map((val, index) => {
         return transNumericProps(val);
@@ -127,18 +143,34 @@ export function sx4u(node: HTMLElement, sty: SxProps) {
     }, {});
   }
   
-  function camelCaseToDash(str) {
+  function camelCaseToDash(str: string) {
     return str.replace(/([a-zA-Z])(?=[A-Z])/g, '$1-').toLowerCase();
   }
   
-  function applySheet(diff) {
-    let str = '';
-    for (const red of Object.keys(diff)) {
-      str += camelCaseToDash(red) + ': ' + diff[red] + ';';
-    }
+  function insertSxStyleSheet(diff) {
     
+    let str       = doLoop(diff);
+    // create style fragment
+    const styleEl = document.createElement('style', {is: 'new'});
+    styleEl.setAttribute('type', 'text/css');
+    document.head.appendChild(styleEl);
+    // take sheet
+    let styleSheet    = styleEl.sheet;
     // styleSheet.insertRule('.daRule {'+str+'}',styleSheet.cssRules.length); // , styleSheet.cssRules.length
     styleEl.innerText = `.${sx4uClassName}{${str}}.${sx4uClassName}{} `; // , styleSheet.cssRules.length
+    
+    function doLoop(diff) {
+      let ret = '';
+      for (const red of Object.keys(diff)) {
+        if (typeof (diff[red]) === 'object') {
+          ret += camelCaseToDash(red) + '{' + doLoop(diff[red]) + '};';
+        }
+        if (typeof (diff[red]) === 'string') {
+          ret += camelCaseToDash(red) + ': ' + diff[red] + ';';
+        }
+      }
+      return ret;
+    }
   }
   
 }

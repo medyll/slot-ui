@@ -18,13 +18,13 @@
 
 </script>
 
-<div use:sx4u="{{brd:3  }}" class="bar" >
+<div use:sx4u="{{brdb:1,sm:{brdb: 2}}}" class="bar">
     {#each [...windows] as [key, value]}
         <button on:click="{()=>{toggleWindow(value)}}">{key}</button>
     {/each}
 </div>
 
-<style >
+<style>
     .bar {
         display: flex;
         grid-gap: 8px;
