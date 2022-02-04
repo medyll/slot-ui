@@ -2,9 +2,7 @@
                 immutable={true}/>
 <script lang="ts">
   import {custom_event} from 'svelte/internal';
-  import {get_current_component} from 'svelte/internal';
   import {onMount} from 'svelte';
-
 
   export let title = 'not set';
 
@@ -16,8 +14,7 @@
     ref.dispatchEvent(event);
   }
 
-  onMount(() => {
-  });
+  onMount(() => {});
 
 </script>
 

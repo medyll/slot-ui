@@ -11,6 +11,7 @@
   import color from 'color';
   import {afterUpdate, onMount} from 'svelte';
 
+  import Icon from "/src/components/ui/icon/index.svelte"
   let slideLeft: any;
   let slideRight: any;
 
@@ -23,13 +24,12 @@
     console.log('update startMenu');
   });
 
-
   onMount(() => {
     console.log('mounted');
-   /* document.addEventListener('panel:button:clicked', (event) => {
-      // alert('red');
-      toggleSlidePanels(event)
-    }, true);*/
+      /* document.addEventListener('panel:button:clicked', (event) => {
+       // alert('red');
+       toggleSlidePanels(event)
+       }, true);*/
   });
 </script>
 
@@ -54,14 +54,14 @@
                         {/each}
                     </div>
                 </Panel>
-                <Panel title="Recent Items" >
+                <Panel title="Recent Items">
                     <div class="gridIconBis">
                         {#each [...Array(12)] as key}
                             <div class="buttonPole">here</div>
                         {/each}
                     </div>
                 </Panel>
-                <Panel >
+                <Panel>
                     <div class="gridOne">
                         {#each [...Array(3)] as key}
                             <div class="buttonPole">here</div>
@@ -70,7 +70,7 @@
                 </Panel>
             </SlidePanel>
             <SlidePanel open="{false}" bind:this={slideRight}>
-                <Panel title="Zoom area" >
+                <Panel title="Zoom area">
                     <div class="gridIconMid">
                         {#each [...Array(130)] as key}
                             <div class="buttonPole">here</div>
@@ -81,12 +81,14 @@
         </div>
         <div class="bottomBar">
             hereddd
+            <Icon />
         </div>
     </div>
 {/if}
 <style lang="scss">
   .startMenu {
-    background-color: rgb(90, 67, 52);
+    background-color: rgba(90, 67, 52, 0.95);
+    backdrop-filter: blur(10px);
     color: white;
     display: flex;
     flex-direction: column;
@@ -95,6 +97,8 @@
     transform: translate(-50%, 0);
     box-shadow: 0px 0px 3px 1px rgba(51, 51, 51, 0.5);
     overflow: hidden;
+    z-index: 3000;
+    position: absolute;
 
     input {
       border: 1px solid rgb(208, 191, 151);
