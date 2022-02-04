@@ -176,5 +176,8 @@ export function sx4u(node: HTMLElement, sxArgs: Sx4uProps) {
     }
   }
   
+  return {
+    'data-action': 'res'
+  }
 }
 

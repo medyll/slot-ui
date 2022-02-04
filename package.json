@@ -29,6 +29,7 @@
     "@neodrag/svelte": "^1.0.2",
     "axios": "^0.25.0",
     "color": "^4.2.0",
+    "mongodb": "^4.3.1",
     "ress": "^4.0.0",
     "svelte-themer": "^0.5.5",
     "svelte-use-form": "^2.4.3"

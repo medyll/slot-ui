@@ -1,16 +1,19 @@
 <script lang="ts">
   import {sx4u} from '../../../use/sx4u/sx4u';
-
+  import { goto } from '$app/navigation';
   import {getContext} from 'svelte';
   import {WindowStoreListType, windowsStore, IChromeArgs} from '/src/stores/windowStore';
   import {toggleStartMenu} from "../../../configurations";
+  import { get_current_component } from "svelte/internal";
+
+  const thisComponent = get_current_component();
+  console.log(thisComponent);
 
   let {toggle, current, theme} = getContext('theme');
 
   function toggleWindow(frame: IChromeArgs) {
-    console.log({frame});
     let frameId = frame.frameId;
-    windowsStore.toggle(frameId);
+    goto('/explorer/scheme/client');
   }
 
   let windows;
