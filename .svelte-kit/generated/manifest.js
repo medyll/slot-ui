@@ -8,7 +8,7 @@ const d = decodeURIComponent;
 
 export const routes = [
 	// src/routes/index.svelte
-	[/^\/$/, [c[0], c[2]], [c[1]]]
+	[/^\/$/, [c[0], c[2]], [c[1]], null, 1]
 ];
 
 // we import the root layout/error components eagerly, so that

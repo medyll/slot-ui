@@ -1,8 +1,9 @@
 <script lang="ts">
-  import {sx4u} from '../../../use/sx4u';
+  import {sx4u} from '../../../use/sx4u/sx4u';
 
   import {getContext} from 'svelte';
   import {WindowStoreListType, windowsStore, IChromeArgs} from '/src/stores/windowStore';
+  import {toggleStartMenu} from "../../../configurations";
 
   let {toggle, current, theme} = getContext('theme');
 
@@ -12,13 +13,14 @@
     windowsStore.toggle(frameId);
   }
 
-  $: windows = $windowsStore as WindowStoreListType;
+  let windows;
+  $:   windows = $windowsStore as WindowStoreListType;
 
-  console.log({theme});
 
 </script>
 
 <div use:sx4u="{{brdb:1,sm:{brdb: 2}}}" class="bar">
+    <a on:click="{toggleStartMenu}">toggleStartMenu</a>
     {#each [...windows] as [key, value]}
         <button on:click="{()=>{toggleWindow(value)}}">{key}</button>
     {/each}

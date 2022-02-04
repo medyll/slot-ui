@@ -20,6 +20,8 @@ export type IChromeArgs<T = Record<string, any>> = {
     x: number;
     y: number;
   }
+  //
+  destroyer: () => void
 }
 
 export type WindowStoreListType = Map<string | number, IChromeArgs>
@@ -43,7 +45,8 @@ export function createWindowStore() {
     create   : (payload: IChromeArgs) => update((n) => n.set(payload.frameId, {...payload})),
     open     : (payload: IChromeArgs) => update((n) => {
       activeFrame.set(payload.frameId);
-      return n.set(payload.frameId, {...payload, open: true, minimized: false, maximized: true});
+      const obj = n.get(payload.frameId) ?? {};
+      return n.set(payload.frameId, {...payload, ...obj, open: true, minimized: false, maximized: true});
     }),
     close    : (frameId: string | number) => update((n) => {
       const payload = n.get(frameId);
@@ -66,6 +69,17 @@ export function createWindowStore() {
       n.set(frameId, {...payload, position: position});
       return n;
     }),
+    makeOnTop: (frameId: string | number) => update((n) => {
+      const values = Array.from(n);
+      const payload = n.get(frameId);
+      
+      const z = values.reduce((prev,val)=>{
+        return (val[1]?.zIndex >= prev) ? val[1]?.zIndex + 1 : prev
+      },0)
+
+      n.set(frameId, {...payload, zIndex: z});
+      return n;
+    }),
     reset    : () => set(new Map([]))
   };
 }
@@ -75,20 +89,15 @@ export const windowsStore = createWindowStore();
 
 export function getAppWindowStore(frameId: string | number) {
   
-  const {subscribe} = derived([windowsStore, activeFrame], ([$windowsStore, $activeFrame]) => {
-    const size   = $windowsStore.size;
-    const act    = $windowsStore.get(frameId);
-    const zIndex = ($activeFrame === frameId) ? size + 1 : act?.zIndex;
-    return {
-      ...act,
-      active: $activeFrame === frameId,
-      zIndex
-    };
+  const {subscribe} = derived([windowsStore], ([$windowsStore]) => {
+
+    return $windowsStore.get(frameId);
   });
   
   return {
     subscribe,
     updatePos: (position: IChromeArgs['position']) => windowsStore.updatePos(frameId, position),
-    remove   : () => windowsStore.remove(frameId)
+    remove   : () => windowsStore.remove(frameId),
+    makeOnTop: () => windowsStore.makeOnTop(frameId),
   };
 }

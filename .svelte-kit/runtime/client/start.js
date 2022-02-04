@@ -3,8 +3,8 @@ import { fallback, routes } from '__GENERATED__/manifest.js';
 import { onMount, tick } from 'svelte';
 import { g as get_base_uri } from '../chunks/utils.js';
 import { writable } from 'svelte/store';
+import { base, set_paths } from '../paths.js';
 import { init } from './singletons.js';
-import { set_paths } from '../paths.js';
 
 function scroll_state() {
 	return {
@@ -350,7 +350,7 @@ class Router {
 	/**
 	 * @param {{
 	 *   url: URL;
-	 *   scroll: { offsetX: number, offsetY: number } | null;
+	 *   scroll: { x: number, y: number } | null;
 	 *   keepfocus: boolean;
 	 *   chain: string[];
 	 *   details: {
@@ -553,6 +553,56 @@ function notifiable_store(value) {
 	return { notify, set, subscribe };
 }
 
+function create_updated_store() {
+	const { set, subscribe } = writable(false);
+
+	const interval = +(
+		/** @type {string} */ (import.meta.env.VITE_SVELTEKIT_APP_VERSION_POLL_INTERVAL)
+	);
+	const initial = import.meta.env.VITE_SVELTEKIT_APP_VERSION;
+
+	/** @type {NodeJS.Timeout} */
+	let timeout;
+
+	async function check() {
+		if (import.meta.env.DEV || import.meta.env.SSR) return false;
+
+		clearTimeout(timeout);
+
+		if (interval) timeout = setTimeout(check, interval);
+
+		const file = import.meta.env.VITE_SVELTEKIT_APP_VERSION_FILE;
+
+		const res = await fetch(`${base}/${file}`, {
+			headers: {
+				pragma: 'no-cache',
+				'cache-control': 'no-cache'
+			}
+		});
+
+		if (res.ok) {
+			const { version } = await res.json();
+			const updated = version !== initial;
+
+			if (updated) {
+				set(true);
+				clearTimeout(timeout);
+			}
+
+			return updated;
+		} else {
+			throw new Error(`Version check failed: ${res.status}`);
+		}
+	}
+
+	if (interval) timeout = setTimeout(check, interval);
+
+	return {
+		subscribe,
+		check
+	};
+}
+
 /**
  * @param {RequestInfo} resource
  * @param {RequestInit} [opts]
@@ -622,7 +672,8 @@ class Renderer {
 			url: notifiable_store({}),
 			page: notifiable_store({}),
 			navigating: writable(/** @type {Navigating | null} */ (null)),
-			session: writable(session)
+			session: writable(session),
+			updated: create_updated_store()
 		};
 
 		this.$session = null;
@@ -680,14 +731,28 @@ class Renderer {
 			for (let i = 0; i < nodes.length; i += 1) {
 				const is_leaf = i === nodes.length - 1;
 
+				let props;
+
+				if (is_leaf) {
+					const serialized = document.querySelector('[data-type="svelte-props"]');
+					if (serialized) {
+						props = JSON.parse(/** @type {string} */ (serialized.textContent));
+					}
+				}
+
 				const node = await this._load_node({
 					module: await nodes[i],
 					url,
 					params,
 					stuff,
 					status: is_leaf ? status : undefined,
-					error: is_leaf ? error : undefined
+					error: is_leaf ? error : undefined,
+					props
 				});
+
+				if (props) {
+					node.uses.dependencies.add(url.href);
+				}
 
 				branch.push(node);
 
@@ -742,7 +807,7 @@ class Renderer {
 	 * @param {import('./types').NavigationInfo} info
 	 * @param {string[]} chain
 	 * @param {boolean} no_cache
-	 * @param {{hash?: string, scroll: { offsetX: number, offsetY: number } | null, keepfocus: boolean}} [opts]
+	 * @param {{hash?: string, scroll: { x: number, y: number } | null, keepfocus: boolean}} [opts]
 	 */
 	async handle_navigation(info, chain, no_cache, opts) {
 		if (this.started) {
@@ -759,7 +824,7 @@ class Renderer {
 	 * @param {import('./types').NavigationInfo} info
 	 * @param {string[]} chain
 	 * @param {boolean} no_cache
-	 * @param {{hash?: string, scroll: { offsetX: number, offsetY: number } | null, keepfocus: boolean}} [opts]
+	 * @param {{hash?: string, scroll: { x: number, y: number } | null, keepfocus: boolean}} [opts]
 	 */
 	async update(info, chain, no_cache, opts) {
 		const token = (this.token = {});
@@ -788,6 +853,12 @@ class Renderer {
 					location.href = new URL(navigation_result.redirect, location.href).href;
 				}
 
+				return;
+			}
+		} else if (navigation_result.props?.page?.status >= 400) {
+			const updated = await this.stores.updated.check();
+			if (updated) {
+				location.href = info.url.href;
 				return;
 			}
 		}
@@ -821,7 +892,7 @@ class Renderer {
 					scrollTo(scroll.x, scroll.y);
 				} else if (deep_linked) {
 					// Here we use `scrollIntoView` on the element instead of `scrollTo`
-					// because it natively supports the `scroll-m` and `scroll-behavior`
+					// because it natively supports the `scroll-margin` and `scroll-behavior`
 					// CSS properties.
 					deep_linked.scrollIntoView();
 				} else {
@@ -1035,10 +1106,11 @@ class Renderer {
 	 *   url: URL;
 	 *   params: Record<string, string>;
 	 *   stuff: Record<string, any>;
+	 *   props?: Record<string, any>;
 	 * }} options
 	 * @returns
 	 */
-	async _load_node({ status, error, module, url, params, stuff }) {
+	async _load_node({ status, error, module, url, params, stuff, props }) {
 		/** @type {import('./types').BranchNode} */
 		const node = {
 			module,
@@ -1047,11 +1119,16 @@ class Renderer {
 				url: false,
 				session: false,
 				stuff: false,
-				dependencies: []
+				dependencies: new Set()
 			},
 			loaded: null,
 			stuff
 		};
+
+		if (props) {
+			// shadow endpoint props means we need to mark this URL as a dependency of itself
+			node.uses.dependencies.add(url.href);
+		}
 
 		/** @type {Record<string, string>} */
 		const uses_params = {};
@@ -1073,6 +1150,7 @@ class Renderer {
 			/** @type {import('types/page').LoadInput | import('types/page').ErrorLoadInput} */
 			const load_input = {
 				params: uses_params,
+				props: props || {},
 				get url() {
 					node.uses.url = true;
 					return url;
@@ -1088,7 +1166,7 @@ class Renderer {
 				fetch(resource, info) {
 					const requested = typeof resource === 'string' ? resource : resource.url;
 					const { href } = new URL(requested, url);
-					node.uses.dependencies.push(href);
+					node.uses.dependencies.add(href);
 
 					return started ? fetch(resource, info) : initial_fetch(resource, info);
 				}
@@ -1116,6 +1194,8 @@ class Renderer {
 
 			node.loaded = normalize(loaded);
 			if (node.loaded.stuff) node.stuff = node.loaded.stuff;
+		} else if (props) {
+			node.loaded = normalize({ props });
 		}
 
 		return node;
@@ -1134,7 +1214,7 @@ class Renderer {
 			if (cached) return cached;
 		}
 
-		const [pattern, a, b, get_params] = route;
+		const [pattern, a, b, get_params, has_shadow] = route;
 		const params = get_params
 			? // the pattern is for the route which we've already matched to this path
 			  get_params(/** @type {RegExpExecArray}  */ (pattern.exec(path)))
@@ -1178,16 +1258,47 @@ class Renderer {
 					(changed.url && previous.uses.url) ||
 					changed.params.some((param) => previous.uses.params.has(param)) ||
 					(changed.session && previous.uses.session) ||
-					previous.uses.dependencies.some((dep) => this.invalid.has(dep)) ||
+					Array.from(previous.uses.dependencies).some((dep) => this.invalid.has(dep)) ||
 					(stuff_changed && previous.uses.stuff);
 
 				if (changed_since_last_render) {
-					node = await this._load_node({
-						module,
-						url,
-						params,
-						stuff
-					});
+					/** @type {Record<string, any>} */
+					let props = {};
+
+					if (has_shadow && i === a.length - 1) {
+						const res = await fetch(`${url.pathname}/__data.json`, {
+							headers: {
+								'x-sveltekit-noredirect': 'true'
+							}
+						});
+
+						if (res.ok) {
+							const redirect = res.headers.get('x-sveltekit-location');
+
+							if (redirect) {
+								return {
+									redirect,
+									props: {},
+									state: this.current
+								};
+							}
+
+							props = await res.json();
+						} else {
+							status = res.status;
+							error = new Error('Failed to load data');
+						}
+					}
+
+					if (!error) {
+						node = await this._load_node({
+							module,
+							url,
+							params,
+							props,
+							stuff
+						});
+					}
 
 					if (node && node.loaded) {
 						if (node.loaded.fallthrough) {

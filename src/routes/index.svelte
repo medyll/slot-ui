@@ -1,33 +1,26 @@
 <script lang="ts">
   import {ThemeWrapper, ThemeToggle} from 'svelte-themer';
   import {WindowStoreListType, windowsStore} from '/src/stores/windowStore';
-  import Window from '/src/components/ui/window.svelte';
-
-  function addWindow(frameId: string) {
-    windowsStore.open({
-      frameId: frameId,
-      title  : `the ${frameId}`
-    });
-  }
+  import StartMenu from '/src/components/ui/startMenu/startMenu.svelte';
+  import {openWindow, toggleStartMenu} from '../configurations';
 
   let countValue;
+
 
   windowsStore.subscribe((value: WindowStoreListType) => {
     countValue = value;
   });
 
+
 </script>
 
+<div class="text">cfvdvfd</div>
 
-<a on:click="{()=>{addWindow('1st')}}">1st</a>
-<a on:click="{()=>{addWindow('2nd')}}">2nd</a>
-<a on:click="{()=>{addWindow('3rd')}}">3rd</a>
-{#each [...countValue] as [key, value]}
-    <Window frameId="{key}"/>
-{/each}
+<StartMenu />
 
 <style lang="scss" global>
   @import 'node_modules/ress/ress';
+  @import 'D:/boulot/app-node/cssfabric/lib/styles/cssfabric.min.css';
 
   button {
     border: 0.5px solid #ccc;

@@ -9,9 +9,12 @@
     <slot></slot>
 </ThemeWrapper>
 
-<style>
-    :global(html) {
-        /*background-color: var(--theme-colors-background, initial);
-        color: var(--theme-colors-text, initial);*/
+<style global>
+    html{
+        font-size: 12px;
+    }
+    body{
+        height:100%;
+        overflow:hidden;
     }
 </style>

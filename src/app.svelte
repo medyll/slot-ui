@@ -1,0 +1,3 @@
+<script>
+    alert('red')
+</script>
