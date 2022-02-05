@@ -2,11 +2,13 @@
                 immutable={true}/>
 <script lang="ts">
   import {custom_event} from 'svelte/internal';
-  import {onMount} from 'svelte';
+  import {onMount, getContext} from 'svelte';
 
   export let title = 'not set';
 
   let ref;
+
+    console.log(getContext('SlidePanel'));
 
   function sayHello() {
     const event = custom_event('panel:button:clicked',
@@ -22,7 +24,7 @@
 <div class="panel" bind:this={ref}>
     <div class="panelBar">
         <div style="flex:1">{title}</div>
-        <button on:click={sayHello}>go there ></button>
+        <button on:click={sayHello}>go there or back ? ></button>
     </div>
     <div class="panelContent">
         <slot></slot>

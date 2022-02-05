@@ -4,33 +4,39 @@
 
   import {sx4u} from '../../../use/sx4u/sx4u';
   import {clickAway} from '../../../use/clickAway/clickAway';
-  import SlidePanel from '/src/components/ui/slidePanel/slidePanel.svelte';
+  import SlidePanel from '/src/components/ui/slidePanel/SlidePanel.svelte';
   import Panel from '/src/components/ui/panel/panel.svelte';
   import {sx4uPreprocess} from '../../../use/sx4u/sx4uPreprocess';
   import {openWindow, toggleStartMenu, startMenuStore} from '../../../configurations';
   import color from 'color';
-  import {afterUpdate, onMount} from 'svelte';
+  import {afterUpdate, onMount, setContext, getContext} from 'svelte';
 
-  import Icon from "/src/components/ui/icon/index.svelte"
+  import Icon from '/src/components/ui/icon/index.svelte';
+  import {writable} from 'svelte/store';
+
+  const menuStore = writable<any>(null);
+
   let slideLeft: any;
   let slideRight: any;
 
   function toggleSlidePanels(event) {
     slideLeft.actions.toggle();
     slideRight.actions.toggle();
+
+    menuStore.set({
+      ...$menuStore,
+      open: !$menuStore?.open
+    })
+   setContext('SlidePanel', menuStore);
   }
 
-  afterUpdate(() => {
-    console.log('update startMenu');
-  });
+  onMount(()=>{
+    const unsubscribe = menuStore.subscribe(() => {
 
-  onMount(() => {
-    console.log('mounted');
-      /* document.addEventListener('panel:button:clicked', (event) => {
-       // alert('red');
-       toggleSlidePanels(event)
-       }, true);*/
-  });
+    });
+
+    return unsubscribe
+  })
 </script>
 
 {#if $startMenuStore}
@@ -40,7 +46,7 @@
          use:sx4u={{position:'absolute',radius:8,w:96,h:64}}
          use:clickAway={{action: toggleStartMenu }}>
         <div use:sx4u={{p:2,py:2}} style="margin-bottom:2rem">
-            <input style="width: 100%;text-align: right" type="search" value="recherche"/>
+            <input style="width: 100%;" type="search" placeholder="Recherche"/>
         </div>
         <div style="position:relative" class="startMenuContent">
             <SlidePanel open="{true}" bind:this={slideLeft}>
@@ -80,8 +86,9 @@
             </SlidePanel>
         </div>
         <div class="bottomBar">
-            hereddd
-            <Icon />
+            <Icon icon="faAllergies"/>
+            <Icon icon="faAllergies"/>
+            <Icon icon="faAllergies"/>
         </div>
     </div>
 {/if}
@@ -100,19 +107,10 @@
     z-index: 3000;
     position: absolute;
 
-    input {
-      border: 1px solid rgb(208, 191, 151);
-      border-bottom: 2px solid rgb(208, 191, 151);
-      border-radius: 4px;
-      padding: 0.5rem;
-      box-shadow: inset 0px 0px 3px 1px rgba(51, 51, 51, 0.5);
-      background-color: rgb(48, 41, 36);
-      color: white
-    }
-
     .startMenuContent {
       flex: 1;
-      overflow: auto;
+      overflow-y: auto;
+      overflow-x: hidden;
     }
   }
 
@@ -151,7 +149,7 @@
   }
 
   .bottomBar {
-    padding: 1rem 2rem;
+    padding: 2rem 2rem;
     box-shadow: 0px 0px 3px 1px rgba(51, 51, 51, 0.5);
   }
 </style>
