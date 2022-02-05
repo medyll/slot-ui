@@ -5,7 +5,7 @@
   import {sx4u} from '../../../use/sx4u/sx4u';
   import {clickAway} from '../../../use/clickAway/clickAway';
   import SlidePanel from '/src/components/ui/slidePanel/SlidePanel.svelte';
-  import Panel from '/src/components/ui/panel/panel.svelte';
+  import Panel from '/src/components/ui/panel/Panel.svelte';
   import {sx4uPreprocess} from '../../../use/sx4u/sx4uPreprocess';
   import {openWindow, toggleStartMenu, startMenuStore} from '../../../configurations';
   import color from 'color';
@@ -54,8 +54,7 @@
                     <div class="gridIcon">
                         {#each [...Array(9)] as key,val}
                             <div on:click={()=>{openWindow('try'+val)}}
-                                 class="buttonPole"
-                            >key
+                                 class="buttonPole" >key
                             </div>
                         {/each}
                     </div>

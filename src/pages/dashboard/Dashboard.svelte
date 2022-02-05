@@ -1,4 +1,4 @@
-<div style="z-index:-1" class="pos-abs w-full h-full overflow-auto pad-8">
+<div style="z-index:0" class="pos-abs w-full h-full overflow-auto pad-8">
     <div class="gridIcon">
         {#each [...Array(420)] as key,val}
             <div class="bg-palette-red-darker buttonPole">key</div>
