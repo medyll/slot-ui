@@ -2,21 +2,18 @@
                 immutable={true}/>
 <script lang="ts">
   import {custom_event} from 'svelte/internal';
-  import {onMount, getContext} from 'svelte';
+  import {onMount} from 'svelte';
 
   export let title = 'not set';
 
   let ref;
 
-    console.log(getContext('PanelSlide'));
 
   function sayHello() {
     const event = custom_event('panel:button:clicked',
       {title}, true);
     ref.dispatchEvent(event);
   }
-
-  onMount(() => {});
 
 </script>
 

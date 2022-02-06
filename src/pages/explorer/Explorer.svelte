@@ -2,10 +2,27 @@
   import List from '../../components/vendor/list/List.svelte';
   import ListItem from '../../components/vendor/list/ListItem.svelte';
   import ListTitle from '../../components/vendor/list/ListTitle.svelte';
+  import type {LisItemProps} from '../../components/vendor/list/types';
+  import {propsXy} from '../../utils';
+  import type {propsXyProps} from '../../utils';
+  import {null_to_empty} from 'svelte/internal';
+
+  let testArray = [];
 
   const handleClick = (one) => (event: PointerEvent) => {
-    console.log(one, event);
+    // console.log(one, event, 'red');
   };
+
+  const objI = {title: 'Client test', subTitle: 'data'};
+
+  const transformArgs: propsXyProps<LisItemProps, typeof objI> = [['primary', 'title'], ['secondary', 'subTitle']];
+
+
+  const data: any[] = Array.from(Array(120).keys()).map(id => { return {...objI, ...{title: 'datou ' + id, id}};});
+
+  testArray = propsXy(transformArgs, data);
+  console.log({testArray});
+
 </script>
 
 <div class="explorerFrame">
@@ -14,20 +31,20 @@
     </div>
     <div class="explorerContainer">
         <div class="navLeft">
-            <input type="search" style="width:100%;" placeholder="redfer" />
-            <List>
+            <input type="search" style="width:100%;" placeholder="redfer"/>
+            <List on:click={handleClick('reddy')}>
                 <ListTitle>title</ListTitle>
-                {#each [...Array(2)] as key,val}
-                    <ListItem code="{key}" on:click={handleClick('reddy')}>
-                        <span slot="icon">icon</span>
-                        <div slot="primary">primary text</div>
-                        <div slot="secondary">secondary text</div>
-                        <span slot="action">action</span>
+                {#each [...testArray] as key,val}
+                    <ListItem data="{key.data}">
+                        <span slot="icon">{null_to_empty(key.id)}</span>
+                        <span slot="primary">{null_to_empty(key.primary)}</span>
+                        <span slot="secondary">{null_to_empty(key.secondary)}</span>
+                        <span slot="action">{null_to_empty(key.action)}</span>
                     </ListItem>
                 {/each}
-                <ListTitle>title</ListTitle>
+                <!--<ListTitle>title</ListTitle>
                 {#each [...Array(4)] as key,val}
-                    <ListItem code="{val}" on:click={handleClick('reddy')}>
+                    <ListItem>
                         <span slot="icon">icon</span>
                         <div slot="primary">primary text</div>
                         <div slot="secondary">secondary text</div>
@@ -36,7 +53,7 @@
                 {/each}
                 <ListTitle>title</ListTitle>
                 {#each [...Array(7)] as key}
-                    <ListItem on:click={handleClick('reddy')}>
+                    <ListItem>
                         <span slot="icon">icon</span>
                         <div slot="primary">primary text</div>
                         <div slot="secondary">secondary text</div>
@@ -45,19 +62,19 @@
                 {/each}
                 <ListTitle>title</ListTitle>
                 {#each [...Array(30)] as key}
-                    <ListItem on:click={handleClick('reddy')}>
+                    <ListItem>
                         <span slot="icon">icon</span>
                         <div slot="primary">primary text</div>
                         <div slot="secondary">secondary text</div>
                         <span slot="action">action</span>
                     </ListItem>
-                {/each}
+                {/each}-->
             </List>
         </div>
         <div class="content">
             <slot name="content"></slot>
             {#each [...Array(12)] as key}
-                <div class="buttonPole"> </div>
+                <div class="buttonPole"></div>
             {/each}
         </div>
     </div>
@@ -89,7 +106,7 @@
         width: 270px;
         height: 100%;
         overflow: auto;
-        padding:1rem;
+        padding: 1rem;
       }
 
       .content {
