@@ -1,6 +1,6 @@
 <script lang="ts">
   import {ThemeWrapper, ThemeToggle, presets} from 'svelte-themer';
-  import Taskbar from '/src/components/ui/taskbar/taskbar.svelte';
+  import Taskbar from '/src/components/ui/taskbar/Taskbar.svelte';
   import Dashboard from '/src/pages/dashboard/Dashboard.svelte';
   import StartMenu from '/src/components/ui/startMenu/StartMenu.svelte';
   import Login from "../pages/login/Login.svelte";
@@ -12,8 +12,8 @@
     {#if isLogged}
         <Taskbar/>
         <StartMenu/>
+        <slot></slot>
         <Dashboard/>
-        <slot>sss</slot>
     {:else}
         <Login />
     {/if}
@@ -30,7 +30,10 @@
 
   body {
     height: 100%;
+    width:100%;
     overflow: hidden;
+    background-image: url("back2.png") ;
+    background-size: cover;
   }
 
   #svelte{

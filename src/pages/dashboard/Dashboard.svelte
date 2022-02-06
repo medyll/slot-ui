@@ -1,17 +1,29 @@
-<div style="z-index:0" class="pos-abs w-full h-full overflow-auto pad-8">
+
+<script lang="ts">
+
+    import {goto} from '$app/navigation';
+
+    const handleClick = () => () => {
+      goto('explorer')
+    }
+</script>
+
+<div style="z-index:0" class="dashBoard pos-abs w-full h-full overflow-auto pad-8">
     <div class="gridIcon">
-        {#each [...Array(420)] as key,val}
-            <div class="bg-palette-red-darker buttonPole">key</div>
+        {#each [...Array(7)] as key,val}
+            <div on:click={handleClick('test')} class="bg-palette-red-darker buttonPole">key</div>
         {/each}
     </div>
 </div>
 
 <style lang="scss">
+
+
   .gridIcon {
     width: 100%;
     display: grid;
     justify-content: center;
-    grid-gap: 10px;
+    grid-gap: 64px;
     grid-template-columns: repeat(auto-fill, minmax(120px, auto));
   }
 

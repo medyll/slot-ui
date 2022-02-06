@@ -1,27 +1,29 @@
 import {writable, get, readable, derived} from 'svelte/store';
 
 
-export type IChromeArgs<T = Record<string, any>> = {
+export type IChromeArgs  = {
   frameId: string | number,
+  title?: string,
   open?: boolean,
   minimized?: boolean,
   maximized?: boolean,
   active?: boolean,
-  title?: string,
   secondaryTitle?: string,
   description?: string,
-  onClose?: () => void,
-  onCancel?: () => void,
-  onValidate?: () => void,
+  onClose?: () => {},
+  onCancel?: () => {},
+  onValidate?: () => {},
   component?: any,
-  componentProps?: T
+  componentProps?: any
   zIndex?: number
   position?: {
     x: number;
     y: number;
   }
-  //
-  destroyer: () => void
+  defaultPosition?: {
+    x: number;
+    y: number;
+  }
 }
 
 export type WindowStoreListType = Map<string | number, IChromeArgs>
@@ -46,7 +48,8 @@ export function createWindowStore() {
     open     : (payload: IChromeArgs) => update((n) => {
       activeFrame.set(payload.frameId);
       const obj = n.get(payload.frameId) ?? {};
-      return n.set(payload.frameId, {...payload, ...obj, open: true, minimized: false, maximized: true});
+      console.log({ ...obj,...payload, open: true, minimized: false, maximized: true})
+      return n.set(payload.frameId, { ...obj,...payload, open: true, minimized: false, maximized: true});
     }),
     close    : (frameId: string | number) => update((n) => {
       const payload = n.get(frameId);
@@ -70,13 +73,13 @@ export function createWindowStore() {
       return n;
     }),
     makeOnTop: (frameId: string | number) => update((n) => {
-      const values = Array.from(n);
+      const values  = Array.from(n);
       const payload = n.get(frameId);
       
-      const z = values.reduce((prev,val)=>{
-        return (val[1]?.zIndex >= prev) ? val[1]?.zIndex + 1 : prev
-      },0)
-
+      const z = values.reduce((prev, val) => {
+        return (val[1]?.zIndex >= prev) ? val[1]?.zIndex + 1 : prev;
+      }, 0);
+      
       n.set(frameId, {...payload, zIndex: z});
       return n;
     }),
@@ -90,7 +93,7 @@ export const windowsStore = createWindowStore();
 export function getAppWindowStore(frameId: string | number) {
   
   const {subscribe} = derived([windowsStore], ([$windowsStore]) => {
-
+    
     return $windowsStore.get(frameId);
   });
   

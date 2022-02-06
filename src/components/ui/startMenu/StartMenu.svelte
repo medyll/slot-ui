@@ -4,15 +4,17 @@
 
   import {sx4u} from '../../../use/sx4u/sx4u';
   import {clickAway} from '../../../use/clickAway/clickAway';
-  import SlidePanel from '/src/components/ui/slidePanel/SlidePanel.svelte';
   import Panel from '/src/components/ui/panel/Panel.svelte';
-  import {sx4uPreprocess} from '../../../use/sx4u/sx4uPreprocess';
+  import PanelSlide from '/src/components/ui/panel/PanelSlide.svelte';
+
   import {openWindow, toggleStartMenu, startMenuStore} from '../../../configurations';
   import color from 'color';
   import {afterUpdate, onMount, setContext, getContext} from 'svelte';
 
-  import Icon from '/src/components/ui/icon/index.svelte';
+  import IconButton from '/src/components/vendor/iconButton/IconButton.svelte';
   import {writable} from 'svelte/store';
+  import Debug from '../debug/Debug.svelte';
+
 
   const menuStore = writable<any>(null);
 
@@ -26,17 +28,17 @@
     menuStore.set({
       ...$menuStore,
       open: !$menuStore?.open
-    })
-   setContext('SlidePanel', menuStore);
+    });
+    setContext('PanelSlide', menuStore);
   }
 
-  onMount(()=>{
+  onMount(() => {
     const unsubscribe = menuStore.subscribe(() => {
 
     });
 
-    return unsubscribe
-  })
+    return unsubscribe;
+  });
 </script>
 
 {#if $startMenuStore}
@@ -49,12 +51,15 @@
             <input style="width: 100%;" type="search" placeholder="Recherche"/>
         </div>
         <div style="position:relative" class="startMenuContent">
-            <SlidePanel open="{true}" bind:this={slideLeft}>
+            <PanelSlide open="{true}" bind:this={slideLeft}>
                 <Panel title="Pinned Items">
                     <div class="gridIcon">
                         {#each [...Array(9)] as key,val}
-                            <div on:click={()=>{openWindow('try'+val)}}
-                                 class="buttonPole" >key
+                            <div on:click={()=>{openWindow('try '+val,{
+                                component: Debug,
+                                componentProps:{some:'props',someother:'deprops'}
+                            })}}
+                                 class="buttonPole">key
                             </div>
                         {/each}
                     </div>
@@ -73,8 +78,8 @@
                         {/each}
                     </div>
                 </Panel>
-            </SlidePanel>
-            <SlidePanel open="{false}" bind:this={slideRight}>
+            </PanelSlide>
+            <PanelSlide open="{false}" bind:this={slideRight}>
                 <Panel title="Zoom area">
                     <div class="gridIconMid">
                         {#each [...Array(130)] as key}
@@ -82,22 +87,23 @@
                         {/each}
                     </div>
                 </Panel>
-            </SlidePanel>
+            </PanelSlide>
         </div>
         <div class="bottomBar">
-            <Icon icon="faAllergies"/>
-            <Icon icon="faAllergies"/>
-            <Icon icon="faAllergies"/>
+            <IconButton style="color:white" icon="faBed"/>
+            <IconButton style="color:white" icon="faTruck"/>
+            <IconButton style="color:white" icon="faSign"/>
         </div>
     </div>
 {/if}
 <style lang="scss">
   .startMenu {
-    background-color: rgba(90, 67, 52, 0.95);
+    background-color: rgba(90, 67, 52, 0.9);
     backdrop-filter: blur(10px);
     color: white;
     display: flex;
     flex-direction: column;
+    max-height: 600px;
     height: 80%;
     left: 50%;
     transform: translate(-50%, 0);
@@ -105,6 +111,7 @@
     overflow: hidden;
     z-index: 3000;
     position: absolute;
+    margin-top: 1rem;
 
     .startMenuContent {
       flex: 1;
@@ -148,7 +155,7 @@
   }
 
   .bottomBar {
-    padding: 2rem 2rem;
+    padding: 1rem 2rem;
     box-shadow: 0px 0px 3px 1px rgba(51, 51, 51, 0.5);
   }
 </style>

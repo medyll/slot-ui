@@ -1,17 +1,20 @@
-import Window from '/src/components/ui/window/window.svelte';
-import {createWindowStore, windowsStore} from '../stores/windowStore';
+import Window from '/src/components/ui/window/Window.svelte';
+import {createWindowStore,  windowsStore} from '../stores/windowStore';
+import type {  IChromeArgs } from '../stores/windowStore';
 import {get, writable} from 'svelte/store';
-
+import Debug from '../components/ui/debug/Debug.svelte';
 
 const windowList = globalThis.window;
 
-function openWindow(frameId: string, args: any = {}) {
+function openWindow(frameId: string, args: Partial<IChromeArgs> = {}) {
   
   const appW = get(windowsStore).get(frameId);
   windowsStore.open({
-    title: frameId,
+    title          : frameId,
+    defaultPosition: {x: 960, y: 650},
+    component: Debug,
     ...args,
-    frameId: frameId,
+    frameId: frameId, // cannot overwrite+
   });
   
   if (!appW) {
@@ -20,7 +23,7 @@ function openWindow(frameId: string, args: any = {}) {
       props : {
         title: frameId,
         ...args,
-        frameId: frameId,
+        frameId  : frameId
       },
     });
     
@@ -30,12 +33,11 @@ function openWindow(frameId: string, args: any = {}) {
   }
 }
 
-export const startMenuStore =  writable<boolean>(true);
+export const startMenuStore = writable<boolean>(true);
 
-function toggleStartMenu(event:PointerEvent){
-  if(event) event.stopPropagation();
-  // console.log('red',get(startMenuStore))
-  startMenuStore.set(!get(startMenuStore))
+function toggleStartMenu(event: PointerEvent) {
+  if (event) event.stopPropagation();
+  startMenuStore.set(!get(startMenuStore));
 }
 
-export {openWindow,toggleStartMenu};
+export {openWindow, toggleStartMenu};
