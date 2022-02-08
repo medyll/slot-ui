@@ -1,0 +1,79 @@
+{
+  "RECORDS": [
+    {
+      "_id": "561fa91ba0ade164198b4676",
+      "codeAppscheme_base": "sitebase_app",
+      "dateCreationAppscheme_base": "2015-10-15",
+      "dateModificationAppscheme_base": "2018-11-18",
+      "heureCreationAppscheme_base": "15:24:43",
+      "heureModificationAppscheme_base": "01:27:22",
+      "idappscheme_base": "1",
+      "isoDateCreationAppscheme_base": "14/10/2015 22:00:00",
+      "m_mode": "1",
+      "nomAppscheme_base": "sitebase_app",
+      "timeCreationAppscheme_base": "1444915483",
+      "timeModificationAppscheme_base": "1542500842",
+      "updated_fields": "{ \"isoDateCreationAppscheme_base\" : { \"$date\" : { \"$numberLong\" : \"1444860000000\" } } }"
+    },
+    {
+      "_id": "561fa991a0ade1e71e8b456b",
+      "codeAppscheme_base": "sitebase_pref",
+      "dateCreationAppscheme_base": "2015-10-15",
+      "dateModificationAppscheme_base": "2018-11-18",
+      "heureCreationAppscheme_base": "15:26:41",
+      "heureModificationAppscheme_base": "01:27:22",
+      "idappscheme_base": "2",
+      "isoDateCreationAppscheme_base": "14/10/2015 22:00:00",
+      "m_mode": "1",
+      "nomAppscheme_base": "sitebase_pref",
+      "timeCreationAppscheme_base": "1444915601",
+      "timeModificationAppscheme_base": "1542500842",
+      "updated_fields": "{ \"isoDateCreationAppscheme_base\" : { \"$date\" : { \"$numberLong\" : \"1444860000000\" } } }"
+    },
+    {
+      "_id": "561fa9c1a0ade1e71e8b456d",
+      "codeAppscheme_base": "sitebase_base",
+      "dateCreationAppscheme_base": "2015-10-15",
+      "dateModificationAppscheme_base": "2018-11-18",
+      "heureCreationAppscheme_base": "15:27:29",
+      "heureModificationAppscheme_base": "01:27:22",
+      "idappscheme_base": "3",
+      "isoDateCreationAppscheme_base": "14/10/2015 22:00:00",
+      "m_mode": "1",
+      "nomAppscheme_base": "sitebase_base",
+      "timeCreationAppscheme_base": "1444915649",
+      "timeModificationAppscheme_base": "1542500842",
+      "updated_fields": "{ \"isoDateCreationAppscheme_base\" : { \"$date\" : { \"$numberLong\" : \"1444860000000\" } } }"
+    },
+    {
+      "_id": "56867737a0ade15f2b8b4567",
+      "codeAppscheme_base": "sitebase_ged",
+      "dateCreationAppscheme_base": null,
+      "dateModificationAppscheme_base": null,
+      "heureCreationAppscheme_base": null,
+      "heureModificationAppscheme_base": null,
+      "idappscheme_base": "5",
+      "isoDateCreationAppscheme_base": null,
+      "m_mode": null,
+      "nomAppscheme_base": "sitebase_ged",
+      "timeCreationAppscheme_base": null,
+      "timeModificationAppscheme_base": null,
+      "updated_fields": null
+    },
+    {
+      "_id": "570218cfa0ade1c55d8b4567",
+      "codeAppscheme_base": "sitebase_sockets",
+      "dateCreationAppscheme_base": null,
+      "dateModificationAppscheme_base": null,
+      "heureCreationAppscheme_base": null,
+      "heureModificationAppscheme_base": null,
+      "idappscheme_base": "6",
+      "isoDateCreationAppscheme_base": null,
+      "m_mode": null,
+      "nomAppscheme_base": "sitebase_sockets",
+      "timeCreationAppscheme_base": null,
+      "timeModificationAppscheme_base": null,
+      "updated_fields": null
+    }
+  ]
+}
