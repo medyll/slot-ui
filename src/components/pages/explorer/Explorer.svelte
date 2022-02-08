@@ -10,7 +10,7 @@
   let testArray = [];
 
   const handleClick = (one) => (event: PointerEvent) => {
-    // console.log(one, event, 'red');
+     console.log(one, event );
   };
 
   const objI = {title: 'Client test', subTitle: 'data'};
@@ -27,21 +27,17 @@
   const myBest3 = testArray.slice(10, 20);
 
   const openIn = () => {
-
   };
 
 </script>
 
 <div class="explorerFrame">
-    <div class="appbar">
-        the title of the frame
-    </div>
     <div class="explorerContainer">
         <div class="navLeft">
             <div style="position:sticky;margin-top: 0;">
                 <input type="search" style="width:100%;" placeholder="redfer"/>
             </div>
-            <List on:click={handleClick('reddy')}>
+            <List handleClick={handleClick('reddy')}>
                 <ListTitle>title</ListTitle>
                 {#each myBest as key,val}
                     <ListItem data="{key.data}">
@@ -72,6 +68,9 @@
             </List>
         </div>
         <div class="content">
+            <div class="appbar">
+                the title of the frame
+            </div>
             <slot name="content">
                 slot for content,
             </slot>

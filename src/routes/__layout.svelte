@@ -4,23 +4,22 @@
   import Dashboard from '/src/components/pages/dashboard/Dashboard.svelte';
   import StartMenu from '/src/components/ui/startMenu/StartMenu.svelte';
   import Login from '../components/pages/login/Login.svelte';
-  import TaskBarContent from "../components/engine/TaskBarContent.svelte";
+  import TaskBarContent from '../components/engine/TaskBarContent.svelte';
 
   let isLogged = true;
-
-  console.log($$slots)
-
+  console.log('$app/lib');
+  console.log($$slots);
 </script>
 <ThemeWrapper mode="dark">
     <StartMenu/>
     <div style="height:100%;max-height:100%;overflow:hidden;display:flex;flex-direction: column">
         {#if isLogged}
             <Taskbar>
-                <TaskBarContent />
+                <TaskBarContent/>
             </Taskbar>
             <div style="flex: 1;overflow:hidden">
                 <Dashboard/>
-                <slot>empty !!! </slot>
+                <slot>empty !!!</slot>
             </div>
 
         {:else}

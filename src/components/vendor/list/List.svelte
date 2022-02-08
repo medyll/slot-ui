@@ -13,13 +13,17 @@
 
   setContext('listStateContext', listStore);
 
-  function handleClick(e: CustomEvent<LisItemProps>) {
+  function onListItemClick(e: CustomEvent<LisItemProps>) {
     listStore.setActiveData(e.detail)
+  }
+
+  function handleClick(e: CustomEvent<LisItemProps>) {
+   $:  console.log($listStore)
   }
 
 </script>
 
-<ul on:list:listItem:clicked={handleClick} on:click bind:this={ref} style="{style}">
+<ul on:list:listItem:clicked={onListItemClick} on:click={handleClick} bind:this={ref} style="{style}">
     {#each listItems as lisItem}
         <ListItem>
             <div slot="icon"></div>
