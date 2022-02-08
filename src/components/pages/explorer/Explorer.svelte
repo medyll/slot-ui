@@ -1,10 +1,10 @@
 <script lang="ts">
-  import List from '../../components/vendor/list/List.svelte';
-  import ListItem from '../../components/vendor/list/ListItem.svelte';
-  import ListTitle from '../../components/vendor/list/ListTitle.svelte';
-  import type {LisItemProps} from '../../components/vendor/list/types';
-  import {propsXy} from '../../utils';
-  import type {propsXyProps} from '../../utils';
+  import List from '../../vendor/list/List.svelte';
+  import ListItem from '../../vendor/list/ListItem.svelte';
+  import ListTitle from '../../vendor/list/ListTitle.svelte';
+  import type {LisItemProps} from '../../vendor/list/types';
+  import {propsXy} from '../../../utils';
+  import type {propsXyProps} from '../../../utils';
   import {null_to_empty} from 'svelte/internal';
 
   let testArray = [];
@@ -18,10 +18,17 @@
   const transformArgs: propsXyProps<LisItemProps, typeof objI> = [['primary', 'title'], ['secondary', 'subTitle']];
 
 
-  const data: any[] = Array.from(Array(120).keys()).map(id => { return {...objI, ...{title: 'datou ' + id, id}};});
+  const data: any[] = Array.from(Array(70).keys()).map(id => { return {...objI, ...{title: 'datou ' + id, id}};});
 
   testArray = propsXy(transformArgs, data);
-  console.log({testArray});
+
+  const myBest  = testArray.slice(0, 5);
+  const myBest2 = testArray.slice(5, 9);
+  const myBest3 = testArray.slice(10, 20);
+
+  const openIn = () => {
+
+  };
 
 </script>
 
@@ -31,10 +38,12 @@
     </div>
     <div class="explorerContainer">
         <div class="navLeft">
-            <input type="search" style="width:100%;" placeholder="redfer"/>
+            <div style="position:sticky;margin-top: 0;">
+                <input type="search" style="width:100%;" placeholder="redfer"/>
+            </div>
             <List on:click={handleClick('reddy')}>
                 <ListTitle>title</ListTitle>
-                {#each [...testArray] as key,val}
+                {#each myBest as key,val}
                     <ListItem data="{key.data}">
                         <span slot="icon">{null_to_empty(key.id)}</span>
                         <span slot="primary">{null_to_empty(key.primary)}</span>
@@ -42,39 +51,32 @@
                         <span slot="action">{null_to_empty(key.action)}</span>
                     </ListItem>
                 {/each}
-                <!--<ListTitle>title</ListTitle>
-                {#each [...Array(4)] as key,val}
-                    <ListItem>
-                        <span slot="icon">icon</span>
-                        <div slot="primary">primary text</div>
-                        <div slot="secondary">secondary text</div>
-                        <span slot="action">action</span>
+                <ListTitle>title</ListTitle>
+                {#each myBest2 as key,val}
+                    <ListItem data="{key.data}">
+                        <span slot="icon">{null_to_empty(key.id)}</span>
+                        <span slot="primary">{null_to_empty(key.primary)}</span>
+                        <span slot="secondary">{null_to_empty(key.secondary)}</span>
+                        <span slot="action">{null_to_empty(key.action)}</span>
                     </ListItem>
                 {/each}
                 <ListTitle>title</ListTitle>
-                {#each [...Array(7)] as key}
-                    <ListItem>
-                        <span slot="icon">icon</span>
-                        <div slot="primary">primary text</div>
-                        <div slot="secondary">secondary text</div>
-                        <span slot="action">action</span>
+                {#each myBest3 as key,val}
+                    <ListItem data="{key.data}">
+                        <span slot="icon">{null_to_empty(key.id)}</span>
+                        <span slot="primary">{null_to_empty(key.primary)}</span>
+                        <span slot="secondary">{null_to_empty(key.secondary)}</span>
+                        <span slot="action">{null_to_empty(key.action)}</span>
                     </ListItem>
                 {/each}
-                <ListTitle>title</ListTitle>
-                {#each [...Array(30)] as key}
-                    <ListItem>
-                        <span slot="icon">icon</span>
-                        <div slot="primary">primary text</div>
-                        <div slot="secondary">secondary text</div>
-                        <span slot="action">action</span>
-                    </ListItem>
-                {/each}-->
             </List>
         </div>
         <div class="content">
-            <slot name="content"></slot>
+            <slot name="content">
+                slot for content,
+            </slot>
             {#each [...Array(12)] as key}
-                <div class="buttonPole"></div>
+                <div class="buttonPole">gg</div>
             {/each}
         </div>
     </div>
@@ -104,7 +106,6 @@
 
       .navLeft {
         width: 270px;
-        height: 100%;
         overflow: auto;
         padding: 1rem;
       }

@@ -11,6 +11,7 @@ export const propsXy = <T = any, B = any, C = any>(props: propsXyProps<T, B>, da
       const keyTo           = prop[0] as string;
       if (dta[keyFrom]) out[keyTo] = dta[keyFrom];
     }
+    // keep original data
     out['data'] = dta
     ret.push(out);
   }

@@ -20,11 +20,11 @@
   import {WindowStoreListType, getAppWindowStore, IChromeArgs} from '/src/stores/windowStore';
   import {onDestroy, onMount, setContext} from 'svelte';
   import IconButton from '../../vendor/iconButton/IconButton.svelte';
-  import Icon from "../icon/Icon.svelte";
+  import Icon from '../icon/Icon.svelte';
 
   export let frameId                                   = '';
   export let self                                      = null;
-  export let defaultPosition: { x: number, y: number } = {};
+  export let defaultPosition: { x: number, y: number } = {x: 30, y: 30};
   export let component                                 = null;
 
   let frameRef;
@@ -95,7 +95,9 @@
      style="z-index:{$appWindowStore?.zIndex}"
      class="window">
     <div class="bar">
-        <div class="pad-4"><Icon icon="faLinux"/></div>
+        <div class="pad-4">
+            <Icon icon="faLinux"/>
+        </div>
         <div class="handle">{$appWindowStore?.title}</div>
         <div class="iconZone" style="color:white">
             <div>
@@ -125,11 +127,14 @@
     display: block;
     border-radius: 6px;
     background-color: #fff;
-    border: 1px solid rgba(255, 255, 255,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     min-width: 720px;
     position: absolute;
+    top: 0;
+    left: 0;
     // box-shadow: 0 0 4px rgba(43, 43, 43,0.5);
     overflow: hidden;
+    z-index: 3000;
 
     .bar {
       display: flex;
