@@ -20,8 +20,9 @@
 
   let isActive;
   $: if ($listStateContext) {
-    isActive = listStateContext.selector('id', data);
+    isActive = listStateContext.selector($listStateContext.selectorField, data);
   }
+
 </script>
 
 <li bind:this={ref}

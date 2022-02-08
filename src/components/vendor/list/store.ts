@@ -16,6 +16,7 @@ function createStore() {
     subscribe,
     set,
     update,
+    setSelectorField:(selectorField:string)=> update((n)=> {return {...n,selectorField}}),
     setActiveData: (data: any) => {update(n => {return {...n, activeData: data};});},
     selector     : (field: string, data: Record<string, any>) => {
       return get(innerStore).activeData[field] === data[field];

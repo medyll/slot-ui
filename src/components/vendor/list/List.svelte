@@ -8,17 +8,20 @@
   export let size: 'default' | 'small' | 'large'  = 'default';
   export let direction: 'vertical' | 'horizontal' = 'vertical';
   export let style: string                        = '';
+  export let selectorField                        = 'id';
 
   let ref;
 
   setContext('listStateContext', listStore);
 
+  listStore.setSelectorField(selectorField);
+
   function onListItemClick(e: CustomEvent<LisItemProps>) {
-    listStore.setActiveData(e.detail)
+    listStore.setActiveData(e.detail);
   }
 
   function handleClick(e: CustomEvent<LisItemProps>) {
-   $:  console.log($listStore)
+    $:  console.log($listStore);
   }
 
 </script>

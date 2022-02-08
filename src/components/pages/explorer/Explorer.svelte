@@ -7,10 +7,21 @@
   import type {propsXyProps} from '../../../utils';
   import {null_to_empty} from 'svelte/internal';
 
+
+  import appscheme from '/src/demoData/appscheme.json';
+  import appscheme_base from '/src/demoData/appscheme_base.json';
+  import appscheme_field from '/src/demoData/appscheme_field.json';
+  import appscheme_field_group from '/src/demoData/appscheme_field_group.json';
+  import appscheme_field_type from '/src/demoData/appscheme_field_type.json';
+  import appscheme_has_field from '/src/demoData/appscheme_has_field.json';
+  import appscheme_icon from '/src/demoData/appscheme_icon.json';
+  import appscheme_type from '/src/demoData/appscheme_type.json';
+
+
   let testArray = [];
 
   const handleClick = (one) => (event: PointerEvent) => {
-     console.log(one, event );
+    console.log(one, event);
   };
 
   const objI = {title: 'Client test', subTitle: 'data'};
@@ -20,7 +31,12 @@
 
   const data: any[] = Array.from(Array(70).keys()).map(id => { return {...objI, ...{title: 'datou ' + id, id}};});
 
-  testArray = propsXy(transformArgs, data);
+
+  const schemeData = appscheme_base.RECORDS
+  const transformArgsBis: propsXyProps<LisItemProps, any> = [['primary', 'nomAppscheme_base'], ['secondary', 'codeAppscheme_base'], ['icon', 'iconAppscheme_base']];
+  testArray = propsXy(transformArgsBis, schemeData);
+
+  console.log(testArray)
 
   const myBest  = testArray.slice(0, 5);
   const myBest2 = testArray.slice(5, 9);
@@ -37,9 +53,9 @@
             <div style="position:sticky;margin-top: 0;">
                 <input type="search" style="width:100%;" placeholder="redfer"/>
             </div>
-            <List handleClick={handleClick('reddy')}>
+            <List selectorField="idappscheme_base" handleClick={handleClick('reddy')}>
                 <ListTitle>title</ListTitle>
-                {#each myBest as key,val}
+                {#each testArray as key,val}
                     <ListItem data="{key.data}">
                         <span slot="icon">{null_to_empty(key.id)}</span>
                         <span slot="primary">{null_to_empty(key.primary)}</span>
@@ -47,7 +63,7 @@
                         <span slot="action">{null_to_empty(key.action)}</span>
                     </ListItem>
                 {/each}
-                <ListTitle>title</ListTitle>
+                <!--<ListTitle>title</ListTitle>
                 {#each myBest2 as key,val}
                     <ListItem data="{key.data}">
                         <span slot="icon">{null_to_empty(key.id)}</span>
@@ -64,7 +80,7 @@
                         <span slot="secondary">{null_to_empty(key.secondary)}</span>
                         <span slot="action">{null_to_empty(key.action)}</span>
                     </ListItem>
-                {/each}
+                {/each}-->
             </List>
         </div>
         <div class="content">
