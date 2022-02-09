@@ -9,6 +9,7 @@
   export let direction: 'vertical' | 'horizontal' = 'vertical';
   export let style: string                        = '';
   export let selectorField                        = 'id';
+  export let  handleClick;
 
   let ref;
 
@@ -18,18 +19,15 @@
 
   function onListItemClick(e: CustomEvent<LisItemProps>) {
     listStore.setActiveData(e.detail);
-  }
-
-  function handleClick(e: CustomEvent<LisItemProps>) {
-    $:  console.log($listStore);
+    handleClick && handleClick(e.detail);
   }
 
 </script>
 
-<ul on:list:listItem:clicked={onListItemClick} on:click={handleClick} bind:this={ref} style="{style}">
+<ul on:list:listItem:clicked={onListItemClick}   bind:this={ref} style="{style}">
     {#each listItems as lisItem}
         <ListItem>
-            <div slot="icon"></div>
+            <div slot="icon">ac</div>
             <div slot="text"></div>
             <div slot="action"></div>
         </ListItem>

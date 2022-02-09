@@ -1,11 +1,22 @@
-
 <script lang="ts">
   import Fa from 'svelte-fa/src/fa.svelte';
   import * as All1 from '@fortawesome/free-solid-svg-icons';
   import * as All2 from '@fortawesome/free-brands-svg-icons';
   import * as All3 from '@fortawesome/free-regular-svg-icons';
 
-  let All = {...All1,...All2,...All3};
-  export let icon: keyof typeof All = 'faAnchor';
+  let IconType                           = {...All1, ...All2, ...All3};
+  export let icon: keyof typeof IconType = 'faAnchor';
+
+  const sizes = {
+    tiny   : 8,
+    small  : 16,
+    medium : 24,
+    default: 32,
+    large  : 48,
+    big    : 64,
+  } as const;
+  type SizeType = keyof typeof sizes
+
+  export let fontSize: SizeType = 'medium';
 </script>
-<Fa on:click width="56" icon={All[icon]}/>
+<Fa on:click style="font-size:{sizes[fontSize]}px" icon={IconType[icon]}/>

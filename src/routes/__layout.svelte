@@ -7,7 +7,6 @@
   import TaskBarContent from '../components/engine/TaskBarContent.svelte';
 
   let isLogged = true;
-  console.log(git status'$app/lib');
   console.log($$slots);
 </script>
 <ThemeWrapper mode="dark">

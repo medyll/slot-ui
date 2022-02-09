@@ -30,6 +30,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.15.4",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@neodrag/svelte": "^1.1.2",
+    "@sveltestack/svelte-query": "^1.6.0",
     "axios": "^0.25.0",
     "color": "^4.2.0",
     "mongodb": "^4.3.1",

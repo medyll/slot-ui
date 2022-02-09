@@ -16,34 +16,20 @@
   import appscheme_has_field from '/src/demoData/appscheme_has_field.json';
   import appscheme_icon from '/src/demoData/appscheme_icon.json';
   import appscheme_type from '/src/demoData/appscheme_type.json';
+  import Header from "./Header.svelte";
 
 
-  let testArray = [];
+  let testArray  = [];
+  let activeData;
+  let schemeName = 'Appscheme';
 
-  const handleClick = (one) => (event: PointerEvent) => {
-    console.log(one, event);
+  const openIn = (event: PointerEvent) => {
+    activeData = event;
   };
 
-  const objI = {title: 'Client test', subTitle: 'data'};
-
-  const transformArgs: propsXyProps<LisItemProps, typeof objI> = [['primary', 'title'], ['secondary', 'subTitle']];
-
-
-  const data: any[] = Array.from(Array(70).keys()).map(id => { return {...objI, ...{title: 'datou ' + id, id}};});
-
-
-  const schemeData = appscheme_base.RECORDS
-  const transformArgsBis: propsXyProps<LisItemProps, any> = [['primary', 'nomAppscheme_base'], ['secondary', 'codeAppscheme_base'], ['icon', 'iconAppscheme_base']];
-  testArray = propsXy(transformArgsBis, schemeData);
-
-  console.log(testArray)
-
-  const myBest  = testArray.slice(0, 5);
-  const myBest2 = testArray.slice(5, 9);
-  const myBest3 = testArray.slice(10, 20);
-
-  const openIn = () => {
-  };
+  const schemeData                                        = appscheme.RECORDS;
+  const transformArgsBis: propsXyProps<LisItemProps, any> = [['primary', `nom${schemeName}`], ['secondary', `code${schemeName}`], ['icon', `icon${schemeName}`]];
+  testArray                                               = propsXy(transformArgsBis, schemeData);
 
 </script>
 
@@ -53,7 +39,7 @@
             <div style="position:sticky;margin-top: 0;">
                 <input type="search" style="width:100%;" placeholder="redfer"/>
             </div>
-            <List selectorField="idappscheme_base" handleClick={handleClick('reddy')}>
+            <List selectorField="idappscheme" handleClick={openIn}>
                 <ListTitle>title</ListTitle>
                 {#each testArray as key,val}
                     <ListItem data="{key.data}">
@@ -63,36 +49,15 @@
                         <span slot="action">{null_to_empty(key.action)}</span>
                     </ListItem>
                 {/each}
-                <!--<ListTitle>title</ListTitle>
-                {#each myBest2 as key,val}
-                    <ListItem data="{key.data}">
-                        <span slot="icon">{null_to_empty(key.id)}</span>
-                        <span slot="primary">{null_to_empty(key.primary)}</span>
-                        <span slot="secondary">{null_to_empty(key.secondary)}</span>
-                        <span slot="action">{null_to_empty(key.action)}</span>
-                    </ListItem>
-                {/each}
-                <ListTitle>title</ListTitle>
-                {#each myBest3 as key,val}
-                    <ListItem data="{key.data}">
-                        <span slot="icon">{null_to_empty(key.id)}</span>
-                        <span slot="primary">{null_to_empty(key.primary)}</span>
-                        <span slot="secondary">{null_to_empty(key.secondary)}</span>
-                        <span slot="action">{null_to_empty(key.action)}</span>
-                    </ListItem>
-                {/each}-->
             </List>
         </div>
         <div class="content">
-            <div class="appbar">
-                the title of the frame
+            <Header title={activeData?.[`nomAppscheme`]}>
+                {activeData?.[`nomAppscheme`]}
+            </Header>
+            <div>
+                <pre>{JSON.stringify(activeData, null, ' ')}</pre>
             </div>
-            <slot name="content">
-                slot for content,
-            </slot>
-            {#each [...Array(12)] as key}
-                <div class="buttonPole">gg</div>
-            {/each}
         </div>
     </div>
 </div>
@@ -105,8 +70,9 @@
     flex-direction: column;
     overflow: hidden;
     position: relative;
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(35, 31, 26,0.5);
     backdrop-filter: blur(30px);
+    color: white;
 
     .appbar {
       padding: 2rem;
@@ -121,12 +87,13 @@
 
       .navLeft {
         width: 270px;
+        min-width: 270px;
         overflow: auto;
         padding: 1rem;
       }
 
       .content {
-        flex: 1;
+        flex: 1 auto;
 
       }
     }
