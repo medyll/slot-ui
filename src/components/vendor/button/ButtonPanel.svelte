@@ -12,9 +12,9 @@
   const onActionClick = (event: PointerEvent) => {
     event.stopPropagation();
     openPopper('settingActions', {
-      parent        : buttonRef,
+      parentNode    : buttonRef,
       component     : actionComponent,
-      componentProps: actionComponentProps ?? {}
+      componentProps: actionComponentProps ?? {},
     });
   };
 
@@ -46,6 +46,10 @@
       background-color: rgba(255, 255, 255, 0.2);
       border: 1px solid rgba(255, 255, 255, 0.2);
       position: relative;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+      }
 
       .action {
         position: absolute;

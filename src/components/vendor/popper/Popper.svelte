@@ -1,12 +1,17 @@
 <svelte:options immutable={true}
                 accessors={true}/>
+
 <script lang="ts">
-  import {openPopper} from './actions';
   import type {SvelteComponentDev} from 'svelte/internal';
+  import {onMount} from 'svelte';
 
   export let code: string;
   export let component: SvelteComponentDev;
   export let componentProps: {};
+  export let position: 'T' | 'TR' | 'BR' | 'B' | 'BL' = 'TR';
+  export let parentNode: HTMLElement;
+  ;
+
 
   export const toggle = function () {
     console.log('toggle');
@@ -18,9 +23,27 @@
     console.log('show');
   };
 
+  let styleX = '';
+
+
+  onMount(()=>{
+    if (parentNode) {
+      const parentPos = parentNode.getBoundingClientRect();
+
+      console.log({parentPos})
+
+      switch (position) {
+        case 'TR':
+          styleX = `bottom:${parentPos.bottom}px;left:${parentPos.left};right:auto`
+          break;
+      }
+      console.log({parentNode,parentPos,styleX});
+    }
+  })
+
 </script>
 
-<div class="popper">
+<div class="popper" style={styleX}>
     <slot>
         {#if component}
             <svelte:component this={component} {...componentProps}/>
@@ -28,7 +51,7 @@
     </slot>
 </div>
 
-<style lang="scss" >
+<style lang="scss">
   .popper {
     background-color: rgba(90, 67, 52, 0.8);
     backdrop-filter: blur(10px);

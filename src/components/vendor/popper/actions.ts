@@ -5,23 +5,24 @@ let singletonPoppers: Record<string, Popper> = {};
 
 const openPopper = (popperId: string, args: {
   position?: 'T' | 'TR' | 'BR' | 'B' | 'BL',
-  parent?: HTMLElement,
+  parentNode?: HTMLElement,
   component?: SvelteComponentDev,
   componentProps?: any
 } = {}) => {
   
-  console.log(args?.parent?.getBoundingClientRect())
+  console.log(args)
   
   if (singletonPoppers[popperId]) {
     console.log(singletonPoppers[popperId])
     singletonPoppers[popperId].toggle();
+    // resend props if changed
   } else {
     createPopper()
   }
   
   function createPopper(){
     singletonPoppers[popperId] = new Popper({
-      target: args.parent ?? document.querySelector('#svelte'),
+      target: document.body,//document.querySelector('#svelte'),
       props : {
         code: popperId,
         ...args,
