@@ -4,8 +4,11 @@
   import * as All2 from '@fortawesome/free-brands-svg-icons';
   import * as All3 from '@fortawesome/free-regular-svg-icons';
 
-  let IconType                           = {...All1, ...All2, ...All3};
-  export let icon: keyof typeof IconType = 'faAnchor';
+  let IconTypes = {...All1, ...All2, ...All3} as const;
+
+  export type TIcon = keyof typeof IconTypes;
+
+  export let icon: TIcon = 'faAnchor';
 
   const sizes = {
     tiny   : 8,
@@ -19,4 +22,4 @@
 
   export let fontSize: SizeType = 'medium';
 </script>
-<Fa on:click style="font-size:{sizes[fontSize]}px" icon={IconType[icon]}/>
+<Fa on:click style="font-size:{sizes[fontSize]}px" icon={IconTypes[icon]}/>

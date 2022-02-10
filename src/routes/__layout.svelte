@@ -5,6 +5,7 @@
   import StartMenu from '/src/components/ui/startMenu/StartMenu.svelte';
   import Login from '../components/pages/login/Login.svelte';
   import TaskBarContent from '../components/engine/TaskBarContent.svelte';
+  import Popper from '../components/vendor/popper/Popper.svelte';
 
   let isLogged = true;
   console.log($$slots);
@@ -20,7 +21,7 @@
                 <Dashboard/>
                 <slot>empty !!!</slot>
             </div>
-
+            <!--<Popper/>-->
         {:else}
             <Login/>
         {/if}
@@ -30,7 +31,7 @@
 <style lang="scss" global>
   @import 'ress/ress.css';
   @import '../css/cssFabric/cssfabric.min.css';
-  @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+  @import url("https://fonts.googleapis.com/css?family=Rubik");
 
   html {
     font-size: 12px;
@@ -43,7 +44,7 @@
     overflow: hidden;
     background-image: url("back2.png");
     background-size: cover;
-    font-family: Roboto;
+    font-family: 'Rubik';
   }
 
   #svelte {

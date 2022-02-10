@@ -19,7 +19,7 @@
   import {draggable} from '@neodrag/svelte';
   import {WindowStoreListType, getAppWindowStore, IChromeArgs} from '/src/stores/windowStore';
   import {onDestroy, onMount, setContext} from 'svelte';
-  import IconButton from '../../vendor/iconButton/IconButton.svelte';
+  import IconButton from '../../vendor/button/IconButton.svelte';
   import Icon from '../icon/Icon.svelte';
 
   export let frameId                                   = '';

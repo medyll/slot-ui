@@ -3,7 +3,7 @@
   import {WindowStoreListType, windowsStore, IChromeArgs} from '/src/stores/windowStore';
   import {toggleStartMenu} from '../../configurations';
   import {get_current_component} from 'svelte/internal';
-  import IconButton from '../vendor/iconButton/IconButton.svelte';
+  import IconButton from '../vendor/button/IconButton.svelte';
 
   const thisComponent = get_current_component();
 

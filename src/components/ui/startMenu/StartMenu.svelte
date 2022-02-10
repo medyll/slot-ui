@@ -11,7 +11,7 @@
   import color from 'color';
   import {afterUpdate, onMount, setContext, getContext} from 'svelte';
 
-  import IconButton from '/src/components/vendor/iconButton/IconButton.svelte';
+  import IconButton from '/src/components/vendor/button/IconButton.svelte';
   import {writable} from 'svelte/store';
   import Debug from '../debug/Debug.svelte';
 

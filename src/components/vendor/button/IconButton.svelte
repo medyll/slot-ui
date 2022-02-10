@@ -1,8 +1,7 @@
 <script lang="ts">
+  import Icon  from '../../ui/icon/Icon.svelte';
 
-  import Icon from '../../ui/icon/Icon.svelte';
-
-  export let icon;
+  export let icon: any;
   export let style;
   export let className;
   export let showShip: boolean;

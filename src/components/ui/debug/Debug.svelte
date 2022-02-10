@@ -3,6 +3,9 @@
   import Tabs from '../../vendor/cartouche/tabs/Tabs.svelte';
   import type TabsItemsProps from '../../vendor/cartouche/tabs/Tabs.svelte';
 
+
+  export * as DebugTypes from "./Debug.svelte";
+
   const items: TabsItemsProps = [
     {label: 'theTitle', code: 'theTitle1'},
     {label: 'theTitle bis', code: 'theTitle2'},
