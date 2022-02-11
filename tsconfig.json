@@ -19,7 +19,7 @@
 		"esModuleInterop": true,
 		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": true,
-		"baseUrl": ".",
+		"baseUrl": "./src",
 		"allowJs": true,
 		"checkJs": true,
 		"strict": true,
@@ -27,7 +27,8 @@
 			"$lib": ["src/lib"],
 			"$lib/*": ["src/lib/*"]
 		},
-		"types": ["node", "svelte"]
+		"types": ["node", "svelte"] ,
+		"outDir": "build"
 	},
 	"include": ["src/**/*.d.ts", "src/**/*.js", "src/**/*.ts", "src/**/*.svelte", "src/**/*.scss"]
 }

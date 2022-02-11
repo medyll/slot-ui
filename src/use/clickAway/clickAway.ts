@@ -19,4 +19,8 @@ export function clickAway(node: HTMLElement, props: ClickAwayProps) {
     if (props?.action) props?.action();
     document.removeEventListener('click', doEvent);
   }
+
+  /* return (
+    destroy()=>{}
+  ) */
 }

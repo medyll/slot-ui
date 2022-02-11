@@ -20,14 +20,13 @@
 <style>
     .bar {
         display: flex;
+        align-items: center;
         grid-gap: 8px;
         background-size: auto;
         background-color: rgba(255, 255, 255, 0.5);
         backdrop-filter: blur(20px);
-        min-height: 32px;
-        align-items: center;
+        min-height: 48px;
         box-sizing: border-box;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        padding: 4px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
     }
 </style>
