@@ -1,14 +1,10 @@
-<script lang="ts">
-  import Fa from 'svelte-fa/src/fa.svelte';
+<script context="module" lang="ts">
   import * as All1 from '@fortawesome/free-solid-svg-icons';
   import * as All2 from '@fortawesome/free-brands-svg-icons';
   import * as All3 from '@fortawesome/free-regular-svg-icons';
 
   let IconTypes = {...All1, ...All2, ...All3} as const;
-
   export type TIcon = keyof typeof IconTypes;
-
-  export let icon: TIcon = 'faAnchor';
 
   const sizes = {
     tiny   : 8,
@@ -18,7 +14,17 @@
     large  : 48,
     big    : 64,
   } as const;
-  type SizeType = keyof typeof sizes
+  
+  export type SizeType = keyof typeof sizes
+
+</script>
+<script lang="ts">
+  import Fa from 'svelte-fa/src/fa.svelte';
+
+
+  export let icon: TIcon = 'faQuestion';
+
+  
 
   export let fontSize: SizeType = 'medium';
 </script>

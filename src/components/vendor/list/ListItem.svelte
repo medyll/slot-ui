@@ -1,3 +1,6 @@
+<script context="module" lang="ts">
+  
+</script>
 <script lang="ts">
   import {getContext} from 'svelte';
   import {custom_event} from 'svelte/internal';
@@ -16,17 +19,18 @@
     const event = custom_event('list:listItem:clicked',
       data, true);
     ref.dispatchEvent(event);
-  };
+  }; 
 
-  let isActive;
+  let isActive:boolean;
   $: if ($listStateContext) {
     isActive = listStateContext.selector($listStateContext.selectorField, data);
   }
 
 </script>
 
+
 <li bind:this={ref}
-    on:click={handleClick()}
+    on:click={handleClick()}  
     class:isActive>
     <span class="listItemChip"></span>
     <div class="listItemIcon">
@@ -41,6 +45,9 @@
         </div>
     </div>
     <div class="listItemAction">
+      {#if isActive}
+{$listStateContext.selectorField}
+      {/if}
         <slot name="action"></slot>
     </div>
 </li>
