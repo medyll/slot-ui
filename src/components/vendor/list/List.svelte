@@ -5,7 +5,7 @@
 <script lang="ts">
   import ListItem from './ListItem.svelte';
   import {setContext} from 'svelte';
-  import {listStore} from './store';
+  import {createListStore} from './store';
   import {ElementProps} from './types';
 
   export let listItems: LisItemProps[]            = [];
@@ -14,15 +14,16 @@
   export let selectorField                        = 'id';
   export let handleClick;
 
-  export let density: ElementProps['density'] = "default";
+  export let density: ElementProps['density'] = 'default';
 
   let ref;
-
+  const listStore = createListStore();
   setContext('listStateContext', listStore);
+
   $listStore.density = density;
   listStore.setSelectorField(selectorField);
 
-  console.log($listStore)
+  console.log($listStore);
 
   function onListItemClick(e: CustomEvent<LisItemProps>) {
     listStore.setActiveData(e.detail);

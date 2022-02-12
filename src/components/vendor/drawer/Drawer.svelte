@@ -5,10 +5,8 @@
 
 <script lang="ts">
 	import IconButton from '../button/IconButton.svelte';
-	import type { Drawer } from './types';
 
 	export let title: DrawerTitleType;
-	export let headerButtonsList: Drawer.HeaderButtonsListType;
 
 	let drawerRef: HTMLElement; 
     // any

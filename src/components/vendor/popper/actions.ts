@@ -10,10 +10,9 @@ const openPopper = (popperId: string, args: {
   componentProps?: any
 } = {}) => {
   
-  console.log(args)
   
   if (singletonPoppers[popperId]) {
-    console.log(singletonPoppers[popperId])
+ 
     singletonPoppers[popperId].toggle();
     // resend props if changed
   } else {

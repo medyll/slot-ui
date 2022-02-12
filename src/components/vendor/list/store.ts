@@ -26,7 +26,5 @@ function createStore() {
   };
 }
 
-export const listStore = createStore();
-
 // Allow for multiple stores (good for contexts)
-// export const createMyFormStore = () => new MyFormStore();
+export const createListStore = () => createStore();

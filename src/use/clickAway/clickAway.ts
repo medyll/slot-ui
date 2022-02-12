@@ -1,31 +1,42 @@
-
 type ClickAwayProps = {
   parent?: HTMLElement | string
   action?: () => void
   disabled?: boolean
 }
 
-export function clickAway(node: HTMLElement, props: ClickAwayProps) {
 
+const clickAwayParams = {
+  listenerSet: false
+}
+
+export function clickAway(node: HTMLElement, props: ClickAwayProps) {
+  
+  console.log(clickAwayParams);
   // if (props?.disabled) return false
   // do not propagate if clicked element is node
   node.addEventListener('click', (event: MouseEvent) => {
     event.stopPropagation();
   });
-
-  // treat outside click
-  document.addEventListener('click', doEvent);
-
-  function doEvent(event: any) {
+  
+  
+  const doEvent = function (daNode: any)  {
+    console.log({daNode, event});
     if (props?.action && !props?.disabled) {
       props?.action();
       document.removeEventListener('click', doEvent);
     }
-  }
-
+  };
+  
+  if (!clickAwayParams.listenerSet) {
+    // treat outside click
+    document.addEventListener('click', doEvent);
+    clickAwayParams.listenerSet = true;
+    console.log('listener set')
+ }
+  
   return {
     destroy() {
       document.removeEventListener('click', doEvent);
     }
   };
- }
+}

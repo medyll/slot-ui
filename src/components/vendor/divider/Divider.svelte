@@ -5,7 +5,7 @@
 <script lang="ts">
 
   export let density: ElementProps['density'];
-
+  export let direction: 'vertical' | 'horizontal' = 'horizontal';
 </script>
 
 <hr/>
@@ -16,5 +16,6 @@
         border: none;
         border-top: 1px solid rgba(255, 255, 255, 0.1);
         background-color: rgba(255, 255, 255, 0.1);
+        display:block;
     }
 </style>
