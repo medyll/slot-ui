@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 export type propsXyProps<T = any, B = any> = [string: keyof T, string: keyof B][]
 
 export const propsXy = <T = any, B = any, C = any>(props: propsXyProps<T, B>, data: any[]): Record<keyof B, any>[] => {
@@ -12,9 +14,14 @@ export const propsXy = <T = any, B = any, C = any>(props: propsXyProps<T, B>, da
       if (dta[keyFrom]) out[keyTo] = dta[keyFrom];
     }
     // keep original data
-    out['data'] = dta
+    out['data'] = dta;
     ret.push(out);
   }
   
   return ret;
+};
+
+export const toFa = function (strIn: string) {
+  return strIn ? 'fa'+ _.capitalize(_.camelCase(strIn))
+               : '';
 };

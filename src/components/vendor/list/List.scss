@@ -1,15 +1,16 @@
-li {
+li.listItem {
   display: flex;
   align-items: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  // border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   position: relative;
-  margin: 0.25rem;
   border-radius: 4px;
 
-  &:hover{
+
+
+  &:hover {
     background-color: rgba(255, 255, 255, 0.3);
   }
-  
+
   &.isActive {
     // background-color: rgba(255, 255, 255, 0.3);
 
@@ -25,24 +26,27 @@ li {
 
   .listItemTitle {
     flex: 1;
-    padding: 1rem;
+    padding: 0 0.5rem;
     font-weight: bold;
     font-size: 20px;
-    margin-top: 0;
-    position: sticky; 
+    margin-top: var(--one);
+    position: sticky;
   }
 
   .listItemContent {
     flex: 1;
-    padding: 1rem;
+    padding: 0 0.5rem;
   }
 
   .listItemAction {
-    padding: 1rem;
+    padding: 0 0.5rem;
   }
 
   .listItemIcon {
-    padding: 1rem;
+    text-align: center;
+    padding: 0 0.5rem;
+    // width: 3rem;
+    overflow: hidden;
   }
 
 

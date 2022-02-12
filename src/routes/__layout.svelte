@@ -56,8 +56,8 @@
 				<ListTitle>title</ListTitle>
 				{#each [...Array(10)] as key, val}
 					<ListItem>
-						<span slot="primary">{val}</span>
-						<span slot="action"><button>fds</button></span>
+						<span slot="primary">Some idiom {val}</span>
+						<span slot="action"><button>fds de action</button></span>
 					</ListItem>
 				{/each}
 			</List>

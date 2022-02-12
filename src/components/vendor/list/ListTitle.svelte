@@ -2,9 +2,12 @@
     
 </script>
 <script lang="ts">
-    
+  import {ElementProps} from './types';
+
+  export let density: ElementProps['density'] = "default";
+
 </script>
-<li>
+<li class="listItem density-{density}">
     <span class="listItemIcon">
         <slot></slot>
     </span>
@@ -17,6 +20,6 @@
 </li>
 
 
-<style lang="scss">
+<style lang="scss"  >
   @import "List";
 </style>

@@ -3,10 +3,10 @@
   import ListItem from '../../vendor/list/ListItem.svelte';
   import ListTitle from '../../vendor/list/ListTitle.svelte';
   import type {LisItemProps} from '../../vendor/list/types';
-  import {propsXy} from '../../../utils';
+  import {propsXy, toFa} from '../../../utils';
   import type {propsXyProps} from '../../../utils';
   import {null_to_empty} from 'svelte/internal';
-
+  import _ from 'lodash';
 
   import appscheme from '/src/demoData/appscheme.json';
   import appscheme_base from '/src/demoData/appscheme_base.json';
@@ -16,10 +16,12 @@
   import appscheme_has_field from '/src/demoData/appscheme_has_field.json';
   import appscheme_icon from '/src/demoData/appscheme_icon.json';
   import appscheme_type from '/src/demoData/appscheme_type.json';
-  import Header from "./Header.svelte";
+  import Header from './Header.svelte';
+  import Icon from '../../ui/icon/Icon.svelte';
 
 
-  let testArray  = [];
+  let testArray = [];
+
   let activeData;
   let schemeName = 'Appscheme';
 
@@ -39,13 +41,15 @@
             <div style="position:sticky;margin-top: 0;">
                 <input type="search" style="width:100%;" placeholder="redfer"/>
             </div>
-            <List selectorField="idappscheme" handleClick={openIn}>
+            <List selectorField="idappscheme"
+                  density="tight"
+                  handleClick={openIn}>
                 <ListTitle>title</ListTitle>
                 {#each testArray as key,val}
-                    <ListItem data="{key.data}">
-                        <span slot="icon">{null_to_empty(key.id)}</span>
+                    <ListItem  density="default" data="{key.data}">
+                        <span slot="icon"><Icon fontSize="tiny" icon={toFa(key.icon)}/></span>
                         <span slot="primary">{null_to_empty(key.primary)}</span>
-                        <span slot="secondary">{null_to_empty(key.secondary)}</span>
+                        <!--<span slot="secondary">{null_to_empty(key.secondary)}</span>-->
                         <span slot="action">{null_to_empty(key.action)}</span>
                     </ListItem>
                 {/each}
@@ -70,7 +74,7 @@
     flex-direction: column;
     overflow: hidden;
     position: relative;
-    background-color: rgba(35, 31, 26,0.5);
+    background-color: rgba(35, 31, 26, 0.5);
     backdrop-filter: blur(30px);
     color: white;
 
