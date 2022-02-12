@@ -44,10 +44,7 @@
             <slot name="secondary"></slot>
         </div>
     </div>
-    <div class="listItemAction">
-      {#if isActive}
-{$listStateContext.selectorField}
-      {/if}
+    <div class="listItemAction"> 
         <slot name="action"></slot>
     </div>
 </li>

@@ -189,8 +189,11 @@ class Router {
 			// Ignore if <a> has a target
 			if (a instanceof SVGAElement ? a.target.baseVal : a.target) return;
 
-			// Check if new url only differs by hash
-			if (url.href.split('#')[0] === location.href.split('#')[0]) {
+			// Check if new url only differs by hash and use the browser default behavior in that case
+			// This will ensure the `hashchange` event is fired
+			// Removing the hash does a full page navigation in the browser, so make sure a hash is present
+			const [base, hash] = url.href.split('#');
+			if (hash !== undefined && base === location.href.split('#')[0]) {
 				// Call `pushState` to add url to history so going back works.
 				// Also make a delay, otherwise the browser default behaviour would not kick in
 				setTimeout(() => history.pushState({}, '', url.href));
@@ -1266,11 +1269,14 @@ class Renderer {
 					let props = {};
 
 					if (has_shadow && i === a.length - 1) {
-						const res = await fetch(`${url.pathname}/__data.json`, {
-							headers: {
-								'x-sveltekit-noredirect': 'true'
+						const res = await fetch(
+							`${url.pathname}${url.pathname.endsWith('/') ? '' : '/'}__data.json`,
+							{
+								headers: {
+									'x-sveltekit-noredirect': 'true'
+								}
 							}
-						});
+						);
 
 						if (res.ok) {
 							const redirect = res.headers.get('x-sveltekit-location');
@@ -1458,10 +1464,6 @@ class Renderer {
  * }} opts
  */
 async function start({ paths, target, session, route, spa, trailing_slash, hydrate }) {
-	if (import.meta.env.DEV && !target) {
-		throw new Error('Missing target element. See https://kit.svelte.dev/docs#configuration-target');
-	}
-
 	const renderer = new Renderer({
 		Root,
 		fallback,

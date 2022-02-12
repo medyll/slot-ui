@@ -23,15 +23,9 @@ export function clickAway(node: HTMLElement, props: ClickAwayProps) {
     }
   }
 
-<<<<<<< HEAD
   return {
     destroy() {
       document.removeEventListener('click', doEvent);
     }
   };
-=======
-  /* return (
-    destroy()=>{}
-  ) */
->>>>>>> 00c24c929af295d5f27d49e458a74bba6f6d7f53
-}
+ }

@@ -7,12 +7,12 @@ function to_headers(object) {
 			const value = object[key];
 			if (!value) continue;
 
-			if (typeof value === 'string') {
-				headers.set(key, value);
-			} else {
+			if (Array.isArray(value)) {
 				value.forEach((value) => {
-					headers.append(key, value);
+					headers.append(key, /** @type {string} */ (value));
 				});
+			} else {
+				headers.set(key, /** @type {string} */ (value));
 			}
 		}
 	}
@@ -38,6 +38,16 @@ function hash(value) {
 }
 
 /** @param {Record<string, any>} obj */
+function lowercase_keys(obj) {
+	/** @type {Record<string, any>} */
+	const clone = {};
+
+	for (const key in obj) {
+		clone[key.toLowerCase()] = obj[key];
+	}
+
+	return clone;
+}
 
 /** @param {Record<string, string>} params */
 function decode_params(params) {
@@ -474,7 +484,16 @@ function coalesce_to_error(err) {
 }
 
 /** @type {Record<string, string>} */
-const escape_json_string_in_html_dict = {
+const escape_json_in_html_dict = {
+	'&': '\\u0026',
+	'>': '\\u003e',
+	'<': '\\u003c',
+	'\u2028': '\\u2028',
+	'\u2029': '\\u2029'
+};
+
+/** @type {Record<string, string>} */
+const escape_json_value_in_html_dict = {
 	'"': '\\"',
 	'<': '\\u003C',
 	'>': '\\u003E',
@@ -490,36 +509,30 @@ const escape_json_string_in_html_dict = {
 	'\u2029': '\\u2029'
 };
 
-/** @param {string} str */
-function escape_json_string_in_html(str) {
+/**
+ * Escape a stringified JSON object that's going to be embedded in a `<script>` tag
+ * @param {string} str
+ */
+function escape_json_in_html(str) {
+	// adapted from https://github.com/vercel/next.js/blob/694407450638b037673c6d714bfe4126aeded740/packages/next/server/htmlescape.ts
+	// based on https://github.com/zertosh/htmlescape
+	// License: https://github.com/zertosh/htmlescape/blob/0527ca7156a524d256101bb310a9f970f63078ad/LICENSE
+	return str.replace(/[&><\u2028\u2029]/g, (match) => escape_json_in_html_dict[match]);
+}
+
+/**
+ * Escape a string JSON value to be embedded into a `<script>` tag
+ * @param {string} str
+ */
+function escape_json_value_in_html(str) {
 	return escape(
 		str,
-		escape_json_string_in_html_dict,
+		escape_json_value_in_html_dict,
 		(code) => `\\u${code.toString(16).toUpperCase()}`
 	);
 }
 
-/** @type {Record<string, string>} */
-const escape_html_attr_dict = {
-	'<': '&lt;',
-	'>': '&gt;',
-	'"': '&quot;'
-};
-
 /**
- * use for escaping string values to be used html attributes on the page
- * e.g.
- * <script data-url="here">
- *
- * @param {string} str
- * @returns string escaped string
- */
-function escape_html_attr(str) {
-	return '"' + escape(str, escape_html_attr_dict, (code) => `&#${code};`) + '"';
-}
-
-/**
- *
  * @param str {string} string to escape
  * @param dict {Record<string, string>} dictionary of character replacements
  * @param unicode_encoder {function(number): string} encoder to use for high unicode characters
@@ -550,6 +563,25 @@ function escape(str, dict, unicode_encoder) {
 	}
 
 	return result;
+}
+
+/** @type {Record<string, string>} */
+const escape_html_attr_dict = {
+	'<': '&lt;',
+	'>': '&gt;',
+	'"': '&quot;'
+};
+
+/**
+ * use for escaping string values to be used html attributes on the page
+ * e.g.
+ * <script data-url="here">
+ *
+ * @param {string} str
+ * @returns string escaped string
+ */
+function escape_html_attr(str) {
+	return '"' + escape(str, escape_html_attr_dict, (code) => `&#${code};`) + '"';
 }
 
 const s = JSON.stringify;
@@ -1269,7 +1301,7 @@ async function render_response({
 
 			if (shadow_props) {
 				// prettier-ignore
-				body += `<script type="application/json" data-type="svelte-props">${s(shadow_props)}</script>`;
+				body += `<script type="application/json" data-type="svelte-props">${escape_json_in_html(s(shadow_props))}</script>`;
 			}
 		}
 
@@ -1714,7 +1746,7 @@ async function load_node({
 								fetched.push({
 									url: requested,
 									body: /** @type {string} */ (opts.body),
-									json: `{"status":${response.status},"statusText":${s(response.statusText)},"headers":${s(headers)},"body":"${escape_json_string_in_html(body)}"}`
+									json: `{"status":${response.status},"statusText":${s(response.statusText)},"headers":${s(headers)},"body":"${escape_json_value_in_html(body)}"}`
 								});
 							}
 
@@ -1854,13 +1886,8 @@ async function load_shadow_data(route, event, prerender) {
 
 			if (result.fallthrough) return result;
 
-			const { status = 200, headers = {}, body = {} } = result;
-
-			validate_shadow_output(headers, body);
-
-			if (headers['set-cookie']) {
-				/** @type {string[]} */ (data.cookies).push(...headers['set-cookie']);
-			}
+			const { status, headers, body } = validate_shadow_output(result);
+			add_cookies(/** @type {string[]} */ (data.cookies), headers);
 
 			// Redirects are respected...
 			if (status >= 300 && status < 400) {
@@ -1884,13 +1911,8 @@ async function load_shadow_data(route, event, prerender) {
 
 			if (result.fallthrough) return result;
 
-			const { status = 200, headers = {}, body = {} } = result;
-
-			validate_shadow_output(headers, body);
-
-			if (headers['set-cookie']) {
-				/** @type {string[]} */ (data.cookies).push(...headers['set-cookie']);
-			}
+			const { status, headers, body } = validate_shadow_output(result);
+			add_cookies(/** @type {string[]} */ (data.cookies), headers);
 
 			if (status >= 400) {
 				return {
@@ -1921,19 +1943,42 @@ async function load_shadow_data(route, event, prerender) {
 }
 
 /**
- * @param {Headers | Partial<import('types/helper').ResponseHeaders>} headers
- * @param {import('types/helper').JSONValue} body
+ * @param {string[]} target
+ * @param {Partial<import('types/helper').ResponseHeaders>} headers
  */
-function validate_shadow_output(headers, body) {
-	if (headers instanceof Headers && headers.has('set-cookie')) {
-		throw new Error(
-			'Shadow endpoint request handler cannot use Headers interface with Set-Cookie headers'
-		);
+function add_cookies(target, headers) {
+	const cookies = headers['set-cookie'];
+	if (cookies) {
+		if (Array.isArray(cookies)) {
+			target.push(...cookies);
+		} else {
+			target.push(/** @type {string} */ (cookies));
+		}
+	}
+}
+
+/**
+ * @param {import('types/endpoint').ShadowEndpointOutput} result
+ */
+function validate_shadow_output(result) {
+	const { status = 200, body = {} } = result;
+	let headers = result.headers || {};
+
+	if (headers instanceof Headers) {
+		if (headers.has('set-cookie')) {
+			throw new Error(
+				'Shadow endpoint request handler cannot use Headers interface with Set-Cookie headers'
+			);
+		}
+	} else {
+		headers = lowercase_keys(/** @type {Record<string, string>} */ (headers));
 	}
 
 	if (!is_pojo(body)) {
 		throw new Error('Body returned from shadow endpoint request handler must be a plain object');
 	}
+
+	return { status, headers, body };
 }
 
 /**
@@ -2266,7 +2311,7 @@ function get_page_config(leaf, options) {
 	// TODO remove for 1.0
 	if ('ssr' in leaf) {
 		throw new Error(
-			'`export const ssr` has been removed — use the handle hook instead: https://kit.svelte.dev/docs#hooks-handle'
+			'`export const ssr` has been removed — use the handle hook instead: https://kit.svelte.dev/docs/hooks#handle'
 		);
 	}
 
@@ -2437,7 +2482,7 @@ async function respond(request, options, state = {}) {
 				});
 			} else {
 				const verb = allowed.length === 0 ? 'enabled' : 'allowed';
-				const body = `${parameter}=${method_override} is not ${verb}. See https://kit.svelte.dev/docs#configuration-methodoverride`;
+				const body = `${parameter}=${method_override} is not ${verb}. See https://kit.svelte.dev/docs/configuration#methodoverride`;
 
 				return new Response(body, {
 					status: 400
