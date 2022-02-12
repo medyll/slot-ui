@@ -6,8 +6,12 @@ li {
   margin: 0.25rem;
   border-radius: 4px;
 
-  &.isActive {
+  &:hover{
     background-color: rgba(255, 255, 255, 0.3);
+  }
+  
+  &.isActive {
+    // background-color: rgba(255, 255, 255, 0.3);
 
     .listItemChip {
       position: absolute;
@@ -25,7 +29,7 @@ li {
     font-weight: bold;
     font-size: 20px;
     margin-top: 0;
-    position: sticky;
+    position: sticky; 
   }
 
   .listItemContent {

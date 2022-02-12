@@ -6,13 +6,6 @@
   let IconTypes = {...All1, ...All2, ...All3} as const;
   export type TIcon = keyof typeof IconTypes;
 
-</script>
-<script lang="ts">
-  import Fa from 'svelte-fa/src/fa.svelte';
-
-
-  export let icon: TIcon = 'faQuestion';
-
   const sizes = {
     tiny   : 8,
     small  : 16,
@@ -21,7 +14,17 @@
     large  : 48,
     big    : 64,
   } as const;
-  type SizeType = keyof typeof sizes
+  
+  export type SizeType = keyof typeof sizes
+
+</script>
+<script lang="ts">
+  import Fa from 'svelte-fa/src/fa.svelte';
+
+
+  export let icon: TIcon = 'faQuestion';
+
+  
 
   export let fontSize: SizeType = 'medium';
 </script>

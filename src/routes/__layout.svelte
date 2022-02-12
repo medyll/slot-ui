@@ -7,9 +7,19 @@
 	import TaskBarContent from '../components/engine/TaskBarContent.svelte';
 	import Popper from '../components/vendor/popper/Popper.svelte';
 	import Drawer from '/src/components/vendor/drawer/Drawer.svelte';
+	import MenuBar from '../components/vendor/menuBar/MenuBar.svelte';
+	import IconButton from '/src/components/vendor/button/IconButton.svelte';
+	import List from '/src/components/vendor/list/List.svelte';
+	import ListItem from '/src/components/vendor/list/ListItem.svelte';
+	import ListTitle from '/src/components/vendor/list/ListTitle.svelte';
 
 	let isLogged = true;
-	console.log($$slots);
+
+	let drawerRef: Drawer;
+
+	const handleClick = function () {
+		drawerRef.toggle();
+	};
 </script>
 
 <ThemeWrapper mode="dark">
@@ -18,6 +28,9 @@
 		{#if isLogged}
 			<Taskbar>
 				<TaskBarContent />
+				<div slot="taskBarRIght">
+					<IconButton on:click={handleClick} iconFontSize="small" icon="faAccusoft" />
+				</div>
 			</Taskbar>
 			<div style="flex: 1;overflow:hidden">
 				<Dashboard />
@@ -28,13 +41,26 @@
 			<Login />
 		{/if}
 	</div>
-	<Drawer title="Drawer">
-		<div slot="headerSwitcher">
-			<div class="pad-2">
-				<input placeholder="Search in Bar" style="width:100%;" type="text" />
-			</div>
+	<Drawer bind:this={drawerRef}>
+		<svelte:fragment slot="drawerMenuBar">
+			<MenuBar title="Drawer with menu bar ">
+				<svelte:fragment slot="menuBarSwitcher">
+					<div class="pad-2">
+						<input placeholder="Search in Bar" style="width:100%;" type="text" />
+					</div>
+				</svelte:fragment>
+			</MenuBar>
+		</svelte:fragment>
+		<div class="pad-2" slot="content">
+			<List handleClick={() => {}}>
+				<ListTitle>title</ListTitle>
+				{#each [...Array(10)] as key, val}
+					<ListItem>
+						<span slot="primary">{val}</span>
+					</ListItem>
+				{/each}
+			</List>
 		</div>
-		<div slot="content">content</div>
 	</Drawer>
 </ThemeWrapper>
 
