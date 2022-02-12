@@ -5,7 +5,7 @@
   import Debug from '../debug/Debug.svelte';
 </script>
 
-<div class="h-full grid-v serviceBox" use:clickAway>
+<div class="h-full grid-v serviceBox" use:clickAway={{action:()=>{alert('red')}}}>
 
     <div class="grid-main pad-8 gridIconBis">
         {#each [...Array(6)] as key,val }

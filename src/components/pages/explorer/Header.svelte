@@ -5,7 +5,7 @@
 </script>
 
 
-<div class="pad-tb-8 grid-main">
+<div class="pad-2 pad-tb-8 grid-main">
     <h1>{title}</h1>
 </div>
 <div class="pad-tb-8  grid-h grid-align-top">

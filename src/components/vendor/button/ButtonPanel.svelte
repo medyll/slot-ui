@@ -1,10 +1,12 @@
-<script lang="ts">
+<script lang="ts"> 
+import type { SvelteComponentDev } from 'svelte/internal';
+
 
   import Icon from '../../ui/icon/Icon.svelte';
   import {openPopper} from '../popper/actions';
 
   export let icon: string = 'faList';
-  export let actionComponent;
+  export let actionComponent: SvelteComponentDev;
   export let actionComponentProps;
 
   let buttonRef;

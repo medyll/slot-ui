@@ -2,9 +2,9 @@
   import Icon  from '../../ui/icon/Icon.svelte';
 
   export let icon: any;
-  export let style;
-  export let className;
-  export let showShip: boolean;
+  export let style: string= '';
+  export let className: string = '';
+  export let showShip: boolean = false;
 </script>
 
 <button on:click style="{style}" class="{className}">
