@@ -8,3 +8,7 @@ export type LisItemProps = {
 
 export type LisItemPropsKey = keyof LisItemProps
 
+export interface ElementProps {
+  density  : 'tight' | 'default' | 'find'  ;
+  expansion: 'full' | 'padded' | 'centered'
+}

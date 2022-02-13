@@ -4,7 +4,8 @@
 </script>
 
 <script lang="ts">
-	import IconButton from '../button/IconButton.svelte';
+	import BottomBar from '../bottomBar/BottomBar.svelte';
+import IconButton from '../button/IconButton.svelte';
 
 	export let title: DrawerTitleType;
 
@@ -42,6 +43,9 @@
 		{#if $$slots.content}
 			<div class="grid-main"><slot name="content">content</slot></div>
 		{/if}
+		<BottomBar>
+			bar bottom
+		</BottomBar>
 	</div>
 {/if}
 

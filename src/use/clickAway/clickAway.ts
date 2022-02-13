@@ -11,7 +11,7 @@ const clickAwayParams = {
 
 export function clickAway(node: HTMLElement, props: ClickAwayProps) {
   
-  console.log(clickAwayParams);
+  console.log(node);
   // if (props?.disabled) return false
   // do not propagate if clicked element is node
   node.addEventListener('click', (event: MouseEvent) => {
