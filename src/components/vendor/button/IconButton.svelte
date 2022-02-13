@@ -1,10 +1,10 @@
 <script context="module" lang="ts">
 
+	import type  { TIcon,SizeType } from '../../ui/icon/Icon.svelte';
 
 </script>
 <script lang="ts">
 	import Icon  from '../../ui/icon/Icon.svelte';
-	import type  { TIcon,SizeType } from '../../ui/icon/Icon.svelte';
 
 
 	export let icon: TIcon;

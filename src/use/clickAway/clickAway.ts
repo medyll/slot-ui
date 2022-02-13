@@ -15,6 +15,7 @@ export function clickAway(node: HTMLElement, props: ClickAwayProps) {
   // if (props?.disabled) return false
   // do not propagate if clicked element is node
   node.addEventListener('click', (event: MouseEvent) => {
+    console.log(node);
     event.stopPropagation();
   });
   
@@ -27,16 +28,16 @@ export function clickAway(node: HTMLElement, props: ClickAwayProps) {
     }
   };
   
-  if (!clickAwayParams.listenerSet) {
+ // if (!clickAwayParams.listenerSet) {
     // treat outside click
     document.addEventListener('click', doEvent);
     clickAwayParams.listenerSet = true;
-    console.log('listener set')
- }
+    console.log('listener set for ',node)
+ //}
   
   return {
     destroy() {
-      document.removeEventListener('click', doEvent);
+    //  document.removeEventListener('click', doEvent);
     }
   };
 }

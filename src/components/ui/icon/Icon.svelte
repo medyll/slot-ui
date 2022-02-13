@@ -2,9 +2,9 @@
   import * as All1 from '@fortawesome/free-solid-svg-icons';
   import * as All2 from '@fortawesome/free-brands-svg-icons';
   import * as All3 from '@fortawesome/free-regular-svg-icons';
+  export type TIcon = keyof typeof IconTypes;
 
   let IconTypes = {...All1, ...All2, ...All3} as const;
-  export type TIcon = keyof typeof IconTypes;
 
   const sizes = {
     tiny   : 8,

@@ -1,11 +1,8 @@
-/*
- export async function get({params}) {
+ export async function get ({params}:any) {
   console.log({params});
   return {
-    /!*body: {
+    body: {
       item: 'clean'
-    }*!/
+    }
   };
 }
-*/
-export {}

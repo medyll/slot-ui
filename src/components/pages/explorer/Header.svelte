@@ -9,7 +9,6 @@
 <div class="pad-2 pad-tb-6 grid-main">
     <h3>{title}</h3>
 </div>
-<Divider />
 <div class="pad-4  grid-h grid-align-top">
     <div class="pad-r-4">
         <Icon  fontSize="big" icon="faFile" />
@@ -23,12 +22,13 @@
         <div class="pad-b-1">crefrefre</div>
     </div>
 </div>
-<div class="header">
+<Divider />
+<!--<div class="header">
     <div class="grid-h grid-align-middle">
         <div class="first">icon</div>
         <div class="second">Header title</div>
     </div>
-</div>
+</div>-->
 
 <style>
     .header {

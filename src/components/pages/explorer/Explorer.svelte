@@ -18,10 +18,11 @@
   import appscheme_type from '/src/demoData/appscheme_type.json';
   import Header from './Header.svelte';
   import Icon from '../../ui/icon/Icon.svelte';
-  import Divider from "../../vendor/divider/Divider.svelte";
-  import TopBar from "../../vendor/topBar/TopBar.svelte";
-  import ContentSwitcher from "../../vendor/contentSwitcher/ContentSwitcher.svelte";
-  import MenuBar from "../../vendor/topBar/TopBar.svelte";
+  import Divider from '../../vendor/divider/Divider.svelte';
+  import TopBar from '../../vendor/topBar/TopBar.svelte';
+  import ContentSwitcher from '../../vendor/contentSwitcher/ContentSwitcher.svelte';
+  import MenuBar from '../../vendor/topBar/TopBar.svelte';
+  import Elementor from '../../vendor/Elementor.svelte';
 
 
   let listItems = [];
@@ -35,16 +36,20 @@
 
   const schemeData                                        = appscheme.RECORDS;
   const transformArgsBis: propsXyProps<LisItemProps, any> = [['primary', `nom${schemeName}`], ['secondary', `code${schemeName}`], ['icon', `icon${schemeName}`]];
-  listItems     = propsXy(transformArgsBis, schemeData);
+  listItems                                               = propsXy(transformArgsBis, schemeData);
 
+  let debugValues = [];
+  $: if (activeData) {
+    debugValues = Object.values(activeData);
+  }
 </script>
 
 <div class="explorerFrame">
     <div class="explorerContainer">
         <div class="navLeft grid-v h-full ">
-            <div class="pad-2" >
+            <div class="pad-2">
                 <MenuBar orientation="left" title="Navigation bar ">
-                   <input slot="menuBarSwitcher" placeholder="Search in Bar" style="width:100%;" type="text" />
+                    <input slot="menuBarSwitcher" placeholder="Search in Bar" style="width:100%;" type="text"/>
                 </MenuBar>
             </div>
             <div class="grid-main overflow-auto">
@@ -55,7 +60,7 @@
                       bind:listItems={listItems}
                       let:listItem
                       style="height:100%;">
-                    <ListItem  data="{listItem.data}">
+                    <ListItem data="{listItem.data}">
                         <span slot="icon"><Icon fontSize="tiny" icon={toFa(listItem.icon)}/></span>
                         <span slot="primary">{null_to_empty(listItem.primary)}</span>
                         <span slot="action">{null_to_empty(listItem.action)}</span>
@@ -63,12 +68,22 @@
                 </List>
             </div>
         </div>
-        <div class="content">
-            <Header title={activeData?.[`nomAppscheme`]}>
-                {activeData?.[`nomAppscheme`]}
-            </Header>
+        <div class="content h-full grid-v">
             <div>
-                <pre>{JSON.stringify(activeData, null, ' ')}</pre>
+            <Header title={activeData?.[`nomAppscheme`]} bind:debugValues>
+                {activeData?.[`nomAppscheme`]}
+            </Header></div>
+            <div class="grid-main overflow-auto pad-4">
+                <!--object loop-->
+                {#if activeData}
+                    <Elementor let:itemObject bind:item={activeData}>
+                        <div class="grid-h grid-align-middle">
+                            <div class="pad-2 border-b" style="width:120px;overflow: hidden">{itemObject.key}</div>
+                            <div class="pad-2">:</div>
+                            <div class="pad-2" >{JSON.stringify(itemObject.value)}</div>
+                        </div>
+                    </Elementor>
+                {/if}
             </div>
         </div>
     </div>

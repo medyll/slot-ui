@@ -36,7 +36,6 @@
 				<Dashboard />
 				<slot>empty !!!</slot>
 			</div>
-			<!--<Popper/>-->
 		{:else}
 			<Login />
 		{/if}

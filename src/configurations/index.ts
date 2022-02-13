@@ -6,7 +6,7 @@ import Debug from '../components/ui/debug/Debug.svelte';
 
 const windowList = globalThis.window;
 
-function openWindow(frameId: string, args: Partial<IChromeArgs> = {}) {
+function openWindow(frameId: string , args: Partial<IChromeArgs> = {}) {
   
   const appW = get(windowsStore).get(frameId);
   windowsStore.open({

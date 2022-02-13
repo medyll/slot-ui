@@ -6,12 +6,15 @@
   import {onDestroy, onMount} from 'svelte';
   import {get_current_component} from 'svelte/internal';
 
-  console.log(get_current_component());
-  onMount(() => {
-  });
+
+
+  const onclose = function () {
+    console.log('close ??')
+  };
+
 </script>
 
-<div class="h-full grid-v serviceBox" use:clickAway={{action:()=>{console.log('close ??')}}}>
+<div class="h-full grid-v serviceBox" use:clickAway={{action:onclose}}>
 
     <div class="grid-main pad-8 gridIconBis">
         {#each [...Array(6)] as key,val }
@@ -19,9 +22,9 @@
             <ButtonPanel actionComponent={Debug}>Setting {val}</ButtonPanel>
         {/each}
     </div>
-    <div class="grid-h grid-align-right">
+    <div  use:clickAway={{action:onclose}} class="grid-h grid-align-right">
         <IconButton icon="faList"></IconButton>
-        <IconButton icon="faCopy"></IconButton>
+        <IconButton icon="faList"></IconButton>
     </div>
 </div>
 
