@@ -18,6 +18,10 @@
   import appscheme_type from '/src/demoData/appscheme_type.json';
   import Header from './Header.svelte';
   import Icon from '../../ui/icon/Icon.svelte';
+  import Divider from "../../vendor/divider/Divider.svelte";
+  import TopBar from "../../vendor/topBar/TopBar.svelte";
+  import ContentSwitcher from "../../vendor/contentSwitcher/ContentSwitcher.svelte";
+  import MenuBar from "../../vendor/topBar/TopBar.svelte";
 
 
   let testArray = [];
@@ -37,23 +41,26 @@
 
 <div class="explorerFrame">
     <div class="explorerContainer">
-        <div class="navLeft">
-            <div style="position:sticky;margin-top: 0;">
-                <input type="search" style="width:100%;" placeholder="redfer"/>
+        <div class="navLeft grid-v h-full ">
+            <div class="pad-2" >
+                <MenuBar orientation="left" title="Navigation bar ">
+                   <input slot="menuBarSwitcher" placeholder="Search in Bar" style="width:100%;" type="text" />
+                </MenuBar>
             </div>
-            <List selectorField="idappscheme"
-                  density="tight"
-                  handleClick={openIn}>
-                <ListTitle>title</ListTitle>
-                {#each testArray as key,val}
-                    <ListItem  density="default" data="{key.data}">
-                        <span slot="icon"><Icon fontSize="tiny" icon={toFa(key.icon)}/></span>
-                        <span slot="primary">{null_to_empty(key.primary)}</span>
-                        <!--<span slot="secondary">{null_to_empty(key.secondary)}</span>-->
-                        <span slot="action">{null_to_empty(key.action)}</span>
-                    </ListItem>
-                {/each}
-            </List>
+            <div class="grid-main overflow-auto">
+                <List selectorField="idappscheme"
+                      density="tight"
+                      handleClick={openIn}>
+                    <ListTitle primary="Title"/>
+                    {#each testArray as key,val}
+                        <ListItem density="default" data="{key.data}">
+                            <span slot="icon"><Icon fontSize="tiny" icon={toFa(key.icon)}/></span>
+                            <span slot="primary">{null_to_empty(key.primary)}</span>
+                            <span slot="action">{null_to_empty(key.action)}</span>
+                        </ListItem>
+                    {/each}
+                </List>
+            </div>
         </div>
         <div class="content">
             <Header title={activeData?.[`nomAppscheme`]}>
@@ -92,8 +99,6 @@
       .navLeft {
         width: 270px;
         min-width: 270px;
-        overflow: auto;
-        padding: 1rem;
       }
 
       .content {

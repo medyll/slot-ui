@@ -1,17 +1,14 @@
-<script context="module" lang="ts">
-
-</script>
 <script lang="ts">
   import {getContext} from 'svelte';
   import {custom_event} from 'svelte/internal';
-  import {ElementProps} from './types';
-  import Divider from "../divider/Divider.svelte";
+  import Divider from '../divider/Divider.svelte';
+  import type {ElementProps} from '../../../types';
 
   export let icon: string;
   export let primary: string;
   export let secondary: string;
   export let action: string;
-  // data to hold
+
   export let data: Record<string, any> = {};
 
   export let density: ElementProps['density'] = 'default';
@@ -25,8 +22,8 @@
     ref.dispatchEvent(event);
   };
 
-  let isActive: boolean;
-  $: if ($listStateContext) {
+  let isActive: boolean = false;
+  $: if ($listStateContext && Object.keys(data).length) {
     isActive = listStateContext.selector($listStateContext.selectorField, data);
   }
 
@@ -52,16 +49,16 @@
         <slot name="action"></slot>
     </div>
 </li>
-<Divider />
+<Divider/>
 <style lang="scss" global>
   @import "List";
 
-  li.listItem.density-tight {
+   li.listItem.density-tight {
     padding: 0.5rem 0;
     margin: 0.125rem 0;
   }
 
-  li.listItem.density-default {
+  li.listItem, li.listItem.density-default {
     padding: 1rem 0;
     margin: 0.25rem 0;
   }

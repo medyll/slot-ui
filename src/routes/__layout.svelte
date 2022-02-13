@@ -7,7 +7,7 @@
 	import TaskBarContent from '../components/engine/TaskBarContent.svelte';
 	import Popper from '../components/vendor/popper/Popper.svelte';
 	import Drawer from '/src/components/vendor/drawer/Drawer.svelte';
-	import MenuBar from '../components/vendor/menuBar/MenuBar.svelte';
+	import TopBar from '../components/vendor/topBar/TopBar.svelte';
 	import IconButton from '/src/components/vendor/button/IconButton.svelte';
 	import List from '/src/components/vendor/list/List.svelte';
 	import ListItem from '/src/components/vendor/list/ListItem.svelte';
@@ -25,7 +25,7 @@
 <ThemeWrapper mode="dark">
 	<StartMenu />
 	<div style="height:100%;max-height:100%;overflow:hidden;display:flex;flex-direction: column">
-		{#if isLogged}
+		{#if  isLogged}
 			<Taskbar>
 				<TaskBarContent />
 				<div slot="taskBarRIght">
@@ -43,21 +43,20 @@
 	</div>
 	<Drawer bind:this={drawerRef}>
 		<svelte:fragment slot="drawerMenuBar">
-			<MenuBar title="Drawer with menu bar ">
+			<TopBar title="Drawer with menu bar ">
 				<svelte:fragment slot="menuBarSwitcher">
 					<div class="pad-2">
 						<input placeholder="Search in Bar" style="width:100%;" type="text" />
 					</div>
 				</svelte:fragment>
-			</MenuBar>
+			</TopBar>
 		</svelte:fragment>
 		<div class="pad-2" slot="content">
 			<List handleClick={() => {}}>
-				<ListTitle>title</ListTitle>
 				{#each [...Array(10)] as key, val}
 					<ListItem>
 						<span slot="primary">Some idiom {val}</span>
-						<span slot="action"><button>fds de action</button></span>
+						<span slot="action"><button >fds de action</button></span>
 					</ListItem>
 				{/each}
 			</List>
@@ -89,10 +88,10 @@
 	}
 
 	button {
-		border: 0.5px solid #ccc;
+		border: 0.5px solid rgba(255,255,255,0.2);
 		padding: 0.25rem 0.5rem;
 		border-radius: 4px;
-		background-color: white;
+		 background-color: rgba(255,255,255,0.1);
 
 		&:hover {
 			background-color: #ededed;

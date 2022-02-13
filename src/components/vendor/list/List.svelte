@@ -6,7 +6,10 @@
   import ListItem from './ListItem.svelte';
   import {setContext} from 'svelte';
   import {createListStore} from './store';
-  import {ElementProps} from './types';
+  import type {ElementProps} from '../../../types';
+  import {null_to_empty} from 'svelte/internal';
+  import {toFa} from '../../../utils';
+  import Icon from '../../ui/icon/Icon.svelte';
 
   export let listItems: LisItemProps[]            = [];
   export let direction: 'vertical' | 'horizontal' = 'vertical';
@@ -23,8 +26,6 @@
   $listStore.density = density;
   listStore.setSelectorField(selectorField);
 
-  console.log($listStore);
-
   function onListItemClick(e: CustomEvent<LisItemProps>) {
     listStore.setActiveData(e.detail);
     handleClick && handleClick(e.detail);
@@ -34,9 +35,9 @@
 <ul class="density-{density}" on:list:listItem:clicked={onListItemClick} bind:this={ref} style="{style}">
     {#each listItems as lisItem}
         <ListItem density={density}>
-            <div slot="icon"></div>
-            <div slot="text"></div>
-            <div slot="action"></div>
+            <span slot="icon"><Icon fontSize="tiny" icon={toFa(lisItem.icon)}/></span>
+            <span slot="primary">{null_to_empty(lisItem.primary)}</span>
+            <span slot="action">{null_to_empty(lisItem.action)}</span>
         </ListItem>
     {/each}
     <slot></slot>

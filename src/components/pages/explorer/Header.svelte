@@ -1,22 +1,24 @@
 <script lang="ts">
     import Icon from "../../ui/icon/Icon.svelte";
+    import Divider from "../../vendor/divider/Divider.svelte";
 
     export let title:string;
 </script>
 
 
-<div class="pad-2 pad-tb-8 grid-main">
-    <h1>{title}</h1>
+<div class="pad-2 pad-tb-6 grid-main">
+    <h3>{title}</h3>
 </div>
-<div class="pad-tb-8  grid-h grid-align-top">
+<Divider />
+<div class="pad-4  grid-h grid-align-top">
     <div class="pad-r-4">
         <Icon  fontSize="big" icon="faFile" />
     </div>
-    <div class="pad-1 grid-main">
+    <div class="pad-1 w-8">
         <div class="pad-b-1">crefrefre</div>
         <div class="pad-b-1">crefrefre</div>
     </div>
-    <div class="pad-1 grid-main">
+    <div class="pad-1 ">
         <div class="pad-b-1">crefrefre</div>
         <div class="pad-b-1">crefrefre</div>
     </div>

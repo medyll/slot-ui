@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-  import {ElementProps} from '../list/types';
+  import type {ElementProps} from '../../../types';
 </script>
 
 <script lang="ts">

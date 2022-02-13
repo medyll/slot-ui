@@ -1,10 +1,12 @@
 <script context="module" lang="ts">
-	import type { TIcon } from 'components/ui/icon/Icon.svelte';
+
 	import IconButton from '../button/IconButton.svelte';
+	import type {TIcon} from '../../ui/icon/Icon.svelte';
 	import type { useContentSwitcher } from './useContentSwitcher';
 </script>
 
 <script lang="ts">
+
 	export let icon: TIcon = 'faToggleOff';
 	export let parent: HTMLElement;
 

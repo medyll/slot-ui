@@ -1,5 +1,5 @@
 import {writable, get} from 'svelte/store';
-import type {ElementProps} from './types';
+import type {ElementProps} from '../../../types';
 
 type ListStoreType = {
   activeData: Record<string, any>;
