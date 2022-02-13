@@ -16,7 +16,7 @@
   export let listItems: LisItemProps[];
   export let direction: 'vertical' | 'horizontal' = 'vertical';
   export let style: string                        = '';
-  export let selectorField                        = 'id';
+  export let selectorField;
   export let onItemClick;
   export let title: string;
 

@@ -1,135 +1,44 @@
-import { c as create_ssr_component, h as getContext, a as subscribe, b as add_attribute, g as get_store_value, s as setContext, d as each, v as validate_component, e as escape, n as null_to_empty } from "../../../chunks/index-ac6c1556.js";
-import { w as writable, I as Icon } from "../../../chunks/Icon-cf33c954.js";
+import { c as create_ssr_component, d as escape, b as add_attribute, e as each, v as validate_component, k as null_to_empty } from "../../../chunks/index-06be2ae5.js";
+import { D as Divider, b as Icon, p as propsXy, T as TopBar, L as List, a as ListItem, t as toFa } from "../../../chunks/List-7ff33028.js";
+import "lodash";
 import "@fortawesome/free-regular-svg-icons";
 import "@fortawesome/free-brands-svg-icons";
 import "@fortawesome/free-solid-svg-icons";
-var ListItem_svelte_svelte_type_style_lang = "";
-const css$3 = {
-  code: "li.svelte-s3llgj.svelte-s3llgj{display:flex;align-items:center;border-bottom:1px solid rgba(255, 255, 255, 0.1);position:relative;margin:0.25rem;border-radius:4px}li.isActive.svelte-s3llgj.svelte-s3llgj{background-color:rgba(255, 255, 255, 0.3)}li.isActive.svelte-s3llgj .listItemChip.svelte-s3llgj{position:absolute;height:50%;width:3px;background-color:maroon;border-radius:8px;left:-1px}li.svelte-s3llgj .listItemContent.svelte-s3llgj{flex:1;padding:1rem}li.svelte-s3llgj .listItemAction.svelte-s3llgj{padding:1rem}li.svelte-s3llgj .listItemIcon.svelte-s3llgj{padding:1rem}",
-  map: null
-};
-const ListItem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let $listStateContext, $$unsubscribe_listStateContext;
-  let { icon } = $$props;
-  let { primary } = $$props;
-  let { secondary } = $$props;
-  let { action } = $$props;
-  let { data = {} } = $$props;
-  let ref;
-  let listStateContext = getContext("listStateContext");
-  $$unsubscribe_listStateContext = subscribe(listStateContext, (value) => $listStateContext = value);
-  let isActive;
-  if ($$props.icon === void 0 && $$bindings.icon && icon !== void 0)
-    $$bindings.icon(icon);
-  if ($$props.primary === void 0 && $$bindings.primary && primary !== void 0)
-    $$bindings.primary(primary);
-  if ($$props.secondary === void 0 && $$bindings.secondary && secondary !== void 0)
-    $$bindings.secondary(secondary);
-  if ($$props.action === void 0 && $$bindings.action && action !== void 0)
-    $$bindings.action(action);
-  if ($$props.data === void 0 && $$bindings.data && data !== void 0)
-    $$bindings.data(data);
-  $$result.css.add(css$3);
-  {
-    if ($listStateContext) {
-      isActive = listStateContext.selector($listStateContext.selectorField, data);
-    }
-  }
-  $$unsubscribe_listStateContext();
-  return `<li class="${["svelte-s3llgj", isActive ? "isActive" : ""].join(" ").trim()}"${add_attribute("this", ref, 0)}><span class="${"listItemChip svelte-s3llgj"}"></span>
-    <div class="${"listItemIcon svelte-s3llgj"}">${slots.icon ? slots.icon({}) : ``}</div>
-    <div class="${"listItemContent svelte-s3llgj"}"><div>${slots.primary ? slots.primary({}) : ``}</div>
-        <div>${slots.secondary ? slots.secondary({}) : ``}</div></div>
-    <div class="${"listItemAction svelte-s3llgj"}">${slots.action ? slots.action({}) : ``}</div>
-</li>`;
-});
-function createStore() {
-  const initialData = { activeData: {}, selectorField: "id" };
-  const innerStore = writable(initialData);
-  const { subscribe: subscribe2, set, update } = innerStore;
-  return {
-    subscribe: subscribe2,
-    set,
-    update,
-    setSelectorField: (selectorField) => update((n) => {
-      return { ...n, selectorField };
-    }),
-    setActiveData: (data) => {
-      update((n) => {
-        return { ...n, activeData: data };
-      });
-    },
-    selector: (field, data) => {
-      return get_store_value(innerStore).activeData[field] === data[field];
-    }
-  };
-}
-const listStore = createStore();
-const List = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let { listItems = [] } = $$props;
-  let { size = "default" } = $$props;
-  let { direction = "vertical" } = $$props;
-  let { style = "" } = $$props;
-  let { selectorField = "id" } = $$props;
-  let { handleClick } = $$props;
-  let ref;
-  setContext("listStateContext", listStore);
-  listStore.setSelectorField(selectorField);
-  if ($$props.listItems === void 0 && $$bindings.listItems && listItems !== void 0)
-    $$bindings.listItems(listItems);
-  if ($$props.size === void 0 && $$bindings.size && size !== void 0)
-    $$bindings.size(size);
-  if ($$props.direction === void 0 && $$bindings.direction && direction !== void 0)
-    $$bindings.direction(direction);
-  if ($$props.style === void 0 && $$bindings.style && style !== void 0)
-    $$bindings.style(style);
-  if ($$props.selectorField === void 0 && $$bindings.selectorField && selectorField !== void 0)
-    $$bindings.selectorField(selectorField);
-  if ($$props.handleClick === void 0 && $$bindings.handleClick && handleClick !== void 0)
-    $$bindings.handleClick(handleClick);
-  return `<ul${add_attribute("style", style, 0)}${add_attribute("this", ref, 0)}>${each(listItems, (lisItem) => {
-    return `${validate_component(ListItem, "ListItem").$$render($$result, {}, {}, {
-      action: () => {
-        return `<div slot="${"action"}"></div>`;
-      },
-      text: () => {
-        return `<div slot="${"text"}"></div>`;
-      },
-      icon: () => {
-        return `<div slot="${"icon"}">ac</div>`;
-      }
-    })}`;
-  })}
-    ${slots.default ? slots.default({}) : ``}
-</ul>`;
-});
-var ListTitle_svelte_svelte_type_style_lang = "";
+var VirtualList_svelte_svelte_type_style_lang = "";
 const css$2 = {
-  code: "li.svelte-s3llgj.svelte-s3llgj{display:flex;align-items:center;border-bottom:1px solid rgba(255, 255, 255, 0.1);position:relative;margin:0.25rem;border-radius:4px}li.svelte-s3llgj .listItemTitle.svelte-s3llgj{flex:1;padding:1rem;font-weight:bold;font-size:20px;margin-top:0;position:sticky}li.svelte-s3llgj .listItemAction.svelte-s3llgj{padding:1rem}li.svelte-s3llgj .listItemIcon.svelte-s3llgj{padding:1rem}",
+  code: "svelte-virtual-list-viewport.svelte-1tqh76q{position:relative;overflow-y:auto;-webkit-overflow-scrolling:touch;display:block}svelte-virtual-list-contents.svelte-1tqh76q,svelte-virtual-list-row.svelte-1tqh76q{display:block}svelte-virtual-list-row.svelte-1tqh76q{overflow:hidden}",
   map: null
 };
-const ListTitle = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+const VirtualList = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let { items } = $$props;
+  let { height = "100%" } = $$props;
+  let { itemHeight = void 0 } = $$props;
+  let { start = 0 } = $$props;
+  let { end = 0 } = $$props;
+  let viewport;
+  let contents;
+  let visible;
+  let top = 0;
+  let bottom = 0;
+  if ($$props.items === void 0 && $$bindings.items && items !== void 0)
+    $$bindings.items(items);
+  if ($$props.height === void 0 && $$bindings.height && height !== void 0)
+    $$bindings.height(height);
+  if ($$props.itemHeight === void 0 && $$bindings.itemHeight && itemHeight !== void 0)
+    $$bindings.itemHeight(itemHeight);
+  if ($$props.start === void 0 && $$bindings.start && start !== void 0)
+    $$bindings.start(start);
+  if ($$props.end === void 0 && $$bindings.end && end !== void 0)
+    $$bindings.end(end);
   $$result.css.add(css$2);
-  return `<li class="${"svelte-s3llgj"}"><span class="${"listItemIcon svelte-s3llgj"}">${slots.default ? slots.default({}) : ``}</span>
-    <span class="${"listItemTitle svelte-s3llgj"}">${slots.default ? slots.default({}) : ``}</span>
-    <span class="${"listItemAction svelte-s3llgj"}">${slots.default ? slots.default({}) : ``}</span>
-</li>`;
+  visible = items.slice(start, end).map((data, i) => {
+    return { index: i + start, data };
+  });
+  return `<svelte-virtual-list-viewport style="${"height: " + escape(height) + ";"}" class="${"svelte-1tqh76q"}"${add_attribute("this", viewport, 0)}><svelte-virtual-list-contents style="${"padding-top: " + escape(top) + "px; padding-bottom: " + escape(bottom) + "px;"}" class="${"svelte-1tqh76q"}"${add_attribute("this", contents, 0)}>${each(visible, (row) => {
+    return `<svelte-virtual-list-row class="${"svelte-1tqh76q"}">${slots.default ? slots.default({ item: row.data }) : `Missing template`}
+			</svelte-virtual-list-row>`;
+  })}</svelte-virtual-list-contents></svelte-virtual-list-viewport>`;
 });
-const propsXy = (props, data) => {
-  let ret = [];
-  for (const dta of data) {
-    let out = {};
-    for (const prop of props) {
-      const keyFrom = prop[1];
-      const keyTo = prop[0];
-      if (dta[keyFrom])
-        out[keyTo] = dta[keyFrom];
-    }
-    out["data"] = dta;
-    ret.push(out);
-  }
-  return ret;
-};
 const RECORDS = [
   {
     _id: "558d5d45a0ade1af528b4567",
@@ -8125,11 +8034,12 @@ const Header = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   if ($$props.title === void 0 && $$bindings.title && title !== void 0)
     $$bindings.title(title);
   $$result.css.add(css$1);
-  return `<div class="${"pad-tb-8 grid-main"}"><h1>${escape(title)}</h1></div>
-<div class="${"pad-tb-8 grid-h grid-align-top"}"><div class="${"pad-r-4"}">${validate_component(Icon, "Icon").$$render($$result, { fontSize: "big", icon: "faFile" }, {}, {})}</div>
-    <div class="${"pad-1 grid-main"}"><div class="${"pad-b-1"}">crefrefre</div>
+  return `<div class="${"pad-2 pad-tb-6 grid-main"}"><h3>${escape(title)}</h3></div>
+${validate_component(Divider, "Divider").$$render($$result, {}, {}, {})}
+<div class="${"pad-4 grid-h grid-align-top"}"><div class="${"pad-r-4"}">${validate_component(Icon, "Icon").$$render($$result, { fontSize: "big", icon: "faFile" }, {}, {})}</div>
+    <div class="${"pad-1 w-8"}"><div class="${"pad-b-1"}">crefrefre</div>
         <div class="${"pad-b-1"}">crefrefre</div></div>
-    <div class="${"pad-1 grid-main"}"><div class="${"pad-b-1"}">crefrefre</div>
+    <div class="${"pad-1 "}"><div class="${"pad-b-1"}">crefrefre</div>
         <div class="${"pad-b-1"}">crefrefre</div></div></div>
 <div class="${"header svelte-p4nqug"}"><div class="${"grid-h grid-align-middle"}"><div class="${"first svelte-p4nqug"}">icon</div>
         <div class="${"second svelte-p4nqug"}">Header title</div></div>
@@ -8137,7 +8047,7 @@ const Header = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 });
 var Explorer_svelte_svelte_type_style_lang = "";
 const css = {
-  code: ".explorerFrame.svelte-mgb203.svelte-mgb203{z-index:1;height:100%;display:flex;flex-direction:column;overflow:hidden;position:relative;background-color:rgba(35, 31, 26, 0.5);backdrop-filter:blur(30px);color:white}.explorerFrame.svelte-mgb203 .explorerContainer.svelte-mgb203{display:flex;flex:1;overflow:hidden}.explorerFrame.svelte-mgb203 .explorerContainer .navLeft.svelte-mgb203{width:270px;min-width:270px;overflow:auto;padding:1rem}.explorerFrame.svelte-mgb203 .explorerContainer .content.svelte-mgb203{flex:1 auto}",
+  code: ".explorerFrame.svelte-1ac3me8.svelte-1ac3me8{z-index:1;height:100%;display:flex;flex-direction:column;overflow:hidden;position:relative;background-color:rgba(35, 31, 26, 0.5);backdrop-filter:blur(30px);color:white}.explorerFrame.svelte-1ac3me8 .explorerContainer.svelte-1ac3me8{display:flex;flex:1;overflow:hidden}.explorerFrame.svelte-1ac3me8 .explorerContainer .navLeft.svelte-1ac3me8{width:270px;min-width:270px}.explorerFrame.svelte-1ac3me8 .explorerContainer .content.svelte-1ac3me8{flex:1 auto}",
   map: null
 };
 let schemeName = "Appscheme";
@@ -8155,36 +8065,40 @@ const Explorer = create_ssr_component(($$result, $$props, $$bindings, slots) => 
   ];
   testArray = propsXy(transformArgsBis, schemeData);
   $$result.css.add(css);
-  return `<div class="${"explorerFrame svelte-mgb203"}"><div class="${"explorerContainer svelte-mgb203"}"><div class="${"navLeft svelte-mgb203"}"><div style="${"position:sticky;margin-top: 0;"}"><input type="${"search"}" style="${"width:100%;"}" placeholder="${"redfer"}"></div>
-            ${validate_component(List, "List").$$render($$result, {
-    selectorField: "idappscheme",
-    handleClick: openIn
+  return `<div class="${"explorerFrame svelte-1ac3me8"}"><div class="${"explorerContainer svelte-1ac3me8"}"><div class="${"navLeft grid-v h-full  svelte-1ac3me8"}"><div class="${"pad-2"}">${validate_component(TopBar, "MenuBar").$$render($$result, {
+    orientation: "left",
+    title: "Navigation bar "
   }, {}, {
-    default: () => {
-      return `${validate_component(ListTitle, "ListTitle").$$render($$result, {}, {}, {
-        default: () => {
-          return `title`;
-        }
-      })}
-                ${each(testArray, (key, val) => {
-        return `${validate_component(ListItem, "ListItem").$$render($$result, { data: key.data }, {}, {
-          action: () => {
-            return `<span slot="${"action"}">${escape(null_to_empty(key.action))}</span>`;
-          },
-          secondary: () => {
-            return `<span slot="${"secondary"}">${escape(null_to_empty(key.secondary))}</span>`;
-          },
-          primary: () => {
-            return `<span slot="${"primary"}">${escape(null_to_empty(key.primary))}</span>`;
-          },
-          icon: () => {
-            return `<span slot="${"icon"}">${escape(null_to_empty(key.id))}</span>`;
-          }
-        })}`;
-      })}`;
+    menuBarSwitcher: () => {
+      return `<input slot="${"menuBarSwitcher"}" placeholder="${"Search in Bar"}" style="${"width:100%;"}" type="${"text"}">`;
     }
   })}</div>
-        <div class="${"content svelte-mgb203"}">${validate_component(Header, "Header").$$render($$result, { title: activeData?.[`nomAppscheme`] }, {}, {
+            <div class="${"grid-main overflow-auto"}">${validate_component(List, "List").$$render($$result, {
+    selectorField: "idappscheme",
+    density: "tight",
+    handleClick: openIn,
+    title: "Title List",
+    style: "height:100%;"
+  }, {}, {
+    default: () => {
+      return `${validate_component(VirtualList, "VirtualList").$$render($$result, { items: testArray }, {}, {
+        default: ({ item }) => {
+          return `${validate_component(ListItem, "ListItem").$$render($$result, { density: "default", data: item.data }, {}, {
+            action: () => {
+              return `<span slot="${"action"}">${escape(null_to_empty(item.action))}</span>`;
+            },
+            primary: () => {
+              return `<span slot="${"primary"}">${escape(null_to_empty(item.primary))}</span>`;
+            },
+            icon: () => {
+              return `<span slot="${"icon"}">${validate_component(Icon, "Icon").$$render($$result, { fontSize: "tiny", icon: toFa(item.icon) }, {}, {})}</span>`;
+            }
+          })}`;
+        }
+      })}`;
+    }
+  })}</div></div>
+        <div class="${"content svelte-1ac3me8"}">${validate_component(Header, "Header").$$render($$result, { title: activeData?.[`nomAppscheme`] }, {}, {
     default: () => {
       return `${escape(activeData?.[`nomAppscheme`])}`;
     }

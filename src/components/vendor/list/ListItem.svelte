@@ -24,8 +24,8 @@
 		ref.dispatchEvent(event);
 	};
 
-	let isActive: boolean;
-	$: if ($listStateContext) {
+	let isActive: boolean = false;
+	$: if ($listStateContext?.selectorField) {
 		isActive = listStateContext.selector($listStateContext.selectorField, data);
 	}
 </script>
