@@ -10,12 +10,15 @@
   import {null_to_empty} from 'svelte/internal';
   import {toFa} from '../../../utils';
   import Icon from '../../ui/icon/Icon.svelte';
+  import ListTitle from './ListTitle.svelte';
+  import VirtualList from '@sveltejs/svelte-virtual-list';
 
-  export let listItems: LisItemProps[]            = [];
+  export let listItems: LisItemProps[];
   export let direction: 'vertical' | 'horizontal' = 'vertical';
   export let style: string                        = '';
   export let selectorField                        = 'id';
-  export let handleClick;
+  export let onItemClick;
+  export let title: string;
 
   export let density: ElementProps['density'] = 'default';
 
@@ -28,21 +31,35 @@
 
   function onListItemClick(e: CustomEvent<LisItemProps>) {
     listStore.setActiveData(e.detail);
-    handleClick && handleClick(e.detail);
+    onItemClick && onItemClick(e.detail);
   }
+
 </script>
 
 <ul class="density-{density}" on:list:listItem:clicked={onListItemClick} bind:this={ref} style="{style}">
-    {#each listItems as lisItem}
-        <ListItem density={density}>
-            <span slot="icon"><Icon fontSize="tiny" icon={toFa(lisItem.icon)}/></span>
-            <span slot="primary">{null_to_empty(lisItem.primary)}</span>
-            <span slot="action">{null_to_empty(lisItem.action)}</span>
-        </ListItem>
-    {/each}
-    <slot></slot>
+
+    {#if $$slots.title || title}
+        <slot name="title">
+            <ListTitle primary={title}/>
+        </slot>
+    {/if}
+    {#if listItems}
+        <VirtualList items={listItems} let:item>
+            <slot listItem={item}>
+                <ListItem density={density} data={item.data}>
+                    <span slot="icon"><Icon fontSize="tiny" icon={toFa(item.icon)}/></span>
+                    <span slot="primary">{null_to_empty(item.primary)}</span>
+                    <span slot="action">{null_to_empty(item.action)}</span>
+                </ListItem>
+            </slot>
+        </VirtualList>
+    {/if}
+    {#if !listItems}
+        <slot></slot>
+    {/if}
 </ul>
 
 <style lang="scss" global>
   @import "List.scss";
 </style>
+

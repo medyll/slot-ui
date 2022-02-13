@@ -7,7 +7,7 @@
   import type {propsXyProps} from '../../../utils';
   import {null_to_empty} from 'svelte/internal';
   import _ from 'lodash';
-
+  import VirtualList from '@sveltejs/svelte-virtual-list';
   import appscheme from '/src/demoData/appscheme.json';
   import appscheme_base from '/src/demoData/appscheme_base.json';
   import appscheme_field from '/src/demoData/appscheme_field.json';
@@ -24,7 +24,7 @@
   import MenuBar from "../../vendor/topBar/TopBar.svelte";
 
 
-  let testArray = [];
+  let listItems = [];
 
   let activeData;
   let schemeName = 'Appscheme';
@@ -35,7 +35,7 @@
 
   const schemeData                                        = appscheme.RECORDS;
   const transformArgsBis: propsXyProps<LisItemProps, any> = [['primary', `nom${schemeName}`], ['secondary', `code${schemeName}`], ['icon', `icon${schemeName}`]];
-  testArray                                               = propsXy(transformArgsBis, schemeData);
+  listItems     = propsXy(transformArgsBis, schemeData);
 
 </script>
 
@@ -49,16 +49,17 @@
             </div>
             <div class="grid-main overflow-auto">
                 <List selectorField="idappscheme"
-                      density="tight"
-                      handleClick={openIn}>
-                    <ListTitle primary="Title"/>
-                    {#each testArray as key,val}
-                        <ListItem density="default" data="{key.data}">
-                            <span slot="icon"><Icon fontSize="tiny" icon={toFa(key.icon)}/></span>
-                            <span slot="primary">{null_to_empty(key.primary)}</span>
-                            <span slot="action">{null_to_empty(key.action)}</span>
-                        </ListItem>
-                    {/each}
+                      density="default"
+                      onItemClick={openIn}
+                      title="Title List"
+                      bind:listItems={listItems}
+                      let:listItem
+                      style="height:100%;">
+                    <ListItem  data="{listItem.data}">
+                        <span slot="icon"><Icon fontSize="tiny" icon={toFa(listItem.icon)}/></span>
+                        <span slot="primary">{null_to_empty(listItem.primary)}</span>
+                        <span slot="action">{null_to_empty(listItem.action)}</span>
+                    </ListItem>
                 </List>
             </div>
         </div>

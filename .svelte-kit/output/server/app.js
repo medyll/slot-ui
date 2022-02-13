@@ -17,7 +17,7 @@ var __privateSet = (obj, member, value, setter) => {
   return value;
 };
 var _use_hashes, _dev, _script_needs_csp, _style_needs_csp, _directives, _script_src, _style_src;
-import { c as create_ssr_component, s as setContext, v as validate_component, m as missing_component } from "./chunks/index-ac6c1556.js";
+import { c as create_ssr_component, s as setContext, v as validate_component, m as missing_component } from "./chunks/index-06be2ae5.js";
 function afterUpdate() {
 }
 const Root = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -66,12 +66,12 @@ function to_headers(object) {
       const value = object[key2];
       if (!value)
         continue;
-      if (typeof value === "string") {
-        headers.set(key2, value);
-      } else {
+      if (Array.isArray(value)) {
         value.forEach((value2) => {
           headers.append(key2, value2);
         });
+      } else {
+        headers.set(key2, value);
       }
     }
   }
@@ -88,6 +88,13 @@ function hash(value) {
       hash2 = hash2 * 33 ^ value[--i];
   }
   return (hash2 >>> 0).toString(36);
+}
+function lowercase_keys(obj) {
+  const clone = {};
+  for (const key2 in obj) {
+    clone[key2.toLowerCase()] = obj[key2];
+  }
+  return clone;
 }
 function decode_params(params) {
   for (const key2 in params) {
@@ -116,7 +123,7 @@ function error(body) {
 function is_string(s2) {
   return typeof s2 === "string" || s2 instanceof String;
 }
-const text_types = new Set([
+const text_types = /* @__PURE__ */ new Set([
   "application/xml",
   "application/json",
   "application/x-www-form-urlencoded",
@@ -142,7 +149,7 @@ async function render_endpoint(event, mod) {
     return;
   }
   const { status = 200, body = {} } = response;
-  const headers = response.headers instanceof Headers ? response.headers : to_headers(response.headers);
+  const headers = response.headers instanceof Headers ? new Headers(response.headers) : to_headers(response.headers);
   const type = headers.get("content-type");
   if (!is_text(type) && !(body instanceof Uint8Array || is_string(body))) {
     return error(`${preface}: body must be an instance of string or Uint8Array if content-type is not a supported textual content-type`);
@@ -184,7 +191,7 @@ var escaped = {
 };
 var objectProtoOwnPropertyNames = Object.getOwnPropertyNames(Object.prototype).sort().join("\0");
 function devalue(value) {
-  var counts = new Map();
+  var counts = /* @__PURE__ */ new Map();
   function walk(thing) {
     if (typeof thing === "function") {
       throw new Error("Cannot stringify a function");
@@ -225,7 +232,7 @@ function devalue(value) {
     }
   }
   walk(value);
-  var names = new Map();
+  var names = /* @__PURE__ */ new Map();
   Array.from(counts).filter(function(entry) {
     return entry[1] > 1;
   }).sort(function(a, b) {
@@ -401,7 +408,7 @@ function readable(value, start) {
 }
 function writable(value, start = noop) {
   let stop;
-  const subscribers = new Set();
+  const subscribers = /* @__PURE__ */ new Set();
   function set(new_value) {
     if (safe_not_equal(value, new_value)) {
       value = new_value;
@@ -443,7 +450,14 @@ function writable(value, start = noop) {
 function coalesce_to_error(err) {
   return err instanceof Error || err && err.name && err.message ? err : new Error(JSON.stringify(err));
 }
-const escape_json_string_in_html_dict = {
+const escape_json_in_html_dict = {
+  "&": "\\u0026",
+  ">": "\\u003e",
+  "<": "\\u003c",
+  "\u2028": "\\u2028",
+  "\u2029": "\\u2029"
+};
+const escape_json_value_in_html_dict = {
   '"': '\\"',
   "<": "\\u003C",
   ">": "\\u003E",
@@ -458,16 +472,11 @@ const escape_json_string_in_html_dict = {
   "\u2028": "\\u2028",
   "\u2029": "\\u2029"
 };
-function escape_json_string_in_html(str) {
-  return escape(str, escape_json_string_in_html_dict, (code) => `\\u${code.toString(16).toUpperCase()}`);
+function escape_json_in_html(str) {
+  return str.replace(/[&><\u2028\u2029]/g, (match) => escape_json_in_html_dict[match]);
 }
-const escape_html_attr_dict = {
-  "<": "&lt;",
-  ">": "&gt;",
-  '"': "&quot;"
-};
-function escape_html_attr(str) {
-  return '"' + escape(str, escape_html_attr_dict, (code) => `&#${code};`) + '"';
+function escape_json_value_in_html(str) {
+  return escape(str, escape_json_value_in_html_dict, (code) => `\\u${code.toString(16).toUpperCase()}`);
 }
 function escape(str, dict, unicode_encoder) {
   let result = "";
@@ -488,6 +497,14 @@ function escape(str, dict, unicode_encoder) {
     }
   }
   return result;
+}
+const escape_html_attr_dict = {
+  "<": "&lt;",
+  ">": "&gt;",
+  '"': "&quot;"
+};
+function escape_html_attr(str) {
+  return '"' + escape(str, escape_html_attr_dict, (code) => `&#${code};`) + '"';
 }
 const s = JSON.stringify;
 function create_prerendering_url_proxy(url) {
@@ -644,7 +661,7 @@ if (typeof crypto !== "undefined") {
     };
   });
 }
-const quoted = new Set([
+const quoted = /* @__PURE__ */ new Set([
   "self",
   "unsafe-eval",
   "unsafe-hashes",
@@ -778,7 +795,7 @@ async function render_response({
   }
   const stylesheets = new Set(options.manifest._.entry.css);
   const modulepreloads = new Set(options.manifest._.entry.js);
-  const styles = new Map();
+  const styles = /* @__PURE__ */ new Map();
   const serialized_data = [];
   let shadow_props;
   let rendered;
@@ -937,7 +954,7 @@ ${rendered.css.code}</style>`;
         return `<script ${attributes2}>${json}<\/script>`;
       }).join("\n	");
       if (shadow_props) {
-        body += `<script type="application/json" data-type="svelte-props">${s(shadow_props)}<\/script>`;
+        body += `<script type="application/json" data-type="svelte-props">${escape_json_in_html(s(shadow_props))}<\/script>`;
       }
     }
     if (options.service_worker) {
@@ -1216,7 +1233,7 @@ async function load_node({
                 fetched.push({
                   url: requested,
                   body: opts.body,
-                  json: `{"status":${response2.status},"statusText":${s(response2.statusText)},"headers":${s(headers)},"body":"${escape_json_string_in_html(body)}"}`
+                  json: `{"status":${response2.status},"statusText":${s(response2.statusText)},"headers":${s(headers)},"body":"${escape_json_value_in_html(body)}"}`
                 });
               }
               if (dependency) {
@@ -1316,11 +1333,8 @@ async function load_shadow_data(route, event, prerender) {
       const result = await handler(event);
       if (result.fallthrough)
         return result;
-      const { status = 200, headers = {}, body = {} } = result;
-      validate_shadow_output(headers, body);
-      if (headers["set-cookie"]) {
-        data.cookies.push(...headers["set-cookie"]);
-      }
+      const { status, headers, body } = validate_shadow_output(result);
+      add_cookies(data.cookies, headers);
       if (status >= 300 && status < 400) {
         return {
           status,
@@ -1334,11 +1348,8 @@ async function load_shadow_data(route, event, prerender) {
       const result = await mod.get.call(null, event);
       if (result.fallthrough)
         return result;
-      const { status = 200, headers = {}, body = {} } = result;
-      validate_shadow_output(headers, body);
-      if (headers["set-cookie"]) {
-        data.cookies.push(...headers["set-cookie"]);
-      }
+      const { status, headers, body } = validate_shadow_output(result);
+      add_cookies(data.cookies, headers);
       if (status >= 400) {
         return {
           status,
@@ -1361,13 +1372,30 @@ async function load_shadow_data(route, event, prerender) {
     };
   }
 }
-function validate_shadow_output(headers, body) {
-  if (headers instanceof Headers && headers.has("set-cookie")) {
-    throw new Error("Shadow endpoint request handler cannot use Headers interface with Set-Cookie headers");
+function add_cookies(target, headers) {
+  const cookies = headers["set-cookie"];
+  if (cookies) {
+    if (Array.isArray(cookies)) {
+      target.push(...cookies);
+    } else {
+      target.push(cookies);
+    }
+  }
+}
+function validate_shadow_output(result) {
+  const { status = 200, body = {} } = result;
+  let headers = result.headers || {};
+  if (headers instanceof Headers) {
+    if (headers.has("set-cookie")) {
+      throw new Error("Shadow endpoint request handler cannot use Headers interface with Set-Cookie headers");
+    }
+  } else {
+    headers = lowercase_keys(headers);
   }
   if (!is_pojo(body)) {
     throw new Error("Body returned from shadow endpoint request handler must be a plain object");
   }
+  return { status, headers, body };
 }
 async function respond_with_error({ event, options, state, $session, status, error: error2, ssr }) {
   try {
@@ -1582,7 +1610,7 @@ async function respond$1(opts) {
 }
 function get_page_config(leaf, options) {
   if ("ssr" in leaf) {
-    throw new Error("`export const ssr` has been removed \u2014 use the handle hook instead: https://kit.svelte.dev/docs#hooks-handle");
+    throw new Error("`export const ssr` has been removed \u2014 use the handle hook instead: https://kit.svelte.dev/docs/hooks#handle");
   }
   return {
     router: "router" in leaf ? !!leaf.router : options.router,
@@ -1694,7 +1722,7 @@ async function respond(request, options, state = {}) {
         });
       } else {
         const verb = allowed.length === 0 ? "enabled" : "allowed";
-        const body = `${parameter}=${method_override} is not ${verb}. See https://kit.svelte.dev/docs#configuration-methodoverride`;
+        const body = `${parameter}=${method_override} is not ${verb}. See https://kit.svelte.dev/docs/configuration#methodoverride`;
         return new Response(body, {
           status: 400
         });

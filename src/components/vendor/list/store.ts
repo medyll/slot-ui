@@ -7,7 +7,7 @@ type ListStoreType = {
   density: ElementProps['density']
 }
 
-function createStore() {
+function createStore<T = ListStoreType>() {
   
   const initialData: ListStoreType = {activeData: {}, selectorField: 'id', density: 'default'};
   
@@ -27,4 +27,4 @@ function createStore() {
 }
 
 // Allow for multiple stores (good for contexts)
-export const createListStore = () => createStore();
+export const createListStore = <T = ListStoreType>() => createStore<T>();

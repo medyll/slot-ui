@@ -1,10 +1,11 @@
-import { g as get_store_value, c as create_ssr_component, a as subscribe, s as setContext, b as add_attribute, e as escape, n as null_to_empty, v as validate_component, d as each, f as get_current_component, h as getContext, i as compute_slots } from "../../chunks/index-ac6c1556.js";
-import { w as writable, I as Icon } from "../../chunks/Icon-cf33c954.js";
+import { g as get_store_value, c as create_ssr_component, a as subscribe, s as setContext, e as each, b as add_attribute, d as escape, v as validate_component, f as get_current_component, h as getContext, i as compute_slots } from "../../chunks/index-06be2ae5.js";
+import { w as writable, I as IconButton, D as Divider, L as List$1, T as TopBar, a as ListItem } from "../../chunks/List-7ff33028.js";
 import "@fortawesome/free-regular-svg-icons";
 import "@fortawesome/free-brands-svg-icons";
 import "@fortawesome/free-solid-svg-icons";
 import "@neodrag/svelte";
 import "color";
+import "lodash";
 const presets = {
   light: {
     colors: {
@@ -202,53 +203,32 @@ ${slots.default ? slots.default({}) : `
 });
 var ThemeToggle_svelte_svelte_type_style_lang = "";
 var Popper_svelte_svelte_type_style_lang = "";
-var IconButton_svelte_svelte_type_style_lang = "";
-const css$7 = {
-  code: "button.svelte-8f7jh8.svelte-8f7jh8{padding:8px;position:relative;background-color:transparent;border:1px solid transparent}button.svelte-8f7jh8.svelte-8f7jh8:hover{border:1px solid rgba(255, 255, 255, 0.1);background-color:rgba(255, 255, 255, 0.2);backdrop-filter:blur(10px)}button.svelte-8f7jh8 span.svelte-8f7jh8{display:flex;grid-gap:4px}button.svelte-8f7jh8 .chip.svelte-8f7jh8{position:absolute;height:6px;left:50%;transform:translate(-50%, 0);width:50%;background-color:blue;border-radius:16px;bottom:0px}",
-  map: null
-};
-const IconButton = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let { icon } = $$props;
-  let { style = "" } = $$props;
-  let { className = "" } = $$props;
-  let { showShip = false } = $$props;
-  if ($$props.icon === void 0 && $$bindings.icon && icon !== void 0)
-    $$bindings.icon(icon);
-  if ($$props.style === void 0 && $$bindings.style && style !== void 0)
-    $$bindings.style(style);
-  if ($$props.className === void 0 && $$bindings.className && className !== void 0)
-    $$bindings.className(className);
-  if ($$props.showShip === void 0 && $$bindings.showShip && showShip !== void 0)
-    $$bindings.showShip(showShip);
-  $$result.css.add(css$7);
-  return `<button${add_attribute("style", style, 0)} class="${escape(null_to_empty(className)) + " svelte-8f7jh8"}"><span class="${"svelte-8f7jh8"}"><span class="${"icon svelte-8f7jh8"}">${validate_component(Icon, "Icon").$$render($$result, { icon }, {}, {})}</span>
-		${slots.default ? slots.default({}) : ``}</span>
-	${showShip ? `<span class="${"chip svelte-8f7jh8"}"></span>` : ``}
-</button>`;
-});
 var ButtonPanel_svelte_svelte_type_style_lang = "";
 var Cartouche_svelte_svelte_type_style_lang = "";
 var Tabs_svelte_svelte_type_style_lang = "";
 var ServiceBox_svelte_svelte_type_style_lang = "";
 var Taskbar_svelte_svelte_type_style_lang = "";
-const css$6 = {
-  code: ".bar.svelte-ywhnu1{display:flex;align-items:center;grid-gap:8px;background-size:auto;background-color:rgba(255, 255, 255, 0.5);backdrop-filter:blur(20px);min-height:48px;box-sizing:border-box;border-bottom:1px solid rgba(255, 255, 255, 0.2)}",
+const css$7 = {
+  code: ".bar.svelte-1qaihlv{grid-gap:8px;background-size:auto;background-color:rgba(255, 255, 255, 0.5);backdrop-filter:blur(20px);min-height:48px;box-sizing:border-box;border-bottom:1px solid rgba(255, 255, 255, 0.2)}",
   map: null
 };
 const Taskbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  $$result.css.add(css$6);
-  return `<div class="${"bar svelte-ywhnu1"}">${slots.default ? slots.default({}) : ``}
-    <div><button>one
+  $$result.css.add(css$7);
+  return `<div class="${"bar grid-h grid-align-middle svelte-1qaihlv"}">${slots.default ? slots.default({}) : `
+      ${slots.taskBarLeft ? slots.taskBarLeft({}) : ``}
+    `}
+    <div class="${"grid-main"}"><button>one
         </button></div>
+    ${slots.taskBarRIght ? slots.taskBarRIght({}) : ``}
 </div>`;
 });
 var Dashboard_svelte_svelte_type_style_lang = "";
-const css$5 = {
+const css$6 = {
   code: ".gridIcon.svelte-1s19r5n{width:100%;display:grid;justify-content:center;grid-gap:64px;grid-template-columns:repeat(auto-fill, minmax(120px, auto))}.buttonPole.svelte-1s19r5n{border-radius:4px;border:1px solid rgba(208, 191, 151, 0.3);padding:0.5rem;height:120px}",
   map: null
 };
 const Dashboard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  $$result.css.add(css$5);
+  $$result.css.add(css$6);
   return `<div style="${"z-index:0"}" class="${"dashBoard pos-abs w-full h-full overflow-auto pad-8"}"><div class="${"gridIcon svelte-1s19r5n"}">${each([...Array(7)], (key, val) => {
     return `<div class="${"bg-palette-red-darker buttonPole svelte-1s19r5n"}">key</div>`;
   })}</div>
@@ -601,7 +581,7 @@ var Parser = function Parser2(options, input, startPos) {
   this.potentialArrowInForAwait = false;
   this.yieldPos = this.awaitPos = this.awaitIdentPos = 0;
   this.labels = [];
-  this.undefinedExports = Object.create(null);
+  this.undefinedExports = /* @__PURE__ */ Object.create(null);
   if (this.pos === 0 && options.allowHashBang && this.input.slice(0, 2) === "#!") {
     this.skipLineComment(2);
   }
@@ -804,7 +784,7 @@ pp.isSimpleAssignTarget = function(expr) {
 };
 var pp$1 = Parser.prototype;
 pp$1.parseTopLevel = function(node2) {
-  var exports = Object.create(null);
+  var exports = /* @__PURE__ */ Object.create(null);
   if (!node2.body) {
     node2.body = [];
   }
@@ -1492,7 +1472,7 @@ pp$1.parseClassSuper = function(node2) {
   node2.superClass = this.eat(types._extends) ? this.parseExprSubscripts() : null;
 };
 pp$1.enterClassBody = function() {
-  var element = { declared: Object.create(null), used: [] };
+  var element = { declared: /* @__PURE__ */ Object.create(null), used: [] };
   this.privateNameStack.push(element);
   return element.declared;
 };
@@ -2839,7 +2819,7 @@ pp$3.isSimpleParamList = function(params) {
   return true;
 };
 pp$3.checkParams = function(node2, allowDuplicates) {
-  var nameHash = Object.create(null);
+  var nameHash = /* @__PURE__ */ Object.create(null);
   for (var i = 0, list = node2.params; i < list.length; i += 1) {
     var param = list[i];
     this.checkLValInnerPattern(param, BIND_VAR, allowDuplicates ? null : nameHash);
@@ -7925,8 +7905,8 @@ var Comment = {
   }
 };
 var hasOwnProperty$1 = Object.prototype.hasOwnProperty;
-var keywords$2 = Object.create(null);
-var properties = Object.create(null);
+var keywords$2 = /* @__PURE__ */ Object.create(null);
+var properties = /* @__PURE__ */ Object.create(null);
 var HYPHENMINUS$2 = 45;
 function isCustomProperty(str, offset2) {
   offset2 = offset2 || 0;
@@ -11240,7 +11220,7 @@ var entities = {
   xi: 958
 };
 new RegExp(`&(#?(?:x[\\w\\d]+|\\d+|${Object.keys(entities).join("|")}))(?:;|\\b)`, "g");
-const meta_tags = new Map([
+const meta_tags = /* @__PURE__ */ new Map([
   ["svelte:head", "Head"],
   ["svelte:options", "Options"],
   ["svelte:window", "Window"],
@@ -11250,7 +11230,7 @@ Array.from(meta_tags.keys()).concat("svelte:self", "svelte:component", "svelte:f
 x`true`;
 x`false`;
 const svg_attributes = "accent-height accumulate additive alignment-baseline allowReorder alphabetic amplitude arabic-form ascent attributeName attributeType autoReverse azimuth baseFrequency baseline-shift baseProfile bbox begin bias by calcMode cap-height class clip clipPathUnits clip-path clip-rule color color-interpolation color-interpolation-filters color-profile color-rendering contentScriptType contentStyleType cursor cx cy d decelerate descent diffuseConstant direction display divisor dominant-baseline dur dx dy edgeMode elevation enable-background end exponent externalResourcesRequired fill fill-opacity fill-rule filter filterRes filterUnits flood-color flood-opacity font-family font-size font-size-adjust font-stretch font-style font-variant font-weight format from fr fx fy g1 g2 glyph-name glyph-orientation-horizontal glyph-orientation-vertical glyphRef gradientTransform gradientUnits hanging height href horiz-adv-x horiz-origin-x id ideographic image-rendering in in2 intercept k k1 k2 k3 k4 kernelMatrix kernelUnitLength kerning keyPoints keySplines keyTimes lang lengthAdjust letter-spacing lighting-color limitingConeAngle local marker-end marker-mid marker-start markerHeight markerUnits markerWidth mask maskContentUnits maskUnits mathematical max media method min mode name numOctaves offset onabort onactivate onbegin onclick onend onerror onfocusin onfocusout onload onmousedown onmousemove onmouseout onmouseover onmouseup onrepeat onresize onscroll onunload opacity operator order orient orientation origin overflow overline-position overline-thickness panose-1 paint-order pathLength patternContentUnits patternTransform patternUnits pointer-events points pointsAtX pointsAtY pointsAtZ preserveAlpha preserveAspectRatio primitiveUnits r radius refX refY rendering-intent repeatCount repeatDur requiredExtensions requiredFeatures restart result rotate rx ry scale seed shape-rendering slope spacing specularConstant specularExponent speed spreadMethod startOffset stdDeviation stemh stemv stitchTiles stop-color stop-opacity strikethrough-position strikethrough-thickness string stroke stroke-dasharray stroke-dashoffset stroke-linecap stroke-linejoin stroke-miterlimit stroke-opacity stroke-width style surfaceScale systemLanguage tabindex tableValues target targetX targetY text-anchor text-decoration text-rendering textLength to transform type u1 u2 underline-position underline-thickness unicode unicode-bidi unicode-range units-per-em v-alphabetic v-hanging v-ideographic v-mathematical values version vert-adv-y vert-origin-x vert-origin-y viewBox viewTarget visibility width widths word-spacing writing-mode x x-height x1 x2 xChannelSelector xlink:actuate xlink:arcrole xlink:href xlink:role xlink:show xlink:title xlink:type xml:base xml:lang xml:space y y1 y2 yChannelSelector z zoomAndPan".split(" ");
-const svg_attribute_lookup = new Map();
+const svg_attribute_lookup = /* @__PURE__ */ new Map();
 svg_attributes.forEach((name) => {
   svg_attribute_lookup.set(name.toLowerCase(), name);
 });
@@ -11329,7 +11309,7 @@ var NodeExist;
 })(NodeExist || (NodeExist = {}));
 typeof process !== "undefined" && process.env.TEST;
 var Panel_svelte_svelte_type_style_lang = "";
-const css$4 = {
+const css$5 = {
   code: ".panel.svelte-4uh7at.svelte-4uh7at{position:relative;margin-bottom:2rem}.panel.svelte-4uh7at .panelBar.svelte-4uh7at{margin-bottom:2rem;display:flex;min-width:auto;align-items:center;padding-right:0.5rem}.panel.svelte-4uh7at .panelBar button.svelte-4uh7at{padding:0 0.5rem;border:1px solid rgba(255, 255, 255, 0.05);background-color:rgba(255, 255, 255, 0.1)}",
   map: null
 };
@@ -11338,7 +11318,7 @@ const Panel = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let ref2;
   if ($$props.title === void 0 && $$bindings.title && title !== void 0)
     $$bindings.title(title);
-  $$result.css.add(css$4);
+  $$result.css.add(css$5);
   return `
 
 
@@ -11349,7 +11329,7 @@ const Panel = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 </div>`;
 });
 var PanelSlide_svelte_svelte_type_style_lang = "";
-const css$3 = {
+const css$4 = {
   code: ".sidePanel.svelte-uv8u6f{position:absolute;top:0;bottom:0;padding:1rem 2rem;width:100%}",
   map: null
 };
@@ -11373,13 +11353,13 @@ const PanelSlide = create_ssr_component(($$result, $$props, $$bindings, slots) =
     $$bindings.open(open);
   if ($$props.actions === void 0 && $$bindings.actions && actions !== void 0)
     $$bindings.actions(actions);
-  $$result.css.add(css$3);
+  $$result.css.add(css$4);
   return `
 
 
 ${open ? `<div class="${"sidePanel svelte-uv8u6f"}">${slots.default ? slots.default({}) : ``}</div>` : ``}`;
 });
-const windowListObjects = new Map([]);
+const windowListObjects = /* @__PURE__ */ new Map([]);
 const activeFrame = writable(null);
 function createWindowStore() {
   const { subscribe: subscribe2, set, update } = writable(windowListObjects);
@@ -11425,14 +11405,14 @@ function createWindowStore() {
       n.set(frameId, { ...payload, zIndex: z });
       return n;
     }),
-    reset: () => set(new Map([]))
+    reset: () => set(/* @__PURE__ */ new Map([]))
   };
 }
 const windowsStore = createWindowStore();
 var Window_svelte_svelte_type_style_lang = "";
 const startMenuStore = writable(true);
 var StartMenu_svelte_svelte_type_style_lang = "";
-const css$2 = {
+const css$3 = {
   code: ".startMenu.svelte-1mgo8oz.svelte-1mgo8oz{background-color:rgba(90, 67, 52, 0.9);backdrop-filter:blur(10px);color:white;display:flex;flex-direction:column;max-height:600px;height:80%;left:50%;transform:translate(-50%, 0);box-shadow:0px 0px 3px 1px rgba(51, 51, 51, 0.5);overflow:hidden;z-index:3000;position:absolute;margin-top:1rem}.startMenu.svelte-1mgo8oz .startMenuContent.svelte-1mgo8oz{flex:1;overflow-y:auto;overflow-x:hidden}.buttonPole.svelte-1mgo8oz.svelte-1mgo8oz{border-radius:4px;border:1px solid rgba(208, 191, 151, 0.3);padding:0.5rem}.gridIcon.svelte-1mgo8oz.svelte-1mgo8oz{width:100%;display:grid;grid-gap:10px;grid-template-columns:repeat(auto-fill, minmax(30%, auto))}.gridIconBis.svelte-1mgo8oz.svelte-1mgo8oz{width:100%;display:grid;grid-gap:10px;grid-template-columns:repeat(auto-fill, minmax(15%, auto))}.gridIconMid.svelte-1mgo8oz.svelte-1mgo8oz{width:100%;display:grid;grid-gap:10px;grid-template-columns:repeat(auto-fill, minmax(49%, auto))}.gridOne.svelte-1mgo8oz.svelte-1mgo8oz{width:100%;display:grid;grid-gap:10px;grid-template-columns:repeat(auto-fill, minmax(100%, auto))}.bottomBar.svelte-1mgo8oz.svelte-1mgo8oz{padding:1rem 2rem;box-shadow:0px 0px 3px 1px rgba(51, 51, 51, 0.5)}",
   map: null
 };
@@ -11444,7 +11424,7 @@ const StartMenu = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   $$unsubscribe_menuStore = subscribe(menuStore, (value2) => value2);
   let slideLeft;
   let slideRight;
-  $$result.css.add(css$2);
+  $$result.css.add(css$3);
   let $$settled;
   let $$rendered;
   do {
@@ -11528,56 +11508,120 @@ ${each([...windows], ([key, value2]) => {
     }, {}, {})}`;
   })}`;
 });
+var BottomBar_svelte_svelte_type_style_lang = "";
+const css$2 = {
+  code: ".bottomBar.density-tight.svelte-1v6ew1i{padding:0.5rem 0;margin:0.125rem 0}.bottomBar.density-default.svelte-1v6ew1i{padding:1rem 0;margin:0.25rem 0}.bottomBar.density-kind.svelte-1v6ew1i{padding:1.5rem 0;margin:0.5rem 0}",
+  map: null
+};
+const BottomBar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let { density = "default" } = $$props;
+  if ($$props.density === void 0 && $$bindings.density && density !== void 0)
+    $$bindings.density(density);
+  $$result.css.add(css$2);
+  return `${validate_component(Divider, "Divider").$$render($$result, {}, {}, {})}
+<div class="${"bottomBar density-" + escape(density) + " svelte-1v6ew1i"}">${slots.default ? slots.default({}) : `bottom bar`}
+</div>`;
+});
 var Drawer_svelte_svelte_type_style_lang = "";
 const css$1 = {
-  code: ".drawer.svelte-hf6hb5.svelte-hf6hb5{color:white;background-color:rgba(59, 59, 59, 0.99);backdrop-filter:blur(10px);position:fixed;width:350px;height:100%;top:0;bottom:0;z-index:3000;right:0}.drawer.svelte-hf6hb5 .header.svelte-hf6hb5{border-bottom:1px solid rgba(255, 255, 255, 0.2);min-height:48px;display:flex;align-items:center}.drawer.svelte-hf6hb5 .header .title.svelte-hf6hb5{font-size:large}",
+  code: ".drawer.svelte-hf6hb5.svelte-hf6hb5{color:white;background-color:rgba(59, 59, 59, 0.99);backdrop-filter:blur(10px);position:fixed;width:350px;height:100%;top:0;bottom:0;z-index:3000;right:0}.drawer.svelte-hf6hb5 .header.svelte-hf6hb5{border-bottom:1px solid rgba(255, 255, 255, 0.2);min-height:48px;display:flex;align-items:center}",
   map: null
 };
 const Drawer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$slots = compute_slots(slots);
   let { title } = $$props;
-  let { headerButtonsList } = $$props;
+  let drawerRef;
+  let isOpen = true;
+  let { hideCloseIcon = false } = $$props;
+  function toggle2(visibleSate) {
+    isOpen = visibleSate !== void 0 ? visibleSate : !isOpen;
+  }
   if ($$props.title === void 0 && $$bindings.title && title !== void 0)
     $$bindings.title(title);
-  if ($$props.headerButtonsList === void 0 && $$bindings.headerButtonsList && headerButtonsList !== void 0)
-    $$bindings.headerButtonsList(headerButtonsList);
+  if ($$props.hideCloseIcon === void 0 && $$bindings.hideCloseIcon && hideCloseIcon !== void 0)
+    $$bindings.hideCloseIcon(hideCloseIcon);
+  if ($$props.toggle === void 0 && $$bindings.toggle && toggle2 !== void 0)
+    $$bindings.toggle(toggle2);
   $$result.css.add(css$1);
-  return `<div class="${"drawer grid-v h-full svelte-hf6hb5"}">${$$slots.header || Boolean(title) ? `<div class="${"header grid-h svelte-hf6hb5"}"><div class="${"title grid-main text-500 svelte-hf6hb5"}">${slots.header ? slots.header({}) : `
-					<span class="${"pad-l-4"}">${escape(title)}</span>
-				`}</div>
-			<div class="${"grid-main"}">${slots.headerButtons ? slots.headerButtons({}) : ``}</div>
-			<div>${validate_component(IconButton, "IconButton").$$render($$result, { icon: "faAngleRight" }, {}, {})}</div>
-			<div>${validate_component(IconButton, "IconButton").$$render($$result, { icon: "faQuestion" }, {}, {})}</div>
-			<div>${validate_component(IconButton, "IconButton").$$render($$result, { icon: "faWindowClose" }, {}, {})}</div></div>` : ``}
-	${$$slots.content ? `<div class="${"grid-main"}">${slots.content ? slots.content({}) : `content`}</div>` : ``}
-</div>`;
+  return `${isOpen ? `<div class="${"drawer grid-v h-full svelte-hf6hb5"}"${add_attribute("this", drawerRef, 0)}>${$$slots.drawerMenuBar || Boolean(title) ? `<div class="${"header grid-h svelte-hf6hb5"}"><div class="${"grid-main grid-h grid-align-middle "}">${title ? `<span style="${"font-size:18px;"}" class="${"pad-l-4"}">${escape(title)}</span>` : ``}
+					${slots.drawerMenuBar ? slots.drawerMenuBar({}) : ``}</div>
+				${!hideCloseIcon ? `<div>${validate_component(IconButton, "IconButton").$$render($$result, {
+    iconFontSize: "small",
+    icon: "faWindowClose"
+  }, {}, {})}</div>` : ``}</div>` : ``}
+		${$$slots.content ? `<div class="${"grid-main"}">${slots.content ? slots.content({}) : `content`}</div>` : ``}
+		${validate_component(BottomBar, "BottomBar").$$render($$result, {}, {}, {
+    default: () => {
+      return `bar bottom
+		`;
+    }
+  })}</div>` : ``}`;
 });
 var __layout_svelte_svelte_type_style_lang = "";
 const css = {
-  code: `@import url(ress/ress.css);@import url(../css/cssFabric/cssfabric.min.css);@import url("https://fonts.googleapis.com/css?family=Rubik");html{font-size:12px;height:100%}body{height:100%;width:100%;overflow:hidden;background-image:url("back2.png");background-size:cover;font-family:'Rubik'}#svelte{height:100%}button{border:0.5px solid #ccc;padding:0.25rem 0.5rem;border-radius:4px;background-color:white}button:hover{background-color:#ededed}input{border:1px solid rgba(208, 191, 151, 0.5);border-bottom:2px solid #d0bf97;border-radius:4px;padding:0.5rem;box-shadow:inset 0px 0px 3px 1px rgba(51, 51, 51, 0.8);background-color:rgba(59, 59, 59, 0.99);color:white}`,
+  code: `@import url(ress/ress.css);@import url(../css/cssFabric/cssfabric.min.css);@import url("https://fonts.googleapis.com/css?family=Rubik");html{font-size:12px;height:100%}body{height:100%;width:100%;overflow:hidden;background-image:url("back2.png");background-size:cover;font-family:'Rubik'}#svelte{height:100%}button{border:0.5px solid rgba(255, 255, 255, 0.2);padding:0.25rem 0.5rem;border-radius:4px;background-color:rgba(255, 255, 255, 0.1)}button:hover{background-color:#ededed}input{border:1px solid rgba(208, 191, 151, 0.5);border-bottom:2px solid #d0bf97;border-radius:4px;padding:0.5rem;box-shadow:inset 0px 0px 3px 1px rgba(51, 51, 51, 0.8);background-color:rgba(59, 59, 59, 0.99);color:white}`,
   map: null
 };
 const _layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let $$slots = compute_slots(slots);
-  console.log($$slots);
+  let drawerRef;
   $$result.css.add(css);
-  return `${validate_component(ThemeWrapper, "ThemeWrapper").$$render($$result, { mode: "dark" }, {}, {
-    default: () => {
-      return `${validate_component(StartMenu, "StartMenu").$$render($$result, {}, {}, {})}
+  let $$settled;
+  let $$rendered;
+  do {
+    $$settled = true;
+    $$rendered = `${validate_component(ThemeWrapper, "ThemeWrapper").$$render($$result, { mode: "dark" }, {}, {
+      default: () => {
+        return `${validate_component(StartMenu, "StartMenu").$$render($$result, {}, {}, {})}
 	<div style="${"height:100%;max-height:100%;overflow:hidden;display:flex;flex-direction: column"}">${`${validate_component(Taskbar, "Taskbar").$$render($$result, {}, {}, {
-        default: () => {
-          return `${validate_component(TaskBarContent, "TaskBarContent").$$render($$result, {}, {}, {})}`;
-        }
-      })}
+          taskBarRIght: () => {
+            return `<div slot="${"taskBarRIght"}">${validate_component(IconButton, "IconButton").$$render($$result, {
+              iconFontSize: "small",
+              icon: "faAccusoft"
+            }, {}, {})}</div>`;
+          },
+          default: () => {
+            return `${validate_component(TaskBarContent, "TaskBarContent").$$render($$result, {}, {}, {})}`;
+          }
+        })}
 			<div style="${"flex: 1;overflow:hidden"}">${validate_component(Dashboard, "Dashboard").$$render($$result, {}, {}, {})}
 				${slots.default ? slots.default({}) : `empty !!!`}</div>
 			`}</div>
-	${validate_component(Drawer, "Drawer").$$render($$result, { title: "Drawer" }, {}, {
-        content: () => {
-          return `<div slot="${"content"}">content</div>`;
-        }
-      })}`;
-    }
-  })}`;
+	${validate_component(Drawer, "Drawer").$$render($$result, { this: drawerRef }, {
+          this: ($$value) => {
+            drawerRef = $$value;
+            $$settled = false;
+          }
+        }, {
+          content: () => {
+            return `<div class="${"pad-2"}" slot="${"content"}">${validate_component(List$1, "List").$$render($$result, {
+              handleClick: () => {
+              }
+            }, {}, {
+              default: () => {
+                return `${each([...Array(10)], (key, val) => {
+                  return `${validate_component(ListItem, "ListItem").$$render($$result, {}, {}, {
+                    action: () => {
+                      return `<span slot="${"action"}"><button>fds de action</button></span>`;
+                    },
+                    primary: () => {
+                      return `<span slot="${"primary"}">Some idiom ${escape(val)}</span>`;
+                    }
+                  })}`;
+                })}`;
+              }
+            })}</div>`;
+          },
+          drawerMenuBar: () => {
+            return `${validate_component(TopBar, "TopBar").$$render($$result, { title: "Drawer with menu bar " }, {}, {
+              menuBarSwitcher: () => {
+                return `<div class="${"pad-2"}"><input placeholder="${"Search in Bar"}" style="${"width:100%;"}" type="${"text"}"></div>`;
+              }
+            })}`;
+          }
+        })}`;
+      }
+    })}`;
+  } while (!$$settled);
+  return $$rendered;
 });
 export { _layout as default };

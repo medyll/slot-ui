@@ -17,7 +17,7 @@
 
 	let drawerRef: Drawer;
 
-	const handleClick = function () {
+	const onItemClick = function () {
 		drawerRef.toggle();
 	};
 </script>
@@ -29,7 +29,7 @@
 			<Taskbar>
 				<TaskBarContent />
 				<div slot="taskBarRIght">
-					<IconButton on:click={handleClick} iconFontSize="small" icon="faAccusoft" />
+					<IconButton on:click={onItemClick} iconFontSize="small" icon="faAccusoft" />
 				</div>
 			</Taskbar>
 			<div style="flex: 1;overflow:hidden">
@@ -52,7 +52,7 @@
 			</TopBar>
 		</svelte:fragment>
 		<div class="pad-2" slot="content">
-			<List handleClick={() => {}}>
+			<List onItemClick={() => {}}>
 				{#each [...Array(10)] as key, val}
 					<ListItem>
 						<span slot="primary">Some idiom {val}</span>

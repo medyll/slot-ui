@@ -13,9 +13,11 @@
 
 </script>
 <li class="listItemTitle density-{density}">
+    {#if icon || $$slots.icon}
     <div class="listItemIcon">
         <slot name="icon"></slot>
     </div>
+    {/if}
     <div class="listItemContent">
         {#if primary || $$slots.primary}
             <h5>
@@ -32,7 +34,6 @@
         <slot name="action"></slot>
     </div>
 </li>
-
 <!--
     local instead of global
     means that the sheet is shared at directory level

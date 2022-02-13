@@ -26,7 +26,7 @@ import type { SvelteComponentDev } from 'svelte/internal';
     <button bind:this={buttonRef}>
         <Icon fontSize="small" icon="faList"/>
         {#if actionComponent}
-            <span class="action" on:click={onActionClick}></span>
+            <span class="action" on:click={onActionClick}>...</span>
         {/if}
     </button>
     <div class="pad-4 text-center">
