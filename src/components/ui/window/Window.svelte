@@ -96,18 +96,18 @@
      class="window">
     <div class="bar">
         <div class="pad-4">
-            <Icon icon="faLinux"/>
+            <Icon  fontSize="small"icon="faLinux"/>
         </div>
         <div class="handle">{$appWindowStore?.title}</div>
         <div class="iconZone" style="color:white">
             <div>
-                <IconButton icon="faWindowMinimize"/>
+                <IconButton iconFontSize="small" icon="faWindowMinimize"/>
             </div>
             <div>
-                <IconButton icon="faWindowMaximize"/>
+                <IconButton iconFontSize="small"  icon="faWindowMaximize"/>
             </div>
             <div>
-                <IconButton icon="faWindowClose" on:click={handleClose}/>
+                <IconButton iconFontSize="small" icon="faWindowClose" on:click={handleClose}/>
                 <i class="fa-solid fa-user"></i>
             </div>
         </div>
@@ -144,7 +144,7 @@
       color: white;
 
       .handle {
-        padding: 0.75rem 0.5rem;
+        //padding: 0.75rem 0.5rem;
         flex: 1;
         cursor: pointer;
       }
@@ -160,7 +160,7 @@
 
   .iconZone {
     display: flex;
-    grid-gap: 0.5rem;
+    // grid-gap: 0.5rem;
 
     > {
       color: red;

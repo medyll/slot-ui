@@ -1,5 +1,5 @@
-<script lang="ts"> 
-import type { SvelteComponentDev } from 'svelte/internal';
+<script lang="ts">
+  import type {SvelteComponentDev} from 'svelte/internal';
 
 
   import Icon from '../../ui/icon/Icon.svelte';
@@ -29,9 +29,11 @@ import type { SvelteComponentDev } from 'svelte/internal';
             <span class="action" on:click={onActionClick}>...</span>
         {/if}
     </button>
-    <div class="pad-4 text-center">
-        <slot>Some text</slot>
-    </div>
+    {#if $$slots.length}
+        <div class="pad-4 text-center">
+            <slot></slot>
+        </div>
+    {/if}
 </div>
 
 <style lang="scss">

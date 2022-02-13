@@ -4,7 +4,7 @@ import type {  IChromeArgs } from '../stores/windowStore';
 import {get, writable} from 'svelte/store';
 import Debug from '../components/ui/debug/Debug.svelte';
 
-const windowList = globalThis.window;
+const windowList:Record<string,any> = {}; // Record<string,any>// globalThis.window;
 
 function openWindow(frameId: string , args: Partial<IChromeArgs> = {}) {
   

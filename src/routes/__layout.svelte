@@ -12,6 +12,7 @@
 	import List from '/src/components/vendor/list/List.svelte';
 	import ListItem from '/src/components/vendor/list/ListItem.svelte';
 	import ListTitle from '/src/components/vendor/list/ListTitle.svelte';
+	import {themes} from "../themes/themes";
 
 	let isLogged = true;
 
@@ -22,7 +23,7 @@
 	};
 </script>
 
-<ThemeWrapper mode="dark">
+<ThemeWrapper themes={themes} mode="dark">
 	<StartMenu />
 	<div style="height:100%;max-height:100%;overflow:hidden;display:flex;flex-direction: column">
 		{#if  isLogged}
@@ -77,9 +78,11 @@
 		height: 100%;
 		width: 100%;
 		overflow: hidden;
-		background-image: url('back2.png');
+		// background-image: url('back2.png');
 		background-size: cover;
 		font-family: 'Rubik';
+		background-color: var(--theme-color-background);
+		color:  var(--theme-color-text);
 	}
 
 	#svelte {
