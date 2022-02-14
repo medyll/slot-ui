@@ -22,13 +22,11 @@
 
   function togglePanel() {
     $store.store;
-    //$store = 'Mike';
   }
 
 </script>
 
 <div>
-    <!-- nav left -->
     <ChromeNav></ChromeNav>
     <ChromeContent></ChromeContent>
 </div>

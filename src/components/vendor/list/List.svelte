@@ -36,8 +36,7 @@
 
 </script>
 
-<ul    class="density-{density}" on:list:listItem:clicked={onListItemClick} bind:this={ref} style="{style}">
-
+<ul class="density-{density}" on:list:listItem:clicked={onListItemClick} bind:this={ref} style="{style}">
     {#if $$slots.title || title}
         <slot name="title">
             <ListTitle primary={title}/>

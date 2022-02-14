@@ -1,11 +1,9 @@
 <script context="module" lang="ts">
-
-	import type  { TIcon,SizeType } from '../../ui/icon/Icon.svelte';
-
+	import type { TIcon, SizeType } from '../../ui/icon/Icon.svelte';
 </script>
-<script lang="ts">
-	import Icon  from '../../ui/icon/Icon.svelte';
 
+<script lang="ts">
+	import Icon from '../../ui/icon/Icon.svelte';
 
 	export let icon: TIcon;
 	export let style: string = '';
@@ -16,7 +14,7 @@
 
 <button on:click {style} class={className}>
 	<span>
-		<span class="icon"><Icon {icon} fontSize={iconFontSize}   /></span>
+		<span class="icon"><Icon {icon} fontSize={iconFontSize} /></span>
 		<slot />
 	</span>
 	{#if showShip}
@@ -25,7 +23,6 @@
 </button>
 
 <style lang="scss">
-
 	button {
 		padding: 8px;
 		position: relative;
@@ -55,5 +52,5 @@
 			border-radius: 16px;
 			bottom: 0px;
 		}
-	} 
+	}
 </style>
