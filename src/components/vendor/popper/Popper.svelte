@@ -1,49 +1,40 @@
-<svelte:options immutable={true}
-                accessors={true}/>
+<svelte:options accessors={true}/>
+<script context="module" lang="ts">
 
+</script>
 <script lang="ts">
   import type {SvelteComponentDev} from 'svelte/internal';
-  import {onMount} from 'svelte';
+  import {stickTo} from '/src/use/stickTo/stickTo';
+  import {clickAway} from '/src/use/clickAway/clickAway';
+  import {popperList} from './actions';
+
+  let thisRef;
 
   export let code: string;
   export let component: SvelteComponentDev;
   export let componentProps: {};
-  export let position: 'T' | 'TR' | 'BR' | 'B' | 'BL' = 'TR';
+  export let position: 'TL' | 'TR' | 'BR' | 'B' | 'BL' = 'TR';
   export let parentNode: HTMLElement;
-  ;
 
-
-  export const toggle = function () {
-    console.log('toggle');
+  export const toggle  = function () {
+    popperList[code].$destroy();
   };
-  export const hide   = function () {
+  export const hide    = function () {
     console.log('hide');
   };
-  export const show   = function () {
+  export const show    = function () {
     console.log('show');
   };
-
-  let styleX = '';
-
-
-  onMount(()=>{
-    if (parentNode) {
-      const parentPos = parentNode.getBoundingClientRect();
-
-      console.log({parentPos})
-
-      switch (position) {
-        case 'TR':
-          styleX = `bottom:${parentPos.bottom}px;left:${parentPos.left};right:auto`
-          break;
-      }
-      console.log({parentNode,parentPos,styleX});
-    }
-  })
+  export const destroy = function () {
+    popperList[code].$destroy();
+  };
 
 </script>
 
-<div class="popper" style={styleX}>
+<div class="popper"
+     bind:this={thisRef}
+     use:clickAway={{action:destroy }}
+     use:stickTo={{parentNode,position:'TR'}}>
     <slot>
         {#if component}
             <svelte:component this={component} {...componentProps}/>
@@ -58,11 +49,8 @@
     z-index: 3000;
     box-shadow: 0px 0px 3px 1px rgba(51, 51, 51, 0.5);
     border-radius: 8px;
-
-    margin: 16px;
+    // margin: 16px;
 
     position: absolute;
-    bottom: 0;
-    right: 0;
   }
 </style>

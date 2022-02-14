@@ -1,7 +1,7 @@
 import Popper from './Popper.svelte';
 import type {SvelteComponentDev} from 'svelte/internal';
 
-let singletonPoppers: Record<string, Popper> = {};
+export let popperList: Record<string, Popper> = {};
 
 const openPopper = (popperId: string, args: {
   position?: 'T' | 'TR' | 'BR' | 'B' | 'BL',
@@ -11,24 +11,33 @@ const openPopper = (popperId: string, args: {
 } = {}) => {
   
   
-  if (singletonPoppers[popperId]) {
- 
-    singletonPoppers[popperId].toggle();
+  
+  if (popperList[popperId]) {
+    if(popperList[popperId].toggle) {
+      popperList[popperId].toggle();
+    }else{
+      createPopper()
+    }
     // resend props if changed
   } else {
     createPopper()
   }
   
   function createPopper(){
-    singletonPoppers[popperId] = new Popper({
-      target: document.body,//document.querySelector('#svelte'),
+    popperList[popperId] = new Popper({
+      target: document.body,
+      intro: true,
       props : {
         code: popperId,
         ...args,
       },
     });
+    
+    popperList[popperId].$$.on_destroy.push(()=>{
+      delete(popperList[popperId])
+    })
+    
   }
-  console.log({singletonPoppers});
 };
 
 export {openPopper};

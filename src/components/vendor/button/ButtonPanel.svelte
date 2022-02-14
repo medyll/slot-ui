@@ -26,7 +26,9 @@
     <button bind:this={buttonRef}>
         <Icon fontSize="small" icon="faList"/>
         {#if actionComponent}
-            <span class="action" on:click={onActionClick}>...</span>
+            <span class="action" on:click={onActionClick}>
+                <Icon icon="faChevronRight" fontSize="tiny"/>
+            </span>
         {/if}
     </button>
     {#if $$slots.length}
@@ -44,9 +46,9 @@
     position: relative;
 
     button {
-      padding: 16px 8px;
+      padding: 16px 16px;
       display: block;
-      width: 100px;
+      width: 64px;
       background-color: rgba(255, 255, 255, 0.2);
       border: 1px solid rgba(255, 255, 255, 0.2);
       position: relative;
@@ -62,7 +64,8 @@
         bottom: 0;
         right: 0;
         background-color: rgba(255, 255, 255, 0.1);
-        width: 20%;
+        width: 25%;
+        padding: 0.5rem;
 
         &:hover {
           background-color: rgba(255, 255, 255, 0.5);
