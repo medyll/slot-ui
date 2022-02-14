@@ -23,7 +23,7 @@
 	};
 </script>
 
-<ThemeWrapper themes={themes} mode="dark">
+<ThemeWrapper theme={'dark'} themes={themes} >
 	<StartMenu />
 	<div style="height:100%;max-height:100%;overflow:hidden;display:flex;flex-direction: column">
 		{#if  isLogged}
@@ -45,7 +45,7 @@
 		<svelte:fragment slot="drawerMenuBar">
 			<TopBar title="Drawer with menu bar ">
 				<svelte:fragment slot="menuBarSwitcher">
-					<div class="pad-2">
+					<div class="pad-1">
 						<input placeholder="Search in Bar" style="width:100%;" type="text" />
 					</div>
 				</svelte:fragment>

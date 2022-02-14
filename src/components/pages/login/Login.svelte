@@ -11,10 +11,10 @@
 </script>
 
 <form style="width:100%;height:100%"  use:form={validate} method="post"  >
-    <div class="login h-full w-full grid-h grid-align-middle-center bg-palette-red-dark">
-        <div class="form grid-v grid-align-middle-center">
+    <div class="login h-full w-full flex-h flex-align-middle-center bg-palette-red-dark">
+        <div class="form flex-v flex-align-middle-center">
             <div class="avatarHolder">
-                <div class="avatar grid-h grid-align-middle-center">avatar</div>
+                <div class="avatar flex-h flex-align-middle-center">avatar</div>
             </div>
             <div class="name pad-2"><input type="email" name="email" use:validators={[required, email]}/></div>
             <div class="name pad-2"><input type="password" name="password" use:validators={[required]}/></div>

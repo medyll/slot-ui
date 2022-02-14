@@ -12,7 +12,7 @@
 </script>
 
 <div style="z-index:0" class="pos-abs w-full h-full overflow-auto pad-8">
-    <div class="pad-4 dsp-block-inline grid-h grid-align-middle">
+    <div class="pad-4 dsp-block-inline flex-h flex-align-middle">
         <button on:click={handleClick('explorer')}> explorer</button>
         <button on:click={handleClick('what')}> what</button>
         <ButtonPanel actionComponent={Debug}></ButtonPanel>

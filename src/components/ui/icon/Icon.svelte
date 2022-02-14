@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-  import * as All1 from '@fortawesome/free-solid-svg-icons';
+  import * as All1 from '@fortawesome/free-solid-svg-icons'; // add faSolid
   import * as All2 from '@fortawesome/free-brands-svg-icons';
   import * as All3 from '@fortawesome/free-regular-svg-icons';
   export type TIcon = keyof typeof IconTypes;
@@ -28,4 +28,4 @@
 
   export let fontSize: SizeType = 'medium';
 </script>
-<Fa on:click style="font-size:{sizes[fontSize]}px" icon={IconTypes[icon]}/>
+<Fa on:click style="font-size:{sizes[fontSize]}px"  icon={IconTypes[icon]}/>

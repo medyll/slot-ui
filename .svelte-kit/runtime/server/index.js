@@ -1499,6 +1499,22 @@ function is_root_relative(path) {
 }
 
 /**
+ * @param {string} path
+ * @param {'always' | 'never' | 'ignore'} trailing_slash
+ */
+function normalize_path(path, trailing_slash) {
+	if (path === '/' || trailing_slash === 'ignore') return path;
+
+	if (trailing_slash === 'never') {
+		return path.endsWith('/') ? path.slice(0, -1) : path;
+	} else if (trailing_slash === 'always' && /\/[^./]+$/.test(path)) {
+		return path + '/';
+	}
+
+	return path;
+}
+
+/**
  * @param {{
  *   event: import('types/hooks').RequestEvent;
  *   options: import('types/internal').SSROptions;
@@ -1700,9 +1716,7 @@ async function load_node({
 				} else {
 					// external
 					if (resolved.startsWith('//')) {
-						throw new Error(
-							`Cannot request protocol-relative URL (${requested}) in server-side fetch`
-						);
+						requested = event.url.protocol + requested;
 					}
 
 					// external fetch
@@ -1889,22 +1903,21 @@ async function load_shadow_data(route, event, prerender) {
 			if (result.fallthrough) return result;
 
 			const { status, headers, body } = validate_shadow_output(result);
+			data.status = status;
+
 			add_cookies(/** @type {string[]} */ (data.cookies), headers);
 
 			// Redirects are respected...
 			if (status >= 300 && status < 400) {
-				return {
-					status,
-					redirect: /** @type {string} */ (
-						headers instanceof Headers ? headers.get('location') : headers.location
-					)
-				};
+				data.redirect = /** @type {string} */ (
+					headers instanceof Headers ? headers.get('location') : headers.location
+				);
+				return data;
 			}
 
 			// ...but 4xx and 5xx status codes _don't_ result in the error page
 			// rendering for non-GET requests — instead, we allow the page
 			// to render with any validation errors etc that were returned
-			data.status = status;
 			data.body = body;
 		}
 
@@ -1915,21 +1928,18 @@ async function load_shadow_data(route, event, prerender) {
 
 			const { status, headers, body } = validate_shadow_output(result);
 			add_cookies(/** @type {string[]} */ (data.cookies), headers);
+			data.status = status;
 
 			if (status >= 400) {
-				return {
-					status,
-					error: new Error('Failed to load data')
-				};
+				data.error = new Error('Failed to load data');
+				return data;
 			}
 
 			if (status >= 300) {
-				return {
-					status,
-					redirect: /** @type {string} */ (
-						headers instanceof Headers ? headers.get('location') : headers.location
-					)
-				};
+				data.redirect = /** @type {string} */ (
+					headers instanceof Headers ? headers.get('location') : headers.location
+				);
+				return data;
 			}
 
 			data.body = { ...body, ...data.body };
@@ -2448,26 +2458,15 @@ const DATA_SUFFIX = '/__data.json';
 async function respond(request, options, state = {}) {
 	const url = new URL(request.url);
 
-	if (url.pathname !== '/' && options.trailing_slash !== 'ignore') {
-		const has_trailing_slash = url.pathname.endsWith('/');
+	const normalized = normalize_path(url.pathname, options.trailing_slash);
 
-		if (
-			(has_trailing_slash && options.trailing_slash === 'never') ||
-			(!has_trailing_slash &&
-				options.trailing_slash === 'always' &&
-				!(url.pathname.split('/').pop() || '').includes('.'))
-		) {
-			url.pathname = has_trailing_slash ? url.pathname.slice(0, -1) : url.pathname + '/';
-
-			if (url.search === '?') url.search = '';
-
-			return new Response(undefined, {
-				status: 301,
-				headers: {
-					location: url.pathname + url.search
-				}
-			});
-		}
+	if (normalized !== url.pathname) {
+		return new Response(undefined, {
+			status: 301,
+			headers: {
+				location: normalized + (url.search === '?' ? '' : url.search)
+			}
+		});
 	}
 
 	const { parameter, allowed } = options.method_override;
@@ -2596,11 +2595,11 @@ async function respond(request, options, state = {}) {
 							const location = response.headers.get('location');
 
 							if (location) {
+								const headers = new Headers(response.headers);
+								headers.set('x-sveltekit-location', location);
 								response = new Response(undefined, {
 									status: 204,
-									headers: {
-										'x-sveltekit-location': location
-									}
+									headers
 								});
 							}
 						}

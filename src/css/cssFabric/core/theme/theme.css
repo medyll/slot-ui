@@ -1,6 +1,10 @@
 .theme-text-primary {
   color: orange;
 }
+:root {
+  --theme-text-primary-color: orange;
+}
+
 .theme-text-primary-light {
   color: #ffc04d;
 }
@@ -23,6 +27,10 @@
 .theme-bg-primary {
   background-color: orange;
 }
+:root {
+  --theme-bg-primary-background-color: orange;
+}
+
 .theme-bg-primary-light {
   background-color: #ffc04d;
 }
@@ -45,6 +53,10 @@
 .theme-border-primary {
   border-color: orange;
 }
+:root {
+  --theme-border-primary-border-color: orange;
+}
+
 .theme-border-primary-light {
   border-color: #ffc04d;
 }
@@ -67,6 +79,10 @@
 .theme-text-secondary {
   color: #005aff;
 }
+:root {
+  --theme-text-secondary-color: #005aff;
+}
+
 .theme-text-secondary-light {
   color: #4d8cff;
 }
@@ -89,6 +105,10 @@
 .theme-bg-secondary {
   background-color: #005aff;
 }
+:root {
+  --theme-bg-secondary-background-color: #005aff;
+}
+
 .theme-bg-secondary-light {
   background-color: #4d8cff;
 }
@@ -111,6 +131,10 @@
 .theme-border-secondary {
   border-color: #005aff;
 }
+:root {
+  --theme-border-secondary-border-color: #005aff;
+}
+
 .theme-border-secondary-light {
   border-color: #4d8cff;
 }
@@ -133,6 +157,10 @@
 .theme-text-tertiary {
   color: orange;
 }
+:root {
+  --theme-text-tertiary-color: orange;
+}
+
 .theme-text-tertiary-light {
   color: #ffc04d;
 }
@@ -155,6 +183,10 @@
 .theme-bg-tertiary {
   background-color: orange;
 }
+:root {
+  --theme-bg-tertiary-background-color: orange;
+}
+
 .theme-bg-tertiary-light {
   background-color: #ffc04d;
 }
@@ -177,6 +209,10 @@
 .theme-border-tertiary {
   border-color: orange;
 }
+:root {
+  --theme-border-tertiary-border-color: orange;
+}
+
 .theme-border-tertiary-light {
   border-color: #ffc04d;
 }

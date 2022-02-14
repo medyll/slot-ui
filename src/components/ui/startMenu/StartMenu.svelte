@@ -89,7 +89,7 @@
                 </Panel>
             </PanelSlide>
         </div>
-        <div class="bottomBar">
+        <div class="bottomBar flex-h flex-align-right pad-tb-1 pad-ii-4">
             <IconButton style="color:white" icon="faBed"/>
             <IconButton style="color:white" icon="faTruck"/>
             <IconButton style="color:white" icon="faSign"/>
@@ -155,7 +155,6 @@
   }
 
   .bottomBar {
-    padding: 1rem 2rem;
     box-shadow: 0px 0px 3px 1px rgba(51, 51, 51, 0.5);
   }
 </style>

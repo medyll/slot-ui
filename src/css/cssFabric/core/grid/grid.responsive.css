@@ -1,6 +1,6 @@
 @media only screen and (max-width: 0rem) {
   .grid-xxxl-h {
-    display: flex;
+    display: grid;
     flex-direction: row;
   }
   .grid-xxxl-h > .grid-main {
@@ -35,7 +35,7 @@
   }
 
   .grid-xxxl-v {
-    display: flex;
+    display: grid;
     flex-direction: column;
   }
   .grid-xxxl-v > .grid-main {
@@ -119,25 +119,6 @@
   }
 
   /** raw css properties distribution */
-  .grid-xxxl-h,
-.grid-xxxl-v {
-    /*&.just, &.grid-justify {
-      @each $fabricRule, $value in map-get($cssProps, grid-justify) {
-        @include utils.fabricAttributes('&'+$sep, $fabricRule, 'justify-content', $value);
-      }
-    }*/
-    /*&.items, &.grid-items {
-      @each $fabricRule, $value in map-get($cssProps, grid-items) {
-        @include utils.fabricAttributes('&'+$sep, $fabricRule, 'align-items', $value);
-      }
-    }*/
-    /*&.content, &.grid-content {
-      @each $fabricRule, $value in map-get($cssProps, grid-content) {
-        $tag: content-start;
-        @include utils.fabricAttributes('&'+$sep, $fabricRule, 'align-content', $value);
-      }
-    }*/
-  }
   .grid-xxxl-h.grid-wrap,
 .grid-xxxl-v.grid-wrap {
     flex-wrap: wrap;
@@ -161,7 +142,7 @@
 }
 @media only screen and (max-width: 120rem) {
   .grid-xxl-h {
-    display: flex;
+    display: grid;
     flex-direction: row;
   }
   .grid-xxl-h > .grid-main {
@@ -196,7 +177,7 @@
   }
 
   .grid-xxl-v {
-    display: flex;
+    display: grid;
     flex-direction: column;
   }
   .grid-xxl-v > .grid-main {
@@ -280,25 +261,6 @@
   }
 
   /** raw css properties distribution */
-  .grid-xxl-h,
-.grid-xxl-v {
-    /*&.just, &.grid-justify {
-      @each $fabricRule, $value in map-get($cssProps, grid-justify) {
-        @include utils.fabricAttributes('&'+$sep, $fabricRule, 'justify-content', $value);
-      }
-    }*/
-    /*&.items, &.grid-items {
-      @each $fabricRule, $value in map-get($cssProps, grid-items) {
-        @include utils.fabricAttributes('&'+$sep, $fabricRule, 'align-items', $value);
-      }
-    }*/
-    /*&.content, &.grid-content {
-      @each $fabricRule, $value in map-get($cssProps, grid-content) {
-        $tag: content-start;
-        @include utils.fabricAttributes('&'+$sep, $fabricRule, 'align-content', $value);
-      }
-    }*/
-  }
   .grid-xxl-h.grid-wrap,
 .grid-xxl-v.grid-wrap {
     flex-wrap: wrap;
@@ -322,7 +284,7 @@
 }
 @media only screen and (max-width: 90rem) {
   .grid-xl-h {
-    display: flex;
+    display: grid;
     flex-direction: row;
   }
   .grid-xl-h > .grid-main {
@@ -357,7 +319,7 @@
   }
 
   .grid-xl-v {
-    display: flex;
+    display: grid;
     flex-direction: column;
   }
   .grid-xl-v > .grid-main {
@@ -441,25 +403,6 @@
   }
 
   /** raw css properties distribution */
-  .grid-xl-h,
-.grid-xl-v {
-    /*&.just, &.grid-justify {
-      @each $fabricRule, $value in map-get($cssProps, grid-justify) {
-        @include utils.fabricAttributes('&'+$sep, $fabricRule, 'justify-content', $value);
-      }
-    }*/
-    /*&.items, &.grid-items {
-      @each $fabricRule, $value in map-get($cssProps, grid-items) {
-        @include utils.fabricAttributes('&'+$sep, $fabricRule, 'align-items', $value);
-      }
-    }*/
-    /*&.content, &.grid-content {
-      @each $fabricRule, $value in map-get($cssProps, grid-content) {
-        $tag: content-start;
-        @include utils.fabricAttributes('&'+$sep, $fabricRule, 'align-content', $value);
-      }
-    }*/
-  }
   .grid-xl-h.grid-wrap,
 .grid-xl-v.grid-wrap {
     flex-wrap: wrap;
@@ -483,7 +426,7 @@
 }
 @media only screen and (max-width: 64rem) {
   .grid-lg-h {
-    display: flex;
+    display: grid;
     flex-direction: row;
   }
   .grid-lg-h > .grid-main {
@@ -518,7 +461,7 @@
   }
 
   .grid-lg-v {
-    display: flex;
+    display: grid;
     flex-direction: column;
   }
   .grid-lg-v > .grid-main {
@@ -602,25 +545,6 @@
   }
 
   /** raw css properties distribution */
-  .grid-lg-h,
-.grid-lg-v {
-    /*&.just, &.grid-justify {
-      @each $fabricRule, $value in map-get($cssProps, grid-justify) {
-        @include utils.fabricAttributes('&'+$sep, $fabricRule, 'justify-content', $value);
-      }
-    }*/
-    /*&.items, &.grid-items {
-      @each $fabricRule, $value in map-get($cssProps, grid-items) {
-        @include utils.fabricAttributes('&'+$sep, $fabricRule, 'align-items', $value);
-      }
-    }*/
-    /*&.content, &.grid-content {
-      @each $fabricRule, $value in map-get($cssProps, grid-content) {
-        $tag: content-start;
-        @include utils.fabricAttributes('&'+$sep, $fabricRule, 'align-content', $value);
-      }
-    }*/
-  }
   .grid-lg-h.grid-wrap,
 .grid-lg-v.grid-wrap {
     flex-wrap: wrap;
@@ -644,7 +568,7 @@
 }
 @media only screen and (max-width: 48rem) {
   .grid-md-h {
-    display: flex;
+    display: grid;
     flex-direction: row;
   }
   .grid-md-h > .grid-main {
@@ -679,7 +603,7 @@
   }
 
   .grid-md-v {
-    display: flex;
+    display: grid;
     flex-direction: column;
   }
   .grid-md-v > .grid-main {
@@ -763,25 +687,6 @@
   }
 
   /** raw css properties distribution */
-  .grid-md-h,
-.grid-md-v {
-    /*&.just, &.grid-justify {
-      @each $fabricRule, $value in map-get($cssProps, grid-justify) {
-        @include utils.fabricAttributes('&'+$sep, $fabricRule, 'justify-content', $value);
-      }
-    }*/
-    /*&.items, &.grid-items {
-      @each $fabricRule, $value in map-get($cssProps, grid-items) {
-        @include utils.fabricAttributes('&'+$sep, $fabricRule, 'align-items', $value);
-      }
-    }*/
-    /*&.content, &.grid-content {
-      @each $fabricRule, $value in map-get($cssProps, grid-content) {
-        $tag: content-start;
-        @include utils.fabricAttributes('&'+$sep, $fabricRule, 'align-content', $value);
-      }
-    }*/
-  }
   .grid-md-h.grid-wrap,
 .grid-md-v.grid-wrap {
     flex-wrap: wrap;
@@ -805,7 +710,7 @@
 }
 @media only screen and (max-width: 35.7rem) {
   .grid-sm-h {
-    display: flex;
+    display: grid;
     flex-direction: row;
   }
   .grid-sm-h > .grid-main {
@@ -840,7 +745,7 @@
   }
 
   .grid-sm-v {
-    display: flex;
+    display: grid;
     flex-direction: column;
   }
   .grid-sm-v > .grid-main {
@@ -924,25 +829,6 @@
   }
 
   /** raw css properties distribution */
-  .grid-sm-h,
-.grid-sm-v {
-    /*&.just, &.grid-justify {
-      @each $fabricRule, $value in map-get($cssProps, grid-justify) {
-        @include utils.fabricAttributes('&'+$sep, $fabricRule, 'justify-content', $value);
-      }
-    }*/
-    /*&.items, &.grid-items {
-      @each $fabricRule, $value in map-get($cssProps, grid-items) {
-        @include utils.fabricAttributes('&'+$sep, $fabricRule, 'align-items', $value);
-      }
-    }*/
-    /*&.content, &.grid-content {
-      @each $fabricRule, $value in map-get($cssProps, grid-content) {
-        $tag: content-start;
-        @include utils.fabricAttributes('&'+$sep, $fabricRule, 'align-content', $value);
-      }
-    }*/
-  }
   .grid-sm-h.grid-wrap,
 .grid-sm-v.grid-wrap {
     flex-wrap: wrap;

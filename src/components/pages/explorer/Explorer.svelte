@@ -22,7 +22,7 @@
   import TopBar from '../../vendor/topBar/TopBar.svelte';
   import ContentSwitcher from '../../vendor/contentSwitcher/ContentSwitcher.svelte';
   import MenuBar from '../../vendor/topBar/TopBar.svelte';
-  import Elementor from '../../vendor/Elementor.svelte';
+  import Elementor from '../../vendor/elementor/Elementor.svelte';
 
 
   let listItems = [];
@@ -46,13 +46,13 @@
 
 <div class="explorerFrame">
     <div class="explorerContainer">
-        <div class="navLeft grid-v h-full ">
+        <div class="navLeft flex-v h-full ">
             <div class="pad-2">
                 <MenuBar orientation="left" title="Navigation bar ">
                     <input slot="menuBarSwitcher" placeholder="Search in Bar" style="width:100%;" type="text"/>
                 </MenuBar>
             </div>
-            <div class="grid-main overflow-auto">
+            <div class="flex-main overflow-auto">
                 <List selectorField="idappscheme"
                       density="default"
                       onItemClick={openIn}
@@ -68,16 +68,16 @@
                 </List>
             </div>
         </div>
-        <div class="content h-full grid-v">
+        <div class="content h-full flex-v">
             <div>
             <Header title={activeData?.[`nomAppscheme`]} bind:debugValues>
                 {activeData?.[`nomAppscheme`]}
             </Header></div>
-            <div class="grid-main overflow-auto pad-4">
+            <div class="flex-main overflow-auto pad-4">
                 <!--object loop-->
                 {#if activeData}
                     <Elementor let:itemObject bind:item={activeData}>
-                        <div class="grid-h grid-align-middle">
+                        <div class="flex-h flex-align-middle">
                             <div class="pad-2 border-b" style="width:120px;overflow: hidden">{itemObject.key}</div>
                             <div class="pad-2">:</div>
                             <div class="pad-2" >{JSON.stringify(itemObject.value)}</div>

@@ -10,11 +10,11 @@
   };
 </script>
 
-<div class="bar grid-h grid-align-middle">
+<div class="bar flex-h flex-align-middle">
     <slot>
         <slot name="taskBarLeft"></slot>
     </slot>
-    <div class="grid-main">
+    <div class="flex-main">
         <button on:click={(event)=>{
             event.stopPropagation();
             openPopper('DaPopper',{...popServiceProps})}}>Service Box

@@ -16,7 +16,7 @@
     openPopper('settingActions', {
       parentNode    : buttonRef,
       component     : actionComponent,
-      componentProps: actionComponentProps ?? {},
+      componentProps: actionComponentProps ?? {}
     });
   };
 

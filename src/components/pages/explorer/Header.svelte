@@ -6,10 +6,10 @@
 </script>
 
 
-<div class="pad-2 pad-tb-6 grid-main">
+<div class="pad-2 pad-tb-6 flex-main">
     <h3>{title}</h3>
 </div>
-<div class="pad-4  grid-h grid-align-top">
+<div class="pad-4  flex-h flex-align-top">
     <div class="pad-r-4">
         <Icon  fontSize="big" icon="faFile" />
     </div>
@@ -24,7 +24,7 @@
 </div>
 <Divider />
 <!--<div class="header">
-    <div class="grid-h grid-align-middle">
+    <div class="flex-h flex-align-middle">
         <div class="first">icon</div>
         <div class="second">Header title</div>
     </div>

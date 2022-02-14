@@ -6,6 +6,22 @@ import { writable } from 'svelte/store';
 import { base, set_paths } from '../paths.js';
 import { init } from './singletons.js';
 
+/**
+ * @param {string} path
+ * @param {'always' | 'never' | 'ignore'} trailing_slash
+ */
+function normalize_path(path, trailing_slash) {
+	if (path === '/' || trailing_slash === 'ignore') return path;
+
+	if (trailing_slash === 'never') {
+		return path.endsWith('/') ? path.slice(0, -1) : path;
+	} else if (trailing_slash === 'always' && /\/[^./]+$/.test(path)) {
+		return path + '/';
+	}
+
+	return path;
+}
+
 function scroll_state() {
 	return {
 		x: pageXOffset,
@@ -396,14 +412,7 @@ class Router {
 		}
 		this.navigating++;
 
-		let { pathname } = url;
-
-		if (this.trailing_slash === 'never') {
-			if (pathname !== '/' && pathname.endsWith('/')) pathname = pathname.slice(0, -1);
-		} else if (this.trailing_slash === 'always') {
-			const is_file = /** @type {string} */ (url.pathname.split('/').pop()).includes('.');
-			if (!is_file && !pathname.endsWith('/')) pathname += '/';
-		}
+		const pathname = normalize_path(url.pathname, this.trailing_slash);
 
 		info.url = new URL(url.origin + pathname + url.search + url.hash);
 

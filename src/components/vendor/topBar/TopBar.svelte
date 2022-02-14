@@ -17,8 +17,8 @@
 	const posCloser = orientation === 'right' ? 3 : 1
 </script>
 
-<div bind:this={headerRef} class="grid-h grid-align-middle grid-main">
-	<div class="title grid-main text-500" style="order:{posTitle};min-width:auto">
+<div bind:this={headerRef} class="flex-h flex-align-middle flex-main">
+	<div class="title flex-main text-500" style="order:{posTitle};min-width:auto">
 		{#if $$slots.menuBarTitle || Boolean(title)}
 			<slot name="menuBarTitle">
 				<div style="font-size:18px;min-width:auto;overflow:hidden;"  class="overflow-hidden text-ellipsis pad-l-4  ">

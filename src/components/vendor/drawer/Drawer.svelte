@@ -20,10 +20,10 @@ import IconButton from '../button/IconButton.svelte';
 </script>
 
 {#if isOpen}
-	<div bind:this={drawerRef} class="drawer grid-v h-full">
+	<div bind:this={drawerRef} class="drawer flex-v h-full">
 		{#if $$slots.drawerMenuBar || Boolean(title)}
-			<div class="header grid-h">
-				<div class="grid-main grid-h grid-align-middle ">
+			<div class="header flex-h">
+				<div class="flex-main flex-h flex-align-middle ">
 					{#if title}<span style="font-size:18px;" class="pad-l-4">{title}</span>{/if}
 					<slot name="drawerMenuBar" />
 				</div>
@@ -41,7 +41,7 @@ import IconButton from '../button/IconButton.svelte';
 			</div>
 		{/if}
 		{#if $$slots.content}
-			<div class="grid-main"><slot name="content">content</slot></div>
+			<div class="flex-main"><slot name="content">content</slot></div>
 		{/if}
 		<BottomBar>
 			bar bottom

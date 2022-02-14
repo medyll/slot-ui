@@ -1,5 +1,4 @@
-// const svelte = require('svelte/compiler');
-import {preprocess} from 'svelte/compiler';
+ 
 
 export interface Sx4uProps extends Partial<CSSStyleDeclaration> {
   p?: number[];

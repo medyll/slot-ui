@@ -10,15 +10,15 @@
 
 </script>
 
-<div class="h-full grid-v serviceBox" >
+<div class="h-full flex-v serviceBox" >
 
-    <div class="grid-main pad-8 gridIconBis">
+    <div class="flex-main pad-8 gridIconBis">
         {#each [...Array(6)] as key,val }
             <!--for popper-->
             <ButtonPanel actionComponent={Debug}>Setting {val}</ButtonPanel>
         {/each}
     </div>
-    <div   class="grid-h grid-align-right">
+    <div   class="pad-2 flex-h flex-align-right">
         <IconButton icon="faList"></IconButton>
         <IconButton icon="faList"></IconButton>
     </div>

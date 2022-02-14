@@ -35,11 +35,11 @@
 
 <IconButton  iconFontSize="small" on:click={handleClick} {icon} />
 <div style="display:none" bind:this={thisHolderRef}>
-	<div class="grid-h grid-align-middle" style="width:100%;flex:1;" bind:this={thisRef}>
+	<div class="flex-h flex-align-middle" style="width:100%;flex:1;" bind:this={thisRef}>
 		<div>
 			<IconButton iconFontSize="small"   on:click={handleClick} icon="faChevronLeft" />
 		</div>
-		<div class="grid-main">
+		<div class="flex-main">
 			<slot />
 		</div>
 	</div>
