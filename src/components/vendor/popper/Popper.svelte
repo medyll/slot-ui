@@ -49,8 +49,7 @@
     z-index: 3000;
     box-shadow: 0px 0px 3px 1px rgba(51, 51, 51, 0.5);
     border-radius: 8px;
-    // margin: 16px;
-
+    overflow: hidden;
     position: absolute;
   }
 </style>

@@ -4,7 +4,19 @@
     import {goto} from '$app/navigation';
     import Divider from "../../vendor/divider/Divider.svelte";
     import ButtonPanel from "../../vendor/button/ButtonPanel.svelte";
-    import Debug from "../../ui/debug/Debug.svelte";
+    import Menu from "../../vendor/menu/Menu.svelte";
+    import Icon from '../../ui/icon/Icon.svelte';
+    import Avatar from "../../vendor/avatar/Avatar.svelte";
+ 
+
+    const menuData = [
+      {text: 'text 1', icon: Icon},
+      {text: 'text 2', icon: 'i'},
+      {text: 'text 3', icon: 'i'},
+      {text: 'text 3', icon: 'i'},
+      {text: 'text 3', icon: 'i'},
+      {text: 'text 3', icon: 'i'},
+    ];
 
     const handleClick = (where:string) => (event) => {
       goto(where)
@@ -15,8 +27,9 @@
     <div class="pad-4 dsp-block-inline flex-h flex-align-middle">
         <button on:click={handleClick('explorer')}> explorer</button>
         <button on:click={handleClick('what')}> what</button>
-        <ButtonPanel actionComponent={Debug}></ButtonPanel>
+        <ButtonPanel actionComponent={Menu} actionComponentProps={{menuList:menuData}}>button</ButtonPanel>
     </div>
+    <Avatar />
     <Divider />
     <div class="gridIcon">
         {#each [...Array(20)] as key,val}

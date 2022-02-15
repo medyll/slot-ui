@@ -1,9 +1,9 @@
-
-
 export namespace Drawer {
-    export let title:string  ;
+  export let title: string;
 }
 
 export interface ElementProps {
-    density: 'tight' | 'default' | 'find';
+  density: 'tight' | 'default' | 'kind';
+  icon: | string
+        | { type: 'fa', name: string };
 }

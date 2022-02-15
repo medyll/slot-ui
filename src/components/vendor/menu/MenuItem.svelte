@@ -6,13 +6,16 @@
 </script>
 
 <li role="menuitem" class="menuItem">
-    <div>
-        <slot name="menuItemIconSlot"></slot>
+    <div class="menuItemIcon">
+        <slot name="menuItemIconSlot">{icon}</slot>
     </div>
-    <slot>
-        <slot name="menuItemTextSlot">{text}</slot>
-    </slot>
+    <div class="menuItemText">
+        <slot>
+            <slot name="menuItemTextSlot">{text}</slot>
+        </slot>
+    </div>
 </li>
-<style lang="scss"  >
+
+<style lang="scss" global>
   @import "Menu.scss";
 </style>
