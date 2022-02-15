@@ -12,7 +12,7 @@
 
 <style>
 	hr {
-		margin: 0 8px;
+		margin: 4px 8px;
 		border: none;
 		border-top: 1px solid rgba(255, 255, 255, 0.1);
 		background-color: rgba(255, 255, 255, 0.1);

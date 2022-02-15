@@ -7,7 +7,7 @@
 
   export let icon: string = 'faList';
   export let actionComponent: SvelteComponentDev;
-  export let actionComponentProps;
+  export let actionComponentProps: any;
 
   let buttonRef;
 
