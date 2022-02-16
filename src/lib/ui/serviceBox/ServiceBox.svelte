@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {clickAway} from '../../../use/clickAway/clickAway';
+  import {clickAway} from '../../uses/clickAway/clickAway';
   import IconButton from '../../vendor/button/IconButton.svelte';
   import ButtonPanel from '../../vendor/button/ButtonPanel.svelte';
   import Debug from '../debug/Debug.svelte';

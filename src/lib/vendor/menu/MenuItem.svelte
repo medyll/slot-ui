@@ -28,5 +28,5 @@
 </li>
 
 <style lang="scss" global>
-	@import 'style.scss';
+	@import 'style';
 </style>

@@ -1,17 +1,15 @@
 <script lang="ts">
   import {ThemeWrapper, ThemeToggle, presets} from 'svelte-themer';
-  import Taskbar from '/src/components/ui/taskbar/Taskbar.svelte';
+  import Taskbar from '/src/lib/ui/taskbar/Taskbar.svelte';
   import Dashboard from '/src/components/pages/dashboard/Dashboard.svelte';
-  import StartMenu from '/src/components/ui/startMenu/StartMenu.svelte';
+  import StartMenu from '/src/lib/ui/startMenu/StartMenu.svelte';
   import Login from '../components/pages/login/Login.svelte';
-  import TaskBarContent from '../components/engine/TaskBarContent.svelte';
-  import Popper from '../components/vendor/popper/Popper.svelte';
-  import Drawer from '/src/components/vendor/drawer/Drawer.svelte';
-  import TopBar from '../components/vendor/topBar/TopBar.svelte';
-  import IconButton from '/src/components/vendor/button/IconButton.svelte';
-  import List from '/src/components/vendor/list/List.svelte';
-  import ListItem from '/src/components/vendor/list/ListItem.svelte';
-  import ListTitle from '/src/components/vendor/list/ListTitle.svelte';
+  import TaskBarContent from '../lib/engine/TaskBarContent.svelte';
+  import Drawer from '$lib/vendor/drawer/Drawer.svelte';
+  import TopBar from '../lib/vendor/topBar/TopBar.svelte';
+  import IconButton from '$lib/vendor/button/IconButton.svelte';
+  import List from '$lib/vendor/list/List.svelte';
+  import ListItem from '$lib/vendor/list/ListItem.svelte';
   import {themes} from '../themes/themes';
 
   let isLogged = true;

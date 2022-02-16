@@ -1,8 +1,8 @@
 <script>
-    import DataList from "../../components/vendor/dataList/DataList.svelte";
-    import DataListRow from "../../components/vendor/dataList/DataListRow.svelte";
-    import DataListCell from "../../components/vendor/dataList/DataListCell.svelte";
-    import DataListHead from "../../components/vendor/dataList/DataListHead.svelte";
+    import DataList from "../../lib/vendor/dataList/DataList.svelte";
+    import DataListRow from "../../lib/vendor/dataList/DataListRow.svelte";
+    import DataListCell from "../../lib/vendor/dataList/DataListCell.svelte";
+    import DataListHead from "../../lib/vendor/dataList/DataListHead.svelte";
 
     let items = [...Array(70000)];
 </script>

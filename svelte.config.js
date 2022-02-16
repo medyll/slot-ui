@@ -1,6 +1,6 @@
 import adapter from '@sveltejs/adapter-auto';
 import preprocess from 'svelte-preprocess';
-import {sx4uPreprocess} from './src/use/sx4u/sx4uPreprocess.js';
+import {sx4uPreprocess} from './src/lib/uses/sx4u/sx4uPreprocess.js';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -18,6 +18,10 @@ const config = {
     ],
     kit: {
         adapter: adapter(),
+        package: {
+            dir: 'package',
+            emitTypes: true
+        }
     }
 };
 

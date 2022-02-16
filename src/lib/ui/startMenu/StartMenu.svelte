@@ -2,16 +2,16 @@
 <script lang="ts">
   import {fade, slide} from 'svelte/transition';
 
-  import {sx4u} from '../../../use/sx4u/sx4u';
-  import {clickAway} from '../../../use/clickAway/clickAway';
-  import Panel from '/src/components/ui/panel/Panel.svelte';
-  import PanelSlide from '/src/components/ui/panel/PanelSlide.svelte';
+  import {sx4u} from '../../uses/sx4u/sx4u';
+  import {clickAway} from '../../uses/clickAway/clickAway';
+  import Panel from '/src/lib/ui/panel/Panel.svelte';
+  import PanelSlide from '/src/lib/ui/panel/PanelSlide.svelte';
 
   import {openWindow, toggleStartMenu, startMenuStore} from '../../../configurations';
   import color from 'color';
   import {afterUpdate, onMount, setContext, getContext} from 'svelte';
 
-  import IconButton from '/src/components/vendor/button/IconButton.svelte';
+  import IconButton from '/src/lib/vendor/button/IconButton.svelte';
   import {writable} from 'svelte/store';
   import Debug from '../debug/Debug.svelte';
 

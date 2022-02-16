@@ -3,7 +3,7 @@
 
 
   import Icon from '../../ui/icon/Icon.svelte';
-  import {openPopper} from '../popper/actions';
+  import {openPopper} from '../../../lib/vendor/popper/actions';
 
   export let icon: string = 'faList';
   export let actionComponent: SvelteComponentDev;

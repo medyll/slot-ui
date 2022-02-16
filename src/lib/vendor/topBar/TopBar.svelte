@@ -3,11 +3,7 @@
 </script>
 
 <script lang="ts">
-	import { compute_slots } from 'svelte/internal';
-	import IconButton from '../button/IconButton.svelte';
-
 	import ContentSwitcher from '../contentSwitcher/ContentSwitcher.svelte';
-	import type { Drawer } from '../drawer/types';
 
 	let headerRef;
 	export let title: MenuBarTitleType;

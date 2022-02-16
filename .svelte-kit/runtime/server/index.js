@@ -88,6 +88,14 @@ function is_pojo(body) {
 
 	return true;
 }
+/**
+ * @param {import('types/hooks').RequestEvent} event
+ * @returns string
+ */
+function normalize_request_method(event) {
+	const method = event.request.method.toLowerCase();
+	return method === 'delete' ? 'del' : method; // 'delete' is a reserved word
+}
 
 /** @param {string} body */
 function error(body) {
@@ -127,9 +135,14 @@ function is_text(content_type) {
  * @returns {Promise<Response | undefined>}
  */
 async function render_endpoint(event, mod) {
-	/** @type {import('types/endpoint').RequestHandler} */
-	const handler = mod[event.request.method.toLowerCase().replace('delete', 'del')]; // 'delete' is a reserved word
+	const method = normalize_request_method(event);
 
+	/** @type {import('types/endpoint').RequestHandler} */
+	let handler = mod[method];
+
+	if (!handler && method === 'head') {
+		handler = mod.get;
+	}
 	if (!handler) {
 		return;
 	}
@@ -179,7 +192,7 @@ async function render_endpoint(event, mod) {
 		}
 	}
 
-	return new Response(normalized_body, {
+	return new Response(method !== 'head' ? normalized_body : undefined, {
 		status,
 		headers
 	});
@@ -485,52 +498,29 @@ function coalesce_to_error(err) {
 		: new Error(JSON.stringify(err));
 }
 
+// dict from https://github.com/yahoo/serialize-javascript/blob/183c18a776e4635a379fdc620f81771f219832bb/index.js#L25
 /** @type {Record<string, string>} */
 const escape_json_in_html_dict = {
-	'&': '\\u0026',
-	'>': '\\u003e',
-	'<': '\\u003c',
-	'\u2028': '\\u2028',
-	'\u2029': '\\u2029'
-};
-
-/** @type {Record<string, string>} */
-const escape_json_value_in_html_dict = {
-	'"': '\\"',
 	'<': '\\u003C',
 	'>': '\\u003E',
 	'/': '\\u002F',
-	'\\': '\\\\',
-	'\b': '\\b',
-	'\f': '\\f',
-	'\n': '\\n',
-	'\r': '\\r',
-	'\t': '\\t',
-	'\0': '\\0',
 	'\u2028': '\\u2028',
 	'\u2029': '\\u2029'
 };
 
-/**
- * Escape a stringified JSON object that's going to be embedded in a `<script>` tag
- * @param {string} str
- */
-function escape_json_in_html(str) {
-	// adapted from https://github.com/vercel/next.js/blob/694407450638b037673c6d714bfe4126aeded740/packages/next/server/htmlescape.ts
-	// based on https://github.com/zertosh/htmlescape
-	// License: https://github.com/zertosh/htmlescape/blob/0527ca7156a524d256101bb310a9f970f63078ad/LICENSE
-	return str.replace(/[&><\u2028\u2029]/g, (match) => escape_json_in_html_dict[match]);
-}
+const escape_json_in_html_regex = new RegExp(
+	`[${Object.keys(escape_json_in_html_dict).join('')}]`,
+	'g'
+);
 
 /**
- * Escape a string JSON value to be embedded into a `<script>` tag
- * @param {string} str
+ * Escape a JSONValue that's going to be embedded in a `<script>` tag
+ * @param {import("@sveltejs/kit/types/helper").JSONValue} val
  */
-function escape_json_value_in_html(str) {
-	return escape(
-		str,
-		escape_json_value_in_html_dict,
-		(code) => `\\u${code.toString(16).toUpperCase()}`
+function escape_json_in_html(val) {
+	return JSON.stringify(val).replace(
+		escape_json_in_html_regex,
+		(match) => escape_json_in_html_dict[match]
 	);
 }
 
@@ -1067,7 +1057,7 @@ const updated = {
  *   error?: Error;
  *   url: URL;
  *   params: Record<string, string>;
- *   ssr: boolean;
+ *   resolve_opts: import('types/hooks').RequiredResolveOptions;
  *   stuff: Record<string, any>;
  * }} opts
  */
@@ -1081,7 +1071,7 @@ async function render_response({
 	error,
 	url,
 	params,
-	ssr,
+	resolve_opts,
 	stuff
 }) {
 	if (state.prerender) {
@@ -1113,7 +1103,7 @@ async function render_response({
 		error.stack = options.get_stack(error);
 	}
 
-	if (ssr) {
+	if (resolve_opts.ssr) {
 		branch.forEach(({ node, props, loaded, fetched, uses_credentials }) => {
 			if (node.css) node.css.forEach((url) => stylesheets.add(url));
 			if (node.js) node.js.forEach((url) => modulepreloads.add(url));
@@ -1209,9 +1199,9 @@ async function render_response({
 				throw new Error(`Failed to serialize session data: ${error.message}`);
 			})},
 			route: ${!!page_config.router},
-			spa: ${!ssr},
+			spa: ${!resolve_opts.ssr},
 			trailing_slash: ${s(options.trailing_slash)},
-			hydrate: ${ssr && page_config.hydrate ? `{
+			hydrate: ${resolve_opts.ssr && page_config.hydrate ? `{
 				status: ${status},
 				error: ${serialize_error(error)},
 				nodes: [
@@ -1303,7 +1293,7 @@ async function render_response({
 
 			if (shadow_props) {
 				// prettier-ignore
-				body += `<script type="application/json" data-type="svelte-props">${escape_json_in_html(s(shadow_props))}</script>`;
+				body += `<script type="application/json" data-type="svelte-props">${escape_json_in_html(shadow_props)}</script>`;
 			}
 		}
 
@@ -1337,7 +1327,9 @@ async function render_response({
 	const assets =
 		options.paths.assets || (segments.length > 0 ? segments.map(() => '..').join('/') : '.');
 
-	const html = options.template({ head, body, assets, nonce: /** @type {string} */ (csp.nonce) });
+	const html = resolve_opts.transformPage({
+		html: options.template({ head, body, assets, nonce: /** @type {string} */ (csp.nonce) })
+	});
 
 	const headers = new Headers({
 		'content-type': 'text/html',
@@ -1573,6 +1565,7 @@ async function load_node({
 		? await load_shadow_data(
 				/** @type {import('types/internal').SSRPage} */ (route),
 				event,
+				options,
 				!!state.prerender
 		  )
 		: {};
@@ -1758,11 +1751,21 @@ async function load_node({
 							}
 
 							if (!opts.body || typeof opts.body === 'string') {
+								// the json constructed below is later added to the dom in a script tag
+								// make sure the used values are safe
+								const status_number = Number(response.status);
+								if (isNaN(status_number)) {
+									throw new Error(
+										`response.status is not a number. value: "${
+											response.status
+										}" type: ${typeof response.status}`
+									);
+								}
 								// prettier-ignore
 								fetched.push({
 									url: requested,
 									body: /** @type {string} */ (opts.body),
-									json: `{"status":${response.status},"statusText":${s(response.statusText)},"headers":${s(headers)},"body":"${escape_json_value_in_html(body)}"}`
+									json: `{"status":${status_number},"statusText":${s(response.statusText)},"headers":${s(headers)},"body":${escape_json_in_html(body)}}`
 								});
 							}
 
@@ -1867,10 +1870,11 @@ async function load_node({
  *
  * @param {import('types/internal').SSRPage} route
  * @param {import('types/hooks').RequestEvent} event
+ * @param {import('types/internal').SSROptions} options
  * @param {boolean} prerender
  * @returns {Promise<import('types/endpoint').ShadowData>}
  */
-async function load_shadow_data(route, event, prerender) {
+async function load_shadow_data(route, event, options, prerender) {
 	if (!route.shadow) return {};
 
 	try {
@@ -1880,10 +1884,11 @@ async function load_shadow_data(route, event, prerender) {
 			throw new Error('Cannot prerender pages that have shadow endpoints with mutative methods');
 		}
 
-		const method = event.request.method.toLowerCase().replace('delete', 'del');
-		const handler = mod[method];
+		const method = normalize_request_method(event);
+		const is_get = method === 'head' || method === 'get';
+		const handler = method === 'head' ? mod.head || mod.get : mod[method];
 
-		if (!handler) {
+		if (!handler && !is_get) {
 			return {
 				status: 405,
 				error: new Error(`${method} method not allowed`)
@@ -1897,7 +1902,7 @@ async function load_shadow_data(route, event, prerender) {
 			body: {}
 		};
 
-		if (method !== 'get') {
+		if (!is_get) {
 			const result = await handler(event);
 
 			if (result.fallthrough) return result;
@@ -1921,8 +1926,9 @@ async function load_shadow_data(route, event, prerender) {
 			data.body = body;
 		}
 
-		if (mod.get) {
-			const result = await mod.get.call(null, event);
+		const get = (method === 'head' && mod.head) || mod.get;
+		if (get) {
+			const result = await get(event);
 
 			if (result.fallthrough) return result;
 
@@ -1947,9 +1953,12 @@ async function load_shadow_data(route, event, prerender) {
 
 		return data;
 	} catch (e) {
+		const error = coalesce_to_error(e);
+		options.handle_error(error, event);
+
 		return {
 			status: 500,
-			error: coalesce_to_error(e)
+			error
 		};
 	}
 }
@@ -2007,10 +2016,18 @@ function validate_shadow_output(result) {
  *   $session: any;
  *   status: number;
  *   error: Error;
- *   ssr: boolean;
+ *   resolve_opts: import('types/hooks').RequiredResolveOptions;
  * }} opts
  */
-async function respond_with_error({ event, options, state, $session, status, error, ssr }) {
+async function respond_with_error({
+	event,
+	options,
+	state,
+	$session,
+	status,
+	error,
+	resolve_opts
+}) {
 	try {
 		const default_layout = await options.manifest._.nodes[0](); // 0 is always the root layout
 		const default_error = await options.manifest._.nodes[1](); // 1 is always the root error
@@ -2066,7 +2083,7 @@ async function respond_with_error({ event, options, state, $session, status, err
 			branch: [layout_loaded, error_loaded],
 			url: event.url,
 			params,
-			ssr
+			resolve_opts
 		});
 	} catch (err) {
 		const error = coalesce_to_error(err);
@@ -2092,19 +2109,19 @@ async function respond_with_error({ event, options, state, $session, status, err
  *   options: SSROptions;
  *   state: SSRState;
  *   $session: any;
+ *   resolve_opts: import('types/hooks').RequiredResolveOptions;
  *   route: import('types/internal').SSRPage;
  *   params: Record<string, string>;
- *   ssr: boolean;
  * }} opts
  * @returns {Promise<Response | undefined>}
  */
 async function respond$1(opts) {
-	const { event, options, state, $session, route, ssr } = opts;
+	const { event, options, state, $session, route, resolve_opts } = opts;
 
 	/** @type {Array<SSRNode | undefined>} */
 	let nodes;
 
-	if (!ssr) {
+	if (!resolve_opts.ssr) {
 		return await render_response({
 			...opts,
 			branch: [],
@@ -2134,7 +2151,7 @@ async function respond$1(opts) {
 			$session,
 			status: 500,
 			error,
-			ssr
+			resolve_opts
 		});
 	}
 
@@ -2165,7 +2182,7 @@ async function respond$1(opts) {
 
 	let stuff = {};
 
-	ssr: if (ssr) {
+	ssr: if (resolve_opts.ssr) {
 		for (let i = 0; i < nodes.length; i += 1) {
 			const node = nodes[i];
 
@@ -2270,7 +2287,7 @@ async function respond$1(opts) {
 							$session,
 							status,
 							error,
-							ssr
+							resolve_opts
 						}),
 						set_cookie_headers
 					);
@@ -2351,10 +2368,10 @@ function with_cookies(response, set_cookie_headers) {
  * @param {import('types/internal').SSRPage} route
  * @param {import('types/internal').SSROptions} options
  * @param {import('types/internal').SSRState} state
- * @param {boolean} ssr
+ * @param {import('types/hooks').RequiredResolveOptions} resolve_opts
  * @returns {Promise<Response | undefined>}
  */
-async function render_page(event, route, options, state, ssr) {
+async function render_page(event, route, options, state, resolve_opts) {
 	if (state.initiator === route) {
 		// infinite request cycle detected
 		return new Response(`Not found: ${event.url.pathname}`, {
@@ -2380,9 +2397,9 @@ async function render_page(event, route, options, state, ssr) {
 		options,
 		state,
 		$session,
+		resolve_opts,
 		route,
-		params: event.params, // TODO this is redundant
-		ssr
+		params: event.params // TODO this is redundant
 	});
 
 	if (response) {
@@ -2453,6 +2470,9 @@ function negotiate(accept, types) {
 }
 
 const DATA_SUFFIX = '/__data.json';
+
+/** @param {{ html: string }} opts */
+const default_transform = ({ html }) => html;
 
 /** @type {import('types/internal').Respond} */
 async function respond(request, options, state = {}) {
@@ -2537,13 +2557,22 @@ async function respond(request, options, state = {}) {
 		rawBody: body_getter
 	});
 
-	let ssr = true;
+	/** @type {import('types/hooks').RequiredResolveOptions} */
+	let resolve_opts = {
+		ssr: true,
+		transformPage: default_transform
+	};
 
 	try {
 		const response = await options.hooks.handle({
 			event,
 			resolve: async (event, opts) => {
-				if (opts && 'ssr' in opts) ssr = /** @type {boolean} */ (opts.ssr);
+				if (opts) {
+					resolve_opts = {
+						ssr: opts.ssr !== false,
+						transformPage: opts.transformPage || default_transform
+					};
+				}
 
 				if (state.prerender && state.prerender.fallback) {
 					return await render_response({
@@ -2556,7 +2585,10 @@ async function respond(request, options, state = {}) {
 						stuff: {},
 						status: 200,
 						branch: [],
-						ssr: false
+						resolve_opts: {
+							...resolve_opts,
+							ssr: false
+						}
 					});
 				}
 
@@ -2584,22 +2616,30 @@ async function respond(request, options, state = {}) {
 					if (is_data_request && route.type === 'page' && route.shadow) {
 						response = await render_endpoint(event, await route.shadow());
 
-						// since redirects are opaque to the browser, we need to repackage
-						// 3xx responses as 200s with a custom header
-						if (
-							response &&
-							response.status >= 300 &&
-							response.status < 400 &&
-							request.headers.get('x-sveltekit-noredirect') === 'true'
-						) {
-							const location = response.headers.get('location');
+						// loading data for a client-side transition is a special case
+						if (request.headers.get('x-sveltekit-load') === 'true') {
+							if (response) {
+								// since redirects are opaque to the browser, we need to repackage
+								// 3xx responses as 200s with a custom header
+								if (response.status >= 300 && response.status < 400) {
+									const location = response.headers.get('location');
 
-							if (location) {
-								const headers = new Headers(response.headers);
-								headers.set('x-sveltekit-location', location);
-								response = new Response(undefined, {
-									status: 204,
-									headers
+									if (location) {
+										const headers = new Headers(response.headers);
+										headers.set('x-sveltekit-location', location);
+										response = new Response(undefined, {
+											status: 204,
+											headers
+										});
+									}
+								}
+							} else {
+								// TODO ideally, the client wouldn't request this data
+								// in the first place (at least in production)
+								response = new Response('{}', {
+									headers: {
+										'content-type': 'application/json'
+									}
 								});
 							}
 						}
@@ -2607,7 +2647,7 @@ async function respond(request, options, state = {}) {
 						response =
 							route.type === 'endpoint'
 								? await render_endpoint(event, await route.load())
-								: await render_page(event, route, options, state, ssr);
+								: await render_page(event, route, options, state, resolve_opts);
 					}
 
 					if (response) {
@@ -2659,7 +2699,7 @@ async function respond(request, options, state = {}) {
 						$session,
 						status: 404,
 						error: new Error(`Not found: ${event.url.pathname}`),
-						ssr
+						resolve_opts
 					});
 				}
 
@@ -2695,7 +2735,7 @@ async function respond(request, options, state = {}) {
 				$session,
 				status: 500,
 				error,
-				ssr
+				resolve_opts
 			});
 		} catch (/** @type {unknown} */ e) {
 			const error = coalesce_to_error(e);

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import List from '../../vendor/list/List.svelte';
-  import ListItem from '../../vendor/list/ListItem.svelte';
-  import ListTitle from '../../vendor/list/ListTitle.svelte';
-  import type {LisItemProps} from '../../vendor/list/types';
+  import List from '../../../lib/vendor/list/List.svelte';
+  import ListItem from '../../../lib/vendor/list/ListItem.svelte';
+  import ListTitle from '../../../lib/vendor/list/ListTitle.svelte';
+  import type {LisItemProps} from '../../../lib/vendor/list/types';
   import {propsXy, toFa} from '../../../utils';
   import type {propsXyProps} from '../../../utils';
   import {null_to_empty} from 'svelte/internal';
@@ -17,12 +17,13 @@
   import appscheme_icon from '/src/demoData/appscheme_icon.json';
   import appscheme_type from '/src/demoData/appscheme_type.json';
   import Header from './Header.svelte';
-  import Icon from '../../ui/icon/Icon.svelte';
-  import Divider from '../../vendor/divider/Divider.svelte';
-  import TopBar from '../../vendor/topBar/TopBar.svelte';
-  import ContentSwitcher from '../../vendor/contentSwitcher/ContentSwitcher.svelte';
-  import MenuBar from '../../vendor/topBar/TopBar.svelte';
-  import Elementor from '../../vendor/elementor/Elementor.svelte';
+  import Icon from '../../../lib/ui/icon/Icon.svelte';
+  import Divider from '../../../lib/vendor/divider/Divider.svelte';
+  import TopBar from '../../../lib/vendor/topBar/TopBar.svelte';
+  import ContentSwitcher from '../../../lib/vendor/contentSwitcher/ContentSwitcher.svelte';
+  import MenuBar from '../../../lib/vendor/topBar/TopBar.svelte';
+  import Elementor from '../../../lib/vendor/elementor/Elementor.svelte';
+  import Frame from '$lib/vendor/frame/Frame.svelte';
 
 
   let listItems = [];
@@ -44,84 +45,37 @@
   }
 </script>
 
-<div class="explorerFrame">
-    <div class="explorerContainer">
-        <div class="navLeft flex-v h-full ">
-            <div class="pad-2">
-                <MenuBar orientation="left" title="Navigation bar ">
-                    <input slot="menuBarSwitcher" placeholder="Search in Bar" style="width:100%;" type="text"/>
-                </MenuBar>
-            </div>
-            <div class="flex-main overflow-auto">
-                <List selectorField="idappscheme"
-                      density="default"
-                      onItemClick={openIn}
-                      title="Title List"
-                      bind:listItems={listItems}
-                      let:listItem
-                      style="height:100%;">
-                    <ListItem data="{listItem.data}">
-                        <span slot="icon"><Icon fontSize="tiny" icon={toFa(listItem.icon)}/></span>
-                        <span slot="primary">{null_to_empty(listItem.primary)}</span>
-                        <span slot="action">{null_to_empty(listItem.action)}</span>
-                    </ListItem>
-                </List>
-            </div>
-        </div>
-        <div class="content h-full flex-v">
-            <div>
-            <Header title={activeData?.[`nomAppscheme`]} bind:debugValues>
-                {activeData?.[`nomAppscheme`]}
-            </Header></div>
-            <div class="flex-main overflow-auto pad-4">
-                <!--object loop-->
-                {#if activeData}
-                    <Elementor let:itemObject bind:item={activeData}>
-                        <div class="flex-h flex-align-middle">
-                            <div class="pad-2 border-b" style="width:120px;overflow: hidden">{itemObject.key}</div>
-                            <div class="pad-2">:</div>
-                            <div class="pad-2" >{JSON.stringify(itemObject.value)}</div>
-                        </div>
-                    </Elementor>
-                {/if}
-            </div>
-        </div>
+<Frame>
+    <MenuBar slot="navLeftHeaderFrameSlot" orientation="left" title="Navigation bar ">
+        <input slot="menuBarSwitcher" placeholder="Search in Bar" style="width:100%;" type="text"/>
+    </MenuBar>
+    <div slot="navLeftFrameSlot">
+        <List selectorField="idappscheme"
+              density="default"
+              onItemClick={openIn}
+              title="Title List"
+              bind:listItems={listItems}
+              let:listItem
+              style="height:100%;">
+            <ListItem data="{listItem.data}">
+                <span slot="icon"><Icon fontSize="tiny" icon={toFa(listItem.icon)}/></span>
+                <span slot="primary">{null_to_empty(listItem.primary)}</span>
+                <span slot="action">{null_to_empty(listItem.action)}</span>
+            </ListItem>
+        </List>
     </div>
-</div>
-
-<style lang="scss">
-  .explorerFrame {
-    z-index: 1;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    position: relative;
-    background-color: rgba(35, 31, 26, 0.5);
-    backdrop-filter: blur(30px);
-    color: white;
-
-    .appbar {
-      padding: 2rem;
-      color: white;
-      box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
-    }
-
-    .explorerContainer {
-      display: flex;
-      flex: 1;
-      overflow: hidden;
-
-      .navLeft {
-        width: 270px;
-        min-width: 270px;
-      }
-
-      .content {
-        flex: 1 auto;
-
-      }
-    }
-
-  }
-</style>
+    <Header slot="contentHeaderFrameSlot" title={activeData?.[`nomAppscheme`]} bind:debugValues>
+        {activeData?.[`nomAppscheme`]}
+    </Header>
+    <div slot="contentFrameSlot" class="flex-main overflow-auto pad-4">
+        {#if activeData}
+            <Elementor let:itemObject bind:item={activeData}>
+                <div class="flex-h flex-align-middle">
+                    <div class="pad-2 border-b" style="width:120px;overflow: hidden">{itemObject.key}</div>
+                    <div class="pad-2">:</div>
+                    <div class="pad-2">{JSON.stringify(itemObject.value)}</div>
+                </div>
+            </Elementor>
+        {/if}
+    </div>
+</Frame>

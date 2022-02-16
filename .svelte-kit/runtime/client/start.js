@@ -1282,7 +1282,7 @@ class Renderer {
 							`${url.pathname}${url.pathname.endsWith('/') ? '' : '/'}__data.json`,
 							{
 								headers: {
-									'x-sveltekit-noredirect': 'true'
+									'x-sveltekit-load': 'true'
 								}
 							}
 						);

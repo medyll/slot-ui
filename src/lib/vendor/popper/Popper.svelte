@@ -4,8 +4,8 @@
 </script>
 <script lang="ts">
   import type {SvelteComponentDev} from 'svelte/internal';
-  import {stickTo} from '/src/use/stickTo/stickTo';
-  import {clickAway} from '/src/use/clickAway/clickAway';
+  import {stickTo} from '/src/lib/uses/stickTo/stickTo';
+  import {clickAway} from '/src/lib/uses/clickAway/clickAway';
   import {popperList} from './actions';
 
   let thisRef;

@@ -1,7 +1,7 @@
 <script lang="ts">
   import Cartouche  from '../../vendor/cartouche/Cartouche.svelte';
-  import Tabs from '../../vendor/cartouche/tabs/Tabs.svelte';
-  import type TabsItemsProps from '../../vendor/cartouche/tabs/Tabs.svelte';
+  import Tabs from '../../vendor/tabs/Tabs.svelte';
+  import type TabsItemsProps from '../../vendor/tabs/Tabs.svelte';
 
 
   export * as DebugTypes from "./Debug.svelte";

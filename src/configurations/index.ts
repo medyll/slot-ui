@@ -1,8 +1,8 @@
-import Window from '/src/components/ui/window/Window.svelte';
+import Window from '/src/lib/ui/window/Window.svelte';
 import {createWindowStore,  windowsStore} from '../stores/windowStore';
 import type {  IChromeArgs } from '../stores/windowStore';
 import {get, writable} from 'svelte/store';
-import Debug from '../components/ui/debug/Debug.svelte';
+import Debug from '../lib/ui/debug/Debug.svelte';
 
 const windowList:Record<string,any> = {}; // Record<string,any>// globalThis.window;
 

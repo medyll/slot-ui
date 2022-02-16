@@ -59,6 +59,6 @@
 </ul>
 
 <style lang="scss" global>
-  @import "List.scss";
+  @import "List";
 </style>
 
