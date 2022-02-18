@@ -1,0 +1,2 @@
+<script >import 'svelte';
+</script>

@@ -78,7 +78,7 @@
     height: 100%;
     width: 100%;
     overflow: hidden;
-    // background-image: url('back2.png');
+    background-image: url('back2.png');
     background-size: cover;
     font-family: 'Rubik';
     background-color: var(--theme-color-background);
