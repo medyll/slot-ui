@@ -2,14 +2,9 @@
                 immutable={true}/>
 
 <script context="module" lang="ts">
-  import {get} from 'svelte/store';
   import {windowsStore} from '/src/stores/windowStore';
 
-  const windowList = globalThis.window;
-
   const removeNode = (nodeRef: HTMLElement) => {
-    // console.log(windowList);
-    // console.log({nodeRef});
     if (nodeRef?.parentNode) nodeRef.parentNode.removeChild(nodeRef);
   };
 
@@ -31,6 +26,10 @@
   let activeFrame: string | number;
   let x: number = defaultPosition?.x ?? 350;
   let y: number = defaultPosition?.y ?? 50;
+
+  let appWindowStore;
+  let appWindow;
+  let position;
 
   $: appWindowStore = getAppWindowStore(frameId);
   $: appWindow = $appWindowStore as IChromeArgs;
@@ -90,24 +89,24 @@
 
 </script>
 <div bind:this={frameRef}
-     use:draggable={{...dragOptions,...position }}
+     class="window"
      on:click={handleClick}
      style="z-index:{$appWindowStore?.zIndex}"
-     class="window">
+     use:draggable={{...dragOptions,...position }}>
     <div class="bar">
-        <div class="pad-4">
-            <Icon  fontSize="small"icon="faLinux"/>
+        <div class="pad-2">
+            <Icon fontSize="small" icon="faLinux"/>
         </div>
         <div class="handle">{$appWindowStore?.title}</div>
         <div class="iconZone" style="color:white">
             <div>
-                <IconButton iconFontSize="small" icon="faWindowMinimize"/>
+                <IconButton icon="faWindowMinimize" iconFontSize="small"/>
             </div>
             <div>
-                <IconButton iconFontSize="small"  icon="faWindowMaximize"/>
+                <IconButton icon="faWindowMaximize" iconFontSize="small"/>
             </div>
             <div>
-                <IconButton iconFontSize="small" icon="faWindowClose" on:click={handleClose}/>
+                <IconButton icon="faWindowClose" iconFontSize="small" on:click={handleClose}/>
                 <i class="fa-solid fa-user"></i>
             </div>
         </div>
@@ -126,13 +125,13 @@
   .window {
     display: block;
     border-radius: 6px;
-    background-color: #fff;
+    background-color: var(--theme-color-background);
+    color: var(--theme-color-text);
     border: 1px solid rgba(255, 255, 255, 0.1);
     min-width: 720px;
     position: absolute;
     top: 0;
     left: 0;
-    // box-shadow: 0 0 4px rgba(43, 43, 43,0.5);
     overflow: hidden;
     z-index: 3000;
 

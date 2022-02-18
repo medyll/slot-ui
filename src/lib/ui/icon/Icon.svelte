@@ -2,11 +2,12 @@
   import * as All1 from '@fortawesome/free-solid-svg-icons'; // add faSolid
   import * as All2 from '@fortawesome/free-brands-svg-icons';
   import * as All3 from '@fortawesome/free-regular-svg-icons';
-  export type TIcon = keyof typeof IconTypes;
+  import type {ElementProps} from '../../../types';
 
   let IconTypes = {...All1, ...All2, ...All3} as const;
 
-  const sizes = {
+
+  const sizes: Record<ElementProps['sizeType'],number> = {
     tiny   : 8,
     small  : 16,
     medium : 24,
@@ -23,9 +24,7 @@
 
 
   export let icon: TIcon = 'faQuestion';
-
-  
-
   export let fontSize: SizeType = 'medium';
+
 </script>
 <Fa on:click style="font-size:{sizes[fontSize]}px"  icon={IconTypes[icon]}/>

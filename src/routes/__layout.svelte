@@ -11,6 +11,8 @@
   import List from '$lib/vendor/list/List.svelte';
   import ListItem from '$lib/vendor/list/ListItem.svelte';
   import {themes} from '../themes/themes';
+  import Alert from '$lib/vendor/alert/Alert.svelte';
+  import Divider from '$lib/vendor/divider/Divider.svelte';
 
   let isLogged = true;
 
@@ -31,15 +33,15 @@
                     <IconButton on:click={onItemClick} iconFontSize="small" icon="faAccusoft"/>
                 </div>
             </Taskbar>
-            <div style="flex: 1;overflow:hidden">
-                <Dashboard/>
-                <slot>empty !!!</slot>
+            <br/>
+            <div style="flex: 1;overflow:hidden">                
+                <Dashboard/> 
             </div>
         {:else}
             <Login/>
         {/if}
     </div>
-    <Drawer bind:this={drawerRef}>
+    <Drawer isOpen={false}  bind:this={drawerRef}>
         <svelte:fragment slot="drawerMenuBar">
             <TopBar title="Drawer with menu bar ">
                 <svelte:fragment slot="menuBarSwitcher">

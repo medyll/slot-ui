@@ -1,15 +1,15 @@
 <script context="module" lang="ts">
-	import type { TIcon, SizeType } from '../../ui/icon/Icon.svelte';
 </script>
 
 <script lang="ts">
-	import Icon from '../../ui/icon/Icon.svelte';
+	import Icon from '$lib/ui/icon/Icon.svelte';
+	import type {ElementProps} from '../../../types';
 
-	export let icon: TIcon;
+	export let icon: ElementProps['icon'];
 	export let style: string = '';
 	export let className: string = '';
 	export let showShip: boolean = false;
-	export let iconFontSize: SizeType = 'medium';
+	export let iconFontSize: ElementProps['sizeType'] = 'medium';
 </script>
 
 <button on:click {style} class={className}>

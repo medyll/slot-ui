@@ -23,7 +23,7 @@
         <div class="icon">icon</div>
         <div class="title">{label}</div>
         <div class="chevron">
-            <Icon icon="{chevronIcon}"/>
+            <Icon fontSize="small" icon="{chevronIcon}"/>
         </div>
     </div>
     {#if isOpen}
@@ -36,7 +36,7 @@
   .cartoucheHolder {
     border-radius: 6px;
     overflow: hidden;
-    border:1px solid rgba(157, 157, 157, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 
     .cartoucheContent {
       padding: 0.5rem;
@@ -48,7 +48,7 @@
   .cartouche {
     display: flex;
     grid-gap: 8px;
-    background-color: rgba(157, 157, 157, 0.4);
+    background-color: rgba(157, 157, 157, 0.1);
     height: 48px;
     align-items: center;
 
