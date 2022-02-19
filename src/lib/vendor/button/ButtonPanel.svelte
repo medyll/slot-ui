@@ -22,7 +22,7 @@
 
 </script>
 
-<div on:click class="buttonWrapper">
+<div class="buttonWrapper" on:click>
     <button bind:this={buttonRef}>
         <Icon fontSize="small" icon="faList"/>
         {#if actionComponent}
@@ -31,8 +31,8 @@
             </span>
         {/if}
     </button>
-    {#if $$slots.length}
-        <div class="pad-4 text-center">
+    {#if $$slots.default}
+        <div class="pad-tb-1 text-center">
             <slot></slot>
         </div>
     {/if}
@@ -44,6 +44,7 @@
     color: white;
     display: inline-block;
     position: relative;
+    width: 64px;
 
     button {
       padding: 16px 16px;

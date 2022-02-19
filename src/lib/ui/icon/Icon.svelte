@@ -21,6 +21,7 @@
 </script>
 <script lang="ts">
   import Fa from 'svelte-fa/src/fa.svelte';
+  import type {TIcon} from '../../../types';
 
 
   export let icon: TIcon = 'faQuestion';

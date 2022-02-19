@@ -12,4 +12,6 @@ export type MenuItemProps = {
     text: string
     icon: string
     action?: () => void
+    divider: | boolean
+             | ElementProps['expansion'];
 }

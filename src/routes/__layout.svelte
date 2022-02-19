@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {ThemeWrapper, ThemeToggle, presets} from 'svelte-themer';
+  import {ThemeWrapper} from 'svelte-themer';
   import Taskbar from '/src/lib/ui/taskbar/Taskbar.svelte';
   import Dashboard from '/src/components/pages/dashboard/Dashboard.svelte';
   import StartMenu from '/src/lib/ui/startMenu/StartMenu.svelte';
@@ -11,8 +11,6 @@
   import List from '$lib/vendor/list/List.svelte';
   import ListItem from '$lib/vendor/list/ListItem.svelte';
   import {themes} from '../themes/themes';
-  import Alert from '$lib/vendor/alert/Alert.svelte';
-  import Divider from '$lib/vendor/divider/Divider.svelte';
 
   let isLogged = true;
 
@@ -34,14 +32,14 @@
                 </div>
             </Taskbar>
             <br/>
-            <div style="flex: 1;overflow:hidden">                
-                <Dashboard/> 
+            <div style="flex: 1;overflow:hidden">
+                <Dashboard/>
             </div>
         {:else}
             <Login/>
         {/if}
     </div>
-    <Drawer isOpen={false}  bind:this={drawerRef}>
+    <Drawer bind:this={drawerRef} isOpen={false}>
         <svelte:fragment slot="drawerMenuBar">
             <TopBar title="Drawer with menu bar ">
                 <svelte:fragment slot="menuBarSwitcher">
@@ -64,7 +62,7 @@
     </Drawer>
 </ThemeWrapper>
 
-<style lang="scss" global>
+<style global lang="scss">
   @import 'ress/ress.css';
   @import '../css/cssFabric/cssfabric.min.css';
   @import url('https://fonts.googleapis.com/css?family=Rubik');
@@ -78,7 +76,7 @@
     height: 100%;
     width: 100%;
     overflow: hidden;
-    background-image: url('back2.png');
+    //background-image: url('back1.jpg');
     background-size: cover;
     font-family: 'Rubik';
     background-color: var(--theme-color-background);
@@ -98,6 +96,10 @@
     &:hover {
       background-color: #ededed;
     }
+  }
+
+  .inputBorder {
+    border: 1px solid rgba(255,255,255,0.1)!important;
   }
 
   input {

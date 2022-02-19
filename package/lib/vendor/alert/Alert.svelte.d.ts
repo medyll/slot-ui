@@ -6,6 +6,7 @@ declare const __propDef: {
         data: undefined;
         text: string;
         message: string;
+        isDragable?: boolean | undefined;
         isOpen?: boolean | undefined;
         actions?: {
             open: () => void;

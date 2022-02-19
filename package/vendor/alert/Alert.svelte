@@ -1,13 +1,15 @@
 <script >import { fade } from 'svelte/transition';
 import Divider from '../divider/Divider.svelte';
 import '$lib/ui/icon/Icon.svelte';
-import IconButton from "../button/IconButton.svelte";
+import IconButton from '../button/IconButton.svelte';
+import '@neodrag/svelte';
 /** type of levels */
 export let level = 'info';
 export let action;
 export let data;
 export let text;
 export let message;
+export let isDragable = false;
 export let isOpen = true;
 export const actions = {
     open: () => {
@@ -20,33 +22,48 @@ export const actions = {
         isOpen = !isOpen;
     }
 };
+const handleClick = (event) => {
+    if (event?.target?.attributes['data-close']) {
+        event.stopPropagation();
+        actions.close();
+    }
+};
 </script>
+
 {#if isOpen}
-    <div transition:fade class="alert shad-4">
-        <div class="pad-1 pad-ii-2 border-b-4 border-color-scheme-{level}">
-            <div class="pad-tb-1">
-                <slot></slot>
-            </div>
-            {#if $$slots.messageSlot}
-                <Divider/>
-                <div class="pad-tb-1">
-                    <slot name="messageSlot">message</slot>
-                </div>
-            {/if}
-        </div>
-        {#if $$slots.action}
-            <slot name="action"></slot>
-        {/if}
-        <div class="pad-tb-1 pad-ii-2">
-            <slot name="buttonZoneSlot">
-                <button on:click={()=>{isOpen = !isOpen}}>button</button>
-            </slot>
-        </div>
-        <div class="close">
-            <IconButton  on:click={()=>{isOpen = !isOpen}} iconFontSize="small" icon="faWindowClose"/>
-        </div>
-    </div>
+	<div transition:fade class="alert shad-4" on:click={handleClick}>
+		<div class="pad-1 pad-ii-2 border-b-4 border-color-scheme-{level}">
+			<div class="flex-h flex-align-top pad-tb-1">
+        <div class="pad-1" ><div class="dot bg-themed-scheme-{level}" /></div>				
+				<div class="pad-1" ><slot /></div>
+			</div>
+			{#if $$slots.messageSlot}
+				<Divider />
+				<div class="pad-1">
+					<slot name="messageSlot">message</slot>
+				</div>
+			{/if}
+		</div>
+		{#if $$slots.action}
+			<slot name="action" />
+		{/if}
+		{#if $$slots.buttonZoneSlot}
+			<div class="pad-tb-1 pad-ii-2 flex-h flex-align-right">
+				<slot name="buttonZoneSlot" />
+			</div>
+		{/if}
+		<div class="close">
+			<IconButton
+				on:click={() => {
+					isOpen = !isOpen;
+				}}
+				iconFontSize="small"
+				icon="faWindowClose"
+			/>
+		</div>
+	</div>
 {/if}
+
 <style >.alert {
   position: relative;
   min-width: 350px;
@@ -55,6 +72,12 @@ export const actions = {
   border: 1px solid rgba(255, 255, 255, 0.1);
   background-color: rgba(0, 0, 0, 0.5);
   overflow: hidden; }
+  .alert .dot {
+    display: inline-block;
+    padding: 0.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    margin-right: 1rem; }
   .alert .close {
     position: absolute;
     right: 0;

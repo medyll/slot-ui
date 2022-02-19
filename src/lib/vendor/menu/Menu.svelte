@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { setContext } from 'svelte';
-	import type { menuListItemType } from './types';
+	import type { MenuItemProps } from './types';
 	import type { ElementProps } from '../../../types';
 	import MenuItem from './MenuItem.svelte';
 	import { createMenuStore } from './store';
+	import Divider from "$lib/vendor/divider/Divider.svelte";
 
-	export let menuList: menuListItemType[];
+	export let menuList: MenuItemProps[];
 	export let density: ElementProps['density'] = 'tight';
 
 	const menuStore = createMenuStore();

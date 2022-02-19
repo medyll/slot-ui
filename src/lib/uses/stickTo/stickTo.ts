@@ -1,3 +1,5 @@
+import {elem} from '../../../configurations/elem';
+
 type StickToProps = {
   parentNode: HTMLElement
   position?: 'TL' | 'TR' | 'BR' | 'B' | 'BL'
@@ -7,9 +9,11 @@ type StickToProps = {
 export function stickTo(node: HTMLElement, props: StickToProps) {
   const {parentNode, position} = props;
   if (node && parentNode) {
-    const parentPos = parentNode.getBoundingClientRect();
     
- 
+    const parentPos = parentNode.getBoundingClientRect();
+  
+    document.getElementById('svelte').appendChild(node)
+    
     switch (position) {
       case 'BL':
         node.style.top  = String(parentPos.bottom) + 'px';
@@ -19,14 +23,14 @@ export function stickTo(node: HTMLElement, props: StickToProps) {
         node.style.top  = String(parentPos.bottom) + 'px';
         node.style.left = String(parentPos.right) + 'px';
         break;
+      case 'TL':
+        node.style.top  = String(parentPos.top) + 'px';
+        node.style.left = String(parentPos.left) + 'px';
+        break;
       default:
       case 'TR':
         node.style.top  = String(parentPos.top) + 'px';
         node.style.left = String(parentPos.right) + 'px';
-        break;
-      case 'TL':
-        node.style.top  = String(parentPos.top) + 'px';
-        node.style.left = String(parentPos.left) + 'px';
         break;
     }
     

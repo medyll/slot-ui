@@ -1,0 +1,23 @@
+<script lang="ts">
+  import type {ElementProps} from '$lib/vendor/list/types';
+
+  export let density: ElementProps['density'] = 'default';
+
+  let densityClass = {
+    none   : '',
+    tight  : 'pad-1 marg-1',
+    default: 'pad-2 marg-2',
+    kind   : 'pad-3 marg-3'
+  };
+
+</script>
+<div class="paper shad-8 {densityClass[density]}">
+    <slot></slot>
+</div>
+
+<style global lang="scss">
+  .paper {
+    background-color: var(--theme-color-background-contrast);
+    border-radius: 6px;
+  }
+</style>
