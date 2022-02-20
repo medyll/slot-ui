@@ -1,9 +1,9 @@
 <script lang="ts">
   import type {SvelteComponentDev} from 'svelte/internal';
-
-
-  import Icon from '../../ui/icon/Icon.svelte';
-  import {openPopper} from '../../../lib/vendor/popper/actions';
+  import {openPopper} from '$lib/vendor/popper/actions';
+  import IconButton from '$lib/vendor/button/IconButton.svelte';
+  import Divider from '$lib/vendor/divider/Divider.svelte';
+  import Menu from '$lib/vendor/menu/Menu.svelte';
 
   export let icon: string = 'faList';
   export let actionComponent: SvelteComponentDev;
@@ -13,30 +13,21 @@
 
   const onActionClick = (event: PointerEvent) => {
     event.stopPropagation();
+    console.log(event.target);
     openPopper('settingActions', {
-      parentNode    : buttonRef,
-      component     : actionComponent,
-      componentProps: actionComponentProps ?? {}
+      parentNode    : event.target as HTMLElement,
+      component     : Menu,
+      componentProps: actionComponentProps ?? {},
+      position      : 'BL'
     });
   };
 
 </script>
 
-<div class="buttonWrapper" on:click>
-    <button bind:this={buttonRef}>
-        <Icon fontSize="small" icon="faList"/>
-        {#if actionComponent}
-            <span class="action" on:click={onActionClick}>
-                <Icon icon="faChevronRight" fontSize="tiny"/>
-            </span>
-        {/if}
-    </button>
-    {#if $$slots.default}
-        <div class="pad-tb-1 text-center">
-            <slot></slot>
-        </div>
-    {/if}
-</div>
+<IconButton icon="faEllipsisH"
+            iconFontSize="small"
+            on:click={onActionClick}/>
+
 
 <style lang="scss">
 
@@ -65,7 +56,7 @@
         bottom: 0;
         right: 0;
         background-color: rgba(255, 255, 255, 0.1);
-        width: 25%;
+        width: 30%;
         padding: 0.5rem;
 
         &:hover {

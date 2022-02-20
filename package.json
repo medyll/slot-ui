@@ -14,7 +14,8 @@
     "build-storybook": "build-storybook",
     "vitebook:dev": "vitebook dev",
     "vitebook:build": "vitebook build",
-    "vitebook:preview": "vitebook preview"
+    "vitebook:preview": "vitebook preview",
+    "powerShell": "Start-process powershell -Verb runAs"
   },
   "devDependencies": {
     "@babel/core": "^7.17.2",
@@ -33,6 +34,7 @@
     "@types/lodash": "^4.14.178",
     "@vitebook/client": "^0.22.0",
     "@vitebook/core": "^0.22.0",
+    "@vitebook/markdown-svelte": "^0.22.0",
     "@vitebook/theme-default": "^0.22.0",
     "babel-loader": "^8.2.3",
     "node-sass": "^7.0.1",

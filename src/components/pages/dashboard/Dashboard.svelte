@@ -1,7 +1,7 @@
 <script lang="ts">
   import {goto} from '$app/navigation';
   import Divider from '$lib/vendor/divider/Divider.svelte';
-  import ButtonPanel from '$lib/vendor/button/ButtonPanel.svelte';
+  import ButtonPanel from '$lib/vendor/button/ButtonAction.svelte';
   import Menu from '$lib/vendor/menu/Menu.svelte';
   import Avatar from '$lib/vendor/avatar/Avatar.svelte';
   import Alert from '$lib/vendor/alert/Alert.svelte';
@@ -65,22 +65,20 @@
                 </Alert>
             </Paper>
             <div class="dsp-block-inline shad-16">
-                <Box>
+                <Box onClose="cd" >
+                    <Icon slot="iconSlot" fontSize="small" icon="faClock"/>
                     <span slot="titleSlot">Title of the box</span>
-                    content box
                     <span slot="buttonZoneSlot"><button>button</button></span>
-                </Box>
-                <Box>
-                    <span slot="titleSlot">Title of the box</span>
-                    content box
-                    <span slot="buttonZoneSlot"><button>button</button></span>
+                    Content of the box
                 </Box>
             </div>
             <Paper density="kind">
                 <div class="gridIcon">
                     {#each [...Array(20)] as key, val}
                         <Card>
-                            card
+                            <span slot="title">Title of the box</span>
+                            content
+                            <span slot="footer">Footer of the box</span>
                         </Card>
                     {/each}
                 </div>

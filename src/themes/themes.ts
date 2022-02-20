@@ -4,6 +4,7 @@ export const themes = {
       text: '#282230',
       background: {
         _: '#f1f1f1',
+        paper: '#ededed',
         contrast: '#b1b1b1',
       },
       primary: '#01796f',
@@ -16,6 +17,7 @@ export const themes = {
       text: '#f1f1f1',
       background: {
         _: '#27323a',
+        paper: '#3a3b3b',
         contrast: '#0d1215',
       },
       primary: '#01978b',

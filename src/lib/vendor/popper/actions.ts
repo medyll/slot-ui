@@ -18,7 +18,6 @@ const openPopper = (popperId: string, args: {
     }else{
       createPopper()
     }
-    // resend props if changed
   } else {
     createPopper()
   }
