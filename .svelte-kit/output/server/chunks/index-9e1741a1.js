@@ -148,4 +148,4 @@ function add_attribute(name, value, boolean) {
     return "";
   return ` ${name}${value === true && boolean_attributes.has(name) ? "" : `=${typeof value === "string" ? JSON.stringify(escape(value)) : `"${value}"`}`}`;
 }
-export { subscribe as a, compute_slots as b, create_ssr_component as c, add_attribute as d, getContext as e, set_store_value as f, get_store_value as g, escape as h, each as i, get_current_component as j, noop as k, safe_not_equal as l, missing_component as m, null_to_empty as n, setContext as s, validate_component as v };
+export { subscribe as a, compute_slots as b, create_ssr_component as c, getContext as d, set_store_value as e, escape as f, get_store_value as g, each as h, add_attribute as i, get_current_component as j, noop as k, safe_not_equal as l, missing_component as m, null_to_empty as n, setContext as s, validate_component as v };

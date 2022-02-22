@@ -1,7 +1,7 @@
-import { c as create_ssr_component, h as escape, v as validate_component, i as each, n as null_to_empty } from "../../../chunks/index-e11587b3.js";
-import { I as Icon, D as Divider, p as propsXy, T as TopBar, L as List, b as ListItem, t as toFa } from "../../../chunks/List-68d98bef.js";
+import { c as create_ssr_component, f as escape, v as validate_component, h as each, n as null_to_empty } from "../../../chunks/index-9e1741a1.js";
+import { a as Icon, D as Divider, p as propsXy, L as List, b as ListItem, t as toFa, T as TopBar } from "../../../chunks/List-3360d3e6.js";
 import "lodash";
-import "../../../chunks/VirtualList-a61bbc8f.js";
+import "../../../chunks/VirtualList-5f532cf9.js";
 import "@fortawesome/free-regular-svg-icons";
 import "@fortawesome/free-brands-svg-icons";
 import "@fortawesome/free-solid-svg-icons";
@@ -8014,11 +8014,20 @@ const Elementor = create_ssr_component(($$result, $$props, $$bindings, slots) =>
     `}`;
   })}`;
 });
-var Explorer_svelte_svelte_type_style_lang = "";
+var Frame_svelte_svelte_type_style_lang = "";
 const css = {
-  code: ".explorerFrame.svelte-1ac3me8.svelte-1ac3me8{z-index:1;height:100%;display:flex;flex-direction:column;overflow:hidden;position:relative;background-color:rgba(35, 31, 26, 0.5);backdrop-filter:blur(30px);color:white}.explorerFrame.svelte-1ac3me8 .explorerContainer.svelte-1ac3me8{display:flex;flex:1;overflow:hidden}.explorerFrame.svelte-1ac3me8 .explorerContainer .navLeft.svelte-1ac3me8{width:270px;min-width:270px}.explorerFrame.svelte-1ac3me8 .explorerContainer .content.svelte-1ac3me8{flex:1 auto}",
+  code: ".frame.svelte-1edr997.svelte-1edr997{z-index:1;height:100%;display:flex;flex-direction:column;overflow:hidden;position:relative;background-color:rgba(35, 31, 26, 0.5);backdrop-filter:blur(30px);color:white}.frame.svelte-1edr997 .frameContainer .navLeft.svelte-1edr997{width:270px;min-width:270px}",
   map: null
 };
+const Frame = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  $$result.css.add(css);
+  return `<div class="${"flex-v h-full overflow-hidden frame svelte-1edr997"}"><div>${slots.frameHeaderSlot ? slots.frameHeaderSlot({}) : ``}</div>
+    <div class="${"frameContainer flex-h flex-main overflow-hidden"}"><div class="${"navLeft flex-v h-full overflow-hidden svelte-1edr997"}">${slots.navLeftHeaderFrameSlot ? slots.navLeftHeaderFrameSlot({}) : ``}
+            ${slots.navLeftFrameSlot ? slots.navLeftFrameSlot({}) : ``}</div>
+        <div class="${"h-full flex-main flex-v "}"><div>${slots.contentHeaderFrameSlot ? slots.contentHeaderFrameSlot({}) : ``}</div>
+            <div class="${"flex-main overflow-auto"}">${slots.contentFrameSlot ? slots.contentFrameSlot({}) : ``}</div></div></div>
+</div>`;
+});
 let schemeName = "Appscheme";
 const Explorer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let listItems = [];
@@ -8034,7 +8043,6 @@ const Explorer = create_ssr_component(($$result, $$props, $$bindings, slots) => 
   ];
   listItems = propsXy(transformArgsBis, schemeData);
   let debugValues = [];
-  $$result.css.add(css);
   let $$settled;
   let $$rendered;
   do {
@@ -8044,71 +8052,81 @@ const Explorer = create_ssr_component(($$result, $$props, $$bindings, slots) => 
         debugValues = Object.values(activeData);
       }
     }
-    $$rendered = `<div class="${"explorerFrame svelte-1ac3me8"}"><div class="${"explorerContainer svelte-1ac3me8"}"><div class="${"navLeft flex-v h-full  svelte-1ac3me8"}"><div class="${"pad-2"}">${validate_component(TopBar, "MenuBar").$$render($$result, {
-      orientation: "left",
-      title: "Navigation bar "
-    }, {}, {
-      menuBarSwitcher: () => {
-        return `<input slot="${"menuBarSwitcher"}" placeholder="${"Search in Bar"}" style="${"width:100%;"}" type="${"text"}">`;
-      }
-    })}</div>
-            <div class="${"flex-main overflow-auto"}">${validate_component(List, "List").$$render($$result, {
-      selectorField: "idappscheme",
-      density: "default",
-      onItemClick: openIn,
-      title: "Title List",
-      style: "height:100%;",
-      listItems
-    }, {
-      listItems: ($$value) => {
-        listItems = $$value;
-        $$settled = false;
-      }
-    }, {
-      default: ({ listItem }) => {
-        return `${validate_component(ListItem, "ListItem").$$render($$result, { data: listItem.data }, {}, {
-          action: () => {
-            return `<span slot="${"action"}">${escape(null_to_empty(listItem.action))}</span>`;
-          },
-          primary: () => {
-            return `<span slot="${"primary"}">${escape(null_to_empty(listItem.primary))}</span>`;
-          },
-          icon: () => {
-            return `<span slot="${"icon"}">${validate_component(Icon, "Icon").$$render($$result, {
-              fontSize: "tiny",
-              icon: toFa(listItem.icon)
-            }, {}, {})}</span>`;
+    $$rendered = `${validate_component(Frame, "Frame").$$render($$result, {}, {}, {
+      contentFrameSlot: () => {
+        return `<div slot="${"contentFrameSlot"}" class="${"flex-main overflow-auto pad-4"}">${activeData ? `${validate_component(Elementor, "Elementor").$$render($$result, { item: activeData }, {
+          item: ($$value) => {
+            activeData = $$value;
+            $$settled = false;
+          }
+        }, {
+          default: ({ itemObject }) => {
+            return `<div class="${"flex-h flex-align-middle"}"><div class="${"pad-2 border-b"}" style="${"width:120px;overflow: hidden"}">${escape(itemObject.key)}</div>
+                    <div class="${"pad-2"}">:</div>
+                    <div class="${"pad-2"}">${escape(JSON.stringify(itemObject.value))}</div></div>`;
+          }
+        })}` : ``}</div>`;
+      },
+      contentHeaderFrameSlot: () => {
+        return `${validate_component(Header, "Header").$$render($$result, {
+          slot: "contentHeaderFrameSlot",
+          title: activeData?.[`nomAppscheme`],
+          debugValues
+        }, {
+          debugValues: ($$value) => {
+            debugValues = $$value;
+            $$settled = false;
+          }
+        }, {
+          default: () => {
+            return `${escape(activeData?.[`nomAppscheme`])}`;
+          }
+        })}`;
+      },
+      navLeftFrameSlot: () => {
+        return `<div slot="${"navLeftFrameSlot"}">${validate_component(List, "List").$$render($$result, {
+          selectorField: "idappscheme",
+          density: "default",
+          onItemClick: openIn,
+          title: "Title List",
+          style: "height:100%;",
+          listItems
+        }, {
+          listItems: ($$value) => {
+            listItems = $$value;
+            $$settled = false;
+          }
+        }, {
+          default: ({ listItem }) => {
+            return `${validate_component(ListItem, "ListItem").$$render($$result, { data: listItem.data }, {}, {
+              action: () => {
+                return `<span slot="${"action"}">${escape(null_to_empty(listItem.action))}</span>`;
+              },
+              primary: () => {
+                return `<span slot="${"primary"}">${escape(null_to_empty(listItem.primary))}</span>`;
+              },
+              icon: () => {
+                return `<span slot="${"icon"}">${validate_component(Icon, "Icon").$$render($$result, {
+                  fontSize: "tiny",
+                  icon: toFa(listItem.icon)
+                }, {}, {})}</span>`;
+              }
+            })}`;
+          }
+        })}</div>`;
+      },
+      navLeftHeaderFrameSlot: () => {
+        return `${validate_component(TopBar, "MenuBar").$$render($$result, {
+          slot: "navLeftHeaderFrameSlot",
+          orientation: "left",
+          title: "Navigation bar "
+        }, {}, {
+          menuBarSwitcher: () => {
+            return `<input slot="${"menuBarSwitcher"}" placeholder="${"Search in Bar"}" style="${"width:100%;"}" type="${"text"}">`;
           }
         })}`;
       }
-    })}</div></div>
-        <div class="${"content h-full flex-v svelte-1ac3me8"}"><div>${validate_component(Header, "Header").$$render($$result, {
-      title: activeData?.[`nomAppscheme`],
-      debugValues
-    }, {
-      debugValues: ($$value) => {
-        debugValues = $$value;
-        $$settled = false;
-      }
-    }, {
-      default: () => {
-        return `${escape(activeData?.[`nomAppscheme`])}`;
-      }
-    })}</div>
-            <div class="${"flex-main overflow-auto pad-4"}">
-                ${activeData ? `${validate_component(Elementor, "Elementor").$$render($$result, { item: activeData }, {
-      item: ($$value) => {
-        activeData = $$value;
-        $$settled = false;
-      }
-    }, {
-      default: ({ itemObject }) => {
-        return `<div class="${"flex-h flex-align-middle"}"><div class="${"pad-2 border-b"}" style="${"width:120px;overflow: hidden"}">${escape(itemObject.key)}</div>
-                            <div class="${"pad-2"}">:</div>
-                            <div class="${"pad-2"}">${escape(JSON.stringify(itemObject.value))}</div></div>`;
-      }
-    })}` : ``}</div></div></div>
-</div>`;
+    })}`;
   } while (!$$settled);
   return $$rendered;
 });

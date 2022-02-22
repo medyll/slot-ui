@@ -1,9 +1,9 @@
-import { k as noop, l as safe_not_equal, c as create_ssr_component, d as add_attribute, h as escape, n as null_to_empty, v as validate_component, b as compute_slots, e as getContext, a as subscribe, g as get_store_value, s as setContext, f as set_store_value } from "./index-e11587b3.js";
+import { k as noop, l as safe_not_equal, c as create_ssr_component, i as add_attribute, f as escape, n as null_to_empty, v as validate_component, b as compute_slots, d as getContext, a as subscribe, g as get_store_value, s as setContext, e as set_store_value } from "./index-9e1741a1.js";
+import { V as VirtualList } from "./VirtualList-5f532cf9.js";
+import _ from "lodash";
 import * as All3 from "@fortawesome/free-regular-svg-icons";
 import * as All2 from "@fortawesome/free-brands-svg-icons";
 import * as All1 from "@fortawesome/free-solid-svg-icons";
-import { V as VirtualList } from "./VirtualList-a61bbc8f.js";
-import _ from "lodash";
 const subscriber_queue = [];
 function writable(value, start = noop) {
   let stop;
@@ -251,13 +251,18 @@ const IconButton = create_ssr_component(($$result, $$props, $$bindings, slots) =
 </button>`;
 });
 const css$3 = {
-  code: "hr.svelte-hgfncl{margin:4px 8px;border:none;border-top:1px solid rgba(255, 255, 255, 0.1);background-color:rgba(255, 255, 255, 0.1);display:block}",
+  code: "hr.svelte-na35ma{border:none;border-top:1px solid rgba(255, 255, 255, 0.1);background-color:rgba(255, 255, 255, 0.1);display:block}",
   map: null
 };
 const Divider = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { density } = $$props;
   let { direction = "horizontal" } = $$props;
-  let { extension } = $$props;
+  let { extension = "centered" } = $$props;
+  let extensionClass = {
+    full: "marg-tb-1 ",
+    padded: "marg-tb-1 marg-ii-2",
+    centered: "marg-tb-1 marg-ii-4"
+  };
   if ($$props.density === void 0 && $$bindings.density && density !== void 0)
     $$bindings.density(density);
   if ($$props.direction === void 0 && $$bindings.direction && direction !== void 0)
@@ -265,7 +270,7 @@ const Divider = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   if ($$props.extension === void 0 && $$bindings.extension && extension !== void 0)
     $$bindings.extension(extension);
   $$result.css.add(css$3);
-  return `<hr class="${"svelte-hgfncl"}">`;
+  return `<hr class="${escape(null_to_empty(extensionClass[extension])) + " svelte-na35ma"}">`;
 });
 const ContentSwitcher = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { icon = "faToggleOff" } = $$props;
@@ -483,4 +488,4 @@ const List = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     ${!listItems ? `${slots.default ? slots.default({}) : ``}` : ``}
 </ul>`;
 });
-export { Divider as D, Icon as I, List as L, TopBar as T, IconButton as a, ListItem as b, propsXy as p, toFa as t, writable as w };
+export { Divider as D, IconButton as I, List as L, TopBar as T, Icon as a, ListItem as b, propsXy as p, toFa as t, writable as w };

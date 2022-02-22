@@ -1,11 +1,11 @@
-import { g as get_store_value, c as create_ssr_component, a as subscribe, s as setContext, b as compute_slots, d as add_attribute, v as validate_component, e as getContext, f as set_store_value, h as escape, n as null_to_empty, i as each, j as get_current_component } from "../../chunks/index-e11587b3.js";
-import { w as writable, I as Icon, D as Divider, a as IconButton, L as List, T as TopBar, b as ListItem } from "../../chunks/List-68d98bef.js";
+import { g as get_store_value, c as create_ssr_component, a as subscribe, s as setContext, b as compute_slots, d as getContext, e as set_store_value, f as escape, n as null_to_empty, v as validate_component, h as each, i as add_attribute, j as get_current_component } from "../../chunks/index-9e1741a1.js";
+import { w as writable, D as Divider, I as IconButton, a as Icon, L as List, T as TopBar, b as ListItem } from "../../chunks/List-3360d3e6.js";
 import "@fortawesome/free-regular-svg-icons";
 import "@fortawesome/free-brands-svg-icons";
 import "@fortawesome/free-solid-svg-icons";
+import "../../chunks/VirtualList-5f532cf9.js";
 import "@neodrag/svelte";
 import "color";
-import "../../chunks/VirtualList-a61bbc8f.js";
 import "lodash";
 const presets = {
   light: {
@@ -204,50 +204,9 @@ ${slots.default ? slots.default({}) : `
 });
 var ThemeToggle_svelte_svelte_type_style_lang = "";
 var Popper_svelte_svelte_type_style_lang = "";
-var ButtonPanel_svelte_svelte_type_style_lang = "";
-const css$b = {
-  code: ".buttonWrapper.svelte-1vpdzsf.svelte-1vpdzsf{color:white;display:inline-block;position:relative}.buttonWrapper.svelte-1vpdzsf button.svelte-1vpdzsf{padding:16px 16px;display:block;width:64px;background-color:rgba(255, 255, 255, 0.2);border:1px solid rgba(255, 255, 255, 0.2);position:relative}.buttonWrapper.svelte-1vpdzsf button.svelte-1vpdzsf:hover{background-color:rgba(255, 255, 255, 0.3)}.buttonWrapper.svelte-1vpdzsf button .action.svelte-1vpdzsf{position:absolute;display:block;top:0;bottom:0;right:0;background-color:rgba(255, 255, 255, 0.1);width:25%;padding:0.5rem}.buttonWrapper.svelte-1vpdzsf button .action.svelte-1vpdzsf:hover{background-color:rgba(255, 255, 255, 0.5)}",
-  map: null
-};
-const ButtonPanel = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let $$slots = compute_slots(slots);
-  let { icon = "faList" } = $$props;
-  let { actionComponent } = $$props;
-  let { actionComponentProps } = $$props;
-  let buttonRef;
-  if ($$props.icon === void 0 && $$bindings.icon && icon !== void 0)
-    $$bindings.icon(icon);
-  if ($$props.actionComponent === void 0 && $$bindings.actionComponent && actionComponent !== void 0)
-    $$bindings.actionComponent(actionComponent);
-  if ($$props.actionComponentProps === void 0 && $$bindings.actionComponentProps && actionComponentProps !== void 0)
-    $$bindings.actionComponentProps(actionComponentProps);
-  $$result.css.add(css$b);
-  return `<div class="${"buttonWrapper svelte-1vpdzsf"}"><button class="${"svelte-1vpdzsf"}"${add_attribute("this", buttonRef, 0)}>${validate_component(Icon, "Icon").$$render($$result, { fontSize: "small", icon: "faList" }, {}, {})}
-        ${actionComponent ? `<span class="${"action svelte-1vpdzsf"}">${validate_component(Icon, "Icon").$$render($$result, { icon: "faChevronRight", fontSize: "tiny" }, {}, {})}</span>` : ``}</button>
-    ${$$slots.length ? `<div class="${"pad-4 text-center"}">${slots.default ? slots.default({}) : ``}</div>` : ``}
-</div>`;
-});
-var Cartouche_svelte_svelte_type_style_lang = "";
-var Tabs_svelte_svelte_type_style_lang = "";
-var ServiceBox_svelte_svelte_type_style_lang = "";
-var Taskbar_svelte_svelte_type_style_lang = "";
-const css$a = {
-  code: ".bar.svelte-1xhd9rd{grid-gap:8px;background-size:auto;background-color:rgba(255, 255, 255, 0.5);backdrop-filter:blur(20px);min-height:48px;box-sizing:border-box;border-bottom:1px solid rgba(255, 255, 255, 0.2)}",
-  map: null
-};
-const Taskbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  $$result.css.add(css$a);
-  return `<div class="${"bar flex-h flex-align-middle svelte-1xhd9rd"}">${slots.default ? slots.default({}) : `
-        ${slots.taskBarLeft ? slots.taskBarLeft({}) : ``}
-    `}
-    <div class="${"flex-main"}"><button>Service Box
-        </button></div>
-    ${slots.taskBarRIght ? slots.taskBarRIght({}) : ``}
-</div>`;
-});
 var MenuItem_svelte_svelte_type_style_lang = "";
-const css$9 = {
-  code: ".menu{min-width:150px;padding:0.25rem;cursor:pointer;background-color:var(--theme-color-background);color:var(--theme-color-text);border:0.5px solid rgba(255, 255, 255, 0.1)}.menu.density-tight .menuItem{padding:0.5rem 0;margin:0.125rem 0}.menu.density-default .menuItem{padding:1rem 0;margin:0.25rem 0}.menu.density-kind .menuItem{padding:1.5rem 0;margin:0.5rem 0}.menu .menuItem{border-radius:6px;overflow:hidden;display:flex}.menu .menuItem:hover{background-color:rgba(255, 255, 255, 0.3)}.menu .menuItem .menuItemIcon{width:24px;max-width:24px;text-align:center;overflow:hidden}.menu .menuItem .menuItemText{padding:0 0.25rem}.menu .menuItem.density-tight{padding:0.5rem 0;margin:0.125rem 0}.menu .menuItem.density-default{padding:1rem 0;margin:0.25rem 0}.menu .menuItem.density-kind{padding:1.5rem 0;margin:0.5rem 0}",
+const css$g = {
+  code: ".menu{min-width:150px;padding:0.25rem;cursor:pointer;background-color:var(--theme-color-background);color:var(--theme-color-text);border:0.5px solid rgba(255, 255, 255, 0.1);border-radius:6px}.menu.density-tight .menuItem{padding:0.5rem 0;margin:0.125rem 0}.menu.density-default .menuItem{padding:1rem 0;margin:0.25rem 0}.menu.density-kind .menuItem{padding:1.5rem 0;margin:0.5rem 0}.menu .menuItem{border-radius:6px;overflow:hidden;display:flex}.menu .menuItem:hover{background-color:rgba(255, 255, 255, 0.3)}.menu .menuItem .menuItemIcon{width:24px;max-width:24px;text-align:center;overflow:hidden}.menu .menuItem .menuItemText{padding:0 0.25rem}.menu .menuItem.density-tight{padding:0.5rem 0;margin:0.125rem 0}.menu .menuItem.density-default{padding:1rem 0;margin:0.25rem 0}.menu .menuItem.density-kind{padding:1.5rem 0;margin:0.5rem 0}",
   map: null
 };
 const MenuItem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -255,6 +214,7 @@ const MenuItem = create_ssr_component(($$result, $$props, $$bindings, slots) => 
   let $menuStateContext, $$unsubscribe_menuStateContext;
   let { text } = $$props;
   let { icon } = $$props;
+  let { divider } = $$props;
   const menuStateContext = getContext("menuStateContext");
   $$unsubscribe_menuStateContext = subscribe(menuStateContext, (value) => $menuStateContext = value);
   if (icon || $$slots.menuItemIconSlot) {
@@ -264,13 +224,15 @@ const MenuItem = create_ssr_component(($$result, $$props, $$bindings, slots) => 
     $$bindings.text(text);
   if ($$props.icon === void 0 && $$bindings.icon && icon !== void 0)
     $$bindings.icon(icon);
-  $$result.css.add(css$9);
+  if ($$props.divider === void 0 && $$bindings.divider && divider !== void 0)
+    $$bindings.divider(divider);
+  $$result.css.add(css$g);
   $$unsubscribe_menuStateContext();
-  return `<li role="${"menuitem"}" class="${"menuItem"}">${$menuStateContext.hasIcon ? `<div class="${"menuItemIcon"}">${slots.menuItemIconSlot ? slots.menuItemIconSlot({}) : `${escape(null_to_empty(icon))}`}</div>` : ``}
-	<div class="${"menuItemText"}">${slots.default ? slots.default({}) : `
-			${slots.menuItemTextSlot ? slots.menuItemTextSlot({}) : `${escape(text)}`}
-		`}</div>
-</li>`;
+  return `<li class="${"menuItem"}" role="${"menuitem"}">${$menuStateContext.hasIcon ? `<div class="${"menuItemIcon"}">${slots.menuItemIconSlot ? slots.menuItemIconSlot({}) : `${escape(null_to_empty(icon))}`}</div>` : ``}
+    <div class="${"menuItemText"}">${slots.default ? slots.default({}) : `
+            ${slots.menuItemTextSlot ? slots.menuItemTextSlot({}) : `${escape(text)}`}
+        `}</div></li>
+${divider ? `<li>${validate_component(Divider, "Divider").$$render($$result, { extension: "none" }, {}, {})}</li>` : ``}`;
 });
 function createStore() {
   const initialData = { density: "default" };
@@ -284,8 +246,8 @@ function createStore() {
 }
 const createMenuStore = () => createStore();
 var Menu_svelte_svelte_type_style_lang = "";
-const css$8 = {
-  code: ".menu{min-width:150px;padding:0.25rem;cursor:pointer;background-color:var(--theme-color-background);color:var(--theme-color-text);border:0.5px solid rgba(255, 255, 255, 0.1)}.menu.density-tight .menuItem{padding:0.5rem 0;margin:0.125rem 0}.menu.density-default .menuItem{padding:1rem 0;margin:0.25rem 0}.menu.density-kind .menuItem{padding:1.5rem 0;margin:0.5rem 0}.menu .menuItem{border-radius:6px;overflow:hidden;display:flex}.menu .menuItem:hover{background-color:rgba(255, 255, 255, 0.3)}.menu .menuItem .menuItemIcon{width:24px;max-width:24px;text-align:center;overflow:hidden}.menu .menuItem .menuItemText{padding:0 0.25rem}.menu .menuItem.density-tight{padding:0.5rem 0;margin:0.125rem 0}.menu .menuItem.density-default{padding:1rem 0;margin:0.25rem 0}.menu .menuItem.density-kind{padding:1.5rem 0;margin:0.5rem 0}",
+const css$f = {
+  code: ".menu{min-width:150px;padding:0.25rem;cursor:pointer;background-color:var(--theme-color-background);color:var(--theme-color-text);border:0.5px solid rgba(255, 255, 255, 0.1);border-radius:6px}.menu.density-tight .menuItem{padding:0.5rem 0;margin:0.125rem 0}.menu.density-default .menuItem{padding:1rem 0;margin:0.25rem 0}.menu.density-kind .menuItem{padding:1.5rem 0;margin:0.5rem 0}.menu .menuItem{border-radius:6px;overflow:hidden;display:flex}.menu .menuItem:hover{background-color:rgba(255, 255, 255, 0.3)}.menu .menuItem .menuItemIcon{width:24px;max-width:24px;text-align:center;overflow:hidden}.menu .menuItem .menuItemText{padding:0 0.25rem}.menu .menuItem.density-tight{padding:0.5rem 0;margin:0.125rem 0}.menu .menuItem.density-default{padding:1rem 0;margin:0.25rem 0}.menu .menuItem.density-kind{padding:1.5rem 0;margin:0.5rem 0}",
   map: null
 };
 const Menu = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -300,7 +262,7 @@ const Menu = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     $$bindings.menuList(menuList);
   if ($$props.density === void 0 && $$bindings.density && density !== void 0)
     $$bindings.density(density);
-  $$result.css.add(css$8);
+  $$result.css.add(css$f);
   $$unsubscribe_menuStore();
   return `<ul role="${"menu"}" class="${"density-" + escape(density) + " menu"}">${menuList ? `${each(menuList, (menuItem) => {
     return `${slots.default ? slots.default({ menuItem }) : `
@@ -310,9 +272,42 @@ const Menu = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 	${slots.default ? slots.default({}) : ``}
 </ul>`;
 });
+const ButtonAction = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let { icon = "faList" } = $$props;
+  let { actionComponent } = $$props;
+  let { actionComponentProps } = $$props;
+  if ($$props.icon === void 0 && $$bindings.icon && icon !== void 0)
+    $$bindings.icon(icon);
+  if ($$props.actionComponent === void 0 && $$bindings.actionComponent && actionComponent !== void 0)
+    $$bindings.actionComponent(actionComponent);
+  if ($$props.actionComponentProps === void 0 && $$bindings.actionComponentProps && actionComponentProps !== void 0)
+    $$bindings.actionComponentProps(actionComponentProps);
+  return `${validate_component(IconButton, "IconButton").$$render($$result, {
+    icon: "faEllipsisH",
+    iconFontSize: "small"
+  }, {}, {})}`;
+});
+var Cartouche_svelte_svelte_type_style_lang = "";
+var Tabs_svelte_svelte_type_style_lang = "";
+var ServiceBox_svelte_svelte_type_style_lang = "";
+var Taskbar_svelte_svelte_type_style_lang = "";
+const css$e = {
+  code: ".bar.svelte-1xhd9rd{grid-gap:8px;background-size:auto;background-color:rgba(255, 255, 255, 0.5);backdrop-filter:blur(20px);min-height:48px;box-sizing:border-box;border-bottom:1px solid rgba(255, 255, 255, 0.2)}",
+  map: null
+};
+const Taskbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  $$result.css.add(css$e);
+  return `<div class="${"bar flex-h flex-align-middle svelte-1xhd9rd"}">${slots.default ? slots.default({}) : `
+        ${slots.taskBarLeft ? slots.taskBarLeft({}) : ``}
+    `}
+    <div class="${"flex-main"}"><button>Service Box
+        </button></div>
+    ${slots.taskBarRIght ? slots.taskBarRIght({}) : ``}
+</div>`;
+});
 var Badge_svelte_svelte_type_style_lang = "";
 var Avatar_svelte_svelte_type_style_lang = "";
-const css$7 = {
+const css$d = {
   code: ".avatar.svelte-1imhe8o{position:relative;border-radius:20%;border:1px solid rgba(255, 255, 255, 0.3);display:grid;place-items:center;overflow:hidden}",
   map: null
 };
@@ -327,14 +322,163 @@ const Avatar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   };
   if ($$props.size === void 0 && $$bindings.size && size !== void 0)
     $$bindings.size(size);
-  $$result.css.add(css$7);
+  $$result.css.add(css$d);
   return `<div class="${"avatar svelte-1imhe8o"}" style="${"width:" + escape(sizes[size]) + ";height:" + escape(sizes[size])}">${slots.badge ? slots.badge({}) : ``}
     ${slots.default ? slots.default({}) : ``}
 </div>`;
 });
+var Alert_svelte_svelte_type_style_lang = "";
+const css$c = {
+  code: ".alert.svelte-ip86fr.svelte-ip86fr{position:relative;min-width:350px;display:inline-block;border-radius:6px;border:1px solid rgba(255, 255, 255, 0.1);background-color:rgba(0, 0, 0, 0.5);overflow:hidden}.alert.svelte-ip86fr .dot.svelte-ip86fr{display:inline-block;padding:0.25rem;border:1px solid rgba(255, 255, 255, 0.1);border-radius:6px;margin-right:1rem}.alert.svelte-ip86fr .close.svelte-ip86fr{position:absolute;right:0;top:0;border-radius:6px;margin:0.25rem;padding:0.25rem}",
+  map: null
+};
+const Alert = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let $$slots = compute_slots(slots);
+  let { level = "info" } = $$props;
+  let { action } = $$props;
+  let { data } = $$props;
+  let { text } = $$props;
+  let { message } = $$props;
+  let { isDragable = false } = $$props;
+  let { isOpen = true } = $$props;
+  const actions = {
+    open: () => {
+      isOpen = true;
+    },
+    toggle: () => {
+      isOpen = !isOpen;
+    },
+    close: () => {
+      isOpen = !isOpen;
+    }
+  };
+  if ($$props.level === void 0 && $$bindings.level && level !== void 0)
+    $$bindings.level(level);
+  if ($$props.action === void 0 && $$bindings.action && action !== void 0)
+    $$bindings.action(action);
+  if ($$props.data === void 0 && $$bindings.data && data !== void 0)
+    $$bindings.data(data);
+  if ($$props.text === void 0 && $$bindings.text && text !== void 0)
+    $$bindings.text(text);
+  if ($$props.message === void 0 && $$bindings.message && message !== void 0)
+    $$bindings.message(message);
+  if ($$props.isDragable === void 0 && $$bindings.isDragable && isDragable !== void 0)
+    $$bindings.isDragable(isDragable);
+  if ($$props.isOpen === void 0 && $$bindings.isOpen && isOpen !== void 0)
+    $$bindings.isOpen(isOpen);
+  if ($$props.actions === void 0 && $$bindings.actions && actions !== void 0)
+    $$bindings.actions(actions);
+  $$result.css.add(css$c);
+  return `${isOpen ? `<div class="${"alert shad-4 svelte-ip86fr"}"><div class="${"pad-1 pad-ii-2 border-b-4 border-color-scheme-" + escape(level) + " svelte-ip86fr"}"><div class="${"flex-h flex-align-top pad-tb-1"}"><div class="${"pad-1"}"><div class="${"dot bg-themed-scheme-" + escape(level) + " svelte-ip86fr"}"></div></div>				
+				<div class="${"pad-1"}">${slots.default ? slots.default({}) : ``}</div></div>
+			${$$slots.messageSlot ? `${validate_component(Divider, "Divider").$$render($$result, {}, {}, {})}
+				<div class="${"pad-1"}">${slots.messageSlot ? slots.messageSlot({}) : `message`}</div>` : ``}</div>
+		${$$slots.action ? `${slots.action ? slots.action({}) : ``}` : ``}
+		${$$slots.buttonZoneSlot ? `<div class="${"pad-tb-1 pad-ii-2 flex-h flex-align-right"}">${slots.buttonZoneSlot ? slots.buttonZoneSlot({}) : ``}</div>` : ``}
+		<div class="${"close svelte-ip86fr"}">${validate_component(IconButton, "IconButton").$$render($$result, {
+    iconFontSize: "small",
+    icon: "faWindowClose"
+  }, {}, {})}</div></div>` : ``}`;
+});
+var Select_svelte_svelte_type_style_lang = "";
+const css$b = {
+  code: ".select{background-color:rgba(255, 255, 255, 0.2);height:160px;width:160px;border-radius:6px}",
+  map: null
+};
+const Select = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let innerRef;
+  let inputRef;
+  $$result.css.add(css$b);
+  return `<input id="${"cool"}"${add_attribute("this", inputRef, 0)}>
+<div class="${"pos-abs shad-16 select inputBorder"}" style="${"display:" + escape("none")}"${add_attribute("this", innerRef, 0)}>ss
+</div>`;
+});
+var Paper_svelte_svelte_type_style_lang = "";
+const css$a = {
+  code: ".paper{background-color:var(--theme-color-background-contrast);border-radius:6px}",
+  map: null
+};
+const Paper = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let { density = "default" } = $$props;
+  let densityClass = {
+    none: "",
+    tight: "pad-1 marg-1",
+    default: "pad-2 marg-2",
+    kind: "pad-3 marg-3"
+  };
+  if ($$props.density === void 0 && $$bindings.density && density !== void 0)
+    $$bindings.density(density);
+  $$result.css.add(css$a);
+  return `<div class="${"paper shad-8 " + escape(densityClass[density])}">${slots.default ? slots.default({}) : ``}
+</div>`;
+});
+var Card_svelte_svelte_type_style_lang = "";
+const css$9 = {
+  code: ".card.svelte-1obb16e{border-radius:6px;background-color:var(--theme-color-background-paper);border:1px solid rgba(208, 191, 151, 0.1);padding:0.5rem;height:120px}",
+  map: null
+};
+const Card = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  $$result.css.add(css$9);
+  return `<div class="${"card flex-v shad-32 svelte-1obb16e"}"><div class="${"title"}">${slots.title ? slots.title({}) : ``}</div>
+    <div class="${"content flex-main"}">${slots.cardContentSlot ? slots.cardContentSlot({}) : `${slots.default ? slots.default({}) : ``}`}</div>
+    ${validate_component(Divider, "Divider").$$render($$result, { extension: "full" }, {}, {})}
+    <div class="${"footer"}">${slots.footer ? slots.footer({}) : ``}</div>
+</div>`;
+});
+var TitleBar_svelte_svelte_type_style_lang = "";
+const css$8 = {
+  code: ".titleBar{border-bottom:1px solid rgba(255, 255, 255, 0.1)}",
+  map: null
+};
+const TitleBar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let { onClose } = $$props;
+  let { hasMenu = true } = $$props;
+  if ($$props.onClose === void 0 && $$bindings.onClose && onClose !== void 0)
+    $$bindings.onClose(onClose);
+  if ($$props.hasMenu === void 0 && $$bindings.hasMenu && hasMenu !== void 0)
+    $$bindings.hasMenu(hasMenu);
+  $$result.css.add(css$8);
+  return `<div class="${"titleBar flex-h marg-b-1 pad-1"}"><div class="${"title flex-main flex-h flex-align-middle"}"><div class="${"pad-ii-1 text-center"}">${slots.iconSlot ? slots.iconSlot({}) : `
+                ${validate_component(Icon, "Icon").$$render($$result, { fontSize: "small", icon: "faWorld" }, {}, {})}
+            `}</div>
+        <div class="${"flex-main pad-l-1"}">${slots.titleSlot ? slots.titleSlot({}) : ``}</div></div>
+    ${hasMenu ? `<div class="${""}">${validate_component(ButtonAction, "ButtonAction").$$render($$result, {}, {}, {})}</div>` : ``}
+    ${onClose ? `<div class="${""}">${validate_component(IconButton, "IconButton").$$render($$result, {
+    iconFontSize: "small",
+    icon: "faWindowClose"
+  }, {}, {})}</div>` : ``}
+</div>`;
+});
+var Box_svelte_svelte_type_style_lang = "";
+const css$7 = {
+  code: ".box{min-height:160px;min-width:320px;background-color:var(--theme-color-background-contrast);border-bottom:0.5px solid rgba(255, 255, 255, 0.1)}",
+  map: null
+};
+const Box = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let { className = "" } = $$props;
+  let { onClose } = $$props;
+  if ($$props.className === void 0 && $$bindings.className && className !== void 0)
+    $$bindings.className(className);
+  if ($$props.onClose === void 0 && $$bindings.onClose && onClose !== void 0)
+    $$bindings.onClose(onClose);
+  $$result.css.add(css$7);
+  return `<div class="${"box flex-v " + escape(className)}">${validate_component(TitleBar, "TitleBar").$$render($$result, { onClose }, {}, {
+    titleSlot: () => {
+      return `${slots.titleSlot ? slots.titleSlot({ slot: "titleSlot" }) : ``}`;
+    },
+    iconSlot: () => {
+      return `${slots.iconSlot ? slots.iconSlot({ slot: "iconSlot" }) : ``}`;
+    }
+  })}
+    <div class="${"content flex-main pad-2"}">${slots.contentSlot ? slots.contentSlot({}) : `
+            ${slots.default ? slots.default({}) : ``}
+        `}</div>
+    <div class="${"buttonZone pad-2"}">${slots.buttonZoneSlot ? slots.buttonZoneSlot({}) : ``}</div>
+</div>`;
+});
 var Dashboard_svelte_svelte_type_style_lang = "";
 const css$6 = {
-  code: ".gridIcon.svelte-3ajgyo{width:100%;display:grid;align-items:center;grid-gap:32px;grid-template-columns:repeat(auto-fill, minmax(130px, auto))}.buttonPole.svelte-3ajgyo{border-radius:4px;background-color:rgba(85, 85, 85, 0.2);border:1px solid rgba(208, 191, 151, 0.1);padding:0.5rem;height:120px}",
+  code: ".gridIcon.svelte-jelpzm{width:100%;display:grid;align-items:center;grid-gap:32px;grid-template-columns:repeat(auto-fill, minmax(130px, auto))}",
   map: null
 };
 const Dashboard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -347,21 +491,132 @@ const Dashboard = create_ssr_component(($$result, $$props, $$bindings, slots) =>
     { text: "text 3", icon: "i" }
   ];
   $$result.css.add(css$6);
-  return `<div style="${"z-index:0"}" class="${"pos-abs w-full h-full overflow-hidden pad-8"}"><div class="${"flex-h"}"><div>${validate_component(Avatar, "Avatar").$$render($$result, { size: "small" }, {}, {})}
-			${validate_component(Divider, "Divider").$$render($$result, {}, {}, {})}
-			<div class="${"pad-4 dsp-block-inline flex-h flex-align-middle"}"><button>explorer</button>
-				<button>what</button></div>
-			${validate_component(ButtonPanel, "ButtonPanel").$$render($$result, {
-    actionComponent: Menu,
-    actionComponentProps: { menuList: menuData }
-  }, {}, {
+  return `<div class="${"pos-abs w-full h-full overflow-hidden pad-8"}" style="${"z-index:0"}"><div class="${"flex-h"}"><div>${validate_component(Avatar, "Avatar").$$render($$result, { size: "small" }, {}, {
     default: () => {
-      return `button`;
+      return `${validate_component(Icon, "Icon").$$render($$result, { icon: "faCode" }, {}, {})}`;
+    }
+  })}
+            ${validate_component(Divider, "Divider").$$render($$result, {}, {}, {})}
+            ${validate_component(Select, "Select").$$render($$result, {}, {}, {})}
+            ${validate_component(Divider, "Divider").$$render($$result, {}, {}, {})}
+            ${validate_component(Paper, "Paper").$$render($$result, { density: "tight" }, {}, {
+    default: () => {
+      return `<div class="${"pad-4 dsp-block-inline flex-v flex-align-middle-center"}"><button fullwidth>explorer</button>
+                    <br>
+                    <button>what</button></div>`;
+    }
+  })}
+            ${validate_component(Paper, "Paper").$$render($$result, { density: "tight" }, {}, {
+    default: () => {
+      return `${validate_component(ButtonAction, "ButtonPanel").$$render($$result, {
+        actionComponent: Menu,
+        actionComponentProps: { menuList: menuData }
+      }, {}, {
+        default: () => {
+          return `button is what
+                `;
+        }
+      })}`;
+    }
+  })}
+            ${validate_component(Menu, "Menu").$$render($$result, { menuList: menuData }, {}, {})}</div>
+        <div class="${"flex-main pad-4 overflow-auto"}">${validate_component(Paper, "Paper").$$render($$result, { density: "kind" }, {}, {
+    default: () => {
+      return `${validate_component(Alert, "Alert").$$render($$result, {
+        level: "success",
+        message: "message here"
+      }, {}, {
+        default: () => {
+          return `Simple alert`;
+        }
+      })}
+                ${validate_component(Alert, "Alert").$$render($$result, { level: "info", message: "message here" }, {}, {
+        default: () => {
+          return `Simple alert`;
+        }
+      })}
+                ${validate_component(Alert, "Alert").$$render($$result, { level: "error", message: "message here" }, {}, {
+        buttonZoneSlot: () => {
+          return `<button data-close slot="${"buttonZoneSlot"}">button</button>`;
+        },
+        default: () => {
+          return `Simple alert
+                    `;
+        }
+      })}
+                ${validate_component(Alert, "Alert").$$render($$result, {
+        level: "warning",
+        message: "message here"
+      }, {}, {
+        default: () => {
+          return `Simple alert`;
+        }
+      })}
+                ${validate_component(Alert, "Alert").$$render($$result, { level: "alert", message: "message here" }, {}, {
+        default: () => {
+          return `Simple <br>alert`;
+        }
+      })}
+                ${validate_component(Alert, "Alert").$$render($$result, {
+        level: "discrete",
+        message: "message here"
+      }, {}, {
+        default: () => {
+          return `Simple alert`;
+        }
+      })}
+                ${validate_component(Alert, "Alert").$$render($$result, { message: "message here" }, {}, {
+        buttonZoneSlot: () => {
+          return `<button data-close slot="${"buttonZoneSlot"}">button</button>`;
+        },
+        messageSlot: () => {
+          return `<div slot="${"messageSlot"}">message here</div>`;
+        },
+        default: () => {
+          return `alert red
+                    `;
+        }
+      })}`;
+    }
+  })}
+            <div class="${"dsp-block-inline shad-16"}">${validate_component(Box, "Box").$$render($$result, { onClose: "cd" }, {}, {
+    buttonZoneSlot: () => {
+      return `<span slot="${"buttonZoneSlot"}"><button>button</button></span>`;
+    },
+    titleSlot: () => {
+      return `<span slot="${"titleSlot"}">Title of the box</span>`;
+    },
+    iconSlot: () => {
+      return `${validate_component(Icon, "Icon").$$render($$result, {
+        slot: "iconSlot",
+        fontSize: "small",
+        icon: "faClock"
+      }, {}, {})}`;
+    },
+    default: () => {
+      return `Content of the box
+                `;
     }
   })}</div>
-		<div class="${"flex-main pad-4 overflow-auto"}"><div class="${"gridIcon svelte-3ajgyo"}">${each([...Array(20)], (key, val) => {
-    return `<div class="${"buttonPole dsp-inline svelte-3ajgyo"}" style="${"width:130px"}"></div>`;
-  })}</div></div></div>
+            ${validate_component(Paper, "Paper").$$render($$result, { density: "kind" }, {}, {
+    default: () => {
+      return `<div class="${"gridIcon svelte-jelpzm"}">${each([...Array(20)], (key, val) => {
+        return `${validate_component(Card, "Card").$$render($$result, {}, {}, {
+          footer: () => {
+            return `<span slot="${"footer"}">Footer of the box</span>`;
+          },
+          title: () => {
+            return `<span slot="${"title"}">Title of the box</span>`;
+          },
+          default: () => {
+            return `content
+                            
+                        `;
+          }
+        })}`;
+      })}</div>`;
+    }
+  })}</div></div>
 </div>`;
 });
 var Panel_svelte_svelte_type_style_lang = "";
@@ -587,29 +842,31 @@ const Drawer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$slots = compute_slots(slots);
   let { title } = $$props;
   let drawerRef;
-  let isOpen = true;
+  let { isOpen = true } = $$props;
   let { hideCloseIcon = false } = $$props;
   function toggle2(visibleSate) {
     isOpen = visibleSate !== void 0 ? visibleSate : !isOpen;
   }
   if ($$props.title === void 0 && $$bindings.title && title !== void 0)
     $$bindings.title(title);
+  if ($$props.isOpen === void 0 && $$bindings.isOpen && isOpen !== void 0)
+    $$bindings.isOpen(isOpen);
   if ($$props.hideCloseIcon === void 0 && $$bindings.hideCloseIcon && hideCloseIcon !== void 0)
     $$bindings.hideCloseIcon(hideCloseIcon);
   if ($$props.toggle === void 0 && $$bindings.toggle && toggle2 !== void 0)
     $$bindings.toggle(toggle2);
   $$result.css.add(css$1);
   return `${isOpen ? `<div class="${"drawer flex-v h-full svelte-hf6hb5"}"${add_attribute("this", drawerRef, 0)}>${$$slots.drawerMenuBar || Boolean(title) ? `<div class="${"header flex-h svelte-hf6hb5"}"><div class="${"flex-main flex-h flex-align-middle "}">${title ? `<span style="${"font-size:18px;"}" class="${"pad-l-4"}">${escape(title)}</span>` : ``}
-					${slots.drawerMenuBar ? slots.drawerMenuBar({}) : ``}</div>
-				${!hideCloseIcon ? `<div>${validate_component(IconButton, "IconButton").$$render($$result, {
+                    ${slots.drawerMenuBar ? slots.drawerMenuBar({}) : ``}</div>
+                ${!hideCloseIcon ? `<div>${validate_component(IconButton, "IconButton").$$render($$result, {
     iconFontSize: "small",
     icon: "faWindowClose"
   }, {}, {})}</div>` : ``}</div>` : ``}
-		${$$slots.content ? `<div class="${"flex-main"}">${slots.content ? slots.content({}) : `content`}</div>` : ``}
-		${validate_component(BottomBar, "BottomBar").$$render($$result, {}, {}, {
+        ${$$slots.content ? `<div class="${"flex-main"}">${slots.content ? slots.content({}) : `content`}</div>` : ``}
+        ${validate_component(BottomBar, "BottomBar").$$render($$result, {}, {}, {
     default: () => {
       return `bar bottom
-		`;
+        `;
     }
   })}</div>` : ``}`;
 });
@@ -619,6 +876,7 @@ const themes = {
       text: "#282230",
       background: {
         _: "#f1f1f1",
+        paper: "#ededed",
         contrast: "#b1b1b1"
       },
       primary: "#01796f",
@@ -631,6 +889,7 @@ const themes = {
       text: "#f1f1f1",
       background: {
         _: "#27323a",
+        paper: "#3a3b3b",
         contrast: "#0d1215"
       },
       primary: "#01978b",
@@ -650,7 +909,7 @@ const themes = {
 };
 var __layout_svelte_svelte_type_style_lang = "";
 const css = {
-  code: `@import url(ress/ress.css);@import url(../css/cssFabric/cssfabric.min.css);@import url("https://fonts.googleapis.com/css?family=Rubik");html{font-size:12px;height:100%}body{height:100%;width:100%;overflow:hidden;background-size:cover;font-family:'Rubik';background-color:var(--theme-color-background);color:var(--theme-color-text)}#svelte{height:100%}button{border:0.5px solid rgba(255, 255, 255, 0.2);padding:0.25rem 0.5rem;border-radius:4px;background-color:rgba(255, 255, 255, 0.1)}button:hover{background-color:#ededed}input{border:1px solid rgba(208, 191, 151, 0.5);border-bottom:2px solid #d0bf97;border-radius:4px;padding:0.5rem;box-shadow:inset 0px 0px 3px 1px rgba(51, 51, 51, 0.8);background-color:rgba(59, 59, 59, 0.99);color:white}`,
+  code: `@import url(ress/ress.css);@import url(../css/cssFabric/cssfabric.min.css);@import url("https://fonts.googleapis.com/css?family=Rubik");html{font-size:12px;height:100%}body{height:100%;width:100%;overflow:hidden;background-size:cover;font-family:'Rubik';background-color:var(--theme-color-background);color:var(--theme-color-text)}#svelte{height:100%}button{border:0.5px solid rgba(255, 255, 255, 0.2);padding:0.25rem 0.5rem;border-radius:4px;background-color:rgba(255, 255, 255, 0.1)}button:hover{background-color:#ededed}.inputBorder{border:1px solid rgba(255, 255, 255, 0.1) !important}input{border:1px solid rgba(208, 191, 151, 0.5);border-bottom:2px solid #d0bf97;border-radius:4px;padding:0.5rem;box-shadow:inset 0px 0px 3px 1px rgba(51, 51, 51, 0.8);background-color:rgba(59, 59, 59, 0.99);color:white}`,
   map: null
 };
 const _layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -674,9 +933,9 @@ const _layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
             return `${validate_component(TaskBarContent, "TaskBarContent").$$render($$result, {}, {}, {})}`;
           }
         })}
-            <div style="${"flex: 1;overflow:hidden"}">${validate_component(Dashboard, "Dashboard").$$render($$result, {}, {}, {})}
-                ${slots.default ? slots.default({}) : `empty !!!`}</div>`}</div>
-    ${validate_component(Drawer, "Drawer").$$render($$result, { this: drawerRef }, {
+            <br>
+            <div style="${"flex: 1;overflow:hidden"}">${validate_component(Dashboard, "Dashboard").$$render($$result, {}, {}, {})}</div>`}</div>
+    ${validate_component(Drawer, "Drawer").$$render($$result, { isOpen: false, this: drawerRef }, {
           this: ($$value) => {
             drawerRef = $$value;
             $$settled = false;
