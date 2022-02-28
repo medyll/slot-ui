@@ -1,17 +1,19 @@
 
 <script lang="ts">
   import {email, Hint, HintGroup, required, useForm, validators,Form} from 'svelte-use-form';
+  import {userStore} from './store';
+
 
   function validate(args) {
-    console.log(args)
+    $userStore.logged = true;
     return false;
   }
 
   const form = useForm();
 </script>
 
-<form style="width:100%;height:100%"  use:form={validate} method="post"  >
-    <div class="login h-full w-full flex-h flex-align-middle-center bg-palette-red-dark">
+<form style="width:100%;height:100%" on:submit={(event)=>{event.preventDefault();validate();return false;}}  use:form={validate} method="post"  >
+    <div class="login h-full w-full flex-h flex-align-middle-center">
         <div class="form flex-v flex-align-middle-center">
             <div class="avatarHolder">
                 <div class="avatar flex-h flex-align-middle-center">avatar</div>
@@ -24,15 +26,21 @@
     </div>
 </form>
 <style lang="scss">
+  form{
+    position:absolute;
+    z-index:1000;
+    background-image: url('wallp (1).png');
+  }
   .login {
     color: white;
     position: relative;
+    background-color: rgba(255,255,255,0.2);
+    backdrop-filter: blur(5px);
   }
 
   .form {
     height: 33% !important;
     width: 20%;
-    position: relative;
 
     .avatarHolder {
       width: 50%;

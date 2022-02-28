@@ -1,11 +1,29 @@
 <script lang="ts">
-  import {fade, slide} from 'svelte/transition';
+  import {slide} from 'svelte/transition';
   import Icon from '../../ui/icon/Icon.svelte';
+  import {createEventForwarder} from '$lib/engine/engine';
+  import {get_current_component} from 'svelte/internal';
+  import {elem} from '../../../configurations/elem';
+  import type {SvelteComponent} from 'svelte';
+
+  /** @restProps {button | a} */
+
+  /* common slotUi exports*/
+  let className = '';
+  export {className as class};
+  export let style: string                  = '';
+  export let element: HTMLDivElement | null = null;
+  const forwardEvents                       = createEventForwarder(get_current_component());
+  /* end slotUi exports */
 
   export let label: string;
   export let icon: string;
+  /** can be set as a prop or as a className */
+  export let stacked: boolean = false;
+  export let component: SvelteComponent | undefined;
+  export let componentProps: Record<string, any> = {};
 
-  let isOpen: boolean = false;
+  export let isOpen: boolean = false;
 
   export const actions = {
     open  : () => {
@@ -16,53 +34,55 @@
     }
   };
 
-  $: chevronIcon = !isOpen? 'faChevronDown' : 'faChevronUp'
+  let chevronIcon: 'faChevronDown' | 'faChevronUp';
+  $: chevronIcon = !isOpen ? 'faChevronDown' : 'faChevronUp';
+
+  $: if (element) console.log(elem(element).next());
 </script>
-<div class="cartoucheHolder">
-    <div class="cartouche" on:click="{actions.toggle}">
-        <div class="icon">icon</div>
-        <div class="title">{label}</div>
+
+<div class:stacked bind:this={element} class="cartoucheHolder {className}" style="{style}" use:forwardEvents>
+    <div class="cartouche pad-tb-2" on:click={actions.toggle}>
+        {#if icon || $$slots.cartoucheIconSlot}
+            <div class="icon pad-l-1"><slot name="cartoucheIconSlot">{icon}</slot></div>
+        {/if}
+        <div class="cartoucheLabel  pad-l-1">
+            {#if label || $$slots.cartoucheLabelSlot}<slot name="cartoucheLabelSlot">{label}</slot>
+
+        {/if}
+        </div>
+        <div class="cartoucheAction">
+            <slot name="cartoucheActionSlot"></slot>
+        </div>
         <div class="chevron">
-            <Icon fontSize="small" icon="{chevronIcon}"/>
+            <a>
+                <Icon fontSize="tiny" icon={chevronIcon}/>
+            </a>
         </div>
     </div>
     {#if isOpen}
         <div class="cartoucheContent" transition:slide>
-            <slot></slot>
+            {#if component}
+                <svelte:component this={component} {...componentProps}/>
+            {/if}
+            <slot/>
         </div>
     {/if}
 </div>
+
 <style lang="scss">
+  @import "./Cartouche";
+
   .cartoucheHolder {
-    border-radius: 6px;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-
-    .cartoucheContent {
-      padding: 0.5rem;
-      overflow:hidden;
-      border-radius: 6px;
-    }
-  }
-
-  .cartouche {
-    display: flex;
-    grid-gap: 8px;
-    background-color: rgba(157, 157, 157, 0.1);
-    height: 48px;
-    align-items: center;
-
-    .title {
-      flex: 1;
-    }
-
-    .icon {
-      padding: 0 1rem;
-      border-right: 1px solid #ededed;
-    }
-    .chevron {
-      padding: 0 1rem;
-      border-left: 1px solid #ededed;
+    &.stacked {
+      border-radius: 0;
+      &:first-child {
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+      }
+      &:last-child {
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
+      }
     }
   }
 </style>

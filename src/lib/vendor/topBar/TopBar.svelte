@@ -5,7 +5,12 @@
 <script lang="ts">
 	import ContentSwitcher from '../contentSwitcher/ContentSwitcher.svelte';
 
-	let headerRef;
+	/** common slotUi exports*/
+	let className = '';
+	export { className as class };
+	export let element: HTMLDivElement | null = null;
+	/** end slotUi exports*/
+
 	export let title: MenuBarTitleType;
 	export let orientation: 'right' | 'left'='right';
 
@@ -13,7 +18,7 @@
 	const posCloser = orientation === 'right' ? 3 : 1
 </script>
 
-<div bind:this={headerRef} class="flex-h flex-align-middle flex-main">
+<div bind:this={element} class="flex-h flex-align-middle flex-main {className}">
 	<div class="title flex-main text-500" style="order:{posTitle};min-width:auto">
 		{#if $$slots.menuBarTitle || Boolean(title)}
 			<slot name="menuBarTitle">
@@ -24,11 +29,12 @@
 		{/if}
 	</div>
 	<div style="order:2" >
+
 		<slot name="menuBarButtons" />
 	</div> 
 	{#if $$slots.menuBarSwitcher}
 		<div style="order:{posCloser}">
-			<ContentSwitcher parent={headerRef} icon="faSearch">
+			<ContentSwitcher parent={element} icon="faSearch">
 				<slot name="menuBarSwitcher" />
 			</ContentSwitcher>
 		</div> 

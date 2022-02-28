@@ -1,6 +1,12 @@
 <script lang="ts">
   import type {ElementProps} from '$lib/vendor/list/types';
 
+  /*  common slotUi exports*/
+  let className = '';
+  export {className as class};
+  export let element: HTMLDivElement | null = null;
+  /*  end slotUi exports*/
+
   export let density: ElementProps['density'] = 'default';
 
   let densityClass = {
@@ -11,7 +17,7 @@
   };
 
 </script>
-<div class="paper shad-8 {densityClass[density]}">
+<div class="paper shad-8 {densityClass[density]} {className}">
     <slot></slot>
 </div>
 

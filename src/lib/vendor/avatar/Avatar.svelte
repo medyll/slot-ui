@@ -1,5 +1,13 @@
 <script lang="ts">
-  import Badge from '../badge/Badge.svelte';
+  import {get_current_component} from 'svelte/internal';
+  import {createEventForwarder} from '$lib/engine/engine';
+
+  /*  common slotUi exports*/
+  let className = '';
+  export {className as class};
+  export let element: HTMLDivElement | null = null;
+  const forwardEvents                       = createEventForwarder(get_current_component());
+  /*  end slotUi exports*/
 
   export let size: 'tiny' | 'small' | 'medium' | 'large' | 'full' = 'large';
 
@@ -8,23 +16,20 @@
     small : '4rem',
     medium: '8rem',
     large : '12rem',
-    full  : '100%',
+    full  : '100%'
   };
-
 </script>
 
-<div class="avatar" style="width:{sizes[size]};height:{sizes[size]}">
-    <slot name="badge"></slot>
-    <slot></slot>
+<div
+        bind:this={element}
+        class="avatar {className}"
+        style="width:{sizes[size]};height:{sizes[size]}"
+        use:forwardEvents
+>
+    <slot name="badge"/>
+    <slot/>
 </div>
 
 <style lang="scss">
-  .avatar {
-    position: relative;
-    border-radius: 20%;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    display: grid;
-    place-items: center;
-    overflow: hidden;
-  }
+  @import './Avatar.scss';
 </style>

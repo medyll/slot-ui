@@ -1,7 +1,7 @@
 <svelte:options accessors={true}
                 immutable={true}/>
 <script lang="ts">
-  import {transitions} from '../../../effects/transitions';
+  import {transitions} from '$lib/effects/transitions';
   import {onMount, setContext} from 'svelte';
 
   const {slideOut, slideIn, slideInRtl, slideOutRt} = transitions;

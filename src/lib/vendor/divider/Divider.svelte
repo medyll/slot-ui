@@ -1,25 +1,28 @@
 <script lang="ts">
-  import type {ElementProps} from '../list/types';
+	import type { ElementProps } from '../list/types';
+    import {createEventForwarder} from '$lib/engine/engine';
+    import {get_current_component} from 'svelte/internal';
 
-  export let density: ElementProps['density'];
-  export let direction: 'vertical' | 'horizontal' = 'horizontal';
-  export let extension: ElementProps['expansion'] = 'centered';
+    /*  common slotUi exports*/
+    let className = '';
+    export {className as class};
+    export let element: HTMLDivElement | null = null;
+    const forwardEvents                       = createEventForwarder(get_current_component());
+    /*  end slotUi exports*/
 
-  let extensionClass = {
-    full  : 'marg-tb-1 ',
-    padded: 'marg-tb-1 marg-ii-2',
-    centered   : 'marg-tb-1 marg-ii-4'
-  };
+	export let density: ElementProps['density'] = 'default';
+	export let direction: 'vertical' | 'horizontal' = 'horizontal';
+	export let extension: ElementProps['expansion'] = 'full';
 
+	let extensionClass = {
+		full: 'marg-tb-1 ',
+		padded: 'marg-tb-1 marg-ii-2',
+		centered: 'marg-tb-1 marg-ii-4'
+	};
 </script>
 
-<hr class="{extensionClass[extension]}"/>
+<hr use:forwardEvents bind:this={element} class="{extensionClass[extension]} {className}" />
 
-<style>
-    hr {
-        border: none;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        background-color: rgba(255, 255, 255, 0.1);
-        display: block;
-    }
+<style lang="scss">
+  @import './Divider.scss';
 </style>

@@ -1,46 +1,51 @@
-<script context="module" lang="ts">
-
-	import IconButton from '../button/IconButton.svelte';
-	import type {TIcon} from '../../ui/icon/Icon.svelte';
-	import type { useContentSwitcher } from './useContentSwitcher';
-</script>
 
 <script lang="ts">
+	import IconButton from '../button/IconButton.svelte';
+	import {createEventForwarder} from '$lib/engine/engine';
+  import {get_current_component} from 'svelte/internal';
+  import type {TIcon} from '../../../types';
 
-	export let icon: TIcon = 'faToggleOff';
-	export let parent: HTMLElement;
+  /*  common slotUi exports*/
+  let className = '';
+  export {className as class};
+  export let element: HTMLDivElement | null = null;
+  const forwardEvents                       = createEventForwarder(get_current_component());
+  /*  end slotUi exports*/
 
-	let visibleSate: boolean = false;
-	let thisHolderRef: any;
-	let thisRef: any;
+  export let icon: TIcon = 'faToggleOff';
+  export let parent: HTMLElement;
 
-	function handleClick(event: MouseEvent) {
-		visibleSate = !visibleSate;
+  let visibleSate: boolean = false;
+  let thisHolderRef: any;
+  let thisRef: any;
 
-		const children: HTMLCollection = parent.children;
+  function handleClick(event: MouseEvent) {
+    visibleSate = !visibleSate;
 
-		// iterate over all child nodes
-		Array.from(children).forEach((li: any) => {
-			//li.style.transform = visibleSate ? 'scale(0,0)' : '';
-			li.style.display = visibleSate ? 'none' : '';
-		});
+    const children: HTMLCollection = parent.children;
 
-		if (visibleSate) {
-			parent.appendChild(thisRef);
-		} else {
-			thisHolderRef.appendChild(thisRef);
-		}
-	}
+    // iterate over all child nodes
+    Array.from(children).forEach((li: any) => {
+      //li.style.transform = visibleSate ? 'scale(0,0)' : '';
+      li.style.display = visibleSate ? 'none' : '';
+    });
+
+    if (visibleSate) {
+      parent.appendChild(thisRef);
+    } else {
+      thisHolderRef.appendChild(thisRef);
+    }
+  }
 </script>
 
-<IconButton  iconFontSize="small" on:click={handleClick} {icon} />
-<div style="display:none" bind:this={thisHolderRef}>
-	<div class="flex-h flex-align-middle" style="width:100%;flex:1;" bind:this={thisRef}>
-		<div>
-			<IconButton iconFontSize="small"   on:click={handleClick} icon="faChevronLeft" />
-		</div>
-		<div class="flex-main">
-			<slot />
-		</div>
-	</div>
+<IconButton {icon} iconFontSize="small" on:click={handleClick}/>
+<div bind:this={thisHolderRef} style="display:none">
+    <div bind:this={thisRef} class="flex-h flex-align-middle" style="width:100%;flex:1;">
+        <div>
+            <IconButton icon="faChevronLeft" iconFontSize="small" on:click={handleClick}/>
+        </div>
+        <div class="flex-main">
+            <slot/>
+        </div>
+    </div>
 </div>

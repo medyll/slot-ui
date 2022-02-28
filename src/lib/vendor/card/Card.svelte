@@ -1,24 +1,31 @@
 <script lang="ts">
-    import Divider from "$lib/vendor/divider/Divider.svelte";
+  import Divider from '$lib/vendor/divider/Divider.svelte';
+  import {createEventForwarder} from '$lib/engine/engine';
+  import {get_current_component} from 'svelte/internal';
+  /*  common slotUi exports*/
+  let className = '';
+  export {className as class};
+  export let element: HTMLDivElement | null = null;
+  const forwardEvents                       = createEventForwarder(get_current_component());
+
+  /*  end slotUi exports*/
 </script>
 
-<div class="card flex-v shad-32">
-    <div class="title"><slot name="title"></slot></div>
-    <div class="content flex-main"><slot name="cardContentSlot"><slot></slot></slot></div>
-    <Divider extension="full" />
-    <div class="footer"><slot name="footer"></slot></div>
+<div use:forwardEvents bind:this={element} class="card flex-v shad-32 {className}">
+    <div class="title">
+        <slot name="title"/>
+    </div>
+    <div class="content flex-main">
+        <slot name="cardContentSlot">
+            <slot/>
+        </slot>
+    </div>
+    <Divider extension="full"/>
+    <div class="footer">
+        <slot name="footer"/>
+    </div>
 </div>
 
-
 <style lang="scss">
-  .card {
-    border-radius: 6px;
-    background-color: var(--theme-color-background-paper);
-    border: 1px solid rgba(208, 191, 151, 0.1);
-    padding: 0.5rem;
-    height: 120px;
-    .title{}
-    .content{}
-    .footer{}
-  }
+  @use './Card.scss';
 </style>

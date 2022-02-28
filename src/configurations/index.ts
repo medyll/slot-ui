@@ -1,6 +1,6 @@
 import Window from '/src/lib/ui/window/Window.svelte';
-import {createWindowStore,  windowsStore} from '../stores/windowStore';
-import type {  IChromeArgs } from '../stores/windowStore';
+import {createWindowStore,  windowsStore} from '$lib/ui/window/windowStore';
+import type {  IChromeArgs } from '$lib/ui/window/windowStore';
 import {get, writable} from 'svelte/store';
 import Debug from '../lib/ui/debug/Debug.svelte';
 
@@ -19,7 +19,7 @@ function openWindow(frameId: string , args: Partial<IChromeArgs> = {}) {
   
   if (!appW) {
     windowList[frameId] = new Window({
-      target: document.querySelector('#svelte'),
+      target: document.body,
       props : {
         title: frameId,
         ...args,
@@ -33,7 +33,7 @@ function openWindow(frameId: string , args: Partial<IChromeArgs> = {}) {
   }
 }
 
-export const startMenuStore = writable<boolean>(true);
+export const startMenuStore = writable<boolean>(false);
 
 function toggleStartMenu(event: PointerEvent) {
   if (event) event.stopPropagation();

@@ -1,6 +1,6 @@
 <script lang="ts">
   import {getContext} from 'svelte';
-  import {WindowStoreListType, windowsStore, IChromeArgs} from '/src/stores/windowStore';
+  import {WindowStoreListType, windowsStore, IChromeArgs} from '/src/lib/ui/window/windowStore';
   import {toggleStartMenu} from '../../configurations';
   import {get_current_component} from 'svelte/internal';
   import IconButton from '../vendor/button/IconButton.svelte';

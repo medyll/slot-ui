@@ -1,37 +1,37 @@
 <script lang="ts">
+	import {createEventForwarder} from '$lib/engine/engine';
+	import {get_current_component} from 'svelte/internal';
 
-  interface BreadListType {
-    action?: () => void;
-    breads?: BreadListItemType[];
-  }
+	interface BreadListType {
+		action?: () => void;
+		breads?: BreadListItemType[];
+	}
 
-  interface BreadListItemType<D = Record<string, any>> {
-    text: string;
-    icon: string;
-    link?: string;
-    data?: Record<string,any>
-  }
+	interface BreadListItemType<D = Record<string, any>> {
+		text: string;
+		icon: string;
+		link?: string;
+		data?: Record<string, any>;
+	}
 
-  export const breadList: BreadListType[] = [];
+	/*  common slotUi exports*/
+	let className = '';
+	export {className as class};
+	export let element: HTMLElement | null = null;
+	const forwardEvents                       = createEventForwarder(get_current_component());
+	/*  end slotUi exports*/
+
+	export const breadList: BreadListType[] = [];
 </script>
 
-
-<nav class="breadCrumb">
-    <ul>
-        <li class="bread">
-            <slot></slot>
-        </li>
-    </ul>
+<nav use:forwardEvents bind:this={element} class="breadCrumb {className}">
+	<ul>
+		<li class="bread">
+			<slot />
+		</li>
+	</ul>
 </nav>
 
 <style lang="scss">
-  .breadCrumb {
-    ul {
-      display: flex;
-
-      .bread {
-
-      }
-    }
-  }
+	@import './BreadCrumb.scss';
 </style>

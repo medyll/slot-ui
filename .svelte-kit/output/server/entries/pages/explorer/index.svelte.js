@@ -1,5 +1,5 @@
 import { c as create_ssr_component, f as escape, v as validate_component, h as each, n as null_to_empty } from "../../../chunks/index-9e1741a1.js";
-import { a as Icon, D as Divider, p as propsXy, L as List, b as ListItem, t as toFa, T as TopBar } from "../../../chunks/List-3360d3e6.js";
+import { a as Icon, D as Divider, p as propsXy, L as List, b as ListItem, t as toFa, T as TopBar } from "../../../chunks/List-a7ca1a3f.js";
 import "lodash";
 import "../../../chunks/VirtualList-5f532cf9.js";
 import "@fortawesome/free-regular-svg-icons";

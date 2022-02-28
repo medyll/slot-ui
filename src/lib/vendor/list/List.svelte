@@ -7,11 +7,19 @@
   import {setContext} from 'svelte';
   import {createListStore} from './store';
   import type {ElementProps} from '../../../types';
-  import {null_to_empty} from 'svelte/internal';
+  import {get_current_component, null_to_empty} from 'svelte/internal';
   import {toFa} from '../../../utils';
   import Icon from '../../ui/icon/Icon.svelte';
   import ListTitle from './ListTitle.svelte';
   import VirtualList from '@sveltejs/svelte-virtual-list';
+  import {createEventForwarder} from '$lib/engine/engine';
+
+  /*  common slotUi exports*/
+  let className = '';
+  export {className as class};
+  export let element: HTMLDivElement | null = null;
+  const forwardEvents                       = createEventForwarder(get_current_component());
+  /*  end slotUi exports*/
 
   export let listItems: LisItemProps[];
   export let direction: 'vertical' | 'horizontal' = 'vertical';
@@ -22,7 +30,6 @@
 
   export let density: ElementProps['density'] = 'default';
 
-  let ref;
   const listStore = createListStore();
   setContext('listStateContext', listStore);
 
@@ -36,7 +43,7 @@
 
 </script>
 
-<ul class="density-{density}" on:list:listItem:clicked={onListItemClick} bind:this={ref} style="{style}">
+<ul class="density-{density}" on:list:listItem:clicked={onListItemClick} bind:this={element} style="{style}">
     {#if $$slots.title || title}
         <slot name="title">
             <ListTitle primary={title}/>

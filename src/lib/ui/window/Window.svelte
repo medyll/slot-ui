@@ -2,7 +2,7 @@
                 immutable={true}/>
 
 <script context="module" lang="ts">
-  import {windowsStore} from '/src/stores/windowStore';
+  import {windowsStore} from '/src/lib/ui/window/windowStore';
 
   const removeNode = (nodeRef: HTMLElement) => {
     if (nodeRef?.parentNode) nodeRef.parentNode.removeChild(nodeRef);
@@ -12,7 +12,7 @@
 
 <script lang="ts">
   import {draggable} from '@neodrag/svelte';
-  import {WindowStoreListType, getAppWindowStore, IChromeArgs} from '/src/stores/windowStore';
+  import {WindowStoreListType, getAppWindowStore, IChromeArgs} from '/src/lib/ui/window/windowStore';
   import {onDestroy, onMount, setContext} from 'svelte';
   import IconButton from '../../vendor/button/IconButton.svelte';
   import Icon from '../icon/Icon.svelte';

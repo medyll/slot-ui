@@ -11,28 +11,26 @@
   import List from '$lib/vendor/list/List.svelte';
   import ListItem from '$lib/vendor/list/ListItem.svelte';
   import {themes} from '../themes/themes';
-
-  let isLogged = true;
+  import {userStore} from '../components/pages/login/store';
 
   let drawerRef: Drawer;
 
   const onItemClick = function () {
     drawerRef.toggle();
   };
-</script>
+</script> 
 
 <ThemeWrapper theme={'dark'} themes={themes}>
-    <StartMenu/>
-    <div style="height:100%;max-height:100%;overflow:hidden;display:flex;flex-direction: column">
-        {#if isLogged}
+    <StartMenu/>  
+    <div class="h-full overflow-hidden flex-v">
+        {#if $userStore.logged}
             <Taskbar>
                 <TaskBarContent/>
                 <div slot="taskBarRIght">
                     <IconButton on:click={onItemClick} iconFontSize="small" icon="faAccusoft"/>
                 </div>
             </Taskbar>
-            <br/>
-            <div style="flex: 1;overflow:hidden">
+            <div class="flex-main overflow-hidden">
                 <Dashboard/>
             </div>
         {:else}
@@ -51,7 +49,7 @@
         </svelte:fragment>
         <div class="pad-2" slot="content">
             <List onItemClick={() => {}}>
-                {#each [...Array(10)] as key, val}
+                {#each [...Array(10)] as key, val} 
                     <ListItem>
                         <span slot="primary">Some idiom {val}</span>
                         <span slot="action"><button>fds de action</button></span>
@@ -76,7 +74,7 @@
     height: 100%;
     width: 100%;
     overflow: hidden;
-    //background-image: url('back1.jpg');
+    background-image: url('wallp (4).jpg');
     background-size: cover;
     font-family: 'Rubik';
     background-color: var(--theme-color-background);
@@ -89,17 +87,17 @@
 
   button {
     border: 0.5px solid rgba(255, 255, 255, 0.2);
-    padding: 0.25rem 0.5rem;
+    padding: 0.5rem 0.75rem;
     border-radius: 4px;
     background-color: rgba(255, 255, 255, 0.1);
 
     &:hover {
-      background-color: #ededed;
+      background-color: rgba(208, 191, 151, 0.2);
     }
   }
 
   .inputBorder {
-    border: 1px solid rgba(255,255,255,0.1)!important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
   }
 
   input {

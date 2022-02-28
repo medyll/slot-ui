@@ -1,18 +1,24 @@
-<script context="module" lang="ts">
-</script>
 
 <script lang="ts">
 	import Icon from '$lib/ui/icon/Icon.svelte';
-	import type {ElementProps} from '../../../types';
+	import type { ElementProps } from '../../../types';
+	import {createEventForwarder} from '$lib/engine/engine';
+	import {get_current_component} from 'svelte/internal';
+
+	/*  common slotUi exports*/
+	let className = '';
+	export {className as class};
+	export let element: HTMLButtonElement | null = null;
+	const forwardEvents                          = createEventForwarder(get_current_component());
+	/*  end slotUi exports*/
 
 	export let icon: ElementProps['icon'];
 	export let style: string = '';
-	export let className: string = '';
 	export let showShip: boolean = false;
 	export let iconFontSize: ElementProps['sizeType'] = 'medium';
 </script>
 
-<button on:click {style} class={className}>
+<button bind:this={element} use:forwardEvents on:click {style} class={className}>
 	<span>
 		<span class="icon"><Icon {icon} fontSize={iconFontSize} /></span>
 		<slot />
@@ -23,34 +29,5 @@
 </button>
 
 <style lang="scss">
-	button {
-		padding: 8px;
-		position: relative;
-		background-color: transparent;
-		border: 1px solid transparent;
-
-		&:hover {
-			border: 1px solid rgba(255, 255, 255, 0.1);
-			background-color: rgba(255, 255, 255, 0.2);
-			backdrop-filter: blur(10px);
-		}
-
-		span {
-			display: flex;
-			grid-gap: 4px;
-		}
-
-		.icon {
-		}
-		.chip {
-			position: absolute;
-			height: 6px;
-			left: 50%;
-			transform: translate(-50%, 0);
-			width: 50%;
-			background-color: blue;
-			border-radius: 16px;
-			bottom: 0px;
-		}
-	}
+	@import './IconButton.scss';
 </style>
