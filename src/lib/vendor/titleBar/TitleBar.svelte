@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Icon from '$lib/ui/icon/Icon.svelte';
+  import Icon from '$lib/vendor/icon/Icon.svelte';
   import IconButton from '$lib/vendor/button/IconButton.svelte';
   import Divider from "$lib/vendor/divider/Divider.svelte";
   import ButtonAction from "$lib/vendor/button/ButtonAction.svelte";

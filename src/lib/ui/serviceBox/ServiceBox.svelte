@@ -2,7 +2,7 @@
   import {clickAway} from '../../uses/clickAway/clickAway';
   import IconButton from '../../vendor/button/IconButton.svelte';
   import ButtonPanel from '../../vendor/button/ButtonAction.svelte';
-  import Debug from '../debug/Debug.svelte';
+  import Debug from '../../vendor/debug/Debug.svelte';
 
   const onclose = function () {
     console.log('close ??')

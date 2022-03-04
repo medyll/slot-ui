@@ -1,9 +1,9 @@
 <script lang="ts">
   import {slide} from 'svelte/transition';
-  import Icon from '../../ui/icon/Icon.svelte';
+  import Icon from '../icon/Icon.svelte';
   import {createEventForwarder} from '$lib/engine/engine';
   import {get_current_component} from 'svelte/internal';
-  import {elem} from '../../../configurations/elem';
+  import {elem} from '../../elem';
   import type {SvelteComponent} from 'svelte';
 
   /** @restProps {button | a} */

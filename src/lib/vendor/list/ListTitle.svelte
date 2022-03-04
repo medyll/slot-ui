@@ -1,8 +1,5 @@
-<script   context="module" lang="ts">
-   import type {ElementProps} from '../../../types';
-
-</script>
 <script lang="ts">
+  import type {ElementProps} from '$lib/../../../types';
 
   export let icon: string;
   export let primary: string;

@@ -1,7 +1,5 @@
 <svelte:options accessors={true}/>
-<script context="module" lang="ts">
 
-</script>
 <script lang="ts">
   import type {SvelteComponentDev} from 'svelte/internal';
   import {stickTo} from '$lib/uses/stickTo/stickTo';

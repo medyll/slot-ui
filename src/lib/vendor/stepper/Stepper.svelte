@@ -1,5 +1,3 @@
-<script context="module" lang="ts">
-</script>
 <script lang="ts">
   export type StepperOrientation = 'horizontal' | 'vertical'
   export type StepType = {

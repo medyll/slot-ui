@@ -3,8 +3,8 @@
   import ListItem from '../../../lib/vendor/list/ListItem.svelte';
   import ListTitle from '../../../lib/vendor/list/ListTitle.svelte';
   import type {LisItemProps} from '../../../lib/vendor/list/types';
-  import {propsXy, toFa} from '../../../utils';
-  import type {propsXyProps} from '../../../utils';
+  import {propsXy, toFa} from '$lib/utils';
+  import type {propsXyProps} from '$lib/utils';
   import {null_to_empty} from 'svelte/internal';
   import _ from 'lodash';
   import VirtualList from '@sveltejs/svelte-virtual-list';
@@ -17,7 +17,7 @@
   import appscheme_icon from '/src/demoData/appscheme_icon.json';
   import appscheme_type from '/src/demoData/appscheme_type.json';
   import Header from './Header.svelte';
-  import Icon from '../../../lib/ui/icon/Icon.svelte';
+  import Icon from '../../../lib/vendor/icon/Icon.svelte';
   import Divider from '../../../lib/vendor/divider/Divider.svelte';
   import TopBar from '../../../lib/vendor/topBar/TopBar.svelte';
   import ContentSwitcher from '../../../lib/vendor/contentSwitcher/ContentSwitcher.svelte';

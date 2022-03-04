@@ -1,21 +1,12 @@
 <svelte:options accessors={true}
                 immutable={true}/>
 
-<script context="module" lang="ts">
-  import {windowsStore} from '/src/lib/ui/window/windowStore';
-
-  const removeNode = (nodeRef: HTMLElement) => {
-    if (nodeRef?.parentNode) nodeRef.parentNode.removeChild(nodeRef);
-  };
-
-</script>
-
 <script lang="ts">
+  import {getAppWindowStore, IChromeArgs, windowsStore} from '/src/lib/ui/window/windowStore';
   import {draggable} from '@neodrag/svelte';
-  import {WindowStoreListType, getAppWindowStore, IChromeArgs} from '/src/lib/ui/window/windowStore';
-  import {onDestroy, onMount, setContext} from 'svelte';
+  import {onDestroy} from 'svelte';
   import IconButton from '../../vendor/button/IconButton.svelte';
-  import Icon from '../icon/Icon.svelte';
+  import Icon from '../../vendor/icon/Icon.svelte';
 
   export let frameId                                   = '';
   export let self                                      = null;

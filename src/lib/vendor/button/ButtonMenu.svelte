@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { SvelteComponentDev } from 'svelte/internal';
 
-	import Icon from '$lib/ui/icon/Icon.svelte';
+	import Icon from '$lib/vendor/icon/Icon.svelte';
 	import { openPopper } from '$lib/vendor/popper/actions';
 	import {createEventForwarder} from '$lib/engine/engine';
 	import {get_current_component} from 'svelte/internal';

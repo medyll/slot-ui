@@ -1,15 +1,13 @@
-<script context="module" lang="ts">
-  import type {LisItemProps} from './types';
-</script>
 
 <script lang="ts">
+  import type {LisItemProps} from './types';
   import ListItem from './ListItem.svelte';
   import {setContext} from 'svelte';
   import {createListStore} from './store';
   import type {ElementProps} from '../../../types';
   import {get_current_component, null_to_empty} from 'svelte/internal';
-  import {toFa} from '../../../utils';
-  import Icon from '../../ui/icon/Icon.svelte';
+  import {toFa} from '../../utils';
+  import Icon from '../icon/Icon.svelte';
   import ListTitle from './ListTitle.svelte';
   import VirtualList from '@sveltejs/svelte-virtual-list';
   import {createEventForwarder} from '$lib/engine/engine';

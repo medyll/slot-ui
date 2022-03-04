@@ -1,6 +1,3 @@
-<script context="module" lang="ts">
-</script>
-
 <script lang="ts">
   import BottomBar from '../bottomBar/BottomBar.svelte';
   import IconButton from '../button/IconButton.svelte';

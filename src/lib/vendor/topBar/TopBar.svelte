@@ -1,8 +1,7 @@
-<script context="module" lang="ts">
-	type MenuBarTitleType = string | undefined;
-</script>
+
 
 <script lang="ts">
+	type MenuBarTitleType = string | undefined;
 	import ContentSwitcher from '../contentSwitcher/ContentSwitcher.svelte';
 
 	/** common slotUi exports*/

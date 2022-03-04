@@ -1,6 +1,6 @@
 
 <script lang="ts">
-	import Icon from '$lib/ui/icon/Icon.svelte';
+	import Icon from '$lib/vendor/icon/Icon.svelte';
 	import type { ElementProps } from '../../../types';
 	import {createEventForwarder} from '$lib/engine/engine';
 	import {get_current_component} from 'svelte/internal';

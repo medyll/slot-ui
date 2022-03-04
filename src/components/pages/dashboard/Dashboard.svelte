@@ -9,7 +9,7 @@
   import CartoucheDemo from '$lib/vendor/cartouche/Cartouche.demo.svelte';
   import Select from '$lib/vendor/select/Select.svelte';
   import Paper from '$lib/vendor/paper/Paper.svelte';
-  import Icon from '$lib/ui/icon/Icon.svelte';
+  import Icon from '$lib/vendor/icon/Icon.svelte';
   import Card from '$lib/vendor/card/Card.svelte';
   import Box from '$lib/vendor/box/Box.svelte';
   import Options from '$lib/vendor/select/Options.svelte';

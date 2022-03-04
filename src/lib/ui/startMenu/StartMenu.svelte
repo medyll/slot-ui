@@ -2,18 +2,17 @@
 <script lang="ts">
   import {fade, slide} from 'svelte/transition';
 
-  import {sx4u} from '../../uses/sx4u/sx4u';
-  import {clickAway} from '../../uses/clickAway/clickAway';
-  import Panel from '/src/lib/ui/panel/Panel.svelte';
-  import PanelSlide from '/src/lib/ui/panel/PanelSlide.svelte';
+  import {sx4u} from '$lib/uses/sx4u/sx4u';
+  import {clickAway} from '$lib/uses/clickAway/clickAway';
+  import Panel from '$lib/ui/panel/Panel.svelte';
+  import PanelSlide from '$lib/ui/panel/PanelSlide.svelte';
 
-  import {openWindow, toggleStartMenu, startMenuStore} from '../../../configurations';
-  import color from 'color';
+  import {openWindow, toggleStartMenu, startMenuStore} from '$lib/wactions.utils';
   import {afterUpdate, onMount, setContext, getContext} from 'svelte';
 
-  import IconButton from '/src/lib/vendor/button/IconButton.svelte';
+  import IconButton from '$lib/vendor/button/IconButton.svelte';
   import {writable} from 'svelte/store';
-  import Debug from '../debug/Debug.svelte';
+  import Debug from '$lib/vendor/debug/Debug.svelte';
 
 
   const menuStore = writable<any>(null);
@@ -32,13 +31,6 @@
     setContext('PanelSlide', menuStore);
   }
 
-  onMount(() => {
-    const unsubscribe = menuStore.subscribe(() => {
-
-    });
-
-    return unsubscribe;
-  });
 </script>
 
 {#if $startMenuStore}
