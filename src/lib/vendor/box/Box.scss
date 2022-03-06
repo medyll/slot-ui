@@ -1,7 +1,16 @@
 
-  .box {
-    min-height: 160px;
-    min-width: 320px;
-    background-color: var(--theme-color-background-contrast);
-    border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
+.boxRoot {
+  min-height: 160px;
+  min-width: 320px;
+  background-color: var(--theme-color-background);
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+
+  .boxContent {
+
   }
+
+  .boxButtonZone {
+    text-align: right;
+  }
+}

@@ -2,13 +2,19 @@
   import Tabs from './Tabs.svelte';
   import TabsItemsProps from '$lib/vendor/tabs/Tabs.svelte';
   import Cartouche from '$lib/vendor/cartouche/Cartouche.svelte';
+  import Divider from "../divider/Divider.svelte";
+  import Button from "../button/Button.svelte";
 
   const items: TabsItemsProps = [
-    {label: 'theTitle', code: 'theTitle1'},
-    {label: 'theTitle bis', code: 'theTitle2'},
-    {label: 'theTitle ter', code: 'theTitle3', component: Cartouche, componentProps: {label: 'dynamic'}},
+    {label: 'Tab 1', code: 'theTitle1'},
+    {label: 'Tab 2', code: 'theTitle2'},
+    {label: 'Tab 3', code: 'theTitle3', component: Cartouche, componentProps: {label: 'dynamic'}},
   ];
 </script>
-<Tabs {items}>
-    tabs
+<Tabs activeTabCode="theTitle1" {items} />
+<Divider extension="centered" density="kind" />
+<Tabs activeTabCode="theTitle1" {items}>
+    <span slot="tabsTitleSlot">some tabs title</span>
+    <span slot="tabsButtonSlot"><Button>button</Button></span>
+
 </Tabs>

@@ -1,6 +1,6 @@
 const elem = (node: HTMLElement) => {
   return {
-    find: (qy: string) => { return node.getElementsByClassName(qy);},
+    find: (qy: string) => { return node.querySelector(qy);},
     up  : (qy?: string | undefined, index?: number) => {
       if (!qy) return node.parentNode;
       return _recursivelyFind(node, 'parentNode', qy, index);

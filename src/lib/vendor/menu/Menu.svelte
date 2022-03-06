@@ -12,7 +12,7 @@
 	const menuStore = createMenuStore();
 	setContext('menuStateContext', menuStore);
 
-  $menuStore.density = density;
+  	$menuStore.density = density;
 
 </script>
 

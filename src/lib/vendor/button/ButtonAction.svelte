@@ -1,14 +1,10 @@
 <script lang="ts">
 	import type { SvelteComponentDev } from 'svelte/internal';
+
+	import Icon from '$lib/vendor/icon/Icon.svelte';
 	import { openPopper } from '$lib/vendor/popper/actions';
-	import IconButton from '$lib/vendor/button/IconButton.svelte';
-	import Menu from '$lib/vendor/menu/Menu.svelte';
 	import {createEventForwarder} from '$lib/engine/engine';
 	import {get_current_component} from 'svelte/internal';
-
-	export let icon: string = 'faList';
-	export let actionComponent: SvelteComponentDev;
-	export let actionComponentProps: any;
 
 	/*  common slotUi exports*/
 	let className = '';
@@ -17,26 +13,38 @@
 	const forwardEvents                          = createEventForwarder(get_current_component());
 	/*  end slotUi exports*/
 
+	export let icon: string = 'faList';
+	export let actionComponent: SvelteComponentDev;
+	export let actionComponentProps: any;
+
+	let buttonRef;
+
 	const onActionClick = (event: PointerEvent) => {
 		event.stopPropagation();
-		console.log(event.target);
 		openPopper('settingActions', {
-			parentNode: event.target as HTMLElement,
-			component: Menu,
-			componentProps: actionComponentProps ?? {},
-			position: 'BL'
+			parentNode: buttonRef,
+			component: actionComponent,
+			componentProps: actionComponentProps ?? {}
 		});
 	};
 </script>
 
-<IconButton
-	icon="faEllipsisH"
-	iconFontSize="small"
-	on:click={onActionClick}
-	class={className}
-	{element}
-/>
+<div bind:this={element}  use:forwardEvents class="buttonWrapper" on:click>
+	<button bind:this={buttonRef}>
+		<Icon fontSize="small" icon="faList" />
+		{#if actionComponent}
+			<span class="action" on:click={onActionClick}>
+				<Icon icon="faChevronRight" fontSize="tiny" />
+			</span>
+		{/if}
+	</button>
+	{#if $$slots.default}
+		<div class="pad-tb-1 text-center">
+			<slot />
+		</div>
+	{/if}
+</div>
 
-<style lang="scss"  >
-	@import './ButtonAction.scss';
+<style lang="scss">
+	@import 'ButtonAction';
 </style>

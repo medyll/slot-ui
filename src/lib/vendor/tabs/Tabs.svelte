@@ -1,5 +1,7 @@
 <script lang="ts">
   import type {SvelteComponent} from 'svelte';
+  import {onMount} from 'svelte';
+  import {elem} from '../../elem';
 
   /*  common slotUi exports*/
   let className = '';
@@ -19,28 +21,52 @@
   export let items: TabsItemsProps = [];
   export let activeTabCode: string = '';
 
-  let boundingClientRect;
-  const handleClick = (tabValue, node) => (event) => {
+  let navElementRef: HTMLElement;
+  let activeCellElementRef: HTMLElement;
+  let boundingClientRect: DOMRect;
+  const handleClick = (tabValue) => (event) => {
     activeTabCode      = tabValue;
-    boundingClientRect = node.getBoundingClientRect();
+    const node = navElementRef.querySelector('[data-code=theTitle1]');
+    
+    if(node){
+      boundingClientRect = node.getBoundingClientRect();
+
+      activeCellElementRef.style.left  = (boundingClientRect.left - activeCellElementRef.parentElement.offsetLeft) + 'px';
+      activeCellElementRef.style.width = boundingClientRect.width + 'px';
+
+    }
   };
+
+  onMount(()=>{
+        handleClick(activeTabCode)()
+  })
+
 </script>
-<nav>
-    <ul>
-        {#each items as item }
-            <li on:click={handleClick(item.code,this)}
-                class={activeTabCode === item.code ? 'active' : ''}>{item.label}
-            </li>
-        {/each}
-    </ul>
-    <div>
+<div class="tabsRoot {className}">
+    <nav class="tabsNav flex-h flex-align-middle">
+        <ul bind:this={navElementRef} class="flex-main">
+            {#each items as item }
+                <li data-code={item.code} on:click={handleClick(item.code,this)}
+                    class={activeTabCode === item.code ? 'active' : ''}>{item.label}
+                </li>
+            {/each}
+        </ul>
+        <div>
+            <slot name="tabsTitleSlot"></slot>
+        </div>
+        <div>
+            <slot name="tabsButtonSlot"></slot>
+        </div>
+    </nav>
+    <div bind:this={activeCellElementRef} class="tabsActiveCell"></div>
+    <div class="tabsContent">
         {#each items as item}
             {#if activeTabCode === item.code}
                 <svelte:component this={item.component} {...item.componentProps}/>
             {/if}
         {/each}
     </div>
-</nav>
+</div>
 <style lang="scss">
   @import "./Tabs.scss";
 </style>

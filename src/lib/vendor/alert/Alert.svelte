@@ -55,7 +55,7 @@
         <div class="pad-1 ftdr  border-b-2 border-color-scheme-{level}">
             <div class="flex-h flex-align-middle ">
                 <div class="pad-1">
-                    <div class="dot bg-themed-scheme-{level}"/>
+                    <div class="dot bg-themed-scheme-{level}" ></div>
                 </div>
                 <div class="pad-1 flex-main flex-h flex-align-middle">
                     <div class="flex-main">

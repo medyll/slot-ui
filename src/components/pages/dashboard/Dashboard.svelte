@@ -1,17 +1,18 @@
 <script lang="ts">
   import {goto} from '$app/navigation';
   import Divider from '$lib/vendor/divider/Divider.svelte';
-  import ButtonPanel from '$lib/vendor/button/ButtonAction.svelte';
+  import ButtonPanel from '$lib/vendor/button/ButtonMenu.svelte';
+  import ButtonActionDemo from '$lib/vendor/button/ButtonAction.demo.svelte';
   import Menu from '$lib/vendor/menu/Menu.svelte';
   import Avatar from '$lib/vendor/avatar/Avatar.svelte';
   import AlertDemo from '$lib/vendor/alert/AlertDemo.svelte';
   import TabsDemo from '$lib/vendor/tabs/Tabs.demo.svelte';
   import CartoucheDemo from '$lib/vendor/cartouche/Cartouche.demo.svelte';
+  import BoxDemo from '$lib/vendor/box/Box.demo.svelte';
   import Select from '$lib/vendor/select/Select.svelte';
   import Paper from '$lib/vendor/paper/Paper.svelte';
   import Icon from '$lib/vendor/icon/Icon.svelte';
   import Card from '$lib/vendor/card/Card.svelte';
-  import Box from '$lib/vendor/box/Box.svelte';
   import Options from '$lib/vendor/select/Options.svelte';
 
   const menuData = [
@@ -56,7 +57,6 @@
                     button is what
                 </ButtonPanel>
             </Paper>
-            <Menu menuList={menuData}/>
         </div>
         <div class="flex-main pad-4 overflow-auto ">
             <div class="gridDemo">
@@ -79,14 +79,18 @@
                         <AlertDemo/>
                     </Paper>
                 </div>
-                <Paper  density="kind">
-                    <Box onClose="cd">
-                        <Icon fontSize="small" icon="faClock" slot="iconSlot"/>
-                        <span slot="titleSlot">Title of the box</span>
-                        <span slot="buttonZoneSlot"><button>button</button></span>
-                        Content of the box
-                    </Box>
-                </Paper>
+                <div>
+                    <Paper density="kind">
+                        <ButtonActionDemo/>
+                    </Paper>
+                    <Paper density="kind">
+                        <BoxDemo/>
+                    </Paper>
+                    <Paper>
+                        <Menu menuList={menuData}/>
+                    </Paper>
+
+                </div>
                 <Paper density="kind">
                     <div class="gridIcon">
                         {#each [...Array(20)] as key, val}

@@ -1,7 +1,7 @@
 import type { ElementProps } from "src/types"
 
 
-export type MenuProps<T> = {
+export type MenuProps<T = any> = {
     density: ElementProps['density'],
     hasIcon?: boolean
     data?: T

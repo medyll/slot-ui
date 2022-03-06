@@ -1,11 +1,10 @@
 <script lang="ts">
   import Icon from '$lib/vendor/icon/Icon.svelte';
   import IconButton from '$lib/vendor/button/IconButton.svelte';
-  import Divider from "$lib/vendor/divider/Divider.svelte";
-  import ButtonAction from "$lib/vendor/button/ButtonAction.svelte";
+  import ButtonAction from '../button/ButtonMenu.svelte';
 
   export let onClose: () => void;
-  export let hasMenu: any = true;
+  export let hasMenu: any = false;
 
 </script>
 
@@ -22,17 +21,22 @@
     </div>
     {#if hasMenu}
         <div class="">
-            <ButtonAction />
+            <!--<ButtonAction/>-->
         </div>
     {/if}
     {#if onClose}
         <div class="">
-            <IconButton iconFontSize="small" icon="faWindowClose"/>
+            <IconButton on:click={onClose} iconFontSize="small" icon="faWindowClose"/>
         </div>
     {/if}
 </div>
 <style global lang="scss">
   .titleBar {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1)
+    .title {
+      min-height: 34px;
+
+    }
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 </style>

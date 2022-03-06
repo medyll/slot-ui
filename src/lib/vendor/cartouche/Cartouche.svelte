@@ -3,7 +3,7 @@
   import Icon from '../icon/Icon.svelte';
   import {createEventForwarder} from '$lib/engine/engine';
   import {get_current_component} from 'svelte/internal';
-  import {elem} from '../../elem';
+  import {elem} from '$lib/elem';
   import type {SvelteComponent} from 'svelte';
 
   /** @restProps {button | a} */
@@ -20,11 +20,11 @@
   export let icon: string;
   /** can be set as a prop or as a className */
   export let stacked: boolean = false;
-  export let component: SvelteComponent | undefined;
+  export let component: SvelteComponent | undefined = undefined;
   export let componentProps: Record<string, any> = {};
 
   export let isOpen: boolean = false;
-
+  /** use to control cartouche */
   export const actions = {
     open  : () => {
       isOpen = true;

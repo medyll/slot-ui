@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import { custom_event } from 'svelte/internal';
-	import { ElementProps } from './types';
+	import type { ElementProps } from './types';
 	import Divider from '../divider/Divider.svelte';
 
 	export let icon: string;

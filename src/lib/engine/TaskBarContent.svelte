@@ -1,11 +1,10 @@
 <script lang="ts">
   import {getContext} from 'svelte';
-  import {WindowStoreListType, windowsStore, IChromeArgs} from '/src/lib/ui/window/windowStore';
+  import type {IChromeArgs, WindowStoreListType} from '/src/lib/ui/window/windowStore';
+  import {windowsStore} from '/src/lib/ui/window/windowStore';
   import {toggleStartMenu} from '../wactions.utils';
-  import {get_current_component} from 'svelte/internal';
   import IconButton from '../vendor/button/IconButton.svelte';
 
-  const thisComponent = get_current_component();
 
   let {toggle, current, theme} = getContext('theme');
 
@@ -18,7 +17,7 @@
 
 </script>
 
-<IconButton on:click="{toggleStartMenu}" style="color:white;font-size: large" icon="faBarcode"/>
+<IconButton icon="faBarcode" on:click="{toggleStartMenu}" style="color:white;font-size: large"/>
 {#each [...windows] as [key, value]}
     <IconButton on:click="{()=>{toggleWindow(value)}}" style="color:white;font-size: large" icon="faWindow"/>
 {/each}

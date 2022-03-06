@@ -1,6 +1,6 @@
 {
   "name": "@medyll/slotui",
-  "version": "0.0.2-alpha",
+  "version": "0.0.3-alpha",
   "scripts": {
     "dev": "svelte-kit dev  --port 3001 --host",
     "build": "svelte-kit build",

@@ -1,7 +1,7 @@
 <script lang="ts">
   import {clickAway} from '../../uses/clickAway/clickAway';
   import IconButton from '../../vendor/button/IconButton.svelte';
-  import ButtonPanel from '../../vendor/button/ButtonAction.svelte';
+  import ButtonMenu from '../../vendor/button/ButtonAction.svelte';
   import Debug from '../../vendor/debug/Debug.svelte';
 
   const onclose = function () {
@@ -15,7 +15,7 @@
     <div class="flex-main pad-8 gridIconBis">
         {#each [...Array(6)] as key,val }
             <!--for popper-->
-            <ButtonPanel actionComponent={Debug}>Setting {val}</ButtonPanel>
+            <ButtonMenu actionComponent={Debug}>Setting {val}</ButtonMenu>
         {/each}
     </div>
     <div   class="pad-2 flex-h flex-align-right">

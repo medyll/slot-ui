@@ -18,6 +18,7 @@
   const onItemClick = function () {
     drawerRef.toggle();
   };
+
 </script> 
 
 <ThemeWrapper theme={'dark'} themes={themes}>
@@ -32,6 +33,7 @@
             </Taskbar>
             <div class="flex-main overflow-hidden">
                 <Dashboard/>
+                <slot />
             </div>
         {:else}
             <Login/>
@@ -62,7 +64,7 @@
 
 <style global lang="scss">
   @import 'ress/ress.css';
-  @import '../css/cssFabric/cssfabric.min.css';
+  @import '../lib/css/cssfabric.min.css';
   @import url('https://fonts.googleapis.com/css?family=Rubik');
 
   html {

@@ -10,6 +10,7 @@ export const themes = {
       primary: '#01796f',
       primary_dark: '#016159',
       secondary: '#562931',
+      secondary_dark: '#562931',
     },
   },
   dark: {
@@ -22,16 +23,8 @@ export const themes = {
       },
       primary: '#01978b',
       primary_dark: '#00887c',
-      secondary: '#fe8690',
-      secondary_dark: '#fe8690',
-    },
-    surface: {
-      _: 'red',
-      text: 'white'
-    },
-    paper: {
-      _: 'red',
-      text: 'white'
+      secondary: '#562931',
+      secondary_dark: '#562931',
     }
   },
 } as const;

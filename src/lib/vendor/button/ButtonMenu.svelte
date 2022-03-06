@@ -1,50 +1,46 @@
 <script lang="ts">
-	import type { SvelteComponentDev } from 'svelte/internal';
+  import type {SvelteComponentDev} from 'svelte/internal';
+  import {get_current_component} from 'svelte/internal';
+  import {openPopper} from '$lib/vendor/popper/actions';
+  import IconButton from '$lib/vendor/button/IconButton.svelte';
+  import Menu from '$lib/vendor/menu/Menu.svelte';
+  import {createEventForwarder} from '$lib/engine/engine';
 
-	import Icon from '$lib/vendor/icon/Icon.svelte';
-	import { openPopper } from '$lib/vendor/popper/actions';
-	import {createEventForwarder} from '$lib/engine/engine';
-	import {get_current_component} from 'svelte/internal';
+  export let icon: string = 'faList';
+  export let actionComponent: SvelteComponentDev;
+  export let actionComponentProps: any;
 
-	/*  common slotUi exports*/
-	let className = '';
-	export {className as class};
-	export let element: HTMLButtonElement | null = null;
-	const forwardEvents                          = createEventForwarder(get_current_component());
-	/*  end slotUi exports*/
+  /*  common slotUi exports*/
+  let className = '';
+  export {className as class};
+  export let element: HTMLButtonElement | null = null;
+  const forwardEvents                          = createEventForwarder(get_current_component());
+  /*  end slotUi exports*/
 
-	export let icon: string = 'faList';
-	export let actionComponent: SvelteComponentDev;
-	export let actionComponentProps: any;
-
-	let buttonRef;
-
-	const onActionClick = (event: PointerEvent) => {
-		event.stopPropagation();
-		openPopper('settingActions', {
-			parentNode: buttonRef,
-			component: actionComponent,
-			componentProps: actionComponentProps ?? {}
-		});
-	};
+  const onActionClick = (event: PointerEvent) => {
+    event.stopPropagation();
+    console.log(event.target);
+    openPopper('settingActions', {
+      parentNode    : event.target as HTMLElement,
+      component     : Menu,
+      componentProps: actionComponentProps ?? {},
+      position      : 'BL'
+    });
+  };
 </script>
 
-<div bind:this={element}  use:forwardEvents class="buttonWrapper" on:click>
-	<button bind:this={buttonRef}>
-		<Icon fontSize="small" icon="faList" />
-		{#if actionComponent}
-			<span class="action" on:click={onActionClick}>
-				<Icon icon="faChevronRight" fontSize="tiny" />
-			</span>
-		{/if}
-	</button>
-	{#if $$slots.default}
-		<div class="pad-tb-1 text-center">
-			<slot />
-		</div>
-	{/if}
+<div class="buttonActionRoot">
+    <IconButton
+            class={className}
+            {element}
+            icon="faEllipsisH"
+            iconFontSize="small"
+            on:click={onActionClick}
+    >
+        <slot/>
+    </IconButton>
 </div>
 
 <style lang="scss">
-	@import './ButtonMenu.scss';
+  @import 'ButtonMenu';
 </style>

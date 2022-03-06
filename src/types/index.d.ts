@@ -12,7 +12,7 @@ export namespace Drawer {
 
 export interface ElementProps {
   sizeType: 'tiny' | 'small' | 'medium' | 'default' | 'large' | 'big',
-  density: 'tight' | 'default' | 'kind'
+  density: 'none' | 'tight' | 'default' | 'kind'
   expansion: 'full' | 'padded' | 'centered'
   data: Record<string, any>;
   action: (event, data: ElementProps['data']) => void;
