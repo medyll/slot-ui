@@ -1,7 +1,7 @@
 <script lang="ts">
-  import Divider from '$lib/vendor/divider/Divider.svelte';
   import {createEventForwarder} from '$lib/engine/engine';
   import {get_current_component} from 'svelte/internal';
+  import type {ElementProps} from '../../../types';
   /*  common slotUi exports*/
   let className = '';
   export {className as class};
@@ -9,13 +9,19 @@
   const forwardEvents                       = createEventForwarder(get_current_component());
   /*  end slotUi exports*/
 
+  export let alignment: ElementProps['alignment']   = 'center';
+  export let data: ElementProps['data'] | undefined = undefined;
+
 </script>
 
-<div use:forwardEvents bind:this={element} class="cardRoot flex-v shad-32 {className}">
-    <div class="cardHero">
-        <slot name="cardHeroSlot"/>
-    </div>
-    <Divider />
+<div bind:this={element} class="cardRoot flex-v shad-32 {className}" use:forwardEvents>
+    {#if $$slots.cardHeroSlot}
+        <div class="cardHero">
+            <div class="innerHero">
+                <slot name="cardHeroSlot"/>
+            </div>
+        </div>
+    {/if}
     <div class="cardTitle">
         <slot name="title"/>
     </div>
@@ -24,7 +30,6 @@
             <slot/>
         </slot>
     </div>
-    <Divider extension="full"/>
     <div class="cardFooter">
         <slot name="footer"/>
     </div>

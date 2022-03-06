@@ -12,7 +12,7 @@
   import Select from '$lib/vendor/select/Select.svelte';
   import Paper from '$lib/vendor/paper/Paper.svelte';
   import Icon from '$lib/vendor/icon/Icon.svelte';
-  import Card from '$lib/vendor/card/Card.svelte';
+  import CardDemo from '$lib/vendor/card/Card.demo.svelte';
   import Options from '$lib/vendor/select/Options.svelte';
 
   const menuData = [
@@ -89,19 +89,12 @@
                     <Paper>
                         <Menu menuList={menuData}/>
                     </Paper>
-
                 </div>
-                <Paper density="kind">
-                    <div class="gridIcon">
-                        {#each [...Array(20)] as key, val}
-                            <Card>
-                                <span slot="title">Title of the box</span>
-                                content
-                                <span slot="footer">Footer of the box</span>
-                            </Card>
-                        {/each}
-                    </div>
-                </Paper>
+                <div>
+                    <Paper density="kind">
+                        <CardDemo />
+                    </Paper>
+                </div>
             </div>
         </div>
     </div>
