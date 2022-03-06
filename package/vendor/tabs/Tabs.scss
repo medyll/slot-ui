@@ -1,0 +1,45 @@
+
+.tabsRoot {
+  position: relative;
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+
+    li {
+      padding: 0.5rem;
+      min-width: 48px;
+      cursor: pointer;
+
+      &.active {
+        font-weight: bold;
+      }
+    }
+  }
+
+  .tabsNav {
+    padding: 0.25rem 0;
+    gap: 1rem;
+    border-bottom: 1px solid var(--theme-border_color)
+  }
+
+  .tabsContent {
+    border: 1px solid var(--theme-border_color);
+    border-top: 1px solid transparent;
+    border-radius: 3px;
+    padding: 0.5rem;
+    background-color: var(--theme-color-background);
+    min-height: 96px;
+  }
+
+  .tabsActiveCell {
+    position: absolute;
+    border-radius: 6px;
+    background-color: var(--theme-color-primary);
+    height: 4px;
+    transition: all 0.250s;
+  }
+}

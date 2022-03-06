@@ -1,0 +1,28 @@
+.cardRoot {
+  border-radius: 6px;
+  background-color: var(--theme-color-background-paper);
+  min-height: 120px;
+  overflow: hidden;
+
+  .cardTitle {
+    text-align: center;
+  }
+
+  .cardContent {
+    flex:1;
+    padding: 0.5rem;
+    background-color: var(--theme-color-background-paper);
+    min-height:96px;
+  }
+
+  .cardHero {
+    min-height: 48px;
+    background-color: var(--theme-color-background-paper);
+  }
+
+.cardFooter{
+
+}
+
+
+}
