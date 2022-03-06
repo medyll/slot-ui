@@ -14,6 +14,7 @@
   import Icon from '$lib/vendor/icon/Icon.svelte';
   import CardDemo from '$lib/vendor/card/Card.demo.svelte';
   import Options from '$lib/vendor/select/Options.svelte';
+  import TreeDemo from '$lib/vendor/tree/Tree.demo.svelte';
 
   const menuData = [
     {text: 'text 1'},
@@ -93,6 +94,9 @@
                 <div>
                     <Paper density="kind">
                         <CardDemo />
+                    </Paper>
+                    <Paper density="kind">
+                        <TreeDemo />
                     </Paper>
                 </div>
             </div>

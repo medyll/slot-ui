@@ -63,7 +63,7 @@
 </ThemeWrapper>
 
 <style global lang="scss">
-  @import 'ress/ress.css';
+ // @import 'ress/ress.css';
   @import '../lib/css/cssfabric.min.css';
   @import url('https://fonts.googleapis.com/css?family=Rubik');
 
