@@ -37,6 +37,6 @@
 
     }
 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid var(--theme-border_color);
   }
 </style>

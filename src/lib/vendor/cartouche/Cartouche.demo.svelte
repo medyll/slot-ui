@@ -10,6 +10,7 @@
     Cartouche content
     <Divider />
 </Cartouche>
+<div>
 <Cartouche  stacked={true} label="This is a stacked cartouche"    >
     Cartouche content
 </Cartouche>
@@ -20,7 +21,7 @@
 <Cartouche  stacked={true}     >
     <Icon fontSize="small" slot="cartoucheIconSlot" icon="faUser" />
 </Cartouche>
-
+</div>
 <Cartouche    label="This is another cartouche"  class="marg-tb-1"  >
     <Cartouche  stacked={true}  label="Inner cartouche"  >
         cdcdsds

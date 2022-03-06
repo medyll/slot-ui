@@ -1,6 +1,7 @@
 const elem = (node: HTMLElement) => {
   return {
     find: (qy: string) => { return node.querySelector(qy);},
+    findAll: (qy: string) => { return node.querySelectorAll(qy);},
     up  : (qy?: string | undefined, index?: number) => {
       if (!qy) return node.parentNode;
       return _recursivelyFind(node, 'parentNode', qy, index);

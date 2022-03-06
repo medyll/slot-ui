@@ -7,11 +7,15 @@
   export {className as class};
   export let element: HTMLDivElement | null = null;
   const forwardEvents                       = createEventForwarder(get_current_component());
-
   /*  end slotUi exports*/
+
 </script>
 
 <div use:forwardEvents bind:this={element} class="cardRoot flex-v shad-32 {className}">
+    <div class="cardHero">
+        <slot name="cardHeroSlot"/>
+    </div>
+    <Divider />
     <div class="cardTitle">
         <slot name="title"/>
     </div>

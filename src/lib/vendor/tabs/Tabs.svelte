@@ -26,8 +26,8 @@
   let boundingClientRect: DOMRect;
   const handleClick = (tabValue) => (event) => {
     activeTabCode      = tabValue;
-    const node = navElementRef.querySelector('[data-code=theTitle1]');
-    
+    const node = elem(navElementRef).find(`[data-code=${activeTabCode}]`);
+
     if(node){
       boundingClientRect = node.getBoundingClientRect();
 

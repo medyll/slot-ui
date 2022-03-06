@@ -47,7 +47,6 @@
       dispatch('alert:closed');
     }
   };
-  console.log($$props);
 </script>
 
 {#if isOpen}
@@ -72,7 +71,7 @@
                 </div>
             </div>
             {#if $$slots.messageSlot}
-                <Divider/>
+                <Divider />
                 <div class="pad-1">
                     <slot name="messageSlot"/>
                 </div>

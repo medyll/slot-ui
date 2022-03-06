@@ -19,7 +19,7 @@
     drawerRef.toggle();
   };
 
-</script> 
+</script>
 
 <ThemeWrapper theme={'dark'} themes={themes}>
     <StartMenu/>  

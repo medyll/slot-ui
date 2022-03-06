@@ -8,13 +8,12 @@
   const items: TabsItemsProps = [
     {label: 'Tab 1', code: 'theTitle1'},
     {label: 'Tab 2', code: 'theTitle2'},
-    {label: 'Tab 3', code: 'theTitle3', component: Cartouche, componentProps: {label: 'dynamic'}},
+    {label: 'Another tab', code: 'theTitle3', component: Cartouche, componentProps: {label: 'inner component'}},
   ];
 </script>
 <Tabs activeTabCode="theTitle1" {items} />
 <Divider extension="centered" density="kind" />
-<Tabs activeTabCode="theTitle1" {items}>
+<Tabs activeTabCode="theTitle3" {items}>
     <span slot="tabsTitleSlot">some tabs title</span>
     <span slot="tabsButtonSlot"><Button>button</Button></span>
-
 </Tabs>

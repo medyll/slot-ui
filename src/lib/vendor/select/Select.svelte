@@ -38,11 +38,11 @@
 
 <input use:forwardEvents bind:this={element} id="cool" on:blur={show(false)} on:focus={show(true)}/>
 <ul
-        bind:this={innerRef}
-        class="select pos-abs shad-16 inputBorder"
-        on:click={handleClick('clicked')}
+        class="selectRoot pos-abs shad-16"
         role="listbox"
         style="display:{isVisible ? 'block' : 'none'}"
+        bind:this={innerRef}
+        on:click={handleClick('clicked')}
         use:stickTo={{ parentNode: document.getElementById('cool'), position: 'B' }}
 >
     {#each options as option}

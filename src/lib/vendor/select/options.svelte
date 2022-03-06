@@ -6,7 +6,7 @@
 	export let icon: any| undefined = undefined;
 </script>
 
-<li>
+<li class="pad-1">
 {text}
 </li>
 <slot />

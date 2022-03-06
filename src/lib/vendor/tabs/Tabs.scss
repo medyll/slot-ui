@@ -23,15 +23,16 @@
   .tabsNav {
     padding: 0.25rem 0;
     gap: 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1)
+    border-bottom: 1px solid var(--theme-border_color)
   }
 
   .tabsContent {
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--theme-border_color);
     border-top: 1px solid transparent;
     border-radius: 3px;
     padding: 0.5rem;
     background-color: var(--theme-color-background);
+    min-height: 96px;
   }
 
   .tabsActiveCell {
