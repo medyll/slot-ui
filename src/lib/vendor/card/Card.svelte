@@ -8,8 +8,9 @@
   export let element: HTMLDivElement | null = null;
   const forwardEvents                       = createEventForwarder(get_current_component());
   /*  end slotUi exports*/
-
+  /** vertical alignments of content */
   export let alignment: ElementProps['alignment']   = 'center';
+  /** carried data */
   export let data: ElementProps['data'] | undefined = undefined;
 
 </script>

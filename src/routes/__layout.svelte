@@ -63,8 +63,9 @@
 </ThemeWrapper>
 
 <style global lang="scss">
- // @import 'ress/ress.css';
-  @import '../lib/css/cssfabric.min.css';
+  @import '~@medyll/cssfabric/lib/styles/cssfabric.min.css';
+  @import '~@medyll/cssfabric/lib/styles/cssfabric.responsive.min.css';
+
   @import url('https://fonts.googleapis.com/css?family=Rubik');
 
   html {
@@ -88,7 +89,8 @@
   }
 
   button {
-    border: 0.5px solid rgba(255, 255, 255, 0.2);
+    color: var(--theme-color-text);
+    border: 0.5px solid var(--theme-border_color);
     padding: 0.5rem 0.75rem;
     border-radius: 4px;
     background-color: rgba(255, 255, 255, 0.1);

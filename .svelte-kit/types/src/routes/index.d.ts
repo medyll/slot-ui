@@ -1,4 +1,9 @@
 // this file is auto-generated
-import type { RequestHandler as GenericRequestHandler, Load as GenericLoad } from '@sveltejs/kit';
-export type RequestHandler = GenericRequestHandler<{  }>;
-export type Load<Props = Record<string, any>> = GenericLoad<{  }, Props>;
+import type { RequestHandler as GenericRequestHandler, ResponseBody, Load as GenericLoad } from '@sveltejs/kit';
+
+export type RequestHandler<Output extends ResponseBody = ResponseBody> = GenericRequestHandler<{}, Output>;
+
+export type Load<
+	InputProps extends Record<string, any> = Record<string, any>,
+	OutputProps extends Record<string, any> = InputProps
+> = GenericLoad<{}, InputProps, OutputProps>;
