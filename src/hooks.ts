@@ -1,6 +1,5 @@
 /** @type {import('@sveltejs/kit').GetSession} */
 export function getSession(event: any) {
-  console.log('here session about !!');
   return event.locals.user
          ? {
       user: {

@@ -1,10 +1,10 @@
-import { c as create_ssr_component, f as escape, v as validate_component, h as each, n as null_to_empty } from "../../../chunks/index-9e1741a1.js";
-import { a as Icon, D as Divider, p as propsXy, L as List, b as ListItem, t as toFa, T as TopBar } from "../../../chunks/List-a7ca1a3f.js";
+import { c as create_ssr_component, f as escape, v as validate_component, d as get_current_component, e as add_attribute, h as each, n as null_to_empty } from "../../../chunks/index-fbd3851f.js";
+import { I as Icon, D as Divider, p as propsXy, L as List, b as ListItem, t as toFa, T as TopBar } from "../../../chunks/List-02fdb02d.js";
 import "lodash";
-import "../../../chunks/VirtualList-5f532cf9.js";
-import "@fortawesome/free-regular-svg-icons";
-import "@fortawesome/free-brands-svg-icons";
+import { c as createEventForwarder } from "../../../chunks/VirtualList-b0c0fb34.js";
 import "@fortawesome/free-solid-svg-icons";
+import "@fortawesome/free-brands-svg-icons";
+import "@fortawesome/free-regular-svg-icons";
 const RECORDS = [
   {
     _id: "558d5d45a0ade1af528b4567",
@@ -8004,15 +8004,22 @@ ${validate_component(Divider, "Divider").$$render($$result, {}, {}, {})}
 `;
 });
 const Elementor = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let { class: className = "" } = $$props;
+  let { element = null } = $$props;
+  createEventForwarder(get_current_component());
   let { item = {} } = $$props;
   let itemKeyList;
+  if ($$props.class === void 0 && $$bindings.class && className !== void 0)
+    $$bindings.class(className);
+  if ($$props.element === void 0 && $$bindings.element && element !== void 0)
+    $$bindings.element(element);
   if ($$props.item === void 0 && $$bindings.item && item !== void 0)
     $$bindings.item(item);
   itemKeyList = Object.keys(item);
-  return `${each(itemKeyList, (key, val) => {
+  return `<div${add_attribute("this", element, 0)}>${each(itemKeyList, (key, val) => {
     return `${slots.default ? slots.default({ itemObject: { key, value: item[key] } }) : `
     `}`;
-  })}`;
+  })}</div>`;
 });
 var Frame_svelte_svelte_type_style_lang = "";
 const css = {
@@ -8020,8 +8027,15 @@ const css = {
   map: null
 };
 const Frame = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let { class: className = "" } = $$props;
+  let { element = null } = $$props;
+  createEventForwarder(get_current_component());
+  if ($$props.class === void 0 && $$bindings.class && className !== void 0)
+    $$bindings.class(className);
+  if ($$props.element === void 0 && $$bindings.element && element !== void 0)
+    $$bindings.element(element);
   $$result.css.add(css);
-  return `<div class="${"flex-v h-full overflow-hidden frame svelte-1edr997"}"><div>${slots.frameHeaderSlot ? slots.frameHeaderSlot({}) : ``}</div>
+  return `<div class="${"flex-v h-full overflow-hidden frame " + escape(className) + " svelte-1edr997"}"${add_attribute("this", element, 0)}><div>${slots.frameHeaderSlot ? slots.frameHeaderSlot({}) : ``}</div>
     <div class="${"frameContainer flex-h flex-main overflow-hidden"}"><div class="${"navLeft flex-v h-full overflow-hidden svelte-1edr997"}">${slots.navLeftHeaderFrameSlot ? slots.navLeftHeaderFrameSlot({}) : ``}
             ${slots.navLeftFrameSlot ? slots.navLeftFrameSlot({}) : ``}</div>
         <div class="${"h-full flex-main flex-v "}"><div>${slots.contentHeaderFrameSlot ? slots.contentHeaderFrameSlot({}) : ``}</div>

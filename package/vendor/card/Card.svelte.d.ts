@@ -4,7 +4,8 @@ declare const __propDef: {
     props: {
         class?: string | undefined;
         element?: HTMLDivElement | null | undefined;
-        data?: ElementProps['data'] | undefined;
+        /** vertical alignments of content */ alignment?: "left" | "right" | "center" | undefined;
+        /** carried data */ data?: ElementProps['data'] | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;

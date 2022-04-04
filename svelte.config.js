@@ -1,4 +1,6 @@
-import adapter from '@sveltejs/adapter-auto';
+// import adapter from '@sveltejs/adapter-auto';
+import adapter from '@sveltejs/adapter-node';
+
 import preprocess from 'svelte-preprocess';
 import {sx4uPreprocess} from './src/lib/uses/sx4u/sx4uPreprocess.js';
 

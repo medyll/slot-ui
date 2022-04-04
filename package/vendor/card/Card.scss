@@ -4,25 +4,37 @@
   min-height: 120px;
   overflow: hidden;
 
+  .cardHero {
+    min-height: 64px;
+    //background-color: var(--theme-color-background-paper);
+    text-align: center;
+
+    .innerHero {
+      border-radius: 6px;
+      margin: 0.5rem;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      min-height: 64px;
+      border: 1px solid var(--theme-border_color)
+    }
+  }
+
   .cardTitle {
     text-align: center;
   }
 
   .cardContent {
-    flex:1;
+    flex: 1;
     padding: 0.5rem;
     background-color: var(--theme-color-background-paper);
-    min-height:96px;
+    min-height: 96px;
   }
 
-  .cardHero {
-    min-height: 48px;
-    background-color: var(--theme-color-background-paper);
+  .cardFooter {
+    text-align: center;
+    padding: 0.5rem;
   }
-
-.cardFooter{
-
-}
 
 
 }

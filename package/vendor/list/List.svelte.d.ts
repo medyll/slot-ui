@@ -7,8 +7,8 @@ declare const __propDef: {
         listItems: LisItemProps[];
         direction?: "vertical" | "horizontal" | undefined;
         style?: string | undefined;
-        selectorField: undefined;
-        onItemClick: undefined;
+        selectorField: any;
+        onItemClick: any;
         title: string;
         density?: "default" | "none" | "tight" | "kind" | undefined;
     };

@@ -1,9 +1,9 @@
 export const manifest = {
 	appDir: "_app",
 	assets: new Set(["favicon.png"]),
+	mimeTypes: {".png":"image/png"},
 	_: {
-		mime: {".png":"image/png"},
-		entry: {"file":"start-4e074de8.js","js":["start-4e074de8.js","chunks/vendor-c4aeea05.js","chunks/singletons-a6a7384f.js"],"css":["assets/vendor-ed5447c5.css"]},
+		entry: {"file":"start-13ef3591.js","js":["start-13ef3591.js","chunks/vendor-7533cb4a.js","chunks/singletons-d1fb5791.js"],"css":["assets/vendor-ed5447c5.css"]},
 		nodes: [
 			() => import('./nodes/0.js'),
 			() => import('./nodes/1.js'),
@@ -14,8 +14,10 @@ export const manifest = {
 		routes: [
 			{
 				type: 'page',
+				id: "",
 				pattern: /^\/$/,
-				params: null,
+				names: [],
+				types: [],
 				path: "/",
 				shadow: () => import('./entries/endpoints/index.ts.js'),
 				a: [0,2],
@@ -23,8 +25,10 @@ export const manifest = {
 			},
 			{
 				type: 'page',
+				id: "explorer",
 				pattern: /^\/explorer\/?$/,
-				params: null,
+				names: [],
+				types: [],
 				path: "/explorer",
 				shadow: null,
 				a: [0,3],
@@ -32,13 +36,19 @@ export const manifest = {
 			},
 			{
 				type: 'page',
+				id: "what",
 				pattern: /^\/what\/?$/,
-				params: null,
+				names: [],
+				types: [],
 				path: "/what",
 				shadow: null,
 				a: [0,4],
 				b: [1]
 			}
-		]
+		],
+		matchers: async () => {
+			
+			return {  };
+		}
 	}
 };
