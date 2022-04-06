@@ -25,21 +25,22 @@
   let activeCellElementRef: HTMLElement;
   let boundingClientRect: DOMRect;
   const handleClick = (tabValue) => (event) => {
-    activeTabCode      = tabValue;
-    const node = elem(navElementRef).find(`[data-code=${activeTabCode}]`);
+    activeTabCode = tabValue;
+    const node    = elem(navElementRef).find(`[data-code=${activeTabCode}]`);
 
-    if(node){
+    if (node) {
       boundingClientRect = node.getBoundingClientRect();
 
       activeCellElementRef.style.left  = (boundingClientRect.left - activeCellElementRef.parentElement.offsetLeft) + 'px';
-      activeCellElementRef.style.width = boundingClientRect.width + 'px';
-
+      activeCellElementRef.style.width = (boundingClientRect.width) + 'px';
+      // activeCellElementRef.style.top   = (boundingClientRect.top - activeCellElementRef.parentElement.offsetTop) + 'px';
+      // activeCellElementRef.style.marginLeft = (boundingClientRect.width) / 2 + 'px';
     }
   };
 
-  onMount(()=>{
-        handleClick(activeTabCode)()
-  })
+  onMount(() => {
+    handleClick(activeTabCode)();
+  });
 
 </script>
 <div class="tabsRoot {className}">
@@ -58,7 +59,9 @@
             <slot name="tabsButtonSlot"></slot>
         </div>
     </nav>
-    <div bind:this={activeCellElementRef} class="tabsActiveCell"></div>
+    <div bind:this={activeCellElementRef} class="tabsActiveCellContainer">
+        <div class="tabSlot"></div>
+    </div>
     <div class="tabsContent">
         {#each items as item}
             {#if activeTabCode === item.code}
