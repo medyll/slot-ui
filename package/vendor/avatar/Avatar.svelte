@@ -29,7 +29,7 @@ const sizes = {
 <style >.avatar {
   position: relative;
   border-radius: 20%;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid var(--theme-color-border);
   display: grid;
   place-items: center;
   overflow: hidden; }

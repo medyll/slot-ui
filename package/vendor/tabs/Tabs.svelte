@@ -15,7 +15,9 @@ const handleClick = (tabValue) => (event) => {
     if (node) {
         boundingClientRect = node.getBoundingClientRect();
         activeCellElementRef.style.left = (boundingClientRect.left - activeCellElementRef.parentElement.offsetLeft) + 'px';
-        activeCellElementRef.style.width = boundingClientRect.width + 'px';
+        activeCellElementRef.style.width = (boundingClientRect.width) + 'px';
+        // activeCellElementRef.style.top   = (boundingClientRect.top - activeCellElementRef.parentElement.offsetTop) + 'px';
+        // activeCellElementRef.style.marginLeft = (boundingClientRect.width) / 2 + 'px';
     }
 };
 onMount(() => {
@@ -38,7 +40,9 @@ onMount(() => {
             <slot name="tabsButtonSlot"></slot>
         </div>
     </nav>
-    <div bind:this={activeCellElementRef} class="tabsActiveCell"></div>
+    <div bind:this={activeCellElementRef} class="tabsActiveCellContainer">
+        <div class="tabSlot"></div>
+    </div>
     <div class="tabsContent">
         {#each items as item}
             {#if activeTabCode === item.code}
@@ -72,10 +76,13 @@ onMount(() => {
     padding: 0.5rem;
     background-color: var(--theme-color-background);
     min-height: 96px; }
-  .tabsRoot .tabsActiveCell {
+  .tabsRoot .tabsActiveCellContainer {
     position: absolute;
-    border-radius: 6px;
-    background-color: var(--theme-color-primary);
     height: 4px;
     transition: all 0.250s; }
+    .tabsRoot .tabsActiveCellContainer .tabSlot {
+      border-radius: 6px;
+      height: 4px;
+      background-color: var(--theme-color-primary);
+      width: 100%; }
 </style>

@@ -1,7 +1,8 @@
-<script >import * as All1 from '@fortawesome/free-solid-svg-icons'; // add faSolid
+
+<script >import Fa from 'svelte-fa';
+import * as All1 from '@fortawesome/free-solid-svg-icons'; // add faSolid
 import * as All2 from '@fortawesome/free-brands-svg-icons';
 import * as All3 from '@fortawesome/free-regular-svg-icons';
-import Fa from 'svelte-fa/src/fa.svelte';
 let IconTypes = { ...All1, ...All2, ...All3 };
 const sizes = {
     tiny: 8,

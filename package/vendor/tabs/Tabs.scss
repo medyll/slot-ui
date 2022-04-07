@@ -35,11 +35,15 @@
     min-height: 96px;
   }
 
-  .tabsActiveCell {
+  .tabsActiveCellContainer {
     position: absolute;
-    border-radius: 6px;
-    background-color: var(--theme-color-primary);
     height: 4px;
     transition: all 0.250s;
+    .tabSlot  {
+      border-radius: 6px;
+      height: 4px;
+      background-color: var(--theme-color-primary);
+      width:100%;
+    }
   }
 }

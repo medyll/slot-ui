@@ -1,9 +1,10 @@
 {
   "name": "@medyll/slotui",
-  "version": "0.0.40",
+  "version": "0.0.42",
   "devDependencies": {
     "@babel/core": "^7.17.2",
     "@babel/preset-env": "^7.16.11",
+    "@babel/preset-typescript": "^7.16.7",
     "@sveltejs/adapter-auto": "next",
     "@sveltejs/adapter-node": "^1.0.0-next.67",
     "@sveltejs/kit": "^1.0.0-next.266",
@@ -34,6 +35,7 @@
   "dependencies": {
     "@capacitor/cli": "^3.4.1",
     "@capacitor/core": "^3.4.1",
+    "@fortawesome/fontawesome-free": "^6.1.1",
     "@fortawesome/free-brands-svg-icons": "^5.15.4",
     "@fortawesome/free-regular-svg-icons": "^5.15.4",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
@@ -49,7 +51,8 @@
     "svelte-fa": "^2.4.0",
     "svelte-themer": "^0.5.5",
     "svelte-use-form": "^2.4.3",
-    "svelte2tsx": "^0.5.5"
+    "svelte2tsx": "^0.5.5",
+    "ts-jest": "^27.1.4"
   },
   "exports": {
     "./package.json": "./package.json",
@@ -147,6 +150,7 @@
     "./vendor/switch/Switch.svelte": "./vendor/switch/Switch.svelte",
     "./vendor/tabs/Tabs.demo.svelte": "./vendor/tabs/Tabs.demo.svelte",
     "./vendor/tabs/Tabs.scss": "./vendor/tabs/Tabs.scss",
+    "./vendor/tabs/tabs.spec": "./vendor/tabs/tabs.spec.js",
     "./vendor/tabs/Tabs.svelte": "./vendor/tabs/Tabs.svelte",
     "./vendor/titleBar/TitleBar.svelte": "./vendor/titleBar/TitleBar.svelte",
     "./vendor/toast/Toast.svelte": "./vendor/toast/Toast.svelte",

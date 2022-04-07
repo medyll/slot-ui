@@ -1,4 +1,4 @@
-<script >import { openPopper } from '/src/lib/vendor/popper/actions';
+<script >import { openPopper } from '../../vendor/popper/actions';
 import ServiceBox from '../serviceBox/ServiceBox.svelte';
 const popServiceProps = {
     component: ServiceBox,
