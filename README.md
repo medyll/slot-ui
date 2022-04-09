@@ -2,12 +2,12 @@
 
 alpha stage 
 
-slotui is a  component library built for svelte
+slotui is a  component library built around svelte
 ## Do not try at home
  
 ```bash
 # do not do that
-npm init medyll@slotui
+npm i medyll@slotui
 
 # or that
 yarn add medyll@slotui
