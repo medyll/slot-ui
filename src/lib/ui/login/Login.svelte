@@ -1,6 +1,6 @@
 <script lang="ts">
   import {email, Hint, HintGroup, required, useForm} from 'svelte-use-form';
-  import {slide} from 'svelte/transition';
+  import {fade} from 'svelte/transition';
 
   import {userStore} from './store';
   import Backdrop from '../../base/backdrop/Backdrop.svelte';
@@ -21,34 +21,11 @@
     toggleLoading: (lo?: boolean) => {loading = lo ?? !loading;},
   };
 
-  export let onSubmit = function () {
-    return new Promise((resolve, reject) => {
-      return setTimeout(() => {resolve(true);}, 5000);
-    });
-  };
-
-  function validate() {
-    try {
-      submitting = true;
-      return onSubmit().then(() => {
-        $userStore.logged = true;
-        showLogin         = false;
-      }).catch((e) => {
-        console.log(e);
-        submitting = false;
-      });
-
-    } catch (e) {
-      console.log(e);
-      submitting = false;
-    }
-    return false;
-  }
 
 
   export let showLogin: boolean = true;
-  export let transition         = {type: slide, args: {}};
-  export let fields             = {email: 'user@user.com', password: ''};
+  export let transition         = {type: fade, args: {}};
+  export let fields             = {email: '', password: ''};
 
   export let loading = false;
   let submitting     = false;
@@ -61,11 +38,38 @@
 
   const form = useForm(validData);
 
+  export let onSubmit = function (args) {
+    return new Promise((resolve, reject) => {
+      return setTimeout(() => {resolve(true);}, 5000);
+    });
+  };
+
+  function validate() {
+    try {
+      submitting = true;
+      return onSubmit($form.values).then(() => {
+        $userStore.logged = true;
+        showLogin         = false;
+      }).catch((e) => {
+        console.log(e);
+        grantedError = true;
+        submitting = false;
+      });
+
+    } catch (e) {
+      console.log(e);
+      grantedError = true;
+      submitting = false;
+    }
+    return false;
+  }
+
+
 </script>
 {#if showLogin}
     <Backdrop loading={loading}>
         <form bind:this={element} class="pos-abs top-0 h-full w-full {className}" method="post" on:submit|preventDefault={validate} use:form>
-            <div transition:slide class="pos-rel h-full w-full flex-h flex-align-middle-center">
+            <div transition:fade class="pos-rel h-full w-full flex-h flex-align-middle-center">
                 <div class="form flex-v flex-align-middle-center">
                     <slot name="slotAvatar">
                         <div class="avatarHolder marg-b-2">

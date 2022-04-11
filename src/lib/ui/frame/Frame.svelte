@@ -2,12 +2,12 @@
     import {createEventForwarder} from '../../engine/engine';
     import {get_current_component} from 'svelte/internal';
 
-    /*  common slotUi exports*/
+    /** common slotUi exports*/
     let className = '';
     export {className as class};
     export let element: HTMLDivElement | null = null;
     const forwardEvents                       = createEventForwarder(get_current_component());
-    /*  end slotUi exports*/
+    /** end slotUi exports*/
 </script>
 <div use:forwardEvents bind:this={element} class="flex-v h-full overflow-hidden frame {className}">
     <div>
@@ -31,6 +31,7 @@
 
 
 <style lang="scss">
+
   .frame {
     z-index: 1;
     height: 100%;
@@ -38,9 +39,8 @@
     flex-direction: column;
     overflow: hidden;
     position: relative;
-    background-color: rgba(35, 31, 26, 0.5);
+    background-color: var(--theme-color-primary-alpha-mid);
     backdrop-filter: blur(30px);
-    color: white;
 
     .frameContainer {
 

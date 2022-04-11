@@ -12,7 +12,7 @@
   import Login from '../lib/ui/login/Login.svelte';
   import TaskBarContent from '../lib/engine/TaskBarContent.svelte';
   import Drawer from '$lib/base/drawer/Drawer.svelte';
-  import TopBar from '../lib/base/topBar/TopBar.svelte';
+  import TopBar from '../lib/ui/topBar/TopBar.svelte';
   import IconButton from '$lib/base/button/IconButton.svelte';
   import List from '$lib/base/list/List.svelte';
   import ListItem from '$lib/base/list/ListItem.svelte';

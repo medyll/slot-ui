@@ -19,11 +19,11 @@
   import Header from './Header.svelte';
   import Icon from '../../../lib/base/icon/Icon.svelte';
   import Divider from '../../../lib/base/divider/Divider.svelte';
-  import TopBar from '../../../lib/base/topBar/TopBar.svelte';
+  import TopBar from '../../../lib/ui/topBar/TopBar.svelte';
   import ContentSwitcher from '../../../lib/base/contentSwitcher/ContentSwitcher.svelte';
-  import MenuBar from '../../../lib/base/topBar/TopBar.svelte';
+  import MenuBar from '../../../lib/ui/topBar/TopBar.svelte';
   import Elementor from '../../../lib/base/elementor/Elementor.svelte';
-  import Frame from '$lib/base/frame/Frame.svelte';
+  import Frame from '$lib/ui/frame/Frame.svelte';
 
 
   let listItems = [];
