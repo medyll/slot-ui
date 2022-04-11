@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Divider from '../divider/Divider.svelte';
 	import type { ElementProps } from '../list/types';
-	import {createEventForwarder} from '$lib/engine/engine';
+	import {createEventForwarder} from '../../engine/engine';
 	import {get_current_component} from 'svelte/internal';
 
 	/*  common slotUi exports*/
@@ -20,5 +20,5 @@
 </div>
 
 <style lang="scss">
-	@import './BottomBar.scss';
+	@import 'BottomBar';
 </style>

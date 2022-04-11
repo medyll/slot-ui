@@ -28,5 +28,5 @@ function setVisible(vis) {
   top: 0;
   bottom: 0;
   padding: 1rem 2rem;
-  width: 100%; }
-</style>
+  width: 100%;
+}</style>

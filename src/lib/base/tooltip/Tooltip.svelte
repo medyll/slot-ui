@@ -1,8 +1,8 @@
 <script lang="ts">
   import {SvelteComponent} from 'svelte';
-  import {createEventForwarder} from '$lib/engine/engine';
+  import {createEventForwarder} from '../../engine/engine';
   import {get_current_component} from 'svelte/internal';
-  import {stickTo} from '$lib/uses/stickTo/stickTo';
+  import {stickTo} from '../../uses/stickTo/stickTo';
   /*  common slotUi exports*/
   let className = '';
   export {className as class};

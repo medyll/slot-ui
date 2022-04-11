@@ -6,8 +6,8 @@
   import {getAppWindowStore, windowsStore} from '/src/lib/ui/window/windowStore';
   import {draggable} from '@neodrag/svelte';
   import {onDestroy} from 'svelte';
-  import IconButton from '../../vendor/button/IconButton.svelte';
-  import Icon from '../../vendor/icon/Icon.svelte';
+  import IconButton from '../../base/button/IconButton.svelte';
+  import Icon from '../../base/icon/Icon.svelte';
 
   export let frameId                                   = '';
   export let self                                      = null;

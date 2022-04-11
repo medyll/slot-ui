@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Card from '$lib/vendor/card/Card.svelte';
-  import Icon from '$lib/vendor/icon/Icon.svelte';
+  import Card from './Card.svelte';
+  import Icon from '../icon/Icon.svelte';
 </script>
 
 <div class="gridDemo">

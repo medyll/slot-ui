@@ -1,6 +1,6 @@
 <script lang="ts">
   import {get_current_component} from 'svelte/internal';
-  import {createEventForwarder} from '$lib/engine/engine';
+  import {createEventForwarder} from '../../engine/engine';
 
   /*  common slotUi exports*/
   let className = '';
@@ -31,5 +31,5 @@
 </div>
 
 <style lang="scss">
-  @import './Avatar.scss';
+  @import 'Avatar';
 </style>

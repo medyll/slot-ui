@@ -1,17 +1,22 @@
+<svelte:head>
+    <title>SlotUi</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+    <link href="cssfabric/cssfabric.vars.css" rel="stylesheet">
+</svelte:head>
+
 <script lang="ts">
   import {ThemeWrapper} from 'svelte-themer';
   import Taskbar from '/src/lib/ui/taskbar/Taskbar.svelte';
   import Dashboard from '/src/components/pages/dashboard/Dashboard.svelte';
   import StartMenu from '/src/lib/ui/startMenu/StartMenu.svelte';
-  import Login from '../components/pages/login/Login.svelte';
+  import Login from '../lib/ui/login/Login.svelte';
   import TaskBarContent from '../lib/engine/TaskBarContent.svelte';
-  import Drawer from '$lib/vendor/drawer/Drawer.svelte';
-  import TopBar from '../lib/vendor/topBar/TopBar.svelte';
-  import IconButton from '$lib/vendor/button/IconButton.svelte';
-  import List from '$lib/vendor/list/List.svelte';
-  import ListItem from '$lib/vendor/list/ListItem.svelte';
+  import Drawer from '$lib/base/drawer/Drawer.svelte';
+  import TopBar from '../lib/base/topBar/TopBar.svelte';
+  import IconButton from '$lib/base/button/IconButton.svelte';
+  import List from '$lib/base/list/List.svelte';
+  import ListItem from '$lib/base/list/ListItem.svelte';
   import {themes} from '../themes/themes';
-  import {userStore} from '../components/pages/login/store';
 
   let drawerRef: Drawer;
 
@@ -22,22 +27,20 @@
 </script>
 
 <ThemeWrapper theme={'dark'} themes={themes}>
-    <StartMenu/>  
+    <StartMenu/>
     <div class="h-full overflow-hidden flex-v">
-        {#if $userStore.logged}
+        <Login showLogin={true}>
             <Taskbar>
                 <TaskBarContent/>
                 <div slot="taskBarRIght">
-                    <IconButton on:click={onItemClick} iconFontSize="small" icon="faAccusoft"/>
+                    <IconButton icon="faAccusoft" iconFontSize="small" on:click={onItemClick}/>
                 </div>
             </Taskbar>
             <div class="flex-main overflow-hidden">
                 <Dashboard/>
-                <slot />
+                <slot/>
             </div>
-        {:else}
-            <Login/>
-        {/if}
+        </Login>
     </div>
     <Drawer bind:this={drawerRef} isOpen={false}>
         <svelte:fragment slot="drawerMenuBar">
@@ -51,7 +54,7 @@
         </svelte:fragment>
         <div class="pad-2" slot="content">
             <List onItemClick={() => {}}>
-                {#each [...Array(10)] as key, val} 
+                {#each [...Array(10)] as key, val}
                     <ListItem>
                         <span slot="primary">Some idiom {val}</span>
                         <span slot="action"><button>fds de action</button></span>
@@ -63,8 +66,9 @@
 </ThemeWrapper>
 
 <style global lang="scss">
-  @import '~@medyll/cssfabric/lib/styles/cssfabric.min.css';
-  @import '~@medyll/cssfabric/lib/styles/cssfabric.responsive.min.css';
+  //@import "../node_modules/@medyll/cssfabric/lib/styles/cssfabric.min";
+  @import '@medyll/cssfabric/lib/styles/cssfabric.min.css';
+  /*@import '~@medyll/cssfabric/lib/styles/cssfabric.responsive.min.css';*/
 
   @import url('https://fonts.googleapis.com/css?family=Rubik');
 
@@ -97,6 +101,10 @@
 
     &:hover {
       background-color: rgba(208, 191, 151, 0.2);
+    }
+
+    &[disabled] {
+      color: var(--color-gray-800)
     }
   }
 

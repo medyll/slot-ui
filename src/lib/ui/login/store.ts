@@ -12,7 +12,7 @@ if (browser) {
 }
 
 export const userStore = writable<UserStoreType>({
-  logged: false,
+  logged: true,
   ...JSON.parse(storedUserStore ?? '{}')
 });
 

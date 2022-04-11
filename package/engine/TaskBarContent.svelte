@@ -1,7 +1,7 @@
 <script >import { getContext } from 'svelte';
 import { windowsStore } from '/src/lib/ui/window/windowStore';
-import { toggleStartMenu } from '../wactions.utils';
-import IconButton from '../vendor/button/IconButton.svelte';
+import { toggleStartMenu } from './wactions.utils';
+import IconButton from '../base/button/IconButton.svelte';
 let { toggle, current, theme } = getContext('theme');
 function toggleWindow(frame) {
     let frameId = frame.frameId;

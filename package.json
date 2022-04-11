@@ -2,7 +2,7 @@
   "name": "@medyll/slotui",
   "version": "0.0.5",
   "repository": {
-    "type" : "git",
+    "type": "git",
     "url": "https://github.com/medyll/slot-ui.git"
   },
   "scripts": {
@@ -15,6 +15,8 @@
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. .",
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
     "powerShell": "Start-process powershell -Verb runAs",
+    "css-build": "sass sass/cssfabric.scss cssfabric/cssfabric.vars.css",
+    "css-watch": "npm run css-build -- --watch",
     "vitebook:dev": "vitebook dev",
     "vitebook:build": "vitebook build",
     "vitebook:preview": "vitebook preview",

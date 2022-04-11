@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Icon from '$lib/vendor/icon/Icon.svelte';
-  import IconButton from '$lib/vendor/button/IconButton.svelte';
+  import Icon from '../icon/Icon.svelte';
+  import IconButton from '../button/IconButton.svelte';
   import ButtonAction from '../button/ButtonMenu.svelte';
 
   export let onClose: () => void;

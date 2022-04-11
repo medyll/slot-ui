@@ -4,8 +4,8 @@
 <script >import { getAppWindowStore, windowsStore } from '/src/lib/ui/window/windowStore';
 import { draggable } from '@neodrag/svelte';
 import { onDestroy } from 'svelte';
-import IconButton from '../../vendor/button/IconButton.svelte';
-import Icon from '../../vendor/icon/Icon.svelte';
+import IconButton from '../../base/button/IconButton.svelte';
+import Icon from '../../base/icon/Icon.svelte';
 export let frameId = '';
 export let self = null;
 export let defaultPosition = { x: 30, y: 30 };
@@ -103,24 +103,29 @@ function handleClose(args) {
   top: 0;
   left: 0;
   overflow: hidden;
-  z-index: 3000; }
-  .window .bar {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    background-color: #3c3f41;
-    color: white; }
-    .window .bar .handle {
-      flex: 1;
-      cursor: pointer; }
-  .window .buttonZone {
-    border-top: 1px solid #ccc;
-    padding: 0.5rem;
-    display: flex;
-    justify-content: end; }
+  z-index: 3000;
+}
+.window .bar {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  background-color: #3c3f41;
+  color: white;
+}
+.window .bar .handle {
+  flex: 1;
+  cursor: pointer;
+}
+.window .buttonZone {
+  border-top: 1px solid #ccc;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: end;
+}
 
 .iconZone {
-  display: flex; }
-  .iconZone > {
-    color: red; }
-</style>
+  display: flex;
+}
+.iconZone > {
+  color: red;
+}</style>

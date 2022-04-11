@@ -1,7 +1,7 @@
 
 
 <script lang="ts">
-  import {createEventForwarder} from '$lib/engine/engine';
+  import {createEventForwarder} from '../../engine/engine';
   import {get_current_component} from 'svelte/internal';
 
   /*  common slotUi exports*/

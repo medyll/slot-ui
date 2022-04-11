@@ -1,8 +1,8 @@
 <script lang="ts">
   import {clickAway} from '../../uses/clickAway/clickAway';
-  import IconButton from '../../vendor/button/IconButton.svelte';
-  import ButtonMenu from '../../vendor/button/ButtonAction.svelte';
-  import Debug from '../../vendor/debug/Debug.svelte';
+  import IconButton from '../../base/button/IconButton.svelte';
+  import ButtonMenu from '../../base/button/ButtonAction.svelte';
+  import Debug from '../../base/debug/Debug.svelte';
 
   const onclose = function () {
     console.log('close ??')

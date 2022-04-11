@@ -2,8 +2,8 @@
   import {getContext} from 'svelte';
   import type {IChromeArgs, WindowStoreListType} from '/src/lib/ui/window/windowStore';
   import {windowsStore} from '/src/lib/ui/window/windowStore';
-  import {toggleStartMenu} from '../wactions.utils';
-  import IconButton from '../vendor/button/IconButton.svelte';
+  import {toggleStartMenu} from './wactions.utils';
+  import IconButton from '../base/button/IconButton.svelte';
 
 
   let {toggle, current, theme} = getContext('theme');

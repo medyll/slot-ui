@@ -6,11 +6,11 @@
   import {createListStore} from './store';
   import type {ElementProps} from '../../../types';
   import {get_current_component, null_to_empty} from 'svelte/internal';
-  import {toFa} from '../../utils';
+  import {toFa} from '../../engine/utils';
   import Icon from '../icon/Icon.svelte';
   import ListTitle from './ListTitle.svelte';
   import VirtualList from '@sveltejs/svelte-virtual-list';
-  import {createEventForwarder} from '$lib/engine/engine';
+  import {createEventForwarder} from '../../engine/engine';
 
   /*  common slotUi exports*/
   let className = '';

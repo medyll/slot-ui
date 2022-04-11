@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type {ElementProps} from '$lib/vendor/list/types';
+  import type {ElementProps} from '../list/types';
 
   /*  common slotUi exports*/
   let className = '';

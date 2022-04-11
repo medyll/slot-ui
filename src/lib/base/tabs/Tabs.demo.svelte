@@ -1,7 +1,7 @@
 <script lang="ts">
   import Tabs from './Tabs.svelte';
-  import TabsItemsProps from '$lib/vendor/tabs/Tabs.svelte';
-  import Cartouche from '$lib/vendor/cartouche/Cartouche.svelte';
+  import TabsItemsProps from './Tabs.svelte';
+  import Cartouche from '../cartouche/Cartouche.svelte';
   import Divider from "../divider/Divider.svelte";
   import Button from "../button/Button.svelte";
 

@@ -1,7 +1,7 @@
 <script lang="ts">
   import type {SvelteComponent} from 'svelte';
   import {onMount} from 'svelte';
-  import {elem} from '../../elem';
+  import {elem} from '../../engine/elem';
 
   /*  common slotUi exports*/
   let className = '';
@@ -65,11 +65,11 @@
     <div class="tabsContent">
         {#each items as item}
             {#if activeTabCode === item.code}
-                <svelte:component this={item.component} {...item.componentProps}/>
+                <svelte:component this={item.component} {...item.componentProps ?? {}}/>
             {/if}
         {/each}
     </div>
 </div>
 <style lang="scss">
-  @import "./Tabs.scss";
+  @import "Tabs";
 </style>

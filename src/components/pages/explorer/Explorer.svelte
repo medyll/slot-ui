@@ -1,10 +1,10 @@
 <script lang="ts">
-  import List from '../../../lib/vendor/list/List.svelte';
-  import ListItem from '../../../lib/vendor/list/ListItem.svelte';
-  import ListTitle from '../../../lib/vendor/list/ListTitle.svelte';
-  import type {LisItemProps} from '../../../lib/vendor/list/types';
-  import {propsXy, toFa} from '$lib/utils';
-  import type {propsXyProps} from '$lib/utils';
+  import List from '../../../lib/base/list/List.svelte';
+  import ListItem from '../../../lib/base/list/ListItem.svelte';
+  import ListTitle from '../../../lib/base/list/ListTitle.svelte';
+  import type {LisItemProps} from '../../../lib/base/list/types';
+  import {propsXy, toFa} from '../../../lib/engine/utils';
+  import type {propsXyProps} from '../../../lib/engine/utils';
   import {null_to_empty} from 'svelte/internal';
   import _ from 'lodash';
   import VirtualList from '@sveltejs/svelte-virtual-list';
@@ -17,13 +17,13 @@
   import appscheme_icon from '/src/demoData/appscheme_icon.json';
   import appscheme_type from '/src/demoData/appscheme_type.json';
   import Header from './Header.svelte';
-  import Icon from '../../../lib/vendor/icon/Icon.svelte';
-  import Divider from '../../../lib/vendor/divider/Divider.svelte';
-  import TopBar from '../../../lib/vendor/topBar/TopBar.svelte';
-  import ContentSwitcher from '../../../lib/vendor/contentSwitcher/ContentSwitcher.svelte';
-  import MenuBar from '../../../lib/vendor/topBar/TopBar.svelte';
-  import Elementor from '../../../lib/vendor/elementor/Elementor.svelte';
-  import Frame from '$lib/vendor/frame/Frame.svelte';
+  import Icon from '../../../lib/base/icon/Icon.svelte';
+  import Divider from '../../../lib/base/divider/Divider.svelte';
+  import TopBar from '../../../lib/base/topBar/TopBar.svelte';
+  import ContentSwitcher from '../../../lib/base/contentSwitcher/ContentSwitcher.svelte';
+  import MenuBar from '../../../lib/base/topBar/TopBar.svelte';
+  import Elementor from '../../../lib/base/elementor/Elementor.svelte';
+  import Frame from '$lib/base/frame/Frame.svelte';
 
 
   let listItems = [];

@@ -1,9 +1,9 @@
 <script lang="ts">
   import {fade} from 'svelte/transition';
   import type {ElementProps} from '../../../types';
-  import Divider from '$lib/vendor/divider/Divider.svelte';
-  import IconButton from '$lib/vendor/button/IconButton.svelte';
-  import {createEventForwarder} from '$lib/engine/engine';
+  import Divider from '../divider/Divider.svelte';
+  import IconButton from '../button/IconButton.svelte';
+  import {createEventForwarder} from '../../engine/engine';
   import {createEventDispatcher, get_current_component} from 'svelte/internal';
 
   const dispatch = createEventDispatcher();
@@ -86,5 +86,5 @@
 {/if}
 
 <style lang="scss">
-  @import './Alert.scss';
+  @import 'Alert';
 </style>

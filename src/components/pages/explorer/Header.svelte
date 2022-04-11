@@ -1,6 +1,6 @@
 <script lang="ts">
-    import Icon from "../../../lib/vendor/icon/Icon.svelte";
-    import Divider from "../../../lib/vendor/divider/Divider.svelte";
+    import Icon from "../../../lib/base/icon/Icon.svelte";
+    import Divider from "../../../lib/base/divider/Divider.svelte";
 
     export let title:string;
 </script>

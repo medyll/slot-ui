@@ -1,4 +1,4 @@
-import { elem } from '../../elem';
+import { elem } from '../../engine/elem';
 
 type StickToProps = {
   parentNode: HTMLElement

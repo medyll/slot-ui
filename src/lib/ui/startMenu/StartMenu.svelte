@@ -7,12 +7,12 @@
   import Panel from '$lib/ui/panel/Panel.svelte';
   import PanelSlide from '$lib/ui/panel/PanelSlide.svelte';
 
-  import {openWindow, toggleStartMenu, startMenuStore} from '$lib/wactions.utils';
+  import {openWindow, toggleStartMenu, startMenuStore} from '../../engine/wactions.utils';
   import {afterUpdate, onMount, setContext, getContext} from 'svelte';
 
-  import IconButton from '$lib/vendor/button/IconButton.svelte';
+  import IconButton from '$lib/base/button/IconButton.svelte';
   import {writable} from 'svelte/store';
-  import Debug from '$lib/vendor/debug/Debug.svelte';
+  import Debug from '$lib/base/debug/Debug.svelte';
 
 
   const menuStore = writable<any>(null);

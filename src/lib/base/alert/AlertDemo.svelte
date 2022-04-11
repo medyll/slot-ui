@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Alert from '$lib/vendor/alert/Alert.svelte';
+	import Alert from './Alert.svelte';
 </script>
 
 <Alert level="success" message="Message as props" />

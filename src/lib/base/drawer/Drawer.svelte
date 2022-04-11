@@ -1,7 +1,7 @@
 <script lang="ts">
   import BottomBar from '../bottomBar/BottomBar.svelte';
   import IconButton from '../button/IconButton.svelte';
-  import {createEventForwarder} from '$lib/engine/engine';
+  import {createEventForwarder} from '../../engine/engine';
   import {get_current_component} from 'svelte/internal';
 
   type DrawerTitleType = string | undefined;
@@ -57,5 +57,5 @@
 {/if}
 
 <style lang="scss">
-  @import "./Drawer";
+  @import "Drawer";
 </style>

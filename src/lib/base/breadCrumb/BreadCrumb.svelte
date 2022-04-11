@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {createEventForwarder} from '$lib/engine/engine';
+	import {createEventForwarder} from '../../engine/engine';
 	import {get_current_component} from 'svelte/internal';
 
 	interface BreadListType {
@@ -33,5 +33,5 @@
 </nav>
 
 <style lang="scss">
-	@import './BreadCrumb.scss';
+	@import 'BreadCrumb';
 </style>

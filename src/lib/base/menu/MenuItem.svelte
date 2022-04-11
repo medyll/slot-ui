@@ -3,7 +3,7 @@
   import {null_to_empty} from 'svelte/internal';
 
   import type {MenuItemProps} from './types';
-  import Divider from '$lib/vendor/divider/Divider.svelte';
+  import Divider from '../divider/Divider.svelte';
 
   export let text: MenuItemProps['text'];
   export let icon: MenuItemProps['icon'] | undefined;

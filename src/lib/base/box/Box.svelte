@@ -1,6 +1,6 @@
 <script lang="ts">
-  import TitleBar from '$lib/vendor/titleBar/TitleBar.svelte';
-  import {createEventForwarder} from '$lib/engine/engine';
+  import TitleBar from '../titleBar/TitleBar.svelte';
+  import {createEventForwarder} from '../../engine/engine';
   import {createEventDispatcher, get_current_component} from 'svelte/internal';
 
   const dispatch = createEventDispatcher();
@@ -54,5 +54,5 @@
 </div>
 
 <style global lang="scss">
-  @import 'Box.scss';
+  @import 'Box';
 </style>

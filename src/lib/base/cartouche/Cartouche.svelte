@@ -1,9 +1,9 @@
 <script lang="ts">
   import {slide} from 'svelte/transition';
   import Icon from '../icon/Icon.svelte';
-  import {createEventForwarder} from '$lib/engine/engine';
+  import {createEventForwarder} from '../../engine/engine';
   import {get_current_component} from 'svelte/internal';
-  import {elem} from '$lib/elem';
+  import {elem} from '../../engine/elem';
   import type {SvelteComponent} from 'svelte';
 
   /** @restProps {button | a} */
@@ -70,7 +70,7 @@
 </div>
 
 <style lang="scss">
-  @import "./Cartouche";
+  @import "Cartouche";
 
   .cartoucheHolder {
     &.stacked {

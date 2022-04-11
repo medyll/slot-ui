@@ -1,7 +1,7 @@
 <script lang="ts">
-  import {stickTo} from '$lib/uses/stickTo/stickTo';
+  import {stickTo} from '../../uses/stickTo/stickTo';
   import type {ElementProps} from 'src/types';
-  import {createEventForwarder} from '$lib/engine/engine';
+  import {createEventForwarder} from '../../engine/engine';
   import {get_current_component} from 'svelte/internal';
 
   /*  common slotUi exports*/
@@ -51,5 +51,5 @@
 </ul>
 
 <style global lang="scss">
-  @import "./Select";
+  @import "Select";
 </style>

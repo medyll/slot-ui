@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Tree from '$lib/vendor/tree/Tree.svelte';
+  import Tree from './Tree.svelte';
 
   let paths = [
     'About.vue',

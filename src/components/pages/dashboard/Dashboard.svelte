@@ -1,20 +1,20 @@
 <script lang="ts">
   import {goto} from '$app/navigation';
-  import Divider from '$lib/vendor/divider/Divider.svelte';
-  import ButtonPanel from '$lib/vendor/button/ButtonMenu.svelte';
-  import ButtonActionDemo from '$lib/vendor/button/ButtonAction.demo.svelte';
-  import Menu from '$lib/vendor/menu/Menu.svelte';
-  import Avatar from '$lib/vendor/avatar/Avatar.svelte';
-  import AlertDemo from '$lib/vendor/alert/AlertDemo.svelte';
-  import TabsDemo from '$lib/vendor/tabs/Tabs.demo.svelte';
-  import CartoucheDemo from '$lib/vendor/cartouche/Cartouche.demo.svelte';
-  import BoxDemo from '$lib/vendor/box/Box.demo.svelte';
-  import Select from '$lib/vendor/select/Select.svelte';
-  import Paper from '$lib/vendor/paper/Paper.svelte';
-  import Icon from '$lib/vendor/icon/Icon.svelte';
-  import CardDemo from '$lib/vendor/card/Card.demo.svelte';
-  import Options from '$lib/vendor/select/Options.svelte';
-  import TreeDemo from '$lib/vendor/tree/Tree.demo.svelte';
+  import Divider from '$lib/base/divider/Divider.svelte';
+  import ButtonPanel from '$lib/base/button/ButtonMenu.svelte';
+  import ButtonActionDemo from '$lib/base/button/ButtonAction.demo.svelte';
+  import Menu from '$lib/base/menu/Menu.svelte';
+  import Avatar from '$lib/base/avatar/Avatar.svelte';
+  import AlertDemo from '$lib/base/alert/AlertDemo.svelte';
+  import TabsDemo from '$lib/base/tabs/Tabs.demo.svelte';
+  import CartoucheDemo from '$lib/base/cartouche/Cartouche.demo.svelte';
+  import BoxDemo from '$lib/base/box/Box.demo.svelte';
+  import Select from '$lib/base/select/Select.svelte';
+  import Paper from '$lib/base/paper/Paper.svelte';
+  import Icon from '$lib/base/icon/Icon.svelte';
+  import CardDemo from '$lib/base/card/Card.demo.svelte';
+  import Options from '$lib/base/select/Options.svelte';
+  import TreeDemo from '$lib/base/tree/Tree.demo.svelte';
 
   const menuData = [
     {text: 'text 1'},

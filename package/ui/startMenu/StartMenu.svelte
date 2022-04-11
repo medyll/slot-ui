@@ -4,11 +4,11 @@ import { sx4u } from '../../uses/sx4u/sx4u';
 import { clickAway } from '../../uses/clickAway/clickAway';
 import Panel from '../panel/Panel.svelte';
 import PanelSlide from '../panel/PanelSlide.svelte';
-import { openWindow, toggleStartMenu, startMenuStore } from '../../wactions.utils';
+import { openWindow, toggleStartMenu, startMenuStore } from '../../engine/wactions.utils';
 import { afterUpdate, onMount, setContext, getContext } from 'svelte';
-import IconButton from '../../vendor/button/IconButton.svelte';
+import IconButton from '../../base/button/IconButton.svelte';
 import { writable } from 'svelte/store';
-import Debug from '../../vendor/debug/Debug.svelte';
+import Debug from '../../base/debug/Debug.svelte';
 const menuStore = writable(null);
 let slideLeft;
 let slideRight;
@@ -92,41 +92,48 @@ function toggleSlidePanels(event) {
   overflow: hidden;
   z-index: 3000;
   position: absolute;
-  margin-top: 1rem; }
-  .startMenu .startMenuContent {
-    flex: 1;
-    overflow-y: auto;
-    overflow-x: hidden; }
+  margin-top: 1rem;
+}
+.startMenu .startMenuContent {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 
 .buttonPole {
   border-radius: 4px;
   border: 1px solid rgba(208, 191, 151, 0.3);
-  padding: 0.5rem; }
+  padding: 0.5rem;
+}
 
 .gridIcon {
   width: 100%;
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: repeat(auto-fill, minmax(30%, auto)); }
+  grid-template-columns: repeat(auto-fill, minmax(30%, auto));
+}
 
 .gridIconBis {
   width: 100%;
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: repeat(auto-fill, minmax(15%, auto)); }
+  grid-template-columns: repeat(auto-fill, minmax(15%, auto));
+}
 
 .gridIconMid {
   width: 100%;
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: repeat(auto-fill, minmax(49%, auto)); }
+  grid-template-columns: repeat(auto-fill, minmax(49%, auto));
+}
 
 .gridOne {
   width: 100%;
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: repeat(auto-fill, minmax(100%, auto)); }
+  grid-template-columns: repeat(auto-fill, minmax(100%, auto));
+}
 
 .bottomBar {
-  box-shadow: 0px 0px 3px 1px rgba(51, 51, 51, 0.5); }
-</style>
+  box-shadow: 0px 0px 3px 1px rgba(51, 51, 51, 0.5);
+}</style>
