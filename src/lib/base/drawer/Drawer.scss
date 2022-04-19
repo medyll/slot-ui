@@ -1,6 +1,6 @@
 .drawer {
   color: white;
-  background-color: rgba(59, 59, 59, 0.99);
+  background-color: var(--theme-color-background-alpha);
   backdrop-filter: blur(10px);
   position: fixed;
   width: 350px;

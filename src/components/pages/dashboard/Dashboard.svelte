@@ -3,7 +3,7 @@
   import Divider from '$lib/base/divider/Divider.svelte';
   import ButtonPanel from '$lib/base/button/ButtonMenu.svelte';
   import ButtonActionDemo from '$lib/base/button/ButtonAction.demo.svelte';
-  import Menu from '$lib/base/menu/Menu.svelte';
+  import Menu from '$lib/ui/menu/Menu.svelte';
   import Avatar from '$lib/base/avatar/Avatar.svelte';
   import AlertDemo from '$lib/base/alert/AlertDemo.svelte';
   import TabsDemo from '$lib/base/tabs/Tabs.demo.svelte';

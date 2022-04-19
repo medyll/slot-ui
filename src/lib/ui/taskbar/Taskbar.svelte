@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {openPopper} from '$lib/base/popper/actions';
+  import {openPopper} from '$lib/ui/popper/actions';
   import ServiceBox from '../serviceBox/ServiceBox.svelte';
 
   const popServiceProps = {

@@ -31,12 +31,11 @@
   .backdropRoot {
     position: absolute;
     z-index: 1000;
-    background-image: url('wallp (1).png');
     height: 100%;
     width: 100%;
 
     .backdropContent {
-      background-color: var(--theme-color-background-alpha);
+      background-color: var(--theme-color-foreground-alpha);
       backdrop-filter: blur(5px);
     }
   }

@@ -50,6 +50,7 @@
       return onSubmit($form.values).then(() => {
         $userStore.logged = true;
         showLogin         = false;
+        submitting = false;
       }).catch((e) => {
         console.log(e);
         grantedError = true;

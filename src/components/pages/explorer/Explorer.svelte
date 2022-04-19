@@ -49,7 +49,7 @@
     <MenuBar slot="navLeftHeaderFrameSlot" orientation="left" title="Navigation bar ">
         <input slot="menuBarSwitcher" placeholder="Search in Bar" style="width:100%;" type="text"/>
     </MenuBar>
-    <div slot="navLeftFrameSlot">
+    <div slot="frameDrawerSlot">
         <List selectorField="idappscheme"
               density="default"
               onItemClick={openIn}

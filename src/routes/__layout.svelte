@@ -1,6 +1,7 @@
 <svelte:head>
     <title>SlotUi</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+    <link href="../node_modules/@medyll/cssfabric/lib/styles/cssfabric.css"/>
     <link href="cssfabric/cssfabric.vars.css" rel="stylesheet">
 </svelte:head>
 
@@ -12,24 +13,35 @@
   import Login from '../lib/ui/login/Login.svelte';
   import TaskBarContent from '../lib/engine/TaskBarContent.svelte';
   import Drawer from '$lib/base/drawer/Drawer.svelte';
-  import TopBar from '../lib/ui/topBar/TopBar.svelte';
+  import TopBar from '$lib/ui/topBar/TopBar.svelte';
   import IconButton from '$lib/base/button/IconButton.svelte';
   import List from '$lib/base/list/List.svelte';
   import ListItem from '$lib/base/list/ListItem.svelte';
   import {themes} from '../themes/themes';
+  import Frame from '$lib/ui/frame/Frame.svelte';
+  import {onMount} from 'svelte';
 
+  let frameRef: Frame;
   let drawerRef: Drawer;
+  let drawerRefDash: Drawer;
 
   const onItemClick = function () {
     drawerRef.toggle();
   };
+
+  onMount(function () {
+    console.log({drawerRefDash});
+    //drawerRefDash.toggle();
+
+    console.log({frameRef})
+  });
 
 </script>
 
 <ThemeWrapper theme={'dark'} themes={themes}>
     <StartMenu/>
     <div class="h-full overflow-hidden flex-v">
-        <Login showLogin={true}>
+        <Login showLogin={false}>
             <Taskbar>
                 <TaskBarContent/>
                 <div slot="taskBarRIght">
@@ -37,6 +49,11 @@
                 </div>
             </Taskbar>
             <div class="flex-main overflow-hidden">
+                <Frame bind:this={frameRef} bind:frameDrawerRef={drawerRefDash}>
+                    <div slot="frameDrawerSlot">
+                        nav left
+                    </div>
+                </Frame>
                 <Dashboard/>
                 <slot/>
             </div>
@@ -66,10 +83,11 @@
 </ThemeWrapper>
 
 <style global lang="scss">
-  //@import "../node_modules/@medyll/cssfabric/lib/styles/cssfabric.min";
-  @import '@medyll/cssfabric/lib/styles/cssfabric.min.css';
+  // @import "../node_modules/@medyll/cssfabric/lib/styles/cssfabric.min";
+  //@import '@medyll/cssfabric/lib/styles/cssfabric.min.css';
   /*@import '~@medyll/cssfabric/lib/styles/cssfabric.responsive.min.css';*/
-
+  @import "../node_modules/@medyll/cssfabric/lib/styles/cssfabric";
+  @import "sass/cssfabric";
   @import url('https://fonts.googleapis.com/css?family=Rubik');
 
   html {

@@ -1,6 +1,5 @@
 
 <script lang="ts">
-  import Fa from 'svelte-fa';
   import * as All1 from '@fortawesome/free-solid-svg-icons'; // add faSolid
   import * as All2 from '@fortawesome/free-brands-svg-icons';
   import * as All3 from '@fortawesome/free-regular-svg-icons';
@@ -26,4 +25,5 @@
   export let fontSize: SizeType = 'medium';
 
 </script>
-<Fa icon={IconTypes[icon]} on:click style="font-size:{sizes[fontSize]}px"/>
+<i class="fa {icon}"></i>
+<!--<Fa icon={IconTypes[icon]} on:click style="font-size:{sizes[fontSize]}px"/>-->

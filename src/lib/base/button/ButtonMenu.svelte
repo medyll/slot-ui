@@ -1,9 +1,9 @@
 <script lang="ts">
   import type {SvelteComponentDev} from 'svelte/internal';
   import {get_current_component} from 'svelte/internal';
-  import {openPopper} from '../popper/actions';
+  import {openPopper} from '../../ui/popper/actions';
   import IconButton from './IconButton.svelte';
-  import Menu from '../menu/Menu.svelte';
+  import Menu from '../../ui/menu/Menu.svelte';
   import {createEventForwarder} from '../../engine/engine';
 
   export let icon: string = 'faList';

@@ -1161,7 +1161,14 @@ async function render_response({
 			stores: {
 				page: writable(null),
 				navigating: writable(null),
-				session,
+				/** @type {import('svelte/store').Writable<App.Session>} */
+				session: {
+					...session,
+					subscribe: (fn) => {
+						is_private = true;
+						return session.subscribe(fn);
+					}
+				},
 				updated
 			},
 			/** @type {import('types').Page} */
@@ -1199,17 +1206,7 @@ async function render_response({
 			props[`props_${i}`] = await branch[i].loaded.props;
 		}
 
-		let session_tracking_active = false;
-		const unsubscribe = session.subscribe(() => {
-			if (session_tracking_active) is_private = true;
-		});
-		session_tracking_active = true;
-
-		try {
-			rendered = options.root.render(props);
-		} finally {
-			unsubscribe();
-		}
+		rendered = options.root.render(props);
 	} else {
 		rendered = { head: '', html: '', css: { code: '', map: null } };
 	}
@@ -1728,11 +1725,18 @@ async function load_node({
 						throw new Error('Request body must be a string');
 					}
 
-					response = await respond(new Request(new URL(requested, event.url).href, opts), options, {
-						getClientAddress: state.getClientAddress,
-						initiator: route,
-						prerender: state.prerender
-					});
+					response = await respond(
+						// we set `credentials` to `undefined` to workaround a bug in Cloudflare
+						// (https://github.com/sveltejs/kit/issues/3728) — which is fine, because
+						// we only need the headers
+						new Request(new URL(requested, event.url).href, { ...opts, credentials: undefined }),
+						options,
+						{
+							getClientAddress: state.getClientAddress,
+							initiator: route,
+							prerender: state.prerender
+						}
+					);
 
 					if (state.prerender) {
 						dependency = { response, body: null };
@@ -2081,38 +2085,46 @@ async function respond_with_error({
 	resolve_opts
 }) {
 	try {
-		const default_layout = await options.manifest._.nodes[0](); // 0 is always the root layout
-		const default_error = await options.manifest._.nodes[1](); // 1 is always the root error
+		const branch = [];
+		let stuff = {};
 
-		const layout_loaded = /** @type {Loaded} */ (
-			await load_node({
-				event,
-				options,
-				state,
-				route: null,
-				node: default_layout,
-				$session,
-				stuff: {},
-				is_error: false,
-				is_leaf: false
-			})
-		);
+		if (resolve_opts.ssr) {
+			const default_layout = await options.manifest._.nodes[0](); // 0 is always the root layout
+			const default_error = await options.manifest._.nodes[1](); // 1 is always the root error
 
-		const error_loaded = /** @type {Loaded} */ (
-			await load_node({
-				event,
-				options,
-				state,
-				route: null,
-				node: default_error,
-				$session,
-				stuff: layout_loaded ? layout_loaded.stuff : {},
-				is_error: true,
-				is_leaf: false,
-				status,
-				error
-			})
-		);
+			const layout_loaded = /** @type {Loaded} */ (
+				await load_node({
+					event,
+					options,
+					state,
+					route: null,
+					node: default_layout,
+					$session,
+					stuff: {},
+					is_error: false,
+					is_leaf: false
+				})
+			);
+
+			const error_loaded = /** @type {Loaded} */ (
+				await load_node({
+					event,
+					options,
+					state,
+					route: null,
+					node: default_error,
+					$session,
+					stuff: layout_loaded ? layout_loaded.stuff : {},
+					is_error: true,
+					is_leaf: false,
+					status,
+					error
+				})
+			);
+
+			branch.push(layout_loaded, error_loaded);
+			stuff = error_loaded.stuff;
+		}
 
 		return await render_response({
 			options,
@@ -2122,10 +2134,10 @@ async function respond_with_error({
 				hydrate: options.hydrate,
 				router: options.router
 			},
-			stuff: error_loaded.stuff,
+			stuff,
 			status,
 			error,
-			branch: [layout_loaded, error_loaded],
+			branch,
 			event,
 			resolve_opts
 		});
@@ -2181,7 +2193,8 @@ async function respond$1(opts) {
 
 	try {
 		nodes = await Promise.all(
-			route.a.map((n) => options.manifest._.nodes[n] && options.manifest._.nodes[n]())
+			// we use == here rather than === because [undefined] serializes as "[null]"
+			route.a.map((n) => (n == undefined ? n : options.manifest._.nodes[n]()))
 		);
 	} catch (err) {
 		const error = coalesce_to_error(err);
@@ -2280,7 +2293,8 @@ async function respond$1(opts) {
 				if (error) {
 					while (i--) {
 						if (route.b[i]) {
-							const error_node = await options.manifest._.nodes[route.b[i]]();
+							const index = /** @type {number} */ (route.b[i]);
+							const error_node = await options.manifest._.nodes[index]();
 
 							/** @type {Loaded} */
 							let node_loaded;
@@ -2541,7 +2555,10 @@ async function respond(request, options, state) {
 		return new Response(undefined, {
 			status: 301,
 			headers: {
-				location: normalized + (url.search === '?' ? '' : url.search)
+				location:
+					// ensure paths starting with '//' are not treated as protocol-relative
+					(normalized.startsWith('//') ? url.origin + normalized : normalized) +
+					(url.search === '?' ? '' : url.search)
 			}
 		});
 	}
