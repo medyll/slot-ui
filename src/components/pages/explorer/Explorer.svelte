@@ -1,26 +1,13 @@
 <script lang="ts">
   import List from '../../../lib/base/list/List.svelte';
   import ListItem from '../../../lib/base/list/ListItem.svelte';
-  import ListTitle from '../../../lib/base/list/ListTitle.svelte';
   import type {LisItemProps} from '../../../lib/base/list/types';
-  import {propsXy, toFa} from '../../../lib/engine/utils';
-  import type {propsXyProps} from '../../../lib/engine/utils';
+  import type {PropsProxyProps} from '../../../lib/engine/utils';
+  import {propsProxy} from '../../../lib/engine/utils';
   import {null_to_empty} from 'svelte/internal';
-  import _ from 'lodash';
-  import VirtualList from '@sveltejs/svelte-virtual-list';
   import appscheme from '/src/demoData/appscheme.json';
-  import appscheme_base from '/src/demoData/appscheme_base.json';
-  import appscheme_field from '/src/demoData/appscheme_field.json';
-  import appscheme_field_group from '/src/demoData/appscheme_field_group.json';
-  import appscheme_field_type from '/src/demoData/appscheme_field_type.json';
-  import appscheme_has_field from '/src/demoData/appscheme_has_field.json';
-  import appscheme_icon from '/src/demoData/appscheme_icon.json';
-  import appscheme_type from '/src/demoData/appscheme_type.json';
   import Header from './Header.svelte';
   import Icon from '../../../lib/base/icon/Icon.svelte';
-  import Divider from '../../../lib/base/divider/Divider.svelte';
-  import TopBar from '../../../lib/ui/topBar/TopBar.svelte';
-  import ContentSwitcher from '../../../lib/base/contentSwitcher/ContentSwitcher.svelte';
   import MenuBar from '../../../lib/ui/topBar/TopBar.svelte';
   import Elementor from '../../../lib/base/elementor/Elementor.svelte';
   import Frame from '$lib/ui/frame/Frame.svelte';
@@ -35,39 +22,38 @@
     activeData = event;
   };
 
-  const schemeData                                        = appscheme.RECORDS;
-  const transformArgsBis: propsXyProps<LisItemProps, any> = [['primary', `nom${schemeName}`], ['secondary', `code${schemeName}`], ['icon', `icon${schemeName}`]];
-  listItems                                               = propsXy(transformArgsBis, schemeData);
+  const schemeData                                           = appscheme.RECORDS;
+  const transformArgsBis: PropsProxyProps<LisItemProps, any> = [['primary', `nom${schemeName}`], ['secondary', `code${schemeName}`], ['icon', `icon${schemeName}`]];
+  listItems                                                  = propsProxy(transformArgsBis, schemeData);
 
   let debugValues = [];
   $: if (activeData) {
     debugValues = Object.values(activeData);
   }
+
 </script>
 
 <Frame>
-    <MenuBar slot="navLeftHeaderFrameSlot" orientation="left" title="Navigation bar ">
-        <input slot="menuBarSwitcher" placeholder="Search in Bar" style="width:100%;" type="text"/>
+    <MenuBar orientation="left" slot="navLeftHeaderFrameSlot" title="Navigation bar ">
+        <input placeholder="Search in Bar" slot="menuBarSwitcher" style="width:100%;" type="text"/>
     </MenuBar>
-    <div slot="frameDrawerSlot">
-        <List selectorField="idappscheme"
-              density="default"
-              onItemClick={openIn}
-              title="Title List"
-              bind:listItems={listItems}
-              let:listItem
-              style="height:100%;">
-            <ListItem data="{listItem.data}">
-                <span slot="icon"><Icon fontSize="tiny" icon={toFa(listItem.icon)}/></span>
-                <span slot="primary">{null_to_empty(listItem.primary)}</span>
-                <span slot="action">{null_to_empty(listItem.action)}</span>
-            </ListItem>
-        </List>
-    </div>
-    <Header slot="contentHeaderFrameSlot" title={activeData?.[`nomAppscheme`]} bind:debugValues>
+    <List bind:listItems={listItems} density="default"
+          let:listItem
+          onItemClick={openIn}
+          selectorField="idappscheme"
+          slot="frameDrawerSlot"
+          style="height:100%;"
+          title="Title List test">
+        <ListItem data="{listItem.data}">
+            <span slot="icon"><Icon fontSize="tiny" icon={listItem.icon}/></span>
+            <span slot="primary">{null_to_empty(listItem.primary)}</span>
+            <span slot="action">{null_to_empty(listItem.action)}</span>
+        </ListItem>
+    </List>
+    <Header bind:debugValues slot="contentHeaderFrameSlot" title={activeData?.[`nomAppscheme`]}>
         {activeData?.[`nomAppscheme`]}
     </Header>
-    <div slot="contentFrameSlot" class="flex-main overflow-auto pad-4">
+    <div class="flex-main overflow-auto pad-4" slot="contentFrameSlot">
         {#if activeData}
             <Elementor let:itemObject bind:item={activeData}>
                 <div class="flex-h flex-align-middle">

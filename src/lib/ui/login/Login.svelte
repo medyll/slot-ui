@@ -22,7 +22,6 @@
   };
 
 
-
   export let showLogin: boolean = true;
   export let transition         = {type: fade, args: {}};
   export let fields             = {email: '', password: ''};
@@ -50,17 +49,17 @@
       return onSubmit($form.values).then(() => {
         $userStore.logged = true;
         showLogin         = false;
-        submitting = false;
+        submitting        = false;
       }).catch((e) => {
         console.log(e);
         grantedError = true;
-        submitting = false;
+        submitting   = false;
       });
 
     } catch (e) {
       console.log(e);
       grantedError = true;
-      submitting = false;
+      submitting   = false;
     }
     return false;
   }
@@ -97,7 +96,11 @@
                     {#if grantedError}
                         <div class="pad-1 color-scheme-error">Please verify your input</div>
                     {/if}
-                    <div class="retrieve pad-2">retrieve</div>
+                    {#if $$slots.slotRetrievePassword}
+                        <div class="retrieve pad-2">
+                            <slot name="slotRetrievePassword"></slot>
+                        </div>
+                    {/if}
                 </div>
             </div>
         </form>

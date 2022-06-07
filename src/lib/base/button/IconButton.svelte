@@ -4,7 +4,6 @@
 	import type { ElementProps } from '../../../types';
 	import {createEventForwarder} from '../../engine/engine';
 	import {get_current_component} from 'svelte/internal';
-
 	/*  common slotUi exports*/
 	let className = '';
 	export {className as class};
@@ -13,14 +12,18 @@
 	/*  end slotUi exports*/
 
 	export let icon: ElementProps['icon'];
+	export let iconFamily: string = 'fa-solid';
 	export let style: string = '';
 	export let showShip: boolean = false;
 	export let iconFontSize: ElementProps['sizeType'] = 'medium';
-</script>
 
-<button bind:this={element} use:forwardEvents on:click {style} class={className}>
+
+</script>
+<button data-iconButton bind:this={element} use:forwardEvents on:click {style} class={className}>
 	<span>
-		<span class="icon"><Icon {icon} fontSize={iconFontSize} /></span>
+		<span class="icon">
+			<Icon {icon} {iconFamily} fontSize={iconFontSize} />
+		</span>
 		<slot />
 	</span>
 	{#if showShip}

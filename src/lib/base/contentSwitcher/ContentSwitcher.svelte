@@ -12,7 +12,7 @@
   const forwardEvents                       = createEventForwarder(get_current_component());
   /*  end slotUi exports*/
 
-  export let icon: TIcon = 'faToggleOff';
+  export let icon: string = 'toggle';
   export let parent: HTMLElement;
 
   let visibleSate: boolean = false;
@@ -42,7 +42,7 @@
 <div bind:this={thisHolderRef} style="display:none">
     <div bind:this={thisRef} class="flex-h flex-align-middle" style="width:100%;flex:1;">
         <div>
-            <IconButton icon="faChevronLeft" iconFontSize="small" on:click={handleClick}/>
+            <IconButton  icon="chevron-left" iconFontSize="small" on:click={handleClick}/>
         </div>
         <div class="flex-main">
             <slot/>

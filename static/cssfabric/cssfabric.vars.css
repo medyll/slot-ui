@@ -314,7 +314,6 @@
   --theme-color-paper-alpha: rgba(237, 237, 237, 0.3);
   --theme-color-paper-alpha-low: rgba(237, 237, 237, 0.8);
   --theme-color-paper-alpha-high: rgba(237, 237, 237, 0.1);
-  --theme-color-border: rgba(40, 34, 48, 0.2);
 }
 :root [density=small] {
   --box-density-0: 0rem;
@@ -388,7 +387,7 @@
   --theme-color-paper-alpha: rgba(237, 237, 237, 0.3);
   --theme-color-paper-alpha-low: rgba(237, 237, 237, 0.8);
   --theme-color-paper-alpha-high: rgba(237, 237, 237, 0.1);
-  --theme-color-border: rgba(40, 34, 48, 0.2);
+  --theme-color-border: rgba(237, 237, 237, 0.2);
   --theme-color-overlay: rgba(208, 191, 151, 0.2);
 }
 :root [data-theme=dark] {
@@ -406,7 +405,7 @@
   --theme-color-paper-alpha: rgba(58, 59, 59, 0.3);
   --theme-color-paper-alpha-low: rgba(58, 59, 59, 0.8);
   --theme-color-paper-alpha-high: rgba(58, 59, 59, 0.1);
-  --theme-color-border: rgba(241, 241, 241, 0.3);
+  --theme-color-border: rgba(58, 59, 59, 0.2);
   --theme-color-overlay: rgba(255, 255, 255, 0.1);
 }
 

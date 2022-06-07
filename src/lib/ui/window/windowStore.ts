@@ -13,8 +13,10 @@ export type IChromeArgs  = {
   onClose?: () => {},
   onCancel?: () => {},
   onValidate?: () => {},
+  
   component?: any,
   componentProps?: any
+  
   zIndex?: number
   position?: {
     x: number;

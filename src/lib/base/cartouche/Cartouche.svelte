@@ -37,7 +37,7 @@
   let chevronIcon: 'faChevronDown' | 'faChevronUp';
   $: chevronIcon = !isOpen ? 'faChevronDown' : 'faChevronUp';
 
-  $: if (element) console.log(elem(element).next());
+  // $: if (element) console.log(elem(element).next());
 </script>
 
 <div class:stacked bind:this={element} class="cartoucheHolder {className}" style="{style}" use:forwardEvents>

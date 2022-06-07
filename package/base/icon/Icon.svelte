@@ -14,5 +14,5 @@ const sizes = {
 export let icon = 'faQuestion';
 export let fontSize = 'medium';
 </script>
-{icon}
+<i class="fa {icon}"></i>
 <!--<Fa icon={IconTypes[icon]} on:click style="font-size:{sizes[fontSize]}px"/>-->

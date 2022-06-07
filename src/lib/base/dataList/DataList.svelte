@@ -14,10 +14,7 @@
 
 </script>
 
-<div use:forwardEvents bind:this={element} class="dataList">
-    <slot name="head">
-
-    </slot>
+<div use:forwardEvents bind:this={element} class="dataList  {className}">
     <VirtualList height="100%" bind:items let:val>
         <slot item={val}>
         </slot>

@@ -13,7 +13,7 @@
   import Paper from '$lib/base/paper/Paper.svelte';
   import Icon from '$lib/base/icon/Icon.svelte';
   import CardDemo from '$lib/base/card/Card.demo.svelte';
-  import Options from '$lib/base/select/Options.svelte';
+  import Options from '../../../lib/base/select/Options.svelte';
   import TreeDemo from '$lib/base/tree/Tree.demo.svelte';
 
   const menuData = [
@@ -64,10 +64,10 @@
                 <div>
                     <Paper density="kind">
                         <Avatar size="small">
-                            <Icon icon="faCode"/>
+                            <Icon icon="code"/>
                         </Avatar>
                         <Avatar size="small">
-                            <Icon icon="faCode"/>
+                            <Icon icon="code"/>
                         </Avatar>
                     </Paper>
                     <Paper density="kind">

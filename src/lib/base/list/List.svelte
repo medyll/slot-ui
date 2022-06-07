@@ -1,4 +1,3 @@
-
 <script lang="ts">
   import type {LisItemProps} from './types';
   import ListItem from './ListItem.svelte';
@@ -6,7 +5,6 @@
   import {createListStore} from './store';
   import type {ElementProps} from '../../../types';
   import {get_current_component, null_to_empty} from 'svelte/internal';
-  import {toFa} from '../../engine/utils';
   import Icon from '../icon/Icon.svelte';
   import ListTitle from './ListTitle.svelte';
   import VirtualList from '@sveltejs/svelte-virtual-list';
@@ -39,23 +37,24 @@
     onItemClick && onItemClick(e.detail);
   }
 
+  console.log(element)
 </script>
 
-<ul class="density-{density}" on:list:listItem:clicked={onListItemClick} bind:this={element} style="{style}">
+<ul bind:this={element} class="density-{density}"
+    on:list:listItem:clicked={onListItemClick}
+    style="position:relative;height:100%;{style};margin:0;padding:0">
     {#if $$slots.title || title}
         <slot name="title">
             <ListTitle primary={title}/>
         </slot>
     {/if}
     {#if listItems}
-        <VirtualList items={listItems} let:item>
-            <slot listItem={item}>
-                <ListItem density={density} data={item.data}>
-                    <span slot="icon"><Icon fontSize="tiny" icon={toFa(item.icon)}/></span>
-                    <span slot="primary">{null_to_empty(item.primary)}</span>
-                    <span slot="action">{null_to_empty(item.action)}</span>
-                </ListItem>
-            </slot>
+        <VirtualList height="100%" items={listItems} let:item>
+            <ListItem density={density} data={item.data}>
+                <span slot="icon"><Icon fontSize="tiny" icon={item.icon}/></span>
+                <span slot="primary">{null_to_empty(item.primary)}</span>
+                <span slot="action">{null_to_empty(item.action)}</span>
+            </ListItem>
         </VirtualList>
     {/if}
     {#if !listItems}
@@ -63,7 +62,7 @@
     {/if}
 </ul>
 
-<style lang="scss" global>
+<style global lang="scss">
   @import "List";
 </style>
 

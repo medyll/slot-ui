@@ -1,8 +1,7 @@
-import _ from 'lodash';
 
-export type propsXyProps<T = any, B = any> = [string: keyof T, string: keyof B][]
+export type PropsProxyProps<T = any, B = any> = [string: keyof T, string: keyof B][]
 
-export const propsXy = <T = any, B = any, C = any>(props: propsXyProps<T, B>, data: any[]): Record<keyof B, any>[] => {
+export const propsProxy = <T = any, B = any, C = any>(props: PropsProxyProps<T, B>, data: any[]): Record<keyof B, any>[] => {
   
   let ret: any[] = [];
   for (const dta of data) {
@@ -19,9 +18,4 @@ export const propsXy = <T = any, B = any, C = any>(props: propsXyProps<T, B>, da
   }
   
   return ret;
-};
-
-export const toFa = function (strIn: string) {
-  return strIn ? 'fa'+ _.capitalize(_.camelCase(strIn))
-               : '';
 };

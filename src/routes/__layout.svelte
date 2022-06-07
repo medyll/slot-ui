@@ -1,8 +1,8 @@
 <svelte:head>
     <title>SlotUi</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
-    <link href="../node_modules/@medyll/cssfabric/lib/styles/cssfabric.css"/>
-    <link href="cssfabric/cssfabric.vars.css" rel="stylesheet">
+    <link href="node_modules/@medyll/cssfabric/lib/styles/cssfabric.css"/>
+    <link href="../../static/cssfabric/cssfabric.vars.css" rel="stylesheet">
 </svelte:head>
 
 <script lang="ts">
@@ -20,6 +20,7 @@
   import {themes} from '../themes/themes';
   import Frame from '$lib/ui/frame/Frame.svelte';
   import {onMount} from 'svelte';
+  import {toggleStartMenu} from "../lib/engine/wactions.utils";
 
   let frameRef: Frame;
   let drawerRef: Drawer;
@@ -33,7 +34,7 @@
     console.log({drawerRefDash});
     //drawerRefDash.toggle();
 
-    console.log({frameRef})
+    console.log({frameRef});
   });
 
 </script>
@@ -43,19 +44,18 @@
     <div class="h-full overflow-hidden flex-v">
         <Login showLogin={false}>
             <Taskbar>
+                <IconButton slot="taskBarLeft" icon="barcode" on:click="{toggleStartMenu}" style="color:white;font-size: large"/>
                 <TaskBarContent/>
-                <div slot="taskBarRIght">
-                    <IconButton icon="faAccusoft" iconFontSize="small" on:click={onItemClick}/>
-                </div>
+                <IconButton slot="taskBarRight" icon="fist-raised" iconFontSize="small" on:click={onItemClick} />
             </Taskbar>
             <div class="flex-main overflow-hidden">
-                <Frame bind:this={frameRef} bind:frameDrawerRef={drawerRefDash}>
+                <slot/>
+                <Frame bind:frameDrawerRef={drawerRefDash} bind:this={frameRef}>
                     <div slot="frameDrawerSlot">
                         nav left
                     </div>
+                    <Dashboard slot="contentFrameSlot"/>
                 </Frame>
-                <Dashboard/>
-                <slot/>
             </div>
         </Login>
     </div>
@@ -69,7 +69,7 @@
                 </svelte:fragment>
             </TopBar>
         </svelte:fragment>
-        <div class="pad-2" slot="content">
+        <div class="pad-2"  >
             <List onItemClick={() => {}}>
                 {#each [...Array(10)] as key, val}
                     <ListItem>
@@ -86,7 +86,7 @@
   // @import "../node_modules/@medyll/cssfabric/lib/styles/cssfabric.min";
   //@import '@medyll/cssfabric/lib/styles/cssfabric.min.css';
   /*@import '~@medyll/cssfabric/lib/styles/cssfabric.responsive.min.css';*/
-  @import "../node_modules/@medyll/cssfabric/lib/styles/cssfabric";
+  @import "node_modules/@medyll/cssfabric/lib/styles/cssfabric";
   @import "sass/cssfabric";
   @import url('https://fonts.googleapis.com/css?family=Rubik');
 
