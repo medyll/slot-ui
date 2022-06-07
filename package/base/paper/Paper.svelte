@@ -1,4 +1,4 @@
-<script >/*  common slotUi exports*/
+<script>/*  common slotUi exports*/
 let className = '';
 export { className as class };
 export let element = null;
@@ -15,7 +15,7 @@ let densityClass = {
     <slot></slot>
 </div>
 
-<style global >:global(.paper) {
+<style global>:global(.paper) {
   background-color: var(--theme-color-background-contrast);
   border-radius: 6px;
 }</style>

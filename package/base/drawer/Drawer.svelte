@@ -1,5 +1,5 @@
 <svelte:options accessors/>
-<script >import BottomBar from '../bottomBar/BottomBar.svelte';
+<script>import BottomBar from '../bottomBar/BottomBar.svelte';
 import IconButton from '../button/IconButton.svelte';
 import { createEventForwarder } from '../../engine/engine';
 import { get_current_component } from 'svelte/internal';
@@ -81,7 +81,7 @@ $: style = `position:${positionStyle};width:${widthStyle}!important`;
         {/if}
     {/if}
 </div>
-<style global >:global(.drawer) {
+<style global>:global(.drawer) {
   color: var(--css-drawer-color, inherit);
   background-color: var(--css-drawer-bg-color, var(--theme-color-background-alpha));
   backdrop-filter: var(--css-drawer-backdrop-blur, blur(10px));

@@ -1,4 +1,4 @@
-<script >import { get_current_component } from 'svelte/internal';
+<script>import { get_current_component } from 'svelte/internal';
 import { createEventForwarder } from '../../engine/engine';
 /*  common slotUi exports*/
 let className = '';
@@ -26,7 +26,7 @@ const sizes = {
     <slot/>
 </div>
 
-<style >.avatar {
+<style>.avatar {
   position: relative;
   border-radius: var(--css-avatar-radius, 20%);
   border: 1px solid var(--cass-avatar-border-color, var(--theme-color-border));

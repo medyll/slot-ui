@@ -1,4 +1,4 @@
-<script >import Box from './Box.svelte';
+<script>import Box from './Box.svelte';
 import Icon from '../icon/Icon.svelte';
 import Divider from '../divider/Divider.svelte';
 </script>

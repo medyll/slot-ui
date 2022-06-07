@@ -1,4 +1,4 @@
-<script >import { stickTo } from '../../uses/stickTo/stickTo';
+<script>import { stickTo } from '../../uses/stickTo/stickTo';
 import { createEventForwarder } from '../../engine/engine';
 import { get_current_component } from 'svelte/internal';
 /*  common slotUi exports*/
@@ -41,7 +41,7 @@ const handleClick = (visible) => (event) => {
     {/each}
 </ul>
 
-<style global >:global(.selectRoot) {
+<style global>:global(.selectRoot) {
   background-color: var(--theme-overlay_color);
   height: 160px;
   width: 160px;

@@ -1,4 +1,4 @@
-<script >import { getContext } from 'svelte';
+<script>import { getContext } from 'svelte';
 import { windowsStore } from '/src/lib/ui/window/windowStore';
 import { toggleStartMenu } from './wactions.utils';
 import IconButton from '../base/button/IconButton.svelte';

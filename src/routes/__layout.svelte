@@ -73,7 +73,8 @@
             <List onItemClick={() => {}}>
                 {#each [...Array(10)] as key, val}
                     <ListItem>
-                        <span slot="primary">Some idiom {val}</span>
+                        <span slot="primary">Some idioms {val}</span>
+                        <span slot="secondary">secondary {val}</span>
                         <span slot="action"><button>fds de action</button></span>
                     </ListItem>
                 {/each}

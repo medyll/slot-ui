@@ -1,5 +1,5 @@
 <svelte:options accessors={true}/>
-<script >import Tabs from './Tabs.svelte';
+<script>import Tabs from './Tabs.svelte';
 import TabsItemsProps from './Tabs.svelte';
 import Cartouche from '../cartouche/Cartouche.svelte';
 import Divider from '../divider/Divider.svelte';

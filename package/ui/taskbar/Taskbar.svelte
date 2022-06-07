@@ -1,4 +1,4 @@
-<script >"use strict";
+<script>"use strict";
 </script>
 
 <div class="bar flex-h flex-align-middle">
@@ -8,7 +8,7 @@
     </div>
     <slot name="taskBarRight"></slot>
 </div>
-<style >.bar {
+<style>.bar {
   grid-gap: var(--box-density-1, 8px);
   background-size: auto;
   background-color: var(--css-taskbar-bg-color, rgba(255, 255, 255, 0.5));

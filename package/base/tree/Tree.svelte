@@ -1,7 +1,7 @@
 
 <svelte:options accessors={true}/>
 
-<script >import { trans2Tree } from './tree.utils';
+<script>import { trans2Tree } from './tree.utils';
 export let paths = [];
 export let pathField = 'path';
 export let pathes = trans2Tree(paths, pathField);
@@ -26,7 +26,7 @@ export let pathes = trans2Tree(paths, pathField);
     </div>
 {/each}
 </div>
-<style >.treeRoot .notter {
+<style>.treeRoot .notter {
   border: 1px solid var(--theme-border_color);
   border-radius: 6px;
   background-color: var(--theme-color-primary);

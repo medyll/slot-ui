@@ -1,4 +1,4 @@
-<script >export let steps = [];
+<script>export let steps = [];
 export let stepperOrientation = 'horizontal';
 export const setActiveStep = function (step) {
     activeStep = step ?? 0;
@@ -12,7 +12,7 @@ let activeStep = 0;
     {/each}
 </div>
 
-<style >.stepper .step {
+<style>.stepper .step {
   padding: 0.5rem;
   background-color: red;
   border-radius: 10px;

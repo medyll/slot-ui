@@ -1,5 +1,5 @@
 <svelte:options accessors/>
-<script >import { createEventForwarder } from '../../engine/engine';
+<script>import { createEventForwarder } from '../../engine/engine';
 import { get_current_component } from 'svelte/internal';
 import Drawer from '../../base/drawer/Drawer.svelte';
 /** common slotUi exports*/
@@ -55,7 +55,7 @@ export const actions = {
 </div>
 
 
-<style >.frame {
+<style>.frame {
   z-index: 1;
   height: 100%;
   display: flex;

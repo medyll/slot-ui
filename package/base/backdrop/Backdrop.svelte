@@ -1,4 +1,4 @@
-<script >/*  common slotUi exports*/
+<script>/*  common slotUi exports*/
 import { createEventForwarder } from '../../engine/engine';
 import { get_current_component } from 'svelte/internal';
 let className = '';
@@ -22,7 +22,7 @@ export let loading = false;
         {/if}
     </div>
 </div>
-<style >.backdropRoot {
+<style>.backdropRoot {
   position: absolute;
   z-index: 1000;
   height: 100%;

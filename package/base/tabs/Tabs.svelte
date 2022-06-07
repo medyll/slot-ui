@@ -1,4 +1,4 @@
-<script >import { onMount } from 'svelte';
+<script>import { onMount } from 'svelte';
 import { elem } from '../../engine/elem';
 /*  common slotUi exports*/
 let className = '';
@@ -51,7 +51,7 @@ onMount(() => {
         {/each}
     </div>
 </div>
-<style >.tabsRoot {
+<style>.tabsRoot {
   position: relative;
 }
 .tabsRoot ul {

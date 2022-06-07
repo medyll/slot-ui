@@ -1,4 +1,4 @@
-<script >import Cartouche from '../cartouche/Cartouche.svelte';
+<script>import Cartouche from '../cartouche/Cartouche.svelte';
 import Tabs from '../tabs/Tabs.svelte';
 export * as DebugTypes from './Debug.svelte';
 const items = [

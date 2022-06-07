@@ -1,6 +1,6 @@
 <svelte:options accessors={true}
                 immutable={true}/>
-<script >import { transitions } from '../../effects/transitions';
+<script>import { transitions } from '../../effects/transitions';
 import { onMount, setContext } from 'svelte';
 const { slideOut, slideIn, slideInRtl, slideOutRt } = transitions;
 export let open;
@@ -23,7 +23,7 @@ function setVisible(vis) {
     </div>
 {/if}
 
-<style >.sidePanel {
+<style>.sidePanel {
   position: absolute;
   top: 0;
   bottom: 0;

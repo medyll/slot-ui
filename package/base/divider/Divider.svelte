@@ -1,4 +1,4 @@
-<script >import { createEventForwarder } from '../../engine/engine';
+<script>import { createEventForwarder } from '../../engine/engine';
 import { get_current_component } from 'svelte/internal';
 /*  common slotUi exports*/
 let className = '';
@@ -40,7 +40,7 @@ switch (direction) {
     style="{addStyle}"
     use:forwardEvents/>
 
-<style >hr {
+<style>hr {
   border: none;
   border-top: 1px solid var(--theme-border_color);
   background-color: var(--theme-border_color);

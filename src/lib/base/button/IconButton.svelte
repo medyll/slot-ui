@@ -13,6 +13,7 @@
 
 	export let icon: ElementProps['icon'];
 	export let iconFamily: string = 'fa-solid';
+	export let iconClassName: string = '';
 	export let style: string = '';
 	export let showShip: boolean = false;
 	export let iconFontSize: ElementProps['sizeType'] = 'medium';
@@ -22,7 +23,7 @@
 <button data-iconButton bind:this={element} use:forwardEvents on:click {style} class={className}>
 	<span>
 		<span class="icon">
-			<Icon {icon} {iconFamily} fontSize={iconFontSize} />
+			<Icon {icon} {iconFamily} class={iconClassName} fontSize={iconFontSize} />
 		</span>
 		<slot />
 	</span>

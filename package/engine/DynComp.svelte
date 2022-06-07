@@ -1,4 +1,4 @@
-<script >import { onMount } from 'svelte';
+<script>import { onMount } from 'svelte';
 // import type { PostPayload } from '../../models/post';
 export let id;
 let ref;

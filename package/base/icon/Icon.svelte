@@ -1,4 +1,4 @@
-<script >import Iconify from '@iconify/iconify';
+<script>import Iconify from '@iconify/iconify';
 const sizes = {
     tiny: 8,
     small: 16,

@@ -1,4 +1,4 @@
-<script >import TitleBar from '../titleBar/TitleBar.svelte';
+<script>import TitleBar from '../titleBar/TitleBar.svelte';
 import { createEventForwarder } from '../../engine/engine';
 import { createEventDispatcher, get_current_component } from 'svelte/internal';
 const dispatch = createEventDispatcher();
@@ -46,7 +46,7 @@ export let onClose;
     </div>
 </div>
 
-<style global >:global(.boxRoot) {
+<style global>:global(.boxRoot) {
   min-height: 160px;
   min-width: 320px;
   background-color: var(--theme-color-background);

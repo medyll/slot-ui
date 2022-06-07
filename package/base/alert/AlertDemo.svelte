@@ -1,4 +1,4 @@
-<script >import Alert from './Alert.svelte';
+<script>import Alert from './Alert.svelte';
 </script>
 
 <Alert level="success" message="Message as props" />

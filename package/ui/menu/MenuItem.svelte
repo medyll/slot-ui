@@ -1,4 +1,4 @@
-<script >import { getContext } from 'svelte';
+<script>import { getContext } from 'svelte';
 import { null_to_empty } from 'svelte/internal';
 import Divider from '../../base/divider/Divider.svelte';
 export let text;
@@ -27,7 +27,7 @@ if (icon || $$slots.menuItemIconSlot) {
         <Divider extension="none"/>
     </li>
 {/if}
-<style global >:global(.menu) {
+<style global>:global(.menu) {
   min-width: 150px;
   padding: 0.25rem;
   cursor: pointer;

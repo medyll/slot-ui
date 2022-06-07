@@ -1,4 +1,4 @@
-<script >import { createEventForwarder } from '../../engine/engine';
+<script>import { createEventForwarder } from '../../engine/engine';
 import { get_current_component } from 'svelte/internal';
 /*  common slotUi exports*/
 let className = '';

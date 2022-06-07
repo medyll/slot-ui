@@ -1,4 +1,4 @@
-<script >import { setContext } from 'svelte';
+<script>import { setContext } from 'svelte';
 import { writable } from 'svelte/store';
 import ChromeNav from './ChromeNav.svelte';
 import ChromeContent from './ChromeContent.svelte';

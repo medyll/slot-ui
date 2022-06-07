@@ -1,4 +1,4 @@
-<script >import { createEventForwarder } from '../../engine/engine';
+<script>import { createEventForwarder } from '../../engine/engine';
 import { get_current_component } from 'svelte/internal';
 /*  common slotUi exports*/
 let className = '';
@@ -30,7 +30,7 @@ const yM = {
 	</div>
 {/if}
 
-<style >.badge {
+<style>.badge {
   position: absolute;
   border-radius: 50%;
   border: 1px solid red;

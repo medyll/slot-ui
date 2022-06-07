@@ -1,4 +1,4 @@
-<script >import VirtualList from '@sveltejs/svelte-virtual-list';
+<script>import VirtualList from '@sveltejs/svelte-virtual-list';
 import { createEventForwarder } from '../../engine/engine';
 import { get_current_component } from 'svelte/internal';
 /*  common slotUi exports*/
@@ -20,7 +20,7 @@ export let items = [];
     </slot>
 </div>
 
-<style global >:global(.dataList) {
+<style global>:global(.dataList) {
   height: 100%;
   position: relative;
 }

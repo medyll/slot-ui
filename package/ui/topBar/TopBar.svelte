@@ -1,4 +1,4 @@
-<script >import { createEventForwarder } from '../../engine/engine';
+<script>import { createEventForwarder } from '../../engine/engine';
 import ContentSwitcher from '../../base/contentSwitcher/ContentSwitcher.svelte';
 import { get_current_component } from 'svelte/internal';
 /** common slotUi exports*/
@@ -35,7 +35,7 @@ const posCloser = orientation === 'right' ? 3 : 1;
         </div>
     {/if}
 </div>
-<style >.topBarRoot {
+<style>.topBarRoot {
   padding: var(--box-density-1);
   display: flex;
   flex: 1;

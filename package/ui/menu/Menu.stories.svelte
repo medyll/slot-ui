@@ -1,4 +1,4 @@
-<script >import { Meta, Template, Story } from '@storybook/addon-svelte-csf';
+<script>import { Meta, Template, Story } from '@storybook/addon-svelte-csf';
 import { createEventDispatcher } from 'svelte';
 import Menu from './Menu.svelte';
 const dispatch = createEventDispatcher();

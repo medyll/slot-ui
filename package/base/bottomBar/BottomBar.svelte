@@ -1,4 +1,4 @@
-<script >import Divider from '../divider/Divider.svelte';
+<script>import Divider from '../divider/Divider.svelte';
 import { createEventForwarder } from '../../engine/engine';
 import { get_current_component } from 'svelte/internal';
 /*  common slotUi exports*/
@@ -15,7 +15,7 @@ export let density = 'default';
 	<slot>bottom bar</slot>
 </div>
 
-<style >.bottomBar.density-tight {
+<style>.bottomBar.density-tight {
   padding: 0.5rem 0;
   margin: 0.125rem 0;
 }

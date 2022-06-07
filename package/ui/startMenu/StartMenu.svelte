@@ -1,5 +1,5 @@
 <svelte:options immutable={true}/>
-<script >import { fade, slide } from 'svelte/transition';
+<script>import { fade, slide } from 'svelte/transition';
 import { sx4u } from '../../uses/sx4u/sx4u';
 import { clickAway } from '../../uses/clickAway/clickAway';
 import Panel from '../panel/Panel.svelte';
@@ -78,7 +78,7 @@ function toggleSlidePanels(event) {
         </div>
     </div>
 {/if}
-<style >.startMenu {
+<style>.startMenu {
   background-color: rgba(90, 67, 52, 0.9);
   backdrop-filter: blur(10px);
   color: white;

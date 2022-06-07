@@ -1,4 +1,4 @@
-<script >import Tree from './Tree.svelte';
+<script>import Tree from './Tree.svelte';
 let paths = [
     'About.vue',
     'Categories/Index.vue',

@@ -1,6 +1,6 @@
 <svelte:options accessors={true}
                 immutable={true}/>
-<script >import { custom_event } from 'svelte/internal';
+<script>import { custom_event } from 'svelte/internal';
 import { onMount } from 'svelte';
 export let title = 'not set';
 let ref;
@@ -21,7 +21,7 @@ function sayHello() {
     </div>
 </div>
 
-<style >.panel {
+<style>.panel {
   position: relative;
   margin-bottom: 2rem;
 }

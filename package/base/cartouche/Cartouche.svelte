@@ -1,4 +1,4 @@
-<script >import { slide } from 'svelte/transition';
+<script>import { slide } from 'svelte/transition';
 import Icon from '../icon/Icon.svelte';
 import { createEventForwarder } from '../../engine/engine';
 import { get_current_component } from 'svelte/internal';
@@ -61,7 +61,7 @@ $: chevronIcon = !isOpen ? 'faChevronDown' : 'faChevronUp';
     {/if}
 </div>
 
-<style >.cartoucheHolder {
+<style>.cartoucheHolder {
   border-radius: 6px;
   overflow: hidden;
 }

@@ -1,4 +1,4 @@
-<script >import { createEventForwarder } from '../../engine/engine';
+<script>import { createEventForwarder } from '../../engine/engine';
 import { get_current_component } from 'svelte/internal';
 /*  common slotUi exports*/
 let className = '';
@@ -17,6 +17,6 @@ export const breadList = [];
 	</ul>
 </nav>
 
-<style >.breadCrumb ul {
+<style>.breadCrumb ul {
   display: flex;
 }</style>

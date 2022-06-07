@@ -1,4 +1,4 @@
-<script >import { email, Hint, HintGroup, required, useForm } from 'svelte-use-form';
+<script>import { email, Hint, HintGroup, required, useForm } from 'svelte-use-form';
 import { fade } from 'svelte/transition';
 import { userStore } from './store';
 import Backdrop from '../../base/backdrop/Backdrop.svelte';
@@ -95,7 +95,7 @@ function validate() {
 {:else}
     <slot></slot>
 {/if}
-<style >form {
+<style>form {
   z-index: 1000;
 }
 

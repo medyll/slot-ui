@@ -1,4 +1,4 @@
-<script >import { getContext } from 'svelte';
+<script>import { getContext } from 'svelte';
 /*  common slotUi exports*/
 let className = '';
 export { className as class };

@@ -1,4 +1,4 @@
-<script >import Card from './Card.svelte';
+<script>import Card from './Card.svelte';
 import Icon from '../icon/Icon.svelte';
 </script>
 
@@ -30,7 +30,7 @@ import Icon from '../icon/Icon.svelte';
 
 </div>
 
-<style >.gridDemo {
+<style>.gridDemo {
   flex: 1;
   width: 100%;
   display: grid;

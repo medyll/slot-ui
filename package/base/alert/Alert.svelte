@@ -1,4 +1,4 @@
-<script >import { fade } from 'svelte/transition';
+<script>import { fade } from 'svelte/transition';
 import Divider from '../divider/Divider.svelte';
 import IconButton from '../button/IconButton.svelte';
 import { createEventForwarder } from '../../engine/engine';
@@ -73,7 +73,7 @@ const handleClick = (event) => {
     </div>
 {/if}
 
-<style >.alert {
+<style>.alert {
   position: relative;
   min-width: 350px;
   display: inline-block;

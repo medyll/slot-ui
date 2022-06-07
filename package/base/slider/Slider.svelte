@@ -1,4 +1,4 @@
-<script >import { createEventForwarder } from '../../engine/engine';
+<script>import { createEventForwarder } from '../../engine/engine';
 import { get_current_component } from 'svelte/internal';
 /* common slotUi exports*/
 let className = '';
@@ -13,7 +13,7 @@ const forwardEvents = createEventForwarder(get_current_component());
         <div class="sliderPin dsp-block-inline"></div>
     </div>
 </div>
-<style >.sliderRoot {
+<style>.sliderRoot {
   background-color: var(--theme-color-background);
 }
 .sliderRoot .sliderGouge {

@@ -1,4 +1,4 @@
-<script >import ButtonAction from "./ButtonAction.svelte";
+<script>import ButtonAction from "./ButtonAction.svelte";
 import Debug from "../debug/Debug.svelte";
 import Divider from "../divider/Divider.svelte";
 </script>

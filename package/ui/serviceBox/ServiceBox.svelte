@@ -1,4 +1,4 @@
-<script >import { clickAway } from '../../uses/clickAway/clickAway';
+<script>import { clickAway } from '../../uses/clickAway/clickAway';
 import IconButton from '../../base/button/IconButton.svelte';
 import ButtonMenu from '../../base/button/ButtonAction.svelte';
 import Debug from '../../base/debug/Debug.svelte';
@@ -21,7 +21,7 @@ const onclose = function () {
     </div>
 </div>
 
-<style >.gridIconBis {
+<style>.gridIconBis {
   width: 100%;
   display: grid;
   grid-gap: 8px;

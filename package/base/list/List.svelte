@@ -1,4 +1,4 @@
-<script >import ListItem from './ListItem.svelte';
+<script>import ListItem from './ListItem.svelte';
 import { setContext } from 'svelte';
 import { createListStore } from './store';
 import { get_current_component, null_to_empty } from 'svelte/internal';
@@ -52,7 +52,7 @@ console.log(element);
     {/if}
 </ul>
 
-<style global >:global(li.listItemTitle),
+<style global>:global(li.listItemTitle),
 :global(li.listItem) {
   display: flex;
   align-items: center;

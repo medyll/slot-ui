@@ -1,5 +1,5 @@
 
-<script >import Icon from '../icon/Icon.svelte';
+<script>import Icon from '../icon/Icon.svelte';
 import { createEventForwarder } from '../../engine/engine';
 import { get_current_component } from 'svelte/internal';
 /*  common slotUi exports*/
@@ -26,7 +26,7 @@ export let iconFontSize = 'medium';
 	{/if}
 </button>
 
-<style >button {
+<style>button {
   padding: 8px;
   position: relative;
   background-color: transparent;

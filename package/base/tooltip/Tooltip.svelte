@@ -1,4 +1,4 @@
-<script >import { SvelteComponent } from 'svelte';
+<script>import { SvelteComponent } from 'svelte';
 import { createEventForwarder } from '../../engine/engine';
 import { get_current_component } from 'svelte/internal';
 import { stickTo } from '../../uses/stickTo/stickTo';

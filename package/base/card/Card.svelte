@@ -1,4 +1,4 @@
-<script >import { createEventForwarder } from '../../engine/engine';
+<script>import { createEventForwarder } from '../../engine/engine';
 import { get_current_component } from 'svelte/internal';
 /*  common slotUi exports*/
 let className = '';
@@ -33,7 +33,7 @@ export let data = undefined;
     </div>
 </div>
 
-<style >.cardRoot {
+<style>.cardRoot {
   border-radius: 6px;
   background-color: var(--theme-color-background-paper);
   min-height: 120px;

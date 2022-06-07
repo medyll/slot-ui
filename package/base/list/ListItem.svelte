@@ -1,4 +1,4 @@
-<script >import { getContext } from 'svelte';
+<script>import { getContext } from 'svelte';
 import { custom_event } from 'svelte/internal';
 import Divider from '../divider/Divider.svelte';
 export let icon;
@@ -39,7 +39,7 @@ $: if ($listStateContext?.selectorField) {
 </li>
 <Divider />
 
-<style  global>:global(li.listItemTitle),
+<style global>:global(li.listItemTitle),
 :global(li.listItem) {
   display: flex;
   align-items: center;

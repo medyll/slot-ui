@@ -1,4 +1,4 @@
-<script >import { get_current_component } from 'svelte/internal';
+<script>import { get_current_component } from 'svelte/internal';
 import { openPopper } from '../../ui/popper/actions';
 import IconButton from './IconButton.svelte';
 import Menu from '../../ui/menu/Menu.svelte';
@@ -36,7 +36,7 @@ const onActionClick = (event) => {
     </IconButton>
 </div>
 
-<style >.buttonActionRoot {
+<style>.buttonActionRoot {
   display: inline-block;
   position: relative;
   width: 64px;

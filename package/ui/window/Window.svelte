@@ -1,7 +1,7 @@
 <svelte:options accessors={true}
                 immutable={true}/>
 
-<script >import { getAppWindowStore, windowsStore } from '/src/lib/ui/window/windowStore';
+<script>import { getAppWindowStore, windowsStore } from '/src/lib/ui/window/windowStore';
 import { draggable } from '@neodrag/svelte';
 import { onDestroy } from 'svelte';
 import IconButton from '../../base/button/IconButton.svelte';
@@ -92,7 +92,7 @@ function handleClose(args) {
     </div>
 </div>
 
-<style >.window {
+<style>.window {
   display: block;
   border-radius: 6px;
   background-color: var(--theme-color-background);

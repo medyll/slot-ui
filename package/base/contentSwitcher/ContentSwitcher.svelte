@@ -1,5 +1,5 @@
 
-<script >import IconButton from '../button/IconButton.svelte';
+<script>import IconButton from '../button/IconButton.svelte';
 import { createEventForwarder } from '../../engine/engine';
 import { get_current_component } from 'svelte/internal';
 /*  common slotUi exports*/

@@ -1,4 +1,4 @@
-<script >import Icon from '../icon/Icon.svelte';
+<script>import Icon from '../icon/Icon.svelte';
 import { openPopper } from '../../ui/popper/actions';
 import { createEventForwarder } from '../../engine/engine';
 import { get_current_component } from 'svelte/internal';
@@ -38,7 +38,7 @@ const onActionClick = (event) => {
 	{/if}
 </div>
 
-<style >.buttonWrapper {
+<style>.buttonWrapper {
   color: white;
   display: inline-block;
   position: relative;

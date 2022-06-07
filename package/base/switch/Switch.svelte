@@ -1,4 +1,4 @@
-<script >export let name;
+<script>export let name;
 export let checked;
 </script>
 
@@ -9,4 +9,4 @@ export let checked;
 </div>
 <input name="{name}" type="hidden"/>
 
-<style ></style>
+<style></style>

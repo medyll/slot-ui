@@ -1,4 +1,4 @@
-<script >import { setContext } from 'svelte';
+<script>import { setContext } from 'svelte';
 import MenuItem from './MenuItem.svelte';
 import { createMenuStore } from './store';
 import Divider from "../../base/divider/Divider.svelte";
@@ -20,7 +20,7 @@ $menuStore.density = density;
 	<slot />
 </ul>
 
-<style  global>:global(.menu) {
+<style global>:global(.menu) {
   min-width: 150px;
   padding: 0.25rem;
   cursor: pointer;

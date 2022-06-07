@@ -1,4 +1,4 @@
-<script >import Icon from '../icon/Icon.svelte';
+<script>import Icon from '../icon/Icon.svelte';
 import IconButton from '../button/IconButton.svelte';
 import ButtonAction from '../button/ButtonMenu.svelte';
 export let onClose;
@@ -27,7 +27,7 @@ export let hasMenu = false;
         </div>
     {/if}
 </div>
-<style global >:global(.titleBar) {
+<style global>:global(.titleBar) {
   border-bottom: 1px solid var(--theme-border_color);
 }
 :global(.titleBar) :global(.title) {

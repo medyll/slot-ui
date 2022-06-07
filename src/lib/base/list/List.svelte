@@ -53,6 +53,7 @@
             <ListItem density={density} data={item.data}>
                 <span slot="icon"><Icon fontSize="tiny" icon={item.icon}/></span>
                 <span slot="primary">{null_to_empty(item.primary)}</span>
+                <span slot="secondary">{null_to_empty(item.secondary)}</span>
                 <span slot="action">{null_to_empty(item.action)}</span>
             </ListItem>
         </VirtualList>

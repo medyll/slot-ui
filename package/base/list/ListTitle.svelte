@@ -1,4 +1,4 @@
-<script >export let icon;
+<script>export let icon;
 export let primary;
 export let secondary;
 export let action;
@@ -32,7 +32,7 @@ export let density = 'default';
     useful for compound components,
     css is for cascading
 -->
-<style  global>:global(li.listItemTitle),
+<style global>:global(li.listItemTitle),
 :global(li.listItem) {
   display: flex;
   align-items: center;

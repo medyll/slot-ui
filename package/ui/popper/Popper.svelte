@@ -1,6 +1,6 @@
 <svelte:options accessors={true}/>
 
-<script >import { stickTo } from '../../uses/stickTo/stickTo';
+<script>import { stickTo } from '../../uses/stickTo/stickTo';
 import { clickAway } from '../../uses/clickAway/clickAway';
 import { popperList } from './actions';
 let thisRef;
@@ -34,7 +34,7 @@ export const destroy = function () {
     </slot>
 </div>
 
-<style >.popper {
+<style>.popper {
   background-color: rgba(90, 67, 52, 0.8);
   backdrop-filter: blur(10px);
   z-index: 3000;
