@@ -1,5 +1,5 @@
 import Window from '/src/lib/ui/window/Window.svelte';
-import { createWindowStore, windowsStore } from '../ui/window/windowStore';
+import { windowsStore } from '../ui/window/windowStore';
 import { get, writable } from 'svelte/store';
 import Debug from '../base/debug/Debug.svelte';
 const windowList = {}; // Record<string,any>// globalThis.window;
@@ -31,5 +31,10 @@ function toggleStartMenu(event) {
     if (event)
         event.stopPropagation();
     startMenuStore.set(!get(startMenuStore));
+}
+function openFrame(frameId, options) {
+    //
+    const { parent = "body" } = options;
+    // check if FrameId in store
 }
 export { openWindow, toggleStartMenu };

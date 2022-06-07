@@ -2,6 +2,7 @@ import { SvelteComponentTyped } from "svelte";
 declare const __propDef: {
     props: {
         icon?: any;
+        iconFamily?: string | undefined;
         fontSize?: any;
     };
     events: {

@@ -27,6 +27,7 @@ declare const __propDef: {
     };
     slots: {
         slotAvatar: {};
+        slotRetrievePassword: {};
         default: {};
     };
 };

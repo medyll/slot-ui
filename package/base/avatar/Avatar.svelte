@@ -28,8 +28,8 @@ const sizes = {
 
 <style >.avatar {
   position: relative;
-  border-radius: 20%;
-  border: 1px solid var(--theme-color-border);
+  border-radius: var(--css-avatar-radius, 20%);
+  border: 1px solid var(--cass-avatar-border-color, var(--theme-color-border));
   display: grid;
   place-items: center;
   overflow: hidden;

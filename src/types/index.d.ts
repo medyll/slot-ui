@@ -1,10 +1,4 @@
-import * as All1 from '@fortawesome/free-solid-svg-icons'; // add faSolid
-import * as All2 from '@fortawesome/free-brands-svg-icons';
-import * as All3 from '@fortawesome/free-regular-svg-icons';
-
-let IconTypes = {...All1, ...All2, ...All3} as const;
-
-export type TIcon = keyof typeof IconTypes;
+export type TIcon = string;
 
 export namespace Drawer {
   export let title: string;

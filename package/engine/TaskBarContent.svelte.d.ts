@@ -4,7 +4,9 @@ declare const __propDef: {
     events: {
         [evt: string]: CustomEvent<any>;
     };
-    slots: {};
+    slots: {
+        default: {};
+    };
 };
 export declare type TaskBarContentProps = typeof __propDef.props;
 export declare type TaskBarContentEvents = typeof __propDef.events;

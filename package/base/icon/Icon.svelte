@@ -1,8 +1,4 @@
-
-<script >import * as All1 from '@fortawesome/free-solid-svg-icons'; // add faSolid
-import * as All2 from '@fortawesome/free-brands-svg-icons';
-import * as All3 from '@fortawesome/free-regular-svg-icons';
-let IconTypes = { ...All1, ...All2, ...All3 };
+<script >import Iconify from '@iconify/iconify';
 const sizes = {
     tiny: 8,
     small: 16,
@@ -11,8 +7,10 @@ const sizes = {
     large: 48,
     big: 64,
 };
-export let icon = 'faQuestion';
-export let fontSize = 'medium';
+export let icon = 'question';
+export let iconFamily = 'fa-solid';
+export let fontSize = 'small';
 </script>
-<i class="fa {icon}"></i>
-<!--<Fa icon={IconTypes[icon]} on:click style="font-size:{sizes[fontSize]}px"/>-->
+<i class="iconify-inline"
+   data-icon="{iconFamily}:{icon}"
+   style="font-size:{sizes[fontSize]}px"></i>

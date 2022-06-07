@@ -11,6 +11,7 @@ declare const __propDef: {
            * @type 'wide' | 'inplace'
            */ position?: "wide" | "inplace" | undefined;
         stickTo?: "left" | "right" | undefined;
+        showOpenerIcon?: boolean | undefined;
         toggle?: ((visibleSate?: boolean | undefined) => void) | undefined;
     };
     events: {
@@ -18,7 +19,7 @@ declare const __propDef: {
     };
     slots: {
         drawerMenuBar: {};
-        content: {};
+        default: {};
         drawerBottomBarSlot: {};
     };
 };
@@ -48,6 +49,9 @@ export default class Drawer extends SvelteComponentTyped<DrawerProps, DrawerEven
     get stickTo(): "left" | "right" | undefined;
     /**accessor*/
     set stickTo(_: "left" | "right" | undefined);
+    get showOpenerIcon(): boolean | undefined;
+    /**accessor*/
+    set showOpenerIcon(_: boolean | undefined);
     get undefined(): any;
     /**accessor*/
     set undefined(_: any);

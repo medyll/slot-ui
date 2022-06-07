@@ -1,7 +1,7 @@
 <svelte:head>
     <title>SlotUi</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
-    <link href="node_modules/@medyll/cssfabric/lib/styles/cssfabric.css"/>
+    <link href="node_modules/@medyll/cssfabric/src/lib/styles/cssfabric.css"/>
     <link href="../../static/cssfabric/cssfabric.vars.css" rel="stylesheet">
 </svelte:head>
 
@@ -83,10 +83,7 @@
 </ThemeWrapper>
 
 <style global lang="scss">
-  // @import "../node_modules/@medyll/cssfabric/lib/styles/cssfabric.min";
-  //@import '@medyll/cssfabric/lib/styles/cssfabric.min.css';
-  /*@import '~@medyll/cssfabric/lib/styles/cssfabric.responsive.min.css';*/
-  @import "node_modules/@medyll/cssfabric/lib/styles/cssfabric";
+  @import "node_modules/@medyll/cssfabric/src/lib/styles/cssfabric";
   @import "sass/cssfabric";
   @import url('https://fonts.googleapis.com/css?family=Rubik');
 

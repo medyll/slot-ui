@@ -2,15 +2,28 @@
 import { windowsStore } from '/src/lib/ui/window/windowStore';
 import { toggleStartMenu } from './wactions.utils';
 import IconButton from '../base/button/IconButton.svelte';
+import { openPopper } from '../ui/popper/actions';
+import ServiceBox from '../ui/serviceBox/ServiceBox.svelte';
+import Icon from '@iconify/svelte';
 let { toggle, current, theme } = getContext('theme');
+const popServiceProps = {
+    component: ServiceBox,
+    componentProps: {
+        some: 'what'
+    }
+};
 function toggleWindow(frame) {
     let frameId = frame.frameId;
 }
 let windows;
 $: windows = $windowsStore;
 </script>
-
-<IconButton icon="faBarcode" on:click="{toggleStartMenu}" style="color:white;font-size: large"/>
 {#each [...windows] as [key, value]}
-    <IconButton on:click="{()=>{toggleWindow(value)}}" style="color:white;font-size: large" icon="faWindow"/>
+    <IconButton on:click="{()=>{toggleWindow(value)}}" style="color:white;font-size: large" icon="home"/>
 {/each}
+<slot></slot>
+<!--
+<button on:click={(event)=>{
+            event.stopPropagation();
+            openPopper('DaPopper',{...popServiceProps})}}>Service Box here
+</button>-->

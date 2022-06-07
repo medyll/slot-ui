@@ -81,3 +81,4 @@ typings/
 .DS_STORE
 .temp
 dist/
+/.vitebook/

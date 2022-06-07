@@ -9,14 +9,16 @@ export let element = null;
 const forwardEvents = createEventForwarder(get_current_component());
 /*  end slotUi exports*/
 export let icon;
+export let iconFamily = 'fa-solid';
 export let style = '';
 export let showShip = false;
 export let iconFontSize = 'medium';
 </script>
-
-<button bind:this={element} use:forwardEvents on:click {style} class={className}>
+<button data-iconButton bind:this={element} use:forwardEvents on:click {style} class={className}>
 	<span>
-		<span class="icon"><Icon {icon} fontSize={iconFontSize} /></span>
+		<span class="icon">
+			<Icon {icon} {iconFamily} fontSize={iconFontSize} />
+		</span>
 		<slot />
 	</span>
 	{#if showShip}
@@ -28,7 +30,8 @@ export let iconFontSize = 'medium';
   padding: 8px;
   position: relative;
   background-color: transparent;
-  border: 1px solid transparent;
+  border: 1px solid var(--css-button-radius, transparent);
+  border-radius: var(--css-button-radius, 0);
 }
 button:hover {
   border: 1px solid rgba(255, 255, 255, 0.1);

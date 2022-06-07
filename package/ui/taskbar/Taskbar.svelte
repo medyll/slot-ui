@@ -1,33 +1,20 @@
-<script >import { openPopper } from '../popper/actions';
-import ServiceBox from '../serviceBox/ServiceBox.svelte';
-const popServiceProps = {
-    component: ServiceBox,
-    componentProps: {
-        some: 'what'
-    }
-};
+<script >"use strict";
 </script>
 
 <div class="bar flex-h flex-align-middle">
-    <slot>
-        <slot name="taskBarLeft"></slot>
-    </slot>
+    <slot name="taskBarLeft"></slot>
     <div class="flex-main">
-        <button on:click={(event)=>{
-            event.stopPropagation();
-            openPopper('DaPopper',{...popServiceProps})}}>Service Box
-        </button>
+        <slot></slot>
     </div>
-    <slot name="taskBarRIght"></slot>
+    <slot name="taskBarRight"></slot>
 </div>
-<style>
-    .bar {
-        grid-gap: 8px;
-        background-size: auto;
-        background-color: rgba(255, 255, 255, 0.5);
-        backdrop-filter: blur(20px);
-        min-height: 48px;
-        box-sizing: border-box;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    }
-</style>
+<style >.bar {
+  grid-gap: var(--box-density-1, 8px);
+  background-size: auto;
+  background-color: var(--css-taskbar-bg-color, rgba(255, 255, 255, 0.5));
+  backdrop-filter: var(--css-taskbar-backdrop-blur, blur(20px));
+  min-height: var(--css-taskbar-height, 48px);
+  border-bottom: 1px solid var(--theme-color-foreground-alpha-high, rgba(255, 255, 255, 0.2));
+  box-shadow: var(--css-taskbar-shadow, var(--box-shad-3));
+  box-sizing: border-box;
+}</style>

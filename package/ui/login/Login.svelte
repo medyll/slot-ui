@@ -83,7 +83,11 @@ function validate() {
                     {#if grantedError}
                         <div class="pad-1 color-scheme-error">Please verify your input</div>
                     {/if}
-                    <div class="retrieve pad-2">retrieve</div>
+                    {#if $$slots.slotRetrievePassword}
+                        <div class="retrieve pad-2">
+                            <slot name="slotRetrievePassword"></slot>
+                        </div>
+                    {/if}
                 </div>
             </div>
         </form>

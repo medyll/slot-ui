@@ -1,5 +1,4 @@
-import _ from 'lodash';
-export const propsXy = (props, data) => {
+export const propsProxy = (props, data) => {
     let ret = [];
     for (const dta of data) {
         let out = {};
@@ -14,8 +13,4 @@ export const propsXy = (props, data) => {
         ret.push(out);
     }
     return ret;
-};
-export const toFa = function (strIn) {
-    return strIn ? 'fa' + _.capitalize(_.camelCase(strIn))
-        : '';
 };

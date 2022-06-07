@@ -10,15 +10,36 @@ const forwardEvents = createEventForwarder(get_current_component());
 /** end slotUi exports*/
 export let elementNav = null;
 export let frameDrawerRef = null;
+export let hideCloseIcon = true;
+export let showOpenerIcon = true;
+let defaultOpen = true;
+export const actions = {
+    openNavLeft: () => {
+        defaultOpen = true;
+    },
+    toggleNavLeft: () => {
+        defaultOpen = !defaultOpen;
+    },
+    closeNavLeft: () => {
+        defaultOpen = !defaultOpen;
+    }
+};
+// $: console.log(frameDrawerRef);
 </script>
-<div bind:this={element} class="flex-v h-full overflow-hidden frame {className}" use:forwardEvents>
+<div bind:this={element} class="pos-rel flex-v h-full overflow-hidden frame {className}" use:forwardEvents>
     <div>
         <slot name="frameHeaderSlot"></slot>
     </div>
     <div class="frameContainer flex-h flex-main overflow-hidden">
         <div bind:this={elementNav} class="navLeft flex-v h-full">
-            <slot name="navLeftHeaderFrameSlot"></slot>
-            <Drawer bind:this={frameDrawerRef} position="inplace" >
+            {#if frameDrawerRef?.isOpen}
+                <slot name="navLeftHeaderFrameSlot"></slot>
+            {/if}
+            <Drawer bind:this={frameDrawerRef}
+                    hideCloseIcon={hideCloseIcon}
+                    isOpen={defaultOpen}
+                    position="inplace"
+                    showOpenerIcon={showOpenerIcon}>
                 <slot name="frameDrawerSlot"></slot>
             </Drawer>
         </div>
@@ -26,7 +47,7 @@ export let frameDrawerRef = null;
             <div>
                 <slot name="contentHeaderFrameSlot"></slot>
             </div>
-            <div class="flex-main overflow-auto">
+            <div class="flex-main overflow-auto pos-rel ">
                 <slot name="contentFrameSlot"></slot>
             </div>
         </div>
@@ -41,11 +62,11 @@ export let frameDrawerRef = null;
   flex-direction: column;
   overflow: hidden;
   position: relative;
-  background-color: var(--theme-color-primary);
-  backdrop-filter: blur(30px);
+  background-color: var(--css-frame-bg-color, var(--theme-color-primary));
+  backdrop-filter: var(--css-frame-backdrop-blur, blur(30px));
 }
 .frame .frameContainer .navLeft {
-  max-width: 350px;
+  max-width: 288px;
   border-right: 1px solid var(--theme-color-primary-alpha-low);
 }
 .frame .frameContainer .content {

@@ -115,7 +115,7 @@ const text_types = new Set([
 ]);
 
 /**
- * Decides how the body should be parsed based on its mime type. Should match what's in parse_body
+ * Decides how the body should be parsed based on its mime type
  *
  * @param {string | undefined | null} content_type The `content-type` header of a request/response.
  * @returns {boolean}
@@ -143,14 +143,28 @@ async function render_endpoint(event, mod) {
 	}
 
 	if (!handler) {
+		const allowed = [];
+
+		for (const method in ['get', 'post', 'put', 'patch']) {
+			if (mod[method]) allowed.push(method.toUpperCase());
+		}
+
+		if (mod.del) allowed.push('DELETE');
+		if (mod.get || mod.head) allowed.push('HEAD');
+
 		return event.request.headers.get('x-sveltekit-load')
 			? // TODO would be nice to avoid these requests altogether,
 			  // by noting whether or not page endpoints export `get`
 			  new Response(undefined, {
 					status: 204
 			  })
-			: new Response('Method not allowed', {
-					status: 405
+			: new Response(`${event.request.method} method not allowed`, {
+					status: 405,
+					headers: {
+						// https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/405
+						// "The server must generate an Allow header field in a 405 status code response"
+						allow: allowed.join(', ')
+					}
 			  });
 	}
 
@@ -639,7 +653,7 @@ function sha256(data) {
 	if (!key[0]) precompute();
 
 	const out = init.slice(0);
-	const array = encode(data);
+	const array = encode$1(data);
 
 	for (let i = 0; i < array.length; i += 16) {
 		const w = array.subarray(i, i + 16);
@@ -789,7 +803,7 @@ function reverse_endianness(bytes) {
 }
 
 /** @param {string} str */
-function encode(str) {
+function encode$1(str) {
 	const encoded = encoder.encode(str);
 	const length = encoded.length * 8;
 
@@ -871,33 +885,11 @@ function base64(bytes) {
 /** @type {Promise<void>} */
 let csp_ready;
 
-/** @type {() => string} */
-let generate_nonce;
+const array = new Uint8Array(16);
 
-/** @type {(input: string) => string} */
-let generate_hash;
-
-if (typeof crypto !== 'undefined') {
-	const array = new Uint8Array(16);
-
-	generate_nonce = () => {
-		crypto.getRandomValues(array);
-		return base64(array);
-	};
-
-	generate_hash = sha256;
-} else {
-	// TODO: remove this in favor of web crypto API once we no longer support Node 14
-	const name = 'crypto'; // store in a variable to fool esbuild when adapters bundle kit
-	csp_ready = import(name).then((crypto) => {
-		generate_nonce = () => {
-			return crypto.randomBytes(16).toString('base64');
-		};
-
-		generate_hash = (input) => {
-			return crypto.createHash('sha256').update(input, 'utf-8').digest().toString('base64');
-		};
-	});
+function generate_nonce() {
+	crypto.getRandomValues(array);
+	return base64(array);
 }
 
 const quoted = new Set([
@@ -1000,7 +992,7 @@ class Csp {
 	add_script(content) {
 		if (this.#script_needs_csp) {
 			if (this.#use_hashes) {
-				this.#script_src.push(`sha256-${generate_hash(content)}`);
+				this.#script_src.push(`sha256-${sha256(content)}`);
 			} else if (this.#script_src.length === 0) {
 				this.#script_src.push(`nonce-${this.nonce}`);
 			}
@@ -1011,7 +1003,7 @@ class Csp {
 	add_style(content) {
 		if (this.#style_needs_csp) {
 			if (this.#use_hashes) {
-				this.#style_src.push(`sha256-${generate_hash(content)}`);
+				this.#style_src.push(`sha256-${sha256(content)}`);
 			} else if (this.#style_src.length === 0) {
 				this.#style_src.push(`nonce-${this.nonce}`);
 			}
@@ -1110,13 +1102,13 @@ async function render_response({
 	resolve_opts,
 	stuff
 }) {
-	if (state.prerender) {
+	if (state.prerendering) {
 		if (options.csp.mode === 'nonce') {
 			throw new Error('Cannot use prerendering if config.kit.csp.mode === "nonce"');
 		}
 
 		if (options.template_contains_nonce) {
-			throw new Error('Cannot use prerendering if page template contains %svelte.nonce%');
+			throw new Error('Cannot use prerendering if page template contains %sveltekit.nonce%');
 		}
 	}
 
@@ -1133,7 +1125,8 @@ async function render_response({
 	let rendered;
 
 	let is_private = false;
-	let maxage;
+	/** @type {import('types').NormalizedLoadOutputCache | undefined} */
+	let cache;
 
 	if (error) {
 		error.stack = options.get_stack(error);
@@ -1149,9 +1142,8 @@ async function render_response({
 			if (fetched && page_config.hydrate) serialized_data.push(...fetched);
 			if (props) shadow_props = props;
 
-			if (uses_credentials) is_private = true;
-
-			maxage = loaded.maxage;
+			cache = loaded?.cache;
+			is_private = cache?.private ?? uses_credentials;
 		});
 
 		const session = writable($session);
@@ -1165,7 +1157,7 @@ async function render_response({
 				session: {
 					...session,
 					subscribe: (fn) => {
-						is_private = true;
+						is_private = cache?.private ?? true;
 						return session.subscribe(fn);
 					}
 				},
@@ -1178,7 +1170,7 @@ async function render_response({
 				routeId: event.routeId,
 				status,
 				stuff,
-				url: state.prerender ? create_prerendering_url_proxy(event.url) : event.url
+				url: state.prerendering ? create_prerendering_url_proxy(event.url) : event.url
 			},
 			components: branch.map(({ node }) => node.module.default)
 		};
@@ -1218,7 +1210,7 @@ async function render_response({
 	await csp_ready;
 	const csp = new Csp(options.csp, {
 		dev: options.dev,
-		prerender: !!state.prerender,
+		prerender: !!state.prerendering,
 		needs_nonce: options.template_contains_nonce
 	});
 
@@ -1228,7 +1220,7 @@ async function render_response({
 	const init_app = `
 		import { start } from ${s(options.prefix + options.manifest._.entry.file)};
 		start({
-			target: document.querySelector('[data-hydrate="${target}"]').parentNode,
+			target: document.querySelector('[data-sveltekit-hydrate="${target}"]').parentNode,
 			paths: ${s(options.paths)},
 			session: ${try_serialize($session, (error) => {
 				throw new Error(`Failed to serialize session data: ${error.message}`);
@@ -1239,11 +1231,7 @@ async function render_response({
 			hydrate: ${resolve_opts.ssr && page_config.hydrate ? `{
 				status: ${status},
 				error: ${serialize_error(error)},
-				nodes: [
-					${(branch || [])
-					.map(({ node }) => `import(${s(options.prefix + node.entry)})`)
-					.join(',\n\t\t\t\t\t\t')}
-				],
+				nodes: [${branch.map(({ node }) => node.index).join(', ')}],
 				params: ${devalue(event.params)},
 				routeId: ${s(event.routeId)}
 			}` : 'null'}
@@ -1252,99 +1240,82 @@ async function render_response({
 
 	const init_service_worker = `
 		if ('serviceWorker' in navigator) {
-			navigator.serviceWorker.register('${options.service_worker}');
+			addEventListener('load', () => {
+				navigator.serviceWorker.register('${options.service_worker}');
+			});
 		}
 	`;
 
-	if (options.amp) {
-		// inline_style contains CSS files (i.e. `import './styles.css'`)
-		// rendered.css contains the CSS from `<style>` tags in Svelte components
-		const styles = `${inlined_style}\n${rendered.css.code}`;
-		head += `
-		<style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
-		<noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
-		<script async src="https://cdn.ampproject.org/v0.js"></script>
+	if (inlined_style) {
+		const attributes = [];
+		if (options.dev) attributes.push(' data-sveltekit');
+		if (csp.style_needs_nonce) attributes.push(` nonce="${csp.nonce}"`);
 
-		<style amp-custom>${styles}</style>`;
+		csp.add_style(inlined_style);
 
-		if (options.service_worker) {
-			head +=
-				'<script async custom-element="amp-install-serviceworker" src="https://cdn.ampproject.org/v0/amp-install-serviceworker-0.1.js"></script>';
+		head += `\n\t<style${attributes.join('')}>${inlined_style}</style>`;
+	}
 
-			body += `<amp-install-serviceworker src="${options.service_worker}" layout="nodisplay"></amp-install-serviceworker>`;
-		}
-	} else {
-		if (inlined_style) {
-			const attributes = [];
-			if (options.dev) attributes.push(' data-svelte');
-			if (csp.style_needs_nonce) attributes.push(` nonce="${csp.nonce}"`);
+	// prettier-ignore
+	head += Array.from(stylesheets)
+		.map((dep) => {
+			const attributes = [
+				'rel="stylesheet"',
+				`href="${options.prefix + dep}"`
+			];
 
-			csp.add_style(inlined_style);
-
-			head += `\n\t<style${attributes.join('')}>${inlined_style}</style>`;
-		}
-
-		// prettier-ignore
-		head += Array.from(stylesheets)
-			.map((dep) => {
-				const attributes = [
-					'rel="stylesheet"',
-					`href="${options.prefix + dep}"`
-				];
-
-				if (csp.style_needs_nonce) {
-					attributes.push(`nonce="${csp.nonce}"`);
-				}
-
-				if (styles.has(dep)) {
-					// don't load stylesheets that are already inlined
-					// include them in disabled state so that Vite can detect them and doesn't try to add them
-					attributes.push('disabled', 'media="(max-width: 0)"');
-				}
-
-				return `\n\t<link ${attributes.join(' ')}>`;
-			})
-			.join('');
-
-		if (page_config.router || page_config.hydrate) {
-			head += Array.from(modulepreloads)
-				.map((dep) => `\n\t<link rel="modulepreload" href="${options.prefix + dep}">`)
-				.join('');
-
-			const attributes = ['type="module"', `data-hydrate="${target}"`];
-
-			csp.add_script(init_app);
-
-			if (csp.script_needs_nonce) {
+			if (csp.style_needs_nonce) {
 				attributes.push(`nonce="${csp.nonce}"`);
 			}
 
-			body += `\n\t\t<script ${attributes.join(' ')}>${init_app}</script>`;
-
-			body += serialized_data
-				.map(({ url, body, response }) =>
-					render_json_payload_script(
-						{ type: 'data', url, body: typeof body === 'string' ? hash(body) : undefined },
-						response
-					)
-				)
-				.join('\n\t');
-
-			if (shadow_props) {
-				body += render_json_payload_script({ type: 'props' }, shadow_props);
+			if (styles.has(dep)) {
+				// don't load stylesheets that are already inlined
+				// include them in disabled state so that Vite can detect them and doesn't try to add them
+				attributes.push('disabled', 'media="(max-width: 0)"');
 			}
+
+			return `\n\t<link ${attributes.join(' ')}>`;
+		})
+		.join('');
+
+	if (page_config.router || page_config.hydrate) {
+		head += Array.from(modulepreloads)
+			.map((dep) => `\n\t<link rel="modulepreload" href="${options.prefix + dep}">`)
+			.join('');
+
+		const attributes = ['type="module"', `data-sveltekit-hydrate="${target}"`];
+
+		csp.add_script(init_app);
+
+		if (csp.script_needs_nonce) {
+			attributes.push(`nonce="${csp.nonce}"`);
 		}
 
-		if (options.service_worker) {
-			// always include service worker unless it's turned off explicitly
-			csp.add_script(init_service_worker);
+		body += `\n\t\t<script ${attributes.join(' ')}>${init_app}</script>`;
 
-			head += `
-				<script${csp.script_needs_nonce ? ` nonce="${csp.nonce}"` : ''}>${init_service_worker}</script>`;
+		body += serialized_data
+			.map(({ url, body, response }) =>
+				render_json_payload_script(
+					{ type: 'data', url, body: typeof body === 'string' ? hash(body) : undefined },
+					response
+				)
+			)
+			.join('\n\t');
+
+		if (shadow_props) {
+			body += render_json_payload_script({ type: 'props' }, shadow_props);
 		}
 	}
 
-	if (state.prerender && !options.amp) {
+	if (options.service_worker) {
+		// always include service worker unless it's turned off explicitly
+		csp.add_script(init_service_worker);
+
+		head += `
+			<script${csp.script_needs_nonce ? ` nonce="${csp.nonce}"` : ''}>${init_service_worker}</script>`;
+	}
+
+	if (state.prerendering) {
 		const http_equiv = [];
 
 		const csp_headers = csp.get_meta();
@@ -1352,8 +1323,8 @@ async function render_response({
 			http_equiv.push(csp_headers);
 		}
 
-		if (maxage) {
-			http_equiv.push(`<meta http-equiv="cache-control" content="max-age=${maxage}">`);
+		if (cache) {
+			http_equiv.push(`<meta http-equiv="cache-control" content="max-age=${cache.maxage}">`);
 		}
 
 		if (http_equiv.length > 0) {
@@ -1374,15 +1345,15 @@ async function render_response({
 		etag: `"${hash(html)}"`
 	});
 
-	if (maxage) {
-		headers.set('cache-control', `${is_private ? 'private' : 'public'}, max-age=${maxage}`);
+	if (cache) {
+		headers.set('cache-control', `${is_private ? 'private' : 'public'}, max-age=${cache.maxage}`);
 	}
 
 	if (!options.floc) {
 		headers.set('permissions-policy', 'interest-cohort=()');
 	}
 
-	if (!state.prerender) {
+	if (!state.prerendering) {
 		const csp_header = csp.get_header();
 		if (csp_header) {
 			headers.set('content-security-policy', csp_header);
@@ -1424,21 +1395,503 @@ function serialize_error(error) {
 	return serialized;
 }
 
+/*!
+ * cookie
+ * Copyright(c) 2012-2014 Roman Shtylman
+ * Copyright(c) 2015 Douglas Christopher Wilson
+ * MIT Licensed
+ */
+
+/**
+ * Module exports.
+ * @public
+ */
+
+var parse_1 = parse$1;
+var serialize_1 = serialize;
+
+/**
+ * Module variables.
+ * @private
+ */
+
+var __toString = Object.prototype.toString;
+
+/**
+ * RegExp to match field-content in RFC 7230 sec 3.2
+ *
+ * field-content = field-vchar [ 1*( SP / HTAB ) field-vchar ]
+ * field-vchar   = VCHAR / obs-text
+ * obs-text      = %x80-FF
+ */
+
+var fieldContentRegExp = /^[\u0009\u0020-\u007e\u0080-\u00ff]+$/;
+
+/**
+ * Parse a cookie header.
+ *
+ * Parse the given cookie header string into an object
+ * The object has the various cookies as keys(names) => values
+ *
+ * @param {string} str
+ * @param {object} [options]
+ * @return {object}
+ * @public
+ */
+
+function parse$1(str, options) {
+  if (typeof str !== 'string') {
+    throw new TypeError('argument str must be a string');
+  }
+
+  var obj = {};
+  var opt = options || {};
+  var dec = opt.decode || decode;
+
+  var index = 0;
+  while (index < str.length) {
+    var eqIdx = str.indexOf('=', index);
+
+    // no more cookie pairs
+    if (eqIdx === -1) {
+      break
+    }
+
+    var endIdx = str.indexOf(';', index);
+
+    if (endIdx === -1) {
+      endIdx = str.length;
+    } else if (endIdx < eqIdx) {
+      // backtrack on prior semicolon
+      index = str.lastIndexOf(';', eqIdx - 1) + 1;
+      continue
+    }
+
+    var key = str.slice(index, eqIdx).trim();
+
+    // only assign once
+    if (undefined === obj[key]) {
+      var val = str.slice(eqIdx + 1, endIdx).trim();
+
+      // quoted values
+      if (val.charCodeAt(0) === 0x22) {
+        val = val.slice(1, -1);
+      }
+
+      obj[key] = tryDecode(val, dec);
+    }
+
+    index = endIdx + 1;
+  }
+
+  return obj;
+}
+
+/**
+ * Serialize data into a cookie header.
+ *
+ * Serialize the a name value pair into a cookie string suitable for
+ * http headers. An optional options object specified cookie parameters.
+ *
+ * serialize('foo', 'bar', { httpOnly: true })
+ *   => "foo=bar; httpOnly"
+ *
+ * @param {string} name
+ * @param {string} val
+ * @param {object} [options]
+ * @return {string}
+ * @public
+ */
+
+function serialize(name, val, options) {
+  var opt = options || {};
+  var enc = opt.encode || encode;
+
+  if (typeof enc !== 'function') {
+    throw new TypeError('option encode is invalid');
+  }
+
+  if (!fieldContentRegExp.test(name)) {
+    throw new TypeError('argument name is invalid');
+  }
+
+  var value = enc(val);
+
+  if (value && !fieldContentRegExp.test(value)) {
+    throw new TypeError('argument val is invalid');
+  }
+
+  var str = name + '=' + value;
+
+  if (null != opt.maxAge) {
+    var maxAge = opt.maxAge - 0;
+
+    if (isNaN(maxAge) || !isFinite(maxAge)) {
+      throw new TypeError('option maxAge is invalid')
+    }
+
+    str += '; Max-Age=' + Math.floor(maxAge);
+  }
+
+  if (opt.domain) {
+    if (!fieldContentRegExp.test(opt.domain)) {
+      throw new TypeError('option domain is invalid');
+    }
+
+    str += '; Domain=' + opt.domain;
+  }
+
+  if (opt.path) {
+    if (!fieldContentRegExp.test(opt.path)) {
+      throw new TypeError('option path is invalid');
+    }
+
+    str += '; Path=' + opt.path;
+  }
+
+  if (opt.expires) {
+    var expires = opt.expires;
+
+    if (!isDate(expires) || isNaN(expires.valueOf())) {
+      throw new TypeError('option expires is invalid');
+    }
+
+    str += '; Expires=' + expires.toUTCString();
+  }
+
+  if (opt.httpOnly) {
+    str += '; HttpOnly';
+  }
+
+  if (opt.secure) {
+    str += '; Secure';
+  }
+
+  if (opt.priority) {
+    var priority = typeof opt.priority === 'string'
+      ? opt.priority.toLowerCase()
+      : opt.priority;
+
+    switch (priority) {
+      case 'low':
+        str += '; Priority=Low';
+        break
+      case 'medium':
+        str += '; Priority=Medium';
+        break
+      case 'high':
+        str += '; Priority=High';
+        break
+      default:
+        throw new TypeError('option priority is invalid')
+    }
+  }
+
+  if (opt.sameSite) {
+    var sameSite = typeof opt.sameSite === 'string'
+      ? opt.sameSite.toLowerCase() : opt.sameSite;
+
+    switch (sameSite) {
+      case true:
+        str += '; SameSite=Strict';
+        break;
+      case 'lax':
+        str += '; SameSite=Lax';
+        break;
+      case 'strict':
+        str += '; SameSite=Strict';
+        break;
+      case 'none':
+        str += '; SameSite=None';
+        break;
+      default:
+        throw new TypeError('option sameSite is invalid');
+    }
+  }
+
+  return str;
+}
+
+/**
+ * URL-decode string value. Optimized to skip native call when no %.
+ *
+ * @param {string} str
+ * @returns {string}
+ */
+
+function decode (str) {
+  return str.indexOf('%') !== -1
+    ? decodeURIComponent(str)
+    : str
+}
+
+/**
+ * URL-encode value.
+ *
+ * @param {string} str
+ * @returns {string}
+ */
+
+function encode (val) {
+  return encodeURIComponent(val)
+}
+
+/**
+ * Determine if value is a Date.
+ *
+ * @param {*} val
+ * @private
+ */
+
+function isDate (val) {
+  return __toString.call(val) === '[object Date]' ||
+    val instanceof Date
+}
+
+/**
+ * Try decoding a string using a decoding function.
+ *
+ * @param {string} str
+ * @param {function} decode
+ * @private
+ */
+
+function tryDecode(str, decode) {
+  try {
+    return decode(str);
+  } catch (e) {
+    return str;
+  }
+}
+
+var setCookie = {exports: {}};
+
+var defaultParseOptions = {
+  decodeValues: true,
+  map: false,
+  silent: false,
+};
+
+function isNonEmptyString(str) {
+  return typeof str === "string" && !!str.trim();
+}
+
+function parseString(setCookieValue, options) {
+  var parts = setCookieValue.split(";").filter(isNonEmptyString);
+  var nameValue = parts.shift().split("=");
+  var name = nameValue.shift();
+  var value = nameValue.join("="); // everything after the first =, joined by a "=" if there was more than one part
+
+  options = options
+    ? Object.assign({}, defaultParseOptions, options)
+    : defaultParseOptions;
+
+  try {
+    value = options.decodeValues ? decodeURIComponent(value) : value; // decode cookie value
+  } catch (e) {
+    console.error(
+      "set-cookie-parser encountered an error while decoding a cookie with value '" +
+        value +
+        "'. Set options.decodeValues to false to disable this feature.",
+      e
+    );
+  }
+
+  var cookie = {
+    name: name, // grab everything before the first =
+    value: value,
+  };
+
+  parts.forEach(function (part) {
+    var sides = part.split("=");
+    var key = sides.shift().trimLeft().toLowerCase();
+    var value = sides.join("=");
+    if (key === "expires") {
+      cookie.expires = new Date(value);
+    } else if (key === "max-age") {
+      cookie.maxAge = parseInt(value, 10);
+    } else if (key === "secure") {
+      cookie.secure = true;
+    } else if (key === "httponly") {
+      cookie.httpOnly = true;
+    } else if (key === "samesite") {
+      cookie.sameSite = value;
+    } else {
+      cookie[key] = value;
+    }
+  });
+
+  return cookie;
+}
+
+function parse(input, options) {
+  options = options
+    ? Object.assign({}, defaultParseOptions, options)
+    : defaultParseOptions;
+
+  if (!input) {
+    if (!options.map) {
+      return [];
+    } else {
+      return {};
+    }
+  }
+
+  if (input.headers && input.headers["set-cookie"]) {
+    // fast-path for node.js (which automatically normalizes header names to lower-case
+    input = input.headers["set-cookie"];
+  } else if (input.headers) {
+    // slow-path for other environments - see #25
+    var sch =
+      input.headers[
+        Object.keys(input.headers).find(function (key) {
+          return key.toLowerCase() === "set-cookie";
+        })
+      ];
+    // warn if called on a request-like object with a cookie header rather than a set-cookie header - see #34, 36
+    if (!sch && input.headers.cookie && !options.silent) {
+      console.warn(
+        "Warning: set-cookie-parser appears to have been called on a request object. It is designed to parse Set-Cookie headers from responses, not Cookie headers from requests. Set the option {silent: true} to suppress this warning."
+      );
+    }
+    input = sch;
+  }
+  if (!Array.isArray(input)) {
+    input = [input];
+  }
+
+  options = options
+    ? Object.assign({}, defaultParseOptions, options)
+    : defaultParseOptions;
+
+  if (!options.map) {
+    return input.filter(isNonEmptyString).map(function (str) {
+      return parseString(str, options);
+    });
+  } else {
+    var cookies = {};
+    return input.filter(isNonEmptyString).reduce(function (cookies, str) {
+      var cookie = parseString(str, options);
+      cookies[cookie.name] = cookie;
+      return cookies;
+    }, cookies);
+  }
+}
+
+/*
+  Set-Cookie header field-values are sometimes comma joined in one string. This splits them without choking on commas
+  that are within a single set-cookie field-value, such as in the Expires portion.
+
+  This is uncommon, but explicitly allowed - see https://tools.ietf.org/html/rfc2616#section-4.2
+  Node.js does this for every header *except* set-cookie - see https://github.com/nodejs/node/blob/d5e363b77ebaf1caf67cd7528224b651c86815c1/lib/_http_incoming.js#L128
+  React Native's fetch does this for *every* header, including set-cookie.
+
+  Based on: https://github.com/google/j2objc/commit/16820fdbc8f76ca0c33472810ce0cb03d20efe25
+  Credits to: https://github.com/tomball for original and https://github.com/chrusart for JavaScript implementation
+*/
+function splitCookiesString(cookiesString) {
+  if (Array.isArray(cookiesString)) {
+    return cookiesString;
+  }
+  if (typeof cookiesString !== "string") {
+    return [];
+  }
+
+  var cookiesStrings = [];
+  var pos = 0;
+  var start;
+  var ch;
+  var lastComma;
+  var nextStart;
+  var cookiesSeparatorFound;
+
+  function skipWhitespace() {
+    while (pos < cookiesString.length && /\s/.test(cookiesString.charAt(pos))) {
+      pos += 1;
+    }
+    return pos < cookiesString.length;
+  }
+
+  function notSpecialChar() {
+    ch = cookiesString.charAt(pos);
+
+    return ch !== "=" && ch !== ";" && ch !== ",";
+  }
+
+  while (pos < cookiesString.length) {
+    start = pos;
+    cookiesSeparatorFound = false;
+
+    while (skipWhitespace()) {
+      ch = cookiesString.charAt(pos);
+      if (ch === ",") {
+        // ',' is a cookie separator if we have later first '=', not ';' or ','
+        lastComma = pos;
+        pos += 1;
+
+        skipWhitespace();
+        nextStart = pos;
+
+        while (pos < cookiesString.length && notSpecialChar()) {
+          pos += 1;
+        }
+
+        // currently special character
+        if (pos < cookiesString.length && cookiesString.charAt(pos) === "=") {
+          // we found cookies separator
+          cookiesSeparatorFound = true;
+          // pos is inside the next cookie, so back up and return it.
+          pos = nextStart;
+          cookiesStrings.push(cookiesString.substring(start, lastComma));
+          start = pos;
+        } else {
+          // in param ',' or param separator ';',
+          // we continue from that comma
+          pos = lastComma + 1;
+        }
+      } else {
+        pos += 1;
+      }
+    }
+
+    if (!cookiesSeparatorFound || pos >= cookiesString.length) {
+      cookiesStrings.push(cookiesString.substring(start, cookiesString.length));
+    }
+  }
+
+  return cookiesStrings;
+}
+
+setCookie.exports = parse;
+setCookie.exports.parse = parse;
+var parseString_1 = setCookie.exports.parseString = parseString;
+var splitCookiesString_1 = setCookie.exports.splitCookiesString = splitCookiesString;
+
 /**
  * @param {import('types').LoadOutput} loaded
  * @returns {import('types').NormalizedLoadOutput}
  */
 function normalize(loaded) {
+	// TODO remove for 1.0
+	// @ts-expect-error
+	if (loaded.fallthrough) {
+		throw new Error(
+			'fallthrough is no longer supported. Use matchers instead: https://kit.svelte.dev/docs/routing#advanced-routing-matching'
+		);
+	}
+
+	// TODO remove for 1.0
+	if ('maxage' in loaded) {
+		throw new Error('maxage should be replaced with cache: { maxage }');
+	}
+
 	const has_error_status =
 		loaded.status && loaded.status >= 400 && loaded.status <= 599 && !loaded.redirect;
 	if (loaded.error || has_error_status) {
 		const status = loaded.status;
 
 		if (!loaded.error && has_error_status) {
-			return {
-				status: status || 500,
-				error: new Error()
-			};
+			return { status: status || 500, error: new Error() };
 		}
 
 		const error = typeof loaded.error === 'string' ? new Error(loaded.error) : loaded.error;
@@ -1462,19 +1915,22 @@ function normalize(loaded) {
 
 	if (loaded.redirect) {
 		if (!loaded.status || Math.floor(loaded.status / 100) !== 3) {
-			return {
-				status: 500,
-				error: new Error(
-					'"redirect" property returned from load() must be accompanied by a 3xx status code'
-				)
-			};
+			throw new Error(
+				'"redirect" property returned from load() must be accompanied by a 3xx status code'
+			);
 		}
 
 		if (typeof loaded.redirect !== 'string') {
-			return {
-				status: 500,
-				error: new Error('"redirect" property returned from load() must be a string')
-			};
+			throw new Error('"redirect" property returned from load() must be a string');
+		}
+	}
+
+	if (loaded.dependencies) {
+		if (
+			!Array.isArray(loaded.dependencies) ||
+			loaded.dependencies.some((dep) => typeof dep !== 'string')
+		) {
+			throw new Error('"dependencies" property returned from load() must be of type string[]');
 		}
 	}
 
@@ -1537,11 +1993,37 @@ function normalize_path(path, trailing_slash) {
 
 	if (trailing_slash === 'never') {
 		return path.endsWith('/') ? path.slice(0, -1) : path;
-	} else if (trailing_slash === 'always' && /\/[^./]+$/.test(path)) {
+	} else if (trailing_slash === 'always' && !path.endsWith('/')) {
 		return path + '/';
 	}
 
 	return path;
+}
+
+/**
+ * @param {string} hostname
+ * @param {string} [constraint]
+ */
+function domain_matches(hostname, constraint) {
+	if (!constraint) return true;
+
+	const normalized = constraint[0] === '.' ? constraint.slice(1) : constraint;
+
+	if (hostname === normalized) return true;
+	return hostname.endsWith('.' + normalized);
+}
+
+/**
+ * @param {string} path
+ * @param {string} [constraint]
+ */
+function path_matches(path, constraint) {
+	if (!constraint) return true;
+
+	const normalized = constraint.endsWith('/') ? constraint.slice(0, -1) : constraint;
+
+	if (path === normalized) return true;
+	return path.startsWith(normalized + '/');
 }
 
 /**
@@ -1580,13 +2062,15 @@ async function load_node({
 	/** @type {Array<import('./types').Fetched>} */
 	const fetched = [];
 
-	/**
-	 * @type {string[]}
-	 */
-	let set_cookie_headers = [];
+	const cookies = parse_1(event.request.headers.get('cookie') || '');
+
+	/** @type {import('set-cookie-parser').Cookie[]} */
+	const new_cookies = [];
 
 	/** @type {import('types').LoadOutput} */
 	let loaded;
+
+	const should_prerender = node.module.prerender ?? options.prerender.default;
 
 	/** @type {import('types').ShadowData} */
 	const shadow = is_leaf
@@ -1594,12 +2078,14 @@ async function load_node({
 				/** @type {import('types').SSRPage} */ (route),
 				event,
 				options,
-				!!state.prerender
+				should_prerender
 		  )
 		: {};
 
 	if (shadow.cookies) {
-		set_cookie_headers.push(...shadow.cookies);
+		shadow.cookies.forEach((header) => {
+			new_cookies.push(parseString_1(header));
+		});
 	}
 
 	if (shadow.error) {
@@ -1613,13 +2099,18 @@ async function load_node({
 			redirect: shadow.redirect
 		};
 	} else if (module.load) {
-		/** @type {import('types').LoadInput | import('types').ErrorLoadInput} */
+		/** @type {import('types').LoadEvent} */
 		const load_input = {
-			url: state.prerender ? create_prerendering_url_proxy(event.url) : event.url,
+			url: state.prerendering ? create_prerendering_url_proxy(event.url) : event.url,
 			params: event.params,
 			props: shadow.body || {},
 			routeId: event.routeId,
 			get session() {
+				if (node.module.prerender ?? options.prerender.default) {
+					throw Error(
+						'Attempted to access session from a prerendered page. Session would never be populated.'
+					);
+				}
 				uses_credentials = true;
 				return $session;
 			},
@@ -1705,8 +2196,22 @@ async function load_node({
 					if (opts.credentials !== 'omit') {
 						uses_credentials = true;
 
-						const cookie = event.request.headers.get('cookie');
 						const authorization = event.request.headers.get('authorization');
+
+						// combine cookies from the initiating request with any that were
+						// added via set-cookie
+						const combined_cookies = { ...cookies };
+
+						for (const cookie of new_cookies) {
+							if (!domain_matches(event.url.hostname, cookie.domain)) continue;
+							if (!path_matches(resolved, cookie.path)) continue;
+
+							combined_cookies[cookie.name] = cookie.value;
+						}
+
+						const cookie = Object.entries(combined_cookies)
+							.map(([name, value]) => `${name}=${value}`)
+							.join('; ');
 
 						if (cookie) {
 							opts.headers.set('cookie', cookie);
@@ -1726,21 +2231,17 @@ async function load_node({
 					}
 
 					response = await respond(
-						// we set `credentials` to `undefined` to workaround a bug in Cloudflare
-						// (https://github.com/sveltejs/kit/issues/3728) — which is fine, because
-						// we only need the headers
-						new Request(new URL(requested, event.url).href, { ...opts, credentials: undefined }),
+						new Request(new URL(requested, event.url).href, { ...opts }),
 						options,
 						{
-							getClientAddress: state.getClientAddress,
-							initiator: route,
-							prerender: state.prerender
+							...state,
+							initiator: route
 						}
 					);
 
-					if (state.prerender) {
+					if (state.prerendering) {
 						dependency = { response, body: null };
-						state.prerender.dependencies.set(resolved, dependency);
+						state.prerendering.dependencies.set(resolved, dependency);
 					}
 				} else {
 					// external
@@ -1771,6 +2272,14 @@ async function load_node({
 					response = await options.hooks.externalFetch.call(null, external_request);
 				}
 
+				const set_cookie = response.headers.get('set-cookie');
+				if (set_cookie) {
+					new_cookies.push(
+						...splitCookiesString_1(set_cookie)
+							.map((str) => parseString_1(str))
+					);
+				}
+
 				const proxy = new Proxy(response, {
 					get(response, key, _receiver) {
 						async function text() {
@@ -1779,9 +2288,8 @@ async function load_node({
 							/** @type {import('types').ResponseHeaders} */
 							const headers = {};
 							for (const [key, value] of response.headers) {
-								if (key === 'set-cookie') {
-									set_cookie_headers = set_cookie_headers.concat(value);
-								} else if (key !== 'etag') {
+								// TODO skip others besides set-cookie and etag?
+								if (key !== 'set-cookie' && key !== 'etag') {
 									headers[key] = value;
 								}
 							}
@@ -1848,7 +2356,9 @@ async function load_node({
 
 				return proxy;
 			},
-			stuff: { ...stuff }
+			stuff: { ...stuff },
+			status: is_error ? status ?? null : null,
+			error: is_error ? error ?? null : null
 		};
 
 		if (options.dev) {
@@ -1860,24 +2370,11 @@ async function load_node({
 			});
 		}
 
-		if (is_error) {
-			/** @type {import('types').ErrorLoadInput} */ (load_input).status = status;
-			/** @type {import('types').ErrorLoadInput} */ (load_input).error = error;
-		}
-
 		loaded = await module.load.call(null, load_input);
 
 		if (!loaded) {
 			// TODO do we still want to enforce this now that there's no fallthrough?
 			throw new Error(`load function must return a value${options.dev ? ` (${node.entry})` : ''}`);
-		}
-
-		// TODO remove for 1.0
-		// @ts-expect-error
-		if (loaded.fallthrough) {
-			throw new Error(
-				'fallthrough is no longer supported. Use matchers instead: https://kit.svelte.dev/docs/routing#advanced-routing-matching'
-			);
 		}
 	} else if (shadow.body) {
 		loaded = {
@@ -1888,7 +2385,7 @@ async function load_node({
 	}
 
 	// generate __data.json files when prerendering
-	if (shadow.body && state.prerender) {
+	if (shadow.body && state.prerendering) {
 		const pathname = `${event.url.pathname.replace(/\/$/, '')}/__data.json`;
 
 		const dependency = {
@@ -1896,7 +2393,7 @@ async function load_node({
 			body: JSON.stringify(shadow.body)
 		};
 
-		state.prerender.dependencies.set(pathname, dependency);
+		state.prerendering.dependencies.set(pathname, dependency);
 	}
 
 	return {
@@ -1905,7 +2402,11 @@ async function load_node({
 		loaded: normalize(loaded),
 		stuff: loaded.stuff || stuff,
 		fetched,
-		set_cookie_headers,
+		set_cookie_headers: new_cookies.map((new_cookie) => {
+			const { name, value, ...options } = new_cookie;
+			// @ts-expect-error
+			return serialize_1(name, value, options);
+		}),
 		uses_credentials
 	};
 }
@@ -2217,11 +2718,11 @@ async function respond$1(opts) {
 
 	let page_config = get_page_config(leaf, options);
 
-	if (state.prerender) {
+	if (state.prerendering) {
 		// if the page isn't marked as prerenderable (or is explicitly
 		// marked NOT prerenderable, if `prerender.default` is `true`),
 		// then bail out at this point
-		const should_prerender = leaf.prerender ?? state.prerender.default;
+		const should_prerender = leaf.prerender ?? options.prerender.default;
 		if (!should_prerender) {
 			return new Response(undefined, {
 				status: 204
@@ -2243,7 +2744,7 @@ async function respond$1(opts) {
 
 	let stuff = {};
 
-	ssr: if (resolve_opts.ssr) {
+	ssr: {
 		for (let i = 0; i < nodes.length; i += 1) {
 			const node = nodes[i];
 
@@ -2549,20 +3050,6 @@ const default_transform = ({ html }) => html;
 async function respond(request, options, state) {
 	let url = new URL(request.url);
 
-	const normalized = normalize_path(url.pathname, options.trailing_slash);
-
-	if (normalized !== url.pathname && !state.prerender?.fallback) {
-		return new Response(undefined, {
-			status: 301,
-			headers: {
-				location:
-					// ensure paths starting with '//' are not treated as protocol-relative
-					(normalized.startsWith('//') ? url.origin + normalized : normalized) +
-					(url.search === '?' ? '' : url.search)
-			}
-		});
-	}
-
 	const { parameter, allowed } = options.method_override;
 	const method_override = url.searchParams.get(parameter)?.toUpperCase();
 
@@ -2596,7 +3083,7 @@ async function respond(request, options, state) {
 	/** @type {Record<string, string>} */
 	let params = {};
 
-	if (options.paths.base && !state.prerender?.fallback) {
+	if (options.paths.base && !state.prerendering?.fallback) {
 		if (!decoded.startsWith(options.paths.base)) {
 			return new Response(undefined, { status: 404 });
 		}
@@ -2606,17 +3093,12 @@ async function respond(request, options, state) {
 	const is_data_request = decoded.endsWith(DATA_SUFFIX);
 
 	if (is_data_request) {
-		decoded = decoded.slice(0, -DATA_SUFFIX.length) || '/';
-
-		const normalized = normalize_path(
-			url.pathname.slice(0, -DATA_SUFFIX.length),
-			options.trailing_slash
-		);
-
-		url = new URL(url.origin + normalized + url.search);
+		const data_suffix_length = DATA_SUFFIX.length - (options.trailing_slash === 'always' ? 1 : 0);
+		decoded = decoded.slice(0, -data_suffix_length) || '/';
+		url = new URL(url.origin + url.pathname.slice(0, -data_suffix_length) + url.search);
 	}
 
-	if (!state.prerender || !state.prerender.fallback) {
+	if (!state.prerendering?.fallback) {
 		const matchers = await options.manifest._.matchers();
 
 		for (const candidate of options.manifest._.routes) {
@@ -2629,6 +3111,30 @@ async function respond(request, options, state) {
 				params = decode_params(matched);
 				break;
 			}
+		}
+	}
+
+	if (route) {
+		if (route.type === 'page') {
+			const normalized = normalize_path(url.pathname, options.trailing_slash);
+
+			if (normalized !== url.pathname && !state.prerendering?.fallback) {
+				return new Response(undefined, {
+					status: 301,
+					headers: {
+						'x-sveltekit-normalize': '1',
+						location:
+							// ensure paths starting with '//' are not treated as protocol-relative
+							(normalized.startsWith('//') ? url.origin + normalized : normalized) +
+							(url.search === '?' ? '' : url.search)
+					}
+				});
+			}
+		} else if (is_data_request) {
+			// requesting /__data.json should fail for a standalone endpoint
+			return new Response(undefined, {
+				status: 404
+			});
 		}
 	}
 
@@ -2709,7 +3215,7 @@ async function respond(request, options, state) {
 					};
 				}
 
-				if (state.prerender && state.prerender.fallback) {
+				if (state.prerendering?.fallback) {
 					return await render_response({
 						event,
 						options,
@@ -2811,7 +3317,7 @@ async function respond(request, options, state) {
 					});
 				}
 
-				if (state.prerender) {
+				if (state.prerendering) {
 					return new Response('not found', { status: 404 });
 				}
 
