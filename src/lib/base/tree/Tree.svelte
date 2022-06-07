@@ -2,7 +2,7 @@
 
 <script lang="ts">
   import {trans2Tree} from './tree.utils';
-  import type {TreeItemType,PathDataType} from './types';
+  import type {PathDataType, TreeItemType} from './types';
   import {createEventForwarder} from '../../engine/engine';
   import {get_current_component} from 'svelte/internal';
 
@@ -15,20 +15,29 @@
 
   export let paths: PathDataType[] = [];
   export let pathField: string     = 'path';
+  let finalPaths: TreeItemType[];
 
+  // private use
   export let pathes: TreeItemType[] = trans2Tree(paths, pathField);
+
+  function handleCheck(dataObj: TreeItemType) {
+    console.log('', dataObj.data);
+  }
+
+  finalPaths = trans2Tree(paths, pathField);
+
 </script>
 <div bind:this={element} class="treeRoot {className}" use:forwardEvents>
     {#each pathes as pat, k}
         <div>
             <div class="flex-h flex-align-middle pad-1 gap-small">
-                <div><input type="checkbox"/></div>
+                <div><input on:click={()=>{handleCheck(pat)}} type="checkbox"/></div>
                 <div>{pat.name}</div>
             </div>
             {#if pat?.children?.length}
-                <div class="pad-l-5">
+                <div class="pad-l-5 border-b">
                     <div class="flex-h ">
-                        <div class="notter"></div>
+                        <!--<div class="notter"></div>-->
                         <div>
                             <svelte:self pathes={pat.children}/>
                         </div>
