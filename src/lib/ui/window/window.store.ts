@@ -50,7 +50,7 @@ export function createWindowStore() {
     open     : (payload: IChromeArgs) => update((n) => {
       activeFrame.set(payload.frameId);
       const obj = n.get(payload.frameId) ?? {};
-      console.log({ ...obj,...payload, open: true, minimized: false, maximized: true})
+      // console.log({ ...obj,...payload, open: true, minimized: false, maximized: true})
       return n.set(payload.frameId, { ...obj,...payload, open: true, minimized: false, maximized: true});
     }),
     close    : (frameId: string | number) => update((n) => {

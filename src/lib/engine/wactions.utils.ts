@@ -1,6 +1,6 @@
 import Window from '/src/lib/ui/window/Window.svelte';
-import type {IChromeArgs} from '../ui/window/windowStore';
-import {windowsStore} from '../ui/window/windowStore';
+import type {IChromeArgs} from '../ui/window/window.store';
+import {windowsStore} from '../ui/window/window.store';
 import {get, writable} from 'svelte/store';
 import Debug from '../base/debug/Debug.svelte';
 

@@ -2,8 +2,8 @@
                 immutable={true}/>
 
 <script lang="ts">
-  import type {IChromeArgs} from '/src/lib/ui/window/windowStore';
-  import {getAppWindowStore, windowsStore} from '/src/lib/ui/window/windowStore';
+  import type {IChromeArgs} from '/src/lib/ui/window/window.store';
+  import {getAppWindowStore, windowsStore} from '/src/lib/ui/window/window.store';
   import {draggable} from '@neodrag/svelte';
   import {onDestroy} from 'svelte';
   import IconButton from '../../base/button/IconButton.svelte';

@@ -1077,6 +1077,7 @@ const updated = {
 };
 
 /**
+ * Creates the HTML response.
  * @param {{
  *   branch: Array<import('./types').Loaded>;
  *   options: import('types').SSROptions;
@@ -2027,6 +2028,7 @@ function path_matches(path, constraint) {
 }
 
 /**
+ * Calls the user's `load` function.
  * @param {{
  *   event: import('types').RequestEvent;
  *   options: import('types').SSROptions;
@@ -2661,6 +2663,7 @@ async function respond_with_error({
  */
 
 /**
+ * Gets the nodes, calls `load` for each of them, and then calls render to build the HTML response.
  * @param {{
  *   event: import('types').RequestEvent;
  *   options: SSROptions;

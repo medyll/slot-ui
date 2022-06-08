@@ -10,6 +10,7 @@ const forwardEvents = createEventForwarder(get_current_component());
 /*  end slotUi exports*/
 export let icon;
 export let iconFamily = 'fa-solid';
+export let iconClassName = '';
 export let style = '';
 export let showShip = false;
 export let iconFontSize = 'medium';
@@ -17,7 +18,7 @@ export let iconFontSize = 'medium';
 <button data-iconButton bind:this={element} use:forwardEvents on:click {style} class={className}>
 	<span>
 		<span class="icon">
-			<Icon {icon} {iconFamily} fontSize={iconFontSize} />
+			<Icon {icon} {iconFamily} class={iconClassName} fontSize={iconFontSize} />
 		</span>
 		<slot />
 	</span>

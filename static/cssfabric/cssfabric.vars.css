@@ -258,6 +258,9 @@
   --box-density-preset-small: 0.5rem;
   --box-density-preset-medium: 1.5rem;
   --box-density-preset-large: 2rem;
+  --radius-tiny: 4px;
+  --radius-small: 8px;
+  --radius-medium: 16px;
   /* text */
   /*Hs*/
   --font-size-h1: 3.1rem;
@@ -314,6 +317,7 @@
   --theme-color-paper-alpha: rgba(237, 237, 237, 0.3);
   --theme-color-paper-alpha-low: rgba(237, 237, 237, 0.8);
   --theme-color-paper-alpha-high: rgba(237, 237, 237, 0.1);
+  --theme-color-border: rgba(40, 34, 48, 0.2);
 }
 :root [density=small] {
   --box-density-0: 0rem;
@@ -387,25 +391,25 @@
   --theme-color-paper-alpha: rgba(237, 237, 237, 0.3);
   --theme-color-paper-alpha-low: rgba(237, 237, 237, 0.8);
   --theme-color-paper-alpha-high: rgba(237, 237, 237, 0.1);
-  --theme-color-border: rgba(237, 237, 237, 0.2);
+  --theme-color-border: rgba(40, 34, 48, 0.2);
   --theme-color-overlay: rgba(208, 191, 151, 0.2);
 }
 :root [data-theme=dark] {
   /* theme base colors*/
-  --theme-color-text: #27323a;
-  --theme-color-foreground: #27323a;
-  --theme-color-foreground-alpha: rgba(39, 50, 58, 0.3);
-  --theme-color-foreground-alpha-low: rgba(39, 50, 58, 0.8);
-  --theme-color-foreground-alpha-high: rgba(39, 50, 58, 0.1);
-  --theme-color-background: #f1f1f1;
-  --theme-color-background-alpha: rgba(39, 50, 58, 0.3);
-  --theme-color-background-alpha-low: rgba(39, 50, 58, 0.8);
-  --theme-color-background-alpha-high: rgba(39, 50, 58, 0.1);
+  --theme-color-text: #f1f1f1;
+  --theme-color-foreground: #f1f1f1;
+  --theme-color-foreground-alpha: rgba(241, 241, 241, 0.3);
+  --theme-color-foreground-alpha-low: rgba(241, 241, 241, 0.8);
+  --theme-color-foreground-alpha-high: rgba(241, 241, 241, 0.1);
+  --theme-color-background: #27323a;
+  --theme-color-background-alpha: rgba(241, 241, 241, 0.3);
+  --theme-color-background-alpha-low: rgba(241, 241, 241, 0.8);
+  --theme-color-background-alpha-high: rgba(241, 241, 241, 0.1);
   --theme-color-paper: #f1f1f1;
   --theme-color-paper-alpha: rgba(58, 59, 59, 0.3);
   --theme-color-paper-alpha-low: rgba(58, 59, 59, 0.8);
   --theme-color-paper-alpha-high: rgba(58, 59, 59, 0.1);
-  --theme-color-border: rgba(58, 59, 59, 0.2);
+  --theme-color-border: rgba(241, 241, 241, 0.3);
   --theme-color-overlay: rgba(255, 255, 255, 0.1);
 }
 

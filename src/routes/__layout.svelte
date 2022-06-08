@@ -21,6 +21,10 @@
   import Frame from '$lib/ui/frame/Frame.svelte';
   import {onMount} from 'svelte';
   import {toggleStartMenu} from "../lib/engine/wactions.utils";
+  import Debug from '../lib/base/debug/Debug.svelte';
+  import {openChromeFrame} from '../lib/ui/chromeFrame/chromeFrame.utils';
+  import ChromeFrameList from "../lib/ui/chromeFrame/ChromeFrameList.svelte";
+  import ChromeFrameButtonList from "../lib/ui/chromeFrame/ChromeFrameButtonList.svelte";
 
   let frameRef: Frame;
   let drawerRef: Drawer;
@@ -30,13 +34,10 @@
     drawerRef.toggle();
   };
 
-  onMount(function () {
-    console.log({drawerRefDash});
-    //drawerRefDash.toggle();
 
-    console.log({frameRef});
-  });
-
+  function openCh(frameId:string){
+    openChromeFrame(frameId,{component: Debug,title:'title '+frameId})
+  }
 </script>
 
 <ThemeWrapper theme={'dark'} themes={themes}>
@@ -44,18 +45,27 @@
     <div class="h-full overflow-hidden flex-v">
         <Login showLogin={false}>
             <Taskbar>
-                <IconButton slot="taskBarLeft" icon="barcode" on:click="{toggleStartMenu}" style="color:white;font-size: large"/>
+                <svelte:fragment slot="taskBarLeft">
+                    <IconButton icon="barcode" on:click="{toggleStartMenu}" style="color:white;font-size: large"/>
+                    <button on:click={()=>{openCh('btn1')}}>button 1 </button>
+                    <button on:click={()=>{openCh('btn2')}}>button 2</button>
+                    <button on:click={()=>{openCh('btn3')}}>button 3</button>
+                    <button on:click={()=>{openCh('btn4')}}>button 4</button>
+
+                </svelte:fragment>
+                <ChromeFrameButtonList let:chromeFrame  />
                 <TaskBarContent/>
                 <IconButton slot="taskBarRight" icon="fist-raised" iconFontSize="small" on:click={onItemClick} />
             </Taskbar>
-            <div class="flex-main overflow-hidden">
+            <div class="flex-main overflow-hidden pos-rel">
                 <slot/>
                 <Frame bind:frameDrawerRef={drawerRefDash} bind:this={frameRef}>
                     <div slot="frameDrawerSlot">
                         nav left
                     </div>
-                    <Dashboard slot="contentFrameSlot"/>
+                    <!--<Dashboard slot="contentFrameSlot"/>-->
                 </Frame>
+                <ChromeFrameList />
             </div>
         </Login>
     </div>
@@ -110,7 +120,7 @@
 
   button {
     color: var(--theme-color-text);
-    border: 0.5px solid var(--theme-border_color);
+    border: 0.5px solid var(--theme-color-border);
     padding: 0.5rem 0.75rem;
     border-radius: 4px;
     background-color: rgba(255, 255, 255, 0.1);

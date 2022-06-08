@@ -3,10 +3,12 @@
   import Iconify from '@iconify/iconify';
   import {createEventForwarder} from '../../engine/engine';
   import {get_current_component} from 'svelte/internal';
+  import {onDestroy} from 'svelte';
 
   /*  common slotUi exports*/
   let className = '';
   export {className as class};
+  export let style:string = '';
   export let element: HTMLDivElement | null = null;
   const forwardEvents                       = createEventForwarder(get_current_component());
   /*  end slotUi exports*/
@@ -26,7 +28,10 @@
   export let iconFamily: string = 'fa-solid';
   export let fontSize: SizeType = 'small';
 
+  onDestroy(() => {
+  });
+
 </script>
 <i class="iconify-inline {className}"
    data-icon="{iconFamily}:{icon}"
-   style="font-size:{sizes[fontSize]}px"></i>
+   style="font-size:{sizes[fontSize]}px;{style}"></i>

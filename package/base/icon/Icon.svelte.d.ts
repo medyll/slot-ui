@@ -1,6 +1,9 @@
 import { SvelteComponentTyped } from "svelte";
 declare const __propDef: {
     props: {
+        class?: string | undefined;
+        style?: string | undefined;
+        element?: HTMLDivElement | null | undefined;
         icon?: any;
         iconFamily?: string | undefined;
         fontSize?: any;

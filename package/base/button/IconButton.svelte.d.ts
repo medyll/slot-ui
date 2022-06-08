@@ -6,6 +6,7 @@ declare const __propDef: {
         element?: HTMLButtonElement | null | undefined;
         icon: ElementProps['icon'];
         iconFamily?: string | undefined;
+        iconClassName?: string | undefined;
         style?: string | undefined;
         showShip?: boolean | undefined;
         iconFontSize?: "default" | "tiny" | "small" | "medium" | "large" | "big" | undefined;
