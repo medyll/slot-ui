@@ -1,7 +1,7 @@
 <svelte:options accessors={true}
                 immutable={true}/>
 
-<script>import { getAppWindowStore, windowsStore } from '/src/lib/ui/window/windowStore';
+<script>import { getAppWindowStore, windowsStore } from '/src/lib/ui/window/window.store';
 import { draggable } from '@neodrag/svelte';
 import { onDestroy } from 'svelte';
 import IconButton from '../../base/button/IconButton.svelte';

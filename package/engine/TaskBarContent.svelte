@@ -1,5 +1,5 @@
 <script>import { getContext } from 'svelte';
-import { windowsStore } from '/src/lib/ui/window/windowStore';
+import { windowsStore } from '/src/lib/ui/window/window.store';
 import { toggleStartMenu } from './wactions.utils';
 import IconButton from '../base/button/IconButton.svelte';
 import { openPopper } from '../ui/popper/actions';

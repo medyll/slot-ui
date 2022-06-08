@@ -21,7 +21,6 @@ export let icon = 'question';
 export let iconFamily = 'fa-solid';
 export let fontSize = 'small';
 onDestroy(() => {
-    console.log('icon destroyed');
 });
 </script>
 <i class="iconify-inline {className}"
