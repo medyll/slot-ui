@@ -9,6 +9,7 @@
   import ListTitle from './ListTitle.svelte';
   import VirtualList from '@sveltejs/svelte-virtual-list';
   import {createEventForwarder} from '../../engine/engine';
+  import Virtualize from "../virtualize/Virtualize.svelte";
 
   /*  common slotUi exports*/
   let className = '';
@@ -36,30 +37,31 @@
     listStore.setActiveData(e.detail);
     onItemClick && onItemClick(e.detail);
   }
-
-  console.log(element)
 </script>
 
 <ul bind:this={element} class="density-{density}"
-    on:list:listItem:clicked={onListItemClick}
+    on:listclicked={onListItemClick}
+    use:forwardEvents
     style="position:relative;height:100%;{style};margin:0;padding:0">
     {#if $$slots.title || title}
         <slot name="title">
             <ListTitle primary={title}/>
         </slot>
     {/if}
-    {#if listItems}
-        <VirtualList height="100%" items={listItems} let:item>
+    {#if !$$slots.default &&  listItems}
+        <Virtualize height="100%" items={listItems} let:item>
             <ListItem density={density} data={item.data}>
-                <span slot="icon"><Icon fontSize="tiny" icon={item.icon}/></span>
-                <span slot="primary">{null_to_empty(item.primary)}</span>
-                <span slot="secondary">{null_to_empty(item.secondary)}</span>
-                <span slot="action">{null_to_empty(item.action)}</span>
+                <span slot="icon"><Icon fontSize="tiny" icon={item?.icon}/></span>
+                <span slot="primary">{null_to_empty(item?.primary)}</span>
+                <span slot="secondary">{null_to_empty(item?.secondary)}</span>
+                <span slot="action">{null_to_empty(item?.action)}</span>
             </ListItem>
-        </VirtualList>
+        </Virtualize>
     {/if}
-    {#if !listItems}
-        <slot></slot>
+    {#if $$slots.default &&  listItems}
+        {#each listItems as row  }
+            <slot listItem={row} />
+        {/each}
     {/if}
 </ul>
 

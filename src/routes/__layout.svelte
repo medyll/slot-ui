@@ -1,6 +1,6 @@
 <svelte:head>
     <title>SlotUi</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+    <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>-->
     <link href="node_modules/@medyll/cssfabric/src/lib/styles/cssfabric.css"/>
     <link href="../../static/cssfabric/cssfabric.vars.css" rel="stylesheet">
 </svelte:head>
@@ -36,7 +36,7 @@
 
 
   function openCh(frameId:string){
-    openChromeFrame(frameId,{component: Debug,title:'title '+frameId})
+    openChromeFrame(frameId,{component: Dashboard,title:'title '+frameId})
   }
 </script>
 

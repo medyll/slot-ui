@@ -72,7 +72,7 @@
     flex-direction: column;
     overflow: hidden;
     position: relative;
-    background-color: var(--css-frame-bg-color, var(--theme-color-primary));
+    background-color: var(--css-frame-bg-color, var(--theme-bg));
     backdrop-filter: var(--css-frame-backdrop-blur, blur(30px));
 
     .frameContainer {
