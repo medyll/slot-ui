@@ -16,14 +16,14 @@
   const forwardEvents                       = createEventForwarder(get_current_component());
   /*  end slotUi exports*/
 
-  $: Object.keys(chromeFrameListRef).forEach((frameId) => {
+  $: Boolean(browser) && Object.keys(chromeFrameListRef).forEach((frameId) => {
     if (!$chromeFrameStore.get(frameId)) {
       chromeFrameListRef[frameId].$destroy();
       delete (chromeFrameListRef[frameId]);
     }
   });
 
-  $: $chromeFrameStore.forEach((args:IChromeArgs, frameId: string) => {
+  $: Boolean(browser) && $chromeFrameStore.forEach((args:IChromeArgs, frameId: string) => {
     if (!args.noFrameButton && !chromeFrameListRef[frameId]) {
       chromeFrameListRef[frameId] = new ChromeFrame({
         target: document.getElementById('chromeFrameListContainer') ?? document.body,

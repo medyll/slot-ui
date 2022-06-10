@@ -1,6 +1,6 @@
 {
   "name": "@medyll/slotui",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "repository": {
     "type": "git",
     "url": "https://github.com/medyll/slot-ui.git"
@@ -19,10 +19,7 @@
     "css-watch": "npm run css-build -- --watch",
     "precommit": "npm unlink @medyll/cssfabric & npm i @medyll/cssfabric ",
     "postcommit": "npm remove @medyll/cssfabric & npm link --save @medyll/cssfabric",
-    "test": "jest",
-    "vitebook:dev": "vitebook dev",
-    "vitebook:build": "vitebook build",
-    "vitebook:preview": "vitebook preview"
+    "test": "jest"
   },
   "type": "module",
   "dependencies": {
@@ -70,6 +67,6 @@
     "ts-jest": "^27.1.4",
     "tslib": "^2.3.1",
     "typescript": "^4.4.3",
-    "vite": "^2.9.10"
+    "vite": "^2.9.11"
   }
 }
