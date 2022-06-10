@@ -4,6 +4,7 @@
 import { clickAway } from '../../uses/clickAway/clickAway';
 import { popperList } from './actions';
 let thisRef;
+let zIndex;
 export let code;
 export let component;
 export let componentProps;
@@ -19,14 +20,20 @@ export const show = function () {
     console.log('show');
 };
 export const destroy = function () {
-    popperList[code].$destroy();
+    popperList[code]?.$destroy();
 };
+let siblings = [];
+$: siblings = Array.prototype.slice.call(thisRef?.parentElement?.children ?? []) ?? [];
+$: zIndex = siblings?.reduce((prev, val) => {
+    // @ts-ignore
+    return (val?.style?.zIndex >= prev) ? val?.style?.zIndex + 1 : prev;
+}, 0);
 </script>
 
-<div class="popper"
-     bind:this={thisRef}
+<div bind:this={thisRef}
+     class="popper"
      use:clickAway={{action:destroy }}
-     use:stickTo={{parentNode,position:'TR'}}>
+     use:stickTo={{parentNode,position:'TR'}} >
     <slot>
         {#if component}
             <svelte:component this={component} {...componentProps}/>
@@ -35,11 +42,11 @@ export const destroy = function () {
 </div>
 
 <style>.popper {
-  background-color: rgba(90, 67, 52, 0.8);
-  backdrop-filter: blur(10px);
-  z-index: 3000;
-  box-shadow: 0px 0px 3px 1px rgba(51, 51, 51, 0.5);
-  border-radius: 8px;
+  z-index: 10000;
+  border-radius: var(--css-popper-radius, var(--radius-small));
   overflow: hidden;
   position: absolute;
+  box-shadow: var(--box-shad-4);
+  background-color: var(--theme-color-background-alpha);
+  backdrop-filter: blur(10px);
 }</style>

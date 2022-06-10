@@ -38,11 +38,16 @@ export let density = 'default';
   align-items: center;
   position: relative;
   border-radius: 4px;
+  margin: 0 0.25rem;
 }
 :global(li.listItemTitle) :global(.listItemContent),
 :global(li.listItem) :global(.listItemContent) {
   flex: 1;
   padding: 0 0.5rem;
+}
+:global(li.listItemTitle) :global(.listItemContent) :global([slot=secondary]),
+:global(li.listItem) :global(.listItemContent) :global([slot=secondary]) {
+  opacity: 0.8;
 }
 :global(li.listItemTitle) :global(.listItemAction),
 :global(li.listItem) :global(.listItemAction) {
@@ -57,17 +62,17 @@ export let density = 'default';
 :global(li.listItemTitle.density-tight),
 :global(li.listItem.density-tight) {
   padding: 0.5rem 0;
-  margin: 0.125rem 0;
+  margin: 0.125rem 0.5rem;
 }
 :global(li.listItemTitle.density-default),
 :global(li.listItem.density-default) {
   padding: 1rem 0;
-  margin: 0.25rem 0;
+  margin: 0.25rem 0.5rem;
 }
 :global(li.listItemTitle.density-kind),
 :global(li.listItem.density-kind) {
   padding: 1.5rem 0;
-  margin: 0.5rem 0;
+  margin: 0.5rem 0.5rem;
 }
 
 :global(.listItemTitle) :global(.listItemContent) :global([slot=primary]) {

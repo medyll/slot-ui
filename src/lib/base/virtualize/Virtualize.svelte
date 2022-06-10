@@ -12,7 +12,7 @@
   /*  end slotUi exports*/
 
   // props
-  export let items;
+  export let items      = [];
   export let height     = '100%';
   export let itemHeight = undefined;
 
@@ -38,9 +38,10 @@
   $: visible = items.slice(start, end).map((data, i) => {
     return {index: i + start, data};
   });
-
   // whenever `items` changes, invalidate the current heightmap
   $: if (mounted) refresh(items, viewport_height, itemHeight);
+
+  // $: console.log(visible)
 
   async function refresh(items, viewport_height, itemHeight) {
     const {scrollTop} = viewport;
@@ -138,9 +139,12 @@
   }
 
   // trigger initial refresh
-  onMount(() => {
+  onMount(async () => {
+    await tick();
     rows    = contents.children;
+    await tick();
     mounted = true;
+
   });
 </script>
 
@@ -152,7 +156,7 @@
         display: block;
     }
 
-    virtualize-content{
+    virtualize-content {
         display: block;
     }
 
@@ -165,7 +169,7 @@
         style="height: {height};"
 >
     <div style="position:sticky;top:0">
-        <slot name="virtualizeHeaderSlot" />
+        <slot name="virtualizeHeaderSlot"/>
     </div>
     <virtualize-content
             bind:this={contents}

@@ -6,7 +6,10 @@ declare const __propDef: {
         element?: HTMLDivElement | null | undefined;
         listItems: LisItemProps[];
         direction?: "vertical" | "horizontal" | undefined;
+        height?: string | undefined;
         style?: string | undefined;
+        showIcon?: boolean | undefined;
+        noVirtualize?: boolean | undefined;
         selectorField: any;
         onItemClick: any;
         title: string;
@@ -17,7 +20,9 @@ declare const __propDef: {
     };
     slots: {
         title: {};
-        default: {};
+        default: {
+            listItem: LisItemProps;
+        };
     };
 };
 export declare type ListProps = typeof __propDef.props;

@@ -11,9 +11,9 @@ const forwardEvents = createEventForwarder(get_current_component());
 export let icon;
 export let iconFamily = 'fa-solid';
 export let iconClassName = '';
+export let iconFontSize = 'small';
 export let style = '';
 export let showShip = false;
-export let iconFontSize = 'medium';
 </script>
 <button data-iconButton bind:this={element} use:forwardEvents on:click {style} class={className}>
 	<span>
@@ -28,15 +28,15 @@ export let iconFontSize = 'medium';
 </button>
 
 <style>button {
-  padding: 8px;
   position: relative;
-  background-color: transparent;
-  border: 1px solid var(--css-button-radius, transparent);
-  border-radius: var(--css-button-radius, 0);
+  color: var(--theme-color-text);
+  border: 1px solid var(--css-button-border-color, var(--theme-color-border));
+  padding: var(--box-density-preset-small) 0.75rem;
+  border-radius: var(--css-button-radius, 4px);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 button:hover {
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: var(--color-gray-800);
   backdrop-filter: blur(10px);
 }
 button span {
@@ -45,11 +45,11 @@ button span {
 }
 button .chip {
   position: absolute;
-  height: 6px;
+  height: 2px;
   left: 50%;
   transform: translate(-50%, 0);
   width: 50%;
-  background-color: blue;
+  background-color: var(--css-button-chip-color, var(--theme-color-primary));
   border-radius: 16px;
-  bottom: 0px;
+  bottom: 2px;
 }</style>

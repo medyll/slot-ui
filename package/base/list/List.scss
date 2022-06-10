@@ -5,10 +5,14 @@ li.listItem {
   align-items: center;
   position: relative;
   border-radius: 4px;
+  margin: 0 0.25rem;
 
   .listItemContent {
     flex: 1;
     padding: 0 0.5rem;
+    [slot=secondary] {
+      opacity: 0.8;
+    }
   }
 
   .listItemAction {
@@ -23,17 +27,17 @@ li.listItem {
 
   &.density-tight {
     padding: 0.5rem 0;
-    margin: 0.125rem 0;
+    margin: 0.125rem 0.5rem;
   }
 
   &.density-default {
     padding: 1rem 0;
-    margin: 0.25rem 0;
+    margin: 0.25rem 0.5rem;
   }
 
   &.density-kind {
     padding: 1.5rem 0;
-    margin: 0.5rem 0;
+    margin: 0.5rem 0.5rem;
   }
 }
 

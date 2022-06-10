@@ -1,6 +1,6 @@
 .drawer {
   color: var(--css-drawer-color,inherit);
-  background-color: var(--css-drawer-bg-color,var(--theme-color-background-alpha));
+  background-color: var(--css-drawer-bg-color);
   backdrop-filter:var(--css-drawer-backdrop-blur,blur(10px)) ;
   position: fixed;
   width: 288px;

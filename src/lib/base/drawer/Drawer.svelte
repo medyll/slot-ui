@@ -16,8 +16,9 @@
   export type toggle = () => void;
   export let title: DrawerTitleType;
 
-  // any
+  /** Should the drawer be open */
   export let isOpen: boolean        = true;
+  /** Should the closer icon be hidden */
   export let hideCloseIcon: boolean = false;
 
   /**

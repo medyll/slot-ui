@@ -1,7 +1,7 @@
 <script lang="ts">
   import {goto} from '$app/navigation';
   import Divider from '$lib/base/divider/Divider.svelte';
-  import ButtonPanel from '$lib/base/button/ButtonMenu.svelte';
+  import ButtonMenu from '$lib/base/button/ButtonMenu.svelte';
   import ButtonActionDemo from '$lib/base/button/ButtonAction.demo.svelte';
   import Menu from '$lib/ui/menu/Menu.svelte';
   import Avatar from '$lib/base/avatar/Avatar.svelte';
@@ -15,6 +15,7 @@
   import CardDemo from '$lib/base/card/Card.demo.svelte';
   import Options from '../../../lib/base/select/Options.svelte';
   import TreeDemo from '$lib/base/tree/Tree.demo.svelte';
+  import ListDemo from '$lib/base/list/List.demo.svelte';
 
   const menuData = [
     {text: 'text 1'},
@@ -40,28 +41,26 @@
 
 <div class="pos-abs w-full h-full overflow-hidden" style="z-index:0">
     <div class="flex-h  h-full overflow-hidden">
-        <div>
-
-            <Select let:option options={optionsData}>
-                <Options text={option.text}/>
-            </Select>
-            <Divider/>
-            <Paper density="tight">
-                <div class="pad-4 dsp-block-inline flex-v flex-align-middle-center">
-                    <button fullWidth on:click={handleClick('explorer')}> explorer</button>
-                    <br/>
-                    <button on:click={handleClick('what')}> what</button>
-                </div>
-            </Paper>
-            <Paper density="tight">
-                <ButtonPanel actionComponent={Menu} actionComponentProps={{ menuList: menuData }}>
-                    button is what
-                </ButtonPanel>
-            </Paper>
-        </div>
         <div class="flex-main pad-4 overflow-auto ">
             <div class="gridDemo">
                 <div>
+                    <Paper density="kind">
+
+                        <Select let:option options={optionsData}>
+                            <Options text={option.text}/>
+                        </Select>
+                        <Divider/>
+                        <div class="pad-4 dsp-block-inline flex-v flex-align-middle-center">
+                            <button fullWidth on:click={handleClick('explorer')}> explorer</button>
+                            <br/>
+                            <button on:click={handleClick('what')}> what</button>
+                        </div>
+                    </Paper>
+                    <Paper density="kind">
+                        <ButtonMenu actionComponent={Menu} actionComponentProps={{ menuList: menuData }}>
+                            button is what
+                        </ButtonMenu>
+                    </Paper>
                     <Paper density="kind">
                         <Avatar size="small">
                             <Icon icon="code"/>
@@ -90,13 +89,16 @@
                     <Paper>
                         <Menu menuList={menuData}/>
                     </Paper>
+                    <Paper>
+                        <ListDemo/>
+                    </Paper>
                 </div>
                 <div>
                     <Paper density="kind">
-                        <CardDemo />
+                        <CardDemo/>
                     </Paper>
                     <Paper density="kind">
-                        <TreeDemo />
+                        <TreeDemo/>
                     </Paper>
                 </div>
             </div>

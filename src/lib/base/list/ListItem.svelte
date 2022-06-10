@@ -17,6 +17,7 @@
   export let primary: string;
   export let secondary: string;
   export let action: string;
+  export let selected: boolean;
   // data to hold
   export let data: Record<string, any> = {};
 
@@ -51,7 +52,7 @@
         <div>
             <slot name="primary"/>
         </div>
-        <div>
+        <div class="itemSecondary">
             <slot name="secondary"/>
         </div>
     </div>

@@ -9,8 +9,9 @@ export { className as class };
 export let element = null;
 const forwardEvents = createEventForwarder(get_current_component());
 export let title;
-// any
+/** Should the drawer be open */
 export let isOpen = true;
+/** Should the closer icon be hidden */
 export let hideCloseIcon = false;
 /**
  * position
@@ -83,7 +84,7 @@ $: style = `position:${positionStyle};width:${widthStyle}!important`;
 </div>
 <style global>:global(.drawer) {
   color: var(--css-drawer-color, inherit);
-  background-color: var(--css-drawer-bg-color, var(--theme-color-background-alpha));
+  background-color: var(--css-drawer-bg-color);
   backdrop-filter: var(--css-drawer-backdrop-blur, blur(10px));
   position: fixed;
   width: 288px;

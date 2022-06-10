@@ -21,6 +21,7 @@ $menuStore.density = density;
 </ul>
 
 <style global>:global(.menu) {
+  margin: 0;
   min-width: 150px;
   padding: 0.25rem;
   cursor: pointer;

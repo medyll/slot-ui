@@ -1,6 +1,6 @@
 {
   "name": "@medyll/slotui",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "repository": {
     "type": "git",
     "url": "https://github.com/medyll/slot-ui.git"
@@ -103,6 +103,7 @@
     "./base/elipsisBox/ElipsisBox.svelte": "./base/elipsisBox/ElipsisBox.svelte",
     "./base/icon/Icon.svelte": "./base/icon/Icon.svelte",
     "./base/json/Json.svelte": "./base/json/Json.svelte",
+    "./base/list/List.demo.svelte": "./base/list/List.demo.svelte",
     "./base/list/List.scss": "./base/list/List.scss",
     "./base/list/List.svelte": "./base/list/List.svelte",
     "./base/list/ListItem.svelte": "./base/list/ListItem.svelte",
@@ -131,6 +132,7 @@
     "./base/tree/Tree.svelte": "./base/tree/Tree.svelte",
     "./base/tree/tree.utils": "./base/tree/tree.utils.js",
     "./base/tree/types": "./base/tree/types.js",
+    "./base/virtualize/Virtualize.svelte": "./base/virtualize/Virtualize.svelte",
     "./css/cssfabric.css": "./css/cssfabric.css",
     "./css/cssfabric.min.css": "./css/cssfabric.min.css",
     "./effects/transitions": "./effects/transitions.js",

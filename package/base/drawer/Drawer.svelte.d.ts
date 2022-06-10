@@ -4,8 +4,8 @@ declare const __propDef: {
         class?: string | undefined;
         element?: HTMLDivElement | null | undefined;
         title: string | undefined;
-        isOpen?: boolean | undefined;
-        hideCloseIcon?: boolean | undefined;
+        /** Should the drawer be open */ isOpen?: boolean | undefined;
+        /** Should the closer icon be hidden */ hideCloseIcon?: boolean | undefined;
         /**
            * position
            * @type 'wide' | 'inplace'

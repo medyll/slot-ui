@@ -7,9 +7,9 @@ declare const __propDef: {
         icon: ElementProps['icon'];
         iconFamily?: string | undefined;
         iconClassName?: string | undefined;
+        iconFontSize?: "default" | "tiny" | "small" | "medium" | "large" | "big" | undefined;
         style?: string | undefined;
         showShip?: boolean | undefined;
-        iconFontSize?: "default" | "tiny" | "small" | "medium" | "large" | "big" | undefined;
     };
     events: {
         click: MouseEvent;

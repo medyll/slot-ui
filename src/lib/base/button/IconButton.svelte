@@ -1,9 +1,9 @@
 
 <script lang="ts">
 	import Icon from '../icon/Icon.svelte';
-	import type { ElementProps } from '../../../types';
 	import {createEventForwarder} from '../../engine/engine';
 	import {get_current_component} from 'svelte/internal';
+	import type {ElementProps} from '../../../types';
 	/*  common slotUi exports*/
 	let className = '';
 	export {className as class};
@@ -14,9 +14,9 @@
 	export let icon: ElementProps['icon'];
 	export let iconFamily: string = 'fa-solid';
 	export let iconClassName: string = '';
+	export let iconFontSize: ElementProps['sizeType'] = 'small';
 	export let style: string = '';
 	export let showShip: boolean = false;
-	export let iconFontSize: ElementProps['sizeType'] = 'medium';
 
 
 </script>

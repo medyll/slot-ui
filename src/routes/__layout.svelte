@@ -1,8 +1,9 @@
 <svelte:head>
     <title>SlotUi</title>
-    <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>-->
-    <link href="node_modules/@medyll/cssfabric/src/lib/styles/cssfabric.css"/>
     <link href="../../static/cssfabric/cssfabric.vars.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+    <link href="node_modules/@medyll/cssfabric/src/lib/styles/cssfabric.min.css" lang="scss" rel="stylesheet" />
+
 </svelte:head>
 
 <script lang="ts">
@@ -94,9 +95,6 @@
 </ThemeWrapper>
 
 <style global lang="scss">
-  @import "node_modules/@medyll/cssfabric/src/lib/styles/cssfabric";
-  @import "sass/cssfabric";
-  @import url('https://fonts.googleapis.com/css?family=Rubik');
 
   html {
     font-size: 12px;
@@ -126,7 +124,13 @@
     background-color: rgba(255, 255, 255, 0.1);
 
     &:hover {
-      background-color: rgba(208, 191, 151, 0.2);
+      background-color: var(--color-gray-800);
+    }
+
+    &:active {
+      background-color: var(--theme-color-text);
+      color: var(--theme-color-background);
+      box-shadow: var(--box-shad-10);
     }
 
     &[disabled] {
