@@ -2,7 +2,7 @@
     <title>SlotUi</title>
     <link href="../../static/cssfabric/cssfabric.vars.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
-    <link href="node_modules/@medyll/cssfabric/src/lib/styles/cssfabric.min.css" lang="scss" rel="stylesheet" />
+    <link href="node_modules/@medyll/cssfabric/src/lib/styles/cssfabric.min.css" lang="scss" rel="stylesheet"/>
 
 </svelte:head>
 
@@ -20,12 +20,11 @@
   import ListItem from '$lib/base/list/ListItem.svelte';
   import {themes} from '../themes/themes';
   import Frame from '$lib/ui/frame/Frame.svelte';
-  import {onMount} from 'svelte';
-  import {toggleStartMenu} from "../lib/engine/wactions.utils";
-  import Debug from '../lib/base/debug/Debug.svelte';
+  import {toggleStartMenu} from '../lib/engine/wactions.utils';
   import {openChromeFrame} from '../lib/ui/chromeFrame/chromeFrame.utils';
-  import ChromeFrameList from "../lib/ui/chromeFrame/ChromeFrameList.svelte";
-  import ChromeFrameButtonList from "../lib/ui/chromeFrame/ChromeFrameButtonList.svelte";
+  import ChromeFrameList from '../lib/ui/chromeFrame/ChromeFrameList.svelte';
+  import ChromeFrameButtonList from '../lib/ui/chromeFrame/ChromeFrameButtonList.svelte';
+  import Explorer from "../components/pages/explorer/Explorer.svelte";
 
   let frameRef: Frame;
   let drawerRef: Drawer;
@@ -36,8 +35,10 @@
   };
 
 
-  function openCh(frameId:string){
-    openChromeFrame(frameId,{component: Dashboard,title:'title '+frameId})
+  function openCh(frameId: string,opt: any = {}) {
+    openChromeFrame(frameId,
+      { showCommandBar:false, component: Dashboard, title: frameId,...opt}
+    );
   }
 </script>
 
@@ -48,17 +49,18 @@
             <Taskbar>
                 <svelte:fragment slot="taskBarLeft">
                     <IconButton icon="barcode" on:click="{toggleStartMenu}" style="color:white;font-size: large"/>
-                    <button on:click={()=>{openCh('btn1')}}>button 1 </button>
+                    <button on:click={()=>{openCh('btn1')}}>button 1</button>
                     <button on:click={()=>{openCh('btn2')}}>button 2</button>
                     <button on:click={()=>{openCh('btn3')}}>button 3</button>
-                    <button on:click={()=>{openCh('btn4')}}>button 4</button>
+
+                    <button on:click={()=>{openCh('explorer',{component:Explorer})}}>explorer</button>
 
                 </svelte:fragment>
-                <ChromeFrameButtonList let:chromeFrame  />
+                <ChromeFrameButtonList let:chromeFrame/>
                 <TaskBarContent/>
-                <IconButton slot="taskBarRight" icon="fist-raised" iconFontSize="small" on:click={onItemClick} />
+                <IconButton icon="fist-raised" iconFontSize="small" on:click={onItemClick} slot="taskBarRight"/>
             </Taskbar>
-            <div class="flex-main overflow-hidden pos-rel">
+            <div id="layout" class="flex-main overflow-hidden pos-rel">
                 <slot/>
                 <Frame bind:frameDrawerRef={drawerRefDash} bind:this={frameRef}>
                     <div slot="frameDrawerSlot">
@@ -66,7 +68,12 @@
                     </div>
                     <!--<Dashboard slot="contentFrameSlot"/>-->
                 </Frame>
-                <ChromeFrameList />
+                <ChromeFrameList chromeListConfig={{
+                    showCommandBar: true,
+                    parent: '#layout',
+                    onClose:(chromeFrame)=>{
+                        console.log(chromeFrame)
+                    }}}/>
             </div>
         </Login>
     </div>
@@ -80,7 +87,7 @@
                 </svelte:fragment>
             </TopBar>
         </svelte:fragment>
-        <div class="pad-2"  >
+        <div class="pad-2">
             <List onItemClick={() => {}}>
                 {#each [...Array(10)] as key, val}
                     <ListItem>

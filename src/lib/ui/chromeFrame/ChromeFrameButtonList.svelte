@@ -2,6 +2,7 @@
   import {chromeFrameStore} from './chromeFrame.store';
   import {createEventForwarder} from '../../engine/engine';
   import {get_current_component} from 'svelte/internal';
+  import Icon from "../../base/icon/Icon.svelte";
 
   /** common slotUi exports*/
   let className = '';
@@ -16,9 +17,20 @@
         <div class="buttonRail">
             <slot chromeFrame={value}>
                 <button
-                        on:click={()=>{chromeFrameStore.makeOnTop(value.frameId)}}
+                        style="position:relative"
+                        on:click={()=>{chromeFrameStore.toggle(value.frameId)}}
                         on:dblclick={()=>{chromeFrameStore.remove(value.frameId)}}
-                        class:active={value.active}>{value.title ?? value.frameId}</button>
+                        class:active={value.active}>
+                    <div class="flex-h flex-align-middle gap-tiny">
+                        <div class="pad-r-4">{value.title ?? value.frameId}</div>
+                        <!--<div class="pad-r-4">{value.zIndex}</div>-->
+                        <div class="pos-abs right-0 pad-1">
+                            <slot name="chromeFrameCloseSlot">
+                                <div><Icon class="theme-text-primary"  icon="window-close" /></div>
+                            </slot>
+                        </div>
+                    </div>
+                </button>
             </slot>
         </div>
     {/each}

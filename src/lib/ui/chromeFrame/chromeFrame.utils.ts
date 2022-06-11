@@ -15,6 +15,8 @@ export function getChromeFrame(frameId: string | number) {
     updatePos: (position: IChromeArgs['position']) => chromeFrameStore.updatePos(frameId, position),
     remove   : () => chromeFrameStore.remove(frameId),
     makeOnTop: () => chromeFrameStore.makeOnTop(frameId),
+    minimize: () => chromeFrameStore.minimize(frameId),
+    toggle: () => chromeFrameStore.toggle(frameId),
   };
 }
 
@@ -29,7 +31,5 @@ export function openChromeFrame(frameId: string, args: Partial<IChromeArgs> = {}
     ...args,
     frameId: frameId, // cannot overwrite+
   });
-  // makeOnTop
-  chromeFrameStore.makeOnTop(frameId);
  
 }
