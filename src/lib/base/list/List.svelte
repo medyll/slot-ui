@@ -13,7 +13,7 @@
   /*  common slotUi exports*/
   let className = '';
   export {className as class};
-  export let element: HTMLDivElement | null = null;
+  export let element: HTMLElement | null = null;
   const forwardEvents                       = createEventForwarder(get_current_component());
   /*  end slotUi exports*/
 
@@ -24,7 +24,7 @@
   export let showIcon: boolean                    = true;
   export let noVirtualize: boolean                = false;
   export let selectorField;
-  export let onItemClick;
+  export let onItemClick: (args: Record<string,any>)=>void;
   export let title: string;
   export let groupBy: string
 
@@ -44,6 +44,7 @@
 
 <ul bind:this={element} class="density-{density}"
     on:listclicked={onListItemClick}
+    on:list:dblclicked={onListItemClick}
     style="position:relative;height:{height};margin:0;padding:0;{style}"
     use:forwardEvents>
     {#if $$slots.title || title}
@@ -58,8 +59,8 @@
                     <slot listItem={item}/>
                 </Virtualize>
             {:else}
-                <Virtualize itemHeight="35px" height="100%" items={listItems} let:item>
-                    <ListItem density={density} data={item.data}>
+                <Virtualize  height="100%" items={listItems} let:item>
+                    <ListItem class="" {showIcon} density={density} data={item.data}>
                         <span slot="icon"><Icon fontSize="tiny" icon={item?.icon}/></span>
                         <span slot="primary">{null_to_empty(item?.primary)}</span>
                         <span slot="secondary">{null_to_empty(item?.secondary)}</span>
@@ -70,7 +71,7 @@
         {:else}
             {#each listItems as item  }
                 <slot listItem={item}>
-                    <ListItem density={density} data={item.data}>
+                    <ListItem {showIcon} density={density} data={item.data}>
                         <span slot="icon"><Icon fontSize="tiny" icon={item?.icon}/></span>
                         <span slot="primary">{null_to_empty(item?.primary)}</span>
                         <span slot="secondary">{null_to_empty(item?.secondary)}</span>
