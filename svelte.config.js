@@ -20,7 +20,8 @@ const config = {
 		adapter: adapter(),
 		package: {
 			dir: 'package',
-			emitTypes: true
+			emitTypes: true,
+			exports: (filepath) => true
 		},
 		vite: {
 			server: {

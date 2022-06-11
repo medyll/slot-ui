@@ -82,3 +82,6 @@ typings/
 .temp
 dist/
 /.vitebook/
+
+# FuseBox cache
+.svelte-kit/

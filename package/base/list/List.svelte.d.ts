@@ -3,7 +3,7 @@ import type { LisItemProps } from './types';
 declare const __propDef: {
     props: {
         class?: string | undefined;
-        element?: HTMLDivElement | null | undefined;
+        element?: HTMLElement | null | undefined;
         listItems: LisItemProps[];
         direction?: "vertical" | "horizontal" | undefined;
         height?: string | undefined;
@@ -11,8 +11,9 @@ declare const __propDef: {
         showIcon?: boolean | undefined;
         noVirtualize?: boolean | undefined;
         selectorField: any;
-        onItemClick: any;
+        onItemClick: (args: Record<string, any>) => void;
         title: string;
+        groupBy: string;
         density?: "none" | "tight" | "default" | "kind" | undefined;
     };
     events: {

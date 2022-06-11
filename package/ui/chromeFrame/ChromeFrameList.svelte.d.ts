@@ -1,9 +1,11 @@
 import { SvelteComponentTyped } from "svelte";
+import type { IChromeOptionsArgs } from './types';
 declare const __propDef: {
     props: {
         class?: string | undefined;
         style?: string | undefined;
         element?: HTMLDivElement | null | undefined;
+        chromeListConfig?: IChromeOptionsArgs<Record<string, any>> | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;
@@ -23,5 +25,8 @@ export default class ChromeFrameList extends SvelteComponentTyped<ChromeFrameLis
     get element(): HTMLDivElement | null | undefined;
     /**accessor*/
     set element(_: HTMLDivElement | null | undefined);
+    get chromeListConfig(): IChromeOptionsArgs<Record<string, any>> | undefined;
+    /**accessor*/
+    set chromeListConfig(_: IChromeOptionsArgs<Record<string, any>> | undefined);
 }
 export {};

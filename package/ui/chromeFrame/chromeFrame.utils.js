@@ -10,6 +10,8 @@ export function getChromeFrame(frameId) {
         updatePos: (position) => chromeFrameStore.updatePos(frameId, position),
         remove: () => chromeFrameStore.remove(frameId),
         makeOnTop: () => chromeFrameStore.makeOnTop(frameId),
+        minimize: () => chromeFrameStore.minimize(frameId),
+        toggle: () => chromeFrameStore.toggle(frameId),
     };
 }
 /** open a chrome frame in DOM and add it to the store **/
@@ -21,6 +23,4 @@ export function openChromeFrame(frameId, args = {}) {
         ...args,
         frameId: frameId, // cannot overwrite+
     });
-    // makeOnTop
-    chromeFrameStore.makeOnTop(frameId);
 }

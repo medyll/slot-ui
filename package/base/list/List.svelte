@@ -21,6 +21,7 @@ export let noVirtualize = false;
 export let selectorField;
 export let onItemClick;
 export let title;
+export let groupBy;
 export let density = 'default';
 const listStore = createListStore();
 setContext('listStateContext', listStore);
@@ -34,6 +35,7 @@ function onListItemClick(e) {
 
 <ul bind:this={element} class="density-{density}"
     on:listclicked={onListItemClick}
+    on:list:dblclicked={onListItemClick}
     style="position:relative;height:{height};margin:0;padding:0;{style}"
     use:forwardEvents>
     {#if $$slots.title || title}
@@ -48,8 +50,8 @@ function onListItemClick(e) {
                     <slot listItem={item}/>
                 </Virtualize>
             {:else}
-                <Virtualize itemHeight="35px" height="100%" items={listItems} let:item>
-                    <ListItem density={density} data={item.data}>
+                <Virtualize  height="100%" items={listItems} let:item>
+                    <ListItem class="" {showIcon} density={density} data={item.data}>
                         <span slot="icon"><Icon fontSize="tiny" icon={item?.icon}/></span>
                         <span slot="primary">{null_to_empty(item?.primary)}</span>
                         <span slot="secondary">{null_to_empty(item?.secondary)}</span>
@@ -60,7 +62,7 @@ function onListItemClick(e) {
         {:else}
             {#each listItems as item  }
                 <slot listItem={item}>
-                    <ListItem density={density} data={item.data}>
+                    <ListItem {showIcon} density={density} data={item.data}>
                         <span slot="icon"><Icon fontSize="tiny" icon={item?.icon}/></span>
                         <span slot="primary">{null_to_empty(item?.primary)}</span>
                         <span slot="secondary">{null_to_empty(item?.secondary)}</span>

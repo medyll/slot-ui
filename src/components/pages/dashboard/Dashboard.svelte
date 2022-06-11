@@ -13,9 +13,12 @@
   import Paper from '$lib/base/paper/Paper.svelte';
   import Icon from '$lib/base/icon/Icon.svelte';
   import CardDemo from '$lib/base/card/Card.demo.svelte';
-  import Options from '../../../lib/base/select/Options.svelte';
+  import Options from '$lib/base/select/Options.svelte';
   import TreeDemo from '$lib/base/tree/Tree.demo.svelte';
   import ListDemo from '$lib/base/list/List.demo.svelte';
+
+
+  import GrouperDemo from '$lib/data/grouper/Grouper.demo.svelte';
 
   const menuData = [
     {text: 'text 1'},
@@ -99,6 +102,9 @@
                     </Paper>
                     <Paper density="kind">
                         <TreeDemo/>
+                    </Paper>
+                    <Paper density="kind">
+                        <GrouperDemo/>
                     </Paper>
                 </div>
             </div>

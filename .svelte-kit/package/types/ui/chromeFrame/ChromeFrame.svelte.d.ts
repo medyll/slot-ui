@@ -2,8 +2,12 @@ import { SvelteComponentTyped } from "svelte";
 declare const __propDef: {
     props: {
         frameId: string;
+        showCommands: boolean;
     };
     events: {
+        'chromeframe:hide': Event | MouseEvent | UIEvent | PointerEvent | ClipboardEvent | AnimationEvent | InputEvent | FocusEvent | CompositionEvent | DragEvent | ErrorEvent | FormDataEvent | KeyboardEvent | ProgressEvent<EventTarget> | SecurityPolicyViolationEvent | SubmitEvent | TouchEvent | TransitionEvent | WheelEvent;
+        'chromeframe:close': Event | MouseEvent | UIEvent | PointerEvent | ClipboardEvent | AnimationEvent | InputEvent | FocusEvent | CompositionEvent | DragEvent | ErrorEvent | FormDataEvent | KeyboardEvent | ProgressEvent<EventTarget> | SecurityPolicyViolationEvent | SubmitEvent | TouchEvent | TransitionEvent | WheelEvent;
+    } & {
         [evt: string]: CustomEvent<any>;
     };
     slots: {};

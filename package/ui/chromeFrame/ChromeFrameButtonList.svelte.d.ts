@@ -9,8 +9,9 @@ declare const __propDef: {
     };
     slots: {
         default: {
-            chromeFrame: import("./types").IChromeArgs;
+            chromeFrame: import("./types").IChromeArgs<Record<string, any>>;
         };
+        chromeFrameCloseSlot: {};
     };
 };
 export declare type ChromeFrameButtonListProps = typeof __propDef.props;

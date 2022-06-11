@@ -23,6 +23,6 @@ export let fontSize = 'small';
 onDestroy(() => {
 });
 </script>
-<i class="iconify-inline {className}"
+<span><i class="iconify-inline {className}"
    data-icon="{iconFamily}:{icon}"
-   style="font-size:{sizes[fontSize]}px;{style}"></i>
+   style="font-size:{sizes[fontSize]}px;{style}"></i></span>

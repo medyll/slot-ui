@@ -1,6 +1,6 @@
 {
   "name": "@medyll/slotui",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "repository": {
     "type": "git",
     "url": "https://github.com/medyll/slot-ui.git"
@@ -79,6 +79,7 @@
     "./base/button/ButtonMenu.svelte": "./base/button/ButtonMenu.svelte",
     "./base/button/IconButton.scss": "./base/button/IconButton.scss",
     "./base/button/IconButton.svelte": "./base/button/IconButton.svelte",
+    "./base/button/index.d.ts": "./base/button/index.d.ts",
     "./base/card/Card.demo.svelte": "./base/card/Card.demo.svelte",
     "./base/card/Card.scss": "./base/card/Card.scss",
     "./base/card/Card.svelte": "./base/card/Card.svelte",
@@ -135,6 +136,9 @@
     "./base/virtualize/Virtualize.svelte": "./base/virtualize/Virtualize.svelte",
     "./css/cssfabric.css": "./css/cssfabric.css",
     "./css/cssfabric.min.css": "./css/cssfabric.min.css",
+    "./data/grouper/Grouper.demo.svelte": "./data/grouper/Grouper.demo.svelte",
+    "./data/grouper/Grouper.svelte": "./data/grouper/Grouper.svelte",
+    "./data/sorter/Sorter.svelte": "./data/sorter/Sorter.svelte",
     "./effects/transitions": "./effects/transitions.js",
     "./engine/DynComp.svelte": "./engine/DynComp.svelte",
     "./engine/elem": "./engine/elem.js",

@@ -1,28 +1,33 @@
-<svelte:options accessors={true}/>
+<svelte:options accessors={true} />
 
 <script>import { getContext } from 'svelte';
+import { fade, slide } from 'svelte/transition';
 import { createEventDispatcher, custom_event, get_current_component } from 'svelte/internal';
 import { createEventForwarder } from '../../engine/engine';
+import Icon from '../icon/Icon.svelte';
 /*  common slotUi exports*/
 let className = '';
 export { className as class };
-export let element = null;
+export let element;
 const forwardEvents = createEventForwarder(get_current_component());
 /*  end slotUi exports*/
 export let icon;
-export let primary;
+export let primary = '';
 export let secondary;
 export let action;
 export let selected;
+export let showIcon = true;
 // data to hold
 export let data = {};
 export let density = 'default';
-let ref;
 let listStateContext = getContext('listStateContext');
-const dispatch = createEventDispatcher();
 const handleClick = () => () => {
     const event = custom_event('listclicked', data, { bubbles: true });
-    ref.dispatchEvent(event);
+    element.dispatchEvent(event);
+};
+const handleDblClick = () => () => {
+    const event = custom_event('list:dblclicked', data, { bubbles: true });
+    element.dispatchEvent(event);
 };
 let isActive = false;
 $: if ($listStateContext?.selectorField) {
@@ -31,27 +36,39 @@ $: if ($listStateContext?.selectorField) {
 </script>
 
 <li
-        bind:this={ref}
-        class="listItem density-{density}"
-        class:isActive
-        on:click={handleClick()}>
-    <span class="listItemChip"/>
-    <div class="listItemIcon">
-        <slot name="icon"/>
-    </div>
-    <div class="listItemContent">
-        <div>
-            <slot name="primary"/>
-        </div>
-        <div class="itemSecondary">
-            <slot name="secondary"/>
-        </div>
-    </div>
-    <div class="listItemAction">
-        <slot name="action"/>
-    </div>
+	bind:this={element}
+	class="listItem density-{density} {className}"
+	class:isActive
+	transition:fade
+	on:click={handleClick()}
+	on:dblclick={handleDblClick()}
+>
+	<span class="listItemChip" />
+	{#if showIcon}
+		<div class="listItemIcon">
+			<slot name="icon">
+				<Icon {icon} />
+			</slot>
+		</div>
+	{/if}
+	<div class="listItemContent">
+		<div>
+			<slot name="primary">
+				{primary}
+			</slot>
+		</div>
+		<div class="itemSecondary">
+			<slot name="secondary">
+				{secondary}
+			</slot>
+		</div>
+	</div>
+	<div class="listItemAction">
+		<slot name="action">
+			{action}
+		</slot>
+	</div>
 </li>
-
 
 <style global>:global(li.listItemTitle),
 :global(li.listItem) {
