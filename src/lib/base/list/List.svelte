@@ -26,6 +26,7 @@
   export let selectorField;
   export let onItemClick;
   export let title: string;
+  export let groupBy: string
 
   export let density: ElementProps['density'] = 'default';
 

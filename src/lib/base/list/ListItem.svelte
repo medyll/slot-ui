@@ -2,6 +2,7 @@
 
 <script lang="ts">
   import {getContext} from 'svelte';
+  import { fade,slide } from 'svelte/transition';
   import {createEventDispatcher, custom_event, get_current_component} from 'svelte/internal';
   import type {ElementProps} from './types';
   import {createEventForwarder} from '../../engine/engine';
@@ -43,6 +44,7 @@
         bind:this={ref}
         class="listItem density-{density}"
         class:isActive
+        transition:fade
         on:click={handleClick()}>
     <span class="listItemChip"/>
     <div class="listItemIcon">
