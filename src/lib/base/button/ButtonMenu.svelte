@@ -1,46 +1,50 @@
 <script lang="ts">
-  import type {SvelteComponentDev} from 'svelte/internal';
-  import {get_current_component} from 'svelte/internal';
-  import {openPopper} from '../../ui/popper/actions';
-  import IconButton from './IconButton.svelte';
-  import Menu from '../../ui/menu/Menu.svelte';
-  import {createEventForwarder} from '../../engine/engine';
+	import type { SvelteComponentDev } from 'svelte/internal';
+	import { get_current_component } from 'svelte/internal';
+	import { openPopper } from '../../ui/popper/actions';
+	import IconButton from './IconButton.svelte';
+	import Menu from '../../ui/menu/Menu.svelte';
+	import { createEventForwarder } from '../../engine/engine';
+	import type { SvelteComponent } from 'svelte';
+	import type { PopperPositionType } from '$lib/ui/popper/Popper.svelte';
 
-  export let icon: string = 'faList';
-  export let actionComponent: SvelteComponentDev;
-  export let actionComponentProps: any;
+	export let icon: string = 'list';
+	export let menuData: Record<string, any> = {};
+	export let actionComponent: SvelteComponent | any = Menu;
+	export let menuProps: Record<string, any> = { menuList: menuData };
+	export let menuPosition: PopperPositionType = 'BL';
 
-  /*  common slotUi exports*/
-  let className = '';
-  export {className as class};
-  export let element: HTMLButtonElement | null = null;
-  const forwardEvents                          = createEventForwarder(get_current_component());
-  /*  end slotUi exports*/
+	/*  common slotUi exports*/
+	let className = '';
+	export { className as class };
+	export let element: HTMLButtonElement | null = null;
+	const forwardEvents = createEventForwarder(get_current_component());
+	/*  end slotUi exports*/
 
-  const onActionClick = (event: PointerEvent) => {
-    event.stopPropagation();
-    console.log(event.target);
-    openPopper('settingActions', {
-      parentNode    : event.target as HTMLElement,
-      component     : Menu,
-      componentProps: actionComponentProps ?? {},
-      position      : 'BL'
-    });
-  };
+	let componentProps = menuProps ? menuProps : { menuList: menuData };
+
+	const onActionClick = (event: MouseEvent) => {
+		event.stopPropagation();
+
+		openPopper('settingActions', {
+			parentNode: event.target as HTMLElement,
+			component: actionComponent,
+			componentProps: componentProps ?? {},
+			position: menuPosition
+		});
+	};
 </script>
 
-<div class="buttonActionRoot">
-    <IconButton
-            class={className}
-            {element}
-            icon="faEllipsisH"
-            iconFontSize="small"
-            on:click={onActionClick}
-    >
-        <slot/>
-    </IconButton>
-</div>
+<IconButton
+	class={'ButtonMenu ' + className}
+	{element}
+	icon="faEllipsisH"
+	iconFontSize="small"
+	on:click={onActionClick}
+>
+	<slot />
+</IconButton>
 
 <style lang="scss">
-  @import 'ButtonMenu';
+	@import 'ButtonMenu';
 </style>

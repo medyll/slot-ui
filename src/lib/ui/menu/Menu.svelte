@@ -4,7 +4,6 @@
 	import type { ElementProps } from '../../../types';
 	import MenuItem from './MenuItem.svelte';
 	import { createMenuStore } from './store';
-	import Divider from "../../base/divider/Divider.svelte";
 
 	export let menuList: MenuItemProps[];
 	export let density: ElementProps['density'] = 'tight';
