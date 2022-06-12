@@ -42,9 +42,9 @@
 
 	const onActionClick = (event: MouseEvent) => {
 		event.stopPropagation();
-
+console.log(event)
 		openPopper('settingActions', {
-			parentNode: event.target as HTMLElement,
+			parentNode: event.currentTarget as HTMLElement,
 			component: actionComponent,
 			componentProps: componentProps ?? {},
 			position: menuPosition

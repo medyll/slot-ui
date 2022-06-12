@@ -134,7 +134,6 @@
 	$: menuProps = {
 		menuList: menuData,
 		onMenuItemClick: (e: any) => {
-			console.log(e);
 			if (Object.keys(e)?.[0]) {
 				console.log(Object.keys(e)?.[0]);
 

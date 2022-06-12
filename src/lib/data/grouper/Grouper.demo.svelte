@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Grouper, { type GroupedDataType } from './Grouper.svelte';
-	import SvelteMarkdown from 'svelte-markdown'; 
 
 	const data = [...Array(89)].map((r, i) => {
 		return {
