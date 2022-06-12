@@ -5,9 +5,10 @@ export declare type MenuProps<T = any> = {
     data?: T;
     action?: () => void;
 };
-export declare type MenuItemProps = {
+export declare type MenuItemProps<T = any> = {
     text: string;
     icon: string;
+    data?: T;
     action?: () => void;
     divider: boolean | ElementProps['expansion'];
 };

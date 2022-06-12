@@ -1,32 +1,56 @@
+<svelte:options accessors={true} />
+
 <script>import { getContext } from 'svelte';
-import { null_to_empty } from 'svelte/internal';
+import { custom_event, get_current_component, null_to_empty } from 'svelte/internal';
 import Divider from '../../base/divider/Divider.svelte';
+import { createEventForwarder } from '../../engine/engine';
+/*  common slotUi exports*/
+let className = '';
+export { className as class };
+export let element = undefined;
+const forwardEvents = createEventForwarder(get_current_component());
+/*  end slotUi exports*/
 export let text;
-export let icon;
-export let divider;
+export let icon = undefined;
+export let divider = false;
+export let data = { empty: 'menu item data' };
+export let onMenuItemClick = () => { };
 const menuStateContext = getContext('menuStateContext');
 if (icon || $$slots.menuItemIconSlot) {
     $menuStateContext.hasIcon = true;
 }
+const handleClick = (data) => () => {
+    const event = custom_event('menu:item:clicked', data, { bubbles: true });
+    if (element)
+        element.dispatchEvent(event);
+    onMenuItemClick(data);
+};
 </script>
 
-<li class="menuItem" role="menuitem">
-    {#if $menuStateContext.hasIcon}
-        <div class="menuItemIcon">
-            <slot name="menuItemIconSlot">{null_to_empty(icon)}</slot>
-        </div>
-    {/if}
-    <div class="menuItemText">
-        <slot>
-            <slot name="menuItemTextSlot">{text}</slot>
-        </slot>
-    </div>
+<li
+	class="menuItem"
+	role="menuitem"
+	bind:this={element}
+	use:forwardEvents
+	on:click={handleClick(data)}
+>
+	{#if $menuStateContext.hasIcon}
+		<div class="menuItemIcon">
+			<slot name="menuItemIconSlot">{null_to_empty(icon)}</slot>
+		</div>
+	{/if}
+	<div class="menuItemText">
+		<slot>
+			<slot name="menuItemTextSlot">{text}</slot>
+		</slot>
+	</div>
 </li>
 {#if divider}
-    <li>
-        <Divider extension="none"/>
-    </li>
+	<li>
+		<Divider extension="none" />
+	</li>
 {/if}
+
 <style global>:global(.menu) {
   margin: 0;
   min-width: 150px;

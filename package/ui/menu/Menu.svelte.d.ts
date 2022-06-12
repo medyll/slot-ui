@@ -2,8 +2,11 @@ import { SvelteComponentTyped } from "svelte";
 import type { MenuItemProps } from './types';
 declare const __propDef: {
     props: {
+        class?: string | undefined;
+        element?: HTMLElement | null | undefined;
         menuList: MenuItemProps[];
         density?: "none" | "tight" | "default" | "kind" | undefined;
+        onMenuItemClick?: Function | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;

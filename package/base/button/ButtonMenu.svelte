@@ -1,3 +1,5 @@
+<svelte:options accessors={true} />
+
 <script>import { get_current_component } from 'svelte/internal';
 import { openPopper } from '../../ui/popper/actions';
 import IconButton from './IconButton.svelte';
@@ -6,7 +8,12 @@ import { createEventForwarder } from '../../engine/engine';
 export let icon = 'list';
 export let menuData = {};
 export let actionComponent = Menu;
-export let menuProps = { menuList: menuData };
+export let menuProps = {
+    menuList: menuData,
+    onMenuItemClick: () => {
+        console.log('redfered');
+    }
+};
 export let menuPosition = 'BL';
 /*  common slotUi exports*/
 let className = '';
@@ -14,7 +21,12 @@ export { className as class };
 export let element = null;
 const forwardEvents = createEventForwarder(get_current_component());
 /*  end slotUi exports*/
-let componentProps = menuProps ? menuProps : { menuList: menuData };
+let componentProps = menuProps
+    ? menuProps
+    : {
+        menuList: menuData,
+        onMenuItemClick: () => { }
+    };
 const onActionClick = (event) => {
     event.stopPropagation();
     openPopper('settingActions', {
@@ -24,6 +36,7 @@ const onActionClick = (event) => {
         position: menuPosition
     });
 };
+// on:menu:item:clicked
 </script>
 
 <IconButton
@@ -32,6 +45,10 @@ const onActionClick = (event) => {
 	icon="faEllipsisH"
 	iconFontSize="small"
 	on:click={onActionClick}
+	on:menu:item:clicked={(e) => {
+		alert('red 3');
+		console.log(e);
+	}}
 >
 	<slot />
 </IconButton>

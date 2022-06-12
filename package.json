@@ -6,7 +6,7 @@
     "url": "https://github.com/medyll/slot-ui.git"
   },
   "scripts": {
-    "dev": "svelte-kit dev  --port 3001 --host",
+    "dev": "svelte-kit dev  --port 3001 --host --open",
     "build": "svelte-kit build",
     "package": "svelte-kit package",
     "preview": "svelte-kit preview",
