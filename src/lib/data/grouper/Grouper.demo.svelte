@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Grouper, { type GroupedDataType } from './Grouper.svelte';
-	import SvelteMarkdown from 'svelte-markdown';
-	import Markdown from '$lib/base/markdown/Markdown.svelte';
+	import SvelteMarkdown from 'svelte-markdown'; 
 
 	const data = [...Array(89)].map((r, i) => {
 		return {
@@ -23,17 +22,8 @@
 	let activeGroupFieldPredefined: any;
 	let activeGroupField: any;
 
-	let source = `# This is a header`;
 </script>
-
-<Markdown>
-	```javascript [indeed].push(var) ``` 
-	# This is a header This is a paragraph. 
-	* This is a list *
-	With two items 1. And a sublist 2. That is ordered * With another * Sublist inside | And this is |
-	A table | |-------------|---------| | With two | columns | # this is a header too ### this is a
-	header too # what
-</Markdown>
+ 
 <div class="flex-v gap-large">
 	<h5>{'<Grouper />'}</h5>
 	<h5>Menu mode</h5>
