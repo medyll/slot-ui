@@ -8,9 +8,10 @@
 	import Menu from '../../ui/menu/Menu.svelte';
 	import { createEventForwarder } from '../../engine/engine';
 	import type { SvelteComponent } from 'svelte';
-	import type { PopperPositionType } from '$lib/ui/popper/Popper.svelte';
+	import type { PopperPositionType } from '$lib/ui/popper/types';
 	import type { MenuItemProps } from '$lib/ui/menu/types';
 	import type { ElementProps } from 'src/types';
+import type { UsePopperProps } from '$lib/ui/popper/usePopper';
 
 	export let icon: string = 'list';
 	export let menuData: Record<string, any> = {};
@@ -29,7 +30,7 @@
 	/*  common slotUi exports*/
 	let className = '';
 	export { className as class };
-	export let element: HTMLButtonElement | null = null;
+	export let element: HTMLElement | null = null as HTMLElement;
 	const forwardEvents = createEventForwarder(get_current_component());
 	/*  end slotUi exports*/
 
@@ -41,7 +42,7 @@
 		  };
 
 	const onActionClick = (event: MouseEvent) => {
-		event.stopPropagation(); 
+		event.stopPropagation();
 		openPopper('settingActions', {
 			parentNode: event.currentTarget as HTMLElement,
 			component: actionComponent,
@@ -51,13 +52,25 @@
 	};
 
 	// on:menu:item:clicked
+	// on:click={onActionClick}
+	let openPoppOpt: UsePopperProps;
+
+	$: openPoppOpt = {
+		parentNode: element,
+		component: actionComponent,
+		componentProps: componentProps ?? {},
+		position: 'BL',
+		disabled: false
+	};
+
+	// usePopperOpt={openPoppOpt}
 </script>
 
 <IconButton
 	class={'ButtonMenu ' + className}
-	{element}
+	bind:element 
 	icon="faEllipsisH"
-	iconFontSize="small" 
+	iconFontSize="small"
 	on:click={onActionClick}
 	on:menu:item:clicked={(e) => {
 		alert('red 3');

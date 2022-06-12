@@ -1,5 +1,6 @@
-import Popper, { type PopperPositionType } from './Popper.svelte';
-import type {SvelteComponentDev} from 'svelte/internal';
+import type { PopperPositionType } from './types';
+import Popper from './Popper.svelte';
+import type { SvelteComponentDev } from 'svelte/internal';
 
 export let popperList: Record<string, Popper> = {};
 
@@ -9,34 +10,34 @@ const openPopper = (popperId: string, args: {
   component?: SvelteComponentDev,
   componentProps?: any
 } = {}) => {
-  
-  
-  
+
+
+console.log({args})
   if (popperList[popperId]) {
-    if(popperList[popperId].toggle) {
+    if (popperList[popperId].toggle) {
       popperList[popperId].toggle();
-    }else{
+    } else {
       createPopper()
     }
   } else {
     createPopper()
   }
-  
-  function createPopper(){
+
+  function createPopper() {
     popperList[popperId] = new Popper({
       target: document.body,
       intro: true,
-      props : {
+      props: {
         code: popperId,
         ...args,
       },
     });
-    
-    popperList[popperId].$$.on_destroy.push(()=>{
-      delete(popperList[popperId])
+
+    popperList[popperId].$$.on_destroy.push(() => {
+      delete (popperList[popperId])
     })
-    
+
   }
 };
 
-export {openPopper};
+export { openPopper };

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import github from 'svelte-highlight/styles/github';
+	import github from 'svelte-highlight/styles/github-dark';
 	import { ThemeWrapper } from 'svelte-themer';
 	import Taskbar from '/src/lib/ui/taskbar/Taskbar.svelte';
 	import Dashboard from '/src/components/pages/dashboard/Dashboard.svelte';

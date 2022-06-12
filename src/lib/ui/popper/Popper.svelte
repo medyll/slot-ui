@@ -1,14 +1,11 @@
 <svelte:options accessors={true} />
 
-<script context="module" lang="ts">
-	export type PopperPositionType = 'TL' | 'TR' | 'BR' | 'B' | 'BL';
-</script>
-
 <script lang="ts">
 	import type { SvelteComponentDev } from 'svelte/internal';
 	import { stickTo } from '../../uses/stickTo/stickTo';
 	import { clickAway } from '../../uses/clickAway/clickAway';
 	import { popperList } from './actions';
+	import type { PopperPositionType } from './types';
 
 	let thisRef: HTMLElement;
 	let zIndex;
@@ -16,7 +13,7 @@
 	export let code: string;
 	export let component: SvelteComponentDev;
 	export let componentProps: {};
-	export let position: PopperPositionType;
+	export let position: PopperPositionType = 'B';
 	export let parentNode: HTMLElement;
 
 	export const toggle = function () {
@@ -29,14 +26,14 @@
 		console.log('show');
 	};
 
-	const actions = ({
-		destroy: () => { 
+	const actions = {
+		destroy: () => {
 			popperList[code]?.$destroy();
 		}
-	});
+	};
 	/** @deprecated */
 	export const destroy = function () {
-		console.error('deprecated, use actions.destrtoy in caller')
+		console.error('deprecated, use actions.destrtoy in caller');
 		popperList[code]?.$destroy();
 	};
 
@@ -55,7 +52,7 @@
 	class="popper"
 	on:popper:close={actions.destroy}
 	use:clickAway={{ action: actions.destroy }}
-	use:stickTo={{ parentNode, position: 'TR' }}
+	use:stickTo={{ parentNode, position: position }}
 >
 	<slot>
 		{#if component}

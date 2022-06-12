@@ -18,7 +18,6 @@ export function clickAway(node: HTMLElement, props: ClickAwayProps) {
   
   
   const doEvent = function (daNode: any)  {
-    console.log({daNode,  action});
     if (!disabled) {
       if(action){
         action();
