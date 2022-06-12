@@ -17,6 +17,8 @@
 
 	let groupedTemplateData: GroupedDataType;
 	let groupedData: Record<string, any>;
+	let activeGroupFieldAll: any;
+	let activeGroupFieldPredefined: any;
 	let activeGroupField: any;
 </script>
 
@@ -25,10 +27,10 @@
 	<h5>Menu mode</h5>
 	<div class="flex-h gap-small">
 		<div class="flex-v gap-small">
-			<h6>All</h6>
-			<Grouper bind:groupedData bind:activeGroupField {data} />
-			<h6>Predefined list</h6>
-			<Grouper bind:groupedData bind:activeGroupField groupListItems={['directory', 'subdirectory']} {data} />
+			 <h6>All</h6>
+			<div class="flex-h flex-align-middle gap-tiny"><Grouper bind:groupedData bind:activeGroupField={activeGroupFieldAll} {data} />{activeGroupFieldAll}</div>
+			<h6>Predefined list</h6>  
+			<div class="flex-h flex-align-middle gap-tiny"><Grouper bind:groupedData bind:activeGroupField={activeGroupFieldPredefined} groupListItems={['directory', 'subdirectory']} {data} />{activeGroupFieldPredefined}</div>
 		</div>
 	</div>
 	<h5>Button mode</h5>
