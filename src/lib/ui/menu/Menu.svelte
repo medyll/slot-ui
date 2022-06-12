@@ -5,7 +5,7 @@
 	import MenuItem from './MenuItem.svelte';
 	import { createMenuStore } from './store';
 	import { createEventForwarder } from '$lib/engine/engine';
-	import { get_current_component } from 'svelte/internal';
+	import { custom_event, get_current_component } from 'svelte/internal';
 
 	/*  common slotUi exports*/
 	let className = '';
@@ -25,12 +25,16 @@
 
 	$menuStore.density = density;
 
-	function onMenuClick(e: CustomEvent<any>) {	 
+	function onMenuClick(e: CustomEvent<any>) {
 		onMenuItemClick && onMenuItemClick(e.detail);
+		const event = custom_event('popper:close', {}, { bubbles: true });
+		element.dispatchEvent(event); 
 	}
+
+	function sayHello() {}
 </script>
 
-<ul role="menu" class="density-{density} menu" on:menu:item:clicked={onMenuClick}>
+<ul bind:this={element} role="menu" class="density-{density} menu" on:menu:item:clicked={onMenuClick}>
 	{#if menuList}
 		{#each menuList as menuItem}
 			<slot {menuItem}>

@@ -28,7 +28,15 @@
 	export const show = function () {
 		console.log('show');
 	};
+
+	const actions = ({
+		destroy: () => { 
+			popperList[code]?.$destroy();
+		}
+	});
+	/** @deprecated */
 	export const destroy = function () {
+		console.error('deprecated, use actions.destrtoy in caller')
 		popperList[code]?.$destroy();
 	};
 
@@ -45,7 +53,8 @@
 <div
 	bind:this={thisRef}
 	class="popper"
-	use:clickAway={{ action: destroy }}
+	on:popper:close={actions.destroy}
+	use:clickAway={{ action: actions.destroy }}
 	use:stickTo={{ parentNode, position: 'TR' }}
 >
 	<slot>
