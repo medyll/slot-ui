@@ -3,55 +3,58 @@ import { openPopper } from '../../ui/popper/actions';
 import IconButton from './IconButton.svelte';
 import Menu from '../../ui/menu/Menu.svelte';
 import { createEventForwarder } from '../../engine/engine';
-export let icon = 'faList';
-export let actionComponent;
-export let actionComponentProps;
+export let icon = 'list';
+export let menuData = {};
+export let actionComponent = Menu;
+export let menuProps = { menuList: menuData };
+export let menuPosition = 'BL';
 /*  common slotUi exports*/
 let className = '';
 export { className as class };
 export let element = null;
 const forwardEvents = createEventForwarder(get_current_component());
 /*  end slotUi exports*/
+let componentProps = menuProps ? menuProps : { menuList: menuData };
 const onActionClick = (event) => {
     event.stopPropagation();
-    console.log(event.target);
     openPopper('settingActions', {
         parentNode: event.target,
-        component: Menu,
-        componentProps: actionComponentProps ?? {},
-        position: 'BL'
+        component: actionComponent,
+        componentProps: componentProps ?? {},
+        position: menuPosition
     });
 };
 </script>
 
-<div class="buttonActionRoot">
-    <IconButton
-            class={className}
-            {element}
-            icon="faEllipsisH"
-            iconFontSize="small"
-            on:click={onActionClick}
-    >
-        <slot/>
-    </IconButton>
-</div>
+<IconButton
+	class={'ButtonMenu ' + className}
+	{element}
+	icon="faEllipsisH"
+	iconFontSize="small"
+	on:click={onActionClick}
+>
+	<slot />
+</IconButton>
 
 <style>.buttonActionRoot {
   display: inline-block;
   position: relative;
   width: 64px;
 }
-.buttonActionRoot .buttonText {
+
+.buttonText {
   text-align: center;
 }
-.buttonActionRoot .button {
+
+.button {
   display: block;
   width: 64px;
 }
-.buttonActionRoot .button:hover {
+.button:hover {
   background-color: rgba(255, 255, 255, 0.3);
 }
-.buttonActionRoot .action {
+
+.action {
   position: absolute;
   display: block;
   top: 0;
@@ -61,6 +64,6 @@ const onActionClick = (event) => {
   width: 30%;
   padding: 0.5rem;
 }
-.buttonActionRoot .action:hover {
+.action:hover {
   background-color: rgba(255, 255, 255, 0.5);
 }</style>

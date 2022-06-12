@@ -1,0 +1,62 @@
+<script lang="ts">
+	import Grouper, { type GroupedDataType } from './Grouper.svelte';
+
+	const data = [...Array(89)].map((r, i) => {
+		return {
+			id: i,
+			name: 'one name',
+			surName: 'surname ' + i,
+			directory: ((prop: any) => 'dir-' + (i % 4) + prop)(i),
+			subdirectory: ((prop: any) => 'subdir-' + (i % 8) + prop)(i % 8),
+			directoryName: 'This directory number' + (i % 4),
+			nestedData: {
+				uuid: crypto?.randomUUID() ?? i
+			}
+		};
+	});
+
+	let groupedTemplateData: GroupedDataType;
+	let groupedData: Record<string, any>;
+	let activeGroupField: any;
+</script>
+
+<div class="flex-v gap-large">
+	<h5>{'<Grouper />'}</h5>
+	<h5>Menu mode</h5>
+	<div class="flex-h gap-small">
+		<div class="flex-v gap-small">
+			<h6>All</h6>
+			<Grouper bind:groupedData bind:activeGroupField {data} />
+			<h6>Predefined list</h6>
+			<Grouper bind:groupedData bind:activeGroupField groupListItems={['directory', 'subdirectory']} {data} />
+		</div>
+	</div>
+	<h5>Button mode</h5>
+	<div class="flex-h gap-small flex-align-middle">
+		<Grouper
+			bind:activeGroupField
+			bind:groupedData
+			groupByField="directory"
+			grouperMode="button"
+			{data}
+		>
+			group by directory
+		</Grouper>
+		<Grouper
+			bind:groupedData 
+			groupByField="subdirectory"
+			grouperMode="button"
+			{data}
+		>
+			group by subdirectory
+		</Grouper>
+		<div class="flex-main" />
+		<div>
+			{activeGroupField}
+		</div>
+	</div>
+</div>
+
+<pre>
+{JSON.stringify(groupedData, null, ' ')}
+</pre>

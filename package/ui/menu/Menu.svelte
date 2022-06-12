@@ -1,7 +1,6 @@
 <script>import { setContext } from 'svelte';
 import MenuItem from './MenuItem.svelte';
 import { createMenuStore } from './store';
-import Divider from "../../base/divider/Divider.svelte";
 export let menuList;
 export let density = 'tight';
 const menuStore = createMenuStore();

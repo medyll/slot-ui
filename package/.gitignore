@@ -83,5 +83,6 @@ typings/
 dist/
 /.vitebook/
 
-# FuseBox cache
+# svelte
 .svelte-kit/
+package/

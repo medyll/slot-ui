@@ -1,10 +1,13 @@
 import { SvelteComponentTyped } from "svelte";
-import type { SvelteComponentDev } from 'svelte/internal';
+import type { SvelteComponent } from 'svelte';
+import type { PopperPositionType } from '$lib/ui/popper/Popper.svelte';
 declare const __propDef: {
     props: {
         icon?: string | undefined;
-        actionComponent: SvelteComponentDev;
-        actionComponentProps: any;
+        menuData?: Record<string, any> | undefined;
+        actionComponent?: SvelteComponent | any;
+        menuProps?: Record<string, any> | undefined;
+        menuPosition?: PopperPositionType | undefined;
         class?: string | undefined;
         element?: HTMLButtonElement | null | undefined;
     };

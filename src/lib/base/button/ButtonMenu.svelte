@@ -1,3 +1,5 @@
+<svelte:options accessors={true} />
+
 <script lang="ts">
 	import type { SvelteComponentDev } from 'svelte/internal';
 	import { get_current_component } from 'svelte/internal';
@@ -7,11 +9,21 @@
 	import { createEventForwarder } from '../../engine/engine';
 	import type { SvelteComponent } from 'svelte';
 	import type { PopperPositionType } from '$lib/ui/popper/Popper.svelte';
+	import type { MenuItemProps } from '$lib/ui/menu/types';
+	import type { ElementProps } from 'src/types';
 
 	export let icon: string = 'list';
 	export let menuData: Record<string, any> = {};
 	export let actionComponent: SvelteComponent | any = Menu;
-	export let menuProps: Record<string, any> = { menuList: menuData };
+	export let menuProps: {
+		menuList?: MenuItemProps[];
+		density?: ElementProps['density'];
+	} = {
+		menuList: menuData,
+		onMenuItemClick: () => {
+			console.log('redfered');
+		}
+	};
 	export let menuPosition: PopperPositionType = 'BL';
 
 	/*  common slotUi exports*/
@@ -21,7 +33,12 @@
 	const forwardEvents = createEventForwarder(get_current_component());
 	/*  end slotUi exports*/
 
-	let componentProps = menuProps ? menuProps : { menuList: menuData };
+	let componentProps = menuProps
+		? menuProps
+		: {
+				menuList: menuData,
+				onMenuItemClick: () => {}
+		  };
 
 	const onActionClick = (event: MouseEvent) => {
 		event.stopPropagation();
@@ -33,6 +50,8 @@
 			position: menuPosition
 		});
 	};
+
+	// on:menu:item:clicked
 </script>
 
 <IconButton
@@ -41,6 +60,10 @@
 	icon="faEllipsisH"
 	iconFontSize="small"
 	on:click={onActionClick}
+	on:menu:item:clicked={(e) => {
+		alert('red 3');
+		console.log(e);
+	}}
 >
 	<slot />
 </IconButton>

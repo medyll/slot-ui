@@ -8,9 +8,10 @@ export type MenuProps<T = any> = {
     action?: () => void
 }
 
-export type MenuItemProps = {
+export type MenuItemProps<T = any>  = {
     text: string
     icon: string
+    data?: T
     action?: () => void
     divider: | boolean
              | ElementProps['expansion'];

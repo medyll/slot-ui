@@ -1,11 +1,12 @@
 import { SvelteComponentTyped } from "svelte";
+export declare type PopperPositionType = 'TL' | 'TR' | 'BR' | 'B' | 'BL';
 import type { SvelteComponentDev } from 'svelte/internal';
 declare const __propDef: {
     props: {
         code: string;
         component: SvelteComponentDev;
         componentProps: {};
-        position?: "TL" | "TR" | "BR" | "B" | "BL" | undefined;
+        position: PopperPositionType;
         parentNode: HTMLElement;
         toggle?: (() => void) | undefined;
         hide?: (() => void) | undefined;
@@ -36,9 +37,9 @@ export default class Popper extends SvelteComponentTyped<PopperProps, PopperEven
     get componentProps(): {};
     /**accessor*/
     set componentProps(_: {});
-    get position(): "TL" | "TR" | "BR" | "B" | "BL" | undefined;
+    get position(): PopperPositionType;
     /**accessor*/
-    set position(_: "TL" | "TR" | "BR" | "B" | "BL" | undefined);
+    set position(_: PopperPositionType);
     get parentNode(): HTMLElement;
     /**accessor*/
     set parentNode(_: HTMLElement);
