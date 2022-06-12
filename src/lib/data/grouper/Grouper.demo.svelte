@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Grouper, { type GroupedDataType } from './Grouper.svelte';
+	import SvelteMarkdown from 'svelte-markdown'
 
 	const data = [...Array(89)].map((r, i) => {
 		return {
@@ -20,17 +21,34 @@
 	let activeGroupFieldAll: any;
 	let activeGroupFieldPredefined: any;
 	let activeGroupField: any;
+
+	let source = `# This is a header`
 </script>
+
+<SvelteMarkdown {source} isInline />
 
 <div class="flex-v gap-large">
 	<h5>{'<Grouper />'}</h5>
 	<h5>Menu mode</h5>
 	<div class="flex-h gap-small">
 		<div class="flex-v gap-small">
-			 <h6>All</h6>
-			<div class="flex-h flex-align-middle gap-tiny"><Grouper bind:groupedData bind:activeGroupField={activeGroupFieldAll} {data} />{activeGroupFieldAll}</div>
-			<h6>Predefined list</h6>  
-			<div class="flex-h flex-align-middle gap-tiny"><Grouper bind:groupedData bind:activeGroupField={activeGroupFieldPredefined} groupListItems={['directory', 'subdirectory']} {data} />{activeGroupFieldPredefined}</div>
+			<h6>All</h6>
+			<div class="flex-h flex-align-middle gap-tiny">
+				<Grouper
+					bind:groupedData
+					bind:activeGroupField={activeGroupFieldAll}
+					{data}
+				/>{activeGroupFieldAll}
+			</div>
+			<h6>Predefined list</h6>
+			<div class="flex-h flex-align-middle gap-tiny">
+				<Grouper
+					bind:groupedData
+					bind:activeGroupField={activeGroupFieldPredefined}
+					groupListItems={['directory', 'subdirectory']}
+					{data}
+				/>{activeGroupFieldPredefined}
+			</div>
 		</div>
 	</div>
 	<h5>Button mode</h5>
@@ -44,12 +62,7 @@
 		>
 			group by directory
 		</Grouper>
-		<Grouper
-			bind:groupedData 
-			groupByField="subdirectory"
-			grouperMode="button"
-			{data}
-		>
+		<Grouper bind:groupedData bind:activeGroupField groupByField="subdirectory" grouperMode="button" {data}>
 			group by subdirectory
 		</Grouper>
 		<div class="flex-main" />
@@ -57,8 +70,9 @@
 			{activeGroupField}
 		</div>
 	</div>
-</div>
-
-<pre>
+	<div>
+		<pre>
 {JSON.stringify(groupedData, null, ' ')}
 </pre>
+	</div>
+</div>
