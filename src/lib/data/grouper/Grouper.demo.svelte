@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Grouper, { type GroupedDataType } from './Grouper.svelte';
+	import { HighlightSvelte } from 'svelte-highlight';
 
 	const data = [...Array(89)].map((r, i) => {
 		return {
@@ -21,56 +22,100 @@
 	let activeGroupFieldPredefined: any;
 	let activeGroupField: any;
 
+	let codeAll = `<Grouper 
+	bind:groupedData
+	bind:activeGroupField={activeGroupFieldAll}
+	{data}
+	/>`;
+
+	let codePref = `<Grouper
+	bind:groupedData
+	bind:activeGroupField={activeGroupFieldPredefined}
+	groupListItems={['directory', 'subdirectory']}
+	{data}
+	/>`;
+
+	let codeButtonMode = `<Grouper
+	bind:activeGroupField
+	bind:groupedData
+	groupByField="directory"
+	grouperMode="button"
+	{data}
+	>
+		group by directory
+</Grouper>
+<Grouper
+	bind:groupedData
+	bind:activeGroupField
+	groupByField="subdirectory"
+	grouperMode="button"
+	{data}
+>
+	group by subdirectory
+</Grouper>
+<div class="flex-main" />
+<div>
+	{activeGroupField}
+</div>`;
 </script>
- 
+
 <div class="flex-v gap-large">
 	<h5>{'<Grouper />'}</h5>
 	<h5>Menu mode</h5>
 	<div class="flex-h gap-small">
 		<div class="flex-v gap-small">
 			<h6>All</h6>
-			<div class="flex-h flex-align-middle gap-tiny">
-				<Grouper
-					bind:groupedData
-					bind:activeGroupField={activeGroupFieldAll}
-					{data}
-				/>{activeGroupFieldAll}
+			<div>
+				<div class="flex-h flex-align-middle gap-tiny">
+					<Grouper
+						bind:groupedData
+						bind:activeGroupField={activeGroupFieldAll}
+						{data}
+					/>{activeGroupFieldAll}
+				</div>
+				<HighlightSvelte code={codeAll} />
 			</div>
 			<h6>Predefined list</h6>
-			<div class="flex-h flex-align-middle gap-tiny">
-				<Grouper
-					bind:groupedData
-					bind:activeGroupField={activeGroupFieldPredefined}
-					groupListItems={['directory', 'subdirectory']}
-					{data}
-				/>{activeGroupFieldPredefined}
+			<div>
+				<div class="flex-h flex-align-middle gap-tiny">
+					<Grouper
+						bind:groupedData
+						bind:activeGroupField={activeGroupFieldPredefined}
+						groupListItems={['directory', 'subdirectory']}
+						{data}
+					/>{activeGroupFieldPredefined}
+				</div>
+				<div><HighlightSvelte code={codePref} /></div>
 			</div>
 		</div>
 	</div>
 	<h5>Button mode</h5>
-	<div class="flex-h gap-small flex-align-middle">
-		<Grouper
-			bind:activeGroupField
-			bind:groupedData
-			groupByField="directory"
-			grouperMode="button"
-			{data}
-		>
-			group by directory
-		</Grouper>
-		<Grouper
-			bind:groupedData
-			bind:activeGroupField
-			groupByField="subdirectory"
-			grouperMode="button"
-			{data}
-		>
-			group by subdirectory
-		</Grouper>
-		<div class="flex-main" />
-		<div>
-			{activeGroupField}
+	<div>
+		<div class="flex-h gap-small flex-align-middle">
+			<Grouper
+				bind:activeGroupField
+				bind:groupedData
+				groupByField="directory"
+				grouperMode="button"
+				{data}
+			>
+				group by directory
+			</Grouper>
+			<Grouper
+				bind:groupedData
+				bind:activeGroupField
+				groupByField="subdirectory"
+				grouperMode="button"
+				{data}
+			>
+				group by subdirectory
+			</Grouper>
+			<div class="flex-main" />
+			<div>
+				{activeGroupField}
+			</div>
 		</div>
+		<HighlightSvelte code={codeButtonMode} />		
 	</div>
 	<div>
 		<pre>

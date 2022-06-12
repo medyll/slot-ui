@@ -29,6 +29,9 @@ const config = {
 					// Allow serving files from one level up to the project root
 					allow: ['..']
 				}
+			},
+			optimizeDeps: {
+				include: ['highlight.js', 'highlight.js/lib/core']
 			}
 		}
 	}

@@ -41,8 +41,7 @@
 		  };
 
 	const onActionClick = (event: MouseEvent) => {
-		event.stopPropagation();
-console.log(event)
+		event.stopPropagation(); 
 		openPopper('settingActions', {
 			parentNode: event.currentTarget as HTMLElement,
 			component: actionComponent,
@@ -58,7 +57,7 @@ console.log(event)
 	class={'ButtonMenu ' + className}
 	{element}
 	icon="faEllipsisH"
-	iconFontSize="small"
+	iconFontSize="small" 
 	on:click={onActionClick}
 	on:menu:item:clicked={(e) => {
 		alert('red 3');

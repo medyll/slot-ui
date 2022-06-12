@@ -10,7 +10,7 @@ export type MenuProps<T = any> = {
 
 export type MenuItemProps<T = any>  = {
     text: string
-    icon: string
+    icon?: string
     data?: T
     action?: () => void
     divider: | boolean
