@@ -6,7 +6,7 @@ declare const __propDef: {
         presetDefault?: string | undefined;
         class?: string | undefined;
         element?: HTMLButtonElement | null | undefined;
-        usePopper?: UsePopperProps | undefined;
+        usePopper: UsePopperProps;
         loading?: boolean | undefined;
         showChip?: boolean | undefined;
         contained?: boolean | undefined;
@@ -22,6 +22,8 @@ declare const __propDef: {
         reverse?: boolean | undefined;
     };
     events: {
+        click: MouseEvent;
+    } & {
         [evt: string]: CustomEvent<any>;
     };
     slots: {

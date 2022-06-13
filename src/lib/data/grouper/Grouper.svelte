@@ -19,7 +19,8 @@
 </script>
 
 <script lang="ts">
-	import ButtonMenu from '$lib/base/button/ButtonMenu.svelte';
+import Button from '$lib/base/button/Button.svelte';
+
 	import type { MenuItemProps } from '$lib/ui/menu/types';
 
 	import { custom_event } from 'svelte/internal';
@@ -145,22 +146,22 @@
 
 <div bind:this={element}>
 	{#if grouperMode === 'menu'}
-		<ButtonMenu
+		<Button
 			on:menu:item:clicked={(e) => {
 				alert('red twoo');
 				console.log(e);
 			}}
-			{menuProps}>group by</ButtonMenu
+			{menuProps}>group by</Button
 		>
 	{/if}
 	{#if grouperMode === 'button' && groupByField}
-		<button
+		<Button
 			on:click={innerGroupBy(data, groupByField, {
 				keepUngroupedData: showUnGrouped,
 				fieldTitle: groupByTitleField
 			})}
 		>
 			<slot>group by {groupByField}</slot>
-		</button>
+		</Button>
 	{/if}
 </div>

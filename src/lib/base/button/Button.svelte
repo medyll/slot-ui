@@ -7,7 +7,7 @@
 	import Divider from '../divider/Divider.svelte';
 	import Menu from '$lib/ui/menu/Menu.svelte';
 	import Popper from '$lib/ui/popper/Popper.svelte';
-	import Icon from '@iconify/svelte';
+	import Icon from '../icon/Icon.svelte';
 
 	export let presetDefault = 'bordered contained';
 
@@ -19,7 +19,7 @@
 	/*  end slotUi exports*/
 
 	/** paramters for usePopper */
-	export let usePopper: UsePopperProps = { disabled: true } as UsePopperProps;
+	export let usePopper: UsePopperProps;
 	/** show loading state */
 	export let loading: boolean = false;
 	/** show chip */
@@ -54,8 +54,24 @@
 	let actionComponentProps = {};
 	let actionContent = '';
 
-	// seet use popper
-	$: usePopper.parentNode = element;
+	const onActionClick = (event: MouseEvent) => {
+		event.stopPropagation();
+		/* openPopper('settingActions', {
+			parentNode: event.currentTarget as HTMLElement,
+			component: actionComponent,
+			componentProps: componentProps ?? {},
+			position: menuPosition
+		}); */
+	};
+
+	$: if (usePopper) {
+		usePopper.disabled = false;
+		usePopper.parentNode = element;
+	} else {
+		usePopper = { disabled: true };
+	}
+
+	$: console.log({ usePopper });
 
 	$: actionArgs = {
 		code: 'node',
@@ -68,13 +84,13 @@
 	};
 </script>
 
-<div><Icon icon="user" /></div>
 <button
 	class={className + ' w-' + size}
 	class:loading
 	bind:this={element}
 	use:popper={usePopper}
 	use:forwardEvents
+	on:click
 	class:size={'w-' + size}
 	{density}
 	{nowrap}
@@ -111,8 +127,8 @@
 				<div class="flex-h flex-align-middle gap-tiny">
 					<div>
 						<slot name="loadingIconButtonSlot"
-							><div><Icon icon="spin" class="fa-spinner" /></div></slot
-						>
+							><div><Icon icon="spinner" class="fa-spinner" /></div>
+						</slot>
 					</div>
 					<div>loading</div>
 				</div>
@@ -131,14 +147,14 @@
 	</div>
 {/if}
 {#if element && $$slots.popper}
-	<!-- <Popper {...actionArgs} parentNode={element}>
+	<Popper {...actionArgs} parentNode={element}>
 		<span slot="button">button</span>
 		<slot name="popper">
 			{#if actionArgs?.component}
 				<svelte:component this={actionArgs.component} {...actionArgs.componentProps} />
 			{/if}
 		</slot>
-	</Popper> -->
+	</Popper>
 {/if}
 
 <style lang="scss">
@@ -153,7 +169,7 @@
 		border: 0.5px solid transparent;
 		// padding: auto var(--box-density-preset-tiny);
 		color: var(--theme-color-foreground);
-
+		padding: 0;
 		&[disabled] {
 			color: var(--color-gray-800);
 		}
@@ -243,6 +259,7 @@
 			min-width: auto;
 			align-items: center;
 			justify-content: center;
+			height: 100%;
 			.startButtonSlot {
 				padding: 0 var(--box-density-preset-small, 0.25rem);
 			}
@@ -250,18 +267,20 @@
 				flex: 1;
 				min-width: auto;
 				width: auto;
+				display: inline;
+				vertical-align: bottom;
 				&[nowrap] {
 				}
 			}
 			.action {
-				display: block;
-				top: 0;
-				bottom: 0;
-				right: 0;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				height: 100%;
 				background-color: rgba(255, 255, 255, 0.1);
-				//width: var(--w-tiny);
-				padding: 0 0.25rem;
-
+				width: var(--w-tiny);
+				padding: 0 0.5rem;
+				cursor: pointer;
 				&:hover {
 					background-color: rgba(255, 255, 255, 0.5);
 				}

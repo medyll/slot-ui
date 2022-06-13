@@ -12,11 +12,14 @@ export type UsePopperProps = {
     disabled?: boolean
 }
 
+/** adds click action to parentNode */
 export function popper(node: HTMLElement, props: UsePopperProps) {
 
-    if (props?.disabled) return false
-
-    const { parentNode, position = 'R', code = crypto.randomUUID() } = props;
+    if (Boolean(props?.disabled)) return false
+    if (!props) console.log({ node, props })
+     
+    // node is parentNode !!!!
+    const { parentNode = undefined, position = 'R', code = crypto.randomUUID() } = props;
 
     // document.addEventListener('click', (event) => event.stopPropagation())
 
@@ -24,7 +27,8 @@ export function popper(node: HTMLElement, props: UsePopperProps) {
         event.preventDefault();
         event.stopPropagation();
  
-        openPopper(code, { ...props });
+
+        openPopper(code, { ...props, parentNode: node });
     };
 
     node.addEventListener('click', doPopperEvent);

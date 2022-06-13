@@ -1,6 +1,5 @@
 <script>import Icon from '../icon/Icon.svelte';
 import IconButton from '../button/IconButton.svelte';
-import ButtonAction from '../button/ButtonMenu.svelte';
 export let onClose;
 export let hasMenu = false;
 </script>

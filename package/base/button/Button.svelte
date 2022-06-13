@@ -5,8 +5,8 @@ import { crossfade, fade, scale } from 'svelte/transition';
 import Divider from '../divider/Divider.svelte';
 import Menu from '../../ui/menu/Menu.svelte';
 import Popper from '../../ui/popper/Popper.svelte';
-import Icon from '@iconify/svelte';
-export let presetDefault = 'contained';
+import Icon from '../icon/Icon.svelte';
+export let presetDefault = 'bordered contained';
 /*  common slotUi exports*/
 let className = '';
 export { className as class };
@@ -14,17 +14,17 @@ export let element = null;
 const forwardEvents = createEventForwarder(get_current_component());
 /*  end slotUi exports*/
 /** paramters for usePopper */
-export let usePopper = { disabled: true };
+export let usePopper;
 /** show loading state */
 export let loading = false;
 /** show chip */
 export let showChip = false;
 /** button style contained */
-export let contained = presetDefault === 'contained';
+export let contained = presetDefault.includes('contained');
 /** button style bordered */
-export let bordered = presetDefault === 'bordered';
+export let bordered = presetDefault.includes('bordered');
 /** button style link */
-export let link = presetDefault === 'link';
+export let link = presetDefault.includes('link');
 /** with of the button using  presets */
 export let size = 'medium';
 /** density of the button, using preset values */
@@ -43,8 +43,23 @@ let actionArgs;
 let actionComponent = Menu;
 let actionComponentProps = {};
 let actionContent = '';
-// seet use popper
-$: usePopper.parentNode = element;
+const onActionClick = (event) => {
+    event.stopPropagation();
+    /* openPopper('settingActions', {
+        parentNode: event.currentTarget as HTMLElement,
+        component: actionComponent,
+        componentProps: componentProps ?? {},
+        position: menuPosition
+    }); */
+};
+$: if (usePopper) {
+    usePopper.disabled = false;
+    usePopper.parentNode = element;
+}
+else {
+    usePopper = { disabled: true };
+}
+$: console.log({ usePopper });
 $: actionArgs = {
     code: 'node',
     parentNode: element,
@@ -56,20 +71,20 @@ $: actionArgs = {
 };
 </script>
 
-<div><Icon icon="user" /></div>
 <button
 	class={className + ' w-' + size}
 	class:loading
 	bind:this={element}
 	use:popper={usePopper}
 	use:forwardEvents
+	on:click
 	class:size={'w-' + size}
 	{density}
 	{nowrap}
 	{height}
-	{contained}
-	{bordered}
 	{link}
+	{bordered}
+	{contained}
 	disabled={loading}
 	{...$$restProps}
 >
@@ -99,8 +114,8 @@ $: actionArgs = {
 				<div class="flex-h flex-align-middle gap-tiny">
 					<div>
 						<slot name="loadingIconButtonSlot"
-							><div><Icon icon="spin" class="fa-spinner" /></div></slot
-						>
+							><div><Icon icon="spinner" class="fa-spinner" /></div>
+						</slot>
 					</div>
 					<div>loading</div>
 				</div>
@@ -129,32 +144,38 @@ $: actionArgs = {
 	</Popper>
 {/if}
 
-<style>button {
-  font-size: 11px;
+<style>button,
+button[contained=true],
+input[type=button],
+input[type=submit] {
+  vertical-align: middle;
+  font-size: var(--slotui-button-font-size, 11px);
+  border-radius: var(---slotui-button-radius, var(--box-radius-tiny, 4px));
+  border: 0.5px solid transparent;
   color: var(--theme-color-foreground);
-  border: 0.5px solid var(--theme-color-border);
-  border-radius: var(--box-radius-tiny, 4px);
-  background-color: var(--color-gray-800-alpha-low, rgba(255, 255, 255, 0.1));
-  padding: auto var(--box-density-preset-tiny);
-  /* &.w-tiny{
-            padding:var(--box-density-small,0.75rem)
-        } */
+  padding: 0;
 }
-button:hover {
-  background-color: var(--color-gray-800);
-}
-button:active {
-  background-color: var(--theme-color-text);
-  color: var(--theme-color-background);
-  box-shadow: var(--box-shad-10);
-}
-button[disabled] {
+button[disabled],
+button[contained=true][disabled],
+input[type=button][disabled],
+input[type=submit][disabled] {
   color: var(--color-gray-800);
+}
+button:active, button:focus,
+button[contained=true]:active,
+button[contained=true]:focus,
+input[type=button]:active,
+input[type=button]:focus,
+input[type=submit]:active,
+input[type=submit]:focus {
+  outline: 0;
 }
 
 button {
   position: relative;
   overflow: hidden;
+  /** height presets */
+  /** variant presets */
 }
 button[height=tiny] {
   height: 1rem;
@@ -170,6 +191,39 @@ button[height=large] {
 }
 button[nowrap] {
   color: "red";
+}
+button[bordered=true] {
+  color: var(--theme-color-foreground);
+  border: 0.5px solid var(--theme-color-border);
+  background-color: transparent;
+}
+button[bordered=true]:hover {
+  border: 0.5px solid var(--theme-color-primary);
+}
+button[bordered=true]:active, button[bordered=true]:focus {
+  box-shadow: var(--box-shad-3);
+  border: 0.5px solid var(--theme-color-primary);
+}
+button[contained=true] {
+  color: var(--theme-color-foreground);
+  background-color: var(--color-gray-800-alpha-low, rgba(255, 255, 255, 0.1));
+}
+button[contained=true]:hover {
+  background-color: var(--theme-color-background);
+}
+button[contained=true]:active, button[contained=true]:focus {
+  outline: 0;
+  background-color: var(--theme-color-background-alpha);
+  color: var(--theme-color-background);
+  box-shadow: var(--box-shad-3);
+}
+button[link=true] {
+  color: var(--theme-color-primary);
+  background-color: transparent;
+  cursor: pointer;
+}
+button[link=true]:hover {
+  text-decoration: underline;
 }
 button.loading .loadingButtonZone {
   z-index: 10;
@@ -194,6 +248,8 @@ button .innerButton {
   display: flex;
   min-width: auto;
   align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 button .innerButton .startButtonSlot {
   padding: 0 var(--box-density-preset-small, 0.25rem);
@@ -202,14 +258,18 @@ button .innerButton .central {
   flex: 1;
   min-width: auto;
   width: auto;
+  display: inline;
+  vertical-align: bottom;
 }
 button .innerButton .action {
-  display: block;
-  top: 0;
-  bottom: 0;
-  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
   background-color: rgba(255, 255, 255, 0.1);
-  padding: 0 0.25rem;
+  width: var(--w-tiny);
+  padding: 0 0.5rem;
+  cursor: pointer;
 }
 button .innerButton .action:hover {
   background-color: rgba(255, 255, 255, 0.5);

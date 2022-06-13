@@ -1,1 +1,3 @@
-export type PopperPositionType = 'TL' | 'TR' | 'BR' | 'B' | 'BL';
+import type { StickToPositionType } from "$lib/uses/stickTo/stickTo";
+
+export type PopperPositionType = StickToPositionType

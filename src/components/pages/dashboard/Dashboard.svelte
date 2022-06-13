@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import Divider from '$lib/base/divider/Divider.svelte';
-	import ButtonDemo from '$lib/base/button/Button.demo.svelte';
-	import ButtonMenu from '$lib/base/button/ButtonMenu.svelte';
+	import ButtonDemo from '$lib/base/button/Button.demo.svelte'; 
 	import ButtonActionDemo from '$lib/base/button/ButtonAction.demo.svelte';
 	import Menu from '$lib/ui/menu/Menu.svelte';
 	import Avatar from '$lib/base/avatar/Avatar.svelte';
@@ -39,6 +38,7 @@
 		{ data: {}, text: 'text 3', icon: 'i' }
 	];
 	const handleClick = (where: string) => (event) => {
+		// alert('red')
 		goto(where);
 	};
 </script>

@@ -1,6 +1,5 @@
 import { SvelteComponentTyped } from "svelte";
 import type { SvelteComponent } from 'svelte';
-import type { PopperPositionType } from '$lib/ui/popper/types';
 import type { MenuItemProps, MenuProps } from '$lib/ui/menu/types';
 declare const __propDef: {
     props: {
@@ -8,7 +7,7 @@ declare const __propDef: {
         menuData?: MenuItemProps<any>[] | undefined;
         actionComponent?: SvelteComponent | any;
         menuProps?: MenuProps<any> | undefined;
-        menuPosition?: PopperPositionType | undefined;
+        menuPosition?: import("../../uses/stickTo/stickTo").StickToPositionType | undefined;
         class?: string | undefined;
         element?: HTMLElement | null | undefined;
     };
@@ -35,9 +34,9 @@ export default class ButtonMenu extends SvelteComponentTyped<ButtonMenuProps, Bu
     get menuProps(): MenuProps<any> | undefined;
     /**accessor*/
     set menuProps(_: MenuProps<any> | undefined);
-    get menuPosition(): PopperPositionType | undefined;
+    get menuPosition(): import("../../uses/stickTo/stickTo").StickToPositionType | undefined;
     /**accessor*/
-    set menuPosition(_: PopperPositionType | undefined);
+    set menuPosition(_: import("../../uses/stickTo/stickTo").StickToPositionType | undefined);
     get class(): string | undefined;
     /**accessor*/
     set class(_: string | undefined);

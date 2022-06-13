@@ -1,6 +1,8 @@
+export declare type StickToPositionType = 'TL' | 'TR' | 'BR' | 'B' | 'BL';
+export declare type NewStickToPositionType = 'TT' | 'RR' | 'BB' | 'LL' | 'CC';
 declare type StickToProps = {
     parentNode: HTMLElement;
-    position?: 'TL' | 'TR' | 'BR' | 'B' | 'BL';
+    position?: StickToPositionType;
     disabled?: boolean;
 };
 export declare function stickTo(node: HTMLElement, props: StickToProps): {

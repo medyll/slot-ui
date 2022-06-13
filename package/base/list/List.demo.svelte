@@ -13,11 +13,6 @@ $: menuList = [
 function openIn() {
     // ger
 }
-onMount(() => {
-    setInterval(() => {
-        cc++;
-    }, 1000);
-});
 </script>
 
 <div >

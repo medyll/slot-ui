@@ -1,13 +1,12 @@
 import { SvelteComponentTyped } from "svelte";
 import type { SvelteComponentDev } from 'svelte/internal';
-import type { PopperPositionType } from './types';
 declare const __propDef: {
     props: {
         code: string;
         parentNode: HTMLElement;
         component?: SvelteComponentDev | undefined;
         componentProps?: {} | undefined;
-        position?: PopperPositionType | undefined;
+        position?: import("../../uses/stickTo/stickTo").StickToPositionType | undefined;
         content?: any | undefined;
         toggle?: (() => void) | undefined;
         hide?: (() => void) | undefined;
@@ -42,9 +41,9 @@ export default class Popper extends SvelteComponentTyped<PopperProps, PopperEven
     get componentProps(): {} | undefined;
     /**accessor*/
     set componentProps(_: {} | undefined);
-    get position(): PopperPositionType | undefined;
+    get position(): import("../../uses/stickTo/stickTo").StickToPositionType | undefined;
     /**accessor*/
-    set position(_: PopperPositionType | undefined);
+    set position(_: import("../../uses/stickTo/stickTo").StickToPositionType | undefined);
     get content(): any;
     /**accessor*/
     set content(_: any);
