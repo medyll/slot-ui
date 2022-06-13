@@ -9,7 +9,7 @@
 	import Popper from '$lib/ui/popper/Popper.svelte';
 	import Icon from '@iconify/svelte';
 
-	export let presetDefault = 'contained';
+	export let presetDefault = 'bordered contained';
 
 	/*  common slotUi exports*/
 	let className = '';
@@ -26,11 +26,11 @@
 	export let showChip: boolean = false;
 
 	/** button style contained */
-	export let contained: boolean = presetDefault === 'contained';
+	export let contained: boolean = presetDefault.includes('contained');
 	/** button style bordered */
-	export let bordered: boolean = presetDefault === 'bordered';
+	export let bordered: boolean = presetDefault.includes('bordered');
 	/** button style link */
-	export let link: boolean = presetDefault === 'link';
+	export let link: boolean = presetDefault.includes('link');
 
 	/** with of the button using  presets */
 	export let size: ElementProps['sizeType'] | 'full' = 'medium';
@@ -79,9 +79,9 @@
 	{density}
 	{nowrap}
 	{height}
-	{contained}
-	{bordered}
 	{link}
+	{bordered}
+	{contained}
 	disabled={loading}
 	{...$$restProps}
 >
@@ -131,46 +131,41 @@
 	</div>
 {/if}
 {#if element && $$slots.popper}
-	<Popper {...actionArgs} parentNode={element}>
+	<!-- <Popper {...actionArgs} parentNode={element}>
 		<span slot="button">button</span>
 		<slot name="popper">
 			{#if actionArgs?.component}
 				<svelte:component this={actionArgs.component} {...actionArgs.componentProps} />
 			{/if}
 		</slot>
-	</Popper>
+	</Popper> -->
 {/if}
 
 <style lang="scss">
-	button {
-		font-size: 11px;
-		color: var(--theme-color-foreground);
-		border: 0.5px solid var(--theme-color-border);
+	button,
+	button[contained='true'],
+	input[type='button'],
+	input[type='submit'] {
+		vertical-align: middle;
+		font-size: var(--slotui-button-font-size, 11px);
 		// padding: var(--box-density-small, 0.5rem) 0.75rem;
-		border-radius: var(--box-radius-tiny, 4px);
-		background-color: var(--color-gray-800-alpha-low, rgba(255, 255, 255, 0.1));
-		padding: auto var(--box-density-preset-tiny);
-		&:hover {
-			background-color: var(--color-gray-800);
-		}
-
-		&:active {
-			background-color: var(--theme-color-text);
-			color: var(--theme-color-background);
-			box-shadow: var(--box-shad-10);
-		}
+		border-radius: var(---slotui-button-radius, var(--box-radius-tiny, 4px));
+		border: 0.5px solid transparent;
+		// padding: auto var(--box-density-preset-tiny);
+		color: var(--theme-color-foreground);
 
 		&[disabled] {
 			color: var(--color-gray-800);
 		}
-
-		/* &.w-tiny{
-            padding:var(--box-density-small,0.75rem)
-        } */
+		&:active,
+		&:focus {
+			outline: 0;
+		}
 	}
 	button {
 		position: relative;
 		overflow: hidden;
+		/** height presets */
 		&[height='tiny'] {
 			height: 1rem;
 		}
@@ -185,6 +180,42 @@
 		}
 		&[nowrap] {
 			color: 'red';
+		}
+		/** variant presets */
+		&[bordered='true'] {
+			color: var(--theme-color-foreground);
+			border: 0.5px solid var(--theme-color-border);
+			background-color: transparent;
+			&:hover {
+				border: 0.5px solid var(--theme-color-primary);
+			}
+			&:active,
+			&:focus {
+				box-shadow: var(--box-shad-3);
+				border: 0.5px solid var(--theme-color-primary);
+			}
+		}
+		&[contained='true'] {
+			color: var(--theme-color-foreground);
+			background-color: var(--color-gray-800-alpha-low, rgba(255, 255, 255, 0.1));
+			&:hover {
+				background-color: var(--theme-color-background);
+			}
+			&:active,
+			&:focus {
+				outline: 0;
+				background-color: var(--theme-color-background-alpha);
+				color: var(--theme-color-background);
+				box-shadow: var(--box-shad-3);
+			}
+		}
+		&[link='true'] {
+			color: var(--theme-color-primary);
+			background-color: transparent;
+			cursor: pointer;
+			&:hover {
+				text-decoration: underline;
+			}
 		}
 		&.loading {
 			& .loadingButtonZone {
@@ -211,6 +242,7 @@
 			display: flex;
 			min-width: auto;
 			align-items: center;
+			justify-content: center;
 			.startButtonSlot {
 				padding: 0 var(--box-density-preset-small, 0.25rem);
 			}

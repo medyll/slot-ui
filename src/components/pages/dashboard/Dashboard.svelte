@@ -19,6 +19,7 @@
 	import ListDemo from '$lib/base/list/List.demo.svelte';
 
 	import GrouperDemo from '$lib/data/grouper/Grouper.demo.svelte';
+	import Button from '$lib/base/button/Button.svelte';
 
 	const menuData = [
 		{ text: 'text 1' },
@@ -53,13 +54,16 @@
 						</Select>
 						<Divider />
 						<div class="pad-4 dsp-block-inline flex-v flex-align-middle-center">
-							<button  on:click={handleClick('explorer')}> explorer</button>
+							<Button primary="explorer" on:click={handleClick('explorer')} />
 							<br />
-							<button on:click={handleClick('what')}> what</button>
+							<Button primary="what" on:click={handleClick('what')} />
 						</div>
 					</Paper>
 					<Paper density="kind">
 						<ButtonDemo />
+					</Paper>
+					<Paper density="kind">
+						<ButtonActionDemo />
 					</Paper>
 					<Paper density="kind">
 						<Avatar size="small">
@@ -80,9 +84,6 @@
 					</Paper>
 				</div>
 				<div>
-					<Paper density="kind">
-						<ButtonActionDemo />
-					</Paper>
 					<Paper density="kind">
 						<BoxDemo />
 					</Paper>

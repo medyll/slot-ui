@@ -160,7 +160,7 @@
 		height: 100%;
 	}
 
-	button {
+	/* button {
 		color: var(--theme-color-text);
 		border: 0.5px solid var(--theme-color-border);
 		padding: 0.5rem 0.75rem;
@@ -180,7 +180,7 @@
 		&[disabled] {
 			color: var(--color-gray-800);
 		}
-	}
+	} */
 
 	.inputBorder {
 		border: 1px solid rgba(255, 255, 255, 0.1) !important;
