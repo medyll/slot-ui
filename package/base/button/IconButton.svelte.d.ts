@@ -1,15 +1,17 @@
 import { SvelteComponentTyped } from "svelte";
 import type { ElementProps } from '../../../types';
+import { type UsePopperProps } from '../../ui/popper/usePopper';
 declare const __propDef: {
     props: {
         class?: string | undefined;
-        element?: HTMLButtonElement | null | undefined;
+        element?: HTMLElement | null | undefined;
         icon: ElementProps['icon'];
         iconFamily?: string | undefined;
         iconClassName?: string | undefined;
-        iconFontSize?: "default" | "tiny" | "small" | "medium" | "large" | "big" | undefined;
+        iconFontSize?: "default" | "medium" | "full" | "tiny" | "small" | "large" | "big" | undefined;
         style?: string | undefined;
         showShip?: boolean | undefined;
+        usePopperOpt?: UsePopperProps | undefined;
     };
     events: {
         click: MouseEvent;

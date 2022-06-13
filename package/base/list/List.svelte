@@ -98,8 +98,10 @@ function onListItemClick(e) {
 :global(li.listItemTitle) :global(.listItemIcon),
 :global(li.listItem) :global(.listItemIcon) {
   text-align: center;
-  padding: 0 0.5rem;
+  width: 2rem;
+  min-width: 2rem;
   overflow: hidden;
+  opacity: 0.8;
 }
 :global(li.listItemTitle.density-tight),
 :global(li.listItem.density-tight) {

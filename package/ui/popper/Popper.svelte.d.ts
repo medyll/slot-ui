@@ -1,22 +1,24 @@
 import { SvelteComponentTyped } from "svelte";
-export declare type PopperPositionType = 'TL' | 'TR' | 'BR' | 'B' | 'BL';
 import type { SvelteComponentDev } from 'svelte/internal';
+import type { PopperPositionType } from './types';
 declare const __propDef: {
     props: {
         code: string;
-        component: SvelteComponentDev;
-        componentProps: {};
-        position: PopperPositionType;
         parentNode: HTMLElement;
+        component?: SvelteComponentDev | undefined;
+        componentProps?: {} | undefined;
+        position?: PopperPositionType | undefined;
+        content?: any | undefined;
         toggle?: (() => void) | undefined;
         hide?: (() => void) | undefined;
         show?: (() => void) | undefined;
-        destroy?: (() => void) | undefined;
+        /** @deprecated */ destroy?: (() => void) | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
+        button: {};
         default: {};
     };
 };
@@ -31,17 +33,20 @@ export default class Popper extends SvelteComponentTyped<PopperProps, PopperEven
     get code(): string;
     /**accessor*/
     set code(_: string);
-    get component(): SvelteComponentDev;
-    /**accessor*/
-    set component(_: SvelteComponentDev);
-    get componentProps(): {};
-    /**accessor*/
-    set componentProps(_: {});
-    get position(): PopperPositionType;
-    /**accessor*/
-    set position(_: PopperPositionType);
     get parentNode(): HTMLElement;
     /**accessor*/
     set parentNode(_: HTMLElement);
+    get component(): SvelteComponentDev | undefined;
+    /**accessor*/
+    set component(_: SvelteComponentDev | undefined);
+    get componentProps(): {} | undefined;
+    /**accessor*/
+    set componentProps(_: {} | undefined);
+    get position(): PopperPositionType | undefined;
+    /**accessor*/
+    set position(_: PopperPositionType | undefined);
+    get content(): any;
+    /**accessor*/
+    set content(_: any);
 }
 export {};

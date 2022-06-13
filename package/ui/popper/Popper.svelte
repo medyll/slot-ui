@@ -1,18 +1,17 @@
 <svelte:options accessors={true} />
 
-<script context="module">export {};
-</script>
-
 <script>import { stickTo } from '../../uses/stickTo/stickTo';
 import { clickAway } from '../../uses/clickAway/clickAway';
 import { popperList } from './actions';
-let thisRef;
+import Button from '../../base/button/Button.svelte';
+let element;
 let zIndex;
 export let code;
-export let component;
-export let componentProps;
-export let position;
 export let parentNode;
+export let component = undefined;
+export let componentProps = {};
+export let position = 'B';
+export let content = undefined;
 export const toggle = function () {
     popperList[code].$destroy();
 };
@@ -22,26 +21,41 @@ export const hide = function () {
 export const show = function () {
     console.log('show');
 };
+const actions = ({
+    destroy: () => {
+        popperList[code]?.$destroy();
+    }
+});
+/** @deprecated */
 export const destroy = function () {
+    console.error('deprecated, use actions.destrtoy in caller');
     popperList[code]?.$destroy();
 };
 let siblings = [];
-$: siblings = Array.prototype.slice.call(thisRef?.parentElement?.children ?? []) ?? [];
+$: siblings = Array.prototype.slice.call(element?.parentElement?.children ?? []) ?? [];
 $: zIndex = siblings?.reduce((prev, val) => {
     // @ts-ignore
     return val?.style?.zIndex >= prev ? val?.style?.zIndex + 1 : prev;
 }, 0);
+// if no props parentNode, use element.parentNode 
+$: if (!parentNode && element)
+    parentNode = element?.parentElement ?? document.body;
 </script>
 
+<slot name="button" />
 <div
-	bind:this={thisRef}
+	bind:this={element}
 	class="popper"
-	use:clickAway={{ action: destroy }}
-	use:stickTo={{ parentNode, position: 'TR' }}
+	on:popper:close={actions.destroy}
+	use:clickAway={{ action: actions.destroy }}
+	use:stickTo={{ parentNode, position: position }}
 >
 	<slot>
 		{#if component}
 			<svelte:component this={component} {...componentProps} />
+		{/if}
+		{#if content}
+			{content}
 		{/if}
 	</slot>
 </div>
@@ -54,4 +68,6 @@ $: zIndex = siblings?.reduce((prev, val) => {
   box-shadow: var(--box-shad-4);
   background-color: var(--theme-color-background-alpha);
   backdrop-filter: blur(10px);
+  display: inline-block;
+  width: auto;
 }</style>

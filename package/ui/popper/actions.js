@@ -1,4 +1,4 @@
-import Popper, {} from './Popper.svelte';
+import Popper from './Popper.svelte';
 export let popperList = {};
 const openPopper = (popperId, args = {}) => {
     if (popperList[popperId]) {

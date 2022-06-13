@@ -14,7 +14,7 @@ declare const __propDef: {
         onItemClick: (args: Record<string, any>) => void;
         title: string;
         groupBy: string;
-        density?: "none" | "tight" | "default" | "kind" | undefined;
+        density?: "none" | "tight" | "default" | "medium" | "kind" | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;

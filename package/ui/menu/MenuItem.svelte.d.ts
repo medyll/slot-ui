@@ -6,7 +6,7 @@ declare const __propDef: {
         element?: HTMLElement | undefined;
         text: MenuItemProps['text'];
         icon?: MenuItemProps['icon'] | undefined;
-        divider?: boolean | "full" | "padded" | "centered" | undefined;
+        divider?: MenuItemProps['divider'];
         data?: Record<string, any> | undefined;
         onMenuItemClick?: Function | undefined;
     };

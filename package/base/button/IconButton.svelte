@@ -1,7 +1,7 @@
-
 <script>import Icon from '../icon/Icon.svelte';
 import { createEventForwarder } from '../../engine/engine';
 import { get_current_component } from 'svelte/internal';
+import { popper } from '../../ui/popper/usePopper';
 /*  common slotUi exports*/
 let className = '';
 export { className as class };
@@ -14,8 +14,28 @@ export let iconClassName = '';
 export let iconFontSize = 'small';
 export let style = '';
 export let showShip = false;
+export let usePopperOpt = { disabled: true };
+//$: if(!usePopperOpt.disabled) console.log({popperOpt: usePopperOpt})
+// 
+// $: if(Boolean(usePopperOpt.parentNode)) console.log('==>',usePopperOpt,Boolean(usePopperOpt.parentNode))
+$: if (element)
+    usePopperOpt.parentNode = element;
 </script>
-<button data-iconButton bind:this={element} use:forwardEvents on:click {style} class={className}>
+
+{#key element?.toString() }
+{#if !usePopperOpt.disabled}
+<!-- {@debug usePopperOpt} -->
+{/if}
+
+<button
+	use:popper={usePopperOpt}
+	data-iconButton
+	bind:this={element}
+	use:forwardEvents
+	on:click
+	{style}
+	class={className}
+>
 	<span>
 		<span class="icon">
 			<Icon {icon} {iconFamily} class={iconClassName} fontSize={iconFontSize} />
@@ -26,7 +46,7 @@ export let showShip = false;
 		<span class="chip" />
 	{/if}
 </button>
-
+{/key}
 <style>button {
   position: relative;
   color: var(--theme-color-text);

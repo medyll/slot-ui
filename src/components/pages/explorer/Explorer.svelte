@@ -10,8 +10,7 @@
   import Icon from '../../../lib/base/icon/Icon.svelte';
   import MenuBar from '../../../lib/ui/topBar/TopBar.svelte';
   import Elementor from '../../../lib/base/elementor/Elementor.svelte';
-  import Frame from '$lib/ui/frame/Frame.svelte';
-
+  import Frame from '$lib/ui/frame/Frame.svelte'; 
 
   let listItems = [];
 
@@ -44,11 +43,11 @@
           slot="frameDrawerSlot"
           style="height:100%;"
           title="Title List test">
-        <!--<ListItem  data="{listItem?.data}">
+        <!-- <ListItem  data="{listItem?.data}">
             <span slot="icon"><Icon fontSize="tiny" icon={listItem?.icon}/></span>
             <span slot="primary">{null_to_empty(listItem?.primary)}...</span>
             <span slot="action">{null_to_empty(listItem?.action)}</span>
-        </ListItem>-->
+        </ListItem> -->
     </List>
     <Header bind:debugValues slot="contentHeaderFrameSlot" title={activeData?.[`nomAppscheme`]}>
         {activeData?.[`nomAppscheme`]}

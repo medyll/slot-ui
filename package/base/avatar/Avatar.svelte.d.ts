@@ -3,7 +3,7 @@ declare const __propDef: {
     props: {
         class?: string | undefined;
         element?: HTMLDivElement | null | undefined;
-        size?: "full" | "tiny" | "small" | "medium" | "large" | undefined;
+        size?: "medium" | "full" | "tiny" | "small" | "large" | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;

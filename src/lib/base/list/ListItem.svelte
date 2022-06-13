@@ -1,55 +1,60 @@
 <svelte:options accessors={true} />
 
 <script lang="ts">
-  import {getContext} from 'svelte';
-  import { fade,slide } from 'svelte/transition';
-  import {createEventDispatcher, custom_event, get_current_component} from 'svelte/internal';
-  import type {ElementProps} from './types';
-  import {createEventForwarder} from '../../engine/engine';
-import Icon from '../icon/Icon.svelte';
+	import { getContext } from 'svelte';
+	import { fade, slide } from 'svelte/transition';
+	import {
+		createEventDispatcher,
+		custom_event,
+		get_current_component,
+		null_to_empty
+	} from 'svelte/internal';
+	import type { ElementProps } from './types';
+	import { createEventForwarder } from '../../engine/engine';
+	import Icon from '../icon/Icon.svelte';
 
-  /*  common slotUi exports*/
-  let className = '';
-  export {className as class };
-  export let element: HTMLElement ;
-  const forwardEvents                       = createEventForwarder(get_current_component());
-  /*  end slotUi exports*/
+	/*  common slotUi exports*/
+	let className = '';
+	export { className as class };
+	export let element: HTMLElement;
+	const forwardEvents = createEventForwarder(get_current_component());
+	/*  end slotUi exports*/
 
-  export let icon: string;
-  export let primary: string = '';
-  export let secondary: string;
-  export let action: string;
-  export let selected: boolean;
-  export let showIcon: boolean                    = true;
+	export let icon: string | null = null;
+	export let primary: string | null = null;
+	export let secondary: string | null = null;
+	export let action: string | null = null;
+	export let selected: boolean;
+	export let showIcon: boolean = true;
 
-  // data to hold
-  export let data: Record<string, any> = {};
+	// data to hold
+	export let data: Record<string, any> = {};
 
-  export let density: ElementProps['density'] = 'default';
+	export let density: ElementProps['density'] = 'default';
 
-  let listStateContext = getContext<any>('listStateContext');
+	let listStateContext = getContext<any>('listStateContext');
 
-  const handleClick = () => () => {
-    const event = custom_event('listclicked', data, {bubbles: true});
-    element.dispatchEvent(event);
-  };
+	const handleClick = () => () => {
+		const event = custom_event('listclicked', data, { bubbles: true });
+		element.dispatchEvent(event);
+	};
 
-  const handleDblClick = () => () => {
-    const event = custom_event('list:dblclicked', data, {bubbles: true});
-    element.dispatchEvent(event);
-  };
+	const handleDblClick = () => () => {
+		const event = custom_event('list:dblclicked', data, { bubbles: true });
+		element.dispatchEvent(event);
+	};
 
-  let isActive: boolean = false;
-  $: if ($listStateContext?.selectorField) {
-    isActive = listStateContext.selector($listStateContext.selectorField, data);
-  }
+	let isActive: boolean = false;
+	$: if ($listStateContext?.selectorField) {
+		isActive = listStateContext.selector($listStateContext.selectorField, data);
+	}
 </script>
 
 <li
 	bind:this={element}
 	class="listItem density-{density} {className}"
 	class:isActive
-	transition:fade
+	 
 	on:click={handleClick()}
 	on:dblclick={handleDblClick()}
 >
@@ -57,25 +62,25 @@ import Icon from '../icon/Icon.svelte';
 	{#if showIcon}
 		<div class="listItemIcon">
 			<slot name="icon">
-				<Icon {icon} />
+				{#if icon }<div><Icon {icon} /></div>{/if}
 			</slot>
 		</div>
 	{/if}
 	<div class="listItemContent">
-		<div>
+		<div >
 			<slot name="primary">
-				{primary}
+				{null_to_empty(primary)}
 			</slot>
 		</div>
 		<div class="itemSecondary">
 			<slot name="secondary">
-				{secondary}
+				{null_to_empty(secondary)}
 			</slot>
 		</div>
 	</div>
 	<div class="listItemAction">
 		<slot name="action">
-			{action}
+			{null_to_empty(action)}
 		</slot>
 	</div>
 </li>
@@ -96,13 +101,5 @@ import Icon from '../icon/Icon.svelte';
 	.listItem.density-kind {
 		padding: 1.5rem 0;
 		margin: 0.5rem 0;
-	}
-
-	.listItemIcon {
-		text-align: center;
-		padding: 0 0.5rem;
-		width: 2rem;
-		overflow: hidden;
-		opacity: 0.8;
 	}
 </style>

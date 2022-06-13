@@ -5,6 +5,10 @@ declare const __propDef: {
         element?: HTMLDivElement | null | undefined;
         isOpen?: boolean | undefined;
         hasMenu?: boolean | undefined;
+        title?: string | undefined;
+        icon?: string | undefined;
+        content?: string | undefined;
+        buttonZone?: string | undefined;
         actions?: any;
         onClose: () => void;
     };

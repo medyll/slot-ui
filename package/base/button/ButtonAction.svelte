@@ -27,7 +27,7 @@ const onActionClick = (event) => {
 		<Icon fontSize="small" icon="faList" />
 		{#if actionComponent}
 			<span class="action" on:click={onActionClick}>
-				<Icon icon="faChevronRight" fontSize="tiny" />
+				<Icon icon="chevron-right" fontSize="tiny" />
 			</span>
 		{/if}
 	</button>

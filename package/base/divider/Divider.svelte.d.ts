@@ -3,7 +3,7 @@ declare const __propDef: {
     props: {
         class?: string | undefined;
         element?: HTMLDivElement | null | undefined;
-        density?: "none" | "tight" | "default" | "kind" | undefined;
+        density?: "none" | "tight" | "default" | "medium" | "kind" | undefined;
         direction?: "vertical" | "horizontal" | undefined;
         extension?: "full" | "padded" | "centered" | undefined;
     };

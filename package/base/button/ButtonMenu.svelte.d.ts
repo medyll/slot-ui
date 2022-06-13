@@ -1,19 +1,16 @@
 import { SvelteComponentTyped } from "svelte";
 import type { SvelteComponent } from 'svelte';
-import type { PopperPositionType } from '../../ui/popper/Popper.svelte';
-import type { MenuItemProps } from '../../ui/menu/types';
+import type { PopperPositionType } from '../../ui/popper/types';
+import type { MenuItemProps, MenuProps } from '../../ui/menu/types';
 declare const __propDef: {
     props: {
         icon?: string | undefined;
-        menuData?: Record<string, any> | undefined;
+        menuData?: MenuItemProps<any>[] | undefined;
         actionComponent?: SvelteComponent | any;
-        menuProps?: {
-            menuList?: MenuItemProps<any>[] | undefined;
-            density?: "none" | "tight" | "default" | "kind" | undefined;
-        } | undefined;
+        menuProps?: MenuProps<any> | undefined;
         menuPosition?: PopperPositionType | undefined;
         class?: string | undefined;
-        element?: HTMLButtonElement | null | undefined;
+        element?: HTMLElement | null | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;
@@ -29,29 +26,23 @@ export default class ButtonMenu extends SvelteComponentTyped<ButtonMenuProps, Bu
     get icon(): string | undefined;
     /**accessor*/
     set icon(_: string | undefined);
-    get menuData(): Record<string, any> | undefined;
+    get menuData(): MenuItemProps<any>[] | undefined;
     /**accessor*/
-    set menuData(_: Record<string, any> | undefined);
+    set menuData(_: MenuItemProps<any>[] | undefined);
     get actionComponent(): any;
     /**accessor*/
     set actionComponent(_: any);
-    get menuProps(): {
-        menuList?: MenuItemProps<any>[] | undefined;
-        density?: "none" | "tight" | "default" | "kind" | undefined;
-    } | undefined;
+    get menuProps(): MenuProps<any> | undefined;
     /**accessor*/
-    set menuProps(_: {
-        menuList?: MenuItemProps<any>[] | undefined;
-        density?: "none" | "tight" | "default" | "kind" | undefined;
-    } | undefined);
+    set menuProps(_: MenuProps<any> | undefined);
     get menuPosition(): PopperPositionType | undefined;
     /**accessor*/
     set menuPosition(_: PopperPositionType | undefined);
     get class(): string | undefined;
     /**accessor*/
     set class(_: string | undefined);
-    get element(): HTMLButtonElement | null | undefined;
+    get element(): HTMLElement | null | undefined;
     /**accessor*/
-    set element(_: HTMLButtonElement | null | undefined);
+    set element(_: HTMLElement | null | undefined);
 }
 export {};

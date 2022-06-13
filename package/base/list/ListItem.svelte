@@ -2,7 +2,7 @@
 
 <script>import { getContext } from 'svelte';
 import { fade, slide } from 'svelte/transition';
-import { createEventDispatcher, custom_event, get_current_component } from 'svelte/internal';
+import { createEventDispatcher, custom_event, get_current_component, null_to_empty } from 'svelte/internal';
 import { createEventForwarder } from '../../engine/engine';
 import Icon from '../icon/Icon.svelte';
 /*  common slotUi exports*/
@@ -54,18 +54,18 @@ $: if ($listStateContext?.selectorField) {
 	<div class="listItemContent">
 		<div>
 			<slot name="primary">
-				{primary}
+				{null_to_empty(primary)}
 			</slot>
 		</div>
 		<div class="itemSecondary">
 			<slot name="secondary">
-				{secondary}
+				{null_to_empty(secondary)}
 			</slot>
 		</div>
 	</div>
 	<div class="listItemAction">
 		<slot name="action">
-			{action}
+			{null_to_empty(action)}
 		</slot>
 	</div>
 </li>
@@ -94,8 +94,10 @@ $: if ($listStateContext?.selectorField) {
 :global(li.listItemTitle) :global(.listItemIcon),
 :global(li.listItem) :global(.listItemIcon) {
   text-align: center;
-  padding: 0 0.5rem;
+  width: 2rem;
+  min-width: 2rem;
   overflow: hidden;
+  opacity: 0.8;
 }
 :global(li.listItemTitle.density-tight),
 :global(li.listItem.density-tight) {
@@ -145,12 +147,4 @@ $: if ($listStateContext?.selectorField) {
 :global(.listItem.density-kind) {
   padding: 1.5rem 0;
   margin: 0.5rem 0;
-}
-
-:global(.listItemIcon) {
-  text-align: center;
-  padding: 0 0.5rem;
-  width: 2rem;
-  overflow: hidden;
-  opacity: 0.8;
 }</style>

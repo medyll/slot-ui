@@ -6,7 +6,7 @@ import IconButton from './IconButton.svelte';
 import Menu from '../../ui/menu/Menu.svelte';
 import { createEventForwarder } from '../../engine/engine';
 export let icon = 'list';
-export let menuData = {};
+export let menuData = [];
 export let actionComponent = Menu;
 export let menuProps = {
     menuList: menuData,
@@ -30,27 +30,35 @@ let componentProps = menuProps
 const onActionClick = (event) => {
     event.stopPropagation();
     openPopper('settingActions', {
-        parentNode: event.target,
+        parentNode: event.currentTarget,
         component: actionComponent,
         componentProps: componentProps ?? {},
         position: menuPosition
     });
 };
 // on:menu:item:clicked
+// on:click={onActionClick}
+let openPoppOpt;
+$: openPoppOpt = {
+    parentNode: element,
+    component: actionComponent,
+    componentProps: componentProps ?? {},
+    position: 'BL',
+    disabled: false
+};
+// usePopperOpt={openPoppOpt}
 </script>
+
+<!-- {@debug componentProps} -->
 
 <IconButton
 	class={'ButtonMenu ' + className}
-	{element}
+	bind:element
 	icon="faEllipsisH"
 	iconFontSize="small"
-	on:click={onActionClick}
-	on:menu:item:clicked={(e) => {
-		alert('red 3');
-		console.log(e);
-	}}
+	on:click={onActionClick} 
 >
-	<slot />
+<slot />
 </IconButton>
 
 <style>.buttonActionRoot {

@@ -9,7 +9,6 @@ export function clickAway(node, props) {
         event.stopPropagation();
     });
     const doEvent = function (daNode) {
-        console.log({ daNode, action });
         if (!disabled) {
             if (action) {
                 action();

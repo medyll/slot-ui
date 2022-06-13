@@ -20,9 +20,11 @@ li.listItem {
   }
 
   .listItemIcon {
-    text-align: center;
-    padding: 0 0.5rem;
-    overflow: hidden;
+		text-align: center;
+		width: 2rem;
+		min-width: 2rem;
+		overflow: hidden;
+		opacity: 0.8;
   }
 
   &.density-tight {

@@ -5,7 +5,7 @@ declare const __propDef: {
         class?: string | undefined;
         element?: HTMLElement | null | undefined;
         menuList: MenuItemProps[];
-        density?: "none" | "tight" | "default" | "kind" | undefined;
+        density?: "none" | "tight" | "default" | "medium" | "kind" | undefined;
         onMenuItemClick?: Function | undefined;
     };
     events: {
