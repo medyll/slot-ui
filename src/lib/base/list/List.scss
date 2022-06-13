@@ -1,4 +1,3 @@
-
 li.listItemTitle,
 li.listItem {
   display: flex;
@@ -6,12 +5,24 @@ li.listItem {
   position: relative;
   border-radius: 4px;
   margin: 0 0.25rem;
-
+  max-width: 100%;
   .listItemContent {
     flex: 1;
     padding: 0 0.5rem;
-    [slot=secondary] {
+    min-width: auto;
+    overflow:hidden;
+    [slot="primary"] {
+      text-overflow: ellipsis;
+      display: block;
+      width: 100%;
+      overflow: hidden;
+    }
+    [slot="secondary"] {
       opacity: 0.8;
+      text-overflow: ellipsis;
+      display: block;
+      width: 100%;
+      overflow: hidden;
     }
   }
 
@@ -20,11 +31,11 @@ li.listItem {
   }
 
   .listItemIcon {
-		text-align: center;
-		width: 2rem;
-		min-width: 2rem;
-		overflow: hidden;
-		opacity: 0.8;
+    text-align: center;
+    width: 2rem;
+    min-width: 2rem;
+    overflow: hidden;
+    opacity: 0.8;
   }
 
   &.density-tight {
@@ -44,7 +55,7 @@ li.listItem {
 }
 
 .listItemTitle .listItemContent {
-  [slot=primary] {
+  [slot="primary"] {
     color: red;
   }
 }

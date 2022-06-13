@@ -1,13 +1,13 @@
 import {writable} from 'svelte/store';
-import type {IChromeArgs, IChromeOptionsArgs} from './types';
+import type {IChromeFrameArgs, IChromeOptionsFrameArgs} from './types';
 import {tick} from 'svelte';
 
 
-export type WindowStoreListType = Map<string | number, IChromeArgs>
-export const windowListObjects = new Map<string | number, IChromeArgs>([]);
+export type WindowStoreListType = Map<string | number, IChromeFrameArgs>
+export const windowListObjects = new Map<string | number, IChromeFrameArgs>([]);
 
 const activeFrame            = writable<string | number>('');
-const chromeFrameConfigStore = writable<IChromeOptionsArgs>({showCommandBar: true});
+const chromeFrameConfigStore = writable<IChromeOptionsFrameArgs>({showCommandBar: true});
 const chromeFrameListStore   = writable<WindowStoreListType>(windowListObjects);
 
 /*chromeFrameConfigStore.set()
@@ -17,7 +17,7 @@ function createChromeFrameStore() {
   
   const {subscribe, set, update} = chromeFrameListStore;
   
-  let currentStore: Map<string | number, IChromeArgs> = new Map([]);
+  let currentStore: Map<string | number, IChromeFrameArgs> = new Map([]);
   
   chromeFrameListStore.subscribe((value: any) => {
     currentStore = value;
@@ -53,12 +53,12 @@ function createChromeFrameStore() {
     subscribe,
     activeFrame,
     defaultConfigStore: chromeFrameConfigStore,
-    create            : (payload: IChromeArgs) => update((n) => {
+    create            : (payload: IChromeFrameArgs) => update((n) => {
       setActive(payload.frameId);
       // test global conf
       return n.set(payload.frameId, {...currentConf, ...payload});
     }),
-    open              : (payload: IChromeArgs) => update((n) => {
+    open              : (payload: IChromeFrameArgs) => update((n) => {
       if (!payload.frameId) return n;
       
       activeFrame.set(payload.frameId);
@@ -93,7 +93,7 @@ function createChromeFrameStore() {
       n.delete(frameId);
       return n;
     }),
-    updatePos         : (frameId: string | number, position: IChromeArgs['position']) => update((n) => {
+    updatePos         : (frameId: string | number, position: IChromeFrameArgs['position']) => update((n) => {
       const payload = n.get(frameId);
       n.set(frameId, {...payload, frameId, position: position});
       return n;

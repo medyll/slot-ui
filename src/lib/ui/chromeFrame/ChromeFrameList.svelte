@@ -4,7 +4,7 @@
   import {chromeFrameListRef, chromeFrameStore} from './chromeFrame.store';
   import ChromeFrame from './ChromeFrame.svelte';
   import {browser} from '$app/env';
-  import type {IChromeArgs, IChromeOptionsArgs} from './types';
+  import type {IChromeFrameArgs, IChromeOptionsArgs} from './types';
   import {createEventForwarder} from '../../engine/engine';
   import {get_current_component} from 'svelte/internal';
 
@@ -46,7 +46,7 @@
 
   // mount the component in the assigned target with chromeFrameListRef as reference ,
   // if not already in chromeFrameListRef
-  $: Boolean(browser) && $chromeFrameStore.forEach((args: IChromeArgs, frameId: string) => {
+  $: Boolean(browser) && $chromeFrameStore.forEach((args: IChromeFrameArgs, frameId: string) => {
     console.log(element)
 
     if (!args.noFrameListButton && !chromeFrameListRef[frameId]) {

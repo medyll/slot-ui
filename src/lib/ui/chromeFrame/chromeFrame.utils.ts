@@ -1,7 +1,7 @@
 import {derived, get} from 'svelte/store';
 import ChromeFrame from './ChromeFrame.svelte';
 import {chromeFrameListRef, chromeFrameStore} from './chromeFrame.store';
-import type {IChromeArgs} from './types';
+import type {IChromeFrameArgs} from './types';
 
 export function getChromeFrame(frameId: string | number) {
   
@@ -12,7 +12,7 @@ export function getChromeFrame(frameId: string | number) {
   
   return {
     subscribe,
-    updatePos: (position: IChromeArgs['position']) => chromeFrameStore.updatePos(frameId, position),
+    updatePos: (position: IChromeFrameArgs['position']) => chromeFrameStore.updatePos(frameId, position),
     remove   : () => chromeFrameStore.remove(frameId),
     makeOnTop: () => chromeFrameStore.makeOnTop(frameId),
     minimize: () => chromeFrameStore.minimize(frameId),
@@ -21,7 +21,7 @@ export function getChromeFrame(frameId: string | number) {
 }
 
 /** open a chrome frame in DOM and add it to the store **/
-export function openChromeFrame(frameId: string, args: Partial<IChromeArgs> = {}) {
+export function openChromeFrame(frameId: string, args: Partial<IChromeFrameArgs> = {}) {
 
   
   chromeFrameStore.open({

@@ -9,7 +9,7 @@ declare const __propDef: {
     };
     slots: {
         default: {
-            chromeFrame: import("./types").IChromeArgs<Record<string, any>>;
+            chromeFrame: import("./types").IChromeFrameArgs<Record<string, any>>;
         };
         chromeFrameCloseSlot: {};
     };

@@ -1,11 +1,19 @@
-export declare type IChromeOptionsArgs<T = Record<string, any>> = {
-    onClose?: (chromeFrame?: IChromeArgs) => {};
-    onCancel?: (chromeFrame?: IChromeArgs) => {};
-    onValidate?: (chromeFrame?: IChromeArgs) => {};
+/** @deprecated use IChromeOptionsFrameArgs instead */
+export declare type IChromeOptionsArgs<T = Record<string, any>> = {};
+export declare type IChromeOptionsFrameArgs<T = Record<string, any>> = {
+    /** fires event on:chromeframe:close */
+    onClose?: (chromeFrame?: IChromeFrameArgs) => void;
+    /** fires event on:chromeframe:hide */
+    onCancel?: (chromeFrame?: IChromeFrameArgs) => void;
+    /** fires event on:chromeframe:validate */
+    onValidate?: (chromeFrame?: IChromeFrameArgs) => void;
     showCommandBar?: boolean;
     parent?: string;
 };
-export interface IChromeArgs<T = Record<string, any>> extends IChromeOptionsArgs {
+/** @deprecated use IChromeFrameArgs instead */
+export interface IChromeArgs<T = Record<string, any>> extends IChromeOptionsFrameArgs {
+}
+export interface IChromeFrameArgs<T = Record<string, any>> extends IChromeOptionsFrameArgs {
     frameId: string | number;
     title?: string;
     open?: boolean;

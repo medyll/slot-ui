@@ -54,7 +54,7 @@ $: if ($listStateContext?.selectorField) {
 			</slot>
 		</div>
 	{/if}
-	<div class="listItemContent">
+	<div class="listItemContent" title="{secondary}">
 		<div>
 			<slot name="primary">
 				{null_to_empty(primary)}
@@ -80,15 +80,29 @@ $: if ($listStateContext?.selectorField) {
   position: relative;
   border-radius: 4px;
   margin: 0 0.25rem;
+  max-width: 100%;
 }
 :global(li.listItemTitle) :global(.listItemContent),
 :global(li.listItem) :global(.listItemContent) {
   flex: 1;
   padding: 0 0.5rem;
+  min-width: auto;
+  overflow: hidden;
+}
+:global(li.listItemTitle) :global(.listItemContent) :global([slot=primary]),
+:global(li.listItem) :global(.listItemContent) :global([slot=primary]) {
+  text-overflow: ellipsis;
+  display: block;
+  width: 100%;
+  overflow: hidden;
 }
 :global(li.listItemTitle) :global(.listItemContent) :global([slot=secondary]),
 :global(li.listItem) :global(.listItemContent) :global([slot=secondary]) {
   opacity: 0.8;
+  text-overflow: ellipsis;
+  display: block;
+  width: 100%;
+  overflow: hidden;
 }
 :global(li.listItemTitle) :global(.listItemAction),
 :global(li.listItem) :global(.listItemAction) {

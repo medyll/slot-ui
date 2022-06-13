@@ -70,7 +70,7 @@
 			</slot>
 		</div>
 	{/if}
-	<div class="listItemContent">
+	<div class="listItemContent" title="{secondary}">
 		<div>
 			<slot name="primary">
 				{null_to_empty(primary)}
