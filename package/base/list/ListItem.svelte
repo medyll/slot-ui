@@ -11,12 +11,13 @@ export { className as class };
 export let element;
 const forwardEvents = createEventForwarder(get_current_component());
 /*  end slotUi exports*/
-export let icon;
-export let primary = '';
-export let secondary;
-export let action;
+export let icon = null;
+export let primary = null;
+export let secondary = null;
+export let action = null;
 export let selected;
 export let showIcon = true;
+export let transition = undefined;
 // data to hold
 export let data = {};
 export let density = 'default';
@@ -29,6 +30,9 @@ const handleDblClick = () => () => {
     const event = custom_event('list:dblclicked', data, { bubbles: true });
     element.dispatchEvent(event);
 };
+function doTransition() {
+    return transition;
+}
 let isActive = false;
 $: if ($listStateContext?.selectorField) {
     isActive = listStateContext.selector($listStateContext.selectorField, data);
@@ -39,7 +43,6 @@ $: if ($listStateContext?.selectorField) {
 	bind:this={element}
 	class="listItem density-{density} {className}"
 	class:isActive
-	transition:fade
 	on:click={handleClick()}
 	on:dblclick={handleDblClick()}
 >
@@ -47,7 +50,7 @@ $: if ($listStateContext?.selectorField) {
 	{#if showIcon}
 		<div class="listItemIcon">
 			<slot name="icon">
-				<Icon {icon} />
+				{#if icon}<div><Icon {icon} /></div>{/if}
 			</slot>
 		</div>
 	{/if}

@@ -26,6 +26,7 @@
 	export let action: string | null = null;
 	export let selected: boolean;
 	export let showIcon: boolean = true;
+	export let transition: __sveltets_2_SvelteTransitionReturnType | undefined = undefined;
 
 	// data to hold
 	export let data: Record<string, any> = {};
@@ -44,6 +45,10 @@
 		element.dispatchEvent(event);
 	};
 
+	function doTransition() {
+		return transition;
+	}
+
 	let isActive: boolean = false;
 	$: if ($listStateContext?.selectorField) {
 		isActive = listStateContext.selector($listStateContext.selectorField, data);
@@ -54,7 +59,6 @@
 	bind:this={element}
 	class="listItem density-{density} {className}"
 	class:isActive
-	 
 	on:click={handleClick()}
 	on:dblclick={handleDblClick()}
 >
@@ -62,12 +66,12 @@
 	{#if showIcon}
 		<div class="listItemIcon">
 			<slot name="icon">
-				{#if icon }<div><Icon {icon} /></div>{/if}
+				{#if icon}<div><Icon {icon} /></div>{/if}
 			</slot>
 		</div>
 	{/if}
 	<div class="listItemContent">
-		<div >
+		<div>
 			<slot name="primary">
 				{null_to_empty(primary)}
 			</slot>

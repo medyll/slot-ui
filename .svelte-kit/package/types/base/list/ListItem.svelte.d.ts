@@ -3,12 +3,13 @@ declare const __propDef: {
     props: {
         class?: string | undefined;
         element: HTMLElement;
-        icon: string;
-        primary?: string | undefined;
-        secondary: string;
-        action: string;
+        icon?: string | null | undefined;
+        primary?: string | null | undefined;
+        secondary?: string | null | undefined;
+        action?: string | null | undefined;
         selected: boolean;
         showIcon?: boolean | undefined;
+        transition?: __sveltets_2_SvelteTransitionReturnType | undefined;
         data?: Record<string, any> | undefined;
         density?: "none" | "tight" | "default" | "kind" | undefined;
     };
@@ -32,24 +33,27 @@ export default class ListItem extends SvelteComponentTyped<ListItemProps, ListIt
     get element(): HTMLElement;
     /**accessor*/
     set element(_: HTMLElement);
-    get icon(): string;
+    get icon(): string | null | undefined;
     /**accessor*/
-    set icon(_: string);
-    get primary(): string | undefined;
+    set icon(_: string | null | undefined);
+    get primary(): string | null | undefined;
     /**accessor*/
-    set primary(_: string | undefined);
-    get secondary(): string;
+    set primary(_: string | null | undefined);
+    get secondary(): string | null | undefined;
     /**accessor*/
-    set secondary(_: string);
-    get action(): string;
+    set secondary(_: string | null | undefined);
+    get action(): string | null | undefined;
     /**accessor*/
-    set action(_: string);
+    set action(_: string | null | undefined);
     get selected(): boolean;
     /**accessor*/
     set selected(_: boolean);
     get showIcon(): boolean | undefined;
     /**accessor*/
     set showIcon(_: boolean | undefined);
+    get transition(): __sveltets_2_SvelteTransitionReturnType | undefined;
+    /**accessor*/
+    set transition(_: __sveltets_2_SvelteTransitionReturnType | undefined);
     get data(): Record<string, any> | undefined;
     /**accessor*/
     set data(_: Record<string, any> | undefined);
