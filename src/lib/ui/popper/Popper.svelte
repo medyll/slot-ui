@@ -6,15 +6,17 @@
 	import { clickAway } from '../../uses/clickAway/clickAway';
 	import { popperList } from './actions';
 	import type { PopperPositionType } from './types';
+	import Button from '$lib/base/button/Button.svelte';
 
 	let thisRef: HTMLElement;
 	let zIndex;
 
 	export let code: string;
-	export let component: SvelteComponentDev;
-	export let componentProps: {};
-	export let position: PopperPositionType = 'B';
 	export let parentNode: HTMLElement;
+	export let component: SvelteComponentDev | undefined = undefined;
+	export let componentProps: {} | undefined = {};
+	export let position: PopperPositionType = 'B';
+	export let content: any | undefined = undefined;
 
 	export const toggle = function () {
 		popperList[code].$destroy();
@@ -57,6 +59,9 @@
 	<slot>
 		{#if component}
 			<svelte:component this={component} {...componentProps} />
+		{/if}
+		{#if content}
+			{content}
 		{/if}
 	</slot>
 </div>

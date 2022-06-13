@@ -6,9 +6,9 @@
 	import type { ElementProps } from 'src/types';
 	import Divider from '../divider/Divider.svelte';
 	import Menu from '$lib/ui/menu/Menu.svelte';
-import Popper from '$lib/ui/popper/Popper.svelte';
+	import Popper from '$lib/ui/popper/Popper.svelte';
 
-	export let  presetDefault = 'contained';
+	export let presetDefault = 'contained';
 
 	/*  common slotUi exports*/
 	let className = '';
@@ -21,9 +21,9 @@ import Popper from '$lib/ui/popper/Popper.svelte';
 	export let loading: boolean = false;
 	export let showChip: boolean = false;
 
-	export let contained:  boolean = presetDefault === 'contained';
-	export let bordered: boolean= presetDefault === 'bordered';
-	export let link: boolean= presetDefault === 'link';
+	export let contained: boolean = presetDefault === 'contained';
+	export let bordered: boolean = presetDefault === 'bordered';
+	export let link: boolean = presetDefault === 'link';
 
 	export let size: ElementProps['sizeType'] | 'full' = 'medium';
 	export let density: ElementProps['density'] = 'default';
@@ -35,12 +35,13 @@ import Popper from '$lib/ui/popper/Popper.svelte';
 	export let action: string | undefined = undefined;
 
 	// for action
-	let actionArgs: UsePopperProps;
+	let actionArgs: any;
 	let actionComponent = Menu;
 	let actionComponentProps = {};
 	let actionContent = '';
 
 	$: actionArgs = {
+		code: 'node',
 		parentNode: element,
 		component: actionComponent,
 		componentProps: actionComponentProps ?? {},
@@ -96,9 +97,15 @@ import Popper from '$lib/ui/popper/Popper.svelte';
 		{secondary}
 	</div>
 {/if}
-<slot name="popper">
-     
-</slot>
+{#if secondary}
+	<Popper {...actionArgs}>
+		<slot name="popper">
+			{#if actionArgs?.component}
+				<svelte:component this={actionArgs.component} {...actionArgs.componentProps} />
+			{/if}
+		</slot>
+	</Popper>
+{/if}
 
 <style lang="scss">
 	button {
