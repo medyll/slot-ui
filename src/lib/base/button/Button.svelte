@@ -7,6 +7,7 @@
 	import Divider from '../divider/Divider.svelte';
 	import Menu from '$lib/ui/menu/Menu.svelte';
 	import Popper from '$lib/ui/popper/Popper.svelte';
+	import Icon from '@iconify/svelte';
 
 	export let presetDefault = 'contained';
 
@@ -17,28 +18,44 @@
 	const forwardEvents = createEventForwarder(get_current_component());
 	/*  end slotUi exports*/
 
-	export let usePopper: UsePopperProps = { code: 'string', disabled: true } as UsePopperProps;
+	/** paramters for usePopper */
+	export let usePopper: UsePopperProps = { disabled: true } as UsePopperProps;
+	/** show loading state */
 	export let loading: boolean = false;
+	/** show chip */
 	export let showChip: boolean = false;
 
+	/** button style contained */
 	export let contained: boolean = presetDefault === 'contained';
+	/** button style bordered */
 	export let bordered: boolean = presetDefault === 'bordered';
+	/** button style link */
 	export let link: boolean = presetDefault === 'link';
 
+	/** with of the button using  presets */
 	export let size: ElementProps['sizeType'] | 'full' = 'medium';
+	/** density of the button, using preset values */
 	export let density: ElementProps['density'] = 'default';
+	/** add ellipsis on overflowed text */
 	export let nowrap: boolean = false;
+	/** height of the button, using preset values */
 	export let height: string = 'default';
 
 	export let primary: string | undefined = undefined;
 	export let secondary: string | undefined = undefined;
 	export let action: string | undefined = undefined;
 
+	/** reverse the order of the button zone*/
+	export let reverse: boolean = false;
+
 	// for action
 	let actionArgs: any;
 	let actionComponent = Menu;
 	let actionComponentProps = {};
 	let actionContent = '';
+
+	// seet use popper
+	$: usePopper.parentNode = element;
 
 	$: actionArgs = {
 		code: 'node',
@@ -51,8 +68,8 @@
 	};
 </script>
 
+<div><Icon icon="user" /></div>
 <button
-	{...$$restProps}
 	class={className + ' w-' + size}
 	class:loading
 	bind:this={element}
@@ -65,6 +82,8 @@
 	{contained}
 	{bordered}
 	{link}
+	disabled={loading}
+	{...$$restProps}
 >
 	<div class="innerButton">
 		{#if $$slots.startButtonSlot}
@@ -73,16 +92,30 @@
 			</div>
 		{/if}
 		<div class="central"><slot>{null_to_empty(primary)}</slot></div>
-		{#if $$slots.action}
+		{#if $$slots.actionIcon}
 			<div class="action">
-				<slot name="action" />
+				<slot name="actionIcon" />
+				<!-- <Icon icon="chevron-right" fontSize="tiny" /> -->
 			</div>
 		{/if}
 	</div>
 	{#if loading}
-		<div>
-			<div transition:scale class="loadingButtonZone">
-				<slot name="loadingIconButtonSlot">loading</slot>
+		<div transition:fade>
+			<div
+				on:click={(event) => {
+					event.stopPropagation();
+					event.preventDefault();
+				}}
+				class="loadingButtonZone"
+			>
+				<div class="flex-h flex-align-middle gap-tiny">
+					<div>
+						<slot name="loadingIconButtonSlot"
+							><div><Icon icon="spin" class="fa-spinner" /></div></slot
+						>
+					</div>
+					<div>loading</div>
+				</div>
 			</div>
 		</div>
 	{/if}
@@ -94,11 +127,12 @@
 	<br />
 	<div style={`display:inline-block;width:${element?.style?.width}px`}>
 		<Divider />
-		{secondary}
+		{@html secondary}
 	</div>
 {/if}
-{#if secondary}
-	<Popper {...actionArgs}>
+{#if element && $$slots.popper}
+	<Popper {...actionArgs} parentNode={element}>
+		<span slot="button">button</span>
 		<slot name="popper">
 			{#if actionArgs?.component}
 				<svelte:component this={actionArgs.component} {...actionArgs.componentProps} />
@@ -165,7 +199,7 @@
 				display: flex;
 				align-items: center;
 				justify-content: space-around;
-				background-color: var(--css-bacground-color, var(--theme-color-paper-alpha-high));
+				background-color: var(--css-bacground-color, var(--theme-color-paper-alpha-low));
 				backdrop-filter: blur(3px);
 			}
 		}
@@ -188,14 +222,13 @@
 				}
 			}
 			.action {
-				position: absolute;
 				display: block;
 				top: 0;
 				bottom: 0;
 				right: 0;
 				background-color: rgba(255, 255, 255, 0.1);
-				width: 30%;
-				padding: 0.5rem;
+				//width: var(--w-tiny);
+				padding: 0 0.25rem;
 
 				&:hover {
 					background-color: rgba(255, 255, 255, 0.5);

@@ -8,7 +8,7 @@
 	import type { PopperPositionType } from './types';
 	import Button from '$lib/base/button/Button.svelte';
 
-	let thisRef: HTMLElement;
+	let element: HTMLElement;
 	let zIndex;
 
 	export let code: string;
@@ -28,11 +28,11 @@
 		console.log('show');
 	};
 
-	const actions = {
+	const actions = ({
 		destroy: () => {
 			popperList[code]?.$destroy();
 		}
-	};
+	});
 	/** @deprecated */
 	export const destroy = function () {
 		console.error('deprecated, use actions.destrtoy in caller');
@@ -41,16 +41,20 @@
 
 	let siblings: HTMLCollection | any[] = [];
 
-	$: siblings = Array.prototype.slice.call(thisRef?.parentElement?.children ?? []) ?? [];
+	$: siblings = Array.prototype.slice.call(element?.parentElement?.children ?? []) ?? [];
 
 	$: zIndex = siblings?.reduce((prev, val) => {
 		// @ts-ignore
 		return val?.style?.zIndex >= prev ? val?.style?.zIndex + 1 : prev;
 	}, 0);
+
+	// if no props parentNode, use element.parentNode 
+	$: if(!parentNode && element) parentNode = element?.parentElement ?? document.body
 </script>
 
+<slot name="button" />
 <div
-	bind:this={thisRef}
+	bind:this={element}
 	class="popper"
 	on:popper:close={actions.destroy}
 	use:clickAway={{ action: actions.destroy }}
@@ -75,5 +79,7 @@
 		box-shadow: var(--box-shad-4);
 		background-color: var(--theme-color-background-alpha);
 		backdrop-filter: blur(10px);
+		display: inline-block;
+		width: auto;
 	}
 </style>

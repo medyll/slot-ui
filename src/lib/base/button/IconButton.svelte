@@ -22,7 +22,7 @@
 
 	//$: if(!usePopperOpt.disabled) console.log({popperOpt: usePopperOpt})
 	// 
-	$: if(Boolean(usePopperOpt.parentNode)) console.log('==>',usePopperOpt,Boolean(usePopperOpt.parentNode))
+	// $: if(Boolean(usePopperOpt.parentNode)) console.log('==>',usePopperOpt,Boolean(usePopperOpt.parentNode))
 
 	$: if(element) usePopperOpt.parentNode = element
 </script>

@@ -12,7 +12,7 @@ const openPopper = (popperId: string, args: {
 } = {}) => {
 
 
-console.log({args})
+ 
   if (popperList[popperId]) {
     if (popperList[popperId].toggle) {
       popperList[popperId].toggle();
