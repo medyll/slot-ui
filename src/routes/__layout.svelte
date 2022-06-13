@@ -1,10 +1,13 @@
+
+
 <script lang="ts">
 	import github from 'svelte-highlight/styles/github-dark';
+	import cssfabric from '@medyll/cssfabric/src/lib/styles/vars.min.css';
+
 	import { ThemeWrapper } from 'svelte-themer';
-	import Taskbar from '/src/lib/ui/taskbar/Taskbar.svelte';
-	import Dashboard from '/src/components/pages/dashboard/Dashboard.svelte';
-	import StartMenu from '/src/lib/ui/startMenu/StartMenu.svelte';
-	import Login from '../lib/ui/login/Login.svelte';
+	import Taskbar from '$lib/ui/taskbar/Taskbar.svelte';
+	import StartMenu from '$lib/ui/startMenu/StartMenu.svelte';
+	import Login from '$lib/ui/login/Login.svelte';
 	import TaskBarContent from '../lib/engine/TaskBarContent.svelte';
 	import Drawer from '$lib/base/drawer/Drawer.svelte';
 	import TopBar from '$lib/ui/topBar/TopBar.svelte';
@@ -18,6 +21,7 @@
 	import ChromeFrameList from '../lib/ui/chromeFrame/ChromeFrameList.svelte';
 	import ChromeFrameButtonList from '../lib/ui/chromeFrame/ChromeFrameButtonList.svelte';
 	import Explorer from '../components/pages/explorer/Explorer.svelte';
+	import Dashboard from '../../src/components/pages/dashboard/Dashboard.svelte';
 
 	let frameRef: Frame;
 	let drawerRef: Drawer;
@@ -42,11 +46,12 @@
 	<link href="../../static/cssfabric/cssfabric.vars.css" rel="stylesheet" />
 	<link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet" />
 	<link
-		href="node_modules/@medyll/cssfabric/src/lib/styles/cssfabric.min.css"
+		href="./node_modules/@medyll/cssfabric/src/lib/styles/cssfabric.min.css"
 		lang="scss"
 		rel="stylesheet"
 	/>
-  {@html github}
+	{@html github}
+	<style>{@html cssfabric}</style>
 </svelte:head>
 
 <ThemeWrapper theme={'dark'} {themes}>
@@ -95,7 +100,7 @@
 				<slot />
 				<Frame bind:frameDrawerRef={drawerRefDash} bind:this={frameRef}>
 					<div slot="frameDrawerSlot">nav left</div>
-					<!--<Dashboard slot="contentFrameSlot"/>-->
+					<!-- <Dashboard slot="contentFrameSlot"/> -->
 				</Frame>
 				<ChromeFrameList
 					chromeListConfig={{
@@ -133,7 +138,8 @@
 	</Drawer>
 </ThemeWrapper>
 
-<style global lang="scss">
+
+<style global lang=scss>
 	html {
 		font-size: 12px;
 		height: 100%;

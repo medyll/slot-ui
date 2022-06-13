@@ -9,17 +9,14 @@
 	import { createEventForwarder } from '../../engine/engine';
 	import type { SvelteComponent } from 'svelte';
 	import type { PopperPositionType } from '$lib/ui/popper/types';
-	import type { MenuItemProps } from '$lib/ui/menu/types';
+	import type { MenuItemProps, MenuProps } from '$lib/ui/menu/types';
 	import type { ElementProps } from 'src/types';
-import type { UsePopperProps } from '$lib/ui/popper/usePopper';
+	import type { UsePopperProps } from '$lib/ui/popper/usePopper';
 
 	export let icon: string = 'list';
-	export let menuData: Record<string, any> = {};
+	export let menuData: MenuItemProps[] = [];
 	export let actionComponent: SvelteComponent | any = Menu;
-	export let menuProps: {
-		menuList?: MenuItemProps[];
-		density?: ElementProps['density'];
-	} = {
+	export let menuProps: MenuProps = {
 		menuList: menuData,
 		onMenuItemClick: () => {
 			console.log('redfered');
@@ -66,18 +63,16 @@ import type { UsePopperProps } from '$lib/ui/popper/usePopper';
 	// usePopperOpt={openPoppOpt}
 </script>
 
+<!-- {@debug componentProps} -->
+
 <IconButton
 	class={'ButtonMenu ' + className}
-	bind:element 
+	bind:element
 	icon="faEllipsisH"
 	iconFontSize="small"
-	on:click={onActionClick}
-	on:menu:item:clicked={(e) => {
-		alert('red 3');
-		console.log(e);
-	}}
+	on:click={onActionClick} 
 >
-	<slot />
+<slot />
 </IconButton>
 
 <style lang="scss">

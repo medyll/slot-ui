@@ -5,8 +5,9 @@ export namespace Drawer {
 }
 
 export interface ElementProps {
-  sizeType: 'tiny' | 'small' | 'medium' | 'default' | 'large' | 'big',
-  density: 'none' | 'tight' | 'default' | 'kind'
+  sizeType: 'tiny' | 'small' | 'medium' | 'default' | 'large' | 'big' | 'full',
+  buttonHeight: 'tiny'| 'small'| 'default'|  'large'|'none',
+  density: 'none' | 'tight' | 'default' |'medium' | 'kind'
   expansion: 'full' | 'padded' | 'centered',
   alignment: 'center' | 'left' | 'right',
   data: Record<string, any>;

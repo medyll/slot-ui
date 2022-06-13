@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import Divider from '$lib/base/divider/Divider.svelte';
+	import ButtonDemo from '$lib/base/button/Button.demo.svelte';
 	import ButtonMenu from '$lib/base/button/ButtonMenu.svelte';
 	import ButtonActionDemo from '$lib/base/button/ButtonAction.demo.svelte';
 	import Menu from '$lib/ui/menu/Menu.svelte';
@@ -58,7 +59,7 @@
 						</div>
 					</Paper>
 					<Paper density="kind">
-						<ButtonMenu {menuData}>button is what</ButtonMenu>
+						<ButtonDemo />
 					</Paper>
 					<Paper density="kind">
 						<Avatar size="small">

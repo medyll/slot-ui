@@ -1,2 +1,2 @@
-declare module 'svelte-highlight/styles/*'
+declare module 'svelte-highlight/styles/*' 
 /// <reference types="@sveltejs/kit" />

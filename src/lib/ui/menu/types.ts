@@ -2,17 +2,19 @@ import type { ElementProps } from "src/types"
 
 
 export type MenuProps<T = any> = {
-    density: ElementProps['density'],
+    menuList: MenuItemProps[]
+    density?: ElementProps['density'],
     hasIcon?: boolean
     data?: T
-    action?: () => void
+    onMenuItemClick?: Function
+    action?: () => void /** @deprecated */
 }
 
-export type MenuItemProps<T = any>  = {
+export type MenuItemProps<T = any> = {
     text: string
     icon?: string
     data?: T
     action?: () => void
-    divider: | boolean
-             | ElementProps['expansion'];
+    divider?: | boolean
+    | ElementProps['expansion'];
 }
