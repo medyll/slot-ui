@@ -20,7 +20,6 @@ export function clickAway(node, props) {
     // treat outside click
     document.addEventListener('click', doEvent);
     clickAwayParams.listenerSet = true;
-    console.log('listener set for ', node);
     //}
     return {
         destroy() {

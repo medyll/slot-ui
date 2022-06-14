@@ -1,9 +1,7 @@
-
 <script lang="ts">
-	import IconButton from '../button/IconButton.svelte';
-	import {createEventForwarder} from '../../engine/engine';
+  import IconButton from '../button/IconButton.svelte';
+  import {createEventForwarder} from '../../engine/engine';
   import {get_current_component} from 'svelte/internal';
-  import type {TIcon} from '../../../types';
 
   /*  common slotUi exports*/
   let className = '';
@@ -37,15 +35,28 @@
     }
   }
 </script>
-
-<IconButton {icon} iconFontSize="small" on:click={handleClick}/>
-<div bind:this={thisHolderRef} style="display:none">
-    <div bind:this={thisRef} class="flex-h flex-align-middle" style="width:100%;flex:1;">
-        <div>
-            <IconButton  icon="chevron-left" iconFontSize="small" on:click={handleClick}/>
-        </div>
-        <div class="flex-main">
+    <div><IconButton {icon} iconFontSize="small" on:click={handleClick}/></div>
+    <div bind:this={thisHolderRef} style="display:none">
+        <div bind:this={thisRef} class="flex-h flex-align-middle  root" style="width:100%;flex:1;position: relative">
+            <div>
+                <IconButton icon="chevron-left" iconFontSize="small" on:click={handleClick}/>
+            </div>
             <slot/>
         </div>
     </div>
-</div>
+
+<style lang="scss">
+    .root {
+      min-width:auto;
+      gap: 0.5rem;
+      max-width: 100%;
+      overflow: var(--slotui-contentswitcher-overflow,hidden);
+      position:relative;
+      .content {
+        position:relative;
+        overflow: var(--slotui-contentswitcher-overflow,hidden);
+        min-width: auto;
+        flex: 1 1 auto;
+      }
+    }
+</style>

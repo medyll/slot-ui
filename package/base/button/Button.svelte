@@ -59,7 +59,6 @@ $: if (usePopper) {
 else {
     usePopper = { disabled: true };
 }
-$: console.log({ usePopper });
 $: actionArgs = {
     code: 'node',
     parentNode: element,
@@ -200,7 +199,7 @@ button[bordered=true] {
 button[bordered=true]:hover {
   border: 0.5px solid var(--theme-color-primary);
 }
-button[bordered=true]:active, button[bordered=true]:focus {
+button[bordered=true]:focus {
   box-shadow: var(--box-shad-3);
   border: 0.5px solid var(--theme-color-primary);
 }
@@ -211,10 +210,9 @@ button[contained=true] {
 button[contained=true]:hover {
   background-color: var(--theme-color-background);
 }
-button[contained=true]:active, button[contained=true]:focus {
+button[contained=true]:focus {
   outline: 0;
   background-color: var(--theme-color-background-alpha);
-  color: var(--theme-color-background);
   box-shadow: var(--box-shad-3);
 }
 button[link=true] {

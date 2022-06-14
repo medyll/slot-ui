@@ -30,7 +30,6 @@ export function clickAway(node: HTMLElement, props: ClickAwayProps) {
     // treat outside click
     document.addEventListener('click', doEvent);
     clickAwayParams.listenerSet = true;
-    console.log('listener set for ',node)
  //}
   
   return {

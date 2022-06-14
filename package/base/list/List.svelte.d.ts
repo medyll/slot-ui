@@ -11,6 +11,8 @@ declare const __propDef: {
         showIcon?: boolean | undefined;
         noVirtualize?: boolean | undefined;
         selectorField: any;
+        selectedDataKey: string;
+        setSelectedData: any;
         onItemClick: (args: Record<string, any>) => void;
         title: string;
         groupBy: string;

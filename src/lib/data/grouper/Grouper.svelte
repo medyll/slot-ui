@@ -122,7 +122,6 @@ import Button from '$lib/base/button/Button.svelte';
 		return red;
 	});
 
-	$: console.log({ collectedKeys10: collectedKeys });
 
 	$: data.forEach((dta) => {
 		menuData = (groupListItems || Object.keys(dta))

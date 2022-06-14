@@ -1,9 +1,10 @@
 import { SvelteComponentTyped } from "svelte";
 declare const __propDef: {
     props: {
-        /** common slotUi exports*/ class?: string | undefined;
+        class?: string | undefined;
         element?: HTMLDivElement | null | undefined;
-        /** end slotUi exports*/ title: string | undefined;
+        style?: string | null | undefined;
+        title: string | undefined;
         orientation?: "left" | "right" | undefined;
         contentSwitcherIcon?: string | undefined;
     };
@@ -11,6 +12,7 @@ declare const __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
+        iconSLot: {};
         menuBarTitle: {};
         menuBarButtons: {};
         menuBarSwitcher: {};

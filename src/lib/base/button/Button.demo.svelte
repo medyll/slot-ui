@@ -136,7 +136,7 @@
 		<div class="flex-h gap-tiny">
 			<Button bind:loading>loading button</Button>
 			<Button height="large" bind:loading>
-				<span slot="loadingIconButtonSlot"><Icon icon="spinner" class="fa fa-spin" /></span>
+				<span slot="loadingIconButtonSlot"><Icon icon="spinner" class="fa fa-rotate" /></span>
 				loading button</Button
 			>
 		</div>

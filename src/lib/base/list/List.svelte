@@ -24,6 +24,8 @@
   export let showIcon: boolean                    = true;
   export let noVirtualize: boolean                = false;
   export let selectorField;
+  export let selectedDataKey:string;
+  export let setSelectedData;
   export let onItemClick: (args: Record<string,any>)=>void;
   export let title: string;
   export let groupBy: string
@@ -36,10 +38,13 @@
   $listStore.density = density;
   listStore.setSelectorField(selectorField);
 
+  $: if(setSelectedData){listStore.setActiveData(setSelectedData);console.log('selected')}
+
   function onListItemClick(e: CustomEvent<LisItemProps>) {
     listStore.setActiveData(e.detail);
     onItemClick && onItemClick(e.detail);
   }
+
 </script>
 
 <ul bind:this={element} class="density-{density}"

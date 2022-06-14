@@ -34,7 +34,7 @@
 
 <Frame>
     <MenuBar orientation="left" slot="navLeftHeaderFrameSlot" title="Navigation bar ">
-        <input placeholder="Search in Bar" slot="menuBarSwitcher" style="width:100%;" type="text"/>
+        <input slot="menuBarSwitcher" placeholder="Search in Bar" style="position:relative;width:100%;" type="text"/>
     </MenuBar>
     <List bind:listItems={listItems} density="default"
           let:listItem

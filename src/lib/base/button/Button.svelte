@@ -71,7 +71,6 @@
 		usePopper = { disabled: true };
 	}
 
-	$: console.log({ usePopper });
 
 	$: actionArgs = {
 		code: 'node',
@@ -205,7 +204,6 @@
 			&:hover {
 				border: 0.5px solid var(--theme-color-primary);
 			}
-			&:active,
 			&:focus {
 				box-shadow: var(--box-shad-3);
 				border: 0.5px solid var(--theme-color-primary);
@@ -217,11 +215,10 @@
 			&:hover {
 				background-color: var(--theme-color-background);
 			}
-			&:active,
 			&:focus {
 				outline: 0;
 				background-color: var(--theme-color-background-alpha);
-				color: var(--theme-color-background);
+				// color: var(--theme-color-background);
 				box-shadow: var(--box-shad-3);
 			}
 		}

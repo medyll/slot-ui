@@ -1,6 +1,6 @@
 {
   "name": "@medyll/slotui",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "repository": {
     "type": "git",
     "url": "https://github.com/medyll/slot-ui.git"
@@ -31,6 +31,7 @@
     "@babel/preset-typescript": "^7.16.7",
     "@sveltejs/adapter-auto": "next",
     "@sveltejs/adapter-node": "^1.0.0-next.67",
+    "@sveltejs/adapter-static": "^1.0.0-next.34",
     "@sveltejs/vite-plugin-svelte": "^1.0.0-next.36",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/svelte": "^3.1.0",
@@ -139,6 +140,7 @@
     "./base/virtualize/Virtualize.svelte": "./base/virtualize/Virtualize.svelte",
     "./css/cssfabric.css": "./css/cssfabric.css",
     "./css/cssfabric.min.css": "./css/cssfabric.min.css",
+    "./data/finder/Finder.svelte": "./data/finder/Finder.svelte",
     "./data/grouper/Grouper.demo.svelte": "./data/grouper/Grouper.demo.svelte",
     "./data/grouper/Grouper.svelte": "./data/grouper/Grouper.svelte",
     "./data/sorter/Sorter.svelte": "./data/sorter/Sorter.svelte",

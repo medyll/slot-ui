@@ -19,6 +19,8 @@ export let style = '';
 export let showIcon = true;
 export let noVirtualize = false;
 export let selectorField;
+export let selectedDataKey;
+export let setSelectedData;
 export let onItemClick;
 export let title;
 export let groupBy;
@@ -27,6 +29,10 @@ const listStore = createListStore();
 setContext('listStateContext', listStore);
 $listStore.density = density;
 listStore.setSelectorField(selectorField);
+$: if (setSelectedData) {
+    listStore.setActiveData(setSelectedData);
+    console.log('selected');
+}
 function onListItemClick(e) {
     listStore.setActiveData(e.detail);
     onItemClick && onItemClick(e.detail);
@@ -141,7 +147,8 @@ function onListItemClick(e) {
   background-color: rgba(255, 255, 255, 0.3);
 }
 :global(li.listItem.isActive) {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: var(--slotui-listitem-active-background, var(--theme-color-primary-alpha-high, black));
+  box-shadow: var(--slotui-listitem-active-boxshadow, var(shad-3));
 }
 :global(li.listItem.isActive) :global(.listItemChip) {
   position: absolute;

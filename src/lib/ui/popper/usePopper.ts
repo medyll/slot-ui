@@ -26,7 +26,6 @@ export function popper(node: HTMLElement, props: UsePopperProps) {
     const doPopperEvent = function (event: any) {
         event.preventDefault();
         event.stopPropagation();
- 
 
         openPopper(code, { ...props, parentNode: node });
     };

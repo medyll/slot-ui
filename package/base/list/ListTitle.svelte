@@ -99,7 +99,8 @@ export let density = 'default';
   background-color: rgba(255, 255, 255, 0.3);
 }
 :global(li.listItem.isActive) {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: var(--slotui-listitem-active-background, var(--theme-color-primary-alpha-high, black));
+  box-shadow: var(--slotui-listitem-active-boxshadow, var(shad-3));
 }
 :global(li.listItem.isActive) :global(.listItemChip) {
   position: absolute;
