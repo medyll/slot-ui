@@ -1,9 +1,13 @@
 <script lang="ts">
+  export type SizeType = keyof typeof sizes
   import type {ElementProps, TIcon} from '$lib/../../../types';
   import Iconify from '@iconify/iconify';
   import {createEventForwarder} from '../../engine/engine';
   import {get_current_component} from 'svelte/internal';
   import {onDestroy} from 'svelte';
+
+  import {browser} from '$app/env';
+
 
   /*  common slotUi exports*/
   let className = '';
@@ -22,7 +26,6 @@
     big    : 64,
   } as const;
 
-  export type SizeType = keyof typeof sizes
 
   export let icon: TIcon        = 'question';
   export let iconFamily: string = 'fa-solid';
@@ -31,7 +34,9 @@
   onDestroy(() => {
   });
 
-</script>
-<span><i class="iconify-inline {className}"
+</script> 
+{#if browser}
+  <span><i class="iconify-inline {className}"
    data-icon="{iconFamily}:{icon}"
    style="font-size:{sizes[fontSize]}px;{style}"></i></span>
+{/if}

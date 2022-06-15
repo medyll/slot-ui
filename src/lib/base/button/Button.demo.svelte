@@ -6,7 +6,7 @@
 	import Box from '../box/Box.svelte';
 	import Debug from '../debug/Debug.svelte';
 	import Icon from '../icon/Icon.svelte';
-	import Button from './Button.svelte'; 
+	import Button from './Button.svelte';
 
 	let loading = true;
 	let showChip = true;
@@ -32,6 +32,8 @@
 
 	const popPos: PopperPositionType[] = ['T', 'TL', 'TR', 'B', 'BL', 'BR'];
 
+	const variants: string[] = [ 'link', 'contained','bordered'];
+
 	const usePopper: UsePopperProps = {
 		component: Debug,
 		componentProps: {
@@ -47,6 +49,23 @@
 	<div class="flex-h gap-medium">
 		<span on:click={() => (showChip = !showChip)}> toggle chip</span>
 		<Button bind:showChip>with chip</Button>
+	</div>
+	<h5>variants</h5>
+	<div>
+		{#each variants as variant}
+		{@const red = {[variant]:true}}
+			<div class="pad-1">
+				{variant}
+			</div>
+			<div class="flex-h gap-medium">
+				{#each variants as variant2}
+				{@const red2 = {[variant2]:true}}
+					<div>
+						<Button primary={variant2} {...{...red,...red2}} />						
+					</div>
+				{/each}
+			</div>
+		{/each}
 	</div>
 	<h5>action buttons</h5>
 	<div class="flex-v gap-medium">
@@ -70,27 +89,27 @@
 			</div> -->
 		</div>
 		<div>action's position</div>
-		<div class="flex-v gap-medium" >
-			<div  class="flex-v gap-medium" > 
+		<div class="flex-v gap-medium">
+			<div class="flex-v gap-medium">
 				<div>On whole button</div>
 				<div class="flex-h flex-wrap gap-medium">
 					{#each popPos as pos}
-					{@const a = {...usePopper,position:pos}}
+						{@const a = { ...usePopper, position: pos }}
 						<div>
 							<div>{pos}</div>
-							<div ><Button usePopper={a} primary={pos} /></div>
+							<div><Button usePopper={a} primary={pos} /></div>
 						</div>
 					{/each}
 				</div>
 			</div>
-			<div  class="flex-v gap-medium" >
+			<div class="flex-v gap-medium">
 				<div>On action zone</div>
 				<div class="flex-h flex-wrap gap-medium">
 					{#each popPos as pos}
-					{@const a = {...usePopper,position:pos}}
+						{@const a = { ...usePopper, position: pos }}
 						<div>
 							<div>{pos}</div>
-							<div >
+							<div>
 								<Button primary={pos}>
 									<span use:popper={a} slot="actionIcon">
 										<Icon icon="chevron-down" />
@@ -160,5 +179,5 @@
 
 	<div class="flex-v gap-small">
 		<div><Button primary="vall" secondary="some secondary <br /> test here ;)" /></div>
-	</div> 
+	</div>
 </div>

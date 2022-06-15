@@ -6,6 +6,7 @@
   import Backdrop from '../../base/backdrop/Backdrop.svelte';
   import {createEventForwarder} from '../../engine/engine';
   import {get_current_component} from 'svelte/internal';
+import Button from '$lib/base/button/Button.svelte';
 
   /*  common slotUi exports*/
   let className = '';
@@ -22,7 +23,7 @@
   };
 
 
-  export let showLogin: boolean = true;
+  export let showLogin: boolean = false;
   export let transition         = {type: fade, args: {}};
   export let fields             = {email: '', password: ''};
 
@@ -39,7 +40,7 @@
 
   export let onSubmit = function (args) {
     return new Promise((resolve, reject) => {
-      return setTimeout(() => {resolve(true);}, 5000);
+      return setTimeout(() => {resolve(true);}, 2000);
     });
   };
 
@@ -89,10 +90,10 @@
                     <Hint for="password" let:value on="required" class="color-scheme-error">
                         The password is required
                     </Hint>
-                    <button disabled={!$form.valid}>
+                    <Button primary="login" loading={submitting} disabled={!$form.valid}>
                         {#if submitting}<i class="fa fa-spinner fa-spin theme-text-primary-complement"></i>{/if}
                         Login
-                    </button>
+                    </Button>
                     {#if grantedError}
                         <div class="pad-1 color-scheme-error">Please verify your input</div>
                     {/if}

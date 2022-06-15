@@ -1,38 +1,38 @@
-/* cssFabric vars yes */
+/* cssFabric vars yes  */
 :root {
   /* theme primary colors*/
-  --theme-color-primary: rgb(32, 23, 0);
-  --theme-color-primary-light: #6d4e00;
-  --theme-color-primary-lighter: #b98500;
-  --theme-color-primary-dark: black;
-  --theme-color-primary-darker: black;
-  --theme-color-primary-complement: #000920;
-  --theme-color-primary-invert: #dfe8ff;
-  --theme-color-primary-alpha-low: rgba(32, 23, 0, 0.8);
-  --theme-color-primary-alpha: rgba(32, 23, 0, 0.3);
-  --theme-color-primary-alpha-high: rgba(32, 23, 0, 0.1);
+  --theme-color-primary: #00B5E2;
+  --theme-color-primary-light: #30d6ff;
+  --theme-color-primary-lighter: #7ce5ff;
+  --theme-color-primary-dark: #008caf;
+  --theme-color-primary-darker: #00637c;
+  --theme-color-primary-complement: #e22d00;
+  --theme-color-primary-invert: #ff4a1d;
+  --theme-color-primary-alpha-low: rgba(0, 181, 226, 0.8);
+  --theme-color-primary-alpha: rgba(0, 181, 226, 0.3);
+  --theme-color-primary-alpha-high: rgba(0, 181, 226, 0.1);
   /* theme secondary colors*/
-  --theme-color-secondary: #D14B02;
-  --theme-color-secondary-light: #fd7023;
-  --theme-color-secondary-lighter: #fea16e;
-  --theme-color-secondary-dark: #9e3902;
-  --theme-color-secondary-darker: #6c2701;
-  --theme-color-secondary-complement: #0288d1;
-  --theme-color-secondary-invert: #2eb4fd;
-  --theme-color-secondary-alpha-low: rgba(209, 75, 2, 0.8);
-  --theme-color-secondary-alpha: rgba(209, 75, 2, 0.3);
-  --theme-color-secondary-alpha-high: rgba(209, 75, 2, 0.1);
+  --theme-color-secondary: #330c2f;
+  --theme-color-secondary-light: #711b68;
+  --theme-color-secondary-lighter: #af29a1;
+  --theme-color-secondary-dark: #0a0209;
+  --theme-color-secondary-darker: black;
+  --theme-color-secondary-complement: #0c3310;
+  --theme-color-secondary-invert: #ccf3d0;
+  --theme-color-secondary-alpha-low: rgba(51, 12, 47, 0.8);
+  --theme-color-secondary-alpha: rgba(51, 12, 47, 0.3);
+  --theme-color-secondary-alpha-high: rgba(51, 12, 47, 0.1);
   /* theme tertiary colors*/
-  --theme-color-tertiary: #88D102;
-  --theme-color-tertiary-light: #b0fd23;
-  --theme-color-tertiary-lighter: #cbfe6e;
-  --theme-color-tertiary-dark: #679e02;
-  --theme-color-tertiary-darker: #466c01;
-  --theme-color-tertiary-complement: #4b02d1;
-  --theme-color-tertiary-invert: #772efd;
-  --theme-color-tertiary-alpha-low: rgba(136, 209, 2, 0.8);
-  --theme-color-tertiary-alpha: rgba(136, 209, 2, 0.3);
-  --theme-color-tertiary-alpha-high: rgba(136, 209, 2, 0.1);
+  --theme-color-tertiary: #cacaaa;
+  --theme-color-tertiary-light: #e7e7d9;
+  --theme-color-tertiary-lighter: white;
+  --theme-color-tertiary-dark: #b6b68b;
+  --theme-color-tertiary-darker: #a3a36b;
+  --theme-color-tertiary-complement: #aaaaca;
+  --theme-color-tertiary-invert: #353555;
+  --theme-color-tertiary-alpha-low: rgba(202, 202, 170, 0.8);
+  --theme-color-tertiary-alpha: rgba(202, 202, 170, 0.3);
+  --theme-color-tertiary-alpha-high: rgba(202, 202, 170, 0.1);
   /* color-scheme primary secondary tertiary */
   --color-scheme-discrete: #ccc;
   --color-scheme-discrete-light: #f2f2f2;

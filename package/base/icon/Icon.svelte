@@ -2,6 +2,7 @@
 import { createEventForwarder } from '../../engine/engine';
 import { get_current_component } from 'svelte/internal';
 import { onDestroy } from 'svelte';
+import { browser } from '$app/env';
 /*  common slotUi exports*/
 let className = '';
 export { className as class };
@@ -22,7 +23,9 @@ export let iconFamily = 'fa-solid';
 export let fontSize = 'small';
 onDestroy(() => {
 });
-</script>
-<span><i class="iconify-inline {className}"
+</script> 
+{#if browser}
+  <span><i class="iconify-inline {className}"
    data-icon="{iconFamily}:{icon}"
    style="font-size:{sizes[fontSize]}px;{style}"></i></span>
+{/if}

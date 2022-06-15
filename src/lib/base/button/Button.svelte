@@ -18,8 +18,10 @@
 	const forwardEvents = createEventForwarder(get_current_component());
 	/*  end slotUi exports*/
 
+	/** icon as a parameter*/
+	export let icon: string | undefined = undefined;
 	/** paramters for usePopper */
-	export let usePopper: UsePopperProps;
+	export let usePopper: UsePopperProps | undefined = undefined;
 	/** show loading state */
 	export let loading: boolean = false;
 	/** show chip */
@@ -54,6 +56,10 @@
 	let actionComponentProps = {};
 	let actionContent = '';
 
+	if (contained || bordered || link) {
+		presetDefault = '';
+	}
+
 	const onActionClick = (event: MouseEvent) => {
 		event.stopPropagation();
 		/* openPopper('settingActions', {
@@ -70,7 +76,6 @@
 	} else {
 		usePopper = { disabled: true };
 	}
-
 
 	$: actionArgs = {
 		code: 'node',
@@ -101,9 +106,13 @@
 	{...$$restProps}
 >
 	<div class="innerButton">
-		{#if $$slots.startButtonSlot}
+		{#if $$slots.startButtonSlot || icon}
 			<div class="startButtonSlot">
-				<slot name="startButtonSlot" />
+				<slot name="startButtonSlot">
+					{#if icon}
+						<Icon fontSize="small" {icon} />
+					{/if}
+				</slot>
 			</div>
 		{/if}
 		<div class="central"><slot>{null_to_empty(primary)}</slot></div>
@@ -211,7 +220,7 @@
 		}
 		&[contained='true'] {
 			color: var(--theme-color-foreground);
-			background-color: var(--color-gray-800-alpha-low, rgba(255, 255, 255, 0.1));
+			background-color: var(--color-gray-800-alpha-low, rgba(255, 255, 255, 0.1)) !important;
 			&:hover {
 				background-color: var(--theme-color-background);
 			}

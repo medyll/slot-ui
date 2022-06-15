@@ -1,4 +1,4 @@
-<script lang="ts"></script>
+
 
 <div class="bar flex-h flex-align-middle">
     <slot name="taskBarLeft"></slot>

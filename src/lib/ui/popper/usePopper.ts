@@ -13,10 +13,10 @@ export type UsePopperProps = {
 }
 
 /** adds click action to parentNode */
-export function popper(node: HTMLElement, props: UsePopperProps) {
-
+export function popper(node: HTMLElement, props?: UsePopperProps) {
+ 
+    if (!props) return false
     if (Boolean(props?.disabled)) return false
-    if (!props) console.log({ node, props })
      
     // node is parentNode !!!!
     const { parentNode = undefined, position = 'R', code = crypto.randomUUID() } = props;

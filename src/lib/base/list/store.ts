@@ -3,6 +3,7 @@ import type {ElementProps} from '../../../types';
 
 type ListStoreType = {
   activeData: Record<string, any>;
+  activeItem: Record<string, any>;
   selectorField: string;
   density: ElementProps['density']
 }
@@ -20,6 +21,7 @@ function createStore<T = ListStoreType>() {
     update,
     setSelectorField: (selectorField: string) => update((n) => {return {...n, selectorField};}),
     setActiveData   : (data: any) => {update(n => {return {...n, activeData: data};});},
+    setActiveItem   : (data: any) => {update(n => {return {...n, activeItem: data};});},
     selector        : (field: string, data: Record<string, any>) => {
       return get(innerStore).activeData[field] === data[field];
     },

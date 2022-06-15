@@ -12,10 +12,14 @@ declare const __propDef: {
         noVirtualize?: boolean | undefined;
         selectorField: any;
         selectedDataKey: string;
-        setSelectedData: any;
+        setSelectedData?: Record<string, any> | undefined;
+        setSelectedItem?: Record<string, any> | undefined;
         onItemClick: (args: Record<string, any>) => void;
-        title: string;
-        groupBy: string;
+        /** deprecated , use primary */ title: string;
+        /** displayed as H5*/ primary?: string | undefined;
+        /** secondary title */ secondary?: string | undefined;
+        /** fieldName by wich we will group */ groupBy: string;
+        /** List will not be clickable and will gain opacity */ disabled?: boolean | undefined;
         density?: "none" | "tight" | "default" | "medium" | "kind" | undefined;
     };
     events: {

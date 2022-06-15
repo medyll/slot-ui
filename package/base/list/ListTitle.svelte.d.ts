@@ -2,10 +2,10 @@ import { SvelteComponentTyped } from "svelte";
 declare const __propDef: {
     props: {
         icon: string;
-        primary: string;
-        secondary: string;
+        /** displayed as H5*/ primary?: string | undefined;
+        /** secondary title */ secondary?: string | undefined;
         action: string;
-        density?: any;
+        density?: "none" | "tight" | "default" | "medium" | "kind" | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;

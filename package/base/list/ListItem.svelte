@@ -9,6 +9,7 @@ import Icon from '../icon/Icon.svelte';
 let className = '';
 export { className as class };
 export let element;
+export let style = '';
 const forwardEvents = createEventForwarder(get_current_component());
 /*  end slotUi exports*/
 export let icon = null;
@@ -18,6 +19,7 @@ export let action = null;
 export let selected;
 export let showIcon = true;
 export let transition = undefined;
+export let disabled = false;
 // data to hold
 export let data = {};
 export let density = 'default';
@@ -45,9 +47,10 @@ $: if ($listStateContext?.selectorField) {
 	class:isActive
 	on:click={handleClick()}
 	on:dblclick={handleDblClick()}
+	style="opacity:${disabled ? 0.6 : 1};${style}"
 >
 	<span class="listItemChip" />
-	{#if showIcon}
+	{#if $$slots.icon || icon}
 		<div class="listItemIcon">
 			<slot name="icon">
 				{#if icon}<div><Icon {icon} /></div>{/if}

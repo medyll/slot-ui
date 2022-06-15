@@ -24,3 +24,6 @@ export function openChromeFrame(frameId, args = {}) {
         frameId: frameId, // cannot overwrite+
     });
 }
+export function removeChromeFrame(frameId, args = {}) {
+    chromeFrameStore.remove(frameId);
+}

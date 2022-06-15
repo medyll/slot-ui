@@ -7,5 +7,5 @@ declare type StickToProps = {
 };
 export declare function stickTo(node: HTMLElement, props: StickToProps): {
     destroy(): void;
-};
+} | undefined;
 export {};

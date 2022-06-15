@@ -9,3 +9,4 @@ export declare function getChromeFrame(frameId: string | number): {
 };
 /** open a chrome frame in DOM and add it to the store **/
 export declare function openChromeFrame(frameId: string, args?: Partial<IChromeFrameArgs>): void;
+export declare function removeChromeFrame(frameId: string, args?: Partial<IChromeFrameArgs>): void;

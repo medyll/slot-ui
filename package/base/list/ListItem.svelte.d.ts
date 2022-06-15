@@ -3,6 +3,7 @@ declare const __propDef: {
     props: {
         class?: string | undefined;
         element: HTMLElement;
+        style?: string | undefined;
         icon?: string | null | undefined;
         primary?: string | null | undefined;
         secondary?: string | null | undefined;
@@ -10,6 +11,7 @@ declare const __propDef: {
         selected: boolean;
         showIcon?: boolean | undefined;
         transition?: __sveltets_2_SvelteTransitionReturnType | undefined;
+        disabled?: boolean | undefined;
         data?: Record<string, any> | undefined;
         density?: "none" | "tight" | "default" | "kind" | undefined;
     };
@@ -33,6 +35,9 @@ export default class ListItem extends SvelteComponentTyped<ListItemProps, ListIt
     get element(): HTMLElement;
     /**accessor*/
     set element(_: HTMLElement);
+    get style(): string | undefined;
+    /**accessor*/
+    set style(_: string | undefined);
     get icon(): string | null | undefined;
     /**accessor*/
     set icon(_: string | null | undefined);
@@ -54,6 +59,9 @@ export default class ListItem extends SvelteComponentTyped<ListItemProps, ListIt
     get transition(): __sveltets_2_SvelteTransitionReturnType | undefined;
     /**accessor*/
     set transition(_: __sveltets_2_SvelteTransitionReturnType | undefined);
+    get disabled(): boolean | undefined;
+    /**accessor*/
+    set disabled(_: boolean | undefined);
     get data(): Record<string, any> | undefined;
     /**accessor*/
     set data(_: Record<string, any> | undefined);

@@ -9,6 +9,7 @@ function createStore() {
         update,
         setSelectorField: (selectorField) => update((n) => { return { ...n, selectorField }; }),
         setActiveData: (data) => { update(n => { return { ...n, activeData: data }; }); },
+        setActiveItem: (data) => { update(n => { return { ...n, activeItem: data }; }); },
         selector: (field, data) => {
             return get(innerStore).activeData[field] === data[field];
         },

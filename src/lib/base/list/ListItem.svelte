@@ -17,6 +17,7 @@
 	let className = '';
 	export { className as class };
 	export let element: HTMLElement;
+	export let style: string = ''
 	const forwardEvents = createEventForwarder(get_current_component());
 	/*  end slotUi exports*/
 
@@ -28,6 +29,7 @@
 	export let showIcon: boolean = true;
 	export let transition: __sveltets_2_SvelteTransitionReturnType | undefined = undefined;
 
+	export let disabled: boolean = false;
 	// data to hold
 	export let data: Record<string, any> = {};
 
@@ -61,9 +63,10 @@
 	class:isActive
 	on:click={handleClick()}
 	on:dblclick={handleDblClick()}
+	style="opacity:${disabled ? 0.6 : 1};${style}"
 >
 	<span class="listItemChip" />
-	{#if showIcon}
+	{#if $$slots.icon || icon}
 		<div class="listItemIcon">
 			<slot name="icon">
 				{#if icon}<div><Icon {icon} /></div>{/if}

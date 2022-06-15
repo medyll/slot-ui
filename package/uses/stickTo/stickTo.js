@@ -3,6 +3,8 @@ export function stickTo(node, props) {
     const { parentNode, position } = props;
     if (node && parentNode) {
         const parentPos = parentNode.getBoundingClientRect();
+        if (!document.getElementById('svelte'))
+            return;
         document.getElementById('svelte').appendChild(node);
         setPosition(node, position, parentNode);
     }

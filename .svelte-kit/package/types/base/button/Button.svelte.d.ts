@@ -6,7 +6,8 @@ declare const __propDef: {
         presetDefault?: string | undefined;
         class?: string | undefined;
         element?: HTMLButtonElement | null | undefined;
-        usePopper: UsePopperProps;
+        icon?: string | undefined;
+        usePopper?: UsePopperProps | undefined;
         loading?: boolean | undefined;
         showChip?: boolean | undefined;
         contained?: boolean | undefined;

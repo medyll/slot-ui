@@ -1,31 +1,43 @@
-<script>export let icon;
-export let primary;
-export let secondary;
+<script>import Icon from '../icon/Icon.svelte';
+export let icon;
+/** displayed as H5*/
+export let primary = undefined;
+/** secondary title */
+export let secondary = undefined;
 export let action;
 export let density = 'default';
 </script>
+
 <li class="listItemTitle density-{density}">
-    {#if icon || $$slots.icon}
-    <div class="listItemIcon">
-        <slot name="icon"></slot>
-    </div>
-    {/if}
-    <div class="listItemContent">
-        {#if primary || $$slots.primary}
-            <h5>
-                <slot name="primary">{primary}</slot>
-            </h5>
-        {/if}
-        {#if secondary || $$slots.secondary}
-            <div>
-                <slot name="secondary">{secondary}</slot>
-            </div>
-        {/if}
-    </div>
-    <div class="listItemAction">
-        <slot name="action"></slot>
-    </div>
+	{#if icon || $$slots.icon}
+		<div class="listItemIcon">
+			<slot name="icon" >
+                <Icon {icon} />
+            </slot>
+		</div>
+	{/if}
+	<div class="listItemContent">
+		{#if primary || $$slots.primary}
+			<h5>
+				<slot name="primary">{primary}</slot>
+			</h5>
+		{/if}
+		{#if secondary || $$slots.secondary}
+			<div>
+				<slot name="secondary">{secondary}</slot>
+			</div>
+		{/if}
+	</div>
+	<div class="listItemAction">
+		<slot name="action" />
+	</div>
 </li>
+
+<!--i love slots-->
+<slot name="iloveslots" />
+<!--i love slot more but with less-->
+<slot:iloveslots />
+
 <!--
     local instead of global
     means that the sheet is shared at directory level
@@ -110,9 +122,3 @@ export let density = 'default';
   border-radius: 8px;
   left: -1px;
 }</style>
-
-
-<!--i love slots-->
-<slot name="iloveslots" />
-<!--i love slot more but with less-->
-<slot:iloveslots />

@@ -1,6 +1,7 @@
 import type { ElementProps } from '../../../types';
 declare type ListStoreType = {
     activeData: Record<string, any>;
+    activeItem: Record<string, any>;
     selectorField: string;
     density: ElementProps['density'];
 };
@@ -10,6 +11,7 @@ export declare const createListStore: <T = ListStoreType>() => {
     update: (this: void, updater: import("svelte/store").Updater<ListStoreType>) => void;
     setSelectorField: (selectorField: string) => void;
     setActiveData: (data: any) => void;
+    setActiveItem: (data: any) => void;
     selector: (field: string, data: Record<string, any>) => boolean;
 };
 export {};

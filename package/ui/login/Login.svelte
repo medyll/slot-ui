@@ -4,6 +4,7 @@ import { userStore } from './store';
 import Backdrop from '../../base/backdrop/Backdrop.svelte';
 import { createEventForwarder } from '../../engine/engine';
 import { get_current_component } from 'svelte/internal';
+import Button from '../../base/button/Button.svelte';
 /*  common slotUi exports*/
 let className = '';
 export { className as class };
@@ -15,7 +16,7 @@ export const actions = {
     toggle: (lo) => { showLogin = lo ?? !showLogin; },
     toggleLoading: (lo) => { loading = lo ?? !loading; },
 };
-export let showLogin = true;
+export let showLogin = false;
 export let transition = { type: fade, args: {} };
 export let fields = { email: '', password: '' };
 export let loading = false;
@@ -29,7 +30,7 @@ if (fields?.password)
 const form = useForm(validData);
 export let onSubmit = function (args) {
     return new Promise((resolve, reject) => {
-        return setTimeout(() => { resolve(true); }, 5000);
+        return setTimeout(() => { resolve(true); }, 2000);
     });
 };
 function validate() {
@@ -76,10 +77,10 @@ function validate() {
                     <Hint for="password" let:value on="required" class="color-scheme-error">
                         The password is required
                     </Hint>
-                    <button disabled={!$form.valid}>
+                    <Button primary="login" loading={submitting} disabled={!$form.valid}>
                         {#if submitting}<i class="fa fa-spinner fa-spin theme-text-primary-complement"></i>{/if}
                         Login
-                    </button>
+                    </Button>
                     {#if grantedError}
                         <div class="pad-1 color-scheme-error">Please verify your input</div>
                     {/if}

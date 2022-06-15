@@ -38,7 +38,7 @@ $: style = `position:${positionStyle};width:${widthStyle}!important`;
 <div data-open={isOpen} bind:this={element} class="drawer flex-v h-full {className}" style={style} use:forwardEvents>
     <div style="position: absolute;z-index:8600;right:{pos}px">
         {#if showOpenerIcon}
-            <IconButton
+            <!-- <IconButton
                     --css-button-radius="6px"
                     style="width:32px;height:32px"
                     icon="{sens}"
@@ -47,7 +47,7 @@ $: style = `position:${positionStyle};width:${widthStyle}!important`;
                     on:click={() => {
 								toggle();
 							}}
-           />
+           /> -->
         {/if}
     </div>
     {#if isOpen}

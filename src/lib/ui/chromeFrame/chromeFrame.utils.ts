@@ -33,3 +33,10 @@ export function openChromeFrame(frameId: string, args: Partial<IChromeFrameArgs>
   });
  
 }
+
+export function removeChromeFrame(frameId: string, args: Partial<IChromeFrameArgs> = {}) {
+
+  
+  chromeFrameStore.remove (frameId);
+ 
+}

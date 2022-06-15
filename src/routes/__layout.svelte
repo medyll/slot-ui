@@ -60,11 +60,11 @@
 		<Login showLogin={false}>
 			<Taskbar>
 				<svelte:fragment slot="taskBarLeft">
-					<IconButton
+					<!-- <IconButton
 						icon="barcode"
 						on:click={toggleStartMenu}
 						style="color:white;font-size: large"
-					/>
+					/> -->
 					<button
 						on:click={() => {
 							openCh('btn1');
@@ -89,12 +89,12 @@
 				</svelte:fragment>
 				<ChromeFrameButtonList let:chromeFrame />
 				<TaskBarContent />
-				<IconButton
+				<!-- <IconButton
 					icon="fist-raised"
 					iconFontSize="small"
 					on:click={onItemClick}
 					slot="taskBarRight"
-				/>
+				/> -->
 			</Taskbar>
 			<div id="layout" class="flex-main overflow-hidden pos-rel">
 				<slot />
@@ -194,5 +194,6 @@
 		box-shadow: inset 0px 0px 3px 1px rgba(51, 51, 51, 0.8);
 		background-color: rgba(59, 59, 59, 0.99);
 		color: white;
+		height: 1rem;
 	}
 </style>

@@ -1,7 +1,7 @@
 <script>import ListItem from './ListItem.svelte';
 import { setContext } from 'svelte';
 import { createListStore } from './store';
-import { get_current_component, null_to_empty } from 'svelte/internal';
+import { compute_slots, get_current_component, null_to_empty } from 'svelte/internal';
 import Icon from '../icon/Icon.svelte';
 import ListTitle from './ListTitle.svelte';
 import { createEventForwarder } from '../../engine/engine';
@@ -20,10 +20,19 @@ export let showIcon = true;
 export let noVirtualize = false;
 export let selectorField;
 export let selectedDataKey;
-export let setSelectedData;
+export let setSelectedData = {};
+export let setSelectedItem = {};
 export let onItemClick;
+/** deprecated , use primary */
 export let title;
+/** displayed as H5*/
+export let primary = undefined;
+/** secondary title */
+export let secondary = undefined;
+/** fieldName by wich we will group */
 export let groupBy;
+/** List will not be clickable and will gain opacity */
+export let disabled = false;
 export let density = 'default';
 const listStore = createListStore();
 setContext('listStateContext', listStore);
@@ -31,53 +40,64 @@ $listStore.density = density;
 listStore.setSelectorField(selectorField);
 $: if (setSelectedData) {
     listStore.setActiveData(setSelectedData);
-    console.log('selected');
+    console.log('selected', setSelectedData);
+}
+$: if (setSelectedItem) {
+    // listStore.setActiveData(setSelectedData);
+    console.log('selected', setSelectedItem);
 }
 function onListItemClick(e) {
+    if (disabled) {
+        e.stopPropagation();
+        return;
+    }
     listStore.setActiveData(e.detail);
     onItemClick && onItemClick(e.detail);
 }
 </script>
 
-<ul bind:this={element} class="density-{density}"
-    on:listclicked={onListItemClick}
-    on:list:dblclicked={onListItemClick}
-    style="position:relative;height:{height};margin:0;padding:0;{style}"
-    use:forwardEvents>
-    {#if $$slots.title || title}
-        <slot name="title">
-            <ListTitle primary={title}/>
-        </slot>
-    {/if}
-    {#if listItems}
-        {#if !noVirtualize}
-            {#if $$slots.default }
-                <Virtualize height="100%" items={listItems} let:item>
-                    <slot listItem={item}/>
-                </Virtualize>
-            {:else}
-                <Virtualize  height="100%" items={listItems} let:item>
-                    <ListItem class="" {showIcon} density={density} data={item.data}>
-                        <span slot="icon"><Icon fontSize="tiny" icon={item?.icon}/></span>
-                        <span slot="primary">{null_to_empty(item?.primary)}</span>
-                        <span slot="secondary">{null_to_empty(item?.secondary)}</span>
-                        <span slot="action">{null_to_empty(item?.action)}</span>
-                    </ListItem>
-                </Virtualize>
-            {/if}
-        {:else}
-            {#each listItems as item  }
-                <slot listItem={item}>
-                    <ListItem {showIcon} density={density} data={item.data}>
-                        <span slot="icon"><Icon fontSize="tiny" icon={item?.icon}/></span>
-                        <span slot="primary">{null_to_empty(item?.primary)}</span>
-                        <span slot="secondary">{null_to_empty(item?.secondary)}</span>
-                        <span slot="action">{null_to_empty(item?.action)}</span>
-                    </ListItem>
-                </slot>
-            {/each}
-        {/if}
-    {/if}
+<ul
+	bind:this={element}
+	class="density-{density}"
+	on:listclicked={onListItemClick}
+	on:list:dblclicked={onListItemClick}
+	style="position:relative;height:{height};margin:0;padding:0;{style};opacity:${disabled ? 0.6 : 1}"
+	use:forwardEvents
+>
+	{#if $$slots.title || title}
+		<slot name="title">
+			<ListTitle primary={primary ?? title} {secondary} />
+		</slot>
+	{/if}
+	{#if listItems}
+		{#if !noVirtualize}
+			{#if $$slots.default}
+				<Virtualize height="100%" items={listItems} let:item>
+					<slot listItem={item} />
+				</Virtualize>
+			{:else}
+				<Virtualize height="100%" items={listItems} let:item>
+					<ListItem class="" {showIcon} {density} data={item.data}>
+						<span slot="icon"><Icon fontSize="tiny" icon={item?.icon} /></span>
+						<span slot="primary">{null_to_empty(item?.primary)}</span>
+						<span slot="secondary">{null_to_empty(item?.secondary)}</span>
+						<span slot="action">{null_to_empty(item?.action)}</span>
+					</ListItem>
+				</Virtualize>
+			{/if}
+		{:else}
+			{#each listItems as item}
+				<slot listItem={item}>
+					<ListItem {showIcon} {density} data={item.data} icon={item?.icon}>
+						<span slot="icon"></span>
+						<span slot="primary">{null_to_empty(item?.primary)}</span>
+						<span slot="secondary">{null_to_empty(item?.secondary)}</span>
+						<span slot="action">{null_to_empty(item?.action)}</span>
+					</ListItem>
+				</slot>
+			{/each}
+		{/if}
+	{/if}
 </ul>
 
 <style global>:global(li.listItemTitle),
@@ -158,4 +178,3 @@ function onListItemClick(e) {
   border-radius: 8px;
   left: -1px;
 }</style>
-
