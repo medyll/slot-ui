@@ -1,42 +1,50 @@
+<script lang="ts" context="module">
+	import type { ElementProps } from 'src/types';
+	export type SizeType = keyof typeof sizes;
+	const sizes: Record<ElementProps['sizeType'], number> = {
+		tiny: 8,
+		small: 16,
+		medium: 24,
+		default: 32,
+		large: 48,
+		big: 64,
+		full: 100
+	} as const;
+	// 'tiny' | 'small' | 'medium' | 'default' | 'large' | 'big' | 'full'
+</script>
+
 <script lang="ts">
-  export type SizeType = keyof typeof sizes
-  import type {ElementProps, TIcon} from '$lib/../../../types';
-  import Iconify from '@iconify/iconify';
-  import {createEventForwarder} from '../../engine/engine';
-  import {get_current_component} from 'svelte/internal';
-  import {onDestroy} from 'svelte';
+	import { createEventForwarder } from '../../engine/engine';
+	import { get_current_component } from 'svelte/internal';
+	import { onDestroy } from 'svelte';
+	import Iconify from '@iconify/svelte';
 
-  import {browser} from '$app/env';
+	import { browser } from '$app/env';
 
+	/*  common slotUi exports*/
+	let className = '';
+	export { className as class };
+	export let style: string = '';
+	export let element: HTMLDivElement | null = null;
+	const forwardEvents = createEventForwarder(get_current_component());
+	/*  end slotUi exports*/
 
-  /*  common slotUi exports*/
-  let className = '';
-  export {className as class};
-  export let style:string = '';
-  export let element: HTMLDivElement | null = null;
-  const forwardEvents                       = createEventForwarder(get_current_component());
-  /*  end slotUi exports*/
+	export let icon: string = 'question';
+	export let iconFamily: string = 'fa-solid';
+	export let fontSize: SizeType = 'small';
 
-  const sizes: Record<ElementProps['sizeType'], number> = {
-    tiny   : 8,
-    small  : 16,
-    medium : 24,
-    default: 32,
-    large  : 48,
-    big    : 64,
-  } as const;
+	onDestroy(() => {}); //
+</script>
 
-
-  export let icon: TIcon        = 'question';
-  export let iconFamily: string = 'fa-solid';
-  export let fontSize: SizeType = 'small';
-
-  onDestroy(() => {
-  });
-
-</script> 
 {#if browser}
-  <span><i class="iconify-inline {className}"
-   data-icon="{iconFamily}:{icon}"
-   style="font-size:{sizes[fontSize]}px;{style}"></i></span>
+	<Iconify style="font-size:{sizes[fontSize]}px;{style}" icon="{iconFamily}:{icon}" class="{className}" />
 {/if}
+<!-- {#if browser}
+	<span
+		><i
+			class="iconify-inline {className}"
+			data-icon="{iconFamily}:{icon}"
+			style="font-size:{sizes[fontSize]}px;{style}"
+		/></span
+	>
+{/if} -->

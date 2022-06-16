@@ -5,8 +5,7 @@
   import {toggleStartMenu} from './wactions.utils';
   import IconButton from '../base/button/IconButton.svelte';
   import {openPopper} from '$lib/ui/popper/actions';
-  import ServiceBox from '../ui/serviceBox/ServiceBox.svelte';
-  import Icon from '@iconify/svelte';
+  import ServiceBox from '../ui/serviceBox/ServiceBox.svelte'; 
   let {toggle, current, theme} = getContext('theme');
 
 

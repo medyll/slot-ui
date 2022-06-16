@@ -1,6 +1,9 @@
+<script lang="ts">
+  let className = ''
+  export {   className as class}
+</script>
 
-
-<div class="bar flex-h flex-align-middle">
+<div class="bar flex-h flex-align-middle {className}" {...$$restProps}>
     <slot name="taskBarLeft"></slot>
     <div class="flex-main">
         <slot></slot>

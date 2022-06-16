@@ -1,20 +1,9 @@
-/** @typedef {typeof __propDef.props}  TaskbarProps */
-/** @typedef {typeof __propDef.events}  TaskbarEvents */
-/** @typedef {typeof __propDef.slots}  TaskbarSlots */
-export default class Taskbar extends SvelteComponentTyped<{}, {
-    [evt: string]: CustomEvent<any>;
-}, {
-    taskBarLeft: {};
-    default: {};
-    taskBarRight: {};
-}> {
-}
-export type TaskbarProps = typeof __propDef.props;
-export type TaskbarEvents = typeof __propDef.events;
-export type TaskbarSlots = typeof __propDef.slots;
 import { SvelteComponentTyped } from "svelte";
 declare const __propDef: {
-    props: {};
+    props: {
+        [x: string]: any;
+        class?: string | undefined;
+    };
     events: {
         [evt: string]: CustomEvent<any>;
     };
@@ -24,4 +13,9 @@ declare const __propDef: {
         taskBarRight: {};
     };
 };
+export declare type TaskbarProps = typeof __propDef.props;
+export declare type TaskbarEvents = typeof __propDef.events;
+export declare type TaskbarSlots = typeof __propDef.slots;
+export default class Taskbar extends SvelteComponentTyped<TaskbarProps, TaskbarEvents, TaskbarSlots> {
+}
 export {};

@@ -1,12 +1,15 @@
 import { SvelteComponentTyped } from "svelte";
+import type { ElementProps } from 'src/types';
+export declare type SizeType = keyof typeof sizes;
+declare const sizes: Record<ElementProps['sizeType'], number>;
 declare const __propDef: {
     props: {
         class?: string | undefined;
         style?: string | undefined;
         element?: HTMLDivElement | null | undefined;
-        icon?: any;
+        icon?: string | undefined;
         iconFamily?: string | undefined;
-        fontSize?: any;
+        fontSize?: "default" | "medium" | "full" | "tiny" | "small" | "large" | "big" | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;

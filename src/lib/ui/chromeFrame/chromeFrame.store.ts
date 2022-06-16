@@ -60,7 +60,7 @@ function createChromeFrameStore() {
     }),
     open              : (payload: IChromeFrameArgs) => update((n) => {
       if (!payload.frameId) return n;
-      
+      console.log('open chromeFrame from chromeFrameStore ',payload.frameId)
       activeFrame.set(payload.frameId);
       setActive(payload.frameId);
       

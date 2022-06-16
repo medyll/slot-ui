@@ -1,6 +1,5 @@
 <svelte:options accessors/>
 <script lang="ts">
-  import * as d3 from 'd3';
   import {chromeFrameListRef, chromeFrameStore} from './chromeFrame.store';
   import ChromeFrame from './ChromeFrame.svelte';
   import {browser} from '$app/env';
@@ -71,7 +70,9 @@
     }
   }
 
-  $: console.log($chromeFrameStore);
+  $: console.log('chromeFrameStore from chrome frame list',$chromeFrameStore);
+  $: console.log('var browser, from chrome frame list',browser);
+  $: console.log('chromeFrameListRef, from chrome frame list',chromeFrameListRef);
 
 </script>
 <div bind:this={element}

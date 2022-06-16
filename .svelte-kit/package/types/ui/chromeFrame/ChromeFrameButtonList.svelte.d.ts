@@ -11,7 +11,6 @@ declare const __propDef: {
         default: {
             chromeFrame: import("./types").IChromeFrameArgs<Record<string, any>>;
         };
-        chromeFrameCloseSlot: {};
     };
 };
 export declare type ChromeFrameButtonListProps = typeof __propDef.props;

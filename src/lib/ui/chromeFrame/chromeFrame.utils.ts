@@ -23,7 +23,7 @@ export function getChromeFrame(frameId: string | number) {
 /** open a chrome frame in DOM and add it to the store **/
 export function openChromeFrame(frameId: string, args: Partial<IChromeFrameArgs> = {}) {
 
-  
+  console.log('openChromeFrame from utils :',frameId)
   chromeFrameStore.open({
     title          : frameId,
     defaultPosition: {x: 960, y: 650},

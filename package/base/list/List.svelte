@@ -43,8 +43,7 @@ $: if (setSelectedData) {
     console.log('selected', setSelectedData);
 }
 $: if (setSelectedItem) {
-    // listStore.setActiveData(setSelectedData);
-    console.log('selected', setSelectedItem);
+    // listStore.setActiveData(setSelectedData); 
 }
 function onListItemClick(e) {
     if (disabled) {

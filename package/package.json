@@ -1,6 +1,6 @@
 {
   "name": "@medyll/slotui",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "repository": {
     "type": "git",
     "url": "https://github.com/medyll/slot-ui.git"
@@ -181,6 +181,7 @@
     "./ui/serviceBox/ServiceBox.svelte": "./ui/serviceBox/ServiceBox.svelte",
     "./ui/startMenu/StartMenu.svelte": "./ui/startMenu/StartMenu.svelte",
     "./ui/taskbar/Taskbar.svelte": "./ui/taskbar/Taskbar.svelte",
+    "./ui/themeswitcher/ThemeSwitcher.svelte": "./ui/themeswitcher/ThemeSwitcher.svelte",
     "./ui/toast/Toast.svelte": "./ui/toast/Toast.svelte",
     "./ui/topBar/TopBar.svelte": "./ui/topBar/TopBar.svelte",
     "./ui/window/window.store": "./ui/window/window.store.js",

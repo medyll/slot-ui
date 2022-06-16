@@ -62,7 +62,9 @@ $: if (browser && element) {
         element.style.display = '';
     }
 }
-$: console.log($chromeFrameStore);
+$: console.log('chromeFrameStore from chrome frame list', $chromeFrameStore);
+$: console.log('var browser, from chrome frame list', browser);
+$: console.log('chromeFrameListRef, from chrome frame list', chromeFrameListRef);
 </script>
 <div bind:this={element}
      class="pos-abs h-full w-full top-0 {className}"
