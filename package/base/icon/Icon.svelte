@@ -28,7 +28,10 @@ export let iconFamily = 'fa-solid';
 export let fontSize = 'small';
 onDestroy(() => { }); //
 </script>
-<Iconify icon="{iconFamily}:{icon}" />
+
+{#if browser}
+	<Iconify style="font-size:{sizes[fontSize]}px;{style}" icon="{iconFamily}:{icon}" class="{className}" />
+{/if}
 <!-- {#if browser}
 	<span
 		><i

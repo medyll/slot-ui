@@ -47,6 +47,7 @@ function createChromeFrameStore() {
         open: (payload) => update((n) => {
             if (!payload.frameId)
                 return n;
+            console.log('open chromeFrame from chromeFrameStore ', payload.frameId);
             activeFrame.set(payload.frameId);
             setActive(payload.frameId);
             const obj = n.get(payload.frameId) ?? {};

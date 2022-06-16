@@ -1,10 +1,22 @@
-import { c as create_ssr_component, f as escape, v as validate_component, d as get_current_component, e as add_attribute, h as each, n as null_to_empty } from "../../../chunks/index-fbd3851f.js";
-import { I as Icon, D as Divider, p as propsXy, L as List, b as ListItem, t as toFa, T as TopBar } from "../../../chunks/List-02fdb02d.js";
-import "lodash";
-import { c as createEventForwarder } from "../../../chunks/VirtualList-b0c0fb34.js";
-import "@fortawesome/free-solid-svg-icons";
-import "@fortawesome/free-brands-svg-icons";
-import "@fortawesome/free-regular-svg-icons";
+import { c as create_ssr_component, e as escape, v as validate_component, h as get_current_component, b as add_attribute, d as each } from "../../../chunks/index-80980bc6.js";
+import { L as List, T as TopBar } from "../../../chunks/List-b3a68661.js";
+import { b as Icon, a as Divider, F as Frame } from "../../../chunks/Frame-7ef9c5be.js";
+import { c as createEventForwarder } from "../../../chunks/Divider.svelte_svelte_type_style_lang-e9de6a95.js";
+const propsProxy = (props, data) => {
+  let ret = [];
+  for (const dta of data) {
+    let out = {};
+    for (const prop of props) {
+      const keyFrom = prop[1];
+      const keyTo = prop[0];
+      if (dta[keyFrom])
+        out[keyTo] = dta[keyFrom];
+    }
+    out["data"] = dta;
+    ret.push(out);
+  }
+  return ret;
+};
 const RECORDS = [
   {
     _id: "558d5d45a0ade1af528b4567",
@@ -8021,27 +8033,6 @@ const Elementor = create_ssr_component(($$result, $$props, $$bindings, slots) =>
     `}`;
   })}</div>`;
 });
-var Frame_svelte_svelte_type_style_lang = "";
-const css = {
-  code: ".frame.svelte-1edr997.svelte-1edr997{z-index:1;height:100%;display:flex;flex-direction:column;overflow:hidden;position:relative;background-color:rgba(35, 31, 26, 0.5);backdrop-filter:blur(30px);color:white}.frame.svelte-1edr997 .frameContainer .navLeft.svelte-1edr997{width:270px;min-width:270px}",
-  map: null
-};
-const Frame = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let { class: className = "" } = $$props;
-  let { element = null } = $$props;
-  createEventForwarder(get_current_component());
-  if ($$props.class === void 0 && $$bindings.class && className !== void 0)
-    $$bindings.class(className);
-  if ($$props.element === void 0 && $$bindings.element && element !== void 0)
-    $$bindings.element(element);
-  $$result.css.add(css);
-  return `<div class="${"flex-v h-full overflow-hidden frame " + escape(className) + " svelte-1edr997"}"${add_attribute("this", element, 0)}><div>${slots.frameHeaderSlot ? slots.frameHeaderSlot({}) : ``}</div>
-    <div class="${"frameContainer flex-h flex-main overflow-hidden"}"><div class="${"navLeft flex-v h-full overflow-hidden svelte-1edr997"}">${slots.navLeftHeaderFrameSlot ? slots.navLeftHeaderFrameSlot({}) : ``}
-            ${slots.navLeftFrameSlot ? slots.navLeftFrameSlot({}) : ``}</div>
-        <div class="${"h-full flex-main flex-v "}"><div>${slots.contentHeaderFrameSlot ? slots.contentHeaderFrameSlot({}) : ``}</div>
-            <div class="${"flex-main overflow-auto"}">${slots.contentFrameSlot ? slots.contentFrameSlot({}) : ``}</div></div></div>
-</div>`;
-});
 let schemeName = "Appscheme";
 const Explorer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let listItems = [];
@@ -8055,7 +8046,7 @@ const Explorer = create_ssr_component(($$result, $$props, $$bindings, slots) => 
     ["secondary", `code${schemeName}`],
     ["icon", `icon${schemeName}`]
   ];
-  listItems = propsXy(transformArgsBis, schemeData);
+  listItems = propsProxy(transformArgsBis, schemeData);
   let debugValues = [];
   let $$settled;
   let $$rendered;
@@ -8068,7 +8059,7 @@ const Explorer = create_ssr_component(($$result, $$props, $$bindings, slots) => 
     }
     $$rendered = `${validate_component(Frame, "Frame").$$render($$result, {}, {}, {
       contentFrameSlot: () => {
-        return `<div slot="${"contentFrameSlot"}" class="${"flex-main overflow-auto pad-4"}">${activeData ? `${validate_component(Elementor, "Elementor").$$render($$result, { item: activeData }, {
+        return `<div class="${"flex-main overflow-auto pad-4"}" slot="${"contentFrameSlot"}">${activeData ? `${validate_component(Elementor, "Elementor").$$render($$result, { item: activeData }, {
           item: ($$value) => {
             activeData = $$value;
             $$settled = false;
@@ -8084,7 +8075,7 @@ const Explorer = create_ssr_component(($$result, $$props, $$bindings, slots) => 
       contentHeaderFrameSlot: () => {
         return `${validate_component(Header, "Header").$$render($$result, {
           slot: "contentHeaderFrameSlot",
-          title: activeData?.[`nomAppscheme`],
+          title: activeData == null ? void 0 : activeData[`nomAppscheme`],
           debugValues
         }, {
           debugValues: ($$value) => {
@@ -8093,50 +8084,34 @@ const Explorer = create_ssr_component(($$result, $$props, $$bindings, slots) => 
           }
         }, {
           default: () => {
-            return `${escape(activeData?.[`nomAppscheme`])}`;
+            return `${escape(activeData == null ? void 0 : activeData[`nomAppscheme`])}`;
           }
         })}`;
       },
-      navLeftFrameSlot: () => {
-        return `<div slot="${"navLeftFrameSlot"}">${validate_component(List, "List").$$render($$result, {
-          selectorField: "idappscheme",
+      frameDrawerSlot: ({ listItem }) => {
+        return `${validate_component(List, "List").$$render($$result, {
           density: "default",
           onItemClick: openIn,
-          title: "Title List",
+          selectorField: "idappscheme",
+          slot: "frameDrawerSlot",
           style: "height:100%;",
+          title: "Title List test",
           listItems
         }, {
           listItems: ($$value) => {
             listItems = $$value;
             $$settled = false;
           }
-        }, {
-          default: ({ listItem }) => {
-            return `${validate_component(ListItem, "ListItem").$$render($$result, { data: listItem.data }, {}, {
-              action: () => {
-                return `<span slot="${"action"}">${escape(null_to_empty(listItem.action))}</span>`;
-              },
-              primary: () => {
-                return `<span slot="${"primary"}">${escape(null_to_empty(listItem.primary))}</span>`;
-              },
-              icon: () => {
-                return `<span slot="${"icon"}">${validate_component(Icon, "Icon").$$render($$result, {
-                  fontSize: "tiny",
-                  icon: toFa(listItem.icon)
-                }, {}, {})}</span>`;
-              }
-            })}`;
-          }
-        })}</div>`;
+        }, {})}`;
       },
       navLeftHeaderFrameSlot: () => {
         return `${validate_component(TopBar, "MenuBar").$$render($$result, {
-          slot: "navLeftHeaderFrameSlot",
           orientation: "left",
+          slot: "navLeftHeaderFrameSlot",
           title: "Navigation bar "
         }, {}, {
           menuBarSwitcher: () => {
-            return `<input slot="${"menuBarSwitcher"}" placeholder="${"Search in Bar"}" style="${"width:100%;"}" type="${"text"}">`;
+            return `<input slot="${"menuBarSwitcher"}" placeholder="${"Search in Bar"}" style="${"position:relative;width:100%;"}" type="${"text"}">`;
           }
         })}`;
       }

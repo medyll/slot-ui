@@ -4,11 +4,15 @@ import {tick} from 'svelte';
 
 
 export type WindowStoreListType = Map<string | number, IChromeFrameArgs>
+/** used as a reference */
 export const windowListObjects = new Map<string | number, IChromeFrameArgs>([]);
 
-const activeFrame            = writable<string | number>('');
-const chromeFrameConfigStore = writable<IChromeOptionsFrameArgs>({showCommandBar: true});
-const chromeFrameListStore   = writable<WindowStoreListType>(windowListObjects);
+/** active frameId */
+export const activeFrame            = writable<string | number>('');
+/** host the generic configuration */
+export const chromeFrameConfigStore = writable<IChromeOptionsFrameArgs>({showCommandBar: true});
+/** host the chromeFrame list */
+export const chromeFrameListStore   = writable<WindowStoreListType>(windowListObjects);
 
 /*chromeFrameConfigStore.set()
  $chromeFrameConfigStore.onClose = ()=>{}*/
@@ -32,20 +36,22 @@ function createChromeFrameStore() {
   // set as active, inactivate others
   async function setActive(frameId: string | number) {
     const currentChromeFrame = currentStore.get(frameId);
+    console.log('setActive ',frameId)
     if (currentChromeFrame) {
       currentStore.forEach((frame, frameKey) => {
         currentStore.set(frameKey, {...frame, active: false});
       });
-      await tick();
+      // await tick();
       //
       const values = Array.from(currentStore);
       const zIndex = values.reduce((prev, val) => {
         // @ts-ignore
-        return (val[1]?.zIndex >= prev) ? val[1]?.zIndex + values.length : prev;
+        return (val[1]?.zIndex >= prev) ? val[1]?.zIndex + values.length : prev; 
       }, 0);
      
       currentStore.set(frameId, {...currentChromeFrame, zIndex, active: true, minimized: true});
       activeFrame.set(frameId);
+      console.log('setActive (activated) ',frameId)
     }
   }
   

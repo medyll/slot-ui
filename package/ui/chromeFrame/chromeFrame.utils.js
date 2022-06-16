@@ -16,6 +16,7 @@ export function getChromeFrame(frameId) {
 }
 /** open a chrome frame in DOM and add it to the store **/
 export function openChromeFrame(frameId, args = {}) {
+    console.log('openChromeFrame from utils :', frameId);
     chromeFrameStore.open({
         title: frameId,
         defaultPosition: { x: 960, y: 650 },

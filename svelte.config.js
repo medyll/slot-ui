@@ -16,7 +16,7 @@ const config = {
                 return sx4uPreprocess.render(args);
             }
         })
-    ],
+    ],    
     kit: {
         adapter: adapter({
             pages: "docs",
@@ -26,6 +26,9 @@ const config = {
 			// change below to your repo name
 			// base: dev ? "" : "",
 		},
+        prerender: {
+            default: true
+        },
         package: {
             dir: 'package',
             emitTypes: true,
@@ -40,8 +43,9 @@ const config = {
             },
             optimizeDeps: {
                 include: ['highlight.js', 'highlight.js/lib/core']
-            }
-        }
+            },            
+        },
+        
     }
 };
 

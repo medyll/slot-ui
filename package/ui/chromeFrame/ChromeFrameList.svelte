@@ -1,6 +1,5 @@
 <svelte:options accessors/>
-<script>import * as d3 from 'd3';
-import { chromeFrameListRef, chromeFrameStore } from './chromeFrame.store';
+<script>import { chromeFrameListRef, chromeFrameStore } from './chromeFrame.store';
 import ChromeFrame from './ChromeFrame.svelte';
 import { browser } from '$app/env';
 import { createEventForwarder } from '../../engine/engine';
