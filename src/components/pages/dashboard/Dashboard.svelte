@@ -126,12 +126,4 @@
 		grid-gap: 32px;
 		grid-template-columns: repeat(auto-fill, minmax(30%, auto));
 	}
-
-	.gridIcon {
-		width: 100%;
-		display: grid;
-		align-items: center;
-		grid-gap: 32px;
-		grid-template-columns: repeat(auto-fill, minmax(130px, auto));
-	}
 </style>

@@ -200,6 +200,7 @@
 			outline: 0;
 		}
 		&:active {
+			transform: scale(0.98);
 			border: 0.5px solid green!important;
 		}
 		@include input-sizes-presets;

@@ -25,10 +25,12 @@
 
 			activeCellElementRef.style.left  = (boundingClientRect.left - activeCellElementRef.parentElement.offsetLeft) + 'px';
 			activeCellElementRef.style.width = (boundingClientRect.width) + 'px';
-			 activeCellElementRef.style.top   = (tabsElementRef.offsetHeight) + 'px';
+			activeCellElementRef.style.top   = (tabsElementRef.offsetHeight ) + 'px';
 			// activeCellElementRef.style.marginLeft = (boundingClientRect.width) / 2 + 'px';
 		}
 	};
+
+ 
 
 	onMount(() => {
 		handleClick(activeTabCode)();
@@ -44,10 +46,10 @@
 			{#each items as item}
 				<li
 					data-code={item.code}
-					on:click={handleClick(item.code, this)}
+					on:click={handleClick(item.code)}
 					class={activeTabCode === item.code ? 'active' : ''}
 				>
-					{item.label}
+					<slot {item} name="tabLabelSlot">{item.label}</slot>
 				</li>
 			{/each}
 		</ul>
@@ -66,8 +68,8 @@
 	</div>
 	<div class="tabsContent flex-main pos-rel">
 		{#each items as item}
-			{@const red = (activeTabCode === item.code) ? 'block':'none'}
-			 <div style="display:{red};height:100%;position:relative;">
+			{@const display = (activeTabCode === item.code) ? 'block':'none'}
+			 <div style="display:{display};height:100%;position:relative;">
 			{#if activeTabCode === item.code}
 				{#if Boolean(item?.withComponent)}
 					<svelte:component this={item.withComponent} {...item.componentProps ?? {}} />
