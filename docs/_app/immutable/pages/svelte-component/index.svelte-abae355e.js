@@ -1,0 +1,1 @@
+import{S as o,i,s as r,t as c,h as l,g as d,E as a,d as m}from"../../chunks/index-dae3c301.js";function p(n){let t;return{c(){t=c("index")},l(e){t=l(e,"index")},m(e,s){d(e,t,s)},p:a,i:a,o:a,d(e){e&&m(t)}}}class x extends o{constructor(t){super();i(this,t,null,p,r,{})}}export{x as default};

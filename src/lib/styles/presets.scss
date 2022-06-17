@@ -1,0 +1,39 @@
+* {
+    box-sizing: border-box;
+}
+
+@mixin input-sizes-presets {
+    &[data-height="tiny"] {
+        height: calc(1rem - var(--slotui-border-bottom-size, 2px));
+        padding: 0;
+    }
+    &[data-height="small"] {
+        height: calc(1.9rem - var(--slotui-border-bottom-size, 2px));
+    }
+    &[data-height="default"] {
+        height: calc(2.5rem - var(--slotui-border-bottom-size, 2px));
+    }
+    &[data-height="large"] {
+        height: calc(4rem - var(--slotui-border-bottom-size, 2px));
+    }
+
+    &[borderless="true"] {
+        border: 0px solid none;
+    }
+}
+
+@mixin ui-width-presets {
+    &[data-width="tiny"] {
+        width: 1rem;
+        padding: 0;
+    }
+    &[data-width="small"] {
+        width: 1.65rem;
+    }
+    &[data-width="default"] {
+        width: 2.5rem ;
+    }
+    &[data-width="large"] {
+        width: 4rem
+    } 
+}

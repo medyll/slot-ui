@@ -21,6 +21,7 @@ import Icon from '../icon/Icon.svelte';
 		</div>
 	{/if}
 	<div class="listItemContent">
+		<slot />
 		{#if primary || $$slots.primary}
 			<h5>
 				<slot name="primary">{primary}</slot>

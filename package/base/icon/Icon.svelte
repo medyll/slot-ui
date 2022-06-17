@@ -1,4 +1,5 @@
-<script context="module">const sizes = {
+<script context="module">import Iconify from '@iconify/svelte';
+const sizes = {
     tiny: 8,
     small: 16,
     medium: 24,
@@ -7,14 +8,12 @@
     big: 64,
     full: 100
 };
-export {};
 // 'tiny' | 'small' | 'medium' | 'default' | 'large' | 'big' | 'full'
 </script>
 
 <script>import { createEventForwarder } from '../../engine/engine';
 import { get_current_component } from 'svelte/internal';
 import { onDestroy } from 'svelte';
-import Iconify from '@iconify/svelte';
 import { browser } from '$app/env';
 /*  common slotUi exports*/
 let className = '';
@@ -30,14 +29,5 @@ onDestroy(() => { }); //
 </script>
 
 {#if browser}
-	<Iconify style="font-size:{sizes[fontSize]}px;{style}" icon="{iconFamily}:{icon}" class="{className}" />
+	<Iconify   style="font-size:{sizes[fontSize]}px;{style}" icon="{iconFamily}:{icon}" class="{className}" {...$$restProps} />
 {/if}
-<!-- {#if browser}
-	<span
-		><i
-			class="iconify-inline {className}"
-			data-icon="{iconFamily}:{icon}"
-			style="font-size:{sizes[fontSize]}px;{style}"
-		/></span
-	>
-{/if} -->

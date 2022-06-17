@@ -11,6 +11,9 @@ export let items = [];
 </script>
 
 <div use:forwardEvents bind:this={element} class="dataList  {className}">
+  <slot name="head">
+
+  </slot>
     <VirtualList height="100%" bind:items let:val>
         <slot item={val}>
         </slot>
@@ -21,7 +24,7 @@ export let items = [];
 </div>
 
 <style global>:global(.dataList) {
-  height: 100%;
+  height: 130px;
   position: relative;
 }
 :global(.dataList) :global(.dataListHead) {

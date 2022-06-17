@@ -18,6 +18,9 @@
 	const forwardEvents = createEventForwarder(get_current_component());
 	/*  end slotUi exports*/
 
+	let buttonType = 'button';
+	export { buttonType as type };
+
 	/** icon as a parameter*/
 	export let icon: string | undefined = undefined;
 	/** paramters for usePopper */
@@ -28,11 +31,11 @@
 	export let showChip: boolean = false;
 
 	/** button style contained */
-	export let contained: boolean = presetDefault.includes('contained');
+	export let contained: boolean | undefined = undefined;
 	/** button style bordered */
-	export let bordered: boolean = presetDefault.includes('bordered');
+	export let bordered: boolean  | undefined = undefined;
 	/** button style link */
-	export let link: boolean = presetDefault.includes('link');
+	export let link: boolean  | undefined = undefined;
 
 	/** with of the button using  presets */
 	export let size: ElementProps['sizeType'] | 'full' = 'medium';
@@ -50,6 +53,8 @@
 	/** reverse the order of the button zone*/
 	export let reverse: boolean = false;
 
+	if (contained || bordered || link) presetDefault = '';
+
 	// for action
 	let actionArgs: any;
 	let actionComponent = Menu;
@@ -58,6 +63,10 @@
 
 	if (contained || bordered || link) {
 		presetDefault = '';
+	}else{
+		link = presetDefault.includes('link');
+		bordered = presetDefault.includes('bordered');
+		contained = presetDefault.includes('contained');
 	}
 
 	const onActionClick = (event: MouseEvent) => {
@@ -87,6 +96,7 @@
 		disabled: false
 	};
 </script>
+ 
 
 <button
 	class={className + ' w-' + size}
@@ -96,13 +106,15 @@
 	use:forwardEvents
 	on:click
 	class:size={'w-' + size}
+	data-height={height}
+	disabled={loading}
+	type={buttonType}
 	{density}
 	{nowrap}
-	{height}
 	{link}
 	{bordered}
 	{contained}
-	disabled={loading}
+	{presetDefault}
 	{...$$restProps}
 >
 	<div class="innerButton">
@@ -166,6 +178,7 @@
 {/if}
 
 <style lang="scss">
+	@import '../../../lib/styles/presets.scss';
 	button,
 	button[contained='true'],
 	input[type='button'],
@@ -180,30 +193,22 @@
 		padding: 0;
 		&[disabled] {
 			color: var(--color-gray-800);
+			border-color: var(--color-gray-800);
 		}
 		&:active,
 		&:focus {
 			outline: 0;
 		}
+		&:active {
+			border: 0.5px solid green!important;
+		}
+		@include input-sizes-presets;
 	}
 	button {
 		position: relative;
 		overflow: hidden;
-		/** height presets */
-		&[height='tiny'] {
-			height: 1rem;
-		}
-		&[height='small'] {
-			height: 1.5rem;
-		}
-		&[height='default'] {
-			height: 2rem;
-		}
-		&[height='large'] {
-			height: 4rem;
-		}
 		&[nowrap] {
-			color: 'red';
+			color: ' ';
 		}
 		/** variant presets */
 		&[bordered='true'] {
@@ -214,8 +219,7 @@
 				border: 0.5px solid var(--theme-color-primary);
 			}
 			&:focus {
-				box-shadow: var(--box-shad-3);
-				border: 0.5px solid var(--theme-color-primary);
+				box-shadow: var(--box-shad-3); 
 			}
 		}
 		&[contained='true'] {

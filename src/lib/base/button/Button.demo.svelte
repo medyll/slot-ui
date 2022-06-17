@@ -2,6 +2,7 @@
 	import type { MenuItemProps } from '$lib/ui/menu/types';
 	import type { PopperPositionType } from '$lib/ui/popper/types';
 	import { popper, type UsePopperProps } from '$lib/ui/popper/usePopper';
+	import { togglerSource, togglerTarget } from '$lib/uses/toggler';
 	import type { ElementProps } from 'src/types';
 	import Box from '../box/Box.svelte';
 	import Debug from '../debug/Debug.svelte';
@@ -13,7 +14,7 @@
 
 	type ParameterType = {
 		sizes: ElementProps['sizeType'][];
-		buttonHeight: ElementProps['buttonHeight'][];
+		buttonHeight: ElementProps['inputHeight'][];
 	};
 
 	let parameters: ParameterType = {
@@ -32,7 +33,7 @@
 
 	const popPos: PopperPositionType[] = ['T', 'TL', 'TR', 'B', 'BL', 'BR'];
 
-	const variants: string[] = [ 'link', 'contained','bordered'];
+	const variants: string[] = ['link', 'contained', 'bordered'];
 
 	const usePopper: UsePopperProps = {
 		component: Debug,
@@ -44,28 +45,41 @@
 </script>
 
 <div class="flex-v gap-large">
-	<h5>default button</h5>
-	<div><Button>default button</Button></div>
+	<h5 use:togglerSource={{ uid: 'tre' }}>default button</h5>
+	<div use:togglerTarget={{ uid: 'tre' }}><Button>default button</Button></div>
 	<div class="flex-h gap-medium">
 		<span on:click={() => (showChip = !showChip)}> toggle chip</span>
 		<Button bind:showChip>with chip</Button>
 	</div>
 	<h5>variants</h5>
-	<div>
-		{#each variants as variant}
-		{@const red = {[variant]:true}}
-			<div class="pad-1">
-				{variant}
-			</div>
-			<div class="flex-h gap-medium">
-				{#each variants as variant2}
-				{@const red2 = {[variant2]:true}}
-					<div>
-						<Button primary={variant2} {...{...red,...red2}} />						
+	<div class="flex-v gap-medium">
+		<div>
+			<div class="flex-h gap-small">
+				{#each variants as variant}
+					{@const red = { [variant]: true }}
+					<div class="pad-1 flex-v gap-small">
+						<div>{variant}</div>
+						<div><Button primary={variant} {...{ ...red }} /></div>
 					</div>
 				{/each}
 			</div>
-		{/each}
+		</div>
+		<div>
+			{#each variants as variant}
+				{@const red = { [variant]: true }}
+				<div class="pad-1">
+					Combined : {variant}
+				</div>
+				<div class="flex-h gap-medium">
+					{#each variants as variant2}
+						{@const red2 = { [variant2]: true }}
+						<div>
+							<Button primary={variant2} {...{ ...red, ...red2 }} />
+						</div>
+					{/each}
+				</div>
+			{/each}
+		</div>
 	</div>
 	<h5>action buttons</h5>
 	<div class="flex-v gap-medium">
@@ -139,7 +153,6 @@
 		{/each}
 	</div>
 	<h5>sized height buttons</h5>
-
 	<div class="flex-h flex-wrap gap-small">
 		{#each parameters.buttonHeight as height}
 			<div class="flex-v gap-small">

@@ -13,6 +13,8 @@ export { className as class };
 export let element = null;
 const forwardEvents = createEventForwarder(get_current_component());
 /*  end slotUi exports*/
+let buttonType = 'button';
+export { buttonType as type };
 /** icon as a parameter*/
 export let icon = undefined;
 /** paramters for usePopper */
@@ -22,11 +24,11 @@ export let loading = false;
 /** show chip */
 export let showChip = false;
 /** button style contained */
-export let contained = presetDefault.includes('contained');
+export let contained;
 /** button style bordered */
-export let bordered = presetDefault.includes('bordered');
+export let bordered;
 /** button style link */
-export let link = presetDefault.includes('link');
+export let link;
 /** with of the button using  presets */
 export let size = 'medium';
 /** density of the button, using preset values */
@@ -40,6 +42,8 @@ export let secondary = undefined;
 export let action = undefined;
 /** reverse the order of the button zone*/
 export let reverse = false;
+if (contained || bordered || link)
+    presetDefault = '';
 // for action
 let actionArgs;
 let actionComponent = Menu;
@@ -47,6 +51,11 @@ let actionComponentProps = {};
 let actionContent = '';
 if (contained || bordered || link) {
     presetDefault = '';
+}
+else {
+    link = presetDefault.includes('link');
+    bordered = presetDefault.includes('bordered');
+    contained = presetDefault.includes('contained');
 }
 const onActionClick = (event) => {
     event.stopPropagation();
@@ -74,6 +83,7 @@ $: actionArgs = {
     disabled: false
 };
 </script>
+ 
 
 <button
 	class={className + ' w-' + size}
@@ -83,13 +93,15 @@ $: actionArgs = {
 	use:forwardEvents
 	on:click
 	class:size={'w-' + size}
+	data-height={height}
+	disabled={loading}
+	type={buttonType}
 	{density}
 	{nowrap}
-	{height}
 	{link}
 	{bordered}
 	{contained}
-	disabled={loading}
+	{presetDefault}
 	{...$$restProps}
 >
 	<div class="innerButton">
@@ -152,7 +164,11 @@ $: actionArgs = {
 	</Popper>
 {/if}
 
-<style>button,
+<style>* {
+  box-sizing: border-box;
+}
+
+button,
 button[contained=true],
 input[type=button],
 input[type=submit] {
@@ -168,6 +184,7 @@ button[contained=true][disabled],
 input[type=button][disabled],
 input[type=submit][disabled] {
   color: var(--color-gray-800);
+  border-color: var(--color-gray-800);
 }
 button:active, button:focus,
 button[contained=true]:active,
@@ -178,27 +195,51 @@ input[type=submit]:active,
 input[type=submit]:focus {
   outline: 0;
 }
+button:active,
+button[contained=true]:active,
+input[type=button]:active,
+input[type=submit]:active {
+  border: 0.5px solid green !important;
+}
+button[data-height=tiny],
+button[contained=true][data-height=tiny],
+input[type=button][data-height=tiny],
+input[type=submit][data-height=tiny] {
+  height: calc(1rem - var(--slotui-border-bottom-size, 2px));
+  padding: 0;
+}
+button[data-height=small],
+button[contained=true][data-height=small],
+input[type=button][data-height=small],
+input[type=submit][data-height=small] {
+  height: calc(1.9rem - var(--slotui-border-bottom-size, 2px));
+}
+button[data-height=default],
+button[contained=true][data-height=default],
+input[type=button][data-height=default],
+input[type=submit][data-height=default] {
+  height: calc(2.5rem - var(--slotui-border-bottom-size, 2px));
+}
+button[data-height=large],
+button[contained=true][data-height=large],
+input[type=button][data-height=large],
+input[type=submit][data-height=large] {
+  height: calc(4rem - var(--slotui-border-bottom-size, 2px));
+}
+button[borderless=true],
+button[contained=true][borderless=true],
+input[type=button][borderless=true],
+input[type=submit][borderless=true] {
+  border: 0px solid none;
+}
 
 button {
   position: relative;
   overflow: hidden;
-  /** height presets */
   /** variant presets */
 }
-button[height=tiny] {
-  height: 1rem;
-}
-button[height=small] {
-  height: 1.5rem;
-}
-button[height=default] {
-  height: 2rem;
-}
-button[height=large] {
-  height: 4rem;
-}
 button[nowrap] {
-  color: "red";
+  color: " ";
 }
 button[bordered=true] {
   color: var(--theme-color-foreground);
@@ -210,7 +251,6 @@ button[bordered=true]:hover {
 }
 button[bordered=true]:focus {
   box-shadow: var(--box-shad-3);
-  border: 0.5px solid var(--theme-color-primary);
 }
 button[contained=true] {
   color: var(--theme-color-foreground);

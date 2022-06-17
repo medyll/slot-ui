@@ -16,6 +16,8 @@
 	import Options from '$lib/base/select/Options.svelte';
 	import TreeDemo from '$lib/base/tree/Tree.demo.svelte';
 	import ListDemo from '$lib/base/list/List.demo.svelte';
+	import InputDemo from '$lib/base/input/Input.demo.svelte';
+	import DataListDemo from '$lib/base/datalist/DataList.demo.svelte';
 
 	import GrouperDemo from '$lib/data/grouper/Grouper.demo.svelte';
 	import Button from '$lib/base/button/Button.svelte';
@@ -85,6 +87,9 @@
 				</div>
 				<div>
 					<Paper density="kind">
+						<InputDemo />
+					</Paper>
+					<Paper density="kind">
 						<BoxDemo />
 					</Paper>
 					<Paper>
@@ -95,6 +100,9 @@
 					</Paper>
 				</div>
 				<div>
+					<Paper density="kind">
+						<DataListDemo />
+					</Paper>
 					<Paper density="kind">
 						<CardDemo />
 					</Paper>

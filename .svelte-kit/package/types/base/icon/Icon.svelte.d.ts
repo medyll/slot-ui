@@ -4,6 +4,7 @@ export declare type SizeType = keyof typeof sizes;
 declare const sizes: Record<ElementProps['sizeType'], number>;
 declare const __propDef: {
     props: {
+        [x: string]: any;
         class?: string | undefined;
         style?: string | undefined;
         element?: HTMLDivElement | null | undefined;

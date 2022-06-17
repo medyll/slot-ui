@@ -135,10 +135,6 @@ $: if ($listStateContext?.selectorField) {
   margin: 0.5rem 0.5rem;
 }
 
-:global(.listItemTitle) :global(.listItemContent) :global([slot=primary]) {
-  color: red;
-}
-
 :global(li.listItem:hover) {
   background-color: rgba(255, 255, 255, 0.3);
 }

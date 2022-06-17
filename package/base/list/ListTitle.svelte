@@ -17,6 +17,7 @@ export let density = 'default';
 		</div>
 	{/if}
 	<div class="listItemContent">
+		<slot />
 		{#if primary || $$slots.primary}
 			<h5>
 				<slot name="primary">{primary}</slot>
@@ -101,10 +102,6 @@ export let density = 'default';
 :global(li.listItem.density-kind) {
   padding: 1.5rem 0;
   margin: 0.5rem 0.5rem;
-}
-
-:global(.listItemTitle) :global(.listItemContent) :global([slot=primary]) {
-  color: red;
 }
 
 :global(li.listItem:hover) {

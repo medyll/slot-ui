@@ -6,13 +6,14 @@ declare const __propDef: {
         presetDefault?: string | undefined;
         class?: string | undefined;
         element?: HTMLButtonElement | null | undefined;
+        type?: string | undefined;
         icon?: string | undefined;
         usePopper?: UsePopperProps | undefined;
         loading?: boolean | undefined;
         showChip?: boolean | undefined;
-        contained?: boolean | undefined;
-        bordered?: boolean | undefined;
-        link?: boolean | undefined;
+        contained: boolean;
+        bordered: boolean;
+        link: boolean;
         size?: "default" | "medium" | "full" | "tiny" | "small" | "large" | "big" | undefined;
         density?: "none" | "tight" | "default" | "medium" | "kind" | undefined;
         nowrap?: boolean | undefined;

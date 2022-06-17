@@ -31,7 +31,7 @@ const handleClick = (visible) => (event) => {
 <ul
         class="selectRoot pos-abs shad-16"
         role="listbox"
-        style="display:{isVisible ? 'block' : 'none'}"
+        style="display:{isVisible ? 'block' : 'block'}"
         bind:this={innerRef}
         on:click={handleClick('clicked')}
         use:stickTo={{ parentNode: document.getElementById('cool'), position: 'B' }}

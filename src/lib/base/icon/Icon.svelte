@@ -1,4 +1,6 @@
 <script lang="ts" context="module">
+	import Iconify from '@iconify/svelte';
+
 	import type { ElementProps } from 'src/types';
 	export type SizeType = keyof typeof sizes;
 	const sizes: Record<ElementProps['sizeType'], number> = {
@@ -17,7 +19,6 @@
 	import { createEventForwarder } from '../../engine/engine';
 	import { get_current_component } from 'svelte/internal';
 	import { onDestroy } from 'svelte';
-	import Iconify from '@iconify/svelte';
 
 	import { browser } from '$app/env';
 
@@ -37,14 +38,5 @@
 </script>
 
 {#if browser}
-	<Iconify style="font-size:{sizes[fontSize]}px;{style}" icon="{iconFamily}:{icon}" class="{className}" />
+	<Iconify   style="font-size:{sizes[fontSize]}px;{style}" icon="{iconFamily}:{icon}" class="{className}" {...$$restProps} />
 {/if}
-<!-- {#if browser}
-	<span
-		><i
-			class="iconify-inline {className}"
-			data-icon="{iconFamily}:{icon}"
-			style="font-size:{sizes[fontSize]}px;{style}"
-		/></span
-	>
-{/if} -->

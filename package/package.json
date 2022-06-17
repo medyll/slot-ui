@@ -1,6 +1,6 @@
 {
   "name": "@medyll/slotui",
-  "version": "0.1.19",
+  "version": "0.1.22",
   "repository": {
     "type": "git",
     "url": "https://github.com/medyll/slot-ui.git"
@@ -95,6 +95,7 @@
     "./base/chrome/ChromeNav.svelte": "./base/chrome/ChromeNav.svelte",
     "./base/contentSwitcher/ContentSwitcher.svelte": "./base/contentSwitcher/ContentSwitcher.svelte",
     "./base/contentSwitcher/useContentSwitcher": "./base/contentSwitcher/useContentSwitcher.js",
+    "./base/dataList/DataList.demo.svelte": "./base/dataList/DataList.demo.svelte",
     "./base/dataList/DataList.svelte": "./base/dataList/DataList.svelte",
     "./base/dataList/DataListCell.svelte": "./base/dataList/DataListCell.svelte",
     "./base/dataList/DataListHead.svelte": "./base/dataList/DataListHead.svelte",
@@ -108,6 +109,7 @@
     "./base/elipsisBox/ElipsisBox.svelte": "./base/elipsisBox/ElipsisBox.svelte",
     "./base/icon/Icon.svelte": "./base/icon/Icon.svelte",
     "./base/icon/IconProxy.svelte": "./base/icon/IconProxy.svelte",
+    "./base/input/Input.demo.svelte": "./base/input/Input.demo.svelte",
     "./base/input/Input.svelte": "./base/input/Input.svelte",
     "./base/json/Json.svelte": "./base/json/Json.svelte",
     "./base/list/List.demo.svelte": "./base/list/List.demo.svelte",
@@ -143,6 +145,7 @@
     "./base/virtualize/Virtualize.svelte": "./base/virtualize/Virtualize.svelte",
     "./css/cssfabric.css": "./css/cssfabric.css",
     "./css/cssfabric.min.css": "./css/cssfabric.min.css",
+    "./data/databox/DataBox.svelte": "./data/databox/DataBox.svelte",
     "./data/finder/Finder.svelte": "./data/finder/Finder.svelte",
     "./data/grouper/Grouper.demo.svelte": "./data/grouper/Grouper.demo.svelte",
     "./data/grouper/Grouper.svelte": "./data/grouper/Grouper.svelte",
@@ -154,6 +157,7 @@
     "./engine/TaskBarContent.svelte": "./engine/TaskBarContent.svelte",
     "./engine/utils": "./engine/utils.js",
     "./engine/wactions.utils": "./engine/wactions.utils.js",
+    "./styles/presets.scss": "./styles/presets.scss",
     "./ui/bootstrapp/BootStrApp.svelte": "./ui/bootstrapp/BootStrApp.svelte",
     "./ui/bootstrapp/DynPage.svelte": "./ui/bootstrapp/DynPage.svelte",
     "./ui/chromeFrame/chromeFrame.store": "./ui/chromeFrame/chromeFrame.store.js",
@@ -189,6 +193,7 @@
     "./uses/clickAway/clickAway": "./uses/clickAway/clickAway.js",
     "./uses/stickTo/stickTo": "./uses/stickTo/stickTo.js",
     "./uses/sx4u/sx4u": "./uses/sx4u/sx4u.js",
-    "./uses/sx4u/sx4uPreprocess": "./uses/sx4u/sx4uPreprocess.js"
+    "./uses/sx4u/sx4uPreprocess": "./uses/sx4u/sx4uPreprocess.js",
+    "./uses/toggler": "./uses/toggler.js"
   }
 }

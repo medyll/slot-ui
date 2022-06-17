@@ -1,9 +1,13 @@
 import { writable } from 'svelte/store';
 import { tick } from 'svelte';
+/** used as a reference */
 export const windowListObjects = new Map([]);
-const activeFrame = writable('');
-const chromeFrameConfigStore = writable({ showCommandBar: true });
-const chromeFrameListStore = writable(windowListObjects);
+/** active frameId */
+export const activeFrame = writable('');
+/** host the generic configuration */
+export const chromeFrameConfigStore = writable({ showCommandBar: true });
+/** host the chromeFrame list */
+export const chromeFrameListStore = writable(windowListObjects);
 /*chromeFrameConfigStore.set()
  $chromeFrameConfigStore.onClose = ()=>{}*/
 function createChromeFrameStore() {
@@ -20,11 +24,12 @@ function createChromeFrameStore() {
     // set as active, inactivate others
     async function setActive(frameId) {
         const currentChromeFrame = currentStore.get(frameId);
+        console.log('setActive ', frameId);
         if (currentChromeFrame) {
             currentStore.forEach((frame, frameKey) => {
                 currentStore.set(frameKey, { ...frame, active: false });
             });
-            await tick();
+            // await tick();
             //
             const values = Array.from(currentStore);
             const zIndex = values.reduce((prev, val) => {
@@ -33,6 +38,7 @@ function createChromeFrameStore() {
             }, 0);
             currentStore.set(frameId, { ...currentChromeFrame, zIndex, active: true, minimized: true });
             activeFrame.set(frameId);
+            console.log('setActive (activated) ', frameId);
         }
     }
     return {

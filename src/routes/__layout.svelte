@@ -143,6 +143,7 @@
 	html {
 		font-size: 12px;
 		height: 100%;
+		box-sizing: border-box;
 	}
 
 	body {
@@ -154,6 +155,11 @@
 		font-family: 'Rubik';
 		background-color: var(--theme-color-background);
 		color: var(--theme-color-text);
+		box-sizing: border-box;
+	}
+
+	* {
+		box-sizing: border-box;
 	}
 
 	#svelte {
@@ -186,7 +192,7 @@
 		border: 1px solid rgba(255, 255, 255, 0.1) !important;
 	}
 
-	input {
+	/* input {
 		border: 1px solid rgba(208, 191, 151, 0.5);
 		border-bottom: 2px solid rgb(208, 191, 151);
 		border-radius: 4px;
@@ -195,5 +201,5 @@
 		background-color: rgba(59, 59, 59, 0.99);
 		color: white;
 		height: 1rem;
-	}
+	} */
 </style>
