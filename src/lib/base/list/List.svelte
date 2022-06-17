@@ -79,6 +79,8 @@
 			<ListTitle primary={primary ?? title} {secondary} />
 		</slot>
 	{/if}
+	<slot name="commandBarSlot" />
+
 	{#if listItems}
 		{#if !noVirtualize}
 			{#if $$slots.default}

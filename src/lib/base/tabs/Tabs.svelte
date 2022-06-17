@@ -13,6 +13,7 @@
 	export let activeTabCode: string = '';
 
 	let navElementRef: HTMLElement;
+	let tabsElementRef: HTMLElement;
 	let activeCellElementRef: HTMLElement;
 	let boundingClientRect: DOMRect;
 	const handleClick = (tabValue: any) => (event: Event) => {
@@ -22,10 +23,9 @@
 		if (node && activeCellElementRef?.parentElement) {
 			boundingClientRect = node.getBoundingClientRect();
 
-			activeCellElementRef.style.left =
-				boundingClientRect.left - activeCellElementRef.parentElement.offsetLeft + 'px';
-			activeCellElementRef.style.width = boundingClientRect.width + 'px';
-			// activeCellElementRef.style.top   = (boundingClientRect.top - activeCellElementRef.parentElement.offsetTop) + 'px';
+			activeCellElementRef.style.left  = (boundingClientRect.left - activeCellElementRef.parentElement.offsetLeft) + 'px';
+			activeCellElementRef.style.width = (boundingClientRect.width) + 'px';
+			 activeCellElementRef.style.top   = (tabsElementRef.offsetHeight) + 'px';
 			// activeCellElementRef.style.marginLeft = (boundingClientRect.width) / 2 + 'px';
 		}
 	};
@@ -35,8 +35,11 @@
 	});
 </script>
 
-<div bind:this={element} class="tabsRoot {className}" {...$$restProps}>
-	<nav class="tabsNav flex-h flex-align-middle">
+<div bind:this={element} class="tabsRoot {className} flex-v" {...$$restProps}>
+	<nav bind:this={tabsElementRef} class="tabsNav flex-h flex-align-middle pos-rel">
+		<div>
+			<slot name="tabsFirstTitleSlot" />
+		</div>
 		<ul bind:this={navElementRef} class="flex-main">
 			{#each items as item}
 				<li
@@ -58,8 +61,13 @@
 	<div bind:this={activeCellElementRef} class="tabsActiveCellContainer">
 		<div class="tabSlot" />
 	</div>
-	<div class="tabsContent">
+	<div>
+		<slot name="commandBarSlot" />
+	</div>
+	<div class="tabsContent flex-main pos-rel">
 		{#each items as item}
+			{@const red = (activeTabCode === item.code) ? 'block':'none'}
+			 <div style="display:{red};height:100%;position:relative;">
 			{#if activeTabCode === item.code}
 				{#if Boolean(item?.withComponent)}
 					<svelte:component this={item.withComponent} {...item.componentProps ?? {}} />
@@ -69,6 +77,7 @@
 					{item.withUid}
 				{/if}
 			{/if}
+			 </div>
 		{/each}
 	</div>
 </div>

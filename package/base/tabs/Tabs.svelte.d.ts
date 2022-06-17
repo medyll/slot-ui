@@ -1,15 +1,11 @@
 import { SvelteComponentTyped } from "svelte";
-import type { SvelteComponent } from 'svelte';
+import type { TabsItemsProps } from './types';
 declare const __propDef: {
     props: {
+        [x: string]: any;
         class?: string | undefined;
         element?: HTMLDivElement | null | undefined;
-        items?: {
-            label: string;
-            code: string;
-            component: SvelteComponent;
-            componentProps: Record<string, any>;
-        }[] | undefined;
+        items?: TabsItemsProps | undefined;
         activeTabCode?: string | undefined;
     };
     events: {

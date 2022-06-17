@@ -23,7 +23,8 @@
   .tabsNav {
     padding: 0.25rem 0;
     gap: 1rem;
-    border-bottom: 1px solid var(--theme-border_color)
+    border-bottom: 1px solid var(--theme-border_color);
+    position: relative;
   }
 
   .tabsContent {
@@ -36,14 +37,16 @@
   }
 
   .tabsActiveCellContainer {
+    top: auto;
     position: absolute;
     height: 4px;
     transition: all 0.250s;
-    .tabSlot  {
+
+    .tabSlot {
       border-radius: 6px;
       height: 4px;
       background-color: var(--theme-color-primary);
-      width:100%;
+      width: 100%;
     }
   }
 }

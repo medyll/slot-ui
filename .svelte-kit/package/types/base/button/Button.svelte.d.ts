@@ -11,9 +11,9 @@ declare const __propDef: {
         usePopper?: UsePopperProps | undefined;
         loading?: boolean | undefined;
         showChip?: boolean | undefined;
-        contained: boolean;
-        bordered: boolean;
-        link: boolean;
+        contained?: boolean | undefined;
+        bordered?: boolean | undefined;
+        link?: boolean | undefined;
         size?: "default" | "medium" | "full" | "tiny" | "small" | "large" | "big" | undefined;
         density?: "none" | "tight" | "default" | "medium" | "kind" | undefined;
         nowrap?: boolean | undefined;

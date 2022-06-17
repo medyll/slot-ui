@@ -24,11 +24,11 @@ export let loading = false;
 /** show chip */
 export let showChip = false;
 /** button style contained */
-export let contained;
+export let contained = undefined;
 /** button style bordered */
-export let bordered;
+export let bordered = undefined;
 /** button style link */
-export let link;
+export let link = undefined;
 /** with of the button using  presets */
 export let size = 'medium';
 /** density of the button, using preset values */

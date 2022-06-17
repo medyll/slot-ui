@@ -1,6 +1,6 @@
 {
   "name": "@medyll/slotui",
-  "version": "0.1.22",
+  "version": "0.1.25",
   "repository": {
     "type": "git",
     "url": "https://github.com/medyll/slot-ui.git"
@@ -135,6 +135,7 @@
     "./base/tabs/Tabs.scss": "./base/tabs/Tabs.scss",
     "./base/tabs/tabs.spec": "./base/tabs/tabs.spec.js",
     "./base/tabs/Tabs.svelte": "./base/tabs/Tabs.svelte",
+    "./base/tabs/types": "./base/tabs/types.js",
     "./base/titleBar/TitleBar.svelte": "./base/titleBar/TitleBar.svelte",
     "./base/tooltip/Tooltip.svelte": "./base/tooltip/Tooltip.svelte",
     "./base/tree/Tree.demo.svelte": "./base/tree/Tree.demo.svelte",
