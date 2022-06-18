@@ -1,5 +1,9 @@
 {
     "cSpell.words": [
-        "chromeframe"
-    ]
+        "chromeframe",
+        "fieldname"
+    ],
+    "[svelte]": {
+        "editor.defaultFormatter": "svelte.svelte-vscode"
+    },
 }
