@@ -280,6 +280,7 @@
 				width: auto;
 				display: inline;
 				vertical-align: bottom;
+				padding: 0 0.5rem;
 				&[nowrap] {
 				}
 			}

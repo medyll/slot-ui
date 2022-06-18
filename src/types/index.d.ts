@@ -5,7 +5,7 @@ export namespace Drawer {
 }
 
 export interface ElementProps {
-  sizeType: 'tiny' | 'small' | 'medium' | 'default' | 'large' | 'big' | 'full',
+  sizeType: 'tiny' | 'small' | 'medium' | 'default' | 'large' | 'big' | 'full' | 'auto',
   inputHeight: 'tiny'| 'small'| 'default'|  'large'|'none',
   density: 'none' | 'tight' | 'default' |'medium' | 'kind'
   expansion: 'full' | 'padded' | 'centered',

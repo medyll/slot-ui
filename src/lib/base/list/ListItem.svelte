@@ -64,6 +64,7 @@
 	on:click={handleClick()}
 	on:dblclick={handleDblClick()}
 	style="opacity:${disabled ? 0.6 : 1};${style}"
+	tabindex={1}
 >
 	<span class="listItemChip" />
 	{#if $$slots.icon || icon}

@@ -24,9 +24,14 @@ export class dataOp {
 
   static filterList<T = any>(arr: T[], kw: number | string, fieldname: string = 'id'): T[] {
 
-    return arr.filter((item) => {
+    return arr?.filter((item) => {
       return this.resolveDotPath(item, fieldname) === kw;
     });
+  }
+
+  static filterListFirst<T = any>(arr: T[], kw: number | string, fieldname: string = 'id'): T  {
+
+    return this.filterList<T>(arr,kw,fieldname)?.[0]
   }
 
   static searchList<T = any>(arr: T[], kw: number | string, fieldname: string = 'id'): T[] {

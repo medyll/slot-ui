@@ -9,6 +9,8 @@
 	import ListTitle from './ListTitle.svelte';
 	import { createEventForwarder } from '../../engine/engine';
 	import Virtualize from '../virtualize/Virtualize.svelte';
+	import type { Data } from '$lib/data/grouper/Grouper.svelte';
+import { propsProxy } from '$lib/engine/utils';
 
 	/*  common slotUi exports*/
 	let className = '';
@@ -17,8 +19,15 @@
 	const forwardEvents = createEventForwarder(get_current_component());
 	/*  end slotUi exports*/
 
-	export let listItems: LisItemProps[];
-	export let direction: 'vertical' | 'horizontal' = 'vertical';
+	/** formated listItems list  */
+	export let listItems: LisItemProps[] = [];
+	/** provided raw data, used if no listItems list is provided  */
+	export let data: Data[] | undefined = undefined;
+	/** Row from data for primary, used if props.data is provided  */
+	export let dataFieldPrimary: string | undefined = undefined;
+	/** Row from data for secondary, used if props.data is provided  */
+	export let dataFieldSecondary: string | undefined = undefined;
+
 	export let height: string = '100%';
 	export let style: string = '';
 	export let showIcon: boolean = true;
@@ -49,11 +58,28 @@
 
 	$: if (setSelectedData) {
 		listStore.setActiveData(setSelectedData);
-		console.log('selected',setSelectedData);
+		console.log('selected', setSelectedData);
 	}
 
 	$: if (setSelectedItem) {
-		// listStore.setActiveData(setSelectedData); 
+		// listStore.setActiveData(setSelectedData);
+	}
+
+	$: if (data) {
+		// loop on
+		// if props.dataFieldPrimary : propsProxy
+		// else ...
+		if ( dataFieldPrimary || dataFieldSecondary) {			
+			listItems = propsProxy([[dataFieldPrimary?? '"','primary'],[dataFieldSecondary?? '"','secondary']],data);
+		} else {
+			listItems = data.map((dta: Data) => {
+				return {
+					primary: dta?.name ?? dta.code,
+					secondary: dta?.id,
+					data: dta, 
+				};
+			});
+		}
 	}
 
 	function onListItemClick(e: CustomEvent<LisItemProps>) {
@@ -101,7 +127,7 @@
 			{#each listItems as item}
 				<slot listItem={item}>
 					<ListItem {showIcon} {density} data={item.data} icon={item?.icon}>
-						<span slot="icon"></span>
+						<span slot="icon" />
 						<span slot="primary">{null_to_empty(item?.primary)}</span>
 						<span slot="secondary">{null_to_empty(item?.secondary)}</span>
 						<span slot="action">{null_to_empty(item?.action)}</span>

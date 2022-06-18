@@ -1,8 +1,8 @@
 export type LisItemProps = {
-  icon: string;
-  primary: string;
-  secondary: string;
-  action: string;
+  icon?: string;
+  primary?: string;
+  secondary?: string;
+  action?: string;
   data: Record<string, any>;
 }
 

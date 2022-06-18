@@ -40,12 +40,12 @@
 		{ data: {}, text: 'text 3', icon: 'i' }
 	];
 	const handleClick = (where: string) => (event) => {
-		// alert('red')
+		 alert('red')
 		goto(where);
 	};
 </script>
 
-<div class="pos-abs w-full h-full overflow-hidden" style="z-index:0">
+<div class=" w-full h-full overflow-hidden" style="z-index:0">
 	<div class="flex-h  h-full overflow-hidden">
 		<div class="flex-main pad-4 overflow-auto ">
 			<div class="gridDemo">
@@ -59,6 +59,7 @@
 							<Button primary="explorer" on:click={handleClick('explorer')} />
 							<br />
 							<Button primary="what" on:click={handleClick('what')} />
+							<Button primary="svelte-components" on:click={handleClick('svelte-components')} />
 						</div>
 					</Paper>
 					<Paper density="kind">

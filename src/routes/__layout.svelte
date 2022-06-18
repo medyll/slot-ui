@@ -21,6 +21,8 @@
 	import Explorer from '../components/pages/explorer/Explorer.svelte';
 	import Dashboard from '../../src/components/pages/dashboard/Dashboard.svelte';
 	import ThemeSwitcher from '$lib/ui/themeswitcher/ThemeSwitcher.svelte';
+	import { goto } from '$app/navigation';
+	import Button from '$lib/base/button/Button.svelte';
 
 	let frameRef: Frame;
 	let drawerRef: Drawer;
@@ -38,6 +40,9 @@
 			...opt
 		});
 	}
+	const handleClick = (where: string) => (event: any) => {
+		goto(where);
+	};
 </script>
 
 <svelte:head>
@@ -77,31 +82,27 @@
 	<Login showLogin={false}>
 		<Taskbar>
 			<svelte:fragment slot="taskBarLeft">
+				<Button size="auto" primary="svelte-components" on:click={handleClick('svelte-components')} />
 				<!-- <IconButton
 						icon="barcode"
 						on:click={toggleStartMenu}
 						style="color:white;font-size: large"
 					/> -->
-				<button
+				<Button
 					on:click={() => {
 						openCh('btn1');
-					}}>button 1</button
+					}}>button frame 1</Button
 				>
-				<button
+				<Button
 					on:click={() => {
 						openCh('btn2');
-					}}>button 2</button
-				>
-				<button
-					on:click={() => {
-						openCh('btn3');
-					}}>button 3</button
-				>
+					}}>button 2</Button
+				> 
 
-				<button
+				<Button
 					on:click={() => {
 						openCh('explorer', { component: Explorer });
-					}}>explorer</button
+					}}>explorer</Button
 				>
 			</svelte:fragment>
 			<ChromeFrameButtonList let:chromeFrame />
@@ -109,19 +110,9 @@
 			<svelte:fragment slot="taskBarRight">
 				<ThemeSwitcher />
 			</svelte:fragment>
-			<!-- <IconButton
-					icon="fist-raised"
-					iconFontSize="small"
-					on:click={onItemClick}
-					slot="taskBarRight"
-				/> -->
 		</Taskbar>
-		<div id="layout" class="flex-main overflow-hidden pos-rel">
+		<div id="layout" class="flex-main overflow-hidden theme-bg-paper-alpha-high">
 			<slot />
-			<Frame bind:frameDrawerRef={drawerRefDash} bind:this={frameRef}>
-				<div slot="frameDrawerSlot">nav left</div>
-				<!-- <Dashboard slot="contentFrameSlot"/> -->
-			</Frame>
 			<ChromeFrameList
 				chromeListConfig={{
 					showCommandBar: true,

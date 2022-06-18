@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import DataList from '$lib/base/dataList/DataList.svelte';
 	import DataListRow from '$lib/base/dataList/DataListRow.svelte';
 	import DataListCell from '$lib/base/dataList/DataListCell.svelte';
