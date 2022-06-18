@@ -21,7 +21,7 @@
     <slot></slot>
 </div>
 
-<style global lang="scss">
+<style   lang="scss">
   .paper {
     color: var(--theme-color-foreground);
     background-color: var(--theme-color-paper);

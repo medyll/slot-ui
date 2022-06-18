@@ -1,5 +1,3 @@
-
-
 <script lang="ts">
 	import github from 'svelte-highlight/styles/github-dark';
 	import cssfabric from '@medyll/cssfabric/src/lib/styles/vars.min.css';
@@ -22,6 +20,7 @@
 	import ChromeFrameButtonList from '../lib/ui/chromeFrame/ChromeFrameButtonList.svelte';
 	import Explorer from '../components/pages/explorer/Explorer.svelte';
 	import Dashboard from '../../src/components/pages/dashboard/Dashboard.svelte';
+	import ThemeSwitcher from '$lib/ui/themeswitcher/ThemeSwitcher.svelte';
 
 	let frameRef: Frame;
 	let drawerRef: Drawer;
@@ -30,7 +29,7 @@
 	const onItemClick = function () {
 		drawerRef.toggle();
 	};
-// importsNotUsedAsValues
+	// importsNotUsedAsValues
 	function openCh(frameId: string, opt: any = {}) {
 		openChromeFrame(frameId, {
 			showCommandBar: false,
@@ -51,109 +50,115 @@
 		rel="stylesheet"
 	/>
 	{@html github}
-	<style>{@html cssfabric}</style>
+	<style>
+		 {
+			@html cssfabric;
+		}
+	</style>
 	<script>
 		/*hack for legacy node app*/
-		var global = global || window
-		var Buffer = Buffer || []
-		var process = process || { env: { DEBUG: undefined }, version: [] }
-		document.body.setAttribute('data-theme', "dark")
+		var global = global || window;
+		var Buffer = Buffer || [];
+		var process = process || { env: { DEBUG: undefined }, version: [] };
+		document.body.setAttribute('data-theme', 'light');
 		if (localStorage && localStorage.getItem('themeMode')) {
-				document.body.setAttribute('data-theme', localStorage.getItem('themeMode'))
-			}
-		window.addEventListener("load", function (event) {
+			document.body.setAttribute('data-theme', localStorage.getItem('themeMode'));
+		}
+		window.addEventListener('load', function (event) {
 			if (localStorage && localStorage.getItem('themeMode')) {
-				document.body.setAttribute('data-theme', localStorage.getItem('themeMode'))
+				document.body.setAttribute('data-theme', localStorage.getItem('themeMode'));
 			}
 		});
 	</script>
 </svelte:head>
- 
 
-	<StartMenu />
-	<div class="h-full overflow-hidden flex-v">
-		<Login showLogin={false}>
-			<Taskbar>
-				<svelte:fragment slot="taskBarLeft">
-					<!-- <IconButton
+<StartMenu />
+<div class="h-full overflow-hidden flex-v">
+	<Login showLogin={false}>
+		<Taskbar>
+			<svelte:fragment slot="taskBarLeft">
+				<!-- <IconButton
 						icon="barcode"
 						on:click={toggleStartMenu}
 						style="color:white;font-size: large"
 					/> -->
-					<button
-						on:click={() => {
-							openCh('btn1');
-						}}>button 1</button
-					>
-					<button
-						on:click={() => {
-							openCh('btn2');
-						}}>button 2</button
-					>
-					<button
-						on:click={() => {
-							openCh('btn3');
-						}}>button 3</button
-					>
+				<button
+					on:click={() => {
+						openCh('btn1');
+					}}>button 1</button
+				>
+				<button
+					on:click={() => {
+						openCh('btn2');
+					}}>button 2</button
+				>
+				<button
+					on:click={() => {
+						openCh('btn3');
+					}}>button 3</button
+				>
 
-					<button
-						on:click={() => {
-							openCh('explorer', { component: Explorer });
-						}}>explorer</button
-					>
-				</svelte:fragment>
-				<ChromeFrameButtonList let:chromeFrame />
-				<TaskBarContent />
-				<!-- <IconButton
+				<button
+					on:click={() => {
+						openCh('explorer', { component: Explorer });
+					}}>explorer</button
+				>
+			</svelte:fragment>
+			<ChromeFrameButtonList let:chromeFrame />
+			<TaskBarContent />
+			<svelte:fragment slot="taskBarRight">
+				<ThemeSwitcher />
+			</svelte:fragment>
+			<!-- <IconButton
 					icon="fist-raised"
 					iconFontSize="small"
 					on:click={onItemClick}
 					slot="taskBarRight"
 				/> -->
-			</Taskbar>
-			<div id="layout" class="flex-main overflow-hidden pos-rel">
-				<slot />
-				<Frame bind:frameDrawerRef={drawerRefDash} bind:this={frameRef}>
-					<div slot="frameDrawerSlot">nav left</div>
-					<!-- <Dashboard slot="contentFrameSlot"/> -->
-				</Frame>
-				<ChromeFrameList
-					chromeListConfig={{
-						showCommandBar: true,
-						parent: '#layout',
-						onClose: (chromeFrame) => {
-							console.log(chromeFrame);
-						}
-					}}
-				/>
-			</div>
-		</Login>
-	</div>
-	<Drawer bind:this={drawerRef} isOpen={false}>
-		<svelte:fragment slot="drawerMenuBar">
-			<TopBar title="Drawer with menu bar ">
-				<svelte:fragment slot="menuBarSwitcher">
-					<div class="pad-1">
-						<input placeholder="Search in Bar" style="width:100%;" type="text" />
-					</div>
-				</svelte:fragment>
-			</TopBar>
-		</svelte:fragment>
-		<div class="pad-2">
-			<List onItemClick={() => {}}>
-				{#each [...Array(10)] as key, val}
-					<ListItem>
-						<span slot="primary">Some idioms {val}</span>
-						<span slot="secondary">secondary {val}</span>
-						<span slot="action"><button>fds de action</button></span>
-					</ListItem>
-				{/each}
-			</List>
+		</Taskbar>
+		<div id="layout" class="flex-main overflow-hidden pos-rel">
+			<slot />
+			<Frame bind:frameDrawerRef={drawerRefDash} bind:this={frameRef}>
+				<div slot="frameDrawerSlot">nav left</div>
+				<!-- <Dashboard slot="contentFrameSlot"/> -->
+			</Frame>
+			<ChromeFrameList
+				chromeListConfig={{
+					showCommandBar: true,
+					parent: '#layout',
+					onClose: (chromeFrame) => {
+						console.log(chromeFrame);
+					}
+				}}
+			/>
 		</div>
-	</Drawer> 
+	</Login>
+</div>
 
-
-<style global lang=scss>
+<!-- <Drawer bind:this={drawerRef} isOpen={false}>
+	<svelte:fragment slot="drawerMenuBar">
+		<TopBar title="Drawer with menu bar ">
+			<svelte:fragment slot="menuBarSwitcher">
+				<div class="pad-1">
+					<input placeholder="Search in Bar" style="width:100%;" type="text" />
+				</div>
+			</svelte:fragment>
+			
+		</TopBar>
+	</svelte:fragment>
+	<div class="pad-2">
+		<List onItemClick={() => {}}>
+			{#each [...Array(10)] as key, val}
+				<ListItem>
+					<span slot="primary">Some idioms {val}</span>
+					<span slot="secondary">secondary {val}</span>
+					<span slot="action"><button>fds de action</button></span>
+				</ListItem>
+			{/each}
+		</List>
+	</div>
+</Drawer> -->
+<style global lang="scss">
 	html {
 		font-size: 12px;
 		height: 100%;

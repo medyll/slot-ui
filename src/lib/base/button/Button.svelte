@@ -33,9 +33,9 @@
 	/** button style contained */
 	export let contained: boolean | undefined = undefined;
 	/** button style bordered */
-	export let bordered: boolean  | undefined = undefined;
+	export let bordered: boolean | undefined = undefined;
 	/** button style link */
-	export let link: boolean  | undefined = undefined;
+	export let link: boolean | undefined = undefined;
 
 	/** with of the button using  presets */
 	export let size: ElementProps['sizeType'] | 'full' = 'medium';
@@ -63,7 +63,7 @@
 
 	if (contained || bordered || link) {
 		presetDefault = '';
-	}else{
+	} else {
 		link = presetDefault.includes('link');
 		bordered = presetDefault.includes('bordered');
 		contained = presetDefault.includes('contained');
@@ -96,7 +96,6 @@
 		disabled: false
 	};
 </script>
- 
 
 <button
 	class={className + ' w-' + size}
@@ -201,7 +200,7 @@
 		}
 		&:active {
 			transform: scale(0.98);
-			border: 0.5px solid green!important;
+			border: 0.5px solid green !important;
 		}
 		@include input-sizes-presets;
 	}
@@ -220,25 +219,26 @@
 				border: 0.5px solid var(--theme-color-primary);
 			}
 			&:focus {
-				box-shadow: var(--box-shad-3); 
+				box-shadow: var(--box-shad-3);
 			}
 		}
 		&[contained='true'] {
 			color: var(--theme-color-foreground);
-			background-color: var(--color-gray-800-alpha-low, rgba(255, 255, 255, 0.1)) !important;
-			&:hover {
-				background-color: var(--theme-color-background);
+			background-color: var(--theme-color-paper-alpha-low, rgba(255, 255, 255, 0.1)) !important;
+			&:hover { 
+				background-color: var(--theme-color-background)!important;
 			}
 			&:focus {
 				outline: 0;
-				background-color: var(--theme-color-background-alpha);
-				// color: var(--theme-color-background);
+				background-color: var(--theme-color-background-alpha); 
 				box-shadow: var(--box-shad-3);
 			}
 		}
 		&[link='true'] {
 			color: var(--theme-color-primary);
 			background-color: transparent;
+			text-decoration: underline;
+			text-underline-offset: 0.25rem; 
 			cursor: pointer;
 			&:hover {
 				text-decoration: underline;

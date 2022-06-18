@@ -44,7 +44,7 @@
 	};
 </script>
 
-<div class="flex-v gap-large">
+<div class="flex-v gap-large theme-bg pad-1">
 	<h5 use:togglerSource={{ uid: 'tre' }}>default button</h5>
 	<div use:togglerTarget={{ uid: 'tre' }}><Button>default button</Button></div>
 	<div class="flex-h gap-medium">
