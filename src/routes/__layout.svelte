@@ -52,9 +52,24 @@
 	/>
 	{@html github}
 	<style>{@html cssfabric}</style>
+	<script>
+		/*hack for legacy node app*/
+		var global = global || window
+		var Buffer = Buffer || []
+		var process = process || { env: { DEBUG: undefined }, version: [] }
+		document.body.setAttribute('data-theme', "dark")
+		if (localStorage && localStorage.getItem('themeMode')) {
+				document.body.setAttribute('data-theme', localStorage.getItem('themeMode'))
+			}
+		window.addEventListener("load", function (event) {
+			if (localStorage && localStorage.getItem('themeMode')) {
+				document.body.setAttribute('data-theme', localStorage.getItem('themeMode'))
+			}
+		});
+	</script>
 </svelte:head>
+ 
 
-<ThemeWrapper theme={'dark'} {themes}>
 	<StartMenu />
 	<div class="h-full overflow-hidden flex-v">
 		<Login showLogin={false}>
@@ -135,8 +150,7 @@
 				{/each}
 			</List>
 		</div>
-	</Drawer>
-</ThemeWrapper>
+	</Drawer> 
 
 
 <style global lang=scss>
@@ -154,7 +168,7 @@
 		background-size: cover;
 		font-family: 'Rubik';
 		background-color: var(--theme-color-background);
-		color: var(--theme-color-text);
+		color: var(--theme-color-foreground);
 		box-sizing: border-box;
 	}
 

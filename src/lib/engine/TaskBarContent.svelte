@@ -1,12 +1,11 @@
 <script lang="ts">
   import {getContext} from 'svelte';
-  import type {IChromeArgs, WindowStoreListType} from '/src/lib/ui/window/window.store';
-  import {windowsStore} from '/src/lib/ui/window/window.store';
+  import type {IChromeArgs, WindowStoreListType} from '$lib/ui/window/window.store';
+  import {windowsStore} from '$lib/ui/window/window.store';
   import {toggleStartMenu} from './wactions.utils';
   import IconButton from '../base/button/IconButton.svelte';
   import {openPopper} from '$lib/ui/popper/actions';
-  import ServiceBox from '../ui/serviceBox/ServiceBox.svelte'; 
-  let {toggle, current, theme} = getContext('theme');
+  import ServiceBox from '../ui/serviceBox/ServiceBox.svelte';  
 
 
   const popServiceProps = {
