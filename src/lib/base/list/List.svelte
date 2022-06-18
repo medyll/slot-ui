@@ -116,7 +116,6 @@
 	{#if $$slots.commandBarSlot}
 		<slot name="commandBarSlot" />
 	{/if} 
-
 	{#if listItems}
 		{#if !noVirtualize}
 			{#if $$slots.default}
