@@ -19,7 +19,7 @@
 		{#each parameters.sizes as size}
 			<div class="flex-v gap-small">
 				<div>{size}</div>
-				<div><Input value="{size}" {size}>{size}</Input></div>
+				<div><Input value={size} {size}>{size}</Input></div>
 			</div>
 		{/each}
 	</div>
@@ -34,7 +34,12 @@
 	</div>
 	<h5>start icon or slot</h5>
 	<div class="flex-h flex-wrap gap-small">
-		<div><Input icon="user" value="value"   >...</Input></div>
-		<div><Input icon="search" value="value"   >...</Input></div>
+		<div><Input icon="user" value="value">...</Input></div>
+		<div><Input icon="search" value="value">...</Input></div>
+	</div>
+	<h5>end icon or slot</h5>
+	<div class="flex-h flex-wrap gap-small">
+		<div><Input endIcon="user" value="value">...</Input></div>
+		<div><Input endIcon="search" value="value" /></div>
 	</div>
 </div>

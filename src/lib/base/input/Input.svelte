@@ -18,6 +18,8 @@
 
 	/** icon as a parameter*/
 	export let icon: string | undefined = undefined;
+	/** icon as a parameter*/
+	export let endIcon: string | undefined = undefined;
 	/** paramters for usePopper */
 	export let usePopper: UsePopperProps | undefined = undefined;
 	/** with of the input using  presets */
@@ -34,7 +36,7 @@
 	let niceIconStyle='';
 	
 	niceIconStyle +=(icon || $$slots.startInputSlot) ? 'padding-left:2.2rem;' : ''
-	niceIconStyle += ($$slots.endInputSlot) ? 'padding-right:2.2rem;' : ''
+	niceIconStyle += (endIcon || $$slots.endInputSlot) ? 'padding-right:2.2rem;' : ''
 
 	$: if (usePopper) {
 		usePopper.disabled = false;
@@ -44,18 +46,20 @@
 	}
 </script>
 
-{#if icon || $$slots.startInputSlot || $$slots.endInputSlot}
-	<div   class="pos-rel" style="display:inline-block">
-		{#if icon || $$slots.startInputSlot}
+{#if icon || endIcon || $$slots.startInputSlot || $$slots.endInputSlot}
+	<div style="position:relative;display:inline-block">
+		{#if icon   || $$slots.startInputSlot}
 			<div class="inpuStart">
 				<slot name="startInputSlot">
-					<Icon {icon} style="max-width:100%;" />
+					<Icon {icon} style="max-width:100%;max-height:100%;" />
 				</slot>
 			</div>
 		{/if}
-		{#if $$slots.endInputSlot}
+		{#if $$slots.endInputSlot || endIcon}
 			<div class="inpuEnd">
-				<slot name="endInputSlot" />
+				<slot name="endInputSlot" >
+					<Icon icon={endIcon} style="max-width:100%;max-height:100%;" />
+				</slot>
 			</div>
 		{/if}
 		<input
@@ -99,8 +103,12 @@
 		height: 2.5rem;
 		padding: var(--slotui-input-padding, 0 0.5rem);
 		box-sizing: border-box;
+		[error]{
+			border-bottom: red;
+		}
 		@include input-sizes-presets;
 	}
+
 	.inpuStart {
 		position: absolute;
 		height: 100%;
@@ -110,7 +118,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		padding: 0.25rem;
+		padding: 0.5rem;
 		background-color: rgba(255, 255, 255, 0.1);
 		border-radius: var(--slotui-input-radius, 4px);
 	}
@@ -124,8 +132,8 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		padding: 0.25rem;
-		background-color: rgba(255, 255, 255, 0.1);
+		padding: 0.5rem;
+		// background-color: rgba(255, 255, 255, 0.1);
 		border-radius: var(--slotui-input-radius, 4px);
 	}
 </style>
