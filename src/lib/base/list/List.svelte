@@ -10,7 +10,7 @@
 	import { createEventForwarder } from '../../engine/engine';
 	import Virtualize from '../virtualize/Virtualize.svelte';
 	import type { Data } from '$lib/data/grouper/Grouper.svelte';
-import { propsProxy } from '$lib/engine/utils';
+	import { propsProxy } from '$lib/engine/utils';
 
 	/*  common slotUi exports*/
 	let className = '';
@@ -33,19 +33,21 @@ import { propsProxy } from '$lib/engine/utils';
 	export let showIcon: boolean = true;
 	export let noVirtualize: boolean = false;
 	export let selectorField;
-	export let selectedDataKey: string;
+	export let selectedDataKey: string | undefined = undefined;
 	export let setSelectedData: Record<string, any> = {};
 	export let setSelectedItem: Record<string, any> = {};
 
 	export let onItemClick: (args: Record<string, any>) => void;
-	/** deprecated , use primary */
+	/** @deprecated use primary title  */
 	export let title: string;
 	/** displayed as H5*/
 	export let primary: string | undefined = undefined;
 	/** secondary title */
 	export let secondary: string | undefined = undefined;
+	/** icon for the  title  zone*/
+	export let icon: string | undefined = undefined;
 	/** fieldName by wich we will group */
-	export let groupBy: string;
+	export let groupBy: string | undefined = undefined;
 	/** List will not be clickable and will gain opacity */
 	export let disabled: boolean = false;
 	export let density: ElementProps['density'] = 'default';
@@ -69,14 +71,20 @@ import { propsProxy } from '$lib/engine/utils';
 		// loop on
 		// if props.dataFieldPrimary : propsProxy
 		// else ...
-		if ( dataFieldPrimary || dataFieldSecondary) {			
-			listItems = propsProxy([[dataFieldPrimary?? '"','primary'],[dataFieldSecondary?? '"','secondary']],data);
+		if (dataFieldPrimary || dataFieldSecondary) {
+			listItems = propsProxy(
+				[
+					[dataFieldPrimary ?? '"', 'primary'],
+					[dataFieldSecondary ?? '"', 'secondary']
+				],
+				data
+			);
 		} else {
 			listItems = data.map((dta: Data) => {
 				return {
 					primary: dta?.name ?? dta.code,
 					secondary: dta?.id,
-					data: dta, 
+					data: dta
 				};
 			});
 		}
@@ -100,12 +108,14 @@ import { propsProxy } from '$lib/engine/utils';
 	style="position:relative;height:{height};margin:0;padding:0;{style};opacity:${disabled ? 0.6 : 1}"
 	use:forwardEvents
 >
-	{#if $$slots.title || title}
+	{#if $$slots.title || title || primary || secondary}
 		<slot name="title">
-			<ListTitle primary={primary ?? title} {secondary} />
+			<ListTitle primary={primary ?? title} {secondary} {icon} />
 		</slot>
 	{/if}
-	<slot name="commandBarSlot" />
+	{#if $$slots.commandBarSlot}
+		<slot name="commandBarSlot" />
+	{/if} 
 
 	{#if listItems}
 		{#if !noVirtualize}

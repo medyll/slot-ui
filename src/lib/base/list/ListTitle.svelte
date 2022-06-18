@@ -1,13 +1,13 @@
 <script lang="ts">
 	import type { ElementProps } from 'src/types';
-import Icon from '../icon/Icon.svelte';
+	import Icon from '../icon/Icon.svelte';
 
-	export let icon: string;
+	export let icon: string | undefined = undefined;
 	/** displayed as H5*/
 	export let primary: string | undefined = undefined;
 	/** secondary title */
 	export let secondary: string | undefined = undefined;
-	export let action: string;
+	export let action: string| undefined = undefined;
 
 	export let density: ElementProps['density'] = 'default';
 </script>
@@ -15,13 +15,12 @@ import Icon from '../icon/Icon.svelte';
 <li class="listItemTitle density-{density}">
 	{#if icon || $$slots.icon}
 		<div class="listItemIcon">
-			<slot name="icon" >
-                <Icon {icon} />
-            </slot>
+			<slot name="icon">
+				<Icon {icon} />
+			</slot>
 		</div>
 	{/if}
 	<div class="listItemContent">
-		<slot />
 		{#if primary || $$slots.primary}
 			<h5>
 				<slot name="primary">{primary}</slot>
@@ -32,10 +31,13 @@ import Icon from '../icon/Icon.svelte';
 				<slot name="secondary">{secondary}</slot>
 			</div>
 		{/if}
+		<slot />
 	</div>
+	{#if action || $$slots.action}
 	<div class="listItemAction">
 		<slot name="action" />
 	</div>
+	{/if}
 </li>
 
 <!--i love slots-->
