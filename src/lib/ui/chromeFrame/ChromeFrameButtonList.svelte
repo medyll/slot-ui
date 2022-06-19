@@ -12,8 +12,8 @@
 	const forwardEvents = createEventForwarder(get_current_component());
 	/** end slotUi exports*/
 
-	$: console.log('from chromFrameButtonList',chromeFrameStore);
-	$: console.log('from chromFrameButtonList $store',$chromeFrameStore);
+	/* $: console.log('from chromFrameButtonList',chromeFrameStore);
+	$: console.log('from chromFrameButtonList $store',$chromeFrameStore); */
 </script>
 
 <div bind:this={element} class="flex-h gap-small {className}">

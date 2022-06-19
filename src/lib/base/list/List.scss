@@ -76,7 +76,7 @@ li.listItem {
       position: absolute;
       height: 50%;
       width: 3px;
-      background-color: maroon;
+      background-color: var(--theme-color-primary);
       border-radius: 8px;
       left: -1px;
     }

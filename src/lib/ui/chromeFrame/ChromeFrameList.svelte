@@ -45,8 +45,7 @@
 
   // mount the component in the assigned target with chromeFrameListRef as reference ,
   // if not already in chromeFrameListRef
-  $: Boolean(browser) && $chromeFrameStore.forEach((args: IChromeFrameArgs, frameId: string) => {
-    console.log(element)
+  $: Boolean(browser) && $chromeFrameStore.forEach((args: IChromeFrameArgs, frameId: string) => { 
 
     if (!args.noFrameListButton && !chromeFrameListRef[frameId]) {
       chromeFrameListRef[frameId] = new ChromeFrame({
@@ -70,9 +69,9 @@
     }
   }
 
-  $: console.log('chromeFrameStore from chrome frame list',$chromeFrameStore);
+/*   $: console.log('chromeFrameStore from chrome frame list',$chromeFrameStore);
   $: console.log('var browser, from chrome frame list',browser);
-  $: console.log('chromeFrameListRef, from chrome frame list',chromeFrameListRef);
+  $: console.log('chromeFrameListRef, from chrome frame list',chromeFrameListRef); */
 
 </script>
 <div bind:this={element}

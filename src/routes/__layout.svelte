@@ -11,8 +11,7 @@
 	import TopBar from '$lib/ui/topBar/TopBar.svelte';
 	import IconButton from '$lib/base/button/IconButton.svelte';
 	import List from '$lib/base/list/List.svelte';
-	import ListItem from '$lib/base/list/ListItem.svelte';
-	import { themes } from '../themes/themes';
+	import ListItem from '$lib/base/list/ListItem.svelte'; 
 	import Frame from '$lib/ui/frame/Frame.svelte';
 	import { toggleStartMenu } from '../lib/engine/wactions.utils';
 	import { openChromeFrame } from '../lib/ui/chromeFrame/chromeFrame.utils';
@@ -23,6 +22,8 @@
 	import ThemeSwitcher from '$lib/ui/themeswitcher/ThemeSwitcher.svelte';
 	import { goto } from '$app/navigation';
 	import Button from '$lib/base/button/Button.svelte';
+
+	/* import theme from "../../"; */
 
 	let frameRef: Frame;
 	let drawerRef: Drawer;
@@ -47,14 +48,16 @@
 
 <svelte:head>
 	<title>SlotUi</title>
-	<link href="../../static/cssfabric/cssfabric.vars.css" rel="stylesheet" />
 	<link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet" />
 	<link
 		href="./node_modules/@medyll/cssfabric/src/lib/styles/cssfabric.min.css"
 		lang="scss"
 		rel="stylesheet"
 	/>
+	<!-- <link href="cssfabric/cssfabric.vars.css" rel="stylesheet" /> -->
+	<link href="theme/cssfabric.scss" lang="scss" rel="stylesheet" />
 	{@html github}
+	<!-- {@html theme} -->
 	<style>
 		 {
 			@html cssfabric;
@@ -98,12 +101,6 @@
 						openCh('btn2');
 					}}>button 2</Button
 				> 
-
-				<Button
-					on:click={() => {
-						openCh('explorer', { component: Explorer });
-					}}>explorer</Button
-				>
 			</svelte:fragment>
 			<ChromeFrameButtonList let:chromeFrame />
 			<TaskBarContent />
@@ -150,6 +147,8 @@
 	</div>
 </Drawer> -->
 <style global lang="scss">
+	  @import  "./src/sass/cssfabric.scss";
+
 	html {
 		font-size: 12px;
 		height: 100%;
