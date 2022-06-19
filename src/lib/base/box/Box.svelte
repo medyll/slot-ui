@@ -43,7 +43,7 @@
   export let onClose: () => void;
 </script>
 
-<div class="boxRoot shad-16 flex-v {className}" use:forwardEvents>
+<div class="boxRoot shad-3 flex-v {className}" use:forwardEvents>
     <TitleBar {hasMenu} {onClose}>
         <slot name="titleSlot" slot="titleSlot">{null_to_empty(title)}</slot>
         <slot name="iconSlot" slot="iconSlot"></slot>
@@ -53,7 +53,7 @@
             <slot >{@html null_to_empty(content)}</slot>
         </slot>
     </div>
-    <div class="boxButtonZone pad-2">
+    <div class="boxButtonZone">
         <slot name="buttonZoneSlot">{@html null_to_empty(buttonZone)}</slot>
     </div>
 </div>

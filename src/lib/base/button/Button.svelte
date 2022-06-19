@@ -146,7 +146,7 @@
 				<div class="flex-h flex-align-middle gap-tiny">
 					<div>
 						<slot name="loadingIconButtonSlot"
-							><div><Icon icon="spinner" class="fa-spinner" /></div>
+							><div><Icon icon="spinner" class="fa rotate" /></div>
 						</slot>
 					</div>
 					<div>loading</div>
@@ -159,7 +159,6 @@
 	{/if}
 </button>
 {#if secondary}
-	<br />
 	<div style={`display:inline-block;width:${element?.style?.width}px`}>
 		<Divider />
 		{@html secondary}
@@ -190,7 +189,7 @@
 		// padding: auto var(--box-density-preset-tiny);
 		color: var(--theme-color-foreground);
 		padding: 0;
-		transition: all 0.3s;
+		transition: all 0.2s;
 		&::before,
 		&::after {
 			content: '';
@@ -205,14 +204,24 @@
 		&[disabled] {
 			color: var(--color-gray-800);
 			border-color: var(--color-gray-800);
+			opacity: 0.8;
+		}
+		&:hover {
+			transform: scale(1.05);
+			box-shadow: var(--box-shad-3);
 		}
 		&:active,
 		&:focus {
 			outline: 0;
 		}
 		&:active {
-			transform: scale(0.98);
-			border: 0.5px solid green !important;
+			transform: scale(0.9);
+			border: 0.5px solid var(--theme-color-primary) !important;
+			box-shadow: var(--box-shad-4);
+		}
+		&:focus {
+			border: 0.5px solid var(--theme-color-primary);
+			box-shadow: var(--box-shad-3);
 		}
 		@include input-sizes-presets;
 	}
@@ -230,20 +239,19 @@
 			&:hover {
 				border: 0.5px solid var(--theme-color-primary);
 			}
-			&:focus {
-				box-shadow: var(--box-shad-3);
-			}
 		}
 		&[contained='true'] {
 			color: var(--theme-color-foreground);
 			background-color: var(--theme-color-paper-alpha-low, rgba(255, 255, 255, 0.1)) !important;
+			// background-color: var(--theme-color-primary-alpha, rgba(255, 255, 255, 0.1)) !important;
 			&:hover {
-				background-color: var(--theme-color-paper) !important;
+				// background-color: var(--theme-color-paper) !important;
+				background-color: var(--theme-color-primary, rgba(255, 255, 255, 0.1)) !important;
+				color: white;
 			}
 			&:focus {
 				outline: 0;
 				background-color: var(--theme-color-background-alpha);
-				box-shadow: var(--box-shad-3);
 			}
 		}
 		&[link='true'] {
@@ -313,7 +321,7 @@
 		.chip {
 			position: absolute;
 			z-index: 2;
-			height: 2px;
+			height: 4px;
 			left: 50%;
 			transform: translate(-50%, 0);
 			width: 50%;
