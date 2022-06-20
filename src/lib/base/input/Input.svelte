@@ -94,7 +94,7 @@
 	@import '../../../lib/styles/presets.scss';
 	input {
 		border: 1px solid rgba(208, 191, 151, 0.5);
-		border-bottom: var(--slotui-border-bottom-size, 2px) solid rgb(208, 191, 151);
+		border-bottom: var(--slotui-border-bottom-size, 2px) solid var(--theme-color-primary-darker,rgb(208, 191, 151));
 		border-radius: var(--slotui-input-radius, 4px);
 		padding: var(--slotui-input-padding, 0.5rem);
 		box-shadow: inset 0px 0px 3px 1px rgba(51, 51, 51, 0.8);
