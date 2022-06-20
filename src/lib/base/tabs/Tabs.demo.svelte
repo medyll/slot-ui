@@ -7,7 +7,7 @@
   import Button from '../button/Button.svelte';
 
   const items: TabsItemsProps = [
-    {label: 'Tab 1', code: 'theTitle1', withContent:'ff'},
+    {label: 'Tab 1', code: 'theTitle1', withContent:'ff',secondary:'some'},
     {label: 'Tab 2', code: 'theTitle2'},
     {label: 'Another tab', code: 'theTitle3', withComponent: Cartouche, componentProps: {label: 'inner component'}},
   ];
