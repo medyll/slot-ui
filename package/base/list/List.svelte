@@ -6,31 +6,40 @@ import Icon from '../icon/Icon.svelte';
 import ListTitle from './ListTitle.svelte';
 import { createEventForwarder } from '../../engine/engine';
 import Virtualize from '../virtualize/Virtualize.svelte';
+import { propsProxy } from '../../engine/utils';
 /*  common slotUi exports*/
 let className = '';
 export { className as class };
 export let element = null;
 const forwardEvents = createEventForwarder(get_current_component());
 /*  end slotUi exports*/
-export let listItems;
-export let direction = 'vertical';
+/** formated listItems list  */
+export let listItems = [];
+/** provided raw data, used if no listItems list is provided  */
+export let data = undefined;
+/** Row from data for primary, used if props.data is provided  */
+export let dataFieldPrimary = undefined;
+/** Row from data for secondary, used if props.data is provided  */
+export let dataFieldSecondary = undefined;
 export let height = '100%';
 export let style = '';
 export let showIcon = true;
 export let noVirtualize = false;
 export let selectorField;
-export let selectedDataKey;
+export let selectedDataKey = undefined;
 export let setSelectedData = {};
 export let setSelectedItem = {};
 export let onItemClick;
-/** deprecated , use primary */
+/** @deprecated use primary title  */
 export let title;
 /** displayed as H5*/
 export let primary = undefined;
 /** secondary title */
 export let secondary = undefined;
+/** icon for the  title  zone*/
+export let icon = undefined;
 /** fieldName by wich we will group */
-export let groupBy;
+export let groupBy = undefined;
 /** List will not be clickable and will gain opacity */
 export let disabled = false;
 export let density = 'default';
@@ -43,7 +52,27 @@ $: if (setSelectedData) {
     console.log('selected', setSelectedData);
 }
 $: if (setSelectedItem) {
-    // listStore.setActiveData(setSelectedData); 
+    // listStore.setActiveData(setSelectedData);
+}
+$: if (data) {
+    // loop on
+    // if props.dataFieldPrimary : propsProxy
+    // else ...
+    if (dataFieldPrimary || dataFieldSecondary) {
+        listItems = propsProxy([
+            [dataFieldPrimary ?? '"', 'primary'],
+            [dataFieldSecondary ?? '"', 'secondary']
+        ], data);
+    }
+    else {
+        listItems = data.map((dta) => {
+            return {
+                primary: dta?.name ?? dta.code,
+                secondary: dta?.id,
+                data: dta
+            };
+        });
+    }
 }
 function onListItemClick(e) {
     if (disabled) {
@@ -63,11 +92,14 @@ function onListItemClick(e) {
 	style="position:relative;height:{height};margin:0;padding:0;{style};opacity:${disabled ? 0.6 : 1}"
 	use:forwardEvents
 >
-	{#if $$slots.title || title}
+	{#if $$slots.title || title || primary || secondary}
 		<slot name="title">
-			<ListTitle primary={primary ?? title} {secondary} />
+			<ListTitle primary={primary ?? title} {secondary} {icon} />
 		</slot>
 	{/if}
+	{#if $$slots.commandBarSlot}
+		<slot name="commandBarSlot" />
+	{/if} 
 	{#if listItems}
 		{#if !noVirtualize}
 			{#if $$slots.default}
@@ -88,7 +120,7 @@ function onListItemClick(e) {
 			{#each listItems as item}
 				<slot listItem={item}>
 					<ListItem {showIcon} {density} data={item.data} icon={item?.icon}>
-						<span slot="icon"></span>
+						<span slot="icon" />
 						<span slot="primary">{null_to_empty(item?.primary)}</span>
 						<span slot="secondary">{null_to_empty(item?.secondary)}</span>
 						<span slot="action">{null_to_empty(item?.action)}</span>
@@ -169,7 +201,7 @@ function onListItemClick(e) {
   position: absolute;
   height: 50%;
   width: 3px;
-  background-color: maroon;
+  background-color: var(--theme-color-primary);
   border-radius: 8px;
   left: -1px;
 }</style>

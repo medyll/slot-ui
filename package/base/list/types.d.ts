@@ -1,8 +1,8 @@
 export declare type LisItemProps = {
-    icon: string;
-    primary: string;
-    secondary: string;
-    action: string;
+    icon?: string;
+    primary?: string;
+    secondary?: string;
+    action?: string;
     data: Record<string, any>;
 };
 export declare type LisItemPropsKey = keyof LisItemProps;

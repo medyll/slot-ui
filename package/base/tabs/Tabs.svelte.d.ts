@@ -12,8 +12,13 @@ declare const __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
+        tabsFirstTitleSlot: {};
+        tabLabelSlot: {
+            item: import("./types").Items;
+        };
         tabsTitleSlot: {};
         tabsButtonSlot: {};
+        commandBarSlot: {};
     };
 };
 export declare type TabsProps = typeof __propDef.props;

@@ -1,3 +1,4 @@
+<svelte:options accessors/>
 <script context="module">"use strict";
 /* namespace __propDef {
   vary : 'red'

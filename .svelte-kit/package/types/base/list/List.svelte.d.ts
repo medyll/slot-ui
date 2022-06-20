@@ -1,24 +1,28 @@
 import { SvelteComponentTyped } from "svelte";
 import type { LisItemProps } from './types';
+import type { Data } from '$lib/data/grouper/Grouper.svelte';
 declare const __propDef: {
     props: {
         class?: string | undefined;
         element?: HTMLElement | null | undefined;
-        listItems: LisItemProps[];
-        direction?: "vertical" | "horizontal" | undefined;
+        /** formated listItems list  */ listItems?: LisItemProps[] | undefined;
+        /** provided raw data, used if no listItems list is provided  */ data?: Data[] | undefined;
+        /** Row from data for primary, used if props.data is provided  */ dataFieldPrimary?: string | undefined;
+        /** Row from data for secondary, used if props.data is provided  */ dataFieldSecondary?: string | undefined;
         height?: string | undefined;
         style?: string | undefined;
         showIcon?: boolean | undefined;
         noVirtualize?: boolean | undefined;
         selectorField: any;
-        selectedDataKey: string;
+        selectedDataKey?: string | undefined;
         setSelectedData?: Record<string, any> | undefined;
         setSelectedItem?: Record<string, any> | undefined;
         onItemClick: (args: Record<string, any>) => void;
-        /** deprecated , use primary */ title: string;
+        /** @deprecated use primary title  */ title: string;
         /** displayed as H5*/ primary?: string | undefined;
         /** secondary title */ secondary?: string | undefined;
-        /** fieldName by wich we will group */ groupBy: string;
+        /** icon for the  title  zone*/ icon?: string | undefined;
+        /** fieldName by wich we will group */ groupBy?: string | undefined;
         /** List will not be clickable and will gain opacity */ disabled?: boolean | undefined;
         density?: "none" | "tight" | "default" | "medium" | "kind" | undefined;
     };
@@ -27,6 +31,7 @@ declare const __propDef: {
     };
     slots: {
         title: {};
+        commandBarSlot: {};
         default: {
             listItem: LisItemProps;
         };

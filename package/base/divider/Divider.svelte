@@ -42,13 +42,13 @@ switch (direction) {
 
 <style>hr {
   border: none;
-  border-top: 1px solid var(--theme-border_color);
-  background-color: var(--theme-border_color);
+  border-top: 1px solid var(--theme-color-foreground, red);
+  background-color: var(--theme-color-foreground, red);
   display: block;
 }
 hr.vertical {
   width: 1px;
   height: 50px;
-  border-right: 1px solid var(--theme-border_color);
+  border-right: 1px solid var(--theme-color-background);
   margin: 0.25rem 0.5rem;
 }</style>

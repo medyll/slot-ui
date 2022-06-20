@@ -64,11 +64,14 @@ export const actions = {
   position: relative;
   background-color: var(--css-frame-bg-color, var(--theme-bg));
   backdrop-filter: var(--css-frame-backdrop-blur, blur(30px));
+  overflow: hidden;
 }
 .frame .frameContainer .navLeft {
+  z-index: 0;
   max-width: 288px;
-  border-right: 1px solid var(--theme-color-primary-alpha-low);
+  border-right: 1px solid var(--theme-color-primary);
 }
 .frame .frameContainer .content {
   flex: 1 auto;
+  z-index: 1;
 }</style>

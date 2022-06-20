@@ -28,7 +28,7 @@ function sayHello() { }
 <ul bind:this={element} role="menu" class="density-{density} menu" on:menu:item:clicked={onMenuClick}>
 	{#if menuList}
 		{#each menuList as menuItem}
-			<slot {menuItem}>
+			<slot item={menuItem} {menuItem}>
 				<MenuItem {...menuItem} />
 			</slot>
 		{/each}

@@ -29,14 +29,17 @@ onMount(() => {
 
 <div bind:this={element} class="tabsRoot {className} flex-v" {...$$restProps}>
 	<nav bind:this={tabsElementRef} class="tabsNav flex-h flex-align-middle pos-rel">
+		<div>
+			<slot name="tabsFirstTitleSlot" />
+		</div>
 		<ul bind:this={navElementRef} class="flex-main">
 			{#each items as item}
 				<li
 					data-code={item.code}
-					on:click={handleClick(item.code, this)}
+					on:click={handleClick(item.code)}
 					class={activeTabCode === item.code ? 'active' : ''}
 				>
-					{item.label}
+					<slot {item} name="tabLabelSlot">{item.label}</slot>
 				</li>
 			{/each}
 		</ul>
@@ -50,8 +53,13 @@ onMount(() => {
 	<div bind:this={activeCellElementRef} class="tabsActiveCellContainer">
 		<div class="tabSlot" />
 	</div>
-	<div class="tabsContent flex-main">
+	<div>
+		<slot name="commandBarSlot" />
+	</div>
+	<div class="tabsContent flex-main pos-rel">
 		{#each items as item}
+			{@const display = (activeTabCode === item.code) ? 'block':'none'}
+			 <div style="display:{display};height:100%;position:relative;">
 			{#if activeTabCode === item.code}
 				{#if Boolean(item?.withComponent)}
 					<svelte:component this={item.withComponent} {...item.componentProps ?? {}} />
@@ -61,6 +69,7 @@ onMount(() => {
 					{item.withUid}
 				{/if}
 			{/if}
+			 </div>
 		{/each}
 	</div>
 </div>

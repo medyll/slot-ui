@@ -15,7 +15,8 @@ let densityClass = {
     <slot></slot>
 </div>
 
-<style global>:global(.paper) {
-  background-color: var(--theme-color-background-contrast);
+<style  >.paper {
+  color: var(--theme-color-foreground);
+  background-color: var(--theme-color-paper);
   border-radius: 6px;
 }</style>

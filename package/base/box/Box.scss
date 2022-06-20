@@ -1,16 +1,18 @@
-
 .boxRoot {
   min-height: 160px;
   min-width: 320px;
   background-color: var(--theme-color-background);
-  border-bottom: 1px solid var(--theme-border_color);
+  border-bottom: 1px solid var(--theme-color-primary);
   border-radius: 6px;
-
+  display: inline-block;
   .boxContent {
-
   }
 
   .boxButtonZone {
+    display: flex;
+    gap: --theme-gap-tiny;
     text-align: right;
+    padding: 0.5rem;
+    justify-content: end;
   }
 }

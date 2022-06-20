@@ -48,6 +48,7 @@ $: if ($listStateContext?.selectorField) {
 	on:click={handleClick()}
 	on:dblclick={handleDblClick()}
 	style="opacity:${disabled ? 0.6 : 1};${style}"
+	tabindex={1}
 >
 	<span class="listItemChip" />
 	{#if $$slots.icon || icon}
@@ -146,7 +147,7 @@ $: if ($listStateContext?.selectorField) {
   position: absolute;
   height: 50%;
   width: 3px;
-  background-color: maroon;
+  background-color: var(--theme-color-primary);
   border-radius: 8px;
   left: -1px;
 }

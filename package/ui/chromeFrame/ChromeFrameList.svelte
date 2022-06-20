@@ -39,7 +39,6 @@ $: Boolean(browser) && Object.keys(chromeFrameListRef).forEach((frameId) => {
 // mount the component in the assigned target with chromeFrameListRef as reference ,
 // if not already in chromeFrameListRef
 $: Boolean(browser) && $chromeFrameStore.forEach((args, frameId) => {
-    console.log(element);
     if (!args.noFrameListButton && !chromeFrameListRef[frameId]) {
         chromeFrameListRef[frameId] = new ChromeFrame({
             target: element,
@@ -61,9 +60,9 @@ $: if (browser && element) {
         element.style.display = '';
     }
 }
-$: console.log('chromeFrameStore from chrome frame list', $chromeFrameStore);
-$: console.log('var browser, from chrome frame list', browser);
-$: console.log('chromeFrameListRef, from chrome frame list', chromeFrameListRef);
+/*   $: console.log('chromeFrameStore from chrome frame list',$chromeFrameStore);
+  $: console.log('var browser, from chrome frame list',browser);
+  $: console.log('chromeFrameListRef, from chrome frame list',chromeFrameListRef); */
 </script>
 <div bind:this={element}
      class="pos-abs h-full w-full top-0 {className}"

@@ -29,6 +29,8 @@ export let contained = undefined;
 export let bordered = undefined;
 /** button style link */
 export let link = undefined;
+/** button style link */
+export let naked = undefined;
 /** with of the button using  presets */
 export let size = 'medium';
 /** density of the button, using preset values */
@@ -83,7 +85,6 @@ $: actionArgs = {
     disabled: false
 };
 </script>
- 
 
 <button
 	class={className + ' w-' + size}
@@ -101,6 +102,7 @@ $: actionArgs = {
 	{link}
 	{bordered}
 	{contained}
+	{naked}
 	{presetDefault}
 	{...$$restProps}
 >
@@ -113,8 +115,8 @@ $: actionArgs = {
 					{/if}
 				</slot>
 			</div>
-		{/if}
-		<div class="central"><slot>{null_to_empty(primary)}</slot></div>
+		{/if} 
+			<div class="central"><slot>{null_to_empty(primary)}</slot></div> 
 		{#if $$slots.actionIcon}
 			<div class="action">
 				<slot name="actionIcon" />
@@ -134,7 +136,7 @@ $: actionArgs = {
 				<div class="flex-h flex-align-middle gap-tiny">
 					<div>
 						<slot name="loadingIconButtonSlot"
-							><div><Icon icon="spinner" class="fa-spinner" /></div>
+							><div><Icon icon="spinner" class="fa rotate" /></div>
 						</slot>
 					</div>
 					<div>loading</div>
@@ -147,7 +149,6 @@ $: actionArgs = {
 	{/if}
 </button>
 {#if secondary}
-	<br />
 	<div style={`display:inline-block;width:${element?.style?.width}px`}>
 		<Divider />
 		{@html secondary}
@@ -168,6 +169,7 @@ $: actionArgs = {
   box-sizing: border-box;
 }
 
+.button,
 button,
 button[contained=true],
 input[type=button],
@@ -178,15 +180,46 @@ input[type=submit] {
   border: 0.5px solid transparent;
   color: var(--theme-color-foreground);
   padding: 0;
+  transition: all 0.2s;
 }
+.button::before, .button::after,
+button::before,
+button::after,
+button[contained=true]::before,
+button[contained=true]::after,
+input[type=button]::before,
+input[type=button]::after,
+input[type=submit]::before,
+input[type=submit]::after {
+  content: "";
+  position: absolute;
+  transition: all 0.3s;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.button[disabled],
 button[disabled],
 button[contained=true][disabled],
 input[type=button][disabled],
 input[type=submit][disabled] {
   color: var(--color-gray-800);
   border-color: var(--color-gray-800);
+  opacity: 0.8;
 }
-button:active, button:focus,
+.button:hover,
+button:hover,
+button[contained=true]:hover,
+input[type=button]:hover,
+input[type=submit]:hover {
+  transform: scale(1.05);
+  box-shadow: var(--box-shad-3);
+}
+.button:active, .button:focus,
+button:active,
+button:focus,
 button[contained=true]:active,
 button[contained=true]:focus,
 input[type=button]:active,
@@ -195,12 +228,24 @@ input[type=submit]:active,
 input[type=submit]:focus {
   outline: 0;
 }
+.button:active,
 button:active,
 button[contained=true]:active,
 input[type=button]:active,
 input[type=submit]:active {
-  border: 0.5px solid green !important;
+  transform: scale(0.9);
+  border: 0.5px solid var(--theme-color-primary) !important;
+  box-shadow: var(--box-shad-4);
 }
+.button:focus,
+button:focus,
+button[contained=true]:focus,
+input[type=button]:focus,
+input[type=submit]:focus {
+  border: 0.5px solid var(--theme-color-primary);
+  box-shadow: var(--box-shad-3);
+}
+.button[data-height=tiny],
 button[data-height=tiny],
 button[contained=true][data-height=tiny],
 input[type=button][data-height=tiny],
@@ -208,24 +253,28 @@ input[type=submit][data-height=tiny] {
   height: calc(1rem - var(--slotui-border-bottom-size, 2px));
   padding: 0;
 }
+.button[data-height=small],
 button[data-height=small],
 button[contained=true][data-height=small],
 input[type=button][data-height=small],
 input[type=submit][data-height=small] {
   height: calc(1.9rem - var(--slotui-border-bottom-size, 2px));
 }
+.button[data-height=default],
 button[data-height=default],
 button[contained=true][data-height=default],
 input[type=button][data-height=default],
 input[type=submit][data-height=default] {
   height: calc(2.5rem - var(--slotui-border-bottom-size, 2px));
 }
+.button[data-height=large],
 button[data-height=large],
 button[contained=true][data-height=large],
 input[type=button][data-height=large],
 input[type=submit][data-height=large] {
   height: calc(4rem - var(--slotui-border-bottom-size, 2px));
 }
+.button[borderless=true],
 button[borderless=true],
 button[contained=true][borderless=true],
 input[type=button][borderless=true],
@@ -233,45 +282,61 @@ input[type=submit][borderless=true] {
   border: 0px solid none;
 }
 
+.button,
 button {
   position: relative;
   overflow: hidden;
   /** variant presets */
 }
+.button[nowrap],
 button[nowrap] {
   color: " ";
 }
+.button[bordered=true],
 button[bordered=true] {
   color: var(--theme-color-foreground);
   border: 0.5px solid var(--theme-color-border);
   background-color: transparent;
 }
+.button[bordered=true]:hover,
 button[bordered=true]:hover {
   border: 0.5px solid var(--theme-color-primary);
 }
-button[bordered=true]:focus {
-  box-shadow: var(--box-shad-3);
-}
+.button[contained=true],
 button[contained=true] {
   color: var(--theme-color-foreground);
-  background-color: var(--color-gray-800-alpha-low, rgba(255, 255, 255, 0.1)) !important;
+  background-color: var(--theme-color-paper-alpha-low, rgba(255, 255, 255, 0.1)) !important;
 }
+.button[contained=true]:hover,
 button[contained=true]:hover {
-  background-color: var(--theme-color-background);
+  background-color: var(--theme-color-primary, rgba(255, 255, 255, 0.1)) !important;
+  color: white;
 }
+.button[contained=true]:focus,
 button[contained=true]:focus {
   outline: 0;
   background-color: var(--theme-color-background-alpha);
-  box-shadow: var(--box-shad-3);
 }
+.button[link=true],
 button[link=true] {
   color: var(--theme-color-primary);
   background-color: transparent;
+  text-decoration: underline;
+  text-underline-offset: 0.25rem;
   cursor: pointer;
 }
+.button[link=true]:hover,
 button[link=true]:hover {
   text-decoration: underline;
 }
+.button[naked=true],
+button[naked=true] {
+  color: inherit;
+  background-color: transparent;
+  border: 0.5px solid transparent;
+  cursor: pointer;
+}
+.button.loading .loadingButtonZone,
 button.loading .loadingButtonZone {
   z-index: 10;
   position: absolute;
@@ -287,6 +352,7 @@ button.loading .loadingButtonZone {
   background-color: var(--css-bacground-color, var(--theme-color-paper-alpha-low));
   backdrop-filter: blur(3px);
 }
+.button .innerButton,
 button .innerButton {
   width: 100%;
   overflow: hidden;
@@ -298,16 +364,23 @@ button .innerButton {
   justify-content: center;
   height: 100%;
 }
+.button .innerButton .startButtonSlot,
 button .innerButton .startButtonSlot {
   padding: 0 var(--box-density-preset-small, 0.25rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+.button .innerButton .central,
 button .innerButton .central {
   flex: 1;
   min-width: auto;
   width: auto;
   display: inline;
   vertical-align: bottom;
+  padding: 0 0.5rem;
 }
+.button .innerButton .action,
 button .innerButton .action {
   display: flex;
   align-items: center;
@@ -318,13 +391,15 @@ button .innerButton .action {
   padding: 0 0.5rem;
   cursor: pointer;
 }
+.button .innerButton .action:hover,
 button .innerButton .action:hover {
   background-color: rgba(255, 255, 255, 0.5);
 }
+.button .chip,
 button .chip {
   position: absolute;
   z-index: 2;
-  height: 2px;
+  height: 4px;
   left: 50%;
   transform: translate(-50%, 0);
   width: 50%;

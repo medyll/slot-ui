@@ -25,9 +25,27 @@ const forwardEvents = createEventForwarder(get_current_component());
 export let icon = 'question';
 export let iconFamily = 'fa-solid';
 export let fontSize = 'small';
-onDestroy(() => { }); //
 </script>
 
 {#if browser}
-	<Iconify   style="font-size:{sizes[fontSize]}px;{style}" icon="{iconFamily}:{icon}" class="{className}" {...$$restProps} />
+	<Iconify
+		style="font-size:{sizes[fontSize]}px;{style}"
+		icon="{iconFamily}:{icon}"
+		class={className}
+		inline={false}
+		{...$$restProps}
+	/>
 {/if}
+
+<style>.rotate, .spinner {
+  animation: spinner-frames 3s infinite linear;
+}
+
+@keyframes spinner-frames {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}</style>

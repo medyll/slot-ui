@@ -35,7 +35,7 @@ const handleClick = (event) => {
 export let onClose;
 </script>
 
-<div class="boxRoot shad-16 flex-v {className}" use:forwardEvents>
+<div class="boxRoot shad-3 flex-v {className}" use:forwardEvents>
     <TitleBar {hasMenu} {onClose}>
         <slot name="titleSlot" slot="titleSlot">{null_to_empty(title)}</slot>
         <slot name="iconSlot" slot="iconSlot"></slot>
@@ -45,7 +45,7 @@ export let onClose;
             <slot >{@html null_to_empty(content)}</slot>
         </slot>
     </div>
-    <div class="boxButtonZone pad-2">
+    <div class="boxButtonZone">
         <slot name="buttonZoneSlot">{@html null_to_empty(buttonZone)}</slot>
     </div>
 </div>
@@ -54,9 +54,14 @@ export let onClose;
   min-height: 160px;
   min-width: 320px;
   background-color: var(--theme-color-background);
-  border-bottom: 1px solid var(--theme-border_color);
+  border-bottom: 1px solid var(--theme-color-primary);
   border-radius: 6px;
+  display: inline-block;
 }
 :global(.boxRoot) :global(.boxButtonZone) {
+  display: flex;
+  gap: --theme-gap-tiny;
   text-align: right;
+  padding: 0.5rem;
+  justify-content: end;
 }</style>

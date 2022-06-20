@@ -14,7 +14,8 @@ declare const __propDef: {
         contained?: boolean | undefined;
         bordered?: boolean | undefined;
         link?: boolean | undefined;
-        size?: "default" | "medium" | "full" | "tiny" | "small" | "large" | "big" | undefined;
+        naked?: boolean | undefined;
+        size?: "default" | "medium" | "full" | "tiny" | "small" | "large" | "big" | "auto" | undefined;
         density?: "none" | "tight" | "default" | "medium" | "kind" | undefined;
         nowrap?: boolean | undefined;
         height?: string | undefined;

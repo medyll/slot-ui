@@ -1,17 +1,16 @@
 {
   "name": "@medyll/slotui",
-  "version": "0.1.25",
+  "version": "0.1.26",
   "repository": {
     "type": "git",
     "url": "https://github.com/medyll/slot-ui.git"
   },
   "type": "module",
   "dependencies": {
-    "@iconify/iconify": "^2.2.1",
     "@iconify/svelte": "^2.2.1",
-    "@medyll/cssfabric": "^0.2.3",
+    "@medyll/cssfabric": "^0.2.4",
     "@neodrag/svelte": "^1.1.2",
-    "@sveltejs/kit": "^1.0.0-next.349",
+    "@sveltejs/kit": "^1.0.0-next.350",
     "@sveltejs/svelte-virtual-list": "^3.0.1",
     "@sveltestack/svelte-query": "^1.6.0",
     "axios": "^0.25.0",
@@ -54,7 +53,7 @@
     "ts-jest": "^27.1.4",
     "tslib": "^2.3.1",
     "typescript": "^4.4.3",
-    "vite": "^2.9.11"
+    "vite": "^2.9.12"
   },
   "exports": {
     "./package.json": "./package.json",

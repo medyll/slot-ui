@@ -1,23 +1,22 @@
 <script>import Icon from '../icon/Icon.svelte';
-export let icon;
+export let icon = undefined;
 /** displayed as H5*/
 export let primary = undefined;
 /** secondary title */
 export let secondary = undefined;
-export let action;
+export let action = undefined;
 export let density = 'default';
 </script>
 
 <li class="listItemTitle density-{density}">
 	{#if icon || $$slots.icon}
 		<div class="listItemIcon">
-			<slot name="icon" >
-                <Icon {icon} />
-            </slot>
+			<slot name="icon">
+				<Icon {icon} />
+			</slot>
 		</div>
 	{/if}
 	<div class="listItemContent">
-		<slot />
 		{#if primary || $$slots.primary}
 			<h5>
 				<slot name="primary">{primary}</slot>
@@ -28,10 +27,13 @@ export let density = 'default';
 				<slot name="secondary">{secondary}</slot>
 			</div>
 		{/if}
+		<slot />
 	</div>
+	{#if action || $$slots.action}
 	<div class="listItemAction">
 		<slot name="action" />
 	</div>
+	{/if}
 </li>
 
 <!--i love slots-->
@@ -115,7 +117,7 @@ export let density = 'default';
   position: absolute;
   height: 50%;
   width: 3px;
-  background-color: maroon;
+  background-color: var(--theme-color-primary);
   border-radius: 8px;
   left: -1px;
 }</style>

@@ -1,10 +1,9 @@
 <script>import { getContext } from 'svelte';
-import { windowsStore } from '/src/lib/ui/window/window.store';
+import { windowsStore } from '../ui/window/window.store';
 import { toggleStartMenu } from './wactions.utils';
 import IconButton from '../base/button/IconButton.svelte';
 import { openPopper } from '../ui/popper/actions';
 import ServiceBox from '../ui/serviceBox/ServiceBox.svelte';
-let { toggle, current, theme } = getContext('theme');
 const popServiceProps = {
     component: ServiceBox,
     componentProps: {

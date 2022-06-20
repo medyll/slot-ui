@@ -16,5 +16,11 @@ export declare type ChromeFrameProps = typeof __propDef.props;
 export declare type ChromeFrameEvents = typeof __propDef.events;
 export declare type ChromeFrameSlots = typeof __propDef.slots;
 export default class ChromeFrame extends SvelteComponentTyped<ChromeFrameProps, ChromeFrameEvents, ChromeFrameSlots> {
+    get frameId(): string;
+    /**accessor*/
+    set frameId(_: string);
+    get showCommands(): boolean;
+    /**accessor*/
+    set showCommands(_: boolean);
 }
 export {};
