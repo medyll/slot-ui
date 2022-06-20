@@ -115,8 +115,10 @@ $: actionArgs = {
 					{/if}
 				</slot>
 			</div>
-		{/if} 
-			<div class="central"><slot>{null_to_empty(primary)}</slot></div> 
+		{/if}
+		{#if $$slots.default}
+			<div class="central"><slot>{null_to_empty(primary)}</slot></div>
+		{/if}
 		{#if $$slots.actionIcon}
 			<div class="action">
 				<slot name="actionIcon" />

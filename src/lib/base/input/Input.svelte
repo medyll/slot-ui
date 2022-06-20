@@ -67,7 +67,7 @@
 			bind:this={element}
 			use:forwardEvents
 			use:popper={usePopper}
-			type={inputType}
+			type="text"
 			class={className + ' w-' + size}
 			data-height={height}
 			{borderless}
@@ -81,7 +81,7 @@
 		bind:this={element}
 		use:forwardEvents
 		use:popper={usePopper}
-		type={inputType}
+		type="text"
 		class={className + ' w-' + size}
 		data-height={height}
 		{borderless}
