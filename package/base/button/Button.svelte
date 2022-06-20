@@ -116,7 +116,7 @@ $: actionArgs = {
 				</slot>
 			</div>
 		{/if}
-		{#if $$slots.default}
+		{#if $$slots.default ?? primary}
 			<div class="central"><slot>{null_to_empty(primary)}</slot></div>
 		{/if}
 		{#if $$slots.actionIcon}
