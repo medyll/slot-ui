@@ -38,7 +38,7 @@
 
   .tabsActiveCellContainer {
     top: auto;
-    position: absolute;
+    position: relative;
     height: 4px;
     transition: all 0.250s;
 
@@ -47,6 +47,9 @@
       height: 4px;
       background-color: var(--theme-color-primary);
       width: 100%;
+      position:absolute;
+    transition: all 0.250s;
+
     }
   }
 }

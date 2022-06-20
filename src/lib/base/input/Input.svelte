@@ -98,8 +98,10 @@
 		border-radius: var(--slotui-input-radius, 4px);
 		padding: var(--slotui-input-padding, 0.5rem);
 		box-shadow: inset 0px 0px 3px 1px rgba(51, 51, 51, 0.8);
-		background-color: rgba(59, 59, 59, 0.99);
-		color: white;
+		background-color: var(--theme-color-paper-alpha-low);
+		color: var(--theme-color-text);
+		/* background-color: rgba(59, 59, 59, 0.99);
+		color: white; */
 		height: 2.5rem;
 		padding: var(--slotui-input-padding, 0 0.5rem);
 		box-sizing: border-box;

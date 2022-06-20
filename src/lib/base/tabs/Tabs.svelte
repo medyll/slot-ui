@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { elem } from '../../engine/elem';
+import Icon from '../icon/Icon.svelte';
 	import type { TabsItemsProps } from './types';
 
 	/*  common slotUi exports*/
@@ -71,7 +72,10 @@
 			{@const display = activeTabCode === item.code ? 'block' : 'none'}
 			<div style="display:{display};height:100%;position:relative;">
 				{#if Boolean(item?.secondary)}
-					<div>{item?.secondary}</div>
+					<div class=" flex-h gap-small">
+						<div><Icon  icon='info-circle' /></div>
+						<div>{@html item?.secondary}</div>
+					</div>
 				{/if}
 				{#if activeTabCode === item.code}
 					{#if Boolean(item?.withComponent)}

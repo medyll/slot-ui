@@ -16,9 +16,11 @@ const handleClick = (tabValue) => (event) => {
     const node = elem(navElementRef).find(`[data-code=${activeTabCode}]`);
     if (node && activeCellElementRef?.parentElement) {
         boundingClientRect = node.getBoundingClientRect();
-        activeCellElementRef.style.left = (boundingClientRect.left - activeCellElementRef.parentElement.offsetLeft) + 'px';
-        activeCellElementRef.style.width = (boundingClientRect.width) + 'px';
-        activeCellElementRef.style.top = (tabsElementRef.offsetHeight) + 'px';
+        /* activeCellElementRef.style.left =
+            boundingClientRect.left - activeCellElementRef.parentElement.offsetLeft + 'px'; */
+        activeCellElementRef.style.left = node?.offsetLeft + 'px';
+        activeCellElementRef.style.width = boundingClientRect.width + 'px';
+        // activeCellElementRef.style.top = tabsElementRef.offsetHeight + 'px';
         // activeCellElementRef.style.marginLeft = (boundingClientRect.width) / 2 + 'px';
     }
 };
@@ -50,26 +52,29 @@ onMount(() => {
 			<slot name="tabsButtonSlot" />
 		</div>
 	</nav>
-	<div bind:this={activeCellElementRef} class="tabsActiveCellContainer">
-		<div class="tabSlot" />
+	<div class="tabsActiveCellContainer">
+		<div bind:this={activeCellElementRef} class="tabSlot" />
 	</div>
 	<div>
 		<slot name="commandBarSlot" />
 	</div>
 	<div class="tabsContent flex-main pos-rel">
 		{#each items as item}
-			{@const display = (activeTabCode === item.code) ? 'block':'none'}
-			 <div style="display:{display};height:100%;position:relative;">
-			{#if activeTabCode === item.code}
-				{#if Boolean(item?.withComponent)}
-					<svelte:component this={item.withComponent} {...item.componentProps ?? {}} />
-				{:else if Boolean(item?.withContent)}
-					{item.withContent}
-				{:else if Boolean(item?.withUid)}
-					{item.withUid}
+			{@const display = activeTabCode === item.code ? 'block' : 'none'}
+			<div style="display:{display};height:100%;position:relative;">
+				{#if Boolean(item?.secondary)}
+					<div>{item?.secondary}</div>
 				{/if}
-			{/if}
-			 </div>
+				{#if activeTabCode === item.code}
+					{#if Boolean(item?.withComponent)}
+						<svelte:component this={item.withComponent} {...item.componentProps ?? {}} />
+					{:else if Boolean(item?.withContent)}
+						{item.withContent}
+					{:else if Boolean(item?.withUid)}
+						{item.withUid}
+					{/if}
+				{/if}
+			</div>
 		{/each}
 	</div>
 </div>
@@ -108,7 +113,7 @@ onMount(() => {
 }
 .tabsRoot .tabsActiveCellContainer {
   top: auto;
-  position: absolute;
+  position: relative;
   height: 4px;
   transition: all 0.25s;
 }
@@ -117,4 +122,6 @@ onMount(() => {
   height: 4px;
   background-color: var(--theme-color-primary);
   width: 100%;
+  position: absolute;
+  transition: all 0.25s;
 }</style>
