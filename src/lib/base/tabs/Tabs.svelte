@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { elem } from '../../engine/elem';
-import Icon from '../icon/Icon.svelte';
+	import Icon from '../icon/Icon.svelte';
 	import type { TabsItemsProps } from './types';
 
 	/*  common slotUi exports*/
@@ -26,7 +26,7 @@ import Icon from '../icon/Icon.svelte';
 
 			/* activeCellElementRef.style.left =
 				boundingClientRect.left - activeCellElementRef.parentElement.offsetLeft + 'px'; */
-				activeCellElementRef.style.left = node?.offsetLeft + 'px';
+			activeCellElementRef.style.left = node?.offsetLeft + 'px';
 			activeCellElementRef.style.width = boundingClientRect.width + 'px';
 			// activeCellElementRef.style.top = tabsElementRef.offsetHeight + 'px';
 			// activeCellElementRef.style.marginLeft = (boundingClientRect.width) / 2 + 'px';
@@ -70,22 +70,26 @@ import Icon from '../icon/Icon.svelte';
 	<div class="tabsContent flex-main pos-rel">
 		{#each items as item}
 			{@const display = activeTabCode === item.code ? 'block' : 'none'}
-			<div style="display:{display};height:100%;position:relative;">
+			<div style="display:{display};height:100%;position:relative;display:flex;flex-direction:column">
 				{#if Boolean(item?.secondary)}
-					<div class=" flex-h gap-small">
-						<div><Icon  icon='info-circle' /></div>
-						<div>{@html item?.secondary}</div>
+					<div class=" flex-h pad-tb gap-small">
+						<div class="border-r pad-1 shad-3 radius-tiny theme-bg-paper">
+							<Icon style="display:block" inline={false} icon="info-circle" />
+						</div>
+						<div class="flex-main pad-t-1">{@html item?.secondary}</div>
 					</div>
 				{/if}
-				{#if activeTabCode === item.code}
-					{#if Boolean(item?.withComponent)}
-						<svelte:component this={item.withComponent} {...item.componentProps ?? {}} />
-					{:else if Boolean(item?.withContent)}
-						{item.withContent}
-					{:else if Boolean(item?.withUid)}
-						{item.withUid}
+				<div style="flex:1">
+					{#if activeTabCode === item.code}
+						{#if Boolean(item?.withComponent)}
+							<svelte:component this={item.withComponent} {...item.componentProps ?? {}} />
+						{:else if Boolean(item?.withContent)}
+							{item.withContent}
+						{:else if Boolean(item?.withUid)}
+							{item.withUid}
+						{/if}
 					{/if}
-				{/if}
+				</div>
 			</div>
 		{/each}
 	</div>
