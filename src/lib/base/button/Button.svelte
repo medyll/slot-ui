@@ -274,7 +274,7 @@
 
 		&[naked='true'] {
 			color: inherit;
-			background-color: transparent;
+			background-color: transparent!important;
 			border: 0.5px solid transparent;
 			cursor: pointer;
 			&:hover {

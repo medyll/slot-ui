@@ -24,16 +24,19 @@
 
 @mixin ui-width-presets {
     &[data-width="tiny"] {
-        width: 1rem;
+        width: 2rem;
         padding: 0;
     }
     &[data-width="small"] {
-        width: 1.65rem;
+        width: 4rem;
     }
-    &[data-width="default"] {
-        width: 2.5rem ;
+    &[data-width="default"],&[data-width="medium"] {
+        width: 12rem ;
     }
     &[data-width="large"] {
         width: 4rem
+    } 
+    &[data-width="auto"] {
+        width: auto
     } 
 }

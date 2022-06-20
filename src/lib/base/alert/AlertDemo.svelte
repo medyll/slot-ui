@@ -1,4 +1,5 @@
 <script lang="ts">
+import Button from '../button/Button.svelte';
 	import Alert from './Alert.svelte';
 </script>
 
@@ -6,7 +7,7 @@
 
 <Alert level="info" >
 	Simple alert with button
-	<button slot="topButtonSlot">button</button>
+	<Button slot="topButtonSlot">button</Button>
 </Alert>
 <Alert level="warning" message="message here">Simple alert</Alert>
 <Alert level="alert" message="message here">Simple <br />alert</Alert>
@@ -15,11 +16,11 @@
 		level="error"
 		on:alert:closed={()=>{alert('closed')}}
 >Simple alerte with message
-	<button data-close slot="buttonZoneSlot">button close</button>
+	<Button data-close slot="buttonZoneSlot">button close</Button>
 	<div slot="messageSlot">message here</div>
 </Alert>
 <Alert message="message here">
 	alert red
 	<div slot="messageSlot">description here here</div>
-	<button data-close slot="buttonZoneSlot">buttddd on</button>
+	<Button data-close slot="buttonZoneSlot">buttddd on</Button>
 </Alert>
