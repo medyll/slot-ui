@@ -1,3 +1,4 @@
+<svelte:options accessors/>
 <script lang="ts">
 	import { chromeFrameStore } from './chromeFrame.store';
 	import { createEventForwarder } from '../../engine/engine';

@@ -36,6 +36,8 @@
 	export let bordered: boolean | undefined = undefined;
 	/** button style link */
 	export let link: boolean | undefined = undefined;
+	/** button style link */
+	export let naked: boolean | undefined = undefined;
 
 	/** with of the button using  presets */
 	export let size: ElementProps['sizeType'] | 'full' = 'medium';
@@ -113,6 +115,7 @@
 	{link}
 	{bordered}
 	{contained}
+	{naked}
 	{presetDefault}
 	{...$$restProps}
 >
@@ -125,8 +128,8 @@
 					{/if}
 				</slot>
 			</div>
-		{/if}
-		<div class="central"><slot>{null_to_empty(primary)}</slot></div>
+		{/if} 
+			<div class="central"><slot>{null_to_empty(primary)}</slot></div> 
 		{#if $$slots.actionIcon}
 			<div class="action">
 				<slot name="actionIcon" />
@@ -177,6 +180,7 @@
 
 <style lang="scss">
 	@import '../../../lib/styles/presets.scss';
+	.button,
 	button,
 	button[contained='true'],
 	input[type='button'],
@@ -225,6 +229,7 @@
 		}
 		@include input-sizes-presets;
 	}
+	.button,
 	button {
 		position: relative;
 		overflow: hidden;
@@ -264,6 +269,16 @@
 				text-decoration: underline;
 			}
 		}
+
+		&[naked='true'] {
+			color: inherit;
+			background-color: transparent; 
+			border: 0.5px solid transparent;
+			cursor: pointer;
+			&:hover {
+				 
+			}
+		}
 		&.loading {
 			& .loadingButtonZone {
 				z-index: 10;
@@ -293,6 +308,9 @@
 			height: 100%;
 			.startButtonSlot {
 				padding: 0 var(--box-density-preset-small, 0.25rem);
+				display: flex;
+				justify-content: center;
+				align-items: center;
 			}
 			.central {
 				flex: 1;

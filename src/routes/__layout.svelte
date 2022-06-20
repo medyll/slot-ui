@@ -174,41 +174,10 @@
 	#svelte {
 		height: 100%;
 	}
-
-	/* button {
-		color: var(--theme-color-text);
-		border: 0.5px solid var(--theme-color-border);
-		padding: 0.5rem 0.75rem;
-		border-radius: 4px;
-		background-color: rgba(255, 255, 255, 0.1);
-
-		&:hover {
-			background-color: var(--color-gray-800);
-		}
-
-		&:active {
-			background-color: var(--theme-color-text);
-			color: var(--theme-color-background);
-			box-shadow: var(--box-shad-10);
-		}
-
-		&[disabled] {
-			color: var(--color-gray-800);
-		}
-	} */
-
 	.inputBorder {
 		border: 1px solid rgba(255, 255, 255, 0.1) !important;
 	}
 
-	/* input {
-		border: 1px solid rgba(208, 191, 151, 0.5);
-		border-bottom: 2px solid rgb(208, 191, 151);
-		border-radius: 4px;
-		padding: 0.5rem;
-		box-shadow: inset 0px 0px 3px 1px rgba(51, 51, 51, 0.8);
-		background-color: rgba(59, 59, 59, 0.99);
-		color: white;
-		height: 1rem;
-	} */
+
+
 </style>

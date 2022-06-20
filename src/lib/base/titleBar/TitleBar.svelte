@@ -1,6 +1,7 @@
 <script lang="ts">
   import Icon from '../icon/Icon.svelte';
   import IconButton from '../button/IconButton.svelte'; 
+import Button from '../button/Button.svelte';
 
   export let onClose: () => void;
   export let hasMenu: any = false;
@@ -11,7 +12,7 @@
     <div class="title flex-main flex-h flex-align-middle">
         <div class="pad-ii-1 text-center">
             <slot name="iconSlot">
-                <Icon fontSize="small" icon="faWorld"/>
+                <Icon fontSize="small" icon="world"/>
             </slot>
         </div>
         <div class="flex-main pad-l-1">
@@ -25,7 +26,7 @@
     {/if}
     {#if onClose}
         <div class="">
-            <IconButton on:click={onClose} iconFontSize="small" icon="faWindowClose"/>
+            <Button on:click={onClose} naked  icon="window-close" size="auto" />
         </div>
     {/if}
 </div>

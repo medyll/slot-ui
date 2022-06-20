@@ -33,10 +33,28 @@
 	export let icon: string = 'question';
 	export let iconFamily: string = 'fa-solid';
 	export let fontSize: SizeType = 'small';
-
-	onDestroy(() => {}); //
 </script>
 
 {#if browser}
-	<Iconify   style="font-size:{sizes[fontSize]}px;{style}" icon="{iconFamily}:{icon}" class="{className}" {...$$restProps} />
+	<Iconify
+		style="font-size:{sizes[fontSize]}px;{style}"
+		icon="{iconFamily}:{icon}"
+		class={className}
+		inline={false}
+		{...$$restProps}
+	/>
 {/if}
+
+<style lang="scss">
+	.rotate,.spinner {
+		animation: spinner-frames 3s infinite linear;
+	}
+	@keyframes spinner-frames {
+		0% {
+			transform: rotate(0deg);
+		}
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+</style>

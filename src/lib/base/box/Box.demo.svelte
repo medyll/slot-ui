@@ -13,7 +13,7 @@ import Button from '../button/Button.svelte';
 </Box>
 <Divider/>
 <Box  class="marg" onClose="cd">
-    <Icon fontSize="small" icon="faClock" slot="iconSlot"/>
+    <Icon fontSize="small" icon="clock" slot="iconSlot"/>
     <span slot="titleSlot">Title of the box</span>
     Content of the box grrte
 </Box>
