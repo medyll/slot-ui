@@ -128,8 +128,10 @@
 					{/if}
 				</slot>
 			</div>
-		{/if} 
-			<div class="central"><slot>{null_to_empty(primary)}</slot></div> 
+		{/if}
+		{#if $$slots.default}
+			<div class="central"><slot>{null_to_empty(primary)}</slot></div>
+		{/if}
 		{#if $$slots.actionIcon}
 			<div class="action">
 				<slot name="actionIcon" />
@@ -272,11 +274,10 @@
 
 		&[naked='true'] {
 			color: inherit;
-			background-color: transparent; 
+			background-color: transparent;
 			border: 0.5px solid transparent;
 			cursor: pointer;
 			&:hover {
-				 
 			}
 		}
 		&.loading {
