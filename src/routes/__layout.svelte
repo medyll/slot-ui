@@ -14,7 +14,7 @@
 	import ListItem from '$lib/base/list/ListItem.svelte'; 
 	import Frame from '$lib/ui/frame/Frame.svelte';
 	import { toggleStartMenu } from '../lib/engine/wactions.utils';
-	import { openChromeFrame } from '../lib/ui/chromeFrame/chromeFrame.utils';
+	import { openChromeFrame } from '$lib/ui/chromeFrame/chromeFrame.utils';
 	import ChromeFrameList from '../lib/ui/chromeFrame/ChromeFrameList.svelte';
 	import ChromeFrameButtonList from '../lib/ui/chromeFrame/ChromeFrameButtonList.svelte';
 	import Explorer from '../components/pages/explorer/Explorer.svelte';

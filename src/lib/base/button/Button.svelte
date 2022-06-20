@@ -164,7 +164,7 @@
 	{/if}
 </button>
 {#if secondary}
-	<div style={`display:inline-block;width:${element?.style?.width}px`}>
+	<div style={`display:block;width:${element?.style?.width}px`}>
 		<Divider />
 		{@html secondary}
 	</div>

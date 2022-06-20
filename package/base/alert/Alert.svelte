@@ -3,6 +3,7 @@ import Divider from '../divider/Divider.svelte';
 import IconButton from '../button/IconButton.svelte';
 import { createEventForwarder } from '../../engine/engine';
 import { createEventDispatcher, get_current_component } from 'svelte/internal';
+import Button from '../button/Button.svelte';
 const dispatch = createEventDispatcher();
 /*  common slotUi exports*/
 let className = '';
@@ -38,39 +39,46 @@ const handleClick = (event) => {
 </script>
 
 {#if isOpen}
-    <div use:forwardEvents bind:this={element} transition:fade class="alert shad-4 {className}" on:click={handleClick}>
-        <div class="pad-1 ftdr  border-b-2 border-color-scheme-{level}">
-            <div class="flex-h flex-align-middle ">
-                <div class="pad-1">
-                    <div class="dot bg-themed-scheme-{level}" ></div>
-                </div>
-                <div class="pad-1 flex-main flex-h flex-align-middle">
-                    <div class="flex-main">
-                        <slot>{message}</slot>
-                    </div>
-                    <slot name="topButtonSlot"/>
-                    <IconButton
-                            on:click={() => {
+	<div
+		use:forwardEvents
+		bind:this={element}
+		transition:fade
+		class="alert shad-4 {className}"
+		on:click={handleClick}
+	>
+		<div class="pad-1 ftdr  border-b-2 border-color-scheme-{level}">
+			<div class="flex-h flex-align-middle ">
+				<div class="pad-1">
+					<div class="dot bg-themed-scheme-{level}" />
+				</div>
+				<div class="pad-1 flex-main flex-h flex-align-middle">
+					<div class="flex-main">
+						<slot>{message}</slot>
+					</div>
+					<slot name="topButtonSlot" />
+					<Button
+						size="auto"
+						icon="window-close"
+						naked
+						on:click={() => {
 							isOpen = !isOpen;
 						}}
-                            iconFontSize="small"
-                            icon="faWindowClose"
-                    />
-                </div>
-            </div>
-            {#if $$slots.messageSlot}
-                <Divider />
-                <div class="pad-1">
-                    <slot name="messageSlot"/>
-                </div>
-            {/if}
-        </div>
-        {#if $$slots.buttonZoneSlot}
-            <div class="pad-tb-1 pad-ii-2 flex-h flex-align-right">
-                <slot name="buttonZoneSlot"/>
-            </div>
-        {/if}
-    </div>
+					/>
+				</div>
+			</div>
+			{#if $$slots.messageSlot}
+				<Divider />
+				<div class="pad-1">
+					<slot name="messageSlot" />
+				</div>
+			{/if}
+		</div>
+		{#if $$slots.buttonZoneSlot}
+			<div class="pad-tb-1 pad-ii-2 flex-h flex-align-right">
+				<slot name="buttonZoneSlot" />
+			</div>
+		{/if}
+	</div>
 {/if}
 
 <style>.alert {

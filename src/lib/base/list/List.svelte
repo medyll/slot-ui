@@ -102,10 +102,10 @@
 
 <ul
 	bind:this={element}
-	class="density-{density}"
+	class="density-{density} {className}"
 	on:listclicked={onListItemClick}
 	on:list:dblclicked={onListItemClick}
-	style="position:relative;height:{height};margin:0;padding:0;{style};opacity:${disabled ? 0.6 : 1}"
+	style="position:relative;height:{height};margin:0;padding:0;{style};opacity:{disabled ? 0.6 : 1}"
 	use:forwardEvents
 >
 	{#if $$slots.title || title || primary || secondary}
@@ -135,7 +135,7 @@
 		{:else}
 			{#each listItems as item}
 				<slot listItem={item}>
-					<ListItem {showIcon} {density} data={item.data} icon={item?.icon}>
+					<ListItem style="content-visibility:hidden;" {showIcon} {density} data={item.data} icon={item?.icon}>
 						<span slot="icon" />
 						<span slot="primary">{null_to_empty(item?.primary)}</span>
 						<span slot="secondary">{null_to_empty(item?.secondary)}</span>

@@ -151,7 +151,7 @@ $: actionArgs = {
 	{/if}
 </button>
 {#if secondary}
-	<div style={`display:inline-block;width:${element?.style?.width}px`}>
+	<div style={`display:block;width:${element?.style?.width}px`}>
 		<Divider />
 		{@html secondary}
 	</div>
@@ -334,7 +334,7 @@ button[link=true]:hover {
 .button[naked=true],
 button[naked=true] {
   color: inherit;
-  background-color: transparent;
+  background-color: transparent !important;
   border: 0.5px solid transparent;
   cursor: pointer;
 }

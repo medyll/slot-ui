@@ -106,6 +106,15 @@ export let density = 'default';
   margin: 0.5rem 0.5rem;
 }
 
+:global(li.listItemTitle) {
+  position: sticky;
+  margin-top: 0;
+  top: 0;
+  background-color: var(--theme-color-background-alpha);
+  backdrop-filter: blur(5px);
+  z-index: 1;
+}
+
 :global(li.listItem:hover) {
   background-color: rgba(255, 255, 255, 0.3);
 }

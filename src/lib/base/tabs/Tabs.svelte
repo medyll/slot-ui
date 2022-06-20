@@ -69,7 +69,7 @@
 	</div>
 	<div class="tabsContent flex-main pos-rel">
 		{#each items as item}
-			{@const display = activeTabCode === item.code ? 'block' : 'none'}
+			{@const display = activeTabCode === item.code ? 'flex' : 'none'}
 			<div style="display:{display};height:100%;position:relative;display:flex;flex-direction:column">
 				{#if Boolean(item?.secondary)}
 					<div class=" flex-h pad-tb gap-small">
@@ -79,7 +79,7 @@
 						<div class="flex-main pad-t-1">{@html item?.secondary}</div>
 					</div>
 				{/if}
-				<div style="flex:1">
+				<div style="flex:1;overflow:hidden;">
 					{#if activeTabCode === item.code}
 						{#if Boolean(item?.withComponent)}
 							<svelte:component this={item.withComponent} {...item.componentProps ?? {}} />

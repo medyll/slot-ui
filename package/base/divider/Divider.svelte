@@ -19,7 +19,8 @@ function getDensity(density) {
         none: '0',
         tight: '0.25rem',
         default: '0.5rem',
-        kind: '1.5rem',
+        medium: '1rem',
+        kind: '1.5rem'
     };
     return denses[density];
 }
@@ -34,11 +35,13 @@ switch (direction) {
 }
 </script>
 
-<hr bind:this={element}
-    class="{extensionClass[extension]} {className}"
-    class:vertical={direction==='vertical'}
-    style="{addStyle}"
-    use:forwardEvents/>
+<hr
+	bind:this={element}
+	class="{extensionClass[extension]} {className}"
+	class:vertical={direction === 'vertical'}
+	style={addStyle}
+	use:forwardEvents
+/>
 
 <style>hr {
   border: none;

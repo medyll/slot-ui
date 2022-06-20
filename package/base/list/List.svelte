@@ -86,10 +86,10 @@ function onListItemClick(e) {
 
 <ul
 	bind:this={element}
-	class="density-{density}"
+	class="density-{density} {className}"
 	on:listclicked={onListItemClick}
 	on:list:dblclicked={onListItemClick}
-	style="position:relative;height:{height};margin:0;padding:0;{style};opacity:${disabled ? 0.6 : 1}"
+	style="position:relative;height:{height};margin:0;padding:0;{style};opacity:{disabled ? 0.6 : 1}"
 	use:forwardEvents
 >
 	{#if $$slots.title || title || primary || secondary}
@@ -119,7 +119,7 @@ function onListItemClick(e) {
 		{:else}
 			{#each listItems as item}
 				<slot listItem={item}>
-					<ListItem {showIcon} {density} data={item.data} icon={item?.icon}>
+					<ListItem style="content-visibility:hidden;" {showIcon} {density} data={item.data} icon={item?.icon}>
 						<span slot="icon" />
 						<span slot="primary">{null_to_empty(item?.primary)}</span>
 						<span slot="secondary">{null_to_empty(item?.secondary)}</span>
@@ -188,6 +188,15 @@ function onListItemClick(e) {
 :global(li.listItem.density-kind) {
   padding: 1.5rem 0;
   margin: 0.5rem 0.5rem;
+}
+
+:global(li.listItemTitle) {
+  position: sticky;
+  margin-top: 0;
+  top: 0;
+  background-color: var(--theme-color-background-alpha);
+  backdrop-filter: blur(5px);
+  z-index: 1;
 }
 
 :global(li.listItem:hover) {

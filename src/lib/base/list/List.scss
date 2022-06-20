@@ -58,9 +58,14 @@ li.listItem {
   }
 }
 
-.listItemTitle .listItemContent {
-  [slot="primary"] { 
-  }
+
+li.listItemTitle{
+  position: sticky;
+  margin-top: 0;
+  top:0;
+  background-color: var(--theme-color-background-alpha);
+  backdrop-filter: blur(5px);
+  z-index:1;
 }
 
 li.listItem {
