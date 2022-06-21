@@ -1,6 +1,6 @@
 {
   "name": "@medyll/slotui",
-  "version": "0.1.33",
+  "version": "0.1.24",
   "repository": {
     "type": "git",
     "url": "https://github.com/medyll/slot-ui.git"
@@ -92,6 +92,10 @@
     "./base/chrome/Chrome.svelte": "./base/chrome/Chrome.svelte",
     "./base/chrome/ChromeContent.svelte": "./base/chrome/ChromeContent.svelte",
     "./base/chrome/ChromeNav.svelte": "./base/chrome/ChromeNav.svelte",
+    "./base/columner/Column.svelte": "./base/columner/Column.svelte",
+    "./base/columner/Columner.demo.svelte": "./base/columner/Columner.demo.svelte",
+    "./base/columner/Columner.svelte": "./base/columner/Columner.svelte",
+    "./base/columner/types": "./base/columner/types.js",
     "./base/contentSwitcher/ContentSwitcher.svelte": "./base/contentSwitcher/ContentSwitcher.svelte",
     "./base/contentSwitcher/useContentSwitcher": "./base/contentSwitcher/useContentSwitcher.js",
     "./base/dataList/DataList.demo.svelte": "./base/dataList/DataList.demo.svelte",
