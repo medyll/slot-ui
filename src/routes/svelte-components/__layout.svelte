@@ -24,7 +24,7 @@
 	import ListItem from '$lib/base/list/ListItem.svelte';
 	import { null_to_empty } from 'svelte/internal';
 	import { propsProxy } from '$lib/engine/utils';
-	import  { slotUiComponentList } from '/src/sitedata/componantList';
+	import  { slotUiComponentList } from '/src/sitedata/componentList';
 
 	const cols = propsProxy<any, typeof slotUiComponentList[0]>(
 		[
