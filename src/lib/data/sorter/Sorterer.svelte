@@ -18,7 +18,8 @@
 	export let activeCommonSortField = '';
 </script>
 
-<div bind:this={element} class="flex-h gap-small {className}">
+<div bind:this={element} class="flex-h flex-align-middle gap-small {className}">
+    <slot></slot>
 	{#each fields as field}
 		<Sorter {...field} bind:sortedData bind:activeCommonSortField {data} />
 	{/each}

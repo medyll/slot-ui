@@ -54,6 +54,6 @@
 			bind:sortedData
 			fields={[{ sortByField: 'name' }, { sortByField: 'directory' }]}
 			{data}
-		/>
+		>here</Sorterer>
 	</div>
 </div>
