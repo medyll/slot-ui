@@ -2,6 +2,7 @@
 	import Divider from '$lib/base/divider/Divider.svelte';
 	import List from '$lib/base/list/List.svelte';
 	import Sorter from './Sorter.svelte';
+	import Sorterer from './Sorterer.svelte';
 
 	const data = [...Array(5)].map((r, i) => {
 		return {
@@ -46,5 +47,13 @@
 				nested field <br />
 			</div>
 		</div>
+	</div>
+	<h5>{'<Sorterer />'}</h5>
+	<div>
+		<Sorterer
+			bind:sortedData
+			fields={[{ sortByField: 'name' }, { sortByField: 'directory' }]}
+			{data}
+		/>
 	</div>
 </div>

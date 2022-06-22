@@ -57,7 +57,7 @@
 			icon={icons.default[sortState.indexOf(sortByOrder)]}
 			iconFamily="mdi"
 			naked
-			selected={activeCommonSortField ===sortByField}
+			selected={sortByOrder !== 'none' && activeCommonSortField ===sortByField}
 			size="auto"
 		/>
 	{/if}
