@@ -16,27 +16,37 @@
 		};
 	}
 
-	/*  common slotUi exports*/
+ 
 	let className = '';
 	export { className as class };
 	export let element: HTMLDivElement | null = null;
 	const forwardEvents = createEventForwarder(get_current_component());
-	/*  end slotUi exports*/
+ 
 </script>
 
-<div id={columnId} class="column">
-	<TopBar title="commndBar">commndBar</TopBar>
-	<slot />
-	<div>bottom</div>
+<div bind:this={element} use:forwardEvents id={columnId} class="column {className}"  {...$$restProps}>
+	<slot name="topSlot" />
+	<div class="content"><slot /></div>
+	<slot name="bottomSLot" />
 </div>
 
 <style lang="scss">
 	.column {
+		height:100%;
+		display:flex;
 		flex: 1;
 		position: relative;
+		flex-direction: column; 
+		.content {
+			flex: 1;
+			overflow:hidden;
+		}
+
 		.commandBar {
 			position: sticky;
 			top: 0;
 		}
+		border-right: 1px solid var(--slotui-column-bordercolor,var(--theme-color-foreground-alpha-high));
+		box-shadow: var(--box-shad-1);
 	}
 </style>

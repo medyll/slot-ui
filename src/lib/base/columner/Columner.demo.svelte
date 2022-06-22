@@ -3,9 +3,8 @@
 	import Columner from './Columner.svelte';
 </script>
 
-
-<Columner >
-<Column>re</Column>
-<Column>re</Column>
-<Column>re</Column>
+<Columner style="height:350px">
+	<Column>re</Column>
+	<Column>re</Column>
+	<Column>re</Column>
 </Columner>

@@ -1,6 +1,6 @@
 {
   "name": "@medyll/slotui",
-  "version": "0.1.35",
+  "version": "0.1.36",
   "repository": {
     "type": "git",
     "url": "https://github.com/medyll/slot-ui.git"
@@ -156,6 +156,7 @@
     "./data/grouper/Grouper.svelte": "./data/grouper/Grouper.svelte",
     "./data/sorter/Sorter.demo.svelte": "./data/sorter/Sorter.demo.svelte",
     "./data/sorter/Sorter.svelte": "./data/sorter/Sorter.svelte",
+    "./data/sorter/Sorterer.svelte": "./data/sorter/Sorterer.svelte",
     "./effects/transitions": "./effects/transitions.js",
     "./engine/DynComp.svelte": "./engine/DynComp.svelte",
     "./engine/elem": "./engine/elem.js",

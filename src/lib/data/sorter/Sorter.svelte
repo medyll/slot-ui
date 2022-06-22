@@ -59,6 +59,7 @@
 			naked
 			selected={sortByOrder !== 'none' && activeCommonSortField ===sortByField}
 			size="auto"
+			showChip={sortByOrder !== 'none' && activeCommonSortField ===sortByField}
 		/>
 	{/if}
 	{#if sorterMode === 'menu'}

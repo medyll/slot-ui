@@ -22,9 +22,9 @@
 	export { buttonType as type };
 
 	/** icon as a parameter*/
-	export let icon: string | undefined = undefined;	
+	export let icon: string | undefined = undefined;
 	/** icon as a parameter*/
-	export let iconFamily: string | undefined = 'fa-solid';	
+	export let iconFamily: string | undefined = 'fa-solid';
 	/** icon color as a parameter*/
 	export let iconColor: string = '#666';
 	/** paramters for usePopper */
@@ -131,7 +131,7 @@
 			<div class="startButtonSlot">
 				<slot name="startButtonSlot">
 					{#if icon}
-						<Icon fontSize="small" {icon}  style="color:{iconColor}"  {iconFamily} />
+						<Icon fontSize="small" {icon} style="color:{iconColor}" {iconFamily} />
 					{/if}
 				</slot>
 			</div>
@@ -141,7 +141,7 @@
 		{/if}
 		{#if $$slots.actionIcon}
 			<div class="action">
-				<slot name="actionIcon" />  
+				<slot name="actionIcon" />
 			</div>
 		{/if}
 	</div>
@@ -215,7 +215,7 @@
 		}
 		&[disabled] {
 			color: var(--color-gray-800);
-			border-color: none;  
+			border-color: none;
 			opacity: 0.4;
 		}
 		&:hover {
@@ -247,8 +247,9 @@
 		/** variant presets */
 		&[selected='true'] {
 			box-shadow: var(--box-shad-3);
-			border: 0.5px solid var(--theme-color-paper-alpha-low); 
+			border: 0.5px solid var(--theme-color-paper-alpha-low);
 			background-color: transparent;
+			font-weight: bold;
 		}
 		&[bordered='true'] {
 			color: var(--theme-color-foreground);
@@ -285,13 +286,15 @@
 
 		&[naked='true'] {
 			color: inherit;
-			background-color: transparent!important;
+			background-color: transparent !important;
 			border: 0.5px solid transparent;
 			cursor: pointer;
-			&:hover,&:active,&:focus {
-			background-color: transparent!important;
-			border: 0.5px solid transparent;
-			color: inherit;
+			&:hover,
+			&:active,
+			&:focus {
+				background-color: transparent !important;
+				border: 0.5px solid transparent;
+				color: inherit;
 			}
 		}
 		&.loading {
@@ -354,13 +357,13 @@
 		.chip {
 			position: absolute;
 			z-index: 2;
-			height: 4px;
+			height: 3px;
 			left: 50%;
 			transform: translate(-50%, 0);
 			width: 50%;
 			background-color: var(--css-button-chip-color, var(--theme-color-primary));
 			border-radius: 16px;
-			bottom: 3px;
+			bottom: 2px;
 		}
 	}
 </style>

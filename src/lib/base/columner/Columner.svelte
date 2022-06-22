@@ -7,15 +7,17 @@
 	setContext('columner', columner);
 </script>
 
-<div class="columner">
+<div class="columner"  {...$$restProps}>
 	<slot />
-	<div class="flex-main">
+	<!-- <div class="flex-main">
 		<pre>{JSON.stringify($columner, null, ' ')}</pre>
-	</div>
+	</div> -->
 </div>
 
 <style lang="scss">
 	.columner {
 		display: flex;
+		height: 100%; 
+		position: relative;
 	}
 </style>
