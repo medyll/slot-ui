@@ -14,12 +14,16 @@
 	export let element: HTMLDivElement | null = null;
 	const forwardEvents = createEventForwarder(get_current_component());
 
-	export let style = ''
+	export let style = '';
 
 	/** icon as a parameter*/
 	export let icon: string | undefined = undefined;
 	/** icon as a parameter*/
+	export let iconColor: string = '#666';
+	/** icon as a parameter*/
 	export let endIcon: string | undefined = undefined;
+	/** icon color as a parameter*/
+	export let endIconColor: string = '#666';
 	/** paramters for usePopper */
 	export let usePopper: UsePopperProps | undefined = undefined;
 	/** with of the input using  presets */
@@ -33,10 +37,10 @@
 
 	export let value: any;
 
-	let niceIconStyle='';
-	
-	niceIconStyle +=(icon || $$slots.startInputSlot) ? 'padding-left:2.2rem;' : ''
-	niceIconStyle += (endIcon || $$slots.endInputSlot) ? 'padding-right:2.2rem;' : ''
+	let niceIconStyle = '';
+
+	niceIconStyle += icon || $$slots.startInputSlot ? 'padding-left:2.2rem;' : '';
+	niceIconStyle += endIcon || $$slots.endInputSlot ? 'padding-right:2.2rem;' : '';
 
 	$: if (usePopper) {
 		usePopper.disabled = false;
@@ -48,18 +52,23 @@
 
 {#if icon || endIcon || $$slots.startInputSlot || $$slots.endInputSlot}
 	<div style="position:relative;display:inline-block">
-		{#if icon   || $$slots.startInputSlot}
+		{#if icon || $$slots.startInputSlot}
 			<div class="inpuStart">
 				<slot name="startInputSlot">
-					<Icon {icon} style="max-width:100%;max-height:100%;" />
+					<Icon {icon} style="max-width:100%;max-height:100%;color:{iconColor}" />
 				</slot>
 			</div>
 		{/if}
-		{#if $$slots.endInputSlot || endIcon}
+		{#if $$slots.endInputSlot || endIcon || inputType === 'search'}
 			<div class="inpuEnd">
-				<slot name="endInputSlot" >
-					<Icon icon={endIcon} style="max-width:100%;max-height:100%;" />
-				</slot>
+				{#if $$slots.endInputSlot || endIcon}
+					<slot name="endInputSlot">
+						<Icon icon={endIcon} style="max-width:100%;max-height:100%;color:{endIconColor}" />
+					</slot>
+				{/if}
+				{#if inputType === 'search'}
+					<Button on:click={()=>{value=null}} disabled={!value?.length} naked icon="close-circle-outline" iconFamily="mdi" />
+				{/if}
 			</div>
 		{/if}
 		<input
@@ -72,9 +81,9 @@
 			data-height={height}
 			data-width={size}
 			{borderless}
-			style={niceIconStyle+";"+style}
+			style={niceIconStyle + ';' + style}
 			{...$$restProps}
-		 />
+		/>
 	</div>
 {:else}
 	<input
@@ -96,11 +105,12 @@
 	input {
 		border: 1px solid var(--theme-color-foreground-alpha);
 		// border: 1px solid rgba(208, 191, 151, 0.5);
-		border-bottom: var(--slotui-border-bottom-size, 2px) solid var(--theme-color-primary-darker,rgb(208, 191, 151));
+		border-bottom: var(--slotui-border-bottom-size, 2px) solid
+			var(--theme-color-primary-darker, rgb(208, 191, 151));
 		border-radius: var(--slotui-input-radius, 4px);
 		padding: var(--slotui-input-padding, 0.5rem);
 		box-shadow: inset 0px 0px 3px 1px rgba(51, 51, 51, 0.1);
-		background-color: var(--theme-color-paper-alpha-low);
+		background-color: var(--theme-color-background-alpha-low);
 		color: var(--theme-color-text);
 		/* background-color: rgba(59, 59, 59, 0.99);
 		color: white; 
@@ -108,14 +118,13 @@
 		padding: var(--slotui-input-padding, 0 0.5rem);
 		box-sizing: border-box;
 		&:hover {
-			border-color:  var(--theme-color-foreground);
+			border-color: var(--theme-color-foreground);
 		}
-		[error]{
+		[error] {
 			border-bottom: red;
 		}
 		@include input-sizes-presets;
 		@include ui-width-presets;
-
 	}
 
 	.inpuStart {
@@ -142,7 +151,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		padding: 0.5rem;
+		padding: 0.25rem;
 		// background-color: rgba(255, 255, 255, 0.1);
 		border-radius: var(--slotui-input-radius, 4px);
 	}

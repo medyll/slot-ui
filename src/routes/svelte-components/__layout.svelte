@@ -24,7 +24,7 @@
 	import ListItem from '$lib/base/list/ListItem.svelte';
 	import { null_to_empty } from 'svelte/internal';
 	import { propsProxy } from '$lib/engine/utils';
-	import  { slotUiComponentList } from '/src/sitedata/componentList';
+	import { slotUiComponentList } from '/src/sitedata/componentList';
 
 	const cols = propsProxy<any, typeof slotUiComponentList[0]>(
 		[
@@ -34,7 +34,7 @@
 		slotUiComponentList
 	);
 
-	let activePage:any;
+	let activePage: any;
 	let menuList = [
 		{
 			primary: 'button',
@@ -54,13 +54,13 @@
 </script>
 
 <Frame class="">
-	<div class="theme-bg-paper overflow-hidden  h-full" slot="frameDrawerSlot"> 
+	<div class="theme-bg-paper overflow-hidden  h-full" slot="frameDrawerSlot">
 		{#if menuList}
 			<List
-				listItems={cols} 
+				listItems={cols}
 				setSelectedData={activePage?.data}
-				let:listItem 
-				noVirtualize={true} 
+				let:listItem
+				noVirtualize={true}
 				density="default"
 				onItemClick={openIn}
 				selectorField="code"
@@ -71,9 +71,11 @@
 					<span slot="action">{null_to_empty(listItem?.action)}</span>
 				</ListItem>
 			</List>
-		{/if} 
+		{/if}
 	</div>
 	<div class="theme-bg  h-full" slot="contentFrameSlot">
-		<slot r="red" />
+		<div class="pad-4">
+			<slot />
+		</div>
 	</div>
 </Frame>

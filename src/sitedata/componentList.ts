@@ -19,6 +19,8 @@ import InputDemo from '$lib/base/input/Input.demo.svelte';
 import DataListDemo from '$lib/base/datalist/DataList.demo.svelte';
 import GrouperDemo from '$lib/data/grouper/Grouper.demo.svelte'; 
 import ColumnerDemoSvelte from '$lib/base/columner/Columner.demo.svelte';
+import SorterDemoSvelte from '$lib/data/sorter/Sorter.demo.svelte';
+import ContentSwitcherDemoSvelte from '$lib/base/contentSwitcher/ContentSwitcher.demo.svelte';
 
 export const slotUiComponentList = [
     {
@@ -36,5 +38,7 @@ export const slotUiComponentList = [
     { name: 'Input', code: 'Input', component: InputDemo },
     { name: 'DataList', code: 'DataList', component: DataListDemo },
     { name: 'Grouper component', code: 'grouper', component: GrouperDemo },
-    { name: 'Columner  component', code: 'Columner', component: ColumnerDemoSvelte }
+    { name: 'Sorter component', code: 'sorter', component: SorterDemoSvelte },
+    { name: 'Columner  component', code: 'Columner', component: ColumnerDemoSvelte },
+    { name: 'Content Switcher  component', code: 'switcher', component: ContentSwitcherDemoSvelte }
 ];

@@ -79,14 +79,15 @@
     .frameContainer {
 
       .navLeft {
-        z-index:0;
+        z-index:1;
         max-width: 288px;
         border-right: 1px solid var(--theme-color-primary);
+        box-shadow: var(--box-shad-3);
       }
 
       .content {
         flex: 1 auto;
-        z-index:1;
+        z-index:0;
 
       }
     }

@@ -6,7 +6,6 @@ import {bubble, listen} from 'svelte/internal';
 type EventForwarderCallback = (event: any) => void;
 type EventArgs = (eventType: string, callback: EventForwarderCallback) => () => void
 
-/** @deprecated */
 export function createEventForwarder(component: SvelteComponent, exclude: string[] = []) {
   
   // This is our pseudo $on function. It is defined on component mount.

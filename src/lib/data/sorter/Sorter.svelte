@@ -4,15 +4,73 @@
 </script>
 
 <script lang="ts">
-	export const groupedData: SortItem[] = [];
+	import Button from '$lib/base/button/Button.svelte';
+	import { dataOp } from '$lib/engine/utils';
+
+	/** Sorter mode */
+	export let sorterMode: 'button' | 'menu' = 'button';
+	/** binding : final sorted data as raw object  */
+	export let sortedData: SortItem[] = [];
+	/** list of available sorts shown to user */
+	export let sortListItems: string[] | undefined = undefined;
+	/** data to sort */
 	export let data: Data[];
+	/** field from data to sort by*/
+	export let sortByField: string | undefined = undefined;
+	/** presented field from data to sort by*/
+	export let sortByTitleField: string | undefined = undefined;
+	/** order on which the sorted list is sorted */
+	export let sortByOrder: 'asc' | 'desc' | 'none' | string = 'none';
+	/** binding, used when multiple buttons*/
+	export let activeCommonSortField: string = '';
 
-	function sort() {}
+	const sortState: string[] = ['none', 'asc', 'desc'];
+	const icons = {
+		default: ['dots-horizontal', 'sort-bool-ascending', 'sort-bool-descending']
+	};
 
+	$: sortedData = data;
+	$: if (Boolean(activeCommonSortField) && activeCommonSortField !==sortByField) {
+		sortByOrder = 'none'
+	}
 
+	function doSort(field: string, order: 'asc' | 'desc' | 'none' | string) {
+		activeCommonSortField = field;
+		sortByOrder = order;
+		if (order === 'none') {
+			sortedData = data;
+		} else {
+			sortedData = dataOp.sortBy(data, field, order);
+		}
+	}
 </script>
 
-
 <div>
+	{#if sorterMode === 'button'}
+		<Button
+			on:click={() => {
+				const next = sortState.indexOf(sortByOrder) + 1;
+				let toggleOrder = sortState?.[next] ? sortState[next] : sortState[0];
+				if (sortByField) doSort(sortByField, toggleOrder);
+			}}
+			primary={sortByTitleField ?? sortByField  }
+			icon={icons.default[sortState.indexOf(sortByOrder)]}
+			iconFamily="mdi"
+			naked
+			selected={activeCommonSortField ===sortByField}
+			size="auto"
+		/>
+	{/if}
+	{#if sorterMode === 'menu'}
+		<Button
+			on:click={() => {
+				if (sortByField) doSort(sortByField, 'desc');
+			}}
+			icon="sort-bool-descending"
+			iconFamily="mdi"
+		/>
+	{/if}
+	<!-- // button name + asc/desc -->
+	<!-- // button menu with all data minus objects  + asc/desc -->
 	<slot />
 </div>

@@ -3,20 +3,17 @@
 
 	import type { ElementProps } from 'src/types';
 	export type SizeType = keyof typeof sizes;
-	const sizes: Record<ElementProps['sizeType'], number> = {
+	const sizes: Partial<Record<ElementProps['sizeType'], any>> = {
 		tiny: 8,
 		small: 16,
 		medium: 24,
 		default: 32,
 		large: 48,
-		big: 64,
-		full: 100
-	} as const;
-	// 'tiny' | 'small' | 'medium' | 'default' | 'large' | 'big' | 'full'
+		big: 64, 
+	} as const; 
 </script>
 
-<script lang="ts">
-	import { createEventForwarder } from '../../engine/engine';
+<script lang="ts"> 
 	import { get_current_component } from 'svelte/internal';
 	import { onDestroy } from 'svelte';
 
@@ -25,9 +22,7 @@
 	/*  common slotUi exports*/
 	let className = '';
 	export { className as class };
-	export let style: string = '';
-	export let element: HTMLDivElement | null = null;
-	const forwardEvents = createEventForwarder(get_current_component());
+	export let style: string = ''; 
 	/*  end slotUi exports*/
 
 	export let icon: string = 'question';
@@ -45,7 +40,7 @@
 	/>
 {/if}
 
-<style lang="scss">
+<style lang="scss"> 
 	.rotate,.spinner {
 		animation: spinner-frames 3s infinite linear;
 	}

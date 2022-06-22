@@ -146,11 +146,10 @@ import Button from '$lib/base/button/Button.svelte';
 <div bind:this={element}>
 	{#if grouperMode === 'menu'}
 		<Button
-			on:menu:item:clicked={(e) => {
-				alert('red twoo');
+			on:click={(e) => { 
 				console.log(e);
 			}}
-			{menuProps}>group by</Button
+			{menuProps}>menu group by</Button
 		>
 	{/if}
 	{#if grouperMode === 'button' && groupByField}

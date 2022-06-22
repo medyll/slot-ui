@@ -14,12 +14,16 @@
 	export let direction: 'vertical' | 'horizontal' = 'horizontal';
 	export let extension: ElementProps['expansion'] = 'full';
 
+	export let shadow = false;
+
 	let extensionClass = {
 		full: 'marg-tb-1 ',
 		padded: 'marg-tb-1 marg-ii-2',
 		centered: 'marg-tb-1 marg-ii-4'
 	};
 
+	$: shadowClass = shadow ? "shad-3" : ''
+	
 	function getDensity(density: ElementProps['density']) {
 		const denses: Record<ElementProps['density'], any> = {
 			none: '0',
@@ -45,7 +49,7 @@
 
 <hr
 	bind:this={element}
-	class="{extensionClass[extension]} {className}"
+	class="{extensionClass[extension]} {className} {shadowClass}"
 	class:vertical={direction === 'vertical'}
 	style={addStyle}
 	use:forwardEvents

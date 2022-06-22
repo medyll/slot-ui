@@ -22,7 +22,11 @@
 	export { buttonType as type };
 
 	/** icon as a parameter*/
-	export let icon: string | undefined = undefined;
+	export let icon: string | undefined = undefined;	
+	/** icon as a parameter*/
+	export let iconFamily: string | undefined = 'fa-solid';	
+	/** icon color as a parameter*/
+	export let iconColor: string = '#666';
 	/** paramters for usePopper */
 	export let usePopper: UsePopperProps | undefined = undefined;
 	/** show loading state */
@@ -47,6 +51,8 @@
 	export let nowrap: boolean = false;
 	/** height of the button, using preset values */
 	export let height: string = 'default';
+	/**  button selected */
+	export let selected: boolean = false;
 
 	export let primary: string | undefined = undefined;
 	export let secondary: string | undefined = undefined;
@@ -116,6 +122,7 @@
 	{bordered}
 	{contained}
 	{naked}
+	{selected}
 	{presetDefault}
 	{...$$restProps}
 >
@@ -124,7 +131,7 @@
 			<div class="startButtonSlot">
 				<slot name="startButtonSlot">
 					{#if icon}
-						<Icon fontSize="small" {icon} />
+						<Icon fontSize="small" {icon}  style="color:{iconColor}"  {iconFamily} />
 					{/if}
 				</slot>
 			</div>
@@ -134,8 +141,7 @@
 		{/if}
 		{#if $$slots.actionIcon}
 			<div class="action">
-				<slot name="actionIcon" />
-				<!-- <Icon icon="chevron-right" fontSize="tiny" /> -->
+				<slot name="actionIcon" />  
 			</div>
 		{/if}
 	</div>
@@ -151,7 +157,7 @@
 				<div class="flex-h flex-align-middle gap-tiny">
 					<div>
 						<slot name="loadingIconButtonSlot"
-							><div><Icon icon="spinner" class="fa rotate" /></div>
+							><div><Icon icon="spinner" class="rotate" /></div>
 						</slot>
 					</div>
 					<div>loading</div>
@@ -209,8 +215,8 @@
 		}
 		&[disabled] {
 			color: var(--color-gray-800);
-			border-color: var(--color-gray-800);
-			opacity: 0.8;
+			border-color: none;  
+			opacity: 0.4;
 		}
 		&:hover {
 			transform: scale(1.05);
@@ -221,7 +227,7 @@
 			outline: 0;
 		}
 		&:active {
-			transform: scale(0.9);
+			transform: scale(0.97);
 			border: 0.5px solid var(--theme-color-primary) !important;
 			box-shadow: var(--box-shad-4);
 		}
@@ -239,6 +245,11 @@
 			color: ' ';
 		}
 		/** variant presets */
+		&[selected='true'] {
+			box-shadow: var(--box-shad-3);
+			border: 0.5px solid var(--theme-color-paper-alpha-low); 
+			background-color: transparent;
+		}
 		&[bordered='true'] {
 			color: var(--theme-color-foreground);
 			border: 0.5px solid var(--theme-color-border);
@@ -277,7 +288,10 @@
 			background-color: transparent!important;
 			border: 0.5px solid transparent;
 			cursor: pointer;
-			&:hover {
+			&:hover,&:active,&:focus {
+			background-color: transparent!important;
+			border: 0.5px solid transparent;
+			color: inherit;
 			}
 		}
 		&.loading {

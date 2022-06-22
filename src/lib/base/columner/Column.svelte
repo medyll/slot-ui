@@ -1,6 +1,8 @@
 <script lang="ts">
+	import { createEventForwarder } from '$lib/engine/eventForwarder';
 	import TopBar from '$lib/ui/topBar/TopBar.svelte';
 	import { getContext } from 'svelte';
+	import { get_current_component } from 'svelte/internal';
 	import type { ColumnerStoreType } from './types';
 	let columner = getContext<ColumnerStoreType>('columner');
 
