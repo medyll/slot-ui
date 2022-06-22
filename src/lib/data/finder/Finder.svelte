@@ -1,6 +1,7 @@
 <svelte:options accessors={true} />
 
 <script lang="ts">
+import Input from '$lib/base/input/Input.svelte';
 	import { dataOp } from '$lib/engine/utils';
 
 	let className = '';
@@ -29,12 +30,13 @@
 	$: if (!searchString) filteredData = data;
 </script>
 
-<input
+<Input
 	bind:value={searchString}
 	bind:this={element}
 	on:keydown={doFind(data, this.value, defaultField)}
 	placeholder="find"
 	type="search"
+	size="auto" 
 	{...$$restProps}
 />
 <slot name="noResultsSlot" />

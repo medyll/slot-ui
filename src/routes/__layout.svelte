@@ -1,5 +1,5 @@
 <script lang="ts">
-	import github from 'svelte-highlight/styles/github-dark';
+	import github from 'svelte-highlight/styles/github';
 	import cssfabric from '@medyll/cssfabric/src/lib/styles/vars.min.css';
 
 	import { ThemeWrapper } from 'svelte-themer';

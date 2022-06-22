@@ -50,7 +50,7 @@
 	}
 </script>
 
-{#if icon || endIcon || $$slots.startInputSlot || $$slots.endInputSlot}
+{#if icon || endIcon  || inputType === 'search' || $$slots.startInputSlot || $$slots.endInputSlot}
 	<div style="position:relative;display:inline-block">
 		{#if icon || $$slots.startInputSlot}
 			<div class="inpuStart">

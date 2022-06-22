@@ -22,6 +22,8 @@ import ColumnerDemoSvelte from '$lib/base/columner/Columner.demo.svelte';
 import SorterDemoSvelte from '$lib/data/sorter/Sorter.demo.svelte';
 import ContentSwitcherDemoSvelte from '$lib/base/contentSwitcher/ContentSwitcher.demo.svelte';
 import LoaderDemoSvelte from '$lib/base/loader/Loader.demo.svelte';
+import FinderDemoSvelte from '$lib/data/finder/Finder.demo.svelte';
+import ConfirmDemoSvelte from '$lib/base/confirm/Confirm.demo.svelte';
 
 export const slotUiComponentList = [
     {
@@ -38,9 +40,11 @@ export const slotUiComponentList = [
     { name: 'List', code: 'List', component: ListDemo },
     { name: 'Input', code: 'Input', component: InputDemo },
     { name: 'DataList', code: 'DataList', component: DataListDemo },
+    { name: 'Finder component', code: 'finder', component: FinderDemoSvelte },
     { name: 'Grouper component', code: 'grouper', component: GrouperDemo },
     { name: 'Sorter component', code: 'sorter', component: SorterDemoSvelte },
     { name: 'Columner  component', code: 'Columner', component: ColumnerDemoSvelte },
     { name: 'Content Switcher  component', code: 'switcher', component: ContentSwitcherDemoSvelte },
-    { name: 'Loader', code: 'loader', component: LoaderDemoSvelte }
+    { name: 'Confirm', code: 'confirm', component: ConfirmDemoSvelte },
+    { name: 'Loader', code: 'loader', component: LoaderDemoSvelte },
 ];

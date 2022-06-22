@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Grouper, { type GroupedDataType } from './Grouper.svelte';
 	import { HighlightSvelte } from 'svelte-highlight';
+import Paper from '$lib/base/paper/Paper.svelte';
 
 	const data = [...Array(89)].map((r, i) => {
 		return {
@@ -62,30 +63,40 @@
 <div class="flex-v gap-large">
 	<h5>{'<Grouper />'}</h5>
 	<h5>Menu mode</h5>
-	<div class="flex-h gap-small">
-		<div class="flex-v gap-small">
+	<div class="flex-h gap-small w-full">
+		<div class="flex-v gap-small w-full">
 			<h6>All</h6>
-			<div>
-				<div class="flex-h flex-align-middle gap-tiny">
-					<Grouper
-						bind:groupedData
-						bind:activeGroupField={activeGroupFieldAll}
-						{data}
-					/>{activeGroupFieldAll}
+			<div class="flex-h">
+				<div class="flex-main">
+					<div class="flex-h flex-align-middle gap-tiny">
+						<Grouper
+							bind:groupedData
+							bind:activeGroupField={activeGroupFieldAll}
+							{data}
+						/>{activeGroupFieldAll}
+					</div>					
 				</div>
-				<HighlightSvelte code={codeAll} />
+				<div class="flex-main"><HighlightSvelte code={codeAll} /></div>
 			</div>
 			<h6>Predefined list</h6>
-			<div>
-				<div class="flex-h flex-align-middle gap-tiny">
-					<Grouper
-						bind:groupedData
-						bind:activeGroupField={activeGroupFieldPredefined}
-						groupListItems={['directory', 'subdirectory']}
-						{data}
-					/>{activeGroupFieldPredefined}
+			<div class="flex-h">
+				<div class="flex-main">
+					<div class="flex-h flex-align-middle gap-tiny">
+						<Grouper
+							bind:groupedData
+							bind:activeGroupField={activeGroupFieldPredefined}
+							groupListItems={['directory', 'subdirectory']}
+							{data}
+						/>{activeGroupFieldPredefined}
+					</div>
+					<div></div>
 				</div>
-				<div><HighlightSvelte code={codePref} /></div>
+				<div class="flex-main">
+					<Paper>
+
+						<HighlightSvelte code={codePref} />
+					</Paper>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -115,7 +126,7 @@
 				{activeGroupField}
 			</div>
 		</div>
-		<HighlightSvelte code={codeButtonMode} />		
+		<HighlightSvelte code={codeButtonMode} />
 	</div>
 	<div>
 		<pre>
