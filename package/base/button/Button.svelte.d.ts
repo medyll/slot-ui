@@ -8,6 +8,8 @@ declare const __propDef: {
         element?: HTMLButtonElement | null | undefined;
         type?: string | undefined;
         icon?: string | undefined;
+        iconFamily?: string | undefined;
+        iconColor?: string | undefined;
         usePopper?: UsePopperProps | undefined;
         loading?: boolean | undefined;
         showChip?: boolean | undefined;
@@ -19,6 +21,7 @@ declare const __propDef: {
         density?: "none" | "tight" | "default" | "medium" | "kind" | undefined;
         nowrap?: boolean | undefined;
         height?: string | undefined;
+        selected?: boolean | undefined;
         primary?: string | undefined;
         secondary?: string | undefined;
         action?: string | undefined;

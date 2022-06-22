@@ -17,8 +17,8 @@ declare const __propDef: {
         selectedDataKey?: string | undefined;
         setSelectedData?: Record<string, any> | undefined;
         setSelectedItem?: Record<string, any> | undefined;
-        onItemClick: (args: Record<string, any>) => void;
-        /** @deprecated use primary title  */ title: string;
+        onItemClick?: ((args: Record<string, any>) => void) | undefined;
+        /** @deprecated use primary title  */ title?: string | undefined;
         /** displayed as H5*/ primary?: string | undefined;
         /** secondary title */ secondary?: string | undefined;
         /** icon for the  title  zone*/ icon?: string | undefined;

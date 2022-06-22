@@ -9,11 +9,13 @@ const forwardEvents = createEventForwarder(get_current_component());
 export let density = 'default';
 export let direction = 'horizontal';
 export let extension = 'full';
+export let shadow = false;
 let extensionClass = {
     full: 'marg-tb-1 ',
     padded: 'marg-tb-1 marg-ii-2',
     centered: 'marg-tb-1 marg-ii-4'
 };
+$: shadowClass = shadow ? "shad-3" : '';
 function getDensity(density) {
     const denses = {
         none: '0',
@@ -37,7 +39,7 @@ switch (direction) {
 
 <hr
 	bind:this={element}
-	class="{extensionClass[extension]} {className}"
+	class="{extensionClass[extension]} {className} {shadowClass}"
 	class:vertical={direction === 'vertical'}
 	style={addStyle}
 	use:forwardEvents

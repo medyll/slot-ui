@@ -17,6 +17,10 @@ let buttonType = 'button';
 export { buttonType as type };
 /** icon as a parameter*/
 export let icon = undefined;
+/** icon as a parameter*/
+export let iconFamily = 'fa-solid';
+/** icon color as a parameter*/
+export let iconColor = '#666';
 /** paramters for usePopper */
 export let usePopper = undefined;
 /** show loading state */
@@ -39,6 +43,8 @@ export let density = 'default';
 export let nowrap = false;
 /** height of the button, using preset values */
 export let height = 'default';
+/**  button selected */
+export let selected = false;
 export let primary = undefined;
 export let secondary = undefined;
 export let action = undefined;
@@ -103,6 +109,7 @@ $: actionArgs = {
 	{bordered}
 	{contained}
 	{naked}
+	{selected}
 	{presetDefault}
 	{...$$restProps}
 >
@@ -111,7 +118,7 @@ $: actionArgs = {
 			<div class="startButtonSlot">
 				<slot name="startButtonSlot">
 					{#if icon}
-						<Icon fontSize="small" {icon} />
+						<Icon fontSize="small" {icon}  style="color:{iconColor}"  {iconFamily} />
 					{/if}
 				</slot>
 			</div>
@@ -121,8 +128,7 @@ $: actionArgs = {
 		{/if}
 		{#if $$slots.actionIcon}
 			<div class="action">
-				<slot name="actionIcon" />
-				<!-- <Icon icon="chevron-right" fontSize="tiny" /> -->
+				<slot name="actionIcon" />  
 			</div>
 		{/if}
 	</div>
@@ -138,7 +144,7 @@ $: actionArgs = {
 				<div class="flex-h flex-align-middle gap-tiny">
 					<div>
 						<slot name="loadingIconButtonSlot"
-							><div><Icon icon="spinner" class="fa rotate" /></div>
+							><div><Icon icon="spinner" class="rotate" /></div>
 						</slot>
 					</div>
 					<div>loading</div>
@@ -208,8 +214,8 @@ button[contained=true][disabled],
 input[type=button][disabled],
 input[type=submit][disabled] {
   color: var(--color-gray-800);
-  border-color: var(--color-gray-800);
-  opacity: 0.8;
+  border-color: none;
+  opacity: 0.4;
 }
 .button:hover,
 button:hover,
@@ -235,7 +241,7 @@ button:active,
 button[contained=true]:active,
 input[type=button]:active,
 input[type=submit]:active {
-  transform: scale(0.9);
+  transform: scale(0.97);
   border: 0.5px solid var(--theme-color-primary) !important;
   box-shadow: var(--box-shad-4);
 }
@@ -294,6 +300,12 @@ button {
 button[nowrap] {
   color: " ";
 }
+.button[selected=true],
+button[selected=true] {
+  box-shadow: var(--box-shad-3);
+  border: 0.5px solid var(--theme-color-paper-alpha-low);
+  background-color: transparent;
+}
 .button[bordered=true],
 button[bordered=true] {
   color: var(--theme-color-foreground);
@@ -337,6 +349,14 @@ button[naked=true] {
   background-color: transparent !important;
   border: 0.5px solid transparent;
   cursor: pointer;
+}
+.button[naked=true]:hover, .button[naked=true]:active, .button[naked=true]:focus,
+button[naked=true]:hover,
+button[naked=true]:active,
+button[naked=true]:focus {
+  background-color: transparent !important;
+  border: 0.5px solid transparent;
+  color: inherit;
 }
 .button.loading .loadingButtonZone,
 button.loading .loadingButtonZone {

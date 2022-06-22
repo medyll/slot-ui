@@ -6,21 +6,16 @@ const sizes = {
     default: 32,
     large: 48,
     big: 64,
-    full: 100
 };
-// 'tiny' | 'small' | 'medium' | 'default' | 'large' | 'big' | 'full'
 </script>
 
-<script>import { createEventForwarder } from '../../engine/engine';
-import { get_current_component } from 'svelte/internal';
+<script>import { get_current_component } from 'svelte/internal';
 import { onDestroy } from 'svelte';
 import { browser } from '$app/env';
 /*  common slotUi exports*/
 let className = '';
 export { className as class };
 export let style = '';
-export let element = null;
-const forwardEvents = createEventForwarder(get_current_component());
 /*  end slotUi exports*/
 export let icon = 'question';
 export let iconFamily = 'fa-solid';

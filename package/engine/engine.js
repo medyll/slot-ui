@@ -1,4 +1,5 @@
 import { bubble, listen } from 'svelte/internal';
+/** @deprecated */
 export function createEventForwarder(component, exclude = []) {
     // This is our pseudo $on function. It is defined on component mount.
     let $on;

@@ -1,6 +1,6 @@
 {
   "name": "@medyll/slotui",
-  "version": "0.1.34",
+  "version": "0.1.35",
   "repository": {
     "type": "git",
     "url": "https://github.com/medyll/slot-ui.git"
@@ -96,6 +96,7 @@
     "./base/columner/Columner.demo.svelte": "./base/columner/Columner.demo.svelte",
     "./base/columner/Columner.svelte": "./base/columner/Columner.svelte",
     "./base/columner/types": "./base/columner/types.js",
+    "./base/contentSwitcher/ContentSwitcher.demo.svelte": "./base/contentSwitcher/ContentSwitcher.demo.svelte",
     "./base/contentSwitcher/ContentSwitcher.svelte": "./base/contentSwitcher/ContentSwitcher.svelte",
     "./base/contentSwitcher/useContentSwitcher": "./base/contentSwitcher/useContentSwitcher.js",
     "./base/dataList/DataList.demo.svelte": "./base/dataList/DataList.demo.svelte",
@@ -153,11 +154,13 @@
     "./data/finder/Finder.svelte": "./data/finder/Finder.svelte",
     "./data/grouper/Grouper.demo.svelte": "./data/grouper/Grouper.demo.svelte",
     "./data/grouper/Grouper.svelte": "./data/grouper/Grouper.svelte",
+    "./data/sorter/Sorter.demo.svelte": "./data/sorter/Sorter.demo.svelte",
     "./data/sorter/Sorter.svelte": "./data/sorter/Sorter.svelte",
     "./effects/transitions": "./effects/transitions.js",
     "./engine/DynComp.svelte": "./engine/DynComp.svelte",
     "./engine/elem": "./engine/elem.js",
     "./engine/engine": "./engine/engine.js",
+    "./engine/eventForwarder": "./engine/eventForwarder.js",
     "./engine/TaskBarContent.svelte": "./engine/TaskBarContent.svelte",
     "./engine/utils": "./engine/utils.js",
     "./engine/wactions.utils": "./engine/wactions.utils.js",

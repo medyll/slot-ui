@@ -29,9 +29,9 @@ export let selectorField;
 export let selectedDataKey = undefined;
 export let setSelectedData = {};
 export let setSelectedItem = {};
-export let onItemClick;
+export let onItemClick = ({}) => { };
 /** @deprecated use primary title  */
-export let title;
+export let title = '';
 /** displayed as H5*/
 export let primary = undefined;
 /** secondary title */
@@ -54,15 +54,14 @@ $: if (setSelectedData) {
 $: if (setSelectedItem) {
     // listStore.setActiveData(setSelectedData);
 }
+// if data, build some list items
 $: if (data) {
-    // loop on
-    // if props.dataFieldPrimary : propsProxy
-    // else ...
     if (dataFieldPrimary || dataFieldSecondary) {
         listItems = propsProxy([
             [dataFieldPrimary ?? '"', 'primary'],
             [dataFieldSecondary ?? '"', 'secondary']
         ], data);
+        console.log({ listItems });
     }
     else {
         listItems = data.map((dta) => {
@@ -117,6 +116,7 @@ function onListItemClick(e) {
 				</Virtualize>
 			{/if}
 		{:else}
+		{#key data}
 			{#each listItems as item}
 				<slot listItem={item}>
 					<ListItem style="content-visibility:hidden;" {showIcon} {density} data={item.data} icon={item?.icon}>
@@ -127,6 +127,7 @@ function onListItemClick(e) {
 					</ListItem>
 				</slot>
 			{/each}
+			{/key}
 		{/if}
 	{/if}
 </ul>
