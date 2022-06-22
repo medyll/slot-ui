@@ -32,11 +32,11 @@ export let fontSize = 'small';
 	/>
 {/if}
 
-<style>.rotate, .spinner {
+<style global>:global(.rotate) {
   animation: spinner-frames 3s infinite linear;
 }
 
-@keyframes spinner-frames {
+@keyframes -global-spinner-frames {
   0% {
     transform: rotate(0deg);
   }

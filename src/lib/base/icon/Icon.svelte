@@ -40,8 +40,8 @@
 	/>
 {/if}
 
-<style lang="scss"> 
-	.rotate,.spinner {
+<style global lang="scss"> 
+	.rotate  {
 		animation: spinner-frames 3s infinite linear;
 	}
 	@keyframes spinner-frames {
