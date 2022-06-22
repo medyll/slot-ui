@@ -118,7 +118,7 @@ $: actionArgs = {
 			<div class="startButtonSlot">
 				<slot name="startButtonSlot">
 					{#if icon}
-						<Icon fontSize="small" {icon}  style="color:{iconColor}"  {iconFamily} />
+						<Icon fontSize="small" {icon} style="color:{iconColor}" {iconFamily} />
 					{/if}
 				</slot>
 			</div>
@@ -128,7 +128,7 @@ $: actionArgs = {
 		{/if}
 		{#if $$slots.actionIcon}
 			<div class="action">
-				<slot name="actionIcon" />  
+				<slot name="actionIcon" />
 			</div>
 		{/if}
 	</div>
@@ -305,6 +305,7 @@ button[selected=true] {
   box-shadow: var(--box-shad-3);
   border: 0.5px solid var(--theme-color-paper-alpha-low);
   background-color: transparent;
+  font-weight: bold;
 }
 .button[bordered=true],
 button[bordered=true] {
@@ -421,11 +422,11 @@ button .innerButton .action:hover {
 button .chip {
   position: absolute;
   z-index: 2;
-  height: 4px;
+  height: 3px;
   left: 50%;
   transform: translate(-50%, 0);
   width: 50%;
   background-color: var(--css-button-chip-color, var(--theme-color-primary));
   border-radius: 16px;
-  bottom: 3px;
+  bottom: 2px;
 }</style>

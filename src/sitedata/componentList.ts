@@ -21,6 +21,7 @@ import GrouperDemo from '$lib/data/grouper/Grouper.demo.svelte';
 import ColumnerDemoSvelte from '$lib/base/columner/Columner.demo.svelte';
 import SorterDemoSvelte from '$lib/data/sorter/Sorter.demo.svelte';
 import ContentSwitcherDemoSvelte from '$lib/base/contentSwitcher/ContentSwitcher.demo.svelte';
+import LoaderDemoSvelte from '$lib/base/loader/Loader.demo.svelte';
 
 export const slotUiComponentList = [
     {
@@ -40,5 +41,6 @@ export const slotUiComponentList = [
     { name: 'Grouper component', code: 'grouper', component: GrouperDemo },
     { name: 'Sorter component', code: 'sorter', component: SorterDemoSvelte },
     { name: 'Columner  component', code: 'Columner', component: ColumnerDemoSvelte },
-    { name: 'Content Switcher  component', code: 'switcher', component: ContentSwitcherDemoSvelte }
+    { name: 'Content Switcher  component', code: 'switcher', component: ContentSwitcherDemoSvelte },
+    { name: 'Loader', code: 'loader', component: LoaderDemoSvelte }
 ];
