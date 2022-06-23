@@ -4,11 +4,11 @@
 	import Button from '../button/Button.svelte';
 
 	/** text displayed on confirm button */
-	export let primaryInitial: string = 'action';
+	export let primaryInitial: string = '';
 	/** icon displayed on the confirm button */
 	export let iconInitial: string = '';
 	/** color of the icon displayed on the confirm button */
-	export let iconColorInitial: string = 'green';
+	export let iconColorInitial: string = 'inherit';
 
 	/** text displayed on confirm button */
 	export let primary: string = 'confirm';
@@ -37,6 +37,13 @@
 		event.stopPropagation();
 		step = 'initial';
 	}
+
+	function handleAction(event: any) {
+		event.preventDefault();
+		event.stopPropagation(); 
+		if(action) action()
+	}
+
 </script>
 
 {#if step === 'initial'}
@@ -57,7 +64,7 @@
 			<Button naked icon={cancelIcon} size="auto" title="cancel" />
 		</span>
 		<slot>
-			<Button on:click={action} {iconColor} {icon} iconFamily="mdi" size="auto" {primary} focus />
+			<Button on:click={handleAction} {iconColor} {icon} iconFamily="mdi" size="auto" {primary} focus />
 		</slot>
 	</span>
 {/if}
