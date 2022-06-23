@@ -1,6 +1,6 @@
 {
   "name": "@medyll/slotui",
-  "version": "0.1.41",
+  "version": "0.1.42",
   "repository": {
     "type": "git",
     "url": "https://github.com/medyll/slot-ui.git"
@@ -193,6 +193,7 @@
     "./ui/popper/actions": "./ui/popper/actions.js",
     "./ui/popper/Popper.svelte": "./ui/popper/Popper.svelte",
     "./ui/popper/types": "./ui/popper/types.js",
+    "./ui/popper/usePopper.svelte": "./ui/popper/usePopper.svelte",
     "./ui/popper/usePopper": "./ui/popper/usePopper.js",
     "./ui/serviceBox/ServiceBox.svelte": "./ui/serviceBox/ServiceBox.svelte",
     "./ui/startMenu/StartMenu.svelte": "./ui/startMenu/StartMenu.svelte",
@@ -202,6 +203,7 @@
     "./ui/topBar/TopBar.svelte": "./ui/topBar/TopBar.svelte",
     "./ui/window/window.store": "./ui/window/window.store.js",
     "./ui/window/Window.svelte": "./ui/window/Window.svelte",
+    "./uses/autofocus/autofocus": "./uses/autofocus/autofocus.js",
     "./uses/clickAway/clickAway": "./uses/clickAway/clickAway.js",
     "./uses/stickTo/stickTo": "./uses/stickTo/stickTo.js",
     "./uses/sx4u/sx4u": "./uses/sx4u/sx4u.js",

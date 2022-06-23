@@ -6,6 +6,7 @@ import Divider from '../divider/Divider.svelte';
 import Menu from '../../ui/menu/Menu.svelte';
 import Popper from '../../ui/popper/Popper.svelte';
 import Icon from '../icon/Icon.svelte';
+import { autofocus } from '../../uses/autofocus/autofocus';
 export let presetDefault = 'bordered contained';
 /*  common slotUi exports*/
 let className = '';
@@ -36,7 +37,7 @@ export let link = undefined;
 /** button style link */
 export let naked = undefined;
 /** with of the button using  presets */
-export let size = 'medium';
+export let size = 'auto';
 /** density of the button, using preset values */
 export let density = 'default';
 /** add ellipsis on overflowed text */
@@ -45,6 +46,8 @@ export let nowrap = false;
 export let height = 'default';
 /**  button selected */
 export let selected = false;
+/**  give focus to button on display */
+export let focus = false;
 export let primary = undefined;
 export let secondary = undefined;
 export let action = undefined;
@@ -64,6 +67,10 @@ else {
     link = presetDefault.includes('link');
     bordered = presetDefault.includes('bordered');
     contained = presetDefault.includes('contained');
+}
+function useAutoFocus(node) {
+    if (focus)
+        return autofocus(node);
 }
 const onActionClick = (event) => {
     event.stopPropagation();
@@ -98,6 +105,7 @@ $: actionArgs = {
 	bind:this={element}
 	use:popper={usePopper}
 	use:forwardEvents
+	use:useAutoFocus
 	on:click
 	class:size={'w-' + size}
 	data-height={height}
@@ -313,6 +321,7 @@ button[selected=true] {
 button[bordered=true] {
   color: var(--theme-color-foreground);
   border: 0.5px solid var(--theme-color-border);
+  box-shadow: var(--box-shad-1);
   background-color: transparent;
 }
 .button[bordered=true]:hover,

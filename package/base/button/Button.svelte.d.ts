@@ -22,6 +22,7 @@ declare const __propDef: {
         nowrap?: boolean | undefined;
         height?: string | undefined;
         selected?: boolean | undefined;
+        focus?: boolean | undefined;
         primary?: string | undefined;
         secondary?: string | undefined;
         action?: string | undefined;
