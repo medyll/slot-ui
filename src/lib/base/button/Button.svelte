@@ -140,9 +140,11 @@
 			<div class="central"><slot>{null_to_empty(primary)}</slot></div>
 		{/if}
 		{#if $$slots.actionIcon}
-			<div class="action">
-				<slot name="actionIcon" />
-			</div>
+			{#key $$slots.actionIcon}
+				<div class="action">
+					<slot name="actionIcon" />
+				</div>
+			{/key}
 		{/if}
 	</div>
 	{#if loading}
@@ -180,7 +182,7 @@
 		<span slot="button">button</span>
 		<slot name="popper">
 			{#if actionArgs?.component}
-				<svelte:component this={actionArgs.component} {...actionArgs.componentProps} />
+				<svelte:component this={actionArgs.component} {...actionArgs?.componentProps} />
 			{/if}
 		</slot>
 	</Popper>

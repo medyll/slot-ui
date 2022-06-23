@@ -139,11 +139,11 @@
 							<div>
 								<div>{pos}</div>
 								<div>
-									<Button primary={pos}>
-										<span use:popper={a} slot="actionIcon">
-											<Icon icon="chevron-down" />
-										</span>
-									</Button>
+									<!-- <Button primary={pos}>
+										<div  slot="actionIcon">
+											<span use:popper={a} ><Icon icon="chevron-down" /></span>
+										</div>
+									</Button> --> 
 								</div>
 							</div>
 						{/each}
