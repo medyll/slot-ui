@@ -8,6 +8,7 @@
 	import Menu from '$lib/ui/menu/Menu.svelte';
 	import Popper from '$lib/ui/popper/Popper.svelte';
 	import Icon from '../icon/Icon.svelte';
+	import { autofocus } from '$lib/uses/autofocus/autofocus';
 
 	export let presetDefault = 'bordered contained';
 
@@ -44,7 +45,7 @@
 	export let naked: boolean | undefined = undefined;
 
 	/** with of the button using  presets */
-	export let size: ElementProps['sizeType'] | 'full' = 'medium';
+	export let size: ElementProps['sizeType'] | 'full' = 'auto';
 	/** density of the button, using preset values */
 	export let density: ElementProps['density'] = 'default';
 	/** add ellipsis on overflowed text */
@@ -53,6 +54,8 @@
 	export let height: string = 'default';
 	/**  button selected */
 	export let selected: boolean = false;
+	/**  give focus to button on display */
+	export let focus: boolean = false;
 
 	export let primary: string | undefined = undefined;
 	export let secondary: string | undefined = undefined;
@@ -75,6 +78,10 @@
 		link = presetDefault.includes('link');
 		bordered = presetDefault.includes('bordered');
 		contained = presetDefault.includes('contained');
+	}
+
+	function useAutoFocus(node: HTMLElement) {
+		if (focus) return autofocus(node);
 	}
 
 	const onActionClick = (event: MouseEvent) => {
@@ -111,6 +118,7 @@
 	bind:this={element}
 	use:popper={usePopper}
 	use:forwardEvents
+	use:useAutoFocus
 	on:click
 	class:size={'w-' + size}
 	data-height={height}
@@ -256,6 +264,7 @@
 		&[bordered='true'] {
 			color: var(--theme-color-foreground);
 			border: 0.5px solid var(--theme-color-border);
+			box-shadow: var(--box-shad-1);
 			background-color: transparent;
 			&:hover {
 				border: 0.5px solid var(--theme-color-primary);

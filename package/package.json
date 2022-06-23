@@ -1,6 +1,6 @@
 {
   "name": "@medyll/slotui",
-  "version": "0.1.40",
+  "version": "0.1.41",
   "repository": {
     "type": "git",
     "url": "https://github.com/medyll/slot-ui.git"
@@ -96,6 +96,8 @@
     "./base/columner/Columner.demo.svelte": "./base/columner/Columner.demo.svelte",
     "./base/columner/Columner.svelte": "./base/columner/Columner.svelte",
     "./base/columner/types": "./base/columner/types.js",
+    "./base/confirm/Confirm.demo.svelte": "./base/confirm/Confirm.demo.svelte",
+    "./base/confirm/Confirm.svelte": "./base/confirm/Confirm.svelte",
     "./base/contentSwitcher/ContentSwitcher.demo.svelte": "./base/contentSwitcher/ContentSwitcher.demo.svelte",
     "./base/contentSwitcher/ContentSwitcher.svelte": "./base/contentSwitcher/ContentSwitcher.svelte",
     "./base/contentSwitcher/useContentSwitcher": "./base/contentSwitcher/useContentSwitcher.js",
@@ -152,6 +154,7 @@
     "./css/cssfabric.css": "./css/cssfabric.css",
     "./css/cssfabric.min.css": "./css/cssfabric.min.css",
     "./data/databox/DataBox.svelte": "./data/databox/DataBox.svelte",
+    "./data/finder/Finder.demo.svelte": "./data/finder/Finder.demo.svelte",
     "./data/finder/Finder.svelte": "./data/finder/Finder.svelte",
     "./data/grouper/Grouper.demo.svelte": "./data/grouper/Grouper.demo.svelte",
     "./data/grouper/Grouper.svelte": "./data/grouper/Grouper.svelte",
