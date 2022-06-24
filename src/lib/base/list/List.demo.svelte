@@ -9,6 +9,7 @@
 
   let cc       = 0;
   let menuList = [];
+  
   $: menuList = [
     {primary: 'Account affinities', secondary: 'link account and affinities', icon: 'user', data: {id: 'red'}},
     {primary: 'Account categories', secondary: cc, icon: 'user', data: {id: 'red1'}}

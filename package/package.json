@@ -1,6 +1,6 @@
 {
   "name": "@medyll/slotui",
-  "version": "0.1.44",
+  "version": "0.1.45",
   "repository": {
     "type": "git",
     "url": "https://github.com/medyll/slot-ui.git"
@@ -24,10 +24,10 @@
     "svelte2tsx": "^0.5.5"
   },
   "devDependencies": {
-    "@iconify/svelte": "^2.2.1",
     "@babel/core": "^7.17.2",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-typescript": "^7.16.7",
+    "@iconify/svelte": "^2.2.1",
     "@sveltejs/adapter-auto": "next",
     "@sveltejs/adapter-node": "^1.0.0-next.67",
     "@sveltejs/adapter-static": "^1.0.0-next.34",
@@ -42,6 +42,7 @@
     "babel-jest": "^27.5.1",
     "babel-loader": "^8.2.3",
     "jest": "^27.5.1",
+    "nodemon": "^2.0.18",
     "prettier": "^2.4.1",
     "prettier-plugin-svelte": "^2.7.0",
     "svelte": "^3.48.0",
@@ -75,7 +76,6 @@
     "./base/button/Button.demo.svelte": "./base/button/Button.demo.svelte",
     "./base/button/Button.scss": "./base/button/Button.scss",
     "./base/button/Button.svelte": "./base/button/Button.svelte",
-    "./base/button/ButtonAction.demo.svelte": "./base/button/ButtonAction.demo.svelte",
     "./base/button/ButtonAction.scss": "./base/button/ButtonAction.scss",
     "./base/button/ButtonAction.svelte": "./base/button/ButtonAction.svelte",
     "./base/button/ButtonMenu.scss": "./base/button/ButtonMenu.scss",
@@ -109,6 +109,7 @@
     "./base/debug/Debug.svelte": "./base/debug/Debug.svelte",
     "./base/divider/Divider.scss": "./base/divider/Divider.scss",
     "./base/divider/Divider.svelte": "./base/divider/Divider.svelte",
+    "./base/drawer/Drawer.demo.svelte": "./base/drawer/Drawer.demo.svelte",
     "./base/drawer/Drawer.scss": "./base/drawer/Drawer.scss",
     "./base/drawer/Drawer.svelte": "./base/drawer/Drawer.svelte",
     "./base/elementor/Elementor.svelte": "./base/elementor/Elementor.svelte",
@@ -117,7 +118,6 @@
     "./base/icon/IconProxy.svelte": "./base/icon/IconProxy.svelte",
     "./base/input/Input.demo.svelte": "./base/input/Input.demo.svelte",
     "./base/input/Input.svelte": "./base/input/Input.svelte",
-    "./base/json/Json.svelte": "./base/json/Json.svelte",
     "./base/list/List.demo.svelte": "./base/list/List.demo.svelte",
     "./base/list/List.scss": "./base/list/List.scss",
     "./base/list/List.svelte": "./base/list/List.svelte",
@@ -158,6 +158,8 @@
     "./data/finder/Finder.svelte": "./data/finder/Finder.svelte",
     "./data/grouper/Grouper.demo.svelte": "./data/grouper/Grouper.demo.svelte",
     "./data/grouper/Grouper.svelte": "./data/grouper/Grouper.svelte",
+    "./data/jsoner/Jsoner.demo.svelte": "./data/jsoner/Jsoner.demo.svelte",
+    "./data/jsoner/Jsoner.svelte": "./data/jsoner/Jsoner.svelte",
     "./data/sorter/Sorter.demo.svelte": "./data/sorter/Sorter.demo.svelte",
     "./data/sorter/Sorter.svelte": "./data/sorter/Sorter.svelte",
     "./data/sorter/Sorterer.svelte": "./data/sorter/Sorterer.svelte",

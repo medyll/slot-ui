@@ -49,7 +49,7 @@
 	];
 
 	function openIn(event: any) {
-		goto('/svelte-components/' + event.code);
+		goto('/svelte-components/' + event?.data?.code);
 	}
 </script>
 

@@ -10,7 +10,7 @@
 	import { createEventForwarder } from '../../engine/engine';
 	import Virtualize from '../virtualize/Virtualize.svelte';
 	import type { Data } from '$lib/data/grouper/Grouper.svelte';
-	import { propsProxy } from '$lib/engine/utils';
+	import { dataOp, propsProxy } from '$lib/engine/utils';
 
 	/*  common slotUi exports*/
 	let className = '';
@@ -20,7 +20,7 @@
 	/*  end slotUi exports*/
 
 	/** formated listItems list  */
-	export let listItems: LisItemProps[] = [];
+	export let listItems: LisItemProps[] | undefined = undefined;
 	/** provided raw data, used if no listItems list is provided  */
 	export let data: Data[] | undefined = undefined;
 	/** Row from data for primary, used if props.data is provided  */
@@ -32,14 +32,18 @@
 	export let style: string = '';
 	export let showIcon: boolean = true;
 	export let noVirtualize: boolean = false;
-	export let selectorField;
+	export let selectorField: any;
+
+	/** set selected data by dataKey value*/
 	export let selectedDataKey: string | undefined = undefined;
+	/** set selected data by data object */
 	export let setSelectedData: Record<string, any> = {};
+	/** set selected data by selectedItem object */
 	export let setSelectedItem: Record<string, any> = {};
 
-	export let onItemClick: (args: Record<string, any>) => void = ({})=>{};
+	export let onItemClick: (args: Record<string, any>) => void = ({}) => {};
 	/** @deprecated use primary title  */
-	export let title: string = ''
+	export let title: string = '';
 	/** displayed as H5*/
 	export let primary: string | undefined = undefined;
 	/** secondary title */
@@ -48,6 +52,7 @@
 	export let icon: string | undefined = undefined;
 	/** fieldName by wich we will group */
 	export let groupBy: string | undefined = undefined;
+	let groupedData: any;
 	/** List will not be clickable and will gain opacity */
 	export let disabled: boolean = false;
 	export let density: ElementProps['density'] = 'default';
@@ -60,16 +65,22 @@
 
 	$: if (setSelectedData) {
 		listStore.setActiveData(setSelectedData);
-		console.log('selected', setSelectedData);
 	}
 
 	$: if (setSelectedItem) {
 		// listStore.setActiveData(setSelectedData);
 	}
 
-	// if data, build some list items
-	$: if (data) { 
+	if (groupBy) {
+		// if groupBy, we'll use  props.data or props.lisTitem.data
+		if (data) {
+			groupedData = dataOp.groupBy(data, groupBy);
+		} else {
+		}
+	}
 
+	// if data, build some list items
+	$: if (data) {
 		if (dataFieldPrimary || dataFieldSecondary) {
 			listItems = propsProxy(
 				[
@@ -79,8 +90,7 @@
 				data
 			);
 
-			console.log({listItems})
-
+			console.log({ listItems });
 		} else {
 			listItems = data.map((dta: Data) => {
 				return {
@@ -92,23 +102,85 @@
 		}
 	}
 
+	/** on listItem clicked, we set activeData to e.LisItemProps*/
 	function onListItemClick(e: CustomEvent<LisItemProps>) {
+		console.log(e)
 		if (disabled) {
 			e.stopPropagation();
 			return;
 		}
-		listStore.setActiveData(e.detail);
+e?.target?.scrollIntoView()
+		listStore.setActiveData(e.detail?.data); // should be  e.detail.data
+		listStore.setActiveItem(e.detail);
+
 		onItemClick && onItemClick(e.detail);
+	}
+
+	function onListItemClick_Deprecated(e: CustomEvent<LisItemProps>) {
+		if (disabled) {
+			e.stopPropagation();
+			return;
+		}
+
+		listStore.setActiveData(e.detail); // should be  e.detail.data
+
+		onItemClick && onItemClick(e.detail);
+	}
+
+	function navigateList(e: KeyboardEvent) {
+		if (![38, 40].includes(e.keyCode)) return;
+		if ($listStore.activeData) {
+			console.log($listStore);
+		}
+
+		console.log({ listItems, data });
+		let tt = 0;
+		if (listItems) {
+			// if selectorField
+			// if listItem.primary
+			// seek listItem with same primary as activeData
+			if ($listStore.activeItem?.['primary']) {
+				console.log('primary -----------------------------------');
+				tt = dataOp.findObjectIndex(listItems, $listStore.activeItem['primary'], 'primary');
+			}
+			// seek listItem with same data.selectorField as activeData
+			if (selectorField && $listStore.activeItem?.data?.[selectorField]) {
+				tt = dataOp.findObjectIndex(
+					listItems,
+					$listStore.activeItem.data[selectorField],
+					'data.' + selectorField
+				);
+			}
+		} else if (data) {
+			if (selectorField) {
+				tt = dataOp.findObjectIndex(data, $listStore.activeData[selectorField], selectorField);
+			}
+		}
+
+		console.log({ tt });
+		if (tt === -1) return;
+
+		const dir = e.keyCode === 38 ? tt - 1 : tt + 1;
+
+		if (listItems) {
+			$listStore.activeItem = listItems[dir];
+			$listStore.activeData = listItems[dir]?.data;
+		} else if (data) {
+		}
 	}
 </script>
 
 <ul
 	bind:this={element}
 	class="density-{density} {className}"
-	on:listclicked={onListItemClick}
-	on:list:dblclicked={onListItemClick}
+	on:listclicked={onListItemClick_Deprecated}
+	on:list:dblclicked={onListItemClick_Deprecated}
+	on:listitem:clicked={onListItemClick}
+	on:listitem:dblclicked={onListItemClick}
 	style="position:relative;height:{height};margin:0;padding:0;{style};opacity:{disabled ? 0.6 : 1}"
 	use:forwardEvents
+	tabindex="0"
+	on:keydown={navigateList}
 >
 	{#if $$slots.title || title || primary || secondary}
 		<slot name="title">
@@ -117,7 +189,7 @@
 	{/if}
 	{#if $$slots.commandBarSlot}
 		<slot name="commandBarSlot" />
-	{/if} 
+	{/if}
 	{#if listItems}
 		{#if !noVirtualize}
 			{#if $$slots.default}
@@ -135,17 +207,23 @@
 				</Virtualize>
 			{/if}
 		{:else}
-		{#key data}
-			{#each listItems as item}
-				<slot listItem={item}>
-					<ListItem style="content-visibility:hidden;" {showIcon} {density} data={item.data} icon={item?.icon}>
-						<span slot="icon" />
-						<span slot="primary">{null_to_empty(item?.primary)}</span>
-						<span slot="secondary">{null_to_empty(item?.secondary)}</span>
-						<span slot="action">{null_to_empty(item?.action)}</span>
-					</ListItem>
-				</slot>
-			{/each}
+			{#key data}
+				{#each listItems as item}
+					<slot listItem={item}>
+						<ListItem
+							style="content-visibility:hidden;"
+							{showIcon}
+							{density}
+							data={item.data}
+							icon={item?.icon}
+						>
+							<span slot="icon" />
+							<span slot="primary">{null_to_empty(item?.primary)}</span>
+							<span slot="secondary">{null_to_empty(item?.secondary)}</span>
+							<span slot="action">{null_to_empty(item?.action)}</span>
+						</ListItem>
+					</slot>
+				{/each}
 			{/key}
 		{/if}
 	{/if}
@@ -153,4 +231,9 @@
 
 <style global lang="scss">
 	@import 'List';
+
+	ul:focus {
+		outline: 1px solid #ccc;
+		outline-offset: -1px;
+	}
 </style>

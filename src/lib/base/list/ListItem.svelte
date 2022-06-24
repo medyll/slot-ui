@@ -17,7 +17,7 @@
 	let className = '';
 	export { className as class };
 	export let element: HTMLElement;
-	export let style: string = ''
+	export let style: string = '';
 	const forwardEvents = createEventForwarder(get_current_component());
 	/*  end slotUi exports*/
 
@@ -38,12 +38,22 @@
 	let listStateContext = getContext<any>('listStateContext');
 
 	const handleClick = () => () => {
-		const event = custom_event('listclicked', data, { bubbles: true });
+		// send whole listItem 
+		/** @deprecated */
+		const eventDeprecated = custom_event('listclicked', data, { bubbles: true });
+		element.dispatchEvent(eventDeprecated);
+
+		const event = custom_event('listitem:clicked', {...$$props}, { bubbles: true });
 		element.dispatchEvent(event);
 	};
 
 	const handleDblClick = () => () => {
-		const event = custom_event('list:dblclicked', data, { bubbles: true });
+		// send whole listItem
+		/** @deprecated */
+		const eventDeprecated = custom_event('list:dblclicked', data, { bubbles: true });
+		element.dispatchEvent(eventDeprecated);
+		
+		const event = custom_event('listitem:dblclicked', {...$$props}, { bubbles: true });
 		element.dispatchEvent(event);
 	};
 
@@ -64,7 +74,6 @@
 	on:click={handleClick()}
 	on:dblclick={handleDblClick()}
 	style="opacity:${disabled ? 0.6 : 1};${style}"
-	tabindex={1}
 >
 	<span class="listItemChip" />
 	{#if $$slots.icon || icon}
@@ -74,7 +83,7 @@
 			</slot>
 		</div>
 	{/if}
-	<div class="listItemContent" title="{secondary}">
+	<div class="listItemContent" title={secondary}>
 		<div>
 			<slot name="primary">
 				{null_to_empty(primary)}
@@ -96,6 +105,10 @@
 <style lang="scss" global>
 	@import 'List';
 
+	/* li:focus{
+		outline:1px solid #ccc;
+		outline-offset: -1px;
+	} */
 	.listItem.density-tight {
 		padding: 0.5rem 0;
 		margin: 0.125rem 0;

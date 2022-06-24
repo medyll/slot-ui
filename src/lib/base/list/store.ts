@@ -1,5 +1,6 @@
-import {writable, get} from 'svelte/store';
-import type {ElementProps} from '../../../types';
+import { writable, get } from 'svelte/store';
+import type { Data, ElementProps } from '../../../types';
+import type { LisItemProps } from './types';
 
 type ListStoreType = {
   activeData: Record<string, any>;
@@ -9,20 +10,20 @@ type ListStoreType = {
 }
 
 function createStore<T = ListStoreType>() {
-  
-  const initialData: ListStoreType = {activeData: {}, selectorField: 'id', density: 'default'};
-  
-  const innerStore               = writable<ListStoreType>(initialData);
-  const {subscribe, set, update} = innerStore;
-  
+
+  const initialData: ListStoreType = { activeData: {}, selectorField: 'id', density: 'default' };
+
+  const innerStore = writable<ListStoreType>(initialData);
+  const { subscribe, set, update } = innerStore;
+
   return {
     subscribe,
     set,
     update,
-    setSelectorField: (selectorField: string) => update((n) => {return {...n, selectorField};}),
-    setActiveData   : (data: any) => {update(n => {return {...n, activeData: data};});},
-    setActiveItem   : (data: any) => {update(n => {return {...n, activeItem: data};});},
-    selector        : (field: string, data: Record<string, any>) => {
+    setSelectorField: (selectorField: string) => update((n) => { return { ...n, selectorField }; }),
+    setActiveData: (data: Data) => { update(n => { return { ...n, activeData: data }; }); },
+    setActiveItem: (item: LisItemProps) => { update(n => { return { ...n, activeItem: item }; }); },
+    selector: (field: string, data: Record<string, any>) => {
       return get(innerStore).activeData[field] === data[field];
     },
   };

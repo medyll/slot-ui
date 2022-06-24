@@ -10,20 +10,20 @@ import Button from '../button/Button.svelte';
     Content of the box grrte
 </Box>
 <Divider/>
-<Box  class="marg" onClose="cd">
+<Box  class="marg" onClose="cdss">
     <Icon fontSize="small" icon="clock" slot="iconSlot"/>
     <span slot="titleSlot">Title of the box</span>
     Content of the box grrte
 </Box>
-<Divider/>
-
-<Box hasMenu={true} onClose="cd">
+<Divider/> 
+<Box hasMenu={true} onClose="cd">  
     <Icon fontSize="small" icon="faClock" slot="iconSlot"/>
-    <span slot="titleSlot">Title of the box</span>
+    <span slot="titleSlot">Title of the box</span> 
     <div slot="buttonZoneSlot">
         <Button>button</Button>
         <Button>button</Button>
     </div>
-    Content of the box<br/>
+    Content of the boxs
+    <br/> 
     with a button
 </Box>

@@ -22,12 +22,12 @@ export const propsProxy = <T = any, B = any, C = any>(props: PropsProxyProps<T, 
 
 export class dataOp {
 
-/** sorting  */
+  /** sorting  */
   static sortBy<T = Record<string, any>>(arr: T[], by: string, sortDir: string = 'asc') {
 
     const sortD = (sortDir === 'asc') ? 1 : -1;
     return [...arr].sort((a: T, b: T) => {
-      return this.resolveDotPath(a,by)  > this.resolveDotPath(b,by) ? sortD : this.resolveDotPath(b,by) > this.resolveDotPath(a,by) ? -sortD : 0
+      return this.resolveDotPath(a, by) > this.resolveDotPath(b, by) ? sortD : this.resolveDotPath(b, by) > this.resolveDotPath(a, by) ? -sortD : 0
     })
   }
 
@@ -76,15 +76,16 @@ export class dataOp {
   }
 
 
-
-  /** @deprecated */
-  static getObjectItemById<T = any>(arr: T[], id: number | string, idname?: string): T[] {
-    const idcode = idname ?? 'id'
-    // getValueFromNotation()
-    return arr.filter((item) => {
-      // console.log(idcode , ' : ',resolveDotPath(item,idcode))
-      //return item[idcode] === id
-      return this.resolveDotPath(item, idcode) === id
+  /**
+   * 
+   * @param arr array to find in
+   * @param value value to seek for
+   * @param key  object key to match with
+   * @returns number
+   */
+  static findObjectIndex<T=Record<string,any>>(arr: T[], value: any, key: string = 'id'):number {
+    return arr.findIndex((obj:T) => { 
+      return this.resolveDotPath(obj,key)  === value;
     });
   }
 

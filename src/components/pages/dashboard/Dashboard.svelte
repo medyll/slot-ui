@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import Divider from '$lib/base/divider/Divider.svelte';
 	import ButtonDemo from '$lib/base/button/Button.demo.svelte'; 
-	import ButtonActionDemo from '$lib/base/button/ButtonAction.demo.svelte';
+	
 	import Menu from '$lib/ui/menu/Menu.svelte';
 	import Avatar from '$lib/base/avatar/Avatar.svelte';
 	import AlertDemo from '$lib/base/alert/AlertDemo.svelte';
@@ -65,9 +65,7 @@
 					<Paper density="kind">
 						<ButtonDemo />
 					</Paper>
-					<Paper density="kind">
-						<ButtonActionDemo />
-					</Paper>
+					
 					<Paper density="kind">
 						<Avatar size="small">
 							<Icon icon="code" />
