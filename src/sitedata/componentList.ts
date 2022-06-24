@@ -1,50 +1,36 @@
-import Frame from '$lib/ui/frame/Frame.svelte';
-import { goto } from '$app/navigation';
-import Divider from '$lib/base/divider/Divider.svelte';
-import ButtonDemo from '$lib/base/button/Button.demo.svelte';
-import Menu from '$lib/ui/menu/Menu.svelte';
-import Avatar from '$lib/base/avatar/Avatar.svelte';
-import AlertDemo from '$lib/base/alert/AlertDemo.svelte';
-import TabsDemo from '$lib/base/tabs/Tabs.demo.svelte';
-import CartoucheDemo from '$lib/base/cartouche/Cartouche.demo.svelte';
-import BoxDemo from '$lib/base/box/Box.demo.svelte';
-import Select from '$lib/base/select/Select.svelte';
-import Paper from '$lib/base/paper/Paper.svelte';
-import Icon from '$lib/base/icon/Icon.svelte';
-import CardDemo from '$lib/base/card/Card.demo.svelte';
-import Options from '$lib/base/select/Options.svelte';
-import TreeDemo from '$lib/base/tree/Tree.demo.svelte';
-import ListDemo from '$lib/base/list/List.demo.svelte';
-import InputDemo from '$lib/base/input/Input.demo.svelte';
-import DataListDemo from '$lib/base/datalist/DataList.demo.svelte';
-import GrouperDemo from '$lib/data/grouper/Grouper.demo.svelte'; 
-import ColumnerDemoSvelte from '$lib/base/columner/Columner.demo.svelte';
-import SorterDemoSvelte from '$lib/data/sorter/Sorter.demo.svelte';
-import ContentSwitcherDemoSvelte from '$lib/base/contentSwitcher/ContentSwitcher.demo.svelte';
-import LoaderDemoSvelte from '$lib/base/loader/Loader.demo.svelte';
-import FinderDemoSvelte from '$lib/data/finder/Finder.demo.svelte';
-import ConfirmDemoSvelte from '$lib/base/confirm/Confirm.demo.svelte';
-
-export const slotUiComponentList = [
-    {
-        name: 'Button component',
-        code: 'button',
-        component: ButtonDemo
-    },
-    { name: 'Alert', code: 'Alert', component: AlertDemo },
-    { name: 'Tabs', code: 'Tabs', component: TabsDemo },
-    { name: 'Cartouche', code: 'Cartouche', component: CartoucheDemo },
-    { name: 'Box', code: 'Box', component: BoxDemo },
-    { name: 'Card', code: 'Card', component: CardDemo },
-    { name: 'Tree', code: 'Tree', component: TreeDemo },
-    { name: 'List', code: 'List', component: ListDemo },
-    { name: 'Input', code: 'Input', component: InputDemo },
-    { name: 'DataList', code: 'DataList', component: DataListDemo },
-    { name: 'Finder component', code: 'finder', component: FinderDemoSvelte },
-    { name: 'Grouper component', code: 'grouper', component: GrouperDemo },
-    { name: 'Sorter component', code: 'sorter', component: SorterDemoSvelte },
-    { name: 'Columner  component', code: 'Columner', component: ColumnerDemoSvelte },
-    { name: 'Content Switcher  component', code: 'switcher', component: ContentSwitcherDemoSvelte },
-    { name: 'Confirm', code: 'confirm', component: ConfirmDemoSvelte },
-    { name: 'Loader', code: 'loader', component: LoaderDemoSvelte },
-];
+import Boxdemosvelte from "$lib/base/box/Box.demo.svelte"; 
+import Buttondemosvelte from "$lib/base/button/Button.demo.svelte"; 
+import Carddemosvelte from "$lib/base/card/Card.demo.svelte"; 
+import Cartouchedemosvelte from "$lib/base/cartouche/Cartouche.demo.svelte"; 
+import Columnerdemosvelte from "$lib/base/columner/Columner.demo.svelte"; 
+import Confirmdemosvelte from "$lib/base/confirm/Confirm.demo.svelte"; 
+import ContentSwitcherdemosvelte from "$lib/base/contentSwitcher/ContentSwitcher.demo.svelte"; 
+import DataListdemosvelte from "$lib/base/dataList/DataList.demo.svelte"; 
+import Drawerdemosvelte from "$lib/base/drawer/Drawer.demo.svelte"; 
+import Inputdemosvelte from "$lib/base/input/Input.demo.svelte"; 
+import Listdemosvelte from "$lib/base/list/List.demo.svelte"; 
+import Loaderdemosvelte from "$lib/base/loader/Loader.demo.svelte"; 
+import Tabsdemosvelte from "$lib/base/tabs/Tabs.demo.svelte"; 
+import Treedemosvelte from "$lib/base/tree/Tree.demo.svelte"; 
+import Finderdemosvelte from "$lib/data/finder/Finder.demo.svelte"; 
+import Grouperdemosvelte from "$lib/data/grouper/Grouper.demo.svelte"; 
+import Jsonerdemosvelte from "$lib/data/jsoner/Jsoner.demo.svelte"; 
+import Sorterdemosvelte from "$lib/data/sorter/Sorter.demo.svelte";  
+ export const slotUiComponentList = [ {name:"Box",code:"box",component:Boxdemosvelte},
+{name:"Button",code:"button",component:Buttondemosvelte},
+{name:"Card",code:"card",component:Carddemosvelte},
+{name:"Cartouche",code:"cartouche",component:Cartouchedemosvelte},
+{name:"Columner",code:"columner",component:Columnerdemosvelte},
+{name:"Confirm",code:"confirm",component:Confirmdemosvelte},
+{name:"ContentSwitcher",code:"contentswitcher",component:ContentSwitcherdemosvelte},
+{name:"DataList",code:"datalist",component:DataListdemosvelte},
+{name:"Drawer",code:"drawer",component:Drawerdemosvelte},
+{name:"Input",code:"input",component:Inputdemosvelte},
+{name:"List",code:"list",component:Listdemosvelte},
+{name:"Loader",code:"loader",component:Loaderdemosvelte},
+{name:"Tabs",code:"tabs",component:Tabsdemosvelte},
+{name:"Tree",code:"tree",component:Treedemosvelte},
+{name:"Finder",code:"finder",component:Finderdemosvelte},
+{name:"Grouper",code:"grouper",component:Grouperdemosvelte},
+{name:"Jsoner",code:"jsoner",component:Jsonerdemosvelte},
+{name:"Sorter",code:"sorter",component:Sorterdemosvelte} ] 

@@ -1,8 +1,11 @@
 <script lang="ts">
+	import ContentSwitcher from './../contentSwitcher/ContentSwitcher.demo.svelte';
 	import { autofocus } from '$lib/uses/autofocus/autofocus';
 	import { fade, slide } from 'svelte/transition';
 	import Button from '../button/Button.svelte';
 
+	/** text displayed on confirm button */
+	export let tooltipInitial: string | undefined =undefined;
 	/** text displayed on confirm button */
 	export let primaryInitial: string = '';
 	/** icon displayed on the confirm button */
@@ -47,13 +50,14 @@
 </script>
 
 {#if step === 'initial'}
-	<span in:fade on:click={handleClickInitial} bind:this={initialRef}>
+	<span in:fade on:click={handleClickInitial} bind:this={initialRef} title={tooltipInitial}>
 		<slot name="initial"
 			><Button
 				naked
 				iconColor={iconColorInitial}
 				icon={iconInitial}
 				primary={primaryInitial}
+				title:tooltipInitial
 			/></slot
 		>
 	</span>
@@ -68,3 +72,11 @@
 		</slot>
 	</span>
 {/if}
+
+
+<style lang="scss">
+	.contentSlot{
+		display:flex;
+		align-items:center;
+	}
+</style>
