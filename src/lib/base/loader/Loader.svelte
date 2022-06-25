@@ -49,7 +49,9 @@
 				<Icon iconFamily="mdi" icon={iconisEmpty} fontSize="big" />
 			{/if}
 			<Divider shadow />
+			{#if Boolean(finalMessage)}
 			<div class="message">{finalMessage}</div>
+			{/if}
 		</div>
 	</div>
 {/if}
@@ -70,7 +72,8 @@
 			border-radius: var(--radius-tiny);
 			border: 1px solid var(--theme-color-foreground-alpha-high);
 			padding: 2rem 0;
-			min-width: 256px;
+			min-width: 128px;
+			width:100%;
 			margin: 1rem;
 			text-align: center;
 			background-color: var(--theme-color-background-alpha);

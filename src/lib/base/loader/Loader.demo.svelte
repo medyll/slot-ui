@@ -4,15 +4,25 @@
 	import Loader from './Loader.svelte';
 </script>
 
-<div class="flex-v gap-large pad-6 pos-rel border">
-	<Columner style="height:750px">
-		<Column>
-			<Loader isLoading={true} /> 
-		</Column>
-		<Column>
-			<Loader isError={true} /></Column>
-		<Column><Loader isEmpty={true} /></Column>
-	</Columner>
+<div class="flex-v gap-large">
+	<h5>{'<Loader />'}</h5>
+	<div class="flex-v gap-medium w-large">
+		<h5>Loading</h5>
+
+		<div class="pos-rel h-large">
+			<Loader isLoading={true} />
+		</div>
+		<h5>On error</h5>
+
+		<div class="pos-rel h-large">
+			<Loader isError={true} />
+		</div>
+		<h5>Is empty</h5>
+
+		<div class="pos-rel h-large">
+			<Loader isEmpty={true} />
+		</div>
+	</div>
 	<!-- <div>isLoading</div>
 	<div class="w-medium h-medium pos-rel border pad">
 		<Loader isLoading={true} />
