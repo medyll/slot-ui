@@ -1,7 +1,7 @@
 .cartoucheHolder {
   border-radius: 6px;
   overflow: hidden;
-  // border: 1px solid var(--theme-border_color);
+  border: 1px solid var(--theme-color-foreground-alpha-high);
 
   .cartoucheContent {
     padding: 0.5rem;
@@ -13,7 +13,7 @@
 .cartouche {
   display: flex;
   grid-gap: 8px;
-  background-color: var(--theme-overlay_color);
+  background-color: var(--theme-color-background);
   align-items: center;
 
   &:hover {
@@ -22,6 +22,7 @@
 
   .cartoucheLabel {
     flex: 1;
+    cursor:pointer;
   }
 
   .icon {

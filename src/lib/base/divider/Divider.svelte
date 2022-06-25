@@ -10,10 +10,13 @@
 	const forwardEvents = createEventForwarder(get_current_component());
 	/*  end slotUi exports*/
 
+	/** margins applied to divider */
 	export let density: ElementProps['density'] = 'default';
+	/** default direction of the divider */
 	export let direction: 'vertical' | 'horizontal' = 'horizontal';
+	/** extension of the divider */
 	export let extension: ElementProps['expansion'] = 'full';
-
+	/** give shadow to divider */
 	export let shadow = false;
 
 	let extensionClass = {
@@ -22,8 +25,8 @@
 		centered: 'marg-tb-1 marg-ii-4'
 	};
 
-	$: shadowClass = shadow ? "shad-3" : ''
-	
+	$: shadowClass = shadow ? 'shad-3' : '';
+
 	function getDensity(density: ElementProps['density']) {
 		const denses: Record<ElementProps['density'], any> = {
 			none: '0',
