@@ -18,7 +18,7 @@ __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
-        drawerMenuBar: {};
+        topBarSlot: {};
         default: {};
         drawerBottomBarSlot: {};
     };

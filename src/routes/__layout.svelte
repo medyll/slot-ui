@@ -124,7 +124,7 @@
 </div>
 
 <!-- <Drawer bind:this={drawerRef} isOpen={false}>
-	<svelte:fragment slot="drawerMenuBar">
+	<svelte:fragment slot="topBarSlot">
 		<TopBar title="Drawer with menu bar ">
 			<svelte:fragment slot="menuBarSwitcher">
 				<div class="pad-1">
