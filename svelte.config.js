@@ -1,5 +1,5 @@
 import adapter from "@sveltejs/adapter-static"
-
+import path from 'path'
 import preprocess from 'svelte-preprocess';
 import {sx4uPreprocess} from './src/lib/uses/sx4u/sx4uPreprocess.js';
 
@@ -35,6 +35,12 @@ const config = {
             exports: (filepath) => true
         },
         vite: {
+            resolve: {alias:{
+                '$scripts': path.resolve('./src/lib/scripts'),
+                '$engine': path.resolve('./src/lib/engine'),
+                '$uses': path.resolve('./src/lib/uses'),
+                '$types': path.resolve('./src/lib/types'),
+            }},
             server: {
                 fs: {
                     // Allow serving files from one level up to the project root
