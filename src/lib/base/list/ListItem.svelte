@@ -16,7 +16,7 @@
 	/*  common slotUi exports*/
 	let className = '';
 	export { className as class };
-	export let element: HTMLElement;
+	export let element: HTMLElement | null = null;
 	export let style: string = '';
 	const forwardEvents = createEventForwarder(get_current_component());
 	/*  end slotUi exports*/
@@ -25,7 +25,7 @@
 	export let primary: string | null = null;
 	export let secondary: string | null = null;
 	export let action: string | null = null;
-	export let selected: boolean;
+	export let selected: boolean = false;
 	export let showIcon: boolean = true;
 	export let transition: __sveltets_2_SvelteTransitionReturnType | undefined = undefined;
 

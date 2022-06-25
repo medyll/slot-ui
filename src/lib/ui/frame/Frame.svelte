@@ -1,16 +1,17 @@
 <svelte:options accessors/>
 <script lang="ts">
-  import {createEventForwarder} from '../../engine/engine';
+  import {createEventForwarder} from '../../engine/eventForwarder';
   import {get_current_component} from 'svelte/internal';
   import Drawer from '../../base/drawer/Drawer.svelte';
 
-  /** common slotUi exports*/
+ 
   let className = '';
   export {className as class};
   export let element: HTMLDivElement | null    = null;
   const forwardEvents                          = createEventForwarder(get_current_component());
-  /** end slotUi exports*/
+ 
 
+  export let style: string = ''
   export let elementNav: HTMLDivElement | null = null;
   export let frameDrawerRef: typeof Drawer     = null;
 
@@ -34,7 +35,7 @@
 
   // $: console.log(frameDrawerRef);
 </script>
-<div bind:this={element} class="pos-rel flex-v h-full overflow-hidden frame {className}" use:forwardEvents>
+<div bind:this={element} class="pos-rel flex-v h-full overflow-hidden frame {className}" {style} use:forwardEvents>
     <div>
         <slot name="frameHeaderSlot"></slot>
     </div>

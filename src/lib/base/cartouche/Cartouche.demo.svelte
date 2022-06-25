@@ -11,7 +11,7 @@
 	<Cartouche isOpen={true} class="marg-tb-1">
 		<span slot="primarySlot">This is a cartouche</span>
 		<Icon slot="cartoucheIconSlot" fontSize="small" icon="circle" />
-		Cartouche content 
+		<div class="pad">Cartouche content </div>
 	</Cartouche>
     <h5>Stacked, using props</h5>
 	<div>

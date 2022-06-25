@@ -53,8 +53,8 @@
 	}
 </script>
 
-<Frame class="">
-	<div class="theme-bg-paper overflow-hidden  h-full" slot="frameDrawerSlot">
+<Frame style="height:100%;overflow:auto;">
+	<div   slot="frameDrawerSlot">
 		{#if menuList}
 			<List
 				listItems={cols}

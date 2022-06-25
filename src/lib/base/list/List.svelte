@@ -109,7 +109,7 @@
 			e.stopPropagation();
 			return;
 		}
-e?.target?.scrollIntoView()
+// e?.target?.scrollIntoView()
 		listStore.setActiveData(e.detail?.data); // should be  e.detail.data
 		listStore.setActiveItem(e.detail);
 

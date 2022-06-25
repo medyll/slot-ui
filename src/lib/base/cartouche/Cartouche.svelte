@@ -41,7 +41,6 @@
 	let chevronIcon: 'chevron-down' | 'chevron-up';
 	$: chevronIcon = !isOpen ? 'chevron-down' : 'chevron-up';
 
-	// $: if (element) console.log(elem(element).next());
 </script>
 
 <div
