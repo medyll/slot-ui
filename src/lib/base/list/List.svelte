@@ -190,7 +190,8 @@
 	{#if $$slots.commandBarSlot}
 		<slot name="commandBarSlot" />
 	{/if}
-	{#if listItems}
+	<slot>
+		{#if listItems}
 		{#if !noVirtualize}
 			{#if $$slots.default}
 				<Virtualize height="100%" items={listItems} let:item>
@@ -227,6 +228,7 @@
 			{/key}
 		{/if}
 	{/if}
+	</slot>
 </ul>
 
 <style global lang="scss">
