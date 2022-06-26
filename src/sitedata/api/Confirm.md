@@ -1,6 +1,7 @@
 ```typescript 
 __propDef: {
     props: {
+        /** text displayed on confirm button */ tooltipInitial?: string | undefined;
         /** text displayed on confirm button */ primaryInitial?: string | undefined;
         /** icon displayed on the confirm button */ iconInitial?: string | undefined;
         /** color of the icon displayed on the confirm button */ iconColorInitial?: string | undefined;

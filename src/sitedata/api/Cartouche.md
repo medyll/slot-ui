@@ -20,7 +20,7 @@ __propDef: {
     };
     slots: {
         cartoucheIconSlot: {};
-        primarySlot: {};
+        cartoucheLabelSlot: {};
         cartoucheActionSlot: {};
         default: {};
     };

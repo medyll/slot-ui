@@ -1,14 +1,10 @@
 ```typescript 
 __propDef: {
-    props: {
-        [x: string]: any;
-    };
+    props: {};
     events: {
         [evt: string]: CustomEvent<any>;
     };
-    slots: {
-        default: {};
-    };
+    slots: {};
 };
 
  ```

@@ -6,6 +6,7 @@ import Columnerdemosvelte from "$lib/base/columner/Columner.demo.svelte";
 import Confirmdemosvelte from "$lib/base/confirm/Confirm.demo.svelte"; 
 import ContentSwitcherdemosvelte from "$lib/base/contentSwitcher/ContentSwitcher.demo.svelte"; 
 import DataListdemosvelte from "$lib/base/dataList/DataList.demo.svelte"; 
+import Dividerdemosvelte from "$lib/base/divider/Divider.demo.svelte"; 
 import Drawerdemosvelte from "$lib/base/drawer/Drawer.demo.svelte"; 
 import Inputdemosvelte from "$lib/base/input/Input.demo.svelte"; 
 import Listdemosvelte from "$lib/base/list/List.demo.svelte"; 
@@ -24,6 +25,7 @@ import Sorterdemosvelte from "$lib/data/sorter/Sorter.demo.svelte";
 {name:"Confirm",code:"confirm",component:Confirmdemosvelte},
 {name:"ContentSwitcher",code:"contentswitcher",component:ContentSwitcherdemosvelte},
 {name:"DataList",code:"datalist",component:DataListdemosvelte},
+{name:"Divider",code:"divider",component:Dividerdemosvelte},
 {name:"Drawer",code:"drawer",component:Drawerdemosvelte},
 {name:"Input",code:"input",component:Inputdemosvelte},
 {name:"List",code:"list",component:Listdemosvelte},
