@@ -35,7 +35,7 @@
 	 * @type 'wide' | 'inplace'
 	 */
 	export let flow: 'fixed' | 'relative' | 'absolute' = 'relative'; // fixed,relative,abolute
-	export let stickTo: 'right' | 'left' | 'top' | 'bottom' = 'right';
+	export let stickTo: 'right' | 'left' | 'top' | 'bottom' = 'left';
 	export let showOpenerIcon: boolean = false;
 
 	export function toggle(visibleSate?: boolean) {
@@ -46,53 +46,51 @@
 	let dspStyle: string | undefined = undefined;
 
 	const stickToStyle = {
-		right: 'right:0;top:0;bottom:0;width: 288px;height:100%;',
-		left: 'left:0;top:0;bottom:0;width: 288px;height:100%;',
+		right: 'right:0;top:0;height:100%;height:100%;',
+		left: 'left:0;top:0;bottom:0;height:100%;height:100%;',
 		top: 'left:0;right:0;top:0;height: 288px;',
 		bottom: 'left:0;right:0;bottom:0;height: 288px;'
 	};
 
 	const openerIconStyle = {
-		right: 'left:16px',
-		left: 'right:0',
-		top: 'bottom:0;right:0;',
-		bottom: 'top:0;right:0;'
+		right: 'left:-16px;top:8px;',
+		left: 'right:-16px;top:8px;',
+		top: 'bottom:-16px;right:8px;',
+		bottom: 'top:-16px;right:8px;'
 	};
-	/* let widthStyle;
-  let sens;
-  let pos; */
 
-	$: positionStyle = flow;
+	let sensSuffix = '';
+	$: switch (stickTo) {
+		case 'top':
+			sensSuffix = isOpen ? 'up' : 'down';
+			break;
+		case 'right':
+			sensSuffix = isOpen ? 'right' : 'left';
+			break;
+		case 'bottom':
+			sensSuffix = isOpen ? 'down' : 'up';
+			break;
+		case 'left':
+			sensSuffix = isOpen ? 'left' : 'right';
+			break; 
+	}
 
-	$: dspStyle = isOpen ? 'inherit' : 'none';
-	$: widthStyle = isOpen ? 'auto' : '0px';
+	$: dimKeyVary = ['top', 'bottom'].includes(stickTo) ? 'height' : 'width';
 
-	$: sens = !isOpen ? 'chevron-right' : 'chevron-left';
+	$: dspStyle = isOpen ? 'flex' : 'flex';
+	$: widthStyle = isOpen ? '288px' : '24px';
+	
+	$: sens = 'chevron-' + sensSuffix
 	$: pos = !isOpen ? '-32' : '0';
 
-	$: style = `display:${dspStyle};position:${flow};${stickToStyle[stickTo]}`;
-
-    $: freeOpenr = (()=>{
-        const red = element?.getBoundingClientRect();
-        console.log({red,stickTo});
- 
-        return "..";
-    })()
-
-    $: console.log(freeOpenr)
+	$: style = `display:${dspStyle};position:${flow};${stickToStyle[stickTo]};${dimKeyVary}:${widthStyle};`;
 </script>
 
-<div
-	data-open={isOpen}
-	bind:this={element}
-	class="drawer flex-v h-full pos-rel {className}"
-	{style}
-	use:forwardEvents
->
-	<div style="position: absolute;z-index:8600;{openerIconStyle[stickTo]}">
+<div data-open={isOpen} bind:this={element} class="drawer   {className}" {style} use:forwardEvents>
+	<div class="opener" style={openerIconStyle[stickTo]}>
 		{#if showOpenerIcon}
 			<IconButton
-				--css-button-radius="6px"
+				--css-button-radius="50%"
 				style="width:32px;height:32px"
 				icon={sens}
 				iconFamily="fa-solid"
@@ -138,8 +136,10 @@
 				{/if}
 			</div>
 		{/if}
-		<div class="flex-main pos-rel overflow-hidden">
-			<slot />
+		<div class="content">
+			<div style="height;100%;overflow:auto;">
+				<slot />
+			</div>
 		</div>
 		{#if $$slots.drawerBottomBarSlot}
 			<BottomBar>

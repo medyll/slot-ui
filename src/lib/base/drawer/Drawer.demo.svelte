@@ -105,7 +105,7 @@
 		</div>
 		<div style="height:100%;overflow:auto;">
 			<List noVirtualize={true} onItemClick={() => {}}>
-				{#each [...Array(10)] as key, val}
+				{#each [...Array(20)] as key, val}
 					<ListItem>
 						<span slot="primary">Some idioms {val}</span>
 						<span slot="secondary">secondary {val}</span>
