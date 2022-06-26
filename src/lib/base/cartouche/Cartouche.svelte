@@ -75,7 +75,7 @@
 			<Icon fontSize="tiny" icon={chevronIcon} />
 		</div>
 	</div>
-	<Divider extension="padded" density="none" shadow />
+	<Divider expansion="padded" density="none" shadow />
 	{#if isOpen}
 		<div class="cartoucheContent" transition:slide>
 			{#if component}

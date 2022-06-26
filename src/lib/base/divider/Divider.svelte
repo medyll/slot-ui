@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { createEventForwarder } from '../../engine/engine';
+	import { createEventForwarder } from '$lib/engine/eventForwarder'; 
 	import { get_current_component } from 'svelte/internal';
 	import type { ElementProps } from '../../../types';
 
@@ -14,18 +14,38 @@
 	export let density: ElementProps['density'] = 'default';
 	/** default direction of the divider */
 	export let direction: 'vertical' | 'horizontal' = 'horizontal';
-	/** extension of the divider */
-	export let extension: ElementProps['expansion'] = 'full';
+	/** expansion of the divider */
+	export let expansion: ElementProps['expansion'] = 'full';
 	/** give shadow to divider */
 	export let shadow = false;
+	/** give color to divider */
+	export let color: string | undefined = undefined;
 
 	let extensionClass = {
-		full: 'marg-tb-1 ',
-		padded: 'marg-tb-1 marg-ii-2',
-		centered: 'marg-tb-1 marg-ii-4'
+		horizontal: {
+			full: '',
+			padded: 'marg-ii-12',
+			centered: 'marg-ii-6'
+		},
+		vertical: {
+			full: '',
+			padded: 'marg-ii-12',
+			centered: 'marg-ii-6'
+		}
 	};
+	
+	let addStyle: string = '';
 
 	$: shadowClass = shadow ? 'shad-3' : '';
+
+	$: if(color) addStyle += `--slotui-divider-color:${color};`
+
+	// set height od divider when direction === vertical in a flex env
+	$: if((direction ==='vertical') && (element?.nextElementSibling ?? element?.previousElementSibling) ){
+			let maxHeight = (element?.previousElementSibling ?? element?.nextElementSibling)?.getBoundingClientRect()?.height
+			
+			addStyle += `height:calc(${maxHeight}px - ${getDensity(density)});`;
+	}
 
 	function getDensity(density: ElementProps['density']) {
 		const denses: Record<ElementProps['density'], any> = {
@@ -39,24 +59,24 @@
 		return denses[density];
 	}
 
-	let addStyle: string = '';
 	switch (direction) {
 		case 'horizontal':
-			addStyle = `margin:${getDensity(density)} 0`;
+			 addStyle += `margin-top:${getDensity(density)};margin-bottom:${getDensity(density)};`;
 			break;
 		case 'vertical':
-			addStyle = `margin:0 ${getDensity(density)}`;
+			 addStyle += `margin-left:${getDensity(density)};margin-right:${getDensity(density)};`;
 			break;
 	}
 </script>
 
 <hr
 	bind:this={element}
-	class="{extensionClass[extension]} {className} {shadowClass}"
+	class="{extensionClass[direction][expansion]} {className} {shadowClass}"
 	class:vertical={direction === 'vertical'}
 	style={addStyle}
-	use:forwardEvents
+	use:forwardEvents 
 />
+
 
 <style lang="scss">
 	@import 'Divider';

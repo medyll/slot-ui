@@ -11,7 +11,7 @@
 	import TopBar from '$lib/ui/topBar/TopBar.svelte';
 	import IconButton from '$lib/base/button/IconButton.svelte';
 	import List from '$lib/base/list/List.svelte';
-	import ListItem from '$lib/base/list/ListItem.svelte'; 
+	import ListItem from '$lib/base/list/ListItem.svelte';
 	import Frame from '$lib/ui/frame/Frame.svelte';
 	import { toggleStartMenu } from '../lib/engine/wactions.utils';
 	import { openChromeFrame } from '$lib/ui/chromeFrame/chromeFrame.utils';
@@ -68,9 +68,11 @@
 		var global = global || window;
 		var Buffer = Buffer || [];
 		var process = process || { env: { DEBUG: undefined }, version: [] };
-		document.body.setAttribute('data-theme', 'light');
+		if (document.body) {
+			document.body.setAttribute('data-theme', 'light');
 		if (localStorage && localStorage.getItem('themeMode')) {
 			document.body.setAttribute('data-theme', localStorage.getItem('themeMode'));
+		}
 		}
 		window.addEventListener('load', function (event) {
 			if (localStorage && localStorage.getItem('themeMode')) {
@@ -85,7 +87,11 @@
 	<Login showLogin={false}>
 		<Taskbar>
 			<svelte:fragment slot="taskBarLeft">
-				<Button size="auto" primary="svelte-components" on:click={handleClick('svelte-components')} />
+				<Button
+					size="auto"
+					primary="svelte-components"
+					on:click={handleClick('svelte-components')}
+				/>
 				<!-- <IconButton
 						icon="barcode"
 						on:click={toggleStartMenu}
@@ -100,7 +106,7 @@
 					on:click={() => {
 						openCh('btn2');
 					}}>button 2</Button
-				> 
+				>
 			</svelte:fragment>
 			<ChromeFrameButtonList let:chromeFrame />
 			<TaskBarContent />
@@ -147,7 +153,7 @@
 	</div>
 </Drawer> -->
 <style global lang="scss">
-	  @import  "./src/sass/cssfabric.scss";
+	@import './src/sass/cssfabric.scss';
 
 	html {
 		font-size: 12px;
@@ -177,7 +183,4 @@
 	.inputBorder {
 		border: 1px solid rgba(255, 255, 255, 0.1) !important;
 	}
-
-
-
 </style>
