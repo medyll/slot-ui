@@ -71,7 +71,7 @@ red
 			<!-- <Router {routes} /> -->
 			<Frame>
 				<div slot="frameDrawerSlot">nav left</div>
-				<div slot="contentFrameSlot">
+				<div slot="content">
 					<slot />
 				</div>
 			</Frame>

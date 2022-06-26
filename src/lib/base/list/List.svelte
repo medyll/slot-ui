@@ -25,9 +25,11 @@
 	/** provided raw data, used if no listItems list is provided  */
 	export let data: Data[] | undefined = undefined;
 	/** Row from data for primary, used if props.data is provided  */
-	export let dataFieldPrimary: string | undefined = undefined;
+	export let dataFieldPrimary: string | ((data:Data)=> void) | undefined = undefined;
 	/** Row from data for secondary, used if props.data is provided  */
-	export let dataFieldSecondary: string | undefined = undefined;
+	export let dataFieldSecondary: string | ((data:Data)=> void) | undefined = undefined;
+	/** Row from data for secondary, used if props.data is provided  */
+	export let dataFieldIcon: string  | ((data:Data)=> void) | undefined = undefined;
 
 	export let height: string = '100%';
 	export let style: string = '';
@@ -84,23 +86,18 @@
 		}
 	}
 
-	$: if (element?.getBoundingClientRect().height) {
-		// virtualHeight
-		console.log('red ', element?.getBoundingClientRect().height);
-	}
-
 	// if data, build some list items
 	$: if (data) {
 		if (dataFieldPrimary || dataFieldSecondary) {
 			listItems = propsProxy(
 				[
-					[dataFieldPrimary ?? '"', 'primary'],
-					[dataFieldSecondary ?? '"', 'secondary']
+					['primary',dataFieldPrimary ?? '"', ],
+					['secondary',dataFieldSecondary ?? '"', ],
+					['icon',dataFieldIcon ?? '"', ]
 				],
 				data
 			);
 
-			console.log({ listItems });
 		} else {
 			listItems = data.map((dta: Data) => {
 				return {
@@ -114,12 +111,14 @@
 
 	/** on listItem clicked, we set activeData to e.LisItemProps*/
 	function onListItemClick(e: CustomEvent<LisItemProps>) {
-		console.log(e);
+	
 		if (disabled) {
 			e.stopPropagation();
 			return;
 		}
-		// e?.target?.scrollIntoView()
+		
+		e?.currentTarget?.scrollIntoView();
+
 		listStore.setActiveData(e.detail?.data); // should be  e.detail.data
 		listStore.setActiveItem(e.detail);
 
@@ -139,18 +138,14 @@
 
 	function navigateList(e: KeyboardEvent) {
 		if (![38, 40].includes(e.keyCode)) return;
-		if ($listStore.activeData) {
-			console.log($listStore);
-		}
 
-		console.log({ listItems, data });
 		let tt = 0;
 		if (listItems) {
 			// if selectorField
 			// if listItem.primary
 			// seek listItem with same primary as activeData
 			if ($listStore.activeItem?.['primary']) {
-				console.log('primary -----------------------------------');
+				
 				tt = dataOp.findObjectIndex(listItems, $listStore.activeItem['primary'], 'primary');
 			}
 			// seek listItem with same data.selectorField as activeData
@@ -171,7 +166,7 @@
 
 		const dir = e.keyCode === 38 ? tt - 1 : tt + 1;
 
-		if (listItems) {
+		if (listItems &&  listItems[dir]) {
 			$listStore.activeItem = listItems[dir];
 			$listStore.activeData = listItems[dir]?.data;
 		} else if (data) {

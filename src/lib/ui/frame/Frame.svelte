@@ -54,10 +54,13 @@
         </div>
         <div class="h-full flex-main flex-v ">
             <div>
-                <slot name="contentHeaderFrameSlot"></slot>
+                <slot name="contentHeader"></slot>
             </div>
-            <div class="flex-main overflow-auto pos-rel ">
-                <slot name="contentFrameSlot"></slot>
+            <div class="flex-main overflow-hidden pos-rel ">
+                <slot name="content"></slot>
+            </div>
+            <div>
+                <slot name="bottom"></slot>
             </div>
         </div>
     </div>

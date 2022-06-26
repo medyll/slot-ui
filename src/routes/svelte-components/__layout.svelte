@@ -73,7 +73,7 @@
 			</List>
 		{/if}
 	</div>
-	<div class="theme-bg  h-full" slot="contentFrameSlot">
+	<div class="theme-bg  h-full" slot="content">
 		<div class="pad-4">
 			<slot />
 		</div>

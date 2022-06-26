@@ -8,9 +8,11 @@ export const propsProxy = <T = any, B = any, C = any>(props: PropsProxyProps<T, 
     let out: any = {};
 
     for (const prop of props) {
-      const keyFrom: string = prop[1] as string;
-      const keyTo = prop[0] as string;
-      if (dta[keyFrom]) out[keyTo] = dta[keyFrom];
+      
+      const keyListItem = prop[0] as string;
+      const keyData: string | Function = prop[1] as any;
+      
+      out[keyListItem] = (typeof keyData === 'function')? keyData(dta): dta[keyData];
     }
     // keep original data
     out['data'] = dta;

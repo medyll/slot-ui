@@ -12,9 +12,9 @@
 	/*  end slotUi exports*/
 
 	// props
-	export let items = [];
+	export let items: any[] = [];
 	export let height = '100%';
-	export let itemHeight = undefined;
+	export let itemHeight: number | undefined = undefined;
 
 	let foo;
 
@@ -35,8 +35,7 @@
 	let bottom = 0;
 	let average_height;
 
-	$: visible = items.slice(start, end).map((data, i) => {
-    console.log(items[i])
+	$: visible = items.slice(start, end).map((data, i) => { 
 		return { index: i + start, data };
 	});
 	// whenever `items` changes, invalidate the current heightmap
@@ -139,27 +138,13 @@
 	}
 
 	// trigger initial refresh
-	onMount(async () => {
-		// filter childrens that are title or footer
-		console.log({ contents });
-		rows = contents.children;
-		console.log({ rows });
+	onMount(async () => { 
+		rows = contents.children; 
 		await tick();
 		mounted = true;
 	});
 
-	$: if (contents) {
-		/* console.log('yep')
-    console.log(contents.children)
-    console.log(contents.querySelectorAll('li'))  */
-		/* rows = contents?.children; // querySelectorAll('li');
-		for (let v = 0; v < contents.children.length; v += 1) {
-			console.log(contents.children[v],'red');
-		}
-		mounted = true; */
-	} else {
-		//console.log(rows)
-	}
+ 
 </script>
 
 <virtualize-viewport
@@ -172,8 +157,8 @@
 		<div style="position:sticky;top:0;z-index:9000">
 			<slot name="virtualizeHeaderSlot" />
 		</div>
-		{#each visible as row (row.index)}
-			<slot item={row?.data}>Missing template</slot>
+		{#each visible as row (row?.index)}
+			{#if Boolean(row)}<slot item={row?.data}>Missing template</slot>{/if}
 		{/each}
 	</div>
 </virtualize-viewport>

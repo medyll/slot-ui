@@ -18,6 +18,14 @@
 			};
 	});
 
+	$: data = [...Array(11)].map((val,index) => {
+		return {
+				name: 'Raw data loop '+index,
+				secondary: 'secondary sub-title '+index,
+				icon: 'user', 
+			};
+	});
+
 	function openIn() {
 		// ger
 	}
@@ -30,11 +38,22 @@
 		<List
 			density="default"
 			height="350px"
-			let:listItem
+			onItemClick={openIn}
+			selectorField="name"
+			primary="Raw data"
+			secondary="secondary text" 
+			{data}
+			dataFieldPrimary={(data)=>{return data?.name}}
+			dataFieldSecondary={(data)=>{return data?.secondary + data?.icon}}
+			dataFieldIcon={(data)=>{return data?.icon}}
+		/>
+		<List
+			density="default"
+			height="350px"
 			listItems={menuList}
 			onItemClick={openIn}
 			selectorField="id"
-			primary="With slots"
+			primary="Without slots"
 			secondary="secondary text" 
 		/>
 		<List
@@ -44,7 +63,7 @@
 			listItems={menuList}
 			onItemClick={openIn}
 			selectorField="id"
-			primary="Virtualize and slot"
+			primary="With slots"
 			secondary="secondary text" 
 		>
 			<ListItem data={listItem.data} density={'default'}>
@@ -78,8 +97,7 @@
 			secondary="secondary text" 
 			style="height:350px;overflow:auto;" 
 		>
-			<ListItem showDivider={true} data={listItem.data} density={'default'}>
-				
+			<ListItem showDivider={true} data={listItem.data} density={'default'}>				
 				<span slot="icon">
 					{#if listItem?.icon  }<Icon fontSize="tiny" icon={listItem?.icon} />{/if}
 				</span>				

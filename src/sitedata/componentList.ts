@@ -16,7 +16,8 @@ import Treedemosvelte from "$lib/base/tree/Tree.demo.svelte";
 import Finderdemosvelte from "$lib/data/finder/Finder.demo.svelte"; 
 import Grouperdemosvelte from "$lib/data/grouper/Grouper.demo.svelte"; 
 import Jsonerdemosvelte from "$lib/data/jsoner/Jsoner.demo.svelte"; 
-import Sorterdemosvelte from "$lib/data/sorter/Sorter.demo.svelte";  
+import Sorterdemosvelte from "$lib/data/sorter/Sorter.demo.svelte"; 
+import Framedemosvelte from "$lib/ui/frame/Frame.demo.svelte";  
  export const slotUiComponentList = [ {name:"Box",code:"box",component:Boxdemosvelte},
 {name:"Button",code:"button",component:Buttondemosvelte},
 {name:"Card",code:"card",component:Carddemosvelte},
@@ -35,4 +36,5 @@ import Sorterdemosvelte from "$lib/data/sorter/Sorter.demo.svelte";
 {name:"Finder",code:"finder",component:Finderdemosvelte},
 {name:"Grouper",code:"grouper",component:Grouperdemosvelte},
 {name:"Jsoner",code:"jsoner",component:Jsonerdemosvelte},
-{name:"Sorter",code:"sorter",component:Sorterdemosvelte} ] 
+{name:"Sorter",code:"sorter",component:Sorterdemosvelte},
+{name:"Frame",code:"frame",component:Framedemosvelte} ] 

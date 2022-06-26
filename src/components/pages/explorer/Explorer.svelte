@@ -49,10 +49,10 @@
             <span slot="action">{null_to_empty(listItem?.action)}</span>
         </ListItem> -->
     </List>
-    <Header bind:debugValues slot="contentHeaderFrameSlot" title={activeData?.[`nomAppscheme`]}>
+    <Header bind:debugValues slot="contentHeader" title={activeData?.[`nomAppscheme`]}>
         {activeData?.[`nomAppscheme`]}
     </Header>
-    <div class="flex-main overflow-auto pad-4" slot="contentFrameSlot">
+    <div class="flex-main overflow-auto pad-4" slot="content">
         {#if activeData}
             <Elementor let:itemObject bind:item={activeData}>
                 <div class="flex-h flex-align-middle">
