@@ -29,23 +29,24 @@
 	<div class="flex-h gap-medium">
 		<List
 			density="default"
-			height="150px"
+			height="350px"
 			let:listItem
 			listItems={menuList}
 			onItemClick={openIn}
 			selectorField="id"
-			title="Virtualize no slot"
-			style="height:750px"
+			primary="Virtualize no slot"
+			secondary="secondary text"
+			style="height:350px;overflow:auto;"
 		/>
 		<List
 			density="default"
-			height="150px"
+			height="350px"
 			let:listItem
 			listItems={menuList}
 			onItemClick={openIn}
 			selectorField="id"
-			title="Virtualize and slot"
-			style="height:750px"
+			primary="Virtualize and slot"
+			secondary="secondary text" 
 		>
 			<ListItem data={listItem.data} density={'default'}>
 				<span slot="icon"><Icon fontSize="tiny" icon={listItem?.icon} /></span>

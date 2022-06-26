@@ -59,6 +59,8 @@
 	export let disabled: boolean = false;
 	export let density: ElementProps['density'] = 'default';
 
+	let virtualHeight: number | undefined = undefined;
+
 	const listStore = createListStore();
 	setContext('listStateContext', listStore);
 
@@ -79,6 +81,11 @@
 			groupedData = dataOp.groupBy(data, groupBy);
 		} else {
 		}
+	}
+
+	$: if (element?.getBoundingClientRect().height) {
+		// virtualHeight
+		console.log('red ', element?.getBoundingClientRect().height);
 	}
 
 	// if data, build some list items
@@ -183,11 +190,6 @@
 	tabindex="0"
 	on:keydown={navigateList}
 >
-	{#if $$slots.title || title || primary || secondary}
-		<slot name="title">
-			<ListTitle primary={primary ?? title} {secondary} {icon} />
-		</slot>
-	{/if}
 	{#if $$slots.commandBarSlot}
 		<slot name="commandBarSlot" />
 	{/if}
@@ -195,10 +197,24 @@
 		{#if !noVirtualize}
 			{#if $$slots.default}
 				<Virtualize height="100%" items={listItems} let:item>
+					<svelte:fragment slot="virtualizeHeaderSlot">
+						{#if $$slots.title || title || primary || secondary}
+							<slot name="title">
+								<ListTitle primary={primary ?? title} {secondary} {icon} />
+							</slot>
+						{/if}
+					</svelte:fragment>
 					<slot listItem={item} />
 				</Virtualize>
 			{:else}
 				<Virtualize height="100%" items={listItems} let:item>
+					<svelte:fragment slot="virtualizeHeaderSlot">
+						{#if $$slots.title || title || primary || secondary}
+							<slot name="title">
+								<ListTitle primary={primary ?? title} {secondary} {icon} />
+							</slot>
+						{/if}
+					</svelte:fragment>
 					<ListItem class="" {showIcon} {density} data={item.data}>
 						<span slot="icon"><Icon fontSize="tiny" icon={item?.icon} /></span>
 						<span slot="primary">{null_to_empty(item?.primary)}</span>
@@ -208,6 +224,11 @@
 				</Virtualize>
 			{/if}
 		{:else}
+			{#if $$slots.title || title || primary || secondary}
+				<slot name="title">
+					<ListTitle primary={primary ?? title} {secondary} {icon} />
+				</slot>
+			{/if}
 			{#key data}
 				{#each listItems as item}
 					<slot listItem={item}>
@@ -229,6 +250,11 @@
 			{/key}
 		{/if}
 	{:else}
+		{#if $$slots.title || title || primary || secondary}
+			<slot name="title">
+				<ListTitle primary={primary ?? title} {secondary} {icon} />
+			</slot>
+		{/if}
 		<slot />
 	{/if}
 </ul>
