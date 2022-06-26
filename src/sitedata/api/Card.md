@@ -1,10 +1,21 @@
 ```typescript 
 __propDef: {
-    props: {};
+    props: {
+        class?: string | undefined;
+        element?: HTMLDivElement | null | undefined;
+        /** vertical alignments of content */ alignment?: "left" | "right" | "center" | undefined;
+        /** carried data */ data?: ElementProps['data'] | undefined;
+    };
     events: {
         [evt: string]: CustomEvent<any>;
     };
-    slots: {};
+    slots: {
+        cardHeroSlot: {};
+        title: {};
+        cardContentSlot: {};
+        default: {};
+        footer: {};
+    };
 };
 
  ```
