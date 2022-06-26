@@ -9,9 +9,11 @@
 		get_current_component,
 		null_to_empty
 	} from 'svelte/internal';
-	import type { ElementProps } from './types';
+
 	import { createEventForwarder } from '../../engine/engine';
 	import Icon from '../icon/Icon.svelte';
+	import type { ElementProps } from 'src/types';
+	import Divider from '../divider/Divider.svelte';
 
 	/*  common slotUi exports*/
 	let className = '';
@@ -21,12 +23,19 @@
 	const forwardEvents = createEventForwarder(get_current_component());
 	/*  end slotUi exports*/
 
+	/** icon ti be displayed in the list's header */
 	export let icon: string | null = null;
+	/** title of the list */
 	export let primary: string | null = null;
+	/** sub-title of the list */
 	export let secondary: string | null = null;
 	export let action: string | null = null;
+	/** show selected state */
 	export let selected: boolean = false;
 	export let showIcon: boolean = true;
+	/** show divider after listItem */
+	export let showDivider: boolean = false;
+	export let dividerProps: Record<string,any>  = {}
 	export let transition: __sveltets_2_SvelteTransitionReturnType | undefined = undefined;
 
 	export let disabled: boolean = false;
@@ -38,23 +47,23 @@
 	let listStateContext = getContext<any>('listStateContext');
 
 	const handleClick = () => () => {
-		// send whole listItem 
+		// send whole listItem
 		/** @deprecated */
 		const eventDeprecated = custom_event('listclicked', data, { bubbles: true });
-		element.dispatchEvent(eventDeprecated);
+		element?.dispatchEvent(eventDeprecated);
 
-		const event = custom_event('listitem:clicked', {...$$props}, { bubbles: true });
-		element.dispatchEvent(event);
+		const event = custom_event('listitem:clicked', { ...$$props }, { bubbles: true });
+		element?.dispatchEvent(event);
 	};
 
 	const handleDblClick = () => () => {
 		// send whole listItem
 		/** @deprecated */
 		const eventDeprecated = custom_event('list:dblclicked', data, { bubbles: true });
-		element.dispatchEvent(eventDeprecated);
-		
-		const event = custom_event('listitem:dblclicked', {...$$props}, { bubbles: true });
-		element.dispatchEvent(event);
+		element?.dispatchEvent(eventDeprecated);
+
+		const event = custom_event('listitem:dblclicked', { ...$$props }, { bubbles: true });
+		element?.dispatchEvent(event);
 	};
 
 	function doTransition() {
@@ -101,6 +110,9 @@
 		</slot>
 	</div>
 </li>
+{#if showDivider}
+	<Divider {...dividerProps}  />
+{/if}
 
 <style lang="scss" global>
 	@import 'List';

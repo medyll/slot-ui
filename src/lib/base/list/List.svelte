@@ -11,7 +11,7 @@
 	import Virtualize from '../virtualize/Virtualize.svelte';
 	import type { Data } from '$lib/data/grouper/Grouper.svelte';
 	import { dataOp, propsProxy } from '$lib/engine/utils';
-import Divider from '../divider/Divider.svelte';
+	import Divider from '../divider/Divider.svelte';
 
 	/*  common slotUi exports*/
 	let className = '';
@@ -34,7 +34,8 @@ import Divider from '../divider/Divider.svelte';
 	export let showIcon: boolean = true;
 	export let noVirtualize: boolean = false;
 	export let selectorField: any;
-
+	/** show divider between listItems */
+	export let showDivider: boolean = false;
 	/** set selected data by dataKey value*/
 	export let selectedDataKey: string | undefined = undefined;
 	/** set selected data by data object */
@@ -157,7 +158,7 @@ import Divider from '../divider/Divider.svelte';
 				tt = dataOp.findObjectIndex(data, $listStore.activeData[selectorField], selectorField);
 			}
 		}
- 
+
 		if (tt === -1) return;
 
 		const dir = e.keyCode === 38 ? tt - 1 : tt + 1;
@@ -214,6 +215,7 @@ import Divider from '../divider/Divider.svelte';
 							style="content-visibility:hidden;"
 							{showIcon}
 							{density}
+							{showDivider}
 							data={item.data}
 							icon={item?.icon}
 						>
@@ -222,12 +224,11 @@ import Divider from '../divider/Divider.svelte';
 							<span slot="secondary">{null_to_empty(item?.secondary)}</span>
 							<span slot="action">{null_to_empty(item?.action)}</span>
 						</ListItem>
-						<Divider />
 					</slot>
 				{/each}
 			{/key}
 		{/if}
-		{:else}
+	{:else}
 		<slot />
 	{/if}
 </ul>
