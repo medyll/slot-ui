@@ -47,7 +47,7 @@
             <Drawer bind:this={frameDrawerRef}
                     hideCloseIcon={hideCloseIcon}
                     isOpen={defaultOpen}
-                    position="inplace"
+                    flow="relative"
                     showOpenerIcon={showOpenerIcon}>
                 <slot name="frameDrawerSlot"></slot>
             </Drawer>

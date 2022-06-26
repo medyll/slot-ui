@@ -6,6 +6,7 @@
 	import { createEventForwarder } from '../../engine/engine';
 	import { get_current_component } from 'svelte/internal';
 	import Button from '../button/Button.svelte';
+	import Icon from '../icon/Icon.svelte';
 
 	type DrawerTitleType = string | undefined;
 	export type toggle = () => void;
@@ -17,7 +18,12 @@
 	const forwardEvents = createEventForwarder(get_current_component());
 	/*  end slotUi exports*/
 
-	export let primary: DrawerTitleType;
+	/** title of the drawer */
+	export let primary: DrawerTitleType = undefined;
+	/** sub-title of the drawer */
+	export let secondary: DrawerTitleType = undefined;
+	/** icon of the drawer */
+	export let icon: string | undefined = undefined;
 
 	/** Should the drawer be open */
 	export let isOpen: boolean = true;
@@ -28,8 +34,8 @@
 	 * position
 	 * @type 'wide' | 'inplace'
 	 */
-	export let position: 'wide' | 'inplace' = 'wide';
-	export let stickTo: 'right' | 'left' = 'right';
+	export let flow: 'fixed' | 'relative' | 'absolute' = 'relative'; // fixed,relative,abolute
+	export let stickTo: 'right' | 'left' | 'top' | 'bottom' = 'right';
 	export let showOpenerIcon: boolean = false;
 
 	export function toggle(visibleSate?: boolean) {
@@ -38,51 +44,87 @@
 
 	export let style: string = '';
 	let dspStyle: string | undefined = undefined;
+
+	const stickToStyle = {
+		right: 'right:0;top:0;bottom:0;width: 288px;height:100%;',
+		left: 'left:0;top:0;bottom:0;width: 288px;height:100%;',
+		top: 'left:0;right:0;top:0;height: 288px;',
+		bottom: 'left:0;right:0;bottom:0;height: 288px;'
+	};
+
+	const openerIconStyle = {
+		right: 'left:16px',
+		left: 'right:0',
+		top: 'bottom:0;right:0;',
+		bottom: 'top:0;right:0;'
+	};
 	/* let widthStyle;
   let sens;
   let pos; */
 
-	let positionStyle = position === 'wide' ? 'fixed' : 'relative';
+	$: positionStyle = flow;
+
 	$: dspStyle = isOpen ? 'inherit' : 'none';
-	$: widthStyle = isOpen ? '288px' : '0px';
+	$: widthStyle = isOpen ? 'auto' : '0px';
 
 	$: sens = !isOpen ? 'chevron-right' : 'chevron-left';
 	$: pos = !isOpen ? '-32' : '0';
 
-	$: style = `position:${positionStyle};width:${widthStyle}!important`;
+	$: style = `display:${dspStyle};position:${flow};${stickToStyle[stickTo]}`;
+
+    $: freeOpenr = (()=>{
+        const red = element?.getBoundingClientRect();
+        console.log({red,stickTo});
+ 
+        return "..";
+    })()
+
+    $: console.log(freeOpenr)
 </script>
 
 <div
 	data-open={isOpen}
 	bind:this={element}
-	class="drawer flex-v h-full {className}"
+	class="drawer flex-v h-full pos-rel {className}"
 	{style}
 	use:forwardEvents
 >
-	<div style="position: absolute;z-index:8600;right:{pos}px">
+	<div style="position: absolute;z-index:8600;{openerIconStyle[stickTo]}">
 		{#if showOpenerIcon}
-			<!-- <IconButton
-                    --css-button-radius="6px"
-                    style="width:32px;height:32px"
-                    icon="{sens}"
-                    iconFamily="fa-solid"
-                    iconFontSize="small"
-                    on:click={() => {
-								toggle();
-							}}
-           /> -->
+			<IconButton
+				--css-button-radius="6px"
+				style="width:32px;height:32px"
+				icon={sens}
+				iconFamily="fa-solid"
+				iconFontSize="small"
+				on:click={() => {
+					toggle();
+				}}
+			/>
 		{/if}
 	</div>
 	{#if isOpen}
-		{#if $$slots.topBarSlot || Boolean(primary) || !hideCloseIcon}
+		{#if $$slots.topBarSlot || Boolean(primary) || Boolean(icon) || $$slots.iconSlot || !hideCloseIcon}
 			<div class="header flex-h">
-				<div class="flex-main flex-h flex-align-middle ">
-					{#if primary}
-						<span style="font-size:18px;" class="pad-l-4">{primary}</span>
-					{/if}
+				{#if Boolean(icon) || $$slots.iconSlot}
+					<div class="pad-ii-1">
+						<slot name="iconSlot">
+							<Icon {icon} />
+						</slot>
+					</div>
+				{/if}
+				<div class="flex-main   flex-align-middle ">
+					<div class="flex-v gap-tiny">
+						{#if primary}
+							<div style="font-size:18px;" class="pad-l-1">{primary}</div>
+						{/if}
+						{#if secondary}
+							<div class="pad-l-1">{secondary}</div>
+						{/if}
+					</div>
 					<slot name="topBarSlot" />
 				</div>
-				{#if !hideCloseIcon}
+				{#if !hideCloseIcon && !showOpenerIcon}
 					<div>
 						<Button
 							on:click={() => {
@@ -96,10 +138,8 @@
 				{/if}
 			</div>
 		{/if}
-		<div class="flex-main overflow-hidden">
-			{#if $$slots.default}
-				<slot />
-			{/if}
+		<div class="flex-main pos-rel overflow-hidden">
+			<slot />
 		</div>
 		{#if $$slots.drawerBottomBarSlot}
 			<BottomBar>

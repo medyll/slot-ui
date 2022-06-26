@@ -11,6 +11,7 @@
 	import Virtualize from '../virtualize/Virtualize.svelte';
 	import type { Data } from '$lib/data/grouper/Grouper.svelte';
 	import { dataOp, propsProxy } from '$lib/engine/utils';
+import Divider from '../divider/Divider.svelte';
 
 	/*  common slotUi exports*/
 	let className = '';
@@ -104,12 +105,12 @@
 
 	/** on listItem clicked, we set activeData to e.LisItemProps*/
 	function onListItemClick(e: CustomEvent<LisItemProps>) {
-		console.log(e)
+		console.log(e);
 		if (disabled) {
 			e.stopPropagation();
 			return;
 		}
-// e?.target?.scrollIntoView()
+		// e?.target?.scrollIntoView()
 		listStore.setActiveData(e.detail?.data); // should be  e.detail.data
 		listStore.setActiveItem(e.detail);
 
@@ -156,8 +157,7 @@
 				tt = dataOp.findObjectIndex(data, $listStore.activeData[selectorField], selectorField);
 			}
 		}
-
-		console.log({ tt });
+ 
 		if (tt === -1) return;
 
 		const dir = e.keyCode === 38 ? tt - 1 : tt + 1;
@@ -190,8 +190,7 @@
 	{#if $$slots.commandBarSlot}
 		<slot name="commandBarSlot" />
 	{/if}
-	<slot>
-		{#if listItems}
+	{#if listItems}
 		{#if !noVirtualize}
 			{#if $$slots.default}
 				<Virtualize height="100%" items={listItems} let:item>
@@ -223,12 +222,14 @@
 							<span slot="secondary">{null_to_empty(item?.secondary)}</span>
 							<span slot="action">{null_to_empty(item?.action)}</span>
 						</ListItem>
+						<Divider />
 					</slot>
 				{/each}
 			{/key}
 		{/if}
+		{:else}
+		<slot />
 	{/if}
-	</slot>
 </ul>
 
 <style global lang="scss">
@@ -236,6 +237,6 @@
 
 	ul:focus {
 		outline: 1px solid #ccc;
-		outline-offset: -1px;
+		outline-offset: -4px;
 	}
 </style>

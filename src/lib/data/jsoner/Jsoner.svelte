@@ -10,7 +10,7 @@
 	/*  end slotUi exports*/
 	export let data: any = [];
 
-	export let mode: 'array' | 'object' | 'string';
+	export let mode: 'array' | 'object' | 'string' | undefined = undefined
 
 	if (Array.isArray(data)) {
 		mode = 'array';
