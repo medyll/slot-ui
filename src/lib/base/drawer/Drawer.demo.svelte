@@ -104,7 +104,7 @@
 			{/if}
 		</div>
 		<div style="height:100%;overflow:auto;">
-			<List noVirtualize={true} onItemClick={() => {}}>
+			<List virtualize={true} onItemClick={() => {}}>
 				{#each [...Array(20)] as key, val}
 					<ListItem>
 						<span slot="primary">Some idioms {val}</span>

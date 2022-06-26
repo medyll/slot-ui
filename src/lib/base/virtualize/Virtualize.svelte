@@ -168,9 +168,6 @@
 	on:scroll={handle_scroll}
 	style="height: {height};"
 >
-	<!-- <div style="position:sticky;top:0;z-index:9000">
-        <slot name="virtualizeHeaderSlot"/>
-    </div> -->
 	<div bind:this={contents} style="padding-top: {top}px; padding-bottom: {bottom}px;">
 		<div style="position:sticky;top:0;z-index:9000">
 			<slot name="virtualizeHeaderSlot" />

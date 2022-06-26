@@ -37,7 +37,7 @@
 				<Sorter sortByField="nestedData.uuid" bind:sortedData bind:activeCommonSortField {data} />
 			</div>
 			<Divider shadow />
-			<List noVirtualize={true} selectorField="id" data={[...sortedData]} />
+			<List virtualize={true} selectorField="id" data={[...sortedData]} />
 		</div>
 		<div class="flex-h gap-small">
 			<div class="pad">

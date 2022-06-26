@@ -34,9 +34,8 @@
 			listItems={menuList}
 			onItemClick={openIn}
 			selectorField="id"
-			primary="Virtualize no slot"
-			secondary="secondary text"
-			style="height:350px;overflow:auto;"
+			primary="With slots"
+			secondary="secondary text" 
 		/>
 		<List
 			density="default"
@@ -56,27 +55,28 @@
 			</ListItem>
 		</List>
 		<List
-			density="default"
-			height="150px"
+			density="default" 
 			let:listItem
 			listItems={menuList}
 			onItemClick={openIn}
 			selectorField="id"
-			noVirtualize={true}
-			showDivider={true}
-			title="No Virtualize no slot"
-			style="height:750px"
+			virtualize={true}
+			showDivider={false}
+			primary="Without slots" 
+			secondary="secondary text" 
+
+			style="height:350px;overflow:auto;" 
 		/>
 		<List
-			density="default"
-			height="150px"
+			density="default" 
 			let:listItem
 			listItems={menuList}
 			onItemClick={openIn}
 			selectorField="id"
-			noVirtualize={true}
-			title="No Virtualize and slot"	
-			style="height:750px"		
+			virtualize={true}
+			primary="Virtualize and slot"	
+			secondary="secondary text" 
+			style="height:350px;overflow:auto;" 
 		>
 			<ListItem showDivider={true} data={listItem.data} density={'default'}>
 				

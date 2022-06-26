@@ -60,7 +60,7 @@
 				listItems={cols}
 				setSelectedData={activePage?.data}
 				let:listItem
-				noVirtualize={true}
+				virtualize={true}
 				density="default"
 				onItemClick={openIn}
 				selectorField="code"

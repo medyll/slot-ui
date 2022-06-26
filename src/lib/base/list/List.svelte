@@ -32,10 +32,11 @@
 	export let height: string = '100%';
 	export let style: string = '';
 	export let showIcon: boolean = true;
-	export let noVirtualize: boolean = false;
+	export let virtualize: boolean = false;
 	export let selectorField: any;
 	/** show divider between listItems */
 	export let showDivider: boolean = false;
+	export let dividerProps: Record<string,any>  = {}
 	/** set selected data by dataKey value*/
 	export let selectedDataKey: string | undefined = undefined;
 	/** set selected data by data object */
@@ -194,7 +195,7 @@
 		<slot name="commandBarSlot" />
 	{/if}
 	{#if listItems}
-		{#if !noVirtualize}
+		{#if !virtualize}
 			{#if $$slots.default}
 				<Virtualize height="100%" items={listItems} let:item>
 					<svelte:fragment slot="virtualizeHeaderSlot">
@@ -237,6 +238,7 @@
 							{showIcon}
 							{density}
 							{showDivider}
+							{dividerProps}
 							data={item.data}
 							icon={item?.icon}
 						>
@@ -263,7 +265,7 @@
 	@import 'List';
 
 	ul:focus {
-		outline: 1px solid #ccc;
-		outline-offset: -4px;
+		/* outline: 1px solid #ccc;
+		outline-offset: -4px; */
 	}
 </style>
