@@ -77,7 +77,7 @@
     overflow: hidden;
     position: relative;
     background-color: var(--css-frame-bg-color, var(--theme-bg));
-    backdrop-filter: var(--css-frame-backdrop-blur, blur(30px));
+    //backdrop-filter: var(--css-frame-backdrop-blur, blur(30px));
     overflow:hidden;
 
     .frameContainer {
@@ -86,12 +86,13 @@
         z-index:1;
         max-width: 288px;
         border-right: 1px solid var(--theme-color-primary);
-        box-shadow: var(--box-shad-3);
+        //box-shadow: var(--box-shad-3);
       }
 
       .content {
         flex: 1 auto;
         z-index:0;
+        // box-shadow: var(--box-shad-3);
 
       }
     }

@@ -1,7 +1,7 @@
 .drawer {
   color: var(--css-drawer-color, inherit);
   background-color: var(--slotui-drawer-bg-color, var(--theme-color-paper-alpha-low));
-  backdrop-filter: var(--slotui-drawer-backdrop-blur, blur(10px));
+  backdrop-filter: var(--slotui-drawer-backdrop-blur, blur(0px));
   z-index: 3000;
   box-shadow: var(--box-shad-3);
   border-left: 1px solid var(--slotui-drawer-border-color, var(--theme-color-primary-alpha));
