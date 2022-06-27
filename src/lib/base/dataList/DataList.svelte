@@ -21,7 +21,7 @@
 </script>
 
 <div use:forwardEvents bind:this={element} class="dataList  {className}" {style}>
-	{#if browser}
+	{#if element}
 		<Virtualize height="100%" {items} let:item>
 			<svelte:fragment slot="virtualizeHeaderSlot">
 				<slot name="head">virtualizeHeaderSlot</slot>
