@@ -158,7 +158,7 @@
 			<slot name="virtualizeHeaderSlot" />
 		</div>
 		{#each visible as row (row?.index)}
-			{#if Boolean(row)}<slot item={row?.data}>Missing template</slot>{/if}
+			{#if Boolean(row) && row?.data}<slot item={row?.data ?? {}}>Missing content</slot>{/if}
 		{/each}
 	</div>
 </virtualize-viewport>

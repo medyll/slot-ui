@@ -1,8 +1,7 @@
 
 
 export async function get({params}){
-
-    console.log({params},'comp')
+ 
     return {
         headers:{
             Accept:'application/json',

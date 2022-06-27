@@ -4,31 +4,42 @@
 	import DataListCell from '$lib/base/dataList/DataListCell.svelte';
 	import DataListHead from '$lib/base/dataList/DataListHead.svelte';
 
-	let items = [...Array(70000)];
+	let items = [...Array(70000)].map((caches, index: number) => {
+		return {index, name: 'red', otherName: 'red' ,data:{}};
+	});
 </script>
 
-<div style="height:350px;" class="what h-full pos-rel overflow-auto pad-4">
-	<DataList bind:items let:item>
-		<DataListHead slot="head">
-            <DataListCell>Title</DataListCell>
-            <DataListCell>Title</DataListCell>
-            <DataListCell>Title</DataListCell>
-            <DataListCell>Title</DataListCell>
-            <DataListCell>Title</DataListCell>
-            <DataListCell>Title</DataListCell>
-        </DataListHead>
-		<DataListRow>
-			<DataListCell>{item}</DataListCell>
-			<DataListCell>121512</DataListCell>
-			<DataListCell>121512</DataListCell>
-			<DataListCell>vfbgfbgf</DataListCell>
-			<DataListCell>vfbgfbgf</DataListCell>
-			<DataListCell>vfbgfbgf</DataListCell>
-		</DataListRow>
-	</DataList>
+<div class="flex-v gap-large">
+	<h5>{'<DataList />'}</h5>
+	<cite
+		><p>
+			Those who call they tables are the same who name stones as chairs. <br /> B. Franklin, 1854
+		</p></cite
+	>
+
+	<div style="height:450px;" class="what   pos-rel overflow-hidden pad-4">
+		<DataList {items} let:item> 
+			<DataListHead slot="head">
+				<DataListCell style="width:50px;">Title</DataListCell>
+				<DataListCell style="width:50px;">Title</DataListCell>
+				<DataListCell style="width:100%">Title 50%</DataListCell>
+				<DataListCell style="width:100px">10px</DataListCell>
+				<DataListCell style="width:100px ">Title</DataListCell>
+				<DataListCell style="width:100px">Title</DataListCell>
+			</DataListHead>
+			<DataListRow>
+				<DataListCell>{item.index}</DataListCell>
+				<DataListCell>{item.name}</DataListCell>
+				<DataListCell>121512</DataListCell>
+				<DataListCell>vfbgfbgf</DataListCell>
+				<DataListCell>vfbgfbgf</DataListCell>
+				<DataListCell>vfbgfbgf</DataListCell>
+			</DataListRow>
+		</DataList>
+	</div>
 </div>
 
-<style lang="scss" global>
+<style lang="scss">
 	.what {
 		background-color: var(--theme-color-background);
 		color: var(--theme-color-text);
