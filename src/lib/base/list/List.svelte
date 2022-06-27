@@ -117,7 +117,7 @@
 			return;
 		}
 		
-		e?.currentTarget?.scrollIntoView();
+		//e?.currentTarget?.scrollIntoView();
 
 		listStore.setActiveData(e.detail?.data); // should be  e.detail.data
 		listStore.setActiveItem(e.detail);

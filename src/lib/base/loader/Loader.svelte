@@ -62,8 +62,9 @@
 		top: 0;
 		background-color: var(--theme-color-background-alpha);
 		height: 100%;
-		width: 100%;
-		display: flex;
+		min-width: 256px;
+		max-width: 100%;
+		display: inline-flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
