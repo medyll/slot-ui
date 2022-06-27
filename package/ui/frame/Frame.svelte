@@ -65,14 +65,12 @@ export const actions = {
   overflow: hidden;
   position: relative;
   background-color: var(--css-frame-bg-color, var(--theme-bg));
-  backdrop-filter: var(--css-frame-backdrop-blur, blur(30px));
   overflow: hidden;
 }
 .frame .frameContainer .navLeft {
   z-index: 1;
   max-width: 288px;
   border-right: 1px solid var(--theme-color-primary);
-  box-shadow: var(--box-shad-3);
 }
 .frame .frameContainer .content {
   flex: 1 auto;
