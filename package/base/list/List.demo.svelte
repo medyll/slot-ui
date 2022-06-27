@@ -22,7 +22,6 @@ $: data = [...Array(11)].map((val, index) => {
     };
 });
 function openIn() {
-    // ger
 }
 </script>
 

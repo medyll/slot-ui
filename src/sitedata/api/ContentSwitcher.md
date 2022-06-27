@@ -1,19 +1,10 @@
 ```typescript 
 __propDef: {
-    props: {
-        class?: string | undefined;
-        element?: HTMLDivElement | undefined;
-        icon?: string | undefined;
-        iconback?: string | undefined;
-        parent?: HTMLElement | undefined;
-    };
+    props: {};
     events: {
         [evt: string]: CustomEvent<any>;
     };
-    slots: {
-        switcherSlot: {};
-        default: {};
-    };
+    slots: {};
 };
 
  ```
