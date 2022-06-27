@@ -1,11 +1,12 @@
 ```typescript 
 __propDef: {
     props: {
-        class?: string | undefined;
+        /** @restProps {button | a} */ class?: string | undefined;
         style?: string | undefined;
         element?: HTMLDivElement | null | undefined;
-        label: string;
-        icon: string;
+        /** displayed title of the cartouche */ primary?: string | undefined;
+        /** displayed sub title of the cartouche */ secondary?: string | undefined;
+        icon?: string | undefined;
         /** can be set as a prop or as a className */ stacked?: boolean | undefined;
         component?: SvelteComponent | undefined;
         componentProps?: Record<string, any> | undefined;
@@ -20,7 +21,8 @@ __propDef: {
     };
     slots: {
         cartoucheIconSlot: {};
-        cartoucheLabelSlot: {};
+        primarySlot: {};
+        secondarySlot: {};
         cartoucheActionSlot: {};
         default: {};
     };

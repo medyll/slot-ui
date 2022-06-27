@@ -50,7 +50,7 @@ $: if (element)
 <style>button {
   position: relative;
   color: var(--theme-color-text);
-  border: 1px solid var(--css-button-border-color, var(--theme-color-border));
+  border: 1px solid var(--css-button-border-color, var(--theme-color-primary-alpha));
   padding: var(--box-density-preset-small) 0.75rem;
   border-radius: var(--css-button-radius, 4px);
   background-color: rgba(255, 255, 255, 0.1);

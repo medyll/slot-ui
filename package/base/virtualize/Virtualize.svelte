@@ -46,7 +46,7 @@ async function refresh(items, viewport_height, itemHeight) {
             await tick(); // render the newly visible row
             row = rows[i - start];
         }
-        const row_height = height_map[i] = itemHeight || row.offsetHeight;
+        const row_height = (height_map[i] = itemHeight || row?.getBoundingClientRect().height);
         content_height += row_height;
         i += 1;
     }
@@ -106,42 +106,37 @@ async function handle_scroll() {
 }
 // trigger initial refresh
 onMount(async () => {
-    await tick();
     rows = contents.children;
     await tick();
     mounted = true;
 });
 </script>
 
-<style>
-    virtualize-viewport {
-        position: relative;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-        display: block;
-    }
-
-    virtualize-content {
-        display: block;
-    }
-
-</style>
-
 <virtualize-viewport
-        bind:offsetHeight={viewport_height}
-        bind:this={viewport}
-        on:scroll={handle_scroll}
-        style="height: {height};"
+	bind:offsetHeight={viewport_height}
+	bind:this={viewport}
+	on:scroll={handle_scroll}
+	style="height: {height};"
 >
-    <div style="position:sticky;top:0">
-        <slot name="virtualizeHeaderSlot"/>
-    </div>
-    <virtualize-content
-            bind:this={contents}
-            style="padding-top: {top}px; padding-bottom: {bottom}px;"
-    >
-        {#each visible as row (row.index)}
-            <slot item={row.data}>Missing template</slot>
-        {/each}
-    </virtualize-content>
+	<div bind:this={contents} style="padding-top: {top}px; padding-bottom: {bottom}px;">
+		<div style="position:sticky;top:0;z-index:9000">
+			<slot name="virtualizeHeaderSlot" />
+		</div>
+		{#each visible as row (row?.index)}
+			{#if Boolean(row)}<slot item={row?.data}>Missing template</slot>{/if}
+		{/each}
+	</div>
 </virtualize-viewport>
+
+<style>
+	virtualize-viewport {
+		position: relative;
+		overflow-y: auto;
+		-webkit-overflow-scrolling: touch;
+		display: block;
+	}
+
+	/* virtualize-content {
+        display: block;
+    } */
+</style>

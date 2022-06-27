@@ -1,9 +1,10 @@
 ```typescript 
 __propDef: {
     props: {
-        /** common slotUi s*/ class?: string | undefined;
+        class?: string | undefined;
         element?: HTMLDivElement | null | undefined;
-        /** end slotUi s*/ elementNav?: HTMLDivElement | null | undefined;
+        style?: string | undefined;
+        elementNav?: HTMLDivElement | null | undefined;
         frameDrawerRef?: typeof Drawer | undefined;
         hideCloseIcon?: boolean | undefined;
         showOpenerIcon?: boolean | undefined;
@@ -20,8 +21,9 @@ __propDef: {
         frameHeaderSlot: {};
         navLeftHeaderFrameSlot: {};
         frameDrawerSlot: {};
-        contentHeaderFrameSlot: {};
-        contentFrameSlot: {};
+        contentHeader: {};
+        content: {};
+        bottom: {};
     };
 };
 

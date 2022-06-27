@@ -27,7 +27,6 @@
 	});
 
 	function openIn() {
-		// ger
 	}
 </script>
 

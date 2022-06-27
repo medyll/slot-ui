@@ -1,13 +1,11 @@
 hr {
   border: none;
-  border-top: 1px solid var(--slotui-divider-color,var(--theme-color-paper,#ccc) ) ;
-  background-color: var(--slotui-divider-color,var(--theme-color-paper,#ccc) ) ;
+  border-top: 1px solid var(--slotui-divider-color,var(--theme-color-foreground-alpha-high,#333) ) ;
+  background-color: var(--slotui-divider-color,var(--theme-color-foreground-alpha,#333) ) ;
   display: block;
-
+ 
   &.vertical {
-    width: 1px;
-    height: 50px;
-    border-right: 1px solid var(--slotui-divider-color,var(--theme-color-paper,#ccc) ) ;
-    margin: 0.25rem 0.5rem;
+    width: 1px;   
+    border-right: 1px solid var(--slotui-divider-color,var(--theme-color-foreground-alpha,#333) ) ;
   }
 }

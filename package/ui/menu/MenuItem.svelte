@@ -47,7 +47,7 @@ const handleClick = (data) => () => {
 </li>
 {#if divider}
 	<li>
-		<Divider extension="none" />
+		<Divider expansion="none" />
 	</li>
 {/if}
 

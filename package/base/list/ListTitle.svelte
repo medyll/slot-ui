@@ -36,17 +36,6 @@ export let density = 'default';
 	{/if}
 </li>
 
-<!--i love slots-->
-<slot name="iloveslots" />
-<!--i love slot more but with less-->
-<slot:iloveslots />
-
-<!--
-    local instead of global
-    means that the sheet is shared at directory level
-    useful for compound components,
-    css is for cascading
--->
 <style global>:global(li.listItemTitle),
 :global(li.listItem) {
   display: flex;

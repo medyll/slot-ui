@@ -5,7 +5,7 @@ __propDef: {
         element?: HTMLDivElement | null | undefined;
         items?: any[] | undefined;
         height?: string | undefined;
-        itemHeight?: undefined;
+        itemHeight?: number | undefined;
         start?: number | undefined;
         end?: number | undefined;
     };

@@ -19,7 +19,7 @@ const posCloser = orientation === 'right' ? 3 : 1;
 </script>
 
 <div bind:this={element}
-     class="flex-h topBarRoot  flex-align-middle {className} gap-2"
+     class="flex-h topBarRoot w-full  flex-align-middle {className} gap-2"
      style={style} use:forwardEvents>
     {#if $$slots.iconSLot}
         <div class="pad-l-i">

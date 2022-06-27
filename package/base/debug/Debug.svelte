@@ -18,17 +18,17 @@ const items = [
     <Tabs activeTabCode="theTitle1" {items}>tabs</Tabs>
 </div>
 <div style="padding:0.5rem">
-    <Cartouche label="debug zone here">
+    <Cartouche primary="debug zone here">
         <pre>{JSON.stringify($$props, null, " ")}</pre>
     </Cartouche>
 </div>
 <div style="padding:0.5rem">
-    <Cartouche label="debug">
+    <Cartouche primary="debug">
         <pre>{JSON.stringify($$props, null, " ")}</pre>
     </Cartouche>
 </div>
 <div style="padding:0.5rem">
-    <Cartouche label="debug">
+    <Cartouche primary="debug">
         <pre>{JSON.stringify($$props, null, " ")}</pre>
     </Cartouche>
 </div>

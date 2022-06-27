@@ -1,13 +1,12 @@
 <svelte:options accessors/>
-<script>import { createEventForwarder } from '../../engine/engine';
+<script>import { createEventForwarder } from '../../engine/eventForwarder';
 import { get_current_component } from 'svelte/internal';
 import Drawer from '../../base/drawer/Drawer.svelte';
-/** common slotUi exports*/
 let className = '';
 export { className as class };
 export let element = null;
 const forwardEvents = createEventForwarder(get_current_component());
-/** end slotUi exports*/
+export let style = '';
 export let elementNav = null;
 export let frameDrawerRef = null;
 export let hideCloseIcon = true;
@@ -26,7 +25,7 @@ export const actions = {
 };
 // $: console.log(frameDrawerRef);
 </script>
-<div bind:this={element} class="pos-rel flex-v h-full overflow-hidden frame {className}" use:forwardEvents>
+<div bind:this={element} class="pos-rel flex-v h-full overflow-hidden frame {className}" {style} use:forwardEvents>
     <div>
         <slot name="frameHeaderSlot"></slot>
     </div>
@@ -38,17 +37,20 @@ export const actions = {
             <Drawer bind:this={frameDrawerRef}
                     hideCloseIcon={hideCloseIcon}
                     isOpen={defaultOpen}
-                    position="inplace"
+                    flow="relative"
                     showOpenerIcon={showOpenerIcon}>
                 <slot name="frameDrawerSlot"></slot>
             </Drawer>
         </div>
         <div class="h-full flex-main flex-v ">
             <div>
-                <slot name="contentHeaderFrameSlot"></slot>
+                <slot name="contentHeader"></slot>
             </div>
-            <div class="flex-main overflow-auto pos-rel ">
-                <slot name="contentFrameSlot"></slot>
+            <div class="flex-main overflow-hidden pos-rel ">
+                <slot name="content"></slot>
+            </div>
+            <div>
+                <slot name="bottom"></slot>
             </div>
         </div>
     </div>

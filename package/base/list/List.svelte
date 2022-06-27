@@ -6,7 +6,8 @@ import Icon from '../icon/Icon.svelte';
 import ListTitle from './ListTitle.svelte';
 import { createEventForwarder } from '../../engine/engine';
 import Virtualize from '../virtualize/Virtualize.svelte';
-import { propsProxy } from '../../engine/utils';
+import { dataOp, propsProxy } from '../../engine/utils';
+import Divider from '../divider/Divider.svelte';
 /*  common slotUi exports*/
 let className = '';
 export { className as class };
@@ -14,20 +15,28 @@ export let element = null;
 const forwardEvents = createEventForwarder(get_current_component());
 /*  end slotUi exports*/
 /** formated listItems list  */
-export let listItems = [];
+export let listItems = undefined;
 /** provided raw data, used if no listItems list is provided  */
 export let data = undefined;
 /** Row from data for primary, used if props.data is provided  */
 export let dataFieldPrimary = undefined;
 /** Row from data for secondary, used if props.data is provided  */
 export let dataFieldSecondary = undefined;
+/** Row from data for secondary, used if props.data is provided  */
+export let dataFieldIcon = undefined;
 export let height = '100%';
 export let style = '';
 export let showIcon = true;
-export let noVirtualize = false;
+export let virtualize = false;
 export let selectorField;
+/** show divider between listItems */
+export let showDivider = false;
+export let dividerProps = {};
+/** set selected data by dataKey value*/
 export let selectedDataKey = undefined;
+/** set selected data by data object */
 export let setSelectedData = {};
+/** set selected data by selectedItem object */
 export let setSelectedItem = {};
 export let onItemClick = ({}) => { };
 /** @deprecated use primary title  */
@@ -40,28 +49,37 @@ export let secondary = undefined;
 export let icon = undefined;
 /** fieldName by wich we will group */
 export let groupBy = undefined;
+let groupedData;
 /** List will not be clickable and will gain opacity */
 export let disabled = false;
 export let density = 'default';
+let virtualHeight = undefined;
 const listStore = createListStore();
 setContext('listStateContext', listStore);
 $listStore.density = density;
 listStore.setSelectorField(selectorField);
 $: if (setSelectedData) {
     listStore.setActiveData(setSelectedData);
-    console.log('selected', setSelectedData);
 }
 $: if (setSelectedItem) {
     // listStore.setActiveData(setSelectedData);
+}
+if (groupBy) {
+    // if groupBy, we'll use  props.data or props.lisTitem.data
+    if (data) {
+        groupedData = dataOp.groupBy(data, groupBy);
+    }
+    else {
+    }
 }
 // if data, build some list items
 $: if (data) {
     if (dataFieldPrimary || dataFieldSecondary) {
         listItems = propsProxy([
-            [dataFieldPrimary ?? '"', 'primary'],
-            [dataFieldSecondary ?? '"', 'secondary']
+            ['primary', dataFieldPrimary ?? '"',],
+            ['secondary', dataFieldSecondary ?? '"',],
+            ['icon', dataFieldIcon ?? '"',]
         ], data);
-        console.log({ listItems });
     }
     else {
         listItems = data.map((dta) => {
@@ -73,40 +91,95 @@ $: if (data) {
         });
     }
 }
+/** on listItem clicked, we set activeData to e.LisItemProps*/
 function onListItemClick(e) {
     if (disabled) {
         e.stopPropagation();
         return;
     }
-    listStore.setActiveData(e.detail);
+    e?.currentTarget?.scrollIntoView();
+    listStore.setActiveData(e.detail?.data); // should be  e.detail.data
+    listStore.setActiveItem(e.detail);
     onItemClick && onItemClick(e.detail);
+}
+function onListItemClick_Deprecated(e) {
+    if (disabled) {
+        e.stopPropagation();
+        return;
+    }
+    listStore.setActiveData(e.detail); // should be  e.detail.data
+    onItemClick && onItemClick(e.detail);
+}
+function navigateList(e) {
+    if (![38, 40].includes(e.keyCode))
+        return;
+    let tt = 0;
+    if (listItems) {
+        // if selectorField
+        // if listItem.primary
+        // seek listItem with same primary as activeData
+        if ($listStore.activeItem?.['primary']) {
+            tt = dataOp.findObjectIndex(listItems, $listStore.activeItem['primary'], 'primary');
+        }
+        // seek listItem with same data.selectorField as activeData
+        if (selectorField && $listStore.activeItem?.data?.[selectorField]) {
+            tt = dataOp.findObjectIndex(listItems, $listStore.activeItem.data[selectorField], 'data.' + selectorField);
+        }
+    }
+    else if (data) {
+        if (selectorField) {
+            tt = dataOp.findObjectIndex(data, $listStore.activeData[selectorField], selectorField);
+        }
+    }
+    if (tt === -1)
+        return;
+    const dir = e.keyCode === 38 ? tt - 1 : tt + 1;
+    if (listItems && listItems[dir]) {
+        $listStore.activeItem = listItems[dir];
+        $listStore.activeData = listItems[dir]?.data;
+    }
+    else if (data) {
+    }
 }
 </script>
 
 <ul
 	bind:this={element}
 	class="density-{density} {className}"
-	on:listclicked={onListItemClick}
-	on:list:dblclicked={onListItemClick}
+	on:listclicked={onListItemClick_Deprecated}
+	on:list:dblclicked={onListItemClick_Deprecated}
+	on:listitem:clicked={onListItemClick}
+	on:listitem:dblclicked={onListItemClick}
 	style="position:relative;height:{height};margin:0;padding:0;{style};opacity:{disabled ? 0.6 : 1}"
 	use:forwardEvents
+	tabindex="0"
+	on:keydown={navigateList}
 >
-	{#if $$slots.title || title || primary || secondary}
-		<slot name="title">
-			<ListTitle primary={primary ?? title} {secondary} {icon} />
-		</slot>
-	{/if}
 	{#if $$slots.commandBarSlot}
 		<slot name="commandBarSlot" />
-	{/if} 
+	{/if}
 	{#if listItems}
-		{#if !noVirtualize}
+		{#if !virtualize}
 			{#if $$slots.default}
 				<Virtualize height="100%" items={listItems} let:item>
+					<svelte:fragment slot="virtualizeHeaderSlot">
+						{#if $$slots.title || title || primary || secondary}
+							<slot name="title">
+								<ListTitle primary={primary ?? title} {secondary} {icon} />
+							</slot>
+						{/if}
+					</svelte:fragment>
 					<slot listItem={item} />
 				</Virtualize>
 			{:else}
 				<Virtualize height="100%" items={listItems} let:item>
+					<svelte:fragment slot="virtualizeHeaderSlot">
+						{#if $$slots.title || title || primary || secondary}
+							<slot name="title">
+								<ListTitle primary={primary ?? title} {secondary} {icon} />
+							</slot>
+						{/if}
+					</svelte:fragment>
 					<ListItem class="" {showIcon} {density} data={item.data}>
 						<span slot="icon"><Icon fontSize="tiny" icon={item?.icon} /></span>
 						<span slot="primary">{null_to_empty(item?.primary)}</span>
@@ -116,19 +189,39 @@ function onListItemClick(e) {
 				</Virtualize>
 			{/if}
 		{:else}
-		{#key data}
-			{#each listItems as item}
-				<slot listItem={item}>
-					<ListItem style="content-visibility:hidden;" {showIcon} {density} data={item.data} icon={item?.icon}>
-						<span slot="icon" />
-						<span slot="primary">{null_to_empty(item?.primary)}</span>
-						<span slot="secondary">{null_to_empty(item?.secondary)}</span>
-						<span slot="action">{null_to_empty(item?.action)}</span>
-					</ListItem>
+			{#if $$slots.title || title || primary || secondary}
+				<slot name="title">
+					<ListTitle primary={primary ?? title} {secondary} {icon} />
 				</slot>
-			{/each}
+			{/if}
+			{#key data}
+				{#each listItems as item}
+					<slot listItem={item}>
+						<ListItem
+							style="content-visibility:hidden;"
+							{showIcon}
+							{density}
+							{showDivider}
+							{dividerProps}
+							data={item.data}
+							icon={item?.icon}
+						>
+							<span slot="icon" />
+							<span slot="primary">{null_to_empty(item?.primary)}</span>
+							<span slot="secondary">{null_to_empty(item?.secondary)}</span>
+							<span slot="action">{null_to_empty(item?.action)}</span>
+						</ListItem>
+					</slot>
+				{/each}
 			{/key}
 		{/if}
+	{:else}
+		{#if $$slots.title || title || primary || secondary}
+			<slot name="title">
+				<ListTitle primary={primary ?? title} {secondary} {icon} />
+			</slot>
+		{/if}
+		<slot />
 	{/if}
 </ul>
 
@@ -214,4 +307,9 @@ function onListItemClick(e) {
   background-color: var(--theme-color-primary);
   border-radius: 8px;
   left: -1px;
+}
+
+:global(ul:focus) {
+  /* outline: 1px solid #ccc;
+  outline-offset: -4px; */
 }</style>

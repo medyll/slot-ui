@@ -16,7 +16,6 @@ __propDef: {
         secondary: {};
         default: {};
         action: {};
-        iloveslots: {};
     };
 };
 

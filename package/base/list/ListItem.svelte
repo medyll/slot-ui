@@ -5,19 +5,27 @@ import { fade, slide } from 'svelte/transition';
 import { createEventDispatcher, custom_event, get_current_component, null_to_empty } from 'svelte/internal';
 import { createEventForwarder } from '../../engine/engine';
 import Icon from '../icon/Icon.svelte';
+import Divider from '../divider/Divider.svelte';
 /*  common slotUi exports*/
 let className = '';
 export { className as class };
-export let element;
+export let element = null;
 export let style = '';
 const forwardEvents = createEventForwarder(get_current_component());
 /*  end slotUi exports*/
+/** icon ti be displayed in the list's header */
 export let icon = null;
+/** title of the list */
 export let primary = null;
+/** sub-title of the list */
 export let secondary = null;
 export let action = null;
-export let selected;
+/** show selected state */
+export let selected = false;
 export let showIcon = true;
+/** show divider after listItem */
+export let showDivider = false;
+export let dividerProps = {};
 export let transition = undefined;
 export let disabled = false;
 // data to hold
@@ -25,12 +33,20 @@ export let data = {};
 export let density = 'default';
 let listStateContext = getContext('listStateContext');
 const handleClick = () => () => {
-    const event = custom_event('listclicked', data, { bubbles: true });
-    element.dispatchEvent(event);
+    // send whole listItem
+    /** @deprecated */
+    const eventDeprecated = custom_event('listclicked', data, { bubbles: true });
+    element?.dispatchEvent(eventDeprecated);
+    const event = custom_event('listitem:clicked', { ...$$props }, { bubbles: true });
+    element?.dispatchEvent(event);
 };
 const handleDblClick = () => () => {
-    const event = custom_event('list:dblclicked', data, { bubbles: true });
-    element.dispatchEvent(event);
+    // send whole listItem
+    /** @deprecated */
+    const eventDeprecated = custom_event('list:dblclicked', data, { bubbles: true });
+    element?.dispatchEvent(eventDeprecated);
+    const event = custom_event('listitem:dblclicked', { ...$$props }, { bubbles: true });
+    element?.dispatchEvent(event);
 };
 function doTransition() {
     return transition;
@@ -48,7 +64,6 @@ $: if ($listStateContext?.selectorField) {
 	on:click={handleClick()}
 	on:dblclick={handleDblClick()}
 	style="opacity:${disabled ? 0.6 : 1};${style}"
-	tabindex={1}
 >
 	<span class="listItemChip" />
 	{#if $$slots.icon || icon}
@@ -58,7 +73,7 @@ $: if ($listStateContext?.selectorField) {
 			</slot>
 		</div>
 	{/if}
-	<div class="listItemContent" title="{secondary}">
+	<div class="listItemContent" title={secondary}>
 		<div>
 			<slot name="primary">
 				{null_to_empty(primary)}
@@ -76,6 +91,9 @@ $: if ($listStateContext?.selectorField) {
 		</slot>
 	</div>
 </li>
+{#if showDivider}
+	<Divider {...dividerProps}  />
+{/if}
 
 <style global>:global(li.listItemTitle),
 :global(li.listItem) {
@@ -161,6 +179,10 @@ $: if ($listStateContext?.selectorField) {
   left: -1px;
 }
 
+/* li:focus{
+	outline:1px solid #ccc;
+	outline-offset: -1px;
+} */
 :global(.listItem.density-tight) {
   padding: 0.5rem 0;
   margin: 0.125rem 0;

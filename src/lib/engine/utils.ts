@@ -1,5 +1,5 @@
 
-export type PropsProxyProps<T = any, B = any> = [string: keyof T, string: keyof B][]
+export type PropsProxyProps<T = any, B = any> = [string: keyof T, string: keyof B | (()=>void) ][]
 
 export const propsProxy = <T = any, B = any, C = any>(props: PropsProxyProps<T, B>, data: any[]): Record<keyof B, any>[] => {
 
@@ -8,7 +8,7 @@ export const propsProxy = <T = any, B = any, C = any>(props: PropsProxyProps<T, 
     let out: any = {};
 
     for (const prop of props) {
-      
+
       const keyListItem = prop[0] as string;
       const keyData: string | Function = prop[1] as any;
       

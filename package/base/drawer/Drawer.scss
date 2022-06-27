@@ -1,17 +1,23 @@
 .drawer {
-  color: var(--css-drawer-color,inherit);
-  background-color: var(--css-drawer-bg-color);
-  backdrop-filter:var(--css-drawer-backdrop-blur,blur(10px)) ;
-  position: fixed;
-  width: 288px;
-  height: 100%;
-  top: 0;
-  bottom: 0;
+  color: var(--css-drawer-color, inherit);
+  background-color: var(--slotui-drawer-bg-color, var(--theme-color-paper-alpha-low));
+  backdrop-filter: var(--slotui-drawer-backdrop-blur, blur(10px));
   z-index: 3000;
-  right: 0;
-
+  box-shadow: var(--box-shad-3);
+  border-left: 1px solid var(--slotui-drawer-border-color, var(--theme-color-primary-alpha));
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.4s;
+  .opener {
+    //background-color: var(--slotui-drawer-bg-color, var(--theme-color-paper-alpha-low));
+    position: absolute;
+    z-index: 8600;
+  }
   .header {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid var(--theme-color-foreground-alpha-high);
+    box-shadow: var(--box-shad-1);
+
     min-height: 48px;
     display: flex;
     align-items: center;
@@ -19,5 +25,10 @@
     .title {
       font-size: large;
     }
+  }
+  .content {
+    flex: 1;
+    overflow: auto;
+    position: relative;
   }
 }

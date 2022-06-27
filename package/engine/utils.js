@@ -3,10 +3,9 @@ export const propsProxy = (props, data) => {
     for (const dta of data) {
         let out = {};
         for (const prop of props) {
-            const keyFrom = prop[1];
-            const keyTo = prop[0];
-            if (dta[keyFrom])
-                out[keyTo] = dta[keyFrom];
+            const keyListItem = prop[0];
+            const keyData = prop[1];
+            out[keyListItem] = (typeof keyData === 'function') ? keyData(dta) : dta[keyData];
         }
         // keep original data
         out['data'] = dta;
@@ -52,14 +51,16 @@ export class dataOp {
     static resolveDotPath(object, path, defaultValue) {
         return path.split('.').reduce((r, s) => (r ? r[s] : defaultValue), object);
     }
-    /** @deprecated */
-    static getObjectItemById(arr, id, idname) {
-        const idcode = idname ?? 'id';
-        // getValueFromNotation()
-        return arr.filter((item) => {
-            // console.log(idcode , ' : ',resolveDotPath(item,idcode))
-            //return item[idcode] === id
-            return this.resolveDotPath(item, idcode) === id;
+    /**
+     *
+     * @param arr array to find in
+     * @param value value to seek for
+     * @param key  object key to match with
+     * @returns number
+     */
+    static findObjectIndex(arr, value, key = 'id') {
+        return arr.findIndex((obj) => {
+            return this.resolveDotPath(obj, key) === value;
         });
     }
 }
