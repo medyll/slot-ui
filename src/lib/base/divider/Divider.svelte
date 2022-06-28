@@ -3,12 +3,10 @@
 	import { get_current_component } from 'svelte/internal';
 	import type { ElementProps } from '../../../types';
 
-	/*  common slotUi exports*/
 	let className = '';
 	export { className as class };
 	export let element: HTMLDivElement | null = null;
-	const forwardEvents = createEventForwarder(get_current_component());
-	/*  end slotUi exports*/
+	const forwardEvents = createEventForwarder(get_current_component()); 
 
 	/** margins applied to divider */
 	export let density: ElementProps['density'] = 'default';

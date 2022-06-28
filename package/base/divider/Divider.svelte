@@ -1,11 +1,9 @@
 <script>import { createEventForwarder } from '../../engine/eventForwarder';
 import { get_current_component } from 'svelte/internal';
-/*  common slotUi exports*/
 let className = '';
 export { className as class };
 export let element = null;
 const forwardEvents = createEventForwarder(get_current_component());
-/*  end slotUi exports*/
 /** margins applied to divider */
 export let density = 'default';
 /** default direction of the divider */

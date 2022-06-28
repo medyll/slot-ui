@@ -3,6 +3,7 @@ __propDef: {
     props: {
         class?: string | undefined;
         element?: HTMLDivElement | null | undefined;
+        style?: string | undefined;
         items?: any[] | undefined;
     };
     events: {

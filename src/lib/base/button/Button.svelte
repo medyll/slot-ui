@@ -64,7 +64,7 @@
 	/** reverse the order of the button zone*/
 	export let reverse: boolean = false;
 
-	if (contained || bordered || link) presetDefault = '';
+	if (contained || bordered || link || naked) presetDefault = '';
 
 	// for action
 	let actionArgs: any;

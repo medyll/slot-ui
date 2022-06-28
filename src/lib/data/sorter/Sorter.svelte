@@ -56,7 +56,7 @@
 			primary={sortByTitleField ?? sortByField  }
 			icon={icons.default[sortState.indexOf(sortByOrder)]}
 			iconFamily="mdi"
-			naked
+			naked 
 			selected={sortByOrder !== 'none' && activeCommonSortField ===sortByField}
 			size="auto"
 			showChip={sortByOrder !== 'none' && activeCommonSortField ===sortByField}

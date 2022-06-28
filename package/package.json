@@ -106,6 +106,7 @@
     "./base/dataList/DataListCell.svelte": "./base/dataList/DataListCell.svelte",
     "./base/dataList/DataListHead.svelte": "./base/dataList/DataListHead.svelte",
     "./base/dataList/DataListRow.svelte": "./base/dataList/DataListRow.svelte",
+    "./base/dataList/types": "./base/dataList/types.js",
     "./base/debug/Debug.svelte": "./base/debug/Debug.svelte",
     "./base/divider/Divider.demo.svelte": "./base/divider/Divider.demo.svelte",
     "./base/divider/Divider.scss": "./base/divider/Divider.scss",

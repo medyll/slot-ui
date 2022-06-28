@@ -53,7 +53,7 @@ export let secondary = undefined;
 export let action = undefined;
 /** reverse the order of the button zone*/
 export let reverse = false;
-if (contained || bordered || link)
+if (contained || bordered || link || naked)
     presetDefault = '';
 // for action
 let actionArgs;

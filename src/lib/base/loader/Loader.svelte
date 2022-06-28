@@ -32,7 +32,7 @@
 </script>
 
 {#if isLoading || isError || isEmpty}
-	<div bind:this={element} transition:fade class="root {className}" style="{style}">
+	<div bind:this={element} transition:fade class="root {className}" {style}>
 		<div class="loaderBox">
 			{#if isLoading}
 				<Icon
@@ -48,9 +48,9 @@
 			{#if isEmpty}
 				<Icon iconFamily="mdi" icon={iconisEmpty} fontSize="big" />
 			{/if}
-			<Divider shadow />
+			<Divider expansion="centered" shadow />
 			{#if Boolean(finalMessage)}
-			<div class="message">{finalMessage}</div>
+				<div class="message">{finalMessage}</div>
 			{/if}
 		</div>
 	</div>
@@ -62,19 +62,21 @@
 		top: 0;
 		background-color: var(--theme-color-background-alpha);
 		height: 100%;
-		min-width: 256px;
+		min-width: 128px;
 		max-width: 100%;
 		display: inline-flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
+		left: 50%;
+		transform: translate(-50%, 0);
 		.loaderBox {
 			box-shadow: var(--box-shad-5);
 			border-radius: var(--radius-tiny);
 			border: 1px solid var(--theme-color-foreground-alpha-high);
 			padding: 2rem 0;
 			min-width: 128px;
-			width:100%;
+			width: 100%;
 			margin: 1rem;
 			text-align: center;
 			background-color: var(--theme-color-background-alpha);

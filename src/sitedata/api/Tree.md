@@ -1,12 +1,6 @@
 ```typescript 
 __propDef: {
-    props: {
-        class?: string | undefined;
-        element?: HTMLDivElement | null | undefined;
-        paths?: PathDataType[] | undefined;
-        pathField?: string | undefined;
-        pathes?: TreeItemType<Record<string, any>>[] | undefined;
-    };
+    props: {};
     events: {
         [evt: string]: CustomEvent<any>;
     };
