@@ -1,5 +1,4 @@
 <script lang="ts">
-	import appscheme from '../../../demoData/appscheme.json';
 	import Jsoner from './Jsoner.svelte';
 
 	const data = {

@@ -5,7 +5,7 @@
   import type {PropsProxyProps} from '../../../lib/engine/utils';
   import {propsProxy} from '../../../lib/engine/utils';
   import {null_to_empty} from 'svelte/internal';
-  import appscheme from '/src/demoData/appscheme.json';
+  import appscheme from '../../../demoData/appscheme.json';
   import Header from './Header.svelte';
   import Icon from '../../../lib/base/icon/Icon.svelte';
   import MenuBar from '../../../lib/ui/topBar/TopBar.svelte';

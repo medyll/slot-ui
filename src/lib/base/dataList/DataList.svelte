@@ -6,8 +6,8 @@
 	import { writable, type Writable } from 'svelte/store';
 	import { browser } from '$app/env';
 	import { slotUiComponentList } from '$lib/sitedata/componentList';
-import DataListRow from './DataListRow.svelte';
-import DataListCell from './DataListCell.svelte';
+	import DataListRow from './DataListRow.svelte';
+	import DataListCell from './DataListCell.svelte';
 
 	/*  common slotUi exports*/
 	let className = '';
@@ -33,11 +33,11 @@ import DataListCell from './DataListCell.svelte';
 				{#if $$slots.default}
 					<slot {item} />
 				{:else}
-				<DataListRow>
-					{#each Object.keys(item) as inItem}
-					<DataListCell>{item?.[inItem]}</DataListCell>
-					{/each} 
-				</DataListRow> 
+					<DataListRow>
+						{#each Object.keys(item) as inItem}
+							<DataListCell>{item?.[inItem]}</DataListCell>
+						{/each}
+					</DataListRow>
 				{/if}
 			{/if}
 		</Virtualize>

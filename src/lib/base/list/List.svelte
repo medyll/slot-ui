@@ -13,23 +13,25 @@
 	import { dataOp, propsProxy } from '$lib/engine/utils';
 	import Divider from '../divider/Divider.svelte';
 
-	/*  common slotUi exports*/
+	// set store
+	const listStore = createListStore();
+	setContext('listStateContext', listStore);
+
 	let className = '';
 	export { className as class };
 	export let element: HTMLElement | null = null;
 	const forwardEvents = createEventForwarder(get_current_component());
-	/*  end slotUi exports*/
 
 	/** formated listItems list  */
 	export let listItems: LisItemProps[] | undefined = undefined;
 	/** provided raw data, used if no listItems list is provided  */
 	export let data: Data[] | undefined = undefined;
 	/** Row from data for primary, used if props.data is provided  */
-	export let dataFieldPrimary: string | ((data:Data)=> void) | undefined = undefined;
+	export let dataFieldPrimary: string | ((data: Data) => void) | undefined = undefined;
 	/** Row from data for secondary, used if props.data is provided  */
-	export let dataFieldSecondary: string | ((data:Data)=> void) | undefined = undefined;
+	export let dataFieldSecondary: string | ((data: Data) => void) | undefined = undefined;
 	/** Row from data for secondary, used if props.data is provided  */
-	export let dataFieldIcon: string  | ((data:Data)=> void) | undefined = undefined;
+	export let dataFieldIcon: string | ((data: Data) => void) | undefined = undefined;
 
 	export let height: string = '100%';
 	export let style: string = '';
@@ -38,7 +40,7 @@
 	export let selectorField: any;
 	/** show divider between listItems */
 	export let showDivider: boolean = false;
-	export let dividerProps: Record<string,any>  = {}
+	export let dividerProps: Record<string, any> = {};
 	/** set selected data by dataKey value*/
 	export let selectedDataKey: string | undefined = undefined;
 	/** set selected data by data object */
@@ -62,10 +64,9 @@
 	export let disabled: boolean = false;
 	export let density: ElementProps['density'] = 'default';
 
+	/** binding for selectedData */
+	export let activeData = $listStore.activeData;
 	let virtualHeight: number | undefined = undefined;
-
-	const listStore = createListStore();
-	setContext('listStateContext', listStore);
 
 	$listStore.density = density;
 	listStore.setSelectorField(selectorField);
@@ -91,13 +92,12 @@
 		if (dataFieldPrimary || dataFieldSecondary) {
 			listItems = propsProxy(
 				[
-					['primary',dataFieldPrimary ?? '"', ],
-					['secondary',dataFieldSecondary ?? '"', ],
-					['icon',dataFieldIcon ?? '"', ]
+					['primary', dataFieldPrimary ?? '"'],
+					['secondary', dataFieldSecondary ?? '"'],
+					['icon', dataFieldIcon ?? '"']
 				],
 				data
 			);
-
 		} else {
 			listItems = data.map((dta: Data) => {
 				return {
@@ -111,12 +111,11 @@
 
 	/** on listItem clicked, we set activeData to e.LisItemProps*/
 	function onListItemClick(e: CustomEvent<LisItemProps>) {
-	
 		if (disabled) {
 			e.stopPropagation();
 			return;
 		}
-		
+
 		//e?.currentTarget?.scrollIntoView();
 
 		listStore.setActiveData(e.detail?.data); // should be  e.detail.data
@@ -145,7 +144,6 @@
 			// if listItem.primary
 			// seek listItem with same primary as activeData
 			if ($listStore.activeItem?.['primary']) {
-				
 				tt = dataOp.findObjectIndex(listItems, $listStore.activeItem['primary'], 'primary');
 			}
 			// seek listItem with same data.selectorField as activeData
@@ -166,7 +164,7 @@
 
 		const dir = e.keyCode === 38 ? tt - 1 : tt + 1;
 
-		if (listItems &&  listItems[dir]) {
+		if (listItems && listItems[dir]) {
 			$listStore.activeItem = listItems[dir];
 			$listStore.activeData = listItems[dir]?.data;
 		} else if (data) {

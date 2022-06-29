@@ -8,12 +8,13 @@ import { createEventForwarder } from '../../engine/engine';
 import Virtualize from '../virtualize/Virtualize.svelte';
 import { dataOp, propsProxy } from '../../engine/utils';
 import Divider from '../divider/Divider.svelte';
-/*  common slotUi exports*/
+// set store
+const listStore = createListStore();
+setContext('listStateContext', listStore);
 let className = '';
 export { className as class };
 export let element = null;
 const forwardEvents = createEventForwarder(get_current_component());
-/*  end slotUi exports*/
 /** formated listItems list  */
 export let listItems = undefined;
 /** provided raw data, used if no listItems list is provided  */
@@ -53,9 +54,9 @@ let groupedData;
 /** List will not be clickable and will gain opacity */
 export let disabled = false;
 export let density = 'default';
+/** binding for selectedData */
+export let activeData = $listStore.activeData;
 let virtualHeight = undefined;
-const listStore = createListStore();
-setContext('listStateContext', listStore);
 $listStore.density = density;
 listStore.setSelectorField(selectorField);
 $: if (setSelectedData) {
@@ -76,9 +77,9 @@ if (groupBy) {
 $: if (data) {
     if (dataFieldPrimary || dataFieldSecondary) {
         listItems = propsProxy([
-            ['primary', dataFieldPrimary ?? '"',],
-            ['secondary', dataFieldSecondary ?? '"',],
-            ['icon', dataFieldIcon ?? '"',]
+            ['primary', dataFieldPrimary ?? '"'],
+            ['secondary', dataFieldSecondary ?? '"'],
+            ['icon', dataFieldIcon ?? '"']
         ], data);
     }
     else {

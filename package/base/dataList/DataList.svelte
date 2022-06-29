@@ -28,11 +28,11 @@ setContext('dataListContext', dataListStore);
 				{#if $$slots.default}
 					<slot {item} />
 				{:else}
-				<DataListRow>
-					{#each Object.keys(item) as inItem}
-					<DataListCell>{item?.[inItem]}</DataListCell>
-					{/each} 
-				</DataListRow> 
+					<DataListRow>
+						{#each Object.keys(item) as inItem}
+							<DataListCell>{item?.[inItem]}</DataListCell>
+						{/each}
+					</DataListRow>
 				{/if}
 			{/if}
 		</Virtualize>
