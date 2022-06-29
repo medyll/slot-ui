@@ -10,7 +10,7 @@ let addStyle;
 // if inHeader, then monitor cell
 onMount(async () => {
     if (element && mainContext && inHeader) {
-        const width = element?.style?.width ?? element?.style?.flex;
+        const width = element?.style?.width ?? element?.offsetWidth + 'px';
         const index = [...element.parentElement.children].indexOf(element);
         if (columnId) {
             // find header.col by columnId
@@ -37,12 +37,13 @@ onMount(async () => {
     }
 });
 $: if (element && columnId && dataOp.filterListFirst($mainContext, columnId, 'columnId')) {
-    if (!element.style.width)
+    if (!element.style.width) {
         element.style.width = dataOp.filterListFirst($mainContext, columnId, 'columnId').width;
+    }
 }
 </script>
 
-<div data-column-id={columnId}  bind:this={element} class="dataListCell" {style}>
+<div data-column-id={columnId} bind:this={element} class="dataListCell" {style}>
 	<slot />
 </div>
 

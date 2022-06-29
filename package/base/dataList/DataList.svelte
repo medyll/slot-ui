@@ -1,27 +1,40 @@
 <script>import { setContext } from 'svelte';
 import { createEventForwarder } from '../../engine/engine';
-import { get_current_component } from 'svelte/internal';
+import { each, get_current_component } from 'svelte/internal';
 import Virtualize from '../virtualize/Virtualize.svelte';
 import { writable } from 'svelte/store';
 import { browser } from '$app/env';
+import { slotUiComponentList } from '../../sitedata/componentList';
+import DataListRow from './DataListRow.svelte';
+import DataListCell from './DataListCell.svelte';
 /*  common slotUi exports*/
 let className = '';
 export { className as class };
 export let element = null;
 const forwardEvents = createEventForwarder(get_current_component());
 export let style = undefined;
-export let items = [];
+export let data = [];
 const dataListStore = writable([]);
 setContext('dataListContext', dataListStore);
 </script>
 
 <div use:forwardEvents bind:this={element} class="dataList  {className}" {style}>
 	{#if element}
-		<Virtualize height="100%" {items} let:item>
+		<Virtualize height="100%" items={data} let:item>
 			<svelte:fragment slot="virtualizeHeaderSlot">
 				<slot name="head">virtualizeHeaderSlot</slot>
 			</svelte:fragment>
-			<slot {item} />
+			{#if item}
+				{#if $$slots.default}
+					<slot {item} />
+				{:else}
+				<DataListRow>
+					{#each Object.keys(item) as inItem}
+					<DataListCell>{item?.[inItem]}</DataListCell>
+					{/each} 
+				</DataListRow> 
+				{/if}
+			{/if}
 		</Virtualize>
 	{/if}
 	<slot name="foot" />

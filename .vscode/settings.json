@@ -2,7 +2,8 @@
     "cSpell.words": [
         "chromeframe",
         "Columner",
-        "fieldname"
+        "fieldname",
+        "sitedata"
     ],
     "[svelte]": {
         "editor.defaultFormatter": "svelte.svelte-vscode"

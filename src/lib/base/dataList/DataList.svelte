@@ -1,10 +1,13 @@
 <script lang="ts">
 	import { setContext } from 'svelte';
 	import { createEventForwarder } from '../../engine/engine';
-	import { get_current_component } from 'svelte/internal';
+	import { each, get_current_component } from 'svelte/internal';
 	import Virtualize from '../virtualize/Virtualize.svelte';
 	import { writable, type Writable } from 'svelte/store';
 	import { browser } from '$app/env';
+	import { slotUiComponentList } from '$lib/sitedata/componentList';
+import DataListRow from './DataListRow.svelte';
+import DataListCell from './DataListCell.svelte';
 
 	/*  common slotUi exports*/
 	let className = '';
@@ -14,7 +17,7 @@
 
 	export let style: string | undefined = undefined;
 
-	export let items: any[] = [];
+	export let data: any[] = [];
 
 	const dataListStore = writable([]);
 	setContext<Writable<any[]>>('dataListContext', dataListStore);
@@ -22,11 +25,21 @@
 
 <div use:forwardEvents bind:this={element} class="dataList  {className}" {style}>
 	{#if element}
-		<Virtualize height="100%" {items} let:item>
+		<Virtualize height="100%" items={data} let:item>
 			<svelte:fragment slot="virtualizeHeaderSlot">
 				<slot name="head">virtualizeHeaderSlot</slot>
 			</svelte:fragment>
-			<slot {item} />
+			{#if item}
+				{#if $$slots.default}
+					<slot {item} />
+				{:else}
+				<DataListRow>
+					{#each Object.keys(item) as inItem}
+					<DataListCell>{item?.[inItem]}</DataListCell>
+					{/each} 
+				</DataListRow> 
+				{/if}
+			{/if}
 		</Virtualize>
 	{/if}
 	<slot name="foot" />
@@ -34,7 +47,7 @@
 
 <style global lang="scss">
 	.dataList {
-		 height: 100%;
+		height: 100%;
 		position: relative;
 		.dataListHead {
 			display: flex;

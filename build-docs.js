@@ -7,10 +7,12 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const srcPackage = path.join(__dirname, 'package');
 const srcLibDir = path.join(__dirname, 'src', 'lib');
-const dirPath = path.join('src', 'sitedata');
+const dirPath = path.join('src', 'lib','sitedata');
 const libShort = '$lib';
 
 let fileHead = '';
+
+mkdir(dirPath,{recursive:true},()=>{});
 
 const getAllFiles = function (dirPath, arrayOfFiles = [], fragment = 'demo.svelte') {
 	let files = fs.readdirSync(dirPath);
@@ -78,27 +80,38 @@ function createObject(fileList) {
 }
 
 function createMethods(fileList) {
-	fileList.forEach((file) => { 
-		fs.readFile(file, 'utf8', (err, data) => {
-			if (err) {
-				console.error(err);
-				return;
-			}
-			let newData = data.replace(/declare/g,'')
-			let frag = data.match(/__propDef:([^.]*)};([^.]*)export/gm) ;
+	mkdir(dirPath + '/api',{recursive:true},()=>{});
+	let keyDone = {}
+	let objImport = [];
+	let objObj = [];
+	fileList.forEach((file) => {
+		try {
+			const data = fs.readFileSync(file, 'utf8');
+			let newData = data.replace(/declare/g, '');
+			let frag = data.match(/__propDef:([^.]*)};([^.]*)export/gm);
 
-			const comp = file.split('\\').slice(-1)[0].split('.')[0]
-			const newContent = frag?.[0]?.replace(/export/gm,'');
+			const comp = file.split('\\').slice(-1)[0].split('.')[0];
+			const newContent = frag?.[0]?.replace(/export/gm, '');
+			const src = ('$sitedata/api/' + comp + '.md').replace(/\\/g, '/');
 			/* console.log(file.replace(srcPackage,'---')) */
 			/* console.log(frag?.[0]?.replace(/export/gm,'')) */
-			console.log(comp)
-			 
+			// console.log(comp,src)
+			// not for .demo
+			if (!keyDone[comp.toLowerCase()] && !comp.toLowerCase().includes('demo')) {
+				objImport.push(`import ${comp}ReadMe from "${src}"`);
+				objObj.push(`${comp.toLowerCase()}:${comp}ReadMe`);
+				keyDone[comp.toLowerCase()] = true
+			}
+
 			fs.writeFileSync(
-				dirPath + '/api/'+comp+'.md',
-				newContent ? "```typescript \r\n" + newContent + "\r\n ```" : 'error !!'
+				dirPath + '/api/' + comp + '.md',
+				newContent ? '```typescript \r\n' + newContent + '\r\n ```' : 'error !!'
 			);
-		});
+		} catch (e) {}
 	});
+	// write catalog object
+	const finalObj = `export const componentReadMe = {${objObj.join(',\r\n')}}`;
+	fs.writeFileSync(dirPath + '/api/index.ts', objImport.join(';\r\n') + ';\r\n\r\n' + finalObj);
 }
 
 // create a file
@@ -106,10 +119,10 @@ function createMethods(fileList) {
 const result = getAllFiles(srcLibDir);
 const resultProps = getAllFiles(srcPackage, [], 'svelte.d.ts');
 
+// write methods from packaged components
 createMethods(resultProps);
 
-//console.log(resultProps);
-
+// write component list
 fs.writeFileSync(
 	dirPath + '/componentList.ts',
 	createFile(result) + ' \r\n ' + createObject(result)

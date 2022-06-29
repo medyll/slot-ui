@@ -2,13 +2,14 @@
 __propDef: {
     props: {
         class?: string | undefined;
-        element?: HTMLDivElement | null | undefined;
-        data?: any;
+        element?: HTMLDivElement | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;
     };
-    slots: {};
+    slots: {
+        default: {};
+    };
 };
 
  ```

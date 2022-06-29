@@ -3,19 +3,14 @@ __propDef: {
     props: {
         class?: string | undefined;
         element?: HTMLDivElement | null | undefined;
-        style?: string | undefined;
-        items?: any[] | undefined;
+        paths?: PathDataType[] | undefined;
+        pathField?: string | undefined;
+        pathes?: TreeItemType<Record<string, any>>[] | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;
     };
-    slots: {
-        head: {};
-        default: {
-            item: any;
-        };
-        foot: {};
-    };
+    slots: {};
 };
 
  ```

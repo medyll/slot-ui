@@ -25,7 +25,15 @@
 		"strict": true,
 		"paths": {
 			"$lib": ["src/lib"],
-			"$lib/*": ["src/lib/*"]
+			"$lib/*": ["src/lib/*"],
+			"$sitedata": ["src/sitedata"],
+			"$sitedata/*": ["src/sitedata/*"],
+			"$engine": ["src/engine"],
+			"$engine/*": ["src/engine/*"],
+			"$scripts": ["src/scripts"],
+			"$scripts/*": ["src/scripts/*"],
+			"$types": ["src/types"],
+			"$types/*": ["src/types/*"]
 		},
 		"types": ["node", "svelte"] ,
 		"outDir": "build",

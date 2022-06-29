@@ -16,7 +16,7 @@
 	// if inHeader, then monitor cell
 	onMount(async () => {
 		if (element && mainContext && inHeader) {
-			const width = element?.style?.width ?? element?.style?.flex;
+			const width = element?.style?.width ?? element?.offsetWidth+'px';
 
 			const index = [...element.parentElement.children].indexOf(element);
 
@@ -27,10 +27,10 @@
 			} else if (!dataOp.filterListFirst($mainContext, index, 'index')) {
 				// find header.col by index, create uniqid
 				columnId = crypto.randomUUID();
-				$mainContext.push({ index, columnId, width }); 
+				$mainContext.push({ index, columnId, width });
 			}
 		}
-        if (element && mainContext && !inHeader) { 
+		if (element && mainContext && !inHeader) {
 			const index = [...element.parentElement.children].indexOf(element);
 
 			if (columnId) {
@@ -39,19 +39,20 @@
 				}
 			} else if (dataOp.filterListFirst($mainContext, index, 'index')) {
 				// find header.col by index, create uniqid
-				columnId = dataOp.filterListFirst($mainContext, index, 'index').columnId; 
+				columnId = dataOp.filterListFirst($mainContext, index, 'index').columnId;
 			}
 		}
 	});
- 
 
 	$: if (element && columnId && dataOp.filterListFirst($mainContext, columnId, 'columnId')) {
-		if(!element.style.width) element.style.width = dataOp.filterListFirst($mainContext, columnId, 'columnId').width; 
+		if (!element.style.width){
+
+			element.style.width = dataOp.filterListFirst($mainContext, columnId, 'columnId').width;
+		} 
 	}
- 
 </script>
 
-<div data-column-id={columnId}  bind:this={element} class="dataListCell" {style}>
+<div data-column-id={columnId} bind:this={element} class="dataListCell" {style}>
 	<slot />
 </div>
 
