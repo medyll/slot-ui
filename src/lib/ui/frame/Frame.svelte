@@ -33,14 +33,14 @@
   };
 
 
-  // $: console.log(frameDrawerRef);
+    
 </script>
 <div bind:this={element} class="pos-rel flex-v h-full overflow-hidden frame {className}" {style} use:forwardEvents>
     <div>
         <slot name="frameHeaderSlot"></slot>
     </div>
-    <div class="frameContainer flex-h flex-main overflow-hidden">
-        <div bind:this={elementNav} class="navLeft flex-v h-full">
+    <div class="frameContainer flex-h pos-rel flex-main overflow-hidden">
+        <div bind:this={elementNav} class="navLeft pos-rel flex-v h-full " >
             {#if frameDrawerRef?.isOpen}
                 <slot name="navLeftHeaderFrameSlot"></slot>
             {/if}
@@ -48,8 +48,12 @@
                     hideCloseIcon={hideCloseIcon}
                     isOpen={defaultOpen}
                     flow="relative"
+                    stickTo="left"
+                    style="flex:1;position:relative;"
                     showOpenerIcon={showOpenerIcon}>
-                <slot name="frameDrawerSlot"></slot>
+                <slot name="frameDrawerSlot">
+
+                </slot>
             </Drawer>
         </div>
         <div class="h-full flex-main flex-v ">
@@ -86,15 +90,20 @@
         z-index:1;
         max-width: 288px;
         border-right: 1px solid var(--theme-color-primary);
+        background-color: red;
+        height: 100%;
+        position:relative;
         //box-shadow: var(--box-shad-3);
       }
 
-      .content {
+      /* .content {
         flex: 1 auto;
         z-index:0;
+        position:relative;
+        background-color: red;
         // box-shadow: var(--box-shad-3);
 
-      }
+      } */
     }
 
   }

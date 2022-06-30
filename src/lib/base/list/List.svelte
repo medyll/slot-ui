@@ -12,6 +12,8 @@
 	import type { Data } from '$lib/data/grouper/Grouper.svelte';
 	import { dataOp, propsProxy } from '$lib/engine/utils';
 	import Divider from '../divider/Divider.svelte';
+	import type { SorterFieldType } from '$lib/data/sorter/types';
+	import Sorterer from '$lib/data/sorter/Sorterer.svelte';
 
 	// set store
 	const listStore = createListStore();
@@ -40,7 +42,10 @@
 	export let selectorField: any;
 	/** show divider between listItems */
 	export let showDivider: boolean = false;
+	/** props for Divider, if present*/
 	export let dividerProps: Record<string, any> = {};
+	/** Sorterer component inclusion. Inferred */
+	export let sorterer: SorterFieldType[] | undefined = undefined;
 	/** set selected data by dataKey value*/
 	export let selectedDataKey: string | undefined = undefined;
 	/** set selected data by data object */
@@ -66,6 +71,9 @@
 
 	/** binding for selectedData */
 	export let activeData = $listStore.activeData;
+	/** sortedData if props.sorterer*/
+	let sortedData: any[];
+
 	let virtualHeight: number | undefined = undefined;
 
 	$listStore.density = density;
@@ -108,6 +116,8 @@
 			});
 		}
 	}
+
+	// $: console.log({ sortedData, data });
 
 	/** on listItem clicked, we set activeData to e.LisItemProps*/
 	function onListItemClick(e: CustomEvent<LisItemProps>) {
@@ -170,9 +180,11 @@
 		} else if (data) {
 		}
 	}
-</script>
 
-<ul
+	// vars for display rules
+	let showTitleZone = $$slots.title || title || primary || secondary; // || sorterer;
+</script>
+<!-- <ul
 	bind:this={element}
 	class="density-{density} {className}"
 	on:listclicked={onListItemClick_Deprecated}
@@ -252,13 +264,83 @@
 		{/if}
 		<slot />
 	{/if}
+</ul> -->
+<ul
+	bind:this={element}
+	class="density-{density} {className}"
+	on:listclicked={onListItemClick_Deprecated}
+	on:list:dblclicked={onListItemClick_Deprecated}
+	on:listitem:clicked={onListItemClick}
+	on:listitem:dblclicked={onListItemClick}
+	style="position:relative;height:{height};margin:0;padding:0!important;{style};opacity:{disabled
+		? 0.6
+		: 1};overflow:{virtualize ? 'hidden' : 'auto'};"
+	use:forwardEvents
+	tabindex="0"
+	on:keydown={navigateList}
+>
+	{#if $$slots.commandBarSlot}
+		<slot name="commandBarSlot" />
+	{/if}
+	{#if virtualize}
+		<Virtualize height="100%" items={listItems} let:item> 
+			<svelte:fragment slot="virtualizeHeaderSlot"> 
+				{#if showTitleZone}
+					<slot name="title">
+						<ListTitle primary={primary ?? title} {secondary} {icon}>
+							{#if sorterer}<Sorterer {sortedData} fields={sorterer} data={listItems} />{/if}
+						</ListTitle>
+					</slot>
+				{/if}
+			</svelte:fragment>
+			{#if item}
+				<slot listItem={item}>
+					<ListItem class="" {showIcon} {density} data={item.data}>
+						<span slot="icon"><Icon fontSize="tiny" icon={item?.icon} /></span>
+						<span slot="primary">{null_to_empty(item?.primary)}</span>
+						<span slot="secondary">{null_to_empty(item?.secondary)}</span>
+						<span slot="action">{null_to_empty(item?.action)}</span>
+					</ListItem>
+				</slot>
+			{/if}
+		</Virtualize>
+	{:else}
+		{#if showTitleZone}
+			<slot name="title">
+				<ListTitle primary={primary ?? title} {secondary} {icon} />
+			</slot>
+		{/if} 
+		{#if listItems} 
+			{#each listItems as item}
+				<slot listItem={item}>
+					<ListItem
+						style="content-visibility:hidden;"
+						{showIcon}
+						{density}
+						{showDivider}
+						{dividerProps}
+						data={item.data}
+						icon={item?.icon}
+					>
+						<span slot="icon" />
+						<span slot="primary">{null_to_empty(item?.primary)}</span>
+						<span slot="secondary">{null_to_empty(item?.secondary)}</span>
+						<span slot="action">{null_to_empty(item?.action)}</span>
+					</ListItem>
+				</slot>
+			{/each}
+		{:else} 
+		<slot></slot>
+		{/if}
+	{/if}
 </ul>
 
 <style global lang="scss">
 	@import 'List';
-
+	ul {
+	}
 	ul:focus {
-		/* outline: 1px solid #ccc;
-		outline-offset: -4px; */
+		outline: 0;
+		outline-offset: -4px;
 	}
 </style>

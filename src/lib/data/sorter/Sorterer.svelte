@@ -1,15 +1,12 @@
 <script lang="ts">
 	import Sorter from './Sorter.svelte';
+	import type { SorterFieldType } from './types';
 
 	let className = '';
 	export { className as class };
 	export let element: HTMLDivElement | null = null;
 	/** array of Sorter.props */
-	export let fields: {
-		sortByField: string;
-		sortByTitleField?: string;
-		sortByOrder?: 'asc' | 'desc' | 'none';
-	}[] = [];
+	export let fields: SorterFieldType[] = [];
 	/** data to sort */
 	export let data: Record<string, any>[];
 	/** binding : final sorted data as raw object  */
@@ -19,7 +16,7 @@
 </script>
 
 <div bind:this={element} class="flex-h flex-align-middle gap-tiny {className}">
-    <slot></slot>
+	<slot />
 	{#each fields as field}
 		<Sorter {...field} bind:sortedData bind:activeCommonSortField {data} />
 	{/each}

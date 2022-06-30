@@ -35,32 +35,31 @@
 	}
 </script>
 
-<Frame style="height:100%;overflow:auto;">
-	<div   slot="frameDrawerSlot">
+<Frame style="height:100%;overflow:hidden;">
+	<div   style="height:100%;overflow:auto;" slot="frameDrawerSlot">
 		{#if menuList}
-			<List
-				listItems={cols}
-				setSelectedData={activePage?.data}
-				let:listItem
-				virtualize={true}
-				density="default"
-				onItemClick={openIn}
-				selectorField="code"
-				title="SlotUi"
-			>
-				<ListItem data={listItem?.data}>
-					<span slot="primary">{null_to_empty(listItem?.primary)}</span>
-					<span slot="action">{null_to_empty(listItem?.action)}</span>
-				</ListItem>
-			</List>
+			<div style="height:100%;position:relative;">
+				<List
+					listItems={cols}
+					setSelectedData={activePage?.data}
+					let:listItem
+					density="default"
+					onItemClick={openIn}
+					selectorField="code"
+					title="SlotUi" 
+					height="100%"
+				>
+					<ListItem data={listItem?.data}>
+						<span slot="primary">{null_to_empty(listItem?.primary)}</span>
+						<span slot="action">{null_to_empty(listItem?.action)}</span>
+					</ListItem>
+				</List>
+			</div>
 		{/if}
 	</div>
-	<div class="theme-bg  h-full" slot="content">
-		<div class="pad-4">
+	<div class="theme-bg   h-full" slot="content">
+		<div class="pad-4 flex-main">
 			<slot />
-		</div>
-		<div>
-			 
-		</div>
+		</div> 
 	</div>
 </Frame>

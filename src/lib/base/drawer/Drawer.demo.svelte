@@ -10,7 +10,7 @@
 
 	let drawerRef: Drawer;
 	let withTopBar: boolean = false;
-	let attrs = { primary: 'A Drawer', secondary: 'drawer seconday text' };
+	let attrs = { primary: 'A Drawer', secondary: 'drawer seconday text',stickTo:'right' };
 
 	const options = {
 		stickTo: ['left', 'right', 'top', 'bottom'],
@@ -103,8 +103,8 @@
 				</TopBar>
 			{/if}
 		</div>
-		<div style="height:100%;overflow:auto;">
-			<List virtualize={true} onItemClick={() => {}}>
+		<div style="height:100%;overflow:hidden;"> 
+			<List height="100%"   onItemClick={() => {}}>
 				{#each [...Array(20)] as key, val}
 					<ListItem>
 						<span slot="primary">Some idioms {val}</span>

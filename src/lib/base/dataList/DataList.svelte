@@ -46,6 +46,12 @@
 </div>
 
 <style global lang="scss">
+	[data-theme='dark'] {
+		--border-color: rgba(255,255,255,0.1)
+	}
+	[data-theme='light'] {
+		--border-color: rgba(0,0,0,0.1);
+	}
 	.dataList {
 		height: 100%;
 		position: relative;
@@ -60,8 +66,9 @@
 
 		.dataListRow {
 			display: flex;
-			border-bottom: 1px solid #ccc;
-			border-radius: 6px;
+			border-bottom: 1px solid var(--border-color);
+
+			//border-radius: 6px;
 			margin: 0.25rem 0;
 
 			.dataListCell {
