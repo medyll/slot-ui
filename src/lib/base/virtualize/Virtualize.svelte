@@ -162,14 +162,14 @@
 >
 	<div bind:this={contents} style="padding-top: {top}px; padding-bottom: {bottom}px;">
 		<div style="position:sticky;top:0;z-index:9000">
-			<slot name="virtualizeHeaderSlot">empty header</slot>
+			<slot name="virtualizeHeaderSlot"></slot>
 		</div>
 		{#if browser && visible !== undefined}
 			{#each visible as row}
 				<slot item={row?.data ?? {}}>Missing content</slot>
 			{/each}
 		{/if}
-	</div>
+	</div> 
 </virtualize-viewport>
 
 <style>
