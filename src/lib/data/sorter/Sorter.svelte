@@ -8,7 +8,7 @@
 	import { dataOp } from '$lib/engine/utils';
 
 	/** Sorter mode */
-	export let sorterMode: 'button' | 'menu' = 'button';
+	export let sorterMode: 'button' | 'menu' | 'free' = 'button';
 	/** binding : final sorted data as raw object  */
 	export let sortedData: SortItem[] = [];
 	/** list of available sorts shown to user */
@@ -30,8 +30,8 @@
 	};
 
 	$: sortedData = data;
-	$: if (Boolean(activeCommonSortField) && activeCommonSortField !==sortByField) {
-		sortByOrder = 'none'
+	$: if (Boolean(activeCommonSortField) && activeCommonSortField !== sortByField) {
+		sortByOrder = 'none';
 	}
 
 	function doSort(field: string, order: 'asc' | 'desc' | 'none' | string) {
@@ -53,13 +53,13 @@
 				let toggleOrder = sortState?.[next] ? sortState[next] : sortState[0];
 				if (sortByField) doSort(sortByField, toggleOrder);
 			}}
-			primary={sortByTitleField ?? sortByField  }
+			primary={sortByTitleField ?? sortByField}
 			icon={icons.default[sortState.indexOf(sortByOrder)]}
 			iconFamily="mdi"
-			naked 
-			selected={sortByOrder !== 'none' && activeCommonSortField ===sortByField}
+			naked
+			selected={sortByOrder !== 'none' && activeCommonSortField === sortByField}
 			size="auto"
-			showChip={sortByOrder !== 'none' && activeCommonSortField ===sortByField}
+			showChip={sortByOrder !== 'none' && activeCommonSortField === sortByField}
 		/>
 	{/if}
 	{#if sorterMode === 'menu'}
@@ -73,5 +73,13 @@
 	{/if}
 	<!-- // button name + asc/desc -->
 	<!-- // button menu with all data minus objects  + asc/desc -->
-	<slot />
+	<slot
+		primary={sortByTitleField ?? sortByField}
+		icon={icons.default[sortState.indexOf(sortByOrder)]}
+		iconFamily="mdi"
+		naked
+		selected={sortByOrder !== 'none' && activeCommonSortField === sortByField}
+		size="auto"
+		showChip={sortByOrder !== 'none' && activeCommonSortField === sortByField}
+	/>
 </div>

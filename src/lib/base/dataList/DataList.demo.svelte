@@ -5,7 +5,7 @@
 	import DataListHead from '$lib/base/dataList/DataListHead.svelte';
 
 	let data = [...Array(70000)].map((caches, index: number) => {
-		return { index, name: 'red', otherName: 'red' };
+		return { index, name: 'name '+index, otherName: 'otherName '+index };
 	});
 </script>
 
@@ -23,9 +23,9 @@
 		<div style="height:350px;" class="what   pos-rel overflow-hidden pad-4">
 			<DataList {data} let:item>
 				<DataListHead slot="head">
-					<DataListCell>index</DataListCell>
-					<DataListCell>name</DataListCell>
-					<DataListCell>otherName</DataListCell>
+					<DataListCell  dataField="index">index</DataListCell>
+					<DataListCell  dataField="name">name</DataListCell>
+					<DataListCell  dataField="otherName"style="flex:1">otherName</DataListCell>
 				</DataListHead>
 			</DataList>
 		</div>
@@ -34,10 +34,10 @@
 			<DataList {data} let:item>
 				<DataListHead slot="head">
 					<DataListCell style="width:50px;">index</DataListCell>
-					<DataListCell style="width:50px;">name</DataListCell>
-					<DataListCell style="width:100%">otherName 50%</DataListCell>
-					<DataListCell style="width:100px">10px</DataListCell>
-					<DataListCell style="width:100px ">Title</DataListCell>
+					<DataListCell dataField="name" style="width:50px;">name</DataListCell>
+					<DataListCell style="width:100px">otherName 50%</DataListCell>
+					<DataListCell style="width:250px">250px</DataListCell>
+					<DataListCell style="width:100px ">TitleTitleTitleTitleTitleTitleTitle</DataListCell>
 					<DataListCell style="width:100px">Title</DataListCell>
 				</DataListHead>
 				<DataListRow>

@@ -85,7 +85,6 @@
 
 	$: finalStyle = `display:${dspStyle};position:${flow};${stickToStyle[stickTo]};${dimKeyVary}:${widthStyle};${style};`;
 
-	$: console.log(finalStyle);
 </script>
 
 <div

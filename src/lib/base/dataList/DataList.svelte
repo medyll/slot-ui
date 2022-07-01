@@ -8,6 +8,8 @@
 	import { slotUiComponentList } from '$lib/sitedata/componentList';
 	import DataListRow from './DataListRow.svelte';
 	import DataListCell from './DataListCell.svelte';
+	import type { DataListStoreType } from './types';
+	import { dataOp } from '$lib/engine/utils';
 
 	/*  common slotUi exports*/
 	let className = '';
@@ -16,26 +18,80 @@
 	const forwardEvents = createEventForwarder(get_current_component());
 
 	export let style: string | undefined = undefined;
+	/** is the datalist sortable */
+	export let isSortable: boolean = true;
+	/** order on which the sorted list is sorted */
+	export let sortByOrder: 'asc' | 'desc' | 'none' | string = 'none';
+	/** binding, used when multiple buttons*/
+	export let activeCommonSortField: string = '';
 
 	export let data: any[] = [];
 
-	const dataListStore = writable([]);
-	setContext<Writable<any[]>>('dataListContext', dataListStore);
+	let sortedData: any[] = data;
+
+	const sortState: string[] = ['none', 'asc', 'desc'];
+	export let sortingIcons = {
+		default: ['dots-horizontal', 'sort-bool-ascending', 'sort-bool-descending'],
+		numeric: ['dots-horizontal', 'sort-bool-ascending', 'sort-bool-descending'],
+	};
+
+	/** context store for dataList config*/
+	const dataListStore = writable<DataListStoreType>({
+		config: {
+			isSortable,
+			defaultSortByField: undefined,
+			defaultSortByOrder: sortByOrder,
+			sortingIcons
+		},
+		sortBy:{
+			activeSortByField: undefined,
+			activeSortByOrder: 'none',
+		},
+		data,
+		columns: []
+	});
+
+	let dataListContext = setContext<Writable<DataListStoreType>>('dataListContext', dataListStore);
+
+	function doSort(e: CustomEvent<{ field: string; order: 'asc' | 'desc' | 'none' }>) {
+		const next = sortState.indexOf(e.detail.order ?? sortByOrder) + 1;
+		let toggleOrder = sortState?.[next] ? sortState[next] : sortState[0];
+
+		if (e.detail.field) {
+			activeCommonSortField = e.detail.field;
+			sortByOrder = toggleOrder ?? 'none';
+
+			if (e.detail.order === 'none') {
+				sortedData = data;
+			} else {
+				sortedData = dataOp.sortBy(data, e.detail.field, toggleOrder);
+			}
+			// update context
+			$dataListContext.sortBy.activeSortByField = e.detail.field;
+			$dataListContext.sortBy.activeSortByOrder = toggleOrder;
+		}
+	}
 </script>
 
-<div use:forwardEvents bind:this={element} class="dataList  {className}" {style}>
-	{#if element}
-		<Virtualize height="100%" items={data} let:item>
+<div
+	use:forwardEvents
+	on:datalist:sort:clicked={doSort}
+	bind:this={element}
+	class="dataList  {className}"
+	{style}
+	tabindex="0"
+>	{#if element}
+		<Virtualize height="100%" items={sortedData} let:item>
 			<svelte:fragment slot="virtualizeHeaderSlot">
-				<slot name="head">virtualizeHeaderSlot</slot>
+				<slot name="head" />
 			</svelte:fragment>
 			{#if item}
 				{#if $$slots.default}
 					<slot {item} />
 				{:else}
-					<DataListRow>
+					<DataListRow data={item}>
 						{#each Object.keys(item) as inItem}
-							<DataListCell>{item?.[inItem]}</DataListCell>
+							<DataListCell dataField={inItem}>{item?.[inItem]}</DataListCell>
 						{/each}
 					</DataListRow>
 				{/if}
@@ -47,10 +103,10 @@
 
 <style global lang="scss">
 	[data-theme='dark'] {
-		--border-color: rgba(255,255,255,0.1)
+		--border-color: rgba(255, 255, 255, 0.1);
 	}
 	[data-theme='light'] {
-		--border-color: rgba(0,0,0,0.1);
+		--border-color: rgba(0, 0, 0, 0.1);
 	}
 	.dataList {
 		height: 100%;
@@ -58,9 +114,38 @@
 		.dataListHead {
 			display: flex;
 			margin-bottom: 0.5rem;
+			align-items: stretch;
+			height: 32px;
+			background-color: var(--theme-color-paper-alpha-low);
+			backdrop-filter: blur(1px);
+			border-radius: var(--radius-tiny);
 			.dataListCell {
-				padding: 8px;
+				display: flex;
+				align-items: stretch;
 				overflow: hidden;
+				border-right: 1px solid var(--border-color);
+				&[data-sortable='true'] {
+					cursor: pointer;
+					&:hover {
+						background-color: var(--theme-color-primary-alpha); 
+					}
+				}
+
+				.cellHeader {
+					display: flex;
+					align-items: center;
+					// border: 1px solid red;
+					min-width: 0;
+					width: 100%;
+					.cellHeaderContent {
+						flex: 1;
+						overflow: hidden;
+						padding: 0 8px;
+					}
+					.cellHeaderSorter {
+						//padding: 0 4px;
+					}
+				}
 			}
 		}
 
@@ -69,11 +154,15 @@
 			border-bottom: 1px solid var(--border-color);
 
 			//border-radius: 6px;
-			margin: 0.25rem 0;
+			// margin: 0.25rem 0;
 
 			.dataListCell {
 				padding: 8px;
 				color: var(--theme-color-text);
+				border-right: 1px solid var(--border-color);
+				&[data-noWrap=true]{
+
+				}
 			}
 		}
 	}

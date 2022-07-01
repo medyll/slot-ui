@@ -150,8 +150,7 @@
 	});
 
 	$: if (mounted) {
-		rows = contents.children;
-		console.log(contents.children);
+		rows = contents.children; 
 	}
 </script>
 

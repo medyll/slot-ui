@@ -57,7 +57,7 @@
 			</div>
 		{/if}
 	</div>
-	<div class="theme-bg   h-full" slot="content">
+	<div class="theme-bg   h-full overflow-auto" slot="content">
 		<div class="pad-4 flex-main">
 			<slot />
 		</div> 

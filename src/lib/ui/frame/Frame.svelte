@@ -90,7 +90,7 @@
         z-index:1;
         max-width: 288px;
         border-right: 1px solid var(--theme-color-primary);
-        background-color: red;
+        //background-color: red;
         height: 100%;
         position:relative;
         //box-shadow: var(--box-shad-3);
