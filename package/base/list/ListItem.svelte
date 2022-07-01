@@ -156,10 +156,10 @@ $: if ($listStateContext?.selectorField) {
 
 :global(li.listItemTitle) {
   position: sticky;
-  margin-top: 0;
-  top: 0;
-  background-color: var(--theme-color-background-alpha);
-  backdrop-filter: blur(5px);
+  margin-top: 1px !important;
+  top: 1px;
+  background-color: var(--theme-color-background-alpha-low);
+  backdrop-filter: blur(1px);
   z-index: 1;
 }
 

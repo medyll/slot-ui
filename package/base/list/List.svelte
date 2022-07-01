@@ -8,6 +8,7 @@ import { createEventForwarder } from '../../engine/engine';
 import Virtualize from '../virtualize/Virtualize.svelte';
 import { dataOp, propsProxy } from '../../engine/utils';
 import Divider from '../divider/Divider.svelte';
+import Sorterer from '../../data/sorter/Sorterer.svelte';
 // set store
 const listStore = createListStore();
 setContext('listStateContext', listStore);
@@ -32,7 +33,10 @@ export let virtualize = false;
 export let selectorField;
 /** show divider between listItems */
 export let showDivider = false;
+/** props for Divider, if present*/
 export let dividerProps = {};
+/** Sorterer component inclusion. Inferred */
+export let sorterer = undefined;
 /** set selected data by dataKey value*/
 export let selectedDataKey = undefined;
 /** set selected data by data object */
@@ -56,6 +60,8 @@ export let disabled = false;
 export let density = 'default';
 /** binding for selectedData */
 export let activeData = $listStore.activeData;
+/** sortedData if props.sorterer*/
+let sortedData;
 let virtualHeight = undefined;
 $listStore.density = density;
 listStore.setSelectorField(selectorField);
@@ -92,6 +98,7 @@ $: if (data) {
         });
     }
 }
+// $: console.log({ sortedData, data });
 /** on listItem clicked, we set activeData to e.LisItemProps*/
 function onListItemClick(e) {
     if (disabled) {
@@ -142,9 +149,10 @@ function navigateList(e) {
     else if (data) {
     }
 }
+// vars for display rules
+let showTitleZone = $$slots.title || title || primary || secondary; // || sorterer;
 </script>
-
-<ul
+<!-- <ul
 	bind:this={element}
 	class="density-{density} {className}"
 	on:listclicked={onListItemClick_Deprecated}
@@ -224,6 +232,75 @@ function navigateList(e) {
 		{/if}
 		<slot />
 	{/if}
+</ul> -->
+<ul
+	bind:this={element}
+	class="density-{density} {className}"
+	on:listclicked={onListItemClick_Deprecated}
+	on:list:dblclicked={onListItemClick_Deprecated}
+	on:listitem:clicked={onListItemClick}
+	on:listitem:dblclicked={onListItemClick}
+	style="position:relative;height:{height};margin:0;padding:0!important;{style};opacity:{disabled
+		? 0.6
+		: 1};overflow:{virtualize ? 'hidden' : 'auto'};"
+	use:forwardEvents
+	tabindex="0"
+	on:keydown={navigateList}
+>
+	{#if $$slots.commandBarSlot}
+		<slot name="commandBarSlot" />
+	{/if}
+	{#if virtualize}
+		<Virtualize height="100%" items={listItems} let:item> 
+			<svelte:fragment slot="virtualizeHeaderSlot"> 
+				{#if showTitleZone}
+					<slot name="title">
+						<ListTitle primary={primary ?? title} {secondary} {icon}>
+							{#if sorterer}<Sorterer {sortedData} fields={sorterer} data={listItems} />{/if}
+						</ListTitle>
+					</slot>
+				{/if}
+			</svelte:fragment>
+			{#if item}
+				<slot listItem={item}>
+					<ListItem class="" {showIcon} {density} data={item.data}>
+						<span slot="icon"><Icon fontSize="tiny" icon={item?.icon} /></span>
+						<span slot="primary">{null_to_empty(item?.primary)}</span>
+						<span slot="secondary">{null_to_empty(item?.secondary)}</span>
+						<span slot="action">{null_to_empty(item?.action)}</span>
+					</ListItem>
+				</slot>
+			{/if}
+		</Virtualize>
+	{:else}
+		{#if showTitleZone}
+			<slot name="title">
+				<ListTitle primary={primary ?? title} {secondary} {icon} />
+			</slot>
+		{/if} 
+		{#if listItems} 
+			{#each listItems as item}
+				<slot listItem={item}>
+					<ListItem
+						style="content-visibility:hidden;"
+						{showIcon}
+						{density}
+						{showDivider}
+						{dividerProps}
+						data={item.data}
+						icon={item?.icon}
+					>
+						<span slot="icon" />
+						<span slot="primary">{null_to_empty(item?.primary)}</span>
+						<span slot="secondary">{null_to_empty(item?.secondary)}</span>
+						<span slot="action">{null_to_empty(item?.action)}</span>
+					</ListItem>
+				</slot>
+			{/each}
+		{:else} 
+		<slot></slot>
+		{/if}
+	{/if}
 </ul>
 
 <style global>:global(li.listItemTitle),
@@ -287,10 +364,10 @@ function navigateList(e) {
 
 :global(li.listItemTitle) {
   position: sticky;
-  margin-top: 0;
-  top: 0;
-  background-color: var(--theme-color-background-alpha);
-  backdrop-filter: blur(5px);
+  margin-top: 1px !important;
+  top: 1px;
+  background-color: var(--theme-color-background-alpha-low);
+  backdrop-filter: blur(1px);
   z-index: 1;
 }
 
@@ -311,6 +388,6 @@ function navigateList(e) {
 }
 
 :global(ul:focus) {
-  /* outline: 1px solid #ccc;
-  outline-offset: -4px; */
+  outline: 0;
+  outline-offset: -4px;
 }</style>

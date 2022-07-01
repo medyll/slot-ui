@@ -66,10 +66,16 @@ $: dspStyle = isOpen ? 'flex' : 'flex';
 $: widthStyle = isOpen ? '288px' : '24px';
 $: sens = 'chevron-' + sensSuffix;
 $: pos = !isOpen ? '-32' : '0';
-$: style = `display:${dspStyle};position:${flow};${stickToStyle[stickTo]};${dimKeyVary}:${widthStyle};`;
+$: finalStyle = `display:${dspStyle};position:${flow};${stickToStyle[stickTo]};${dimKeyVary}:${widthStyle};${style};`;
 </script>
 
-<div data-open={isOpen} bind:this={element} class="drawer   {className}" {style} use:forwardEvents>
+<div
+	data-open={isOpen}
+	bind:this={element}
+	class="drawer flex-v h-full {className}"
+	style={finalStyle}
+	use:forwardEvents
+>
 	<div class="opener" style={openerIconStyle[stickTo]}>
 		{#if showOpenerIcon}
 			<IconButton
@@ -119,13 +125,11 @@ $: style = `display:${dspStyle};position:${flow};${stickToStyle[stickTo]};${dimK
 				{/if}
 			</div>
 		{/if}
-		<div class="content">
-			<div style="height;100%;overflow:auto;">
-				<slot />
-			</div>
+		<div class="content" style="position:relative;flex:1;overflow:hidden">
+			<slot />
 		</div>
 		{#if $$slots.drawerBottomBarSlot}
-			<BottomBar>
+			<BottomBar density="tight">
 				<slot name="drawerBottomBarSlot" />
 			</BottomBar>
 		{/if}
@@ -142,7 +146,7 @@ $: style = `display:${dspStyle};position:${flow};${stickToStyle[stickTo]};${dimK
   overflow: visible;
   display: flex;
   flex-direction: column;
-  transition: all 0.4s;
+  transition: all 0.1s;
 }
 :global(.drawer) :global(.opener) {
   position: absolute;
@@ -160,6 +164,5 @@ $: style = `display:${dspStyle};position:${flow};${stickToStyle[stickTo]};${dimK
 }
 :global(.drawer) :global(.content) {
   flex: 1;
-  overflow: auto;
   position: relative;
 }</style>

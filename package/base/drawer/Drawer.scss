@@ -8,7 +8,7 @@
   overflow: visible;
   display: flex;
   flex-direction: column;
-  transition: all 0.4s;
+  transition: all 0.1s; 
   .opener {
     //background-color: var(--slotui-drawer-bg-color, var(--theme-color-paper-alpha-low));
     position: absolute;
@@ -27,8 +27,7 @@
     }
   }
   .content {
-    flex: 1;
-    overflow: auto;
-    position: relative;
+    flex: 1; 
+    position: relative; 
   }
 }

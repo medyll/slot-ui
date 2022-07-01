@@ -2,6 +2,7 @@
 import { onMount, tick } from 'svelte';
 import { createEventForwarder } from '../../engine/engine';
 import { get_current_component } from 'svelte/internal';
+import { browser } from '$app/env';
 /*  common slotUi exports*/
 let className = '';
 export { className as class };
@@ -27,9 +28,10 @@ let mounted;
 let top = 0;
 let bottom = 0;
 let average_height;
-$: visible = items.slice(start, end).map((data, i) => {
-    return { index: i + start, data };
-});
+$: if (mounted)
+    visible = items.slice(start, end).map((data, i) => {
+        return { index: i + start, data };
+    });
 // whenever `items` changes, invalidate the current heightmap
 $: if (mounted)
     refresh(items, viewport_height, itemHeight);
@@ -106,10 +108,16 @@ async function handle_scroll() {
 }
 // trigger initial refresh
 onMount(async () => {
-    rows = contents.children;
     await tick();
     mounted = true;
+    return () => {
+        visible = [];
+        mounted = false;
+    };
 });
+$: if (mounted) {
+    rows = contents.children;
+}
 </script>
 
 <virtualize-viewport
@@ -120,11 +128,13 @@ onMount(async () => {
 >
 	<div bind:this={contents} style="padding-top: {top}px; padding-bottom: {bottom}px;">
 		<div style="position:sticky;top:0;z-index:9000">
-			<slot name="virtualizeHeaderSlot" />
+			<slot name="virtualizeHeaderSlot">empty header</slot>
 		</div>
-		{#each visible as row (row?.index)}
-			{#if Boolean(row) && row?.data}<slot item={row?.data ?? {}}>Missing content</slot>{/if}
-		{/each}
+		{#if browser && visible !== undefined}
+			{#each visible as row}
+				<slot item={row?.data ?? {}}>Missing content</slot>
+			{/each}
+		{/if}
 	</div>
 </virtualize-viewport>
 

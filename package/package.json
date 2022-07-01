@@ -1,6 +1,6 @@
 {
   "name": "@medyll/slotui",
-  "version": "0.1.52",
+  "version": "0.1.54",
   "repository": {
     "type": "git",
     "url": "https://github.com/medyll/slot-ui.git"
@@ -9,7 +9,7 @@
   "dependencies": {
     "@medyll/cssfabric": "^0.2.4",
     "@neodrag/svelte": "^1.1.2",
-    "@sveltejs/kit": "^1.0.0-next.350",
+    "@sveltejs/kit": "^1.0.0-next.357",
     "@sveltejs/svelte-virtual-list": "^3.0.1",
     "@sveltestack/svelte-query": "^1.6.0",
     "axios": "^0.25.0",
@@ -45,7 +45,7 @@
     "nodemon": "^2.0.18",
     "prettier": "^2.4.1",
     "prettier-plugin-svelte": "^2.7.0",
-    "svelte": "^3.48.0",
+    "svelte": "~3.48.0",
     "svelte-check": "^2.7.2",
     "svelte-highlight": "^6.1.0",
     "svelte-jester": "^2.3.2",
@@ -165,6 +165,7 @@
     "./data/sorter/Sorter.demo.svelte": "./data/sorter/Sorter.demo.svelte",
     "./data/sorter/Sorter.svelte": "./data/sorter/Sorter.svelte",
     "./data/sorter/Sorterer.svelte": "./data/sorter/Sorterer.svelte",
+    "./data/sorter/types": "./data/sorter/types.js",
     "./effects/transitions": "./effects/transitions.js",
     "./engine/DynComp.svelte": "./engine/DynComp.svelte",
     "./engine/elem": "./engine/elem.js",

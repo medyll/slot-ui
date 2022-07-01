@@ -1,7 +1,7 @@
 ```typescript 
 __propDef: {
     props: {
-        /** Sorter mode */ sorterMode?: "button" | "menu" | undefined;
+        /** Sorter mode */ sorterMode?: "button" | "menu" | "free" | undefined;
         /** binding : final sorted data as raw object  */ sortedData?: SortItem[] | undefined;
         /** list of available sorts shown to user */ sortListItems?: string[] | undefined;
         /** data to sort */ data: Data[];
@@ -14,7 +14,14 @@ __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
-        default: {};
+        default: {
+            primary: string | undefined;
+            icon: string;
+            iconFamily: string;
+            selected: boolean;
+            size: string;
+            showChip: boolean;
+        };
     };
 };
 

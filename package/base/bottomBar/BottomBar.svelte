@@ -10,22 +10,18 @@ const forwardEvents = createEventForwarder(get_current_component());
 export let density = 'default';
 </script>
 
-<Divider />
 <div use:forwardEvents bind:this={element} class="bottomBar density-{density} {className}">
 	<slot>bottom bar</slot>
 </div>
-
+ 
 <style>.bottomBar.density-tight {
   padding: 0.5rem 0;
-  margin: 0.125rem 0;
 }
 
 .bottomBar.density-default {
   padding: 1rem 0;
-  margin: 0.25rem 0;
 }
 
 .bottomBar.density-kind {
   padding: 1.5rem 0;
-  margin: 0.5rem 0;
 }</style>
