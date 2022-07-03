@@ -1,18 +1,18 @@
 import { forEach } from 'lodash';
-import type { PathsType, TreeItemType } from './types';
+import type { PathDataType, PathsType, TreeItemType } from './types';
 
-export const trans2Tree = (paths: PathsType, pathKey: string): TreeItemType[] => {
+export const trans2Tree = (paths: PathsType, pathKey: keyof  PathDataType='path',splitter:string = '/'): TreeItemType[] => {
 
   const tree: TreeItemType[] = [];
 
   // sort path alphabetically
-  const sortedPaths = paths.sort((a, b) => (a.path > b.path) ?  1 : -1)
+  const sortedPaths = paths.sort((a, b) => (a[pathKey] > b[pathKey]) ?  1 : -1)
 
   for (let i = 0; i < sortedPaths.length; i++) {
 
-    const path = sortedPaths[i].path;
-    const data = sortedPaths[i]?.data;
-    const pathSplice = path.split('/');
+    const path = sortedPaths[i][pathKey];
+    
+    const pathSplice = path.split(splitter);
 
     let currentLevel = tree;
 
@@ -24,21 +24,16 @@ export const trans2Tree = (paths: PathsType, pathKey: string): TreeItemType[] =>
       if (existingPath) {
         currentLevel = existingPath.children;
       } else {
-        // ensure precedent exist !
-        const prectest = pathSplice
-        let precCollPath = '';
 
         const newPart = {
           name: part ,
-          path: pathSplice.slice(0,j+1).join('/'), // nope
+          path: pathSplice.slice(0,j+1).join(splitter), 
           data: {},
-          children: [],
+          children: []
         };
         // 
         currentLevel.push(newPart);
-        currentLevel = newPart.children;
-        // console.log({ currentLevel })
-         
+        currentLevel = newPart.children;         
       }
     }
   }

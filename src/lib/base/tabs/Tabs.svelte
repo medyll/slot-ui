@@ -84,7 +84,7 @@
 	<div class="tabsContent flex-main pos-rel">
 		{#each items as item}
 			{@const display = activeTabCode === item.code ? 'flex' : 'none'}
-			<slot {item} >
+			<slot {item}>
 				<div
 					style="display:{display};height:100%;position:relative;display:flex;flex-direction:column"
 				>
