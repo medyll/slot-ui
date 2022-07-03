@@ -1,11 +1,15 @@
 <script lang="ts">
-	import { setContext } from 'svelte';
-	import { writable } from 'svelte/store';
+	import type { DataListStoreType } from './types.ts';
+	import { getContext, setContext } from 'svelte';
+	import { writable, type Writable } from 'svelte/store';
 	import type { CellType } from './types';
 
 	export const style: string | undefined = undefined;
 	export let element: HTMLDivElement | undefined = undefined;
 
+	export let stickyHeader: boolean | undefined = true;
+
+	const dataListStore = getContext<Writable<DataListStoreType>>('dataListContext');
 	// this head is a head
 	// cells give width for the whole dataList
 	const headerer = writable<CellType[]>([]);
@@ -22,7 +26,7 @@
 	}
 </script>
 
-<div  on:datalist:sort:clicked bind:this={element} bind:clientWidth  class="pos-sticky dataListHead shad-2" {style}>
+<div bind:this={element} bind:clientWidth class:pos-sticky={stickyHeader}  class="dataListHead shad-2" {style}>
 	<slot />
 </div>
 

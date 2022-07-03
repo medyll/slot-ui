@@ -1,7 +1,14 @@
-
 .tabsRoot {
   position: relative;
-
+  display: flex;   
+  &[data-orientation="horizontal"] {
+    ul {
+      flex-direction: column; 
+    }
+  }
+  &[data-orientation="vertical"] {
+    flex-direction: column;
+  }
   ul {
     display: flex;
     flex-wrap: wrap;
@@ -23,34 +30,39 @@
   .tabsNav {
     padding: 0.25rem 0;
     gap: 1rem;
-    border-bottom: 1px solid var(--theme-border_color);
+    border-bottom: 1px solid var(--slotui-tabs-nav-border-color,var(--theme-color-primary-alpha-high));
     position: relative;
+    display:flex;
+    align-items:center;
+    &[data-orientation="horizontal"] {
+      flex-direction: column;
+    }
   }
 
   .tabsContent {
-    border: 1px solid var(--theme-border_color);
+    border: 1px solid var(--slotui-tabs-content-border-color,var(--theme-color-foreground-alpha-high)) ;
     border-top: 1px solid transparent;
     border-radius: 3px;
     padding: 0.5rem;
     background-color: var(--theme-color-background);
     min-height: 96px;
-    position:relative;
+    position: relative;
+    width:100%;
   }
 
   .tabsActiveCellContainer {
     top: auto;
     position: relative;
     height: 4px;
-    transition: all 0.250s;
+    transition: all 0.25s;
 
     .tabSlot {
       border-radius: 6px;
       height: 4px;
       background-color: var(--theme-color-primary);
       width: 100%;
-      position:absolute;
-    transition: all 0.250s;
-
+      position: absolute;
+      transition: all 0.25s;
     }
   }
 }

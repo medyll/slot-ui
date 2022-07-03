@@ -14,9 +14,9 @@
 	export let style: string | undefined = undefined;
 	export let columnId: string | number | undefined = undefined;
 	/** if data has been provided, then cell got a fieldName */
-	export let dataField: string;
-	/** set noWrap =true to have ellipsis on cell content*/
-	export let noWrap = true; 
+	export let dataField: string | undefined = undefined;
+	/** set noWrap = true to have ellipsis on this cell content*/
+	export let noWrap: boolean = true;
 
 	let addStyle: string;
 	// if inHeader, then monitor cell
@@ -59,12 +59,9 @@
 	if (!columnId && element && inHeader) {
 		const index = [...element.parentElement.children].indexOf(element);
 		columnId = dataOp.filterListFirst($dataListContextStore.columns, index, 'index').columnId;
-	 
 	}
 
 	const sortState: string[] = ['none', 'asc', 'desc'];
-
- 
 
 	$: if (
 		!inHeader &&
@@ -81,6 +78,15 @@
 		}
 	}
 
+	$: sorticon =
+		$dataListContextStore.sortBy.activeSortByField === dataField
+			? $dataListContextStore?.config?.sortingIcons?.default[
+					sortState.indexOf($dataListContextStore?.sortBy?.activeSortByOrder)
+			  ]
+			: 'dots-horizontal';
+
+	$: showChip = $dataListContextStore.sortBy.activeSortByField === dataField;
+
 	const onSort = (columnId: string, order: 'asc' | 'desc' | 'none') => (e) => {
 		// find field from index
 		if ($dataListContextStore?.config?.isSortable && columnId && dataField) {
@@ -92,7 +98,7 @@
 			if (element) element.dispatchEvent(event);
 			// seek index
 			const column = dataOp.filterListFirst($dataListContextStore.columns, columnId, 'columnId');
-			if (column.dataField) { 
+			if (column.dataField) {
 				const event = custom_event(
 					'datalist:sort:clicked',
 					{ field: column.dataField, order },
@@ -103,13 +109,7 @@
 		}
 	};
 
-	$: sorticon =
-		$dataListContextStore.sortBy.activeSortByField === dataField
-			? $dataListContextStore?.config?.sortingIcons?.default[
-					sortState.indexOf($dataListContextStore?.sortBy?.activeSortByOrder)
-			  ]
-			: 'dots-horizontal';
-	$: showChip = $dataListContextStore.sortBy.activeSortByField === dataField;
+
 </script>
 
 <div
@@ -130,7 +130,7 @@
 			{/if}
 		</div>
 	{:else}
-		<div><slot /></div>
+		<slot />
 	{/if}
 </div>
 

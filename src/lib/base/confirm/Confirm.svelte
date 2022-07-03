@@ -3,6 +3,7 @@
 	import { autofocus } from '$lib/uses/autofocus/autofocus';
 	import { fade, slide } from 'svelte/transition';
 	import Button from '../button/Button.svelte';
+	import { onDestroy } from 'svelte';
 
 	/** text displayed on confirm button */
 	export let tooltipInitial: string | undefined =undefined;
@@ -46,6 +47,10 @@
 		event.stopPropagation(); 
 		if(action) action()
 	}
+
+	onDestroy(()=>{
+		step = 'initial'
+	})
 
 </script>
 

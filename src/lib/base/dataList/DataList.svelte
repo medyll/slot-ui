@@ -2,7 +2,7 @@
 	import { setContext } from 'svelte';
 	import { createEventForwarder } from '../../engine/engine';
 	import { each, get_current_component } from 'svelte/internal';
-	import Virtualize from '../virtualize/Virtualize.svelte';
+	import Virtualize from '../virtualizer/Virtualizer.svelte';
 	import { writable, type Writable } from 'svelte/store';
 	import { browser } from '$app/env';
 	import { slotUiComponentList } from '$lib/sitedata/componentList';
@@ -24,6 +24,8 @@
 	export let sortByOrder: 'asc' | 'desc' | 'none' | string = 'none';
 	/** binding, used when multiple buttons*/
 	export let activeCommonSortField: string = '';
+	/** set noWrap = true to have ellipsis on all cells content*/
+	export let noWrap: boolean = true;
 
 	export let data: any[] = [];
 
@@ -32,7 +34,7 @@
 	const sortState: string[] = ['none', 'asc', 'desc'];
 	export let sortingIcons = {
 		default: ['dots-horizontal', 'sort-bool-ascending', 'sort-bool-descending'],
-		numeric: ['dots-horizontal', 'sort-bool-ascending', 'sort-bool-descending'],
+		numeric: ['dots-horizontal', 'sort-bool-ascending', 'sort-bool-descending']
 	};
 
 	/** context store for dataList config*/
@@ -41,11 +43,12 @@
 			isSortable,
 			defaultSortByField: undefined,
 			defaultSortByOrder: sortByOrder,
-			sortingIcons
+			sortingIcons,
+			noWrap
 		},
-		sortBy:{
+		sortBy: {
 			activeSortByField: undefined,
-			activeSortByOrder: 'none',
+			activeSortByOrder: 'none'
 		},
 		data,
 		columns: []
@@ -80,8 +83,9 @@
 	class="dataList  {className}"
 	{style}
 	tabindex="0"
->	{#if element}
-		<Virtualize height="100%" items={sortedData} let:item>
+>
+	{#if element}
+		<Virtualize height="100%" data={sortedData} let:item>
 			<svelte:fragment slot="virtualizeHeaderSlot">
 				<slot name="head" />
 			</svelte:fragment>
@@ -127,7 +131,7 @@
 				&[data-sortable='true'] {
 					cursor: pointer;
 					&:hover {
-						background-color: var(--theme-color-primary-alpha); 
+						background-color: var(--theme-color-primary-alpha);
 					}
 				}
 
@@ -160,8 +164,14 @@
 				padding: 8px;
 				color: var(--theme-color-text);
 				border-right: 1px solid var(--border-color);
-				&[data-noWrap=true]{
-
+				&[data-noWrap='true'] { 
+					display:box;
+					overflow: hidden;
+					text-overflow:ellipsis;
+					white-space: nowrap;
+					/* display: -webkit-box;
+					-webkit-line-clamp: 1;
+					-webkit-box-orient: vertical; */
 				}
 			}
 		}

@@ -11,6 +11,7 @@ import Drawerdemosvelte from "$lib/base/drawer/Drawer.demo.svelte";
 import Inputdemosvelte from "$lib/base/input/Input.demo.svelte"; 
 import Listdemosvelte from "$lib/base/list/List.demo.svelte"; 
 import Loaderdemosvelte from "$lib/base/loader/Loader.demo.svelte"; 
+import Ratingdemosvelte from "$lib/base/rating/Rating.demo.svelte"; 
 import Tabsdemosvelte from "$lib/base/tabs/Tabs.demo.svelte"; 
 import Treedemosvelte from "$lib/base/tree/Tree.demo.svelte"; 
 import Finderdemosvelte from "$lib/data/finder/Finder.demo.svelte"; 
@@ -31,6 +32,7 @@ import Framedemosvelte from "$lib/ui/frame/Frame.demo.svelte";
 {name:"Input",code:"input",component:Inputdemosvelte},
 {name:"List",code:"list",component:Listdemosvelte},
 {name:"Loader",code:"loader",component:Loaderdemosvelte},
+{name:"Rating",code:"rating",component:Ratingdemosvelte},
 {name:"Tabs",code:"tabs",component:Tabsdemosvelte},
 {name:"Tree",code:"tree",component:Treedemosvelte},
 {name:"Finder",code:"finder",component:Finderdemosvelte},

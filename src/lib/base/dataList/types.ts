@@ -17,7 +17,8 @@ export interface DataListStoreType {
         isSortable?: boolean
         defaultSortByField?: string
         defaultSortByOrder: 'asc' | 'desc' | 'none' | string
-        sortingIcons: Record<string,string[]>
+        sortingIcons: Record<string, string[]>
+        noWrap?: boolean
     }
     sortBy: {
         activeSortByField?: string
