@@ -97,7 +97,7 @@
 			);
 			if (element) element.dispatchEvent(event);
 			// seek index
-			const column = dataOp.filterListFirst($dataListContextStore.columns, columnId, 'columnId');
+			/* const column = dataOp.filterListFirst($dataListContextStore.columns, columnId, 'columnId');
 			if (column.dataField) {
 				const event = custom_event(
 					'datalist:sort:clicked',
@@ -105,7 +105,7 @@
 					{ bubbles: true }
 				);
 				if (element) element.dispatchEvent(event);
-			}
+			} */
 		}
 	};
 

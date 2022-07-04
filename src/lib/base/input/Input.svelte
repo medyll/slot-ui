@@ -138,8 +138,7 @@
 		justify-content: center;
 		padding: 0.5rem;
 		background-color: rgba(255, 255, 255, 0.1);
-		border-radius: var(--slotui-input-radius, 4px);
-		box-shadow: var(--box-shad-1);
+		border-radius: var(--slotui-input-radius, 4px); 
 	}
 	.inpuEnd {
 		position: absolute;

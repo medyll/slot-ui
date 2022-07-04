@@ -17,7 +17,7 @@
     list-style: none;
 
     li {
-      padding: 0.5rem;
+      padding: var(--box-density-preset-small);
       min-width: 48px;
       cursor: pointer;
 
@@ -34,9 +34,11 @@
     position: relative;
     display:flex;
     align-items:center;
+    width:100%;
     &[data-orientation="horizontal"] {
       flex-direction: column;
     }
+    .tabsRail{flex:1}
   }
 
   .tabsContent {

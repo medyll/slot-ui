@@ -57,7 +57,7 @@
 		<div>
 			<slot name="tabsFirstTitleSlot" />
 		</div>
-		<ul bind:this={navElementRef} class="flex-main">
+		<ul bind:this={navElementRef} class="tabsRail">
 			{#each items as item}
 				<li
 					data-code={item.code}

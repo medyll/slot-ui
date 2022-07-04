@@ -106,7 +106,7 @@
 				}}
 				title={pat.path}
 				style="--tree-level:{level * 2}rem"
-				class="gap-tiny  cell w-full"
+				class="gap-tiny  cell"
 			>
 				<div class="cellArrow">
 					{#if pat?.children?.length}
@@ -154,6 +154,7 @@
 		border-radius: var(--radius-tiny);
 		display: flex;
 		align-items: center;
+		width:100%;
 		cursor: pointer;
 		.cellArrow {
 			width: 16px;

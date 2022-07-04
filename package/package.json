@@ -1,6 +1,6 @@
 {
   "name": "@medyll/slotui",
-  "version": "0.1.55",
+  "version": "0.1.57",
   "repository": {
     "type": "git",
     "url": "https://github.com/medyll/slot-ui.git"
@@ -133,6 +133,7 @@
     "./base/paper/Paper.svelte": "./base/paper/Paper.svelte",
     "./base/portal/Portal.svelte": "./base/portal/Portal.svelte",
     "./base/progress/Progress.svelte": "./base/progress/Progress.svelte",
+    "./base/rating/Rating.demo.svelte": "./base/rating/Rating.demo.svelte",
     "./base/rating/Rating.svelte": "./base/rating/Rating.svelte",
     "./base/select/Options.svelte": "./base/select/Options.svelte",
     "./base/select/Select.scss": "./base/select/Select.scss",
@@ -142,7 +143,6 @@
     "./base/switch/Switch.svelte": "./base/switch/Switch.svelte",
     "./base/tabs/Tabs.demo.svelte": "./base/tabs/Tabs.demo.svelte",
     "./base/tabs/Tabs.scss": "./base/tabs/Tabs.scss",
-    "./base/tabs/tabs.spec": "./base/tabs/tabs.spec.js",
     "./base/tabs/Tabs.svelte": "./base/tabs/Tabs.svelte",
     "./base/tabs/types": "./base/tabs/types.js",
     "./base/titleBar/TitleBar.svelte": "./base/titleBar/TitleBar.svelte",
@@ -153,6 +153,7 @@
     "./base/tree/tree.utils": "./base/tree/tree.utils.js",
     "./base/tree/types": "./base/tree/types.js",
     "./base/virtualize/Virtualize.svelte": "./base/virtualize/Virtualize.svelte",
+    "./base/virtualizer/Virtualizer.svelte": "./base/virtualizer/Virtualizer.svelte",
     "./css/cssfabric.css": "./css/cssfabric.css",
     "./css/cssfabric.min.css": "./css/cssfabric.min.css",
     "./data/databox/DataBox.svelte": "./data/databox/DataBox.svelte",

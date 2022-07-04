@@ -57,8 +57,13 @@
 	let dataListContext = setContext<Writable<DataListStoreType>>('dataListContext', dataListStore);
 
 	function doSort(e: CustomEvent<{ field: string; order: 'asc' | 'desc' | 'none' }>) {
+		 
 		const next = sortState.indexOf(e.detail.order ?? sortByOrder) + 1;
 		let toggleOrder = sortState?.[next] ? sortState[next] : sortState[0];
+
+		// let toggleOrder = order === 'asc' ? 'desc' : 'asc';
+
+if(toggleOrder==='none') toggleOrder='asc'
 
 		if (e.detail.field) {
 			activeCommonSortField = e.detail.field;
@@ -75,7 +80,7 @@
 		}
 	}
 </script>
-
+{sortByOrder}
 <div
 	use:forwardEvents
 	on:datalist:sort:clicked={doSort}
@@ -164,10 +169,10 @@
 				padding: 8px;
 				color: var(--theme-color-text);
 				border-right: 1px solid var(--border-color);
-				&[data-noWrap='true'] { 
-					display:box;
+				&[data-noWrap='true'] {
+					display: box;
 					overflow: hidden;
-					text-overflow:ellipsis;
+					text-overflow: ellipsis;
 					white-space: nowrap;
 					/* display: -webkit-box;
 					-webkit-line-clamp: 1;

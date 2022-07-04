@@ -1,7 +1,9 @@
-<script>import { setContext } from 'svelte';
+<script>import { getContext, setContext } from 'svelte';
 import { writable } from 'svelte/store';
 export const style = undefined;
 export let element = undefined;
+export let stickyHeader = true;
+const dataListStore = getContext('dataListContext');
 // this head is a head
 // cells give width for the whole dataList
 const headerer = writable([]);
@@ -16,7 +18,7 @@ function reDraw() {
 }
 </script>
 
-<div  on:datalist:sort:clicked bind:this={element} bind:clientWidth  class="pos-sticky dataListHead shad-2" {style}>
+<div bind:this={element} bind:clientWidth class:pos-sticky={stickyHeader}  class="dataListHead shad-2" {style}>
 	<slot />
 </div>
 

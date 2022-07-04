@@ -9,8 +9,8 @@ export let element = null;
 export let style = undefined;
 export let columnId = undefined;
 /** if data has been provided, then cell got a fieldName */
-export let dataField;
-/** set noWrap =true to have ellipsis on cell content*/
+export let dataField = undefined;
+/** set noWrap = true to have ellipsis on this cell content*/
 export let noWrap = true;
 let addStyle;
 // if inHeader, then monitor cell
@@ -60,6 +60,11 @@ $: if (!inHeader &&
         element.style.width = dataOp.filterListFirst($dataListContextStore.columns, columnId, 'columnId').width;
     }
 }
+$: sorticon =
+    $dataListContextStore.sortBy.activeSortByField === dataField
+        ? $dataListContextStore?.config?.sortingIcons?.default[sortState.indexOf($dataListContextStore?.sortBy?.activeSortByOrder)]
+        : 'dots-horizontal';
+$: showChip = $dataListContextStore.sortBy.activeSortByField === dataField;
 const onSort = (columnId, order) => (e) => {
     // find field from index
     if ($dataListContextStore?.config?.isSortable && columnId && dataField) {
@@ -75,11 +80,6 @@ const onSort = (columnId, order) => (e) => {
         }
     }
 };
-$: sorticon =
-    $dataListContextStore.sortBy.activeSortByField === dataField
-        ? $dataListContextStore?.config?.sortingIcons?.default[sortState.indexOf($dataListContextStore?.sortBy?.activeSortByOrder)]
-        : 'dots-horizontal';
-$: showChip = $dataListContextStore.sortBy.activeSortByField === dataField;
 </script>
 
 <div
@@ -100,7 +100,7 @@ $: showChip = $dataListContextStore.sortBy.activeSortByField === dataField;
 			{/if}
 		</div>
 	{:else}
-		<div><slot /></div>
+		<slot />
 	{/if}
 </div>
 

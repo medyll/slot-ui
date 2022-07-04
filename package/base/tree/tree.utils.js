@@ -1,8 +1,11 @@
-export const trans2Tree = (paths, pathKey) => {
+import { forEach } from 'lodash';
+export const trans2Tree = (paths, pathKey = 'path', splitter = '/') => {
     const tree = [];
-    for (let i = 0; i < paths.length; i++) {
-        const path = paths[i].path;
-        const pathSplice = path.split('/');
+    // sort path alphabetically
+    const sortedPaths = paths.sort((a, b) => (a[pathKey] > b[pathKey]) ? 1 : -1);
+    for (let i = 0; i < sortedPaths.length; i++) {
+        const path = sortedPaths[i][pathKey];
+        const pathSplice = path.split(splitter);
         let currentLevel = tree;
         for (let j = 0; j < pathSplice.length; j++) {
             const part = pathSplice[j];
@@ -13,10 +16,11 @@ export const trans2Tree = (paths, pathKey) => {
             else {
                 const newPart = {
                     name: part,
-                    path: '',
+                    path: pathSplice.slice(0, j + 1).join(splitter),
                     data: {},
-                    children: [],
+                    children: []
                 };
+                // 
                 currentLevel.push(newPart);
                 currentLevel = newPart.children;
             }
