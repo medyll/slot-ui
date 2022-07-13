@@ -6,7 +6,7 @@
     "url": "https://github.com/medyll/slot-ui.git"
   },
   "scripts": {
-    "dev": " svelte-kit dev  --port 3001 --host --open   ",
+    "dev": "vite dev  --port 3001 --host --open   ",
     "build": "svelte-kit build",
     "package": "svelte-kit package",
     "preview": "svelte-kit preview",
@@ -26,11 +26,11 @@
   "type": "module",
   "dependencies": {
     "@medyll/cssfabric": "^0.2.4",
-    "@neodrag/svelte": "^1.1.2",
-    "@sveltejs/kit": "^1.0.0-next.357",
+    "@neodrag/svelte": "^1.2.3",
+    "@sveltejs/kit": "^1.0.0-next.372",
     "@sveltejs/svelte-virtual-list": "^3.0.1",
     "@sveltestack/svelte-query": "^1.6.0",
-    "axios": "^0.25.0",
+    "axios": "^0.27.2",
     "d3": "^7.4.4",
     "lodash": "^4.17.21",
     "svelte-css-vars": "^0.0.3",
@@ -39,7 +39,7 @@
     "svelte-spa-router": "^3.2.0",
     "svelte-themer": "^0.5.5",
     "svelte-use-form": "^2.4.3",
-    "svelte2tsx": "^0.5.5"
+    "svelte2tsx": "^0.5.11"
   },
   "devDependencies": {
     "@babel/core": "^7.17.2",
@@ -47,9 +47,9 @@
     "@babel/preset-typescript": "^7.16.7",
     "@iconify/svelte": "^2.2.1",
     "@sveltejs/adapter-auto": "next",
-    "@sveltejs/adapter-node": "^1.0.0-next.67",
+    "@sveltejs/adapter-node": "^1.0.0-next.79",
     "@sveltejs/adapter-static": "^1.0.0-next.34",
-    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.36",
+    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.49",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/svelte": "^3.1.0",
     "@testing-library/user-event": "^14.0.4",
@@ -63,16 +63,16 @@
     "nodemon": "^2.0.18",
     "prettier": "^2.4.1",
     "prettier-plugin-svelte": "^2.7.0",
-    "svelte": "~3.48.0",
-    "svelte-check": "^2.7.2",
-    "svelte-highlight": "^6.1.0",
+    "svelte": "~3.49.0",
+    "svelte-check": "^2.8.0",
+    "svelte-highlight": "^6.2.0",
     "svelte-jester": "^2.3.2",
     "svelte-loader": "^3.1.3",
     "svelte-preprocess": "^4.10.7",
     "svelte-preprocess-markdown": "^2.7.3",
     "ts-jest": "^27.1.4",
-    "tslib": "^2.3.1",
-    "typescript": "^4.4.3",
-    "vite": "^2.9.12"
+    "tslib": "^2.4.0",
+    "typescript": "^4.7.4",
+    "vite": "^2.9.14"
   }
 }

@@ -21,6 +21,62 @@ function to_headers(object) {
 }
 
 /**
+ * Given an Accept header and a list of possible content types, pick
+ * the most suitable one to respond with
+ * @param {string} accept
+ * @param {string[]} types
+ */
+function negotiate(accept, types) {
+	/** @type {Array<{ type: string, subtype: string, q: number, i: number }>} */
+	const parts = [];
+
+	accept.split(',').forEach((str, i) => {
+		const match = /([^/]+)\/([^;]+)(?:;q=([0-9.]+))?/.exec(str);
+
+		// no match equals invalid header — ignore
+		if (match) {
+			const [, type, subtype, q = '1'] = match;
+			parts.push({ type, subtype, q: +q, i });
+		}
+	});
+
+	parts.sort((a, b) => {
+		if (a.q !== b.q) {
+			return b.q - a.q;
+		}
+
+		if ((a.subtype === '*') !== (b.subtype === '*')) {
+			return a.subtype === '*' ? 1 : -1;
+		}
+
+		if ((a.type === '*') !== (b.type === '*')) {
+			return a.type === '*' ? 1 : -1;
+		}
+
+		return a.i - b.i;
+	});
+
+	let accepted;
+	let min_priority = Infinity;
+
+	for (const mimetype of types) {
+		const [type, subtype] = mimetype.split('/');
+		const priority = parts.findIndex(
+			(part) =>
+				(part.type === type || part.type === '*') &&
+				(part.subtype === subtype || part.subtype === '*')
+		);
+
+		if (priority !== -1 && priority < min_priority) {
+			accepted = mimetype;
+			min_priority = priority;
+		}
+	}
+
+	return accepted;
+}
+
+/**
  * Hash using djb2
  * @param {import('types').StrictBody} value
  */
@@ -95,6 +151,47 @@ function normalize_request_method(event) {
 	return method === 'delete' ? 'del' : method; // 'delete' is a reserved word
 }
 
+/**
+ * Serialize an error into a JSON string, by copying its `name`, `message`
+ * and (in dev) `stack`, plus any custom properties, plus recursively
+ * serialized `cause` properties. This is necessary because
+ * `JSON.stringify(error) === '{}'`
+ * @param {Error} error
+ * @param {(error: Error) => string | undefined} get_stack
+ */
+function serialize_error(error, get_stack) {
+	return JSON.stringify(clone_error(error, get_stack));
+}
+
+/**
+ * @param {Error} error
+ * @param {(error: Error) => string | undefined} get_stack
+ */
+function clone_error(error, get_stack) {
+	const {
+		name,
+		message,
+		// this should constitute 'using' a var, since it affects `custom`
+		// eslint-disable-next-line
+		stack,
+		// @ts-expect-error i guess typescript doesn't know about error.cause yet
+		cause,
+		...custom
+	} = error;
+
+	/** @type {Record<string, any>} */
+	const object = { name, message, stack: get_stack(error) };
+
+	if (cause) object.cause = clone_error(cause, get_stack);
+
+	for (const key in custom) {
+		// @ts-expect-error
+		object[key] = custom[key];
+	}
+
+	return object;
+}
+
 /** @param {string} body */
 function error(body) {
 	return new Response(body, {
@@ -132,9 +229,10 @@ function is_text(content_type) {
 /**
  * @param {import('types').RequestEvent} event
  * @param {{ [method: string]: import('types').RequestHandler }} mod
+ * @param {import('types').SSROptions} options
  * @returns {Promise<Response>}
  */
-async function render_endpoint(event, mod) {
+async function render_endpoint(event, mod, options) {
 	const method = normalize_request_method(event);
 
 	/** @type {import('types').RequestHandler} */
@@ -193,9 +291,12 @@ async function render_endpoint(event, mod) {
 
 	const type = headers.get('content-type');
 
-	if (!is_text(type) && !(body instanceof Uint8Array || is_string(body))) {
+	if (
+		!is_text(type) &&
+		!(body instanceof Uint8Array || body instanceof ReadableStream || is_string(body))
+	) {
 		return error(
-			`${preface}: body must be an instance of string or Uint8Array if content-type is not a supported textual content-type`
+			`${preface}: body must be an instance of string, Uint8Array or ReadableStream if content-type is not a supported textual content-type`
 		);
 	}
 
@@ -204,7 +305,8 @@ async function render_endpoint(event, mod) {
 
 	if (is_pojo(body) && (!type || type.startsWith('application/json'))) {
 		headers.set('content-type', 'application/json; charset=utf-8');
-		normalized_body = JSON.stringify(body);
+		normalized_body =
+			body instanceof Error ? serialize_error(body, options.get_stack) : JSON.stringify(body);
 	} else {
 		normalized_body = /** @type {import('types').StrictBody} */ (body);
 	}
@@ -875,9 +977,6 @@ function base64(bytes) {
 	return result;
 }
 
-/** @type {Promise<void>} */
-let csp_ready;
-
 const array = new Uint8Array(16);
 
 function generate_nonce() {
@@ -897,12 +996,11 @@ const quoted = new Set([
 
 const crypto_pattern = /^(nonce|sha\d\d\d)-/;
 
-class Csp {
+// CSP and CSP Report Only are extremely similar with a few caveats
+// the easiest/DRYest way to express this is with some private encapsulation
+class BaseProvider {
 	/** @type {boolean} */
 	#use_hashes;
-
-	/** @type {boolean} */
-	#dev;
 
 	/** @type {boolean} */
 	#script_needs_csp;
@@ -919,21 +1017,18 @@ class Csp {
 	/** @type {import('types').Csp.Source[]} */
 	#style_src;
 
+	/** @type {string} */
+	#nonce;
+
 	/**
-	 * @param {{
-	 *   mode: string,
-	 *   directives: import('types').CspDirectives
-	 * }} config
-	 * @param {{
-	 *   dev: boolean;
-	 *   prerender: boolean;
-	 *   needs_nonce: boolean;
-	 * }} opts
+	 * @param {boolean} use_hashes
+	 * @param {import('types').CspDirectives} directives
+	 * @param {string} nonce
+	 * @param {boolean} dev
 	 */
-	constructor({ mode, directives }, { dev, prerender, needs_nonce }) {
-		this.#use_hashes = mode === 'hash' || (mode === 'auto' && prerender);
+	constructor(use_hashes, directives, nonce, dev) {
+		this.#use_hashes = use_hashes;
 		this.#directives = dev ? { ...directives } : directives; // clone in dev so we can safely mutate
-		this.#dev = dev;
 
 		const d = this.#directives;
 
@@ -975,10 +1070,7 @@ class Csp {
 
 		this.script_needs_nonce = this.#script_needs_csp && !this.#use_hashes;
 		this.style_needs_nonce = this.#style_needs_csp && !this.#use_hashes;
-
-		if (this.script_needs_nonce || this.style_needs_nonce || needs_nonce) {
-			this.nonce = generate_nonce();
-		}
+		this.#nonce = nonce;
 	}
 
 	/** @param {string} content */
@@ -987,7 +1079,7 @@ class Csp {
 			if (this.#use_hashes) {
 				this.#script_src.push(`sha256-${sha256(content)}`);
 			} else if (this.#script_src.length === 0) {
-				this.#script_src.push(`nonce-${this.nonce}`);
+				this.#script_src.push(`nonce-${this.#nonce}`);
 			}
 		}
 	}
@@ -998,12 +1090,14 @@ class Csp {
 			if (this.#use_hashes) {
 				this.#style_src.push(`sha256-${sha256(content)}`);
 			} else if (this.#style_src.length === 0) {
-				this.#style_src.push(`nonce-${this.nonce}`);
+				this.#style_src.push(`nonce-${this.#nonce}`);
 			}
 		}
 	}
 
-	/** @param {boolean} [is_meta] */
+	/**
+	 * @param {boolean} [is_meta]
+	 */
 	get_header(is_meta = false) {
 		const header = [];
 
@@ -1034,7 +1128,7 @@ class Csp {
 				continue;
 			}
 
-			// @ts-expect-error gimme a break typescript, `key` is obviously a member of directives
+			// @ts-expect-error gimme a break typescript, `key` is obviously a member of internal_directives
 			const value = /** @type {string[] | true} */ (directives[key]);
 
 			if (!value) continue;
@@ -1055,10 +1149,78 @@ class Csp {
 
 		return header.join('; ');
 	}
+}
 
+class CspProvider extends BaseProvider {
 	get_meta() {
 		const content = escape_html_attr(this.get_header(true));
 		return `<meta http-equiv="content-security-policy" content=${content}>`;
+	}
+}
+
+class CspReportOnlyProvider extends BaseProvider {
+	/**
+	 * @param {boolean} use_hashes
+	 * @param {import('types').CspDirectives} directives
+	 * @param {string} nonce
+	 * @param {boolean} dev
+	 */
+	constructor(use_hashes, directives, nonce, dev) {
+		super(use_hashes, directives, nonce, dev);
+
+		if (Object.values(directives).filter((v) => !!v).length > 0) {
+			// If we're generating content-security-policy-report-only,
+			// if there are any directives, we need a report-uri or report-to (or both)
+			// else it's just an expensive noop.
+			const has_report_to = directives['report-to']?.length ?? 0 > 0;
+			const has_report_uri = directives['report-uri']?.length ?? 0 > 0;
+			if (!has_report_to && !has_report_uri) {
+				throw Error(
+					'`content-security-policy-report-only` must be specified with either the `report-to` or `report-uri` directives, or both'
+				);
+			}
+		}
+	}
+}
+
+class Csp {
+	/** @readonly */
+	nonce = generate_nonce();
+
+	/** @type {CspProvider} */
+	csp_provider;
+
+	/** @type {CspReportOnlyProvider} */
+	report_only_provider;
+
+	/**
+	 * @param {import('./types').CspConfig} config
+	 * @param {import('./types').CspOpts} opts
+	 */
+	constructor({ mode, directives, reportOnly }, { prerender, dev }) {
+		const use_hashes = mode === 'hash' || (mode === 'auto' && prerender);
+		this.csp_provider = new CspProvider(use_hashes, directives, this.nonce, dev);
+		this.report_only_provider = new CspReportOnlyProvider(use_hashes, reportOnly, this.nonce, dev);
+	}
+
+	get script_needs_nonce() {
+		return this.csp_provider.script_needs_nonce || this.report_only_provider.script_needs_nonce;
+	}
+
+	get style_needs_nonce() {
+		return this.csp_provider.style_needs_nonce || this.report_only_provider.style_needs_nonce;
+	}
+
+	/** @param {string} content */
+	add_script(content) {
+		this.csp_provider.add_script(content);
+		this.report_only_provider.add_script(content);
+	}
+
+	/** @param {string} content */
+	add_style(content) {
+		this.csp_provider.add_style(content);
+		this.report_only_provider.add_style(content);
 	}
 }
 
@@ -1182,10 +1344,14 @@ async function render_response({
 		}
 	}
 
-	const stylesheets = new Set(options.manifest._.entry.css);
-	const modulepreloads = new Set(options.manifest._.entry.js);
+	const { entry } = options.manifest._;
+
+	const stylesheets = new Set(entry.stylesheets);
+	const modulepreloads = new Set(entry.imports);
+
 	/** @type {Map<string, string>} */
-	const styles = new Map();
+	// TODO if we add a client entry point one day, we will need to include inline_styles with the entry, otherwise stylesheets will be linked even if they are below inlineStyleThreshold
+	const inline_styles = new Map();
 
 	/** @type {Array<import('./types').Fetched>} */
 	const serialized_data = [];
@@ -1203,10 +1369,18 @@ async function render_response({
 	}
 
 	if (resolve_opts.ssr) {
-		branch.forEach(({ node, props, loaded, fetched, uses_credentials }) => {
-			if (node.css) node.css.forEach((url) => stylesheets.add(url));
-			if (node.js) node.js.forEach((url) => modulepreloads.add(url));
-			if (node.styles) Object.entries(node.styles).forEach(([k, v]) => styles.set(k, v));
+		for (const { node, props, loaded, fetched, uses_credentials } of branch) {
+			if (node.imports) {
+				node.imports.forEach((url) => modulepreloads.add(url));
+			}
+
+			if (node.stylesheets) {
+				node.stylesheets.forEach((url) => stylesheets.add(url));
+			}
+
+			if (node.inline_styles) {
+				Object.entries(await node.inline_styles()).forEach(([k, v]) => inline_styles.set(k, v));
+			}
 
 			// TODO probably better if `fetched` wasn't populated unless `hydrate`
 			if (fetched && page_config.hydrate) serialized_data.push(...fetched);
@@ -1214,7 +1388,7 @@ async function render_response({
 
 			cache = loaded?.cache;
 			is_private = cache?.private ?? uses_credentials;
-		});
+		}
 
 		const session = writable($session);
 
@@ -1275,20 +1449,16 @@ async function render_response({
 
 	let { head, html: body } = rendered;
 
-	const inlined_style = Array.from(styles.values()).join('\n');
-
-	await csp_ready;
 	const csp = new Csp(options.csp, {
 		dev: options.dev,
-		prerender: !!state.prerendering,
-		needs_nonce: options.template_contains_nonce
+		prerender: !!state.prerendering
 	});
 
 	const target = hash(body);
 
 	// prettier-ignore
 	const init_app = `
-		import { start } from ${s(options.prefix + options.manifest._.entry.file)};
+		import { start } from ${s(options.prefix + entry.file)};
 		start({
 			target: document.querySelector('[data-sveltekit-hydrate="${target}"]').parentNode,
 			paths: ${s(options.paths)},
@@ -1300,7 +1470,7 @@ async function render_response({
 			trailing_slash: ${s(options.trailing_slash)},
 			hydrate: ${resolve_opts.ssr && page_config.hydrate ? `{
 				status: ${status},
-				error: ${serialize_error(error)},
+				error: ${error && serialize_error(error, e => e.stack)},
 				nodes: [${branch.map(({ node }) => node.index).join(', ')}],
 				params: ${devalue(event.params)},
 				routeId: ${s(event.routeId)}
@@ -1308,22 +1478,26 @@ async function render_response({
 		});
 	`;
 
+	// we use an anonymous function instead of an arrow function to support
+	// older browsers (https://github.com/sveltejs/kit/pull/5417)
 	const init_service_worker = `
 		if ('serviceWorker' in navigator) {
-			addEventListener('load', () => {
+			addEventListener('load', function () {
 				navigator.serviceWorker.register('${options.service_worker}');
 			});
 		}
 	`;
 
-	if (inlined_style) {
+	if (inline_styles.size > 0) {
+		const content = Array.from(inline_styles.values()).join('\n');
+
 		const attributes = [];
 		if (options.dev) attributes.push(' data-sveltekit');
 		if (csp.style_needs_nonce) attributes.push(` nonce="${csp.nonce}"`);
 
-		csp.add_style(inlined_style);
+		csp.add_style(content);
 
-		head += `\n\t<style${attributes.join('')}>${inlined_style}</style>`;
+		head += `\n\t<style${attributes.join('')}>${content}</style>`;
 	}
 
 	// prettier-ignore
@@ -1338,7 +1512,7 @@ async function render_response({
 				attributes.push(`nonce="${csp.nonce}"`);
 			}
 
-			if (styles.has(dep)) {
+			if (inline_styles.has(dep)) {
 				// don't load stylesheets that are already inlined
 				// include them in disabled state so that Vite can detect them and doesn't try to add them
 				attributes.push('disabled', 'media="(max-width: 0)"');
@@ -1388,7 +1562,7 @@ async function render_response({
 	if (state.prerendering) {
 		const http_equiv = [];
 
-		const csp_headers = csp.get_meta();
+		const csp_headers = csp.csp_provider.get_meta();
 		if (csp_headers) {
 			http_equiv.push(csp_headers);
 		}
@@ -1419,14 +1593,14 @@ async function render_response({
 		headers.set('cache-control', `${is_private ? 'private' : 'public'}, max-age=${cache.maxage}`);
 	}
 
-	if (!options.floc) {
-		headers.set('permissions-policy', 'interest-cohort=()');
-	}
-
 	if (!state.prerendering) {
-		const csp_header = csp.get_header();
+		const csp_header = csp.csp_provider.get_header();
 		if (csp_header) {
 			headers.set('content-security-policy', csp_header);
+		}
+		const report_only_header = csp.report_only_provider.get_header();
+		if (report_only_header) {
+			headers.set('content-security-policy-report-only', report_only_header);
 		}
 	}
 
@@ -1447,22 +1621,6 @@ function try_serialize(data, fail) {
 		if (fail) fail(coalesce_to_error(err));
 		return null;
 	}
-}
-
-// Ensure we return something truthy so the client will not re-render the page over the error
-
-/** @param {(Error & {frame?: string} & {loc?: object}) | undefined | null} error */
-function serialize_error(error) {
-	if (!error) return null;
-	let serialized = try_serialize(error);
-	if (!serialized) {
-		const { name, message, stack } = error;
-		serialized = try_serialize({ ...error, name, message, stack });
-	}
-	if (!serialized) {
-		serialized = '{}';
-	}
-	return serialized;
 }
 
 /*!
@@ -2163,6 +2321,7 @@ async function load_node({
 				for (const [key, value] of event.request.headers) {
 					if (
 						key !== 'authorization' &&
+						key !== 'connection' &&
 						key !== 'cookie' &&
 						key !== 'host' &&
 						key !== 'if-none-match' &&
@@ -2395,7 +2554,7 @@ async function load_node({
 
 		if (!loaded) {
 			// TODO do we still want to enforce this now that there's no fallthrough?
-			throw new Error(`load function must return a value${options.dev ? ` (${node.entry})` : ''}`);
+			throw new Error(`load function must return a value${options.dev ? ` (${node.file})` : ''}`);
 		}
 	} else if (shadow.body) {
 		loaded = {
@@ -2469,22 +2628,23 @@ async function load_shadow_data(route, event, options, prerender) {
 		};
 
 		if (!is_get) {
-			const result = await handler(event);
-
-			// TODO remove for 1.0
-			// @ts-expect-error
-			if (result.fallthrough) {
-				throw new Error(
-					'fallthrough is no longer supported. Use matchers instead: https://kit.svelte.dev/docs/routing#advanced-routing-matching'
-				);
-			}
-
-			const { status, headers, body } = validate_shadow_output(result);
+			const { status, headers, body } = validate_shadow_output(await handler(event));
+			add_cookies(/** @type {string[]} */ (data.cookies), headers);
 			data.status = status;
 
-			add_cookies(/** @type {string[]} */ (data.cookies), headers);
+			// explicit errors cause an error page...
+			if (body instanceof Error) {
+				if (status < 400) {
+					data.status = 500;
+					data.error = new Error('A non-error status code was returned with an error body');
+				} else {
+					data.error = body;
+				}
 
-			// Redirects are respected...
+				return data;
+			}
+
+			// ...redirects are respected...
 			if (status >= 300 && status < 400) {
 				data.redirect = /** @type {string} */ (
 					headers instanceof Headers ? headers.get('location') : headers.location
@@ -2500,19 +2660,20 @@ async function load_shadow_data(route, event, options, prerender) {
 
 		const get = (method === 'head' && mod.head) || mod.get;
 		if (get) {
-			const result = await get(event);
-
-			// TODO remove for 1.0
-			// @ts-expect-error
-			if (result.fallthrough) {
-				throw new Error(
-					'fallthrough is no longer supported. Use matchers instead: https://kit.svelte.dev/docs/routing#advanced-routing-matching'
-				);
-			}
-
-			const { status, headers, body } = validate_shadow_output(result);
+			const { status, headers, body } = validate_shadow_output(await get(event));
 			add_cookies(/** @type {string[]} */ (data.cookies), headers);
 			data.status = status;
+
+			if (body instanceof Error) {
+				if (status < 400) {
+					data.status = 500;
+					data.error = new Error('A non-error status code was returned with an error body');
+				} else {
+					data.error = body;
+				}
+
+				return data;
+			}
 
 			if (status >= 400) {
 				data.error = new Error('Failed to load data');
@@ -2560,6 +2721,14 @@ function add_cookies(target, headers) {
  * @param {import('types').ShadowEndpointOutput} result
  */
 function validate_shadow_output(result) {
+	// TODO remove for 1.0
+	// @ts-expect-error
+	if (result.fallthrough) {
+		throw new Error(
+			'fallthrough is no longer supported. Use matchers instead: https://kit.svelte.dev/docs/routing#advanced-routing-matching'
+		);
+	}
+
 	const { status = 200, body = {} } = result;
 	let headers = result.headers || {};
 
@@ -2574,7 +2743,9 @@ function validate_shadow_output(result) {
 	}
 
 	if (!is_pojo(body)) {
-		throw new Error('Body returned from endpoint request handler must be a plain object');
+		throw new Error(
+			'Body returned from endpoint request handler must be a plain object or an Error'
+		);
 	}
 
 	return { status, headers, body };
@@ -2967,7 +3138,7 @@ async function render_page(event, route, options, state, resolve_opts) {
 		]);
 
 		if (type === 'application/json') {
-			return render_endpoint(event, await route.shadow());
+			return render_endpoint(event, await route.shadow(), options);
 		}
 	}
 
@@ -2981,58 +3152,6 @@ async function render_page(event, route, options, state, resolve_opts) {
 		resolve_opts,
 		route
 	});
-}
-
-/**
- * @param {string} accept
- * @param {string[]} types
- */
-function negotiate(accept, types) {
-	const parts = accept
-		.split(',')
-		.map((str, i) => {
-			const match = /([^/]+)\/([^;]+)(?:;q=([0-9.]+))?/.exec(str);
-			if (match) {
-				const [, type, subtype, q = '1'] = match;
-				return { type, subtype, q: +q, i };
-			}
-
-			throw new Error(`Invalid Accept header: ${accept}`);
-		})
-		.sort((a, b) => {
-			if (a.q !== b.q) {
-				return b.q - a.q;
-			}
-
-			if ((a.subtype === '*') !== (b.subtype === '*')) {
-				return a.subtype === '*' ? 1 : -1;
-			}
-
-			if ((a.type === '*') !== (b.type === '*')) {
-				return a.type === '*' ? 1 : -1;
-			}
-
-			return a.i - b.i;
-		});
-
-	let accepted;
-	let min_priority = Infinity;
-
-	for (const mimetype of types) {
-		const [type, subtype] = mimetype.split('/');
-		const priority = parts.findIndex(
-			(part) =>
-				(part.type === type || part.type === '*') &&
-				(part.subtype === subtype || part.subtype === '*')
-		);
-
-		if (priority !== -1 && priority < min_priority) {
-			accepted = mimetype;
-			min_priority = priority;
-		}
-	}
-
-	return accepted;
 }
 
 /**
@@ -3265,7 +3384,7 @@ async function respond(request, options, state) {
 					let response;
 
 					if (is_data_request && route.type === 'page' && route.shadow) {
-						response = await render_endpoint(event, await route.shadow());
+						response = await render_endpoint(event, await route.shadow(), options);
 
 						// loading data for a client-side transition is a special case
 						if (request.headers.has('x-sveltekit-load')) {
@@ -3287,7 +3406,7 @@ async function respond(request, options, state) {
 					} else {
 						response =
 							route.type === 'endpoint'
-								? await render_endpoint(event, await route.load())
+								? await render_endpoint(event, await route.load(), options)
 								: await render_page(event, route, options, state, resolve_opts);
 					}
 
@@ -3370,6 +3489,18 @@ async function respond(request, options, state) {
 		const error = coalesce_to_error(e);
 
 		options.handle_error(error, event);
+
+		const type = negotiate(event.request.headers.get('accept') || 'text/html', [
+			'text/html',
+			'application/json'
+		]);
+
+		if (is_data_request || type === 'application/json') {
+			return new Response(serialize_error(error, options.get_stack), {
+				status: 500,
+				headers: { 'content-type': 'application/json; charset=utf-8' }
+			});
+		}
 
 		try {
 			const $session = await options.hooks.getSession(event);
