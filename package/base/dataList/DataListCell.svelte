@@ -5,11 +5,14 @@ import Button from '../button/Button.svelte';
 import { custom_event } from 'svelte/internal';
 const dataListContextStore = getContext('dataListContext');
 const inHeader = getContext('dataListHead');
+const rowContext = getContext('dataListRow');
 export let element = null;
 export let style = undefined;
 export let columnId = undefined;
 /** if data has been provided, then cell got a fieldName */
 export let dataField = undefined;
+/** typeof the dataField. Used when exists Datalist.$$props.dataTypes */
+export let dataFieldType = undefined;
 /** set noWrap = true to have ellipsis on this cell content*/
 export let noWrap = true;
 let addStyle;
@@ -19,9 +22,6 @@ onMount(async () => {
         const width = element.offsetWidth + 'px'; // element?.style?.width ?? element?.offsetWidth+'px';
         const index = [...element.parentElement.children].indexOf(element);
         if (columnId) {
-            // find header.col by columnId
-            if (!dataOp.filterListFirst($dataListContextStore.columns, columnId, 'columnId')) {
-            }
         }
         else if (!dataOp.filterListFirst($dataListContextStore.columns, index, 'index')) {
             // find header.col by index, create uniqid
@@ -33,9 +33,6 @@ onMount(async () => {
     if (element && dataListContextStore && !inHeader) {
         const index = [...element.parentElement.children].indexOf(element);
         if (columnId) {
-            // find header.col by columnId
-            if (!dataOp.filterListFirst($dataListContextStore.columns, columnId, 'columnId')) {
-            }
         }
         else if (dataOp.filterListFirst($dataListContextStore.columns, index, 'index')) {
             // find header.col by index, create uniqid
@@ -58,6 +55,7 @@ $: if (!inHeader &&
     dataOp.filterListFirst($dataListContextStore.columns, columnId, 'columnId')) {
     if (!element.style.width) {
         element.style.width = dataOp.filterListFirst($dataListContextStore.columns, columnId, 'columnId').width;
+        element.style.maxWidth = dataOp.filterListFirst($dataListContextStore.columns, columnId, 'columnId').width;
     }
 }
 $: sorticon =
@@ -71,13 +69,6 @@ const onSort = (columnId, order) => (e) => {
         const event = custom_event('datalist:sort:clicked', { field: dataField, order }, { bubbles: true });
         if (element)
             element.dispatchEvent(event);
-        // seek index
-        const column = dataOp.filterListFirst($dataListContextStore.columns, columnId, 'columnId');
-        if (column.dataField) {
-            const event = custom_event('datalist:sort:clicked', { field: column.dataField, order }, { bubbles: true });
-            if (element)
-                element.dispatchEvent(event);
-        }
     }
 };
 </script>
@@ -100,8 +91,6 @@ const onSort = (columnId, order) => (e) => {
 			{/if}
 		</div>
 	{:else}
-		<slot />
+		<slot fieldData={$rowContext?.data ?? {}} />
 	{/if}
 </div>
-
-<style></style>

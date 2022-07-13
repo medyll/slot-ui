@@ -3,14 +3,25 @@ __propDef: {
     props: {
         class?: string | undefined;
         element?: HTMLDivElement | null | undefined;
-        paths?: PathDataType[] | undefined;
+        paths?: Record<string, any>[] | undefined;
         pathField?: string | undefined;
+        data?: Data[] | undefined;
         pathes?: TreeItemType<Record<string, any>>[] | undefined;
+        level?: number | undefined;
+        selectedDataKeys?: string[] | undefined;
+        /** ed data */ selectedData?: Data[] | undefined;
+        /** ed selected paths */ selectedPathes?: string[] | undefined;
+        /** the split we use to build hierarchy */ splitter?: string | undefined;
+        selectedCategory?: string | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;
     };
-    slots: {};
+    slots: {
+        default: {
+            item: TreeItemType<Record<string, any>>;
+        };
+    };
 };
 
  ```

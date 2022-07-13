@@ -1,6 +1,6 @@
 {
   "name": "@medyll/slotui",
-  "version": "0.1.57",
+  "version": "0.1.60",
   "repository": {
     "type": "git",
     "url": "https://github.com/medyll/slot-ui.git"
@@ -51,6 +51,7 @@
     "svelte-jester": "^2.3.2",
     "svelte-loader": "^3.1.3",
     "svelte-preprocess": "^4.10.7",
+    "svelte-preprocess-markdown": "^2.7.3",
     "ts-jest": "^27.1.4",
     "tslib": "^2.3.1",
     "typescript": "^4.4.3",
@@ -255,6 +256,7 @@
     "./sitedata/api/Tree.md": "./sitedata/api/Tree.md",
     "./sitedata/api/usePopper.md": "./sitedata/api/usePopper.md",
     "./sitedata/api/Virtualize.md": "./sitedata/api/Virtualize.md",
+    "./sitedata/api/Virtualizer.md": "./sitedata/api/Virtualizer.md",
     "./sitedata/api/Window.md": "./sitedata/api/Window.md",
     "./sitedata/componentList": "./sitedata/componentList.js",
     "./styles/presets.scss": "./styles/presets.scss",

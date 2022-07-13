@@ -21,7 +21,17 @@
 	<div class="flex-v gap-medium">
 		<h5>Automatique datalist</h5>
 		<div style="height:350px;width:350px;" class="what   pos-rel overflow-hidden pad-4">
-			<DataList {data} let:item>
+			<DataList {data} >
+				<DataListHead slot="head">
+					<DataListCell  dataField="index">index</DataListCell>
+					<DataListCell  dataField="name">name</DataListCell>
+					<DataListCell  dataField="otherName"style="flex:1">otherName</DataListCell>
+				</DataListHead>
+			</DataList>
+		</div>
+		<h5>Automatique datalist slotted</h5>
+		<div style="height:350px;width:350px;" class="what   pos-rel overflow-hidden pad-4">
+			<DataList {data} on:datalist:click={()=>{}} >
 				<DataListHead slot="head">
 					<DataListCell  dataField="index">index</DataListCell>
 					<DataListCell  dataField="name">name</DataListCell>
@@ -40,7 +50,7 @@
 					<DataListCell style="width:100px ">TitleTitleTitleTitleTitleTitleTitle</DataListCell>
 					<DataListCell style="width:100px">Title</DataListCell>
 				</DataListHead>
-				<DataListRow>
+				<DataListRow data={item}>
 					<DataListCell>{item.index}</DataListCell>
 					<DataListCell>{item.name}</DataListCell>
 					<DataListCell>121512</DataListCell>

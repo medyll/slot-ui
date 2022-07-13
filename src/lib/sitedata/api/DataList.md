@@ -7,6 +7,7 @@ __propDef: {
         /** is the datalist sortable */ isSortable?: boolean | undefined;
         /** order on which the sorted list is sorted */ sortByOrder?: string | undefined;
         /** binding, used when multiple buttons*/ activeCommonSortField?: string | undefined;
+        /** set noWrap = true to have ellipsis on all cells content*/ noWrap?: boolean | undefined;
         data?: any[] | undefined;
         sortingIcons?: {
             default: string[];

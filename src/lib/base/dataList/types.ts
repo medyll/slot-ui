@@ -11,6 +11,9 @@ export interface CellType {
     dataField?: string | ((data: any) => void)
 }
 
+export interface RowType { 
+    data?: Data 
+}
 
 export interface DataListStoreType {
     config: {
@@ -19,6 +22,7 @@ export interface DataListStoreType {
         defaultSortByOrder: 'asc' | 'desc' | 'none' | string
         sortingIcons: Record<string, string[]>
         noWrap?: boolean
+        dataTypes?: Record<string, (item:any) => any>
     }
     sortBy: {
         activeSortByField?: string

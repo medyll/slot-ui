@@ -108,8 +108,7 @@ $: actionArgs = {
 	use:useAutoFocus
 	on:click
 	class:size={'w-' + size}
-	data-height={height}
-	disabled={loading}
+	data-height={height} 
 	type={buttonType}
 	{density}
 	{nowrap}
@@ -136,14 +135,13 @@ $: actionArgs = {
 		{/if}
 		{#if $$slots.actionIcon}
 			{#key $$slots.actionIcon}
-				<div class="action">
+				<div class="action" on:click={(e)=>{e.stopPropagation();e.preventDefault()}}>
 					<slot name="actionIcon" />
 				</div>
 			{/key}
 		{/if}
 	</div>
-	{#if loading}
-		<div transition:fade>
+	{#if loading} 
 			<div
 				on:click={(event) => {
 					event.stopPropagation();
@@ -153,14 +151,13 @@ $: actionArgs = {
 			>
 				<div class="flex-h flex-align-middle gap-tiny">
 					<div>
-						<slot name="loadingIconButtonSlot"
-							><div><Icon icon="spinner" class="rotate" /></div>
+						<slot name="loadingIconButtonSlot" >
+							<div><Icon icon="spinner" class="rotate" /></div>
 						</slot>
 					</div>
 					<div>loading</div>
 				</div>
-			</div>
-		</div>
+			</div> 
 	{/if}
 	{#if showChip}
 		<span class="chip" />
@@ -383,7 +380,8 @@ button.loading .loadingButtonZone {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background-color: var(--css-bacground-color, var(--theme-color-paper-alpha-low));
+  background-color: var(--css-background-color, var(--theme-color-paper));
+  color: var(--css-background-color, var(--theme-color-secondary));
   backdrop-filter: blur(3px);
 }
 .button .innerButton,

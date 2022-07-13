@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { setContext } from 'svelte';
 	import { createEventForwarder } from '../../engine/engine';
-	import { each, get_current_component } from 'svelte/internal';
+	import { custom_event, each, get_current_component } from 'svelte/internal';
 	import Virtualize from '../virtualizer/Virtualizer.svelte';
 	import { writable, type Writable } from 'svelte/store';
 	import { browser } from '$app/env';
@@ -10,6 +10,7 @@
 	import DataListCell from './DataListCell.svelte';
 	import type { DataListStoreType } from './types';
 	import { dataOp } from '$lib/engine/utils';
+	import type { Data } from '$types';
 
 	/*  common slotUi exports*/
 	let className = '';
@@ -26,10 +27,13 @@
 	export let activeCommonSortField: string = '';
 	/** set noWrap = true to have ellipsis on all cells content*/
 	export let noWrap: boolean = true;
-
+	/** represents your data types used to display values */
+	export let dataTypes: Record<string,any> | undefined = undefined;
+	/** data to loop  trought */
 	export let data: any[] = [];
 
-	let sortedData: any[] = data;
+	let sortedData: any[];
+	$: sortedData = data;
 
 	const sortState: string[] = ['none', 'asc', 'desc'];
 	export let sortingIcons = {
@@ -37,14 +41,16 @@
 		numeric: ['dots-horizontal', 'sort-bool-ascending', 'sort-bool-descending']
 	};
 
+
 	/** context store for dataList config*/
-	const dataListStore = writable<DataListStoreType>({
+	let dataListStore = writable<DataListStoreType>({
 		config: {
 			isSortable,
 			defaultSortByField: undefined,
 			defaultSortByOrder: sortByOrder,
 			sortingIcons,
-			noWrap
+			noWrap,
+			dataTypes
 		},
 		sortBy: {
 			activeSortByField: undefined,
@@ -57,13 +63,12 @@
 	let dataListContext = setContext<Writable<DataListStoreType>>('dataListContext', dataListStore);
 
 	function doSort(e: CustomEvent<{ field: string; order: 'asc' | 'desc' | 'none' }>) {
-		 
 		const next = sortState.indexOf(e.detail.order ?? sortByOrder) + 1;
 		let toggleOrder = sortState?.[next] ? sortState[next] : sortState[0];
 
 		// let toggleOrder = order === 'asc' ? 'desc' : 'asc';
 
-if(toggleOrder==='none') toggleOrder='asc'
+		if (toggleOrder === 'none') toggleOrder = 'asc';
 
 		if (e.detail.field) {
 			activeCommonSortField = e.detail.field;
@@ -80,7 +85,7 @@ if(toggleOrder==='none') toggleOrder='asc'
 		}
 	}
 </script>
-{sortByOrder}
+
 <div
 	use:forwardEvents
 	on:datalist:sort:clicked={doSort}
@@ -100,7 +105,9 @@ if(toggleOrder==='none') toggleOrder='asc'
 				{:else}
 					<DataListRow data={item}>
 						{#each Object.keys(item) as inItem}
-							<DataListCell dataField={inItem}>{item?.[inItem]}</DataListCell>
+							<DataListCell dataField={inItem}>
+								{item?.[inItem]}
+							</DataListCell>
 						{/each}
 					</DataListRow>
 				{/if}

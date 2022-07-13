@@ -7,7 +7,9 @@
 	import { null_to_empty } from 'svelte/internal';
 	import { propsProxy } from '$lib/engine/utils';
 	import { slotUiComponentList } from '$sitedata/componentList';
+	// import { componentReadMe } from '$lib/sitedata/api';
 
+	 
 	const cols = propsProxy<any, typeof slotUiComponentList[0]>(
 		[
 			['primary', 'name'],
@@ -36,7 +38,7 @@
 </script>
 
 <Frame style="height:100%;overflow:hidden;">
-	<div   style="height:100%;overflow:auto;" slot="frameDrawerSlot">
+	<div style="height:100%;overflow:auto;" slot="frameDrawerSlot">
 		{#if menuList}
 			<div style="height:100%;position:relative;">
 				<List
@@ -46,7 +48,7 @@
 					density="default"
 					onItemClick={openIn}
 					selectorField="code"
-					title="SlotUi" 
+					title="SlotUi"
 					height="100%"
 				>
 					<ListItem data={listItem?.data}>
@@ -58,8 +60,8 @@
 		{/if}
 	</div>
 	<div class="theme-bg   h-full overflow-auto" slot="content">
-		<div class="pad-4 flex-main">
+		<div class="pad-4 flex-main"> 
 			<slot />
-		</div> 
+		</div>
 	</div>
 </Frame>

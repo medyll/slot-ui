@@ -139,11 +139,11 @@
 							<div>
 								<div>{pos}</div>
 								<div>
-									<!-- <Button primary={pos}>
+									<Button primary={pos}>
 										<div  slot="actionIcon">
 											<span use:popper={a} ><Icon icon="chevron-down" /></span>
 										</div>
-									</Button> --> 
+									</Button> 
 								</div>
 							</div>
 						{/each}
@@ -191,7 +191,7 @@
 			<div class="flex-h gap-tiny">
 				<Button bind:loading>loading button</Button>
 				<Button height="large" bind:loading>
-					<span slot="loadingIconButtonSlot"><Icon icon="spinner" class="fa fa-rotate" /></span>
+					<span slot="loadingIconButtonSlot"><Icon icon="spinner" class=" rotate" /></span>
 					loading button</Button
 				>
 			</div>

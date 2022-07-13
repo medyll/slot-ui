@@ -92,7 +92,7 @@ function createMethods(fileList) {
 
 			const comp = file.split('\\').slice(-1)[0].split('.')[0];
 			const newContent = frag?.[0]?.replace(/export/gm, '');
-			const src = ('$sitedata/api/' + comp + '.md').replace(/\\/g, '/');
+			const src = ('$lib/sitedata/api/' + comp + '.md').replace(/\\/g, '/');
 			/* console.log(file.replace(srcPackage,'---')) */
 			/* console.log(frag?.[0]?.replace(/export/gm,'')) */
 			// console.log(comp,src)

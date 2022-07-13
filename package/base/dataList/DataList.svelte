@@ -1,6 +1,6 @@
 <script>import { setContext } from 'svelte';
 import { createEventForwarder } from '../../engine/engine';
-import { each, get_current_component } from 'svelte/internal';
+import { custom_event, each, get_current_component } from 'svelte/internal';
 import Virtualize from '../virtualizer/Virtualizer.svelte';
 import { writable } from 'svelte/store';
 import { browser } from '$app/env';
@@ -22,21 +22,26 @@ export let sortByOrder = 'none';
 export let activeCommonSortField = '';
 /** set noWrap = true to have ellipsis on all cells content*/
 export let noWrap = true;
+/** represents your data types used to display values */
+export let dataTypes = undefined;
+/** data to loop  trought */
 export let data = [];
-let sortedData = data;
+let sortedData;
+$: sortedData = data;
 const sortState = ['none', 'asc', 'desc'];
 export let sortingIcons = {
     default: ['dots-horizontal', 'sort-bool-ascending', 'sort-bool-descending'],
     numeric: ['dots-horizontal', 'sort-bool-ascending', 'sort-bool-descending']
 };
 /** context store for dataList config*/
-const dataListStore = writable({
+let dataListStore = writable({
     config: {
         isSortable,
         defaultSortByField: undefined,
         defaultSortByOrder: sortByOrder,
         sortingIcons,
-        noWrap
+        noWrap,
+        dataTypes
     },
     sortBy: {
         activeSortByField: undefined,
@@ -49,6 +54,9 @@ let dataListContext = setContext('dataListContext', dataListStore);
 function doSort(e) {
     const next = sortState.indexOf(e.detail.order ?? sortByOrder) + 1;
     let toggleOrder = sortState?.[next] ? sortState[next] : sortState[0];
+    // let toggleOrder = order === 'asc' ? 'desc' : 'asc';
+    if (toggleOrder === 'none')
+        toggleOrder = 'asc';
     if (e.detail.field) {
         activeCommonSortField = e.detail.field;
         sortByOrder = toggleOrder ?? 'none';
@@ -84,7 +92,9 @@ function doSort(e) {
 				{:else}
 					<DataListRow data={item}>
 						{#each Object.keys(item) as inItem}
-							<DataListCell dataField={inItem}>{item?.[inItem]}</DataListCell>
+							<DataListCell dataField={inItem}>
+								{item?.[inItem]}
+							</DataListCell>
 						{/each}
 					</DataListRow>
 				{/if}

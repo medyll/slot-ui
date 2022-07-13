@@ -153,8 +153,7 @@
 		return (() => {
 			visible = [];
 			mounted = false;
-			data = []; 
-			console.log('quitted .... ')
+			data = [];  
 		});
 	});
 
@@ -162,10 +161,9 @@
 		visible = [];
 		mounted = false;
 		data = [];
-		handle_scroll = undefined;
-		console.log('destroy')
+		handle_scroll = undefined; 
 	});
-	$: console.log(viewport?.parentElement?.offsetHeight);
+	
 </script>
 
 <viewport

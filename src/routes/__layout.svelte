@@ -70,9 +70,9 @@
 		var process = process || { env: { DEBUG: undefined }, version: [] };
 		if (document.body) {
 			document.body.setAttribute('data-theme', 'light');
-		if (localStorage && localStorage.getItem('themeMode')) {
-			document.body.setAttribute('data-theme', localStorage.getItem('themeMode'));
-		}
+			if (localStorage && localStorage.getItem('themeMode')) {
+				document.body.setAttribute('data-theme', localStorage.getItem('themeMode'));
+			}
 		}
 		window.addEventListener('load', function (event) {
 			if (localStorage && localStorage.getItem('themeMode')) {
@@ -85,18 +85,18 @@
 <StartMenu />
 <div class="h-full overflow-hidden flex-v">
 	<Login showLogin={false}>
-		<Taskbar>
+		<!-- <Taskbar>
 			<svelte:fragment slot="taskBarLeft">
 				<Button
 					size="auto"
 					primary="svelte-components"
 					on:click={handleClick('svelte-components')}
 				/>
-				<!-- <IconButton
+				<IconButton
 						icon="barcode"
 						on:click={toggleStartMenu}
 						style="color:white;font-size: large"
-					/> -->
+					/>
 				<Button
 					on:click={() => {
 						openCh('btn1');
@@ -113,8 +113,17 @@
 			<svelte:fragment slot="taskBarRight">
 				<ThemeSwitcher />
 			</svelte:fragment>
-		</Taskbar>
-		<div id="layout" class="flex-main overflow-hidden theme-bg-paper-alpha-high">
+		</Taskbar> -->
+		<div id="layout" class="flex-main overflow-hidden theme-bg-paper-alpha-high"> 
+			<div class="flex-h pad flex-align-middle shad-3 gap-small zI-10">
+				<h3>Slot Ui</h3>
+				<div></div>
+				<div class="flex-main"></div>
+				<a href="svelte-components">Components</a>
+				<a href="svelte-components">Documentation</a>
+				<a href="svelte-components">Github</a>
+			</div>
+		
 			<slot />
 			<ChromeFrameList
 				chromeListConfig={{
@@ -165,8 +174,8 @@
 		height: 100%;
 		width: 100%;
 		overflow: hidden;
-		background-image: url('wallp (4).jpg');
-		background-size: cover;
+		/* background-image: url('wallp (1).jpg');
+		background-size: cover; */
 		font-family: 'Rubik';
 		background-color: var(--theme-color-background);
 		color: var(--theme-color-foreground);
