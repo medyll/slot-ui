@@ -3,6 +3,7 @@
         "chromeframe",
         "Columner",
         "fieldname",
+        "resizer",
         "sitedata"
     ],
     "[svelte]": {

@@ -2,7 +2,7 @@
 	import github from 'svelte-highlight/styles/github';
 	import cssfabric from '@medyll/cssfabric/src/lib/styles/vars.min.css';
 
-	import { ThemeWrapper } from 'svelte-themer';
+	
 	import Taskbar from '$lib/ui/taskbar/Taskbar.svelte';
 	import StartMenu from '$lib/ui/startMenu/StartMenu.svelte';
 	import Login from '$lib/ui/login/Login.svelte';

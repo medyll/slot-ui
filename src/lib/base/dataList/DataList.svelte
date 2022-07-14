@@ -28,9 +28,11 @@
 	/** set noWrap = true to have ellipsis on all cells content*/
 	export let noWrap: boolean = true;
 	/** represents your data types used to display values */
-	export let dataTypes: Record<string,any> | undefined = undefined;
+	export let dataTypes: Record<string, any> | undefined = undefined;
 	/** data to loop  trought */
 	export let data: any[] = [];
+	/** data to loop  trought */
+	export let idField: string | undefined = undefined;
 
 	let sortedData: any[];
 	$: sortedData = data;
@@ -40,7 +42,6 @@
 		default: ['dots-horizontal', 'sort-bool-ascending', 'sort-bool-descending'],
 		numeric: ['dots-horizontal', 'sort-bool-ascending', 'sort-bool-descending']
 	};
-
 
 	/** context store for dataList config*/
 	let dataListStore = writable<DataListStoreType>({
@@ -56,8 +57,9 @@
 			activeSortByField: undefined,
 			activeSortByOrder: 'none'
 		},
-		data,
-		columns: []
+		idField,
+		columns: [],
+		data
 	});
 
 	let dataListContext = setContext<Writable<DataListStoreType>>('dataListContext', dataListStore);
@@ -134,12 +136,13 @@
 			height: 32px;
 			background-color: var(--theme-color-paper-alpha-low);
 			backdrop-filter: blur(1px);
-			border-radius: var(--radius-tiny);
+			// border-radius: var(--radius-tiny);
 			.dataListCell {
 				display: flex;
 				align-items: stretch;
 				overflow: hidden;
 				border-right: 1px solid var(--border-color);
+				position: relative;
 				&[data-sortable='true'] {
 					cursor: pointer;
 					&:hover {
@@ -171,6 +174,18 @@
 
 			//border-radius: 6px;
 			// margin: 0.25rem 0;
+
+			&:hover {
+				background-color: var(--theme-color-paper);
+				.dataListCell {
+				}
+			}
+			&[data-selected='true'] {
+				background-color: var(--theme-color-primary);
+				.dataListCell {
+					color: white;
+				}
+			}
 
 			.dataListCell {
 				padding: 8px;

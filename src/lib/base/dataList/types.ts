@@ -28,6 +28,8 @@ export interface DataListStoreType {
         activeSortByField?: string
         activeSortByOrder?: 'asc' | 'desc' | 'none' | string
     }
+    idField?: string
+    selectedRowId?: string
     columns: CellType[]
     data: Data[]
 }

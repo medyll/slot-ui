@@ -6,11 +6,11 @@
 	import Icon from '../icon/Icon.svelte';
 	import Button from '../button/Button.svelte';
 	import { custom_event } from 'svelte/internal';
+	import { resizer } from '$lib/uses/resizer/resizer';
 
 	const dataListContextStore = getContext<Writable<DataListStoreType>>('dataListContext');
 	const inHeader = getContext<Writable<CellType[]>>('dataListHead');
 	const rowContext = getContext<Writable<RowType>>('dataListRow');
-
 
 	export let element: HTMLDivElement | null = null;
 
@@ -19,33 +19,38 @@
 	/** if data has been provided, then cell got a fieldName */
 	export let dataField: string | undefined = undefined;
 	/** typeof the dataField. Used when exists Datalist.$$props.dataTypes */
-	export let dataFieldType: string | undefined = undefined;	
+	export let dataFieldType: string | undefined = undefined;
 	/** set noWrap = true to have ellipsis on this cell content*/
 	export let noWrap: boolean = true;
 
 	let addStyle: string;
+	let colIndex: number | undefined = undefined;
+
 	// if inHeader, then monitor cell
 	onMount(async () => {
-		if (element && dataListContextStore && inHeader) {
-			const width = element.offsetWidth + 'px'; // element?.style?.width ?? element?.offsetWidth+'px';
+		if (element && dataListContextStore) {
+			colIndex = [...element.parentElement.children].indexOf(element);
 
-			const index = [...element.parentElement.children].indexOf(element);
+			if (inHeader) {
+				const width = element.offsetWidth + 'px'; // element?.style?.width ?? element?.offsetWidth+'px';
 
-			if (columnId) { 
-			} else if (!dataOp.filterListFirst($dataListContextStore.columns, index, 'index')) {
-				// find header.col by index, create uniqid
-				columnId = crypto.randomUUID();
-				// register colmun in store
-				$dataListContextStore.columns.push({ index, columnId, width, dataField });
+				if (
+					!columnId &&
+					!dataOp.filterListFirst($dataListContextStore.columns, colIndex, 'index')
+				) {
+					// find header.col by index, create uniqid
+					// columnId = crypto.randomUUID();
+					// register colmun in store
+					// find header.col by index, create uniqid
+					pushToStore(colIndex, width);
+				}
 			}
-		}
-		if (element && dataListContextStore && !inHeader) {
-			const index = [...element.parentElement.children].indexOf(element);
-
-			if (columnId) {
-			} else if (dataOp.filterListFirst($dataListContextStore.columns, index, 'index')) {
-				// find header.col by index, create uniqid
-				columnId = dataOp.filterListFirst($dataListContextStore.columns, index, 'index').columnId;
+			if (!inHeader) {
+				if (!columnId && dataOp.filterListFirst($dataListContextStore.columns, colIndex, 'index')) {
+					// find header.col by index, create uniqid
+					// columnId = dataOp.filterListFirst($dataListContextStore.columns, index, 'index').columnId;
+					findColIdAtIndex(colIndex);
+				}
 			}
 		}
 
@@ -54,21 +59,15 @@
 		};
 	});
 
-	/** try and restore columnId on re-mount */
-	if (!columnId && element && inHeader) {
-		const index = [...element.parentElement.children].indexOf(element);
-		columnId = dataOp.filterListFirst($dataListContextStore.columns, index, 'index').columnId;
-	}
-
 	const sortState: string[] = ['none', 'asc', 'desc'];
 
 	$: if (
 		!inHeader &&
-		element  &&
+		element &&
 		columnId &&
 		dataOp.filterListFirst($dataListContextStore.columns, columnId, 'columnId')
 	) {
-		if (!element.style.width) {
+		/* if (!element.style.width) {
 			element.style.width = dataOp.filterListFirst(
 				$dataListContextStore.columns,
 				columnId,
@@ -79,7 +78,7 @@
 				columnId,
 				'columnId'
 			).width;
-		}
+		} */
 	}
 
 	$: sorticon =
@@ -91,6 +90,14 @@
 
 	$: showChip = $dataListContextStore.sortBy.activeSortByField === dataField;
 
+	// update width
+	$: if (element && !inHeader && $dataListContextStore?.columns?.[colIndex]?.width) {
+		// console.log('updae width', $dataListContextStore?.columns?.[colIndex]?.width  );
+		element.style.width=$dataListContextStore?.columns?.[colIndex]?.width 
+		element.style.maxWidth=$dataListContextStore?.columns?.[colIndex]?.width 
+		element.style.minWidth=$dataListContextStore?.columns?.[colIndex]?.width 
+	}
+
 	const onSort = (columnId: string, order: 'asc' | 'desc' | 'none') => (e) => {
 		// find field from index
 		if ($dataListContextStore?.config?.isSortable && columnId && dataField) {
@@ -99,11 +106,36 @@
 				{ field: dataField, order },
 				{ bubbles: true }
 			);
-			if (element) element.dispatchEvent(event); 
+			if (element) element.dispatchEvent(event);
 		}
 	};
 
+	function pushToStore(index: any, width: any) {
+		let columnId = crypto.randomUUID();
+		// register colmun in store
+		$dataListContextStore.columns.push({ index, columnId, width, dataField });
+	}
 
+	function findColIdAtIndex(index: number) {
+		columnId = dataOp.filterListFirst($dataListContextStore.columns, index, 'index').columnId;
+	}
+
+	// not pure
+	const useResizer = (node: HTMLElement, opt?: any) => {
+		if (inHeader) resizer(node, opt);
+	};
+
+	function resizeStart() { 
+	}
+
+	function resizeOn(data: CustomEvent<{ width: any }>) {
+		// console.log(data.detail);
+		// element.style.width = data.detail.width
+		// push new size to context
+		$dataListContextStore.columns[colIndex].width = data.detail.width + 'px';
+	}
+	function resizeEnd() {
+	}
 </script>
 
 <div
@@ -112,11 +144,16 @@
 	data-noWrap={noWrap}
 	bind:this={element}
 	class="dataListCell"
+	use:useResizer
+	on:resizer:start={resizeStart}
+	on:resizer:resize={resizeOn}
+	on:resizer:end={resizeEnd}
 	{style}
+	title={$dataListContextStore?.columns?.[colIndex]?.width}
 >
 	{#if inHeader}
-		<div class="cellHeader" on:click={onSort(columnId)}>
-			<div title={columnId + 'red'} class="cellHeaderContent"><slot /></div>
+		<div on:click={onSort(columnId)} class="cellHeader">
+			<div class="cellHeaderContent"><slot /></div>
 			{#if dataField && $dataListContextStore?.config?.isSortable}
 				<div class="cellHeaderSorter">
 					<Button naked iconFamily="mdi" icon={sorticon} {showChip} />
