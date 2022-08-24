@@ -26,6 +26,8 @@ export let noWrap = true;
 export let dataTypes = undefined;
 /** data to loop  trought */
 export let data = [];
+/** used only if data is provided */
+export let idField = undefined;
 let sortedData;
 $: sortedData = data;
 const sortState = ['none', 'asc', 'desc'];
@@ -33,7 +35,7 @@ export let sortingIcons = {
     default: ['dots-horizontal', 'sort-bool-ascending', 'sort-bool-descending'],
     numeric: ['dots-horizontal', 'sort-bool-ascending', 'sort-bool-descending']
 };
-/** context store for dataList config*/
+/** context store for dataList config and state */
 let dataListStore = writable({
     config: {
         isSortable,
@@ -47,8 +49,9 @@ let dataListStore = writable({
         activeSortByField: undefined,
         activeSortByOrder: 'none'
     },
-    data,
-    columns: []
+    idField,
+    columns: [],
+    data
 });
 let dataListContext = setContext('dataListContext', dataListStore);
 function doSort(e) {
@@ -123,13 +126,13 @@ function doSort(e) {
   height: 32px;
   background-color: var(--theme-color-paper-alpha-low);
   backdrop-filter: blur(1px);
-  border-radius: var(--radius-tiny);
 }
 :global(.dataList) :global(.dataListHead) :global(.dataListCell) {
   display: flex;
   align-items: stretch;
   overflow: hidden;
   border-right: 1px solid var(--border-color);
+  position: relative;
 }
 :global(.dataList) :global(.dataListHead) :global(.dataListCell[data-sortable=true]) {
   cursor: pointer;
@@ -151,6 +154,15 @@ function doSort(e) {
 :global(.dataList) :global(.dataListRow) {
   display: flex;
   border-bottom: 1px solid var(--border-color);
+}
+:global(.dataList) :global(.dataListRow:hover) {
+  background-color: var(--theme-color-paper);
+}
+:global(.dataList) :global(.dataListRow[data-selected=true]) {
+  background-color: var(--theme-color-primary);
+}
+:global(.dataList) :global(.dataListRow[data-selected=true]) :global(.dataListCell) {
+  color: white;
 }
 :global(.dataList) :global(.dataListRow) :global(.dataListCell) {
   padding: 8px;

@@ -49,11 +49,11 @@
 <svelte:head>
 	<title>SlotUi</title>
 	<link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet" />
-	<link
+	<!-- <link
 		href="./node_modules/@medyll/cssfabric/src/lib/styles/cssfabric.min.css"
 		lang="scss"
 		rel="stylesheet"
-	/>
+	/> -->
 	<!-- <link href="cssfabric/cssfabric.vars.css" rel="stylesheet" /> -->
 	<link href="theme/cssfabric.scss" lang="scss" rel="stylesheet" />
 	{@html github}

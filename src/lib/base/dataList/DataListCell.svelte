@@ -92,7 +92,6 @@
 
 	// update width
 	$: if (element && !inHeader && $dataListContextStore?.columns?.[colIndex]?.width) {
-		// console.log('updae width', $dataListContextStore?.columns?.[colIndex]?.width  );
 		element.style.width=$dataListContextStore?.columns?.[colIndex]?.width 
 		element.style.maxWidth=$dataListContextStore?.columns?.[colIndex]?.width 
 		element.style.minWidth=$dataListContextStore?.columns?.[colIndex]?.width 

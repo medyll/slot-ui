@@ -11,15 +11,22 @@ function handleClick(item) {
     if (element)
         element.dispatchEvent(event);
 }
+function handleSelect(item) {
+    const event = custom_event('datalist:click', item, { bubbles: true });
+    if (element)
+        element.dispatchEvent(event);
+}
 </script>
 
 <div
 	on:datalist:sort:clicked
 	on:click={() => {
 		if (data) handleClick(data);
+		if (data) handleSelect(data);
 	}}
 	bind:this={element}
 	class="dataListRow {className}"
+	 
 >
 	<slot />
 </div>

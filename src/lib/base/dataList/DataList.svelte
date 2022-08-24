@@ -31,7 +31,7 @@
 	export let dataTypes: Record<string, any> | undefined = undefined;
 	/** data to loop  trought */
 	export let data: any[] = [];
-	/** data to loop  trought */
+	/** used only if data is provided */
 	export let idField: string | undefined = undefined;
 
 	let sortedData: any[];
@@ -43,7 +43,7 @@
 		numeric: ['dots-horizontal', 'sort-bool-ascending', 'sort-bool-descending']
 	};
 
-	/** context store for dataList config*/
+	/** context store for dataList config and state */
 	let dataListStore = writable<DataListStoreType>({
 		config: {
 			isSortable,

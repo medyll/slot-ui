@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "vite dev  --port 3001 --host --open   ",
-    "build": "svelte-kit build",
+    "build": "vite build",
     "package": "svelte-kit package",
     "preview": "svelte-kit preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
@@ -46,8 +46,8 @@
     "@babel/preset-typescript": "^7.16.7",
     "@iconify/svelte": "^2.2.1",
     "@sveltejs/adapter-auto": "next",
-    "@sveltejs/adapter-node": "^1.0.0-next.79",
-    "@sveltejs/adapter-static": "^1.0.0-next.34",
+    "@sveltejs/adapter-node": "next",
+    "@sveltejs/adapter-static": "next",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/svelte": "^3.1.0",
     "@testing-library/user-event": "^14.0.4",
@@ -71,6 +71,6 @@
     "ts-jest": "^27.1.4",
     "tslib": "^2.4.0",
     "typescript": "^4.7.4",
-    "vite": "^2.9.14"
+    "vite": "^3.0.9"
   }
 }

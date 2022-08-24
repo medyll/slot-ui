@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<base href="/">
+		<meta charset="utf-8" />
+		<meta name="description" content="" />
+		<link rel="icon" href="./favicon.png" />
+		<meta name="viewport" content="w=device-w, initial-scale=1" />
+		<meta http-equiv="content-security-policy" content=""><title>SlotUi</title><link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet" data-svelte="svelte-odbbna"><link href="theme/cssfabric.scss" lang="scss" rel="stylesheet" data-svelte="svelte-odbbna"><!-- HTML_TAG_START --><style>pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}/*!
+  Theme: GitHub
+  Description: Light theme as seen on github.com
+  Author: github.com
+  Maintainer: @Hirse
+  Updated: 2021-05-15
+
+  Outdated base version: https://github.com/primer/github-syntax-light
+  Current colors taken from GitHub's CSS
+*/.hljs{color:#24292e;background:#fff}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#d73a49}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#6f42c1}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#005cc5}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#032f62}.hljs-built_in,.hljs-symbol{color:#e36209}.hljs-code,.hljs-comment,.hljs-formula{color:#6a737d}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#22863a}.hljs-subst{color:#24292e}.hljs-section{color:#005cc5;font-weight:700}.hljs-bullet{color:#735c0f}.hljs-emphasis{color:#24292e;font-style:italic}.hljs-strong{color:#24292e;font-weight:700}.hljs-addition{color:#22863a;background-color:#f0fff4}.hljs-deletion{color:#b31d28;background-color:#ffeef0}</style><!-- HTML_TAG_END --><style data-svelte="svelte-odbbna">{
+			@html cssfabric;
+		}
+	</style><script data-svelte="svelte-odbbna">/*hack for legacy node app*/
+		var global = global || window;
+		var Buffer = Buffer || [];
+		var process = process || { env: { DEBUG: undefined }, version: [] };
+		if (document.body) {
+			document.body.setAttribute('data-theme', 'light');
+			if (localStorage && localStorage.getItem('themeMode')) {
+				document.body.setAttribute('data-theme', localStorage.getItem('themeMode'));
+			}
+		}
+		window.addEventListener('load', function (event) {
+			if (localStorage && localStorage.getItem('themeMode')) {
+				document.body.setAttribute('data-theme', localStorage.getItem('themeMode'));
+			}
+		});
+	</script>
+	<link rel="stylesheet" href="/_app/immutable/assets/__layout-723b5a92.css">
+	<link rel="stylesheet" href="/_app/immutable/assets/Frame-4e1672be.css">
+	<link rel="stylesheet" href="/_app/immutable/assets/DataList-a0efcd09.css">
+	<link rel="modulepreload" href="/_app/immutable/start-203f2742.js">
+	<link rel="modulepreload" href="/_app/immutable/chunks/index-b4986464.js">
+	<link rel="modulepreload" href="/_app/immutable/chunks/index-2858cd4a.js">
+	<link rel="modulepreload" href="/_app/immutable/chunks/singletons-cdeec3fd.js">
+	<link rel="modulepreload" href="/_app/immutable/pages/__layout.svelte-47c3ae6c.js">
+	<link rel="modulepreload" href="/_app/immutable/chunks/Debug-7f5bc29d.js">
+	<link rel="modulepreload" href="/_app/immutable/chunks/IconButton-225f1aa1.js">
+	<link rel="modulepreload" href="/_app/immutable/chunks/Frame.svelte_svelte_type_style_lang-d26115f0.js">
+	<link rel="modulepreload" href="/_app/immutable/chunks/DataList.svelte_svelte_type_style_lang-b9bd512c.js">
+	<link rel="modulepreload" href="/_app/immutable/chunks/navigation-88dbfef8.js">
+	<link rel="modulepreload" href="/_app/immutable/pages/explorer/index.svelte-0834db40.js">
+	<link rel="modulepreload" href="/_app/immutable/chunks/Frame-8e5915ed.js">
+	</head>
+	<body  data-theme="light" >
+		<div id="svelte">
+
+
+
+
+
+
+
+
+<div class="h-full overflow-hidden flex-v">
+		<div id="layout" class="flex-main overflow-hidden theme-bg-paper-alpha-high"><div class="flex-h pad flex-align-middle shad-3 gap-small zI-10"><h3>Slot Ui</h3>
+				<div></div>
+				<div class="flex-main"></div>
+				<a href="svelte-components">Components</a>
+				<a href="svelte-components">Documentation</a>
+				<a href="svelte-components">Github</a></div>
+		
+			
+
+<div class="pos-rel flex-v h-full overflow-hidden frame  svelte-1awpj2j" style=""><div></div>
+    <div class="frameContainer flex-h pos-rel flex-main overflow-hidden svelte-1awpj2j"><div class="navLeft pos-rel flex-v h-full  svelte-1awpj2j">
+            
+
+
+
+<div data-open="true" class="drawer flex-v h-full " style="display:flex;position:relative;left:0;top:0;bottom:0;height:100%;height:100%;;width:288px;flex:1;position:relative;;"><div class="opener" style="right:-16px;top:8px;"><div style="display: contents; --css-button-radius:50%;">
+
+<button data-iconbutton style="width:32px;height:32px" class=" svelte-1lsv3cj"><span class="svelte-1lsv3cj"><span class="icon svelte-1lsv3cj"></span>
+		</span>
+	</button></div></div>
+	
+		<div class="content" style="position:relative;flex:1;overflow:hidden">
+<ul class="density-default " style="position:relative;height:100%;margin:0;padding:0!important;height:100%;;opacity:1;overflow:auto;" tabindex="0">
+	
+				<li class="listItemTitle density-default">
+	<div class="listItemContent"><h5>Title List test</h5>
+		
+		</div>
+	
+</li>
+			 
+		
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">catégorie client</span></div>
+		<div class="itemSecondary"><span slot="secondary">client_categorie</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">agent_tuile</span></div>
+		<div class="itemSecondary"><span slot="secondary">agent_tuile</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">app_conf</span></div>
+		<div class="itemSecondary"><span slot="secondary">app_conf</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">site_type</span></div>
+		<div class="itemSecondary"><span slot="secondary">site_type</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">app_daemon</span></div>
+		<div class="itemSecondary"><span slot="secondary">app_daemon</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">materiel</span></div>
+		<div class="itemSecondary"><span slot="secondary">materiel</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">conge</span></div>
+		<div class="itemSecondary"><span slot="secondary">conge</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">prospect</span></div>
+		<div class="itemSecondary"><span slot="secondary">prospect</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">categorie_produit</span></div>
+		<div class="itemSecondary"><span slot="secondary">categorie_produit</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">activite agent</span></div>
+		<div class="itemSecondary"><span slot="secondary">agent_activite</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">appscheme_field_type</span></div>
+		<div class="itemSecondary"><span slot="secondary">appscheme_field_type</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">historique agent</span></div>
+		<div class="itemSecondary"><span slot="secondary">agent_history</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">secteur</span></div>
+		<div class="itemSecondary"><span slot="secondary">secteur</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">type ssc</span></div>
+		<div class="itemSecondary"><span slot="secondary">contrat_type</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">statut de congé</span></div>
+		<div class="itemSecondary"><span slot="secondary">conge_statut</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">contrat statut</span></div>
+		<div class="itemSecondary"><span slot="secondary">contrat_statut</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">opportunite_statut</span></div>
+		<div class="itemSecondary"><span slot="secondary">opportunite_statut</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">appscheme_has_table_field</span></div>
+		<div class="itemSecondary"><span slot="secondary">appscheme_has_table_field</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">type de tache</span></div>
+		<div class="itemSecondary"><span slot="secondary">tache_type</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">statut d'intervention</span></div>
+		<div class="itemSecondary"><span slot="secondary">intervention_statut</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">statut de tache</span></div>
+		<div class="itemSecondary"><span slot="secondary">tache_statut</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">appscheme_icon</span></div>
+		<div class="itemSecondary"><span slot="secondary">appscheme_icon</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">agent_type</span></div>
+		<div class="itemSecondary"><span slot="secondary">agent_type</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">agent_liste_ligne</span></div>
+		<div class="itemSecondary"><span slot="secondary">agent_liste_ligne</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">document_extension</span></div>
+		<div class="itemSecondary"><span slot="secondary">document_extension</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">daemon</span></div>
+		<div class="itemSecondary"><span slot="secondary">daemon</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">lignes de contrat</span></div>
+		<div class="itemSecondary"><span slot="secondary">contrat_ligne</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">cron</span></div>
+		<div class="itemSecondary"><span slot="secondary">cron</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">opportunite_ligne</span></div>
+		<div class="itemSecondary"><span slot="secondary">opportunite_ligne</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">client</span></div>
+		<div class="itemSecondary"><span slot="secondary">client</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">vmm</span></div>
+		<div class="itemSecondary"><span slot="secondary">materiel_volume</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">ligne de commande</span></div>
+		<div class="itemSecondary"><span slot="secondary">commande_ligne</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">ligne de financement</span></div>
+		<div class="itemSecondary"><span slot="secondary">financement_ligne</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">rachat</span></div>
+		<div class="itemSecondary"><span slot="secondary">rachat</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">groupe agent</span></div>
+		<div class="itemSecondary"><span slot="secondary">agent_groupe</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">accessoire</span></div>
+		<div class="itemSecondary"><span slot="secondary">accessoire</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">cron_type</span></div>
+		<div class="itemSecondary"><span slot="secondary">cron_type</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">marque</span></div>
+		<div class="itemSecondary"><span slot="secondary">marque</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">produit</span></div>
+		<div class="itemSecondary"><span slot="secondary">produit</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">gamme de produit</span></div>
+		<div class="itemSecondary"><span slot="secondary">produit_gamme</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">activité client</span></div>
+		<div class="itemSecondary"><span slot="secondary">client_activite</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">type de client</span></div>
+		<div class="itemSecondary"><span slot="secondary">client_type</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">contrat</span></div>
+		<div class="itemSecondary"><span slot="secondary">contrat</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">opportunite_type</span></div>
+		<div class="itemSecondary"><span slot="secondary">opportunite_type</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">agent_note</span></div>
+		<div class="itemSecondary"><span slot="secondary">agent_note</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">type d'intervention</span></div>
+		<div class="itemSecondary"><span slot="secondary">intervention_type</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">type de congé</span></div>
+		<div class="itemSecondary"><span slot="secondary">conge_type</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">agent</span></div>
+		<div class="itemSecondary"><span slot="secondary">agent</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">droit groupe agent</span></div>
+		<div class="itemSecondary"><span slot="secondary">agent_groupe_droit</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">entite</span></div>
+		<div class="itemSecondary"><span slot="secondary">entite</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">leaser</span></div>
+		<div class="itemSecondary"><span slot="secondary">leaser</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">relevés compteur</span></div>
+		<div class="itemSecondary"><span slot="secondary">materiel_compteur</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">ressource</span></div>
+		<div class="itemSecondary"><span slot="secondary">ressource</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">affaire</span></div>
+		<div class="itemSecondary"><span slot="secondary">affaire</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">opportunite</span></div>
+		<div class="itemSecondary"><span slot="secondary">opportunite</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">commande</span></div>
+		<div class="itemSecondary"><span slot="secondary">commande</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">intervention</span></div>
+		<div class="itemSecondary"><span slot="secondary">intervention</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">agent_liste</span></div>
+		<div class="itemSecondary"><span slot="secondary">agent_liste</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">appscheme_type</span></div>
+		<div class="itemSecondary"><span slot="secondary">appscheme_type</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">facture</span></div>
+		<div class="itemSecondary"><span slot="secondary">facture</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">agence</span></div>
+		<div class="itemSecondary"><span slot="secondary">agence</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">statut commande</span></div>
+		<div class="itemSecondary"><span slot="secondary">commande_statut</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">financement</span></div>
+		<div class="itemSecondary"><span slot="secondary">financement</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">tache</span></div>
+		<div class="itemSecondary"><span slot="secondary">tache</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">contact</span></div>
+		<div class="itemSecondary"><span slot="secondary">contact</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">appscheme_field</span></div>
+		<div class="itemSecondary"><span slot="secondary">appscheme_field</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">prestataire</span></div>
+		<div class="itemSecondary"><span slot="secondary">prestataire</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">document_type</span></div>
+		<div class="itemSecondary"><span slot="secondary">document_type</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">document</span></div>
+		<div class="itemSecondary"><span slot="secondary">document</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">champs génériques</span></div>
+		<div class="itemSecondary"><span slot="secondary">appscheme_has_field</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">appscheme</span></div>
+		<div class="itemSecondary"><span slot="secondary">appscheme</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">appscheme_base</span></div>
+		<div class="itemSecondary"><span slot="secondary">appscheme_base</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">appscheme_field_group</span></div>
+		<div class="itemSecondary"><span slot="secondary">appscheme_field_group</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">lignes de facture</span></div>
+		<div class="itemSecondary"><span slot="secondary">facture_ligne</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">lignes de rachat</span></div>
+		<div class="itemSecondary"><span slot="secondary">rachat_ligne</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">ged_bin</span></div>
+		<div class="itemSecondary"><span slot="secondary">ged_bin</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">type de contact</span></div>
+		<div class="itemSecondary"><span slot="secondary">contact_type</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">app_version</span></div>
+		<div class="itemSecondary"><span slot="secondary">app_version</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">app_version_file</span></div>
+		<div class="itemSecondary"><span slot="secondary">app_version_file</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">app_version_file_preprod</span></div>
+		<div class="itemSecondary"><span slot="secondary">app_version_file_preprod</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">agent_recherche</span></div>
+		<div class="itemSecondary"><span slot="secondary">agent_recherche</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">agent_table</span></div>
+		<div class="itemSecondary"><span slot="secondary">agent_table</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">Type financement</span></div>
+		<div class="itemSecondary"><span slot="secondary">financement_type</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+					
+
+
+
+<li class="listItem density-default" style="opacity:$1;$content-visibility:hidden;"><span class="listItemChip"></span>
+	<div class="listItemIcon"><span slot="icon"></span></div>
+	<div class="listItemContent"><div><span slot="primary">appscheme_view</span></div>
+		<div class="itemSecondary"><span slot="secondary">appscheme_view</span></div></div>
+	<div class="listItemAction"><span slot="action"></span></div></li>
+
+				
+</ul></div>
+		
+</div></div>
+        <div class="h-full flex-main flex-v "><div><div class="pad-2 pad-tb-6 flex-main"><h3>undefined</h3></div>
+<div class="pad-4 flex-h flex-align-top"><div class="pad-r-4"></div>
+    <div class="pad-1 w-8"><div class="pad-b-1">crefrefre</div>
+        <div class="pad-b-1">crefrefre</div></div>
+    <div class="pad-1 "><div class="pad-b-1">crefrefre</div>
+        <div class="pad-b-1">crefrefre</div></div></div>
+<hr class="svelte-77ivo9" style="margin-top:0.5rem;margin-bottom:0.5rem;">
+</div>
+            <div class="flex-main overflow-hidden pos-rel "><div class="flex-main overflow-auto pad-4" slot="content"></div></div>
+            <div></div></div></div>
+</div>
+			
+
+<div class="pos-abs h-full w-full top-0 " style="z-index:9000;display:none;"></div></div></div>
+
+
+
+
+		<script type="module" data-sveltekit-hydrate="1alg0ia">
+		import { start } from "/_app/immutable/start-203f2742.js";
+		start({
+			target: document.querySelector('[data-sveltekit-hydrate="1alg0ia"]').parentNode,
+			paths: {"base":"","assets":""},
+			session: {},
+			route: true,
+			spa: false,
+			trailing_slash: "never",
+			hydrate: {
+				status: 200,
+				error: null,
+				nodes: [0, 4],
+				params: {},
+				routeId: "explorer"
+			}
+		});
+	</script></div>
+	</body>
+</html>
