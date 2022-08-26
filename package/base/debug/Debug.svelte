@@ -1,15 +1,21 @@
-<script>import Cartouche from '../cartouche/Cartouche.svelte';
-import Tabs from '../tabs/Tabs.svelte';
-export * as DebugTypes from './Debug.svelte';
-const items = [
-    { label: 'theTitle', code: 'theTitle1' },
-    { label: 'theTitle bis', code: 'theTitle2' },
+<script lang="ts">
+  import Cartouche from '../cartouche/Cartouche.svelte';
+  import type TabsItemsProps from '../tabs/Tabs.svelte';
+  import Tabs from '../tabs/Tabs.svelte';
+
+
+  export * as DebugTypes from './Debug.svelte';
+
+  const items: TabsItemsProps = [
+    {label: 'theTitle', code: 'theTitle1'},
+    {label: 'theTitle bis', code: 'theTitle2'},
     {
-        label: 'theTitle ter', code: 'theTitle3',
-        component: Cartouche,
-        componentProps: { label: 'dynamic' }
+      label         : 'theTitle ter', code: 'theTitle3',
+      component     : Cartouche,
+      componentProps: {label: 'dynamic'}
     },
-];
+  ];
+
 </script>
 
 

@@ -6,8 +6,8 @@ __propDef: {
         actions?: {
             show: () => void;
             hide: () => void;
-            toggle: (lo?: boolean | undefined) => void;
-            toggleLoading: (lo?: boolean | undefined) => void;
+            toggle: (lo?: boolean) => void;
+            toggleLoading: (lo?: boolean) => void;
         } | undefined;
         showLogin?: boolean | undefined;
         transition?: {

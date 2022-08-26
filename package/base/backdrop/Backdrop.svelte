@@ -1,11 +1,15 @@
-<script>/*  common slotUi exports*/
-import { createEventForwarder } from '../../engine/engine';
-import { get_current_component } from 'svelte/internal';
-let className = '';
-export { className as class };
-export let element = null;
-const forwardEvents = createEventForwarder(get_current_component());
-export let loading = false;
+<script lang="ts">
+    /*  common slotUi exports*/
+    import {createEventForwarder} from '../../engine/engine';
+    import {get_current_component} from 'svelte/internal';
+
+    let className = '';
+    export {className as class};
+    export let element: HTMLDivElement | null = null;
+    const forwardEvents                       = createEventForwarder(get_current_component());
+
+
+    export let loading = false;
 </script>
 <div bind:this={element} class="backdropRoot h-full w-full pos-fix top-0 zI-10 {className}">
     <div class="backdropContent pos-abs  h-full w-full">
@@ -22,13 +26,18 @@ export let loading = false;
         {/if}
     </div>
 </div>
-<style>.backdropRoot {
-  position: absolute;
-  z-index: 1000;
-  height: 100%;
-  width: 100%;
-}
-.backdropRoot .backdropContent {
-  background-color: var(--theme-color-foreground-alpha);
-  backdrop-filter: blur(5px);
-}</style>
+<style lang="scss">
+
+  .backdropRoot {
+    position: absolute;
+    z-index: 1000;
+    height: 100%;
+    width: 100%;
+
+    .backdropContent {
+      background-color: var(--theme-color-foreground-alpha);
+      backdrop-filter: blur(5px);
+    }
+  }
+
+</style>

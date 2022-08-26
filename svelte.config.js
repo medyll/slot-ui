@@ -9,14 +9,7 @@ const dev = "production" === "development";
 const config = {
     // Consult https://github.com/sveltejs/svelte-preprocess
     // for more information about preprocessors
-    preprocess: [
-        preprocess({
-            aliases: [['sx4u', 'sx4uLanguage']],
-            sx4uLanguage(args) {
-                return sx4uPreprocess.render(args);
-            }
-        })
-    ],    
+  
     kit: {
         adapter: adapter({
             pages: "docs",
@@ -28,13 +21,7 @@ const config = {
 		},
         prerender: {
             default: true
-        },
-        package: {
-            dir: 'package',
-            emitTypes: true,
-            exports: (filepath) => true
-        },
-        
+        },        
     }
 };
 

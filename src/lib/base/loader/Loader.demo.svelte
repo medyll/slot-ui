@@ -6,6 +6,9 @@
 
 <div class="flex-v gap-large">
 	<h5>{'<Loader />'}</h5>
+	<cite><p>
+		And suddenly, in this dark cabinet, i realized that the most pleasant phase was that of waiting.<br /> D. Pentes, 824
+	</p></cite>
 	<div class="flex-v gap-medium w-large pos-rel">
 		<h5>Loading</h5>
 

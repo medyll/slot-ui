@@ -1,18 +1,26 @@
 <svelte:options accessors={true}
                 immutable={true}/>
-<script>import { transitions } from '../../effects/transitions';
-import { onMount, setContext } from 'svelte';
-const { slideOut, slideIn, slideInRtl, slideOutRt } = transitions;
-export let open;
-let inFunc;
-export const actions = {
-    open: () => { setVisible(true); },
-    close: () => { setVisible(false); },
-    toggle: () => { setVisible(!open); },
-};
-function setVisible(vis) {
+<script lang="ts">
+  import {transitions} from '../../effects/transitions';
+  import {onMount, setContext} from 'svelte';
+
+  const {slideOut, slideIn, slideInRtl, slideOutRt} = transitions;
+
+  export let open: boolean;
+
+  let inFunc:()=>void;
+
+  export const actions = {
+    open  : () => {setVisible(true);},
+    close : () => {setVisible(false);},
+    toggle: () => {setVisible(!open);},
+  };
+
+  function setVisible(vis: boolean) {
     open = vis;
-}
+  }
+
+
 </script>
 
 {#if open}
@@ -23,10 +31,12 @@ function setVisible(vis) {
     </div>
 {/if}
 
-<style>.sidePanel {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  padding: 1rem 2rem;
-  width: 100%;
-}</style>
+<style lang="scss">
+  .sidePanel {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    padding: 1rem 2rem;
+    width: 100%;
+  }
+</style>

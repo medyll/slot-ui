@@ -1,8 +1,12 @@
 <script lang="ts">
 	import github from 'svelte-highlight/styles/github';
-	import cssfabric from '@medyll/cssfabric/src/lib/styles/vars.min.css';
+	// fabric default vars
+	import cssfabricVars from '@medyll/cssfabric/src/lib/styles/vars.min.css';
+	// fabric default
+	import cssfabric from "@medyll/cssfabric/src/lib/styles/cssfabric.min.css";
+	// import cssfabric themer
+	import cssfabricThemer from '../styles/cssfabric-theme.scss';
 
-	
 	import Taskbar from '$lib/ui/taskbar/Taskbar.svelte';
 	import StartMenu from '$lib/ui/startMenu/StartMenu.svelte';
 	import Login from '$lib/ui/login/Login.svelte';
@@ -48,19 +52,21 @@
 
 <svelte:head>
 	<title>SlotUi</title>
-	<link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet" />
-	<!-- <link
-		href="./node_modules/@medyll/cssfabric/src/lib/styles/cssfabric.min.css"
-		lang="scss"
-		rel="stylesheet"
-	/> -->
-	<!-- <link href="cssfabric/cssfabric.vars.css" rel="stylesheet" /> -->
-	<link href="theme/cssfabric.scss" lang="scss" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet" /> 
 	{@html github}
-	<!-- {@html theme} -->
+	<style type="text/css">
+		 {
+			@html cssfabricVars;
+		}
+	</style>
 	<style>
 		 {
 			@html cssfabric;
+		}
+	</style>
+	<style type="text/css">
+		 {
+			@html cssfabricThemer;
 		}
 	</style>
 	<script>
@@ -114,16 +120,17 @@
 				<ThemeSwitcher />
 			</svelte:fragment>
 		</Taskbar> -->
-		<div id="layout" class="flex-main overflow-hidden theme-bg-paper-alpha-high"> 
+		<div id="layout" class="flex-main overflow-hidden theme-bg-paper-alpha-high">
 			<div class="flex-h pad flex-align-middle shad-3 gap-small zI-10">
 				<h3>Slot Ui</h3>
-				<div></div>
-				<div class="flex-main"></div>
+				<div />
+				<div class="flex-main" />
 				<a href="svelte-components">Components</a>
-				<a href="svelte-components">Documentation</a>
-				<a href="svelte-components">Github</a>
+				<ThemeSwitcher />
+				<!-- <a href="svelte-components">Documentation</a>
+				<a href="svelte-components">Github</a> -->
 			</div>
-		
+
 			<slot />
 			<ChromeFrameList
 				chromeListConfig={{
@@ -137,59 +144,7 @@
 		</div>
 	</Login>
 </div>
-
-<!-- <Drawer bind:this={drawerRef} isOpen={false}>
-	<svelte:fragment slot="topBarSlot">
-		<TopBar title="Drawer with menu bar ">
-			<svelte:fragment slot="menuBarSwitcher">
-				<div class="pad-1">
-					<input placeholder="Search in Bar" style="width:100%;" type="text" />
-				</div>
-			</svelte:fragment>
-			
-		</TopBar>
-	</svelte:fragment>
-	<div class="pad-2">
-		<List onItemClick={() => {}}>
-			{#each [...Array(10)] as key, val}
-				<ListItem>
-					<span slot="primary">Some idioms {val}</span>
-					<span slot="secondary">secondary {val}</span>
-					<span slot="action"><button>fds de action</button></span>
-				</ListItem>
-			{/each}
-		</List>
-	</div>
-</Drawer> -->
+ 
 <style global lang="scss">
-	@import './src/sass/cssfabric.scss';
-
-	html {
-		font-size: 12px;
-		height: 100%;
-		box-sizing: border-box;
-	}
-
-	body {
-		height: 100%;
-		width: 100%;
-		overflow: hidden;
-		/* background-image: url('wallp (1).jpg');
-		background-size: cover; */
-		font-family: 'Rubik';
-		background-color: var(--theme-color-background);
-		color: var(--theme-color-foreground);
-		box-sizing: border-box;
-	}
-
-	* {
-		box-sizing: border-box;
-	}
-
-	#svelte {
-		height: 100%;
-	}
-	.inputBorder {
-		border: 1px solid rgba(255, 255, 255, 0.1) !important;
-	}
+	 @import "../styles/main.scss"
 </style>

@@ -1,36 +1,46 @@
-<script>import { slide } from 'svelte/transition';
-import Icon from '../icon/Icon.svelte';
-import { createEventForwarder } from '../../engine/eventForwarder';
-import { get_current_component } from 'svelte/internal';
-import { elem } from '../../engine/elem';
-import Divider from '../divider/Divider.svelte';
-/** @restProps {button | a} */
-let className = '';
-export { className as class };
-export let style = '';
-export let element = null;
-const forwardEvents = createEventForwarder(get_current_component());
-/** displayed title of the cartouche */
-export let primary = undefined;
-/** displayed sub title of the cartouche */
-export let secondary = undefined;
-export let icon = undefined;
-/** can be set as a prop or as a className */
-export let stacked = false;
-export let component = undefined;
-export let componentProps = {};
-export let isOpen = false;
-/** use to control cartouche */
-export const actions = {
-    open: () => {
-        isOpen = true;
-    },
-    toggle: () => {
-        isOpen = !isOpen;
-    }
-};
-let chevronIcon;
-$: chevronIcon = !isOpen ? 'chevron-down' : 'chevron-up';
+<script lang="ts">
+	import { slide } from 'svelte/transition';
+	import Icon from '../icon/Icon.svelte';
+	import { createEventForwarder } from '../../engine/eventForwarder';
+	import { get_current_component } from 'svelte/internal';
+	import { elem } from '../../engine/elem';
+	import type { SvelteComponent } from 'svelte';
+	import Divider from '../divider/Divider.svelte';
+
+	/** @restProps {button | a} */
+ 
+	let className = '';
+	export { className as class };
+	export let style: string = '';
+	export let element: HTMLDivElement | null = null;
+	const forwardEvents = createEventForwarder(get_current_component());
+ 
+
+  /** displayed title of the cartouche */
+	export let primary: string | undefined = undefined;
+  /** displayed sub title of the cartouche */
+	export let secondary: string | undefined = undefined;
+
+	export let icon: string | undefined = undefined;
+	/** can be set as a prop or as a className */
+	export let stacked: boolean = false;
+	export let component: SvelteComponent | undefined = undefined;
+	export let componentProps: Record<string, any> = {};
+
+	export let isOpen: boolean = false;
+	/** use to control cartouche */
+	export const actions = {
+		open: () => {
+			isOpen = true;
+		},
+		toggle: () => {
+			isOpen = !isOpen;
+		}
+	};
+
+	let chevronIcon: 'chevron-down' | 'chevron-up';
+	$: chevronIcon = !isOpen ? 'chevron-down' : 'chevron-up';
+
 </script>
 
 <div
@@ -76,43 +86,20 @@ $: chevronIcon = !isOpen ? 'chevron-down' : 'chevron-up';
 	{/if}
 </div>
 
-<style>.cartoucheHolder {
-  border-radius: 6px;
-  overflow: hidden;
-  border: 1px solid var(--theme-color-foreground-alpha-high);
-}
-.cartoucheHolder .cartoucheContent {
-  padding: 0.5rem;
-  overflow: hidden;
-  background-color: var(--theme-color-background);
-}
+<style lang="scss">
+	@import 'Cartouche';
 
-.cartouche {
-  display: flex;
-  grid-gap: 8px;
-  background-color: var(--theme-color-background);
-  align-items: center;
-}
-.cartouche:hover {
-  background-color: rgba(255, 255, 255, 0.4);
-}
-.cartouche .cartoucheLabel {
-  flex: 1;
-  cursor: pointer;
-}
-.cartouche .chevron {
-  padding: 0 1rem;
-  cursor: pointer;
-}
-
-.cartoucheHolder.stacked {
-  border-radius: 0;
-}
-.cartoucheHolder.stacked:first-child {
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-}
-.cartoucheHolder.stacked:last-child {
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
-}</style>
+	.cartoucheHolder {
+		&.stacked {
+			border-radius: 0;
+			&:first-child {
+				border-top-left-radius: 6px;
+				border-top-right-radius: 6px;
+			}
+			&:last-child {
+				border-bottom-left-radius: 6px;
+				border-bottom-right-radius: 6px;
+			}
+		}
+	}
+</style>

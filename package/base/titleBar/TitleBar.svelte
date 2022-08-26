@@ -1,8 +1,11 @@
-<script>import Icon from '../icon/Icon.svelte';
-import IconButton from '../button/IconButton.svelte';
+<script lang="ts">
+  import Icon from '../icon/Icon.svelte';
+  import IconButton from '../button/IconButton.svelte'; 
 import Button from '../button/Button.svelte';
-export let onClose;
-export let hasMenu = false;
+
+  export let onClose: () => void;
+  export let hasMenu: any = false;
+
 </script>
 
 <div class="titleBar flex-h marg-b-1 pad-1">
@@ -27,9 +30,13 @@ export let hasMenu = false;
         </div>
     {/if}
 </div>
-<style global>:global(.titleBar) {
-  border-bottom: 1px solid var(--theme-border_color);
-}
-:global(.titleBar) :global(.title) {
-  min-height: 34px;
-}</style>
+<style global lang="scss">
+  .titleBar {
+    .title {
+      min-height: 34px;
+
+    }
+
+    border-bottom: 1px solid var(--theme-border_color);
+  }
+</style>

@@ -1,17 +1,20 @@
 <svelte:options accessors/>
-<script>import { chromeFrameStore } from './chromeFrame.store';
-import { createEventForwarder } from '../../engine/engine';
-import { get_current_component } from 'svelte/internal';
-import Icon from '../../base/icon/Icon.svelte';
-import Button from '../../base/button/Button.svelte';
-/** common slotUi exports*/
-let className = '';
-export { className as class };
-export let element = null;
-const forwardEvents = createEventForwarder(get_current_component());
-/** end slotUi exports*/
-/* $: console.log('from chromFrameButtonList',chromeFrameStore);
-$: console.log('from chromFrameButtonList $store',$chromeFrameStore); */
+<script lang="ts">
+	import { chromeFrameStore } from './chromeFrame.store';
+	import { createEventForwarder } from '../../engine/engine';
+	import { get_current_component } from 'svelte/internal';
+	import Icon from '../../base/icon/Icon.svelte';
+	import Button from '../../base/button/Button.svelte';
+
+	/** common slotUi exports*/
+	let className = '';
+	export { className as class };
+	export let element: HTMLDivElement | null = null;
+	const forwardEvents = createEventForwarder(get_current_component());
+	/** end slotUi exports*/
+
+	/* $: console.log('from chromFrameButtonList',chromeFrameStore);
+	$: console.log('from chromFrameButtonList $store',$chromeFrameStore); */
 </script>
 
 <div bind:this={element} class="flex-h gap-small {className}">
@@ -35,13 +38,19 @@ $: console.log('from chromFrameButtonList $store',$chromeFrameStore); */
 	{/each}
 </div>
 
-<style global>:global(.buttonRail) :global(button:not(.active)) {
-  border: 1px solid transparent;
-  background-color: transparent;
-}
-:global(.buttonRail) :global(button.active) {
-  border: 1px solid var(--theme-color-border);
-}
-:global(.buttonRail) :global(button:hover) {
-  border: 1px solid var(--theme-color-primary);
-}</style>
+<style global lang="scss">
+	.buttonRail {
+		button:not(.active) {
+			border: 1px solid transparent;
+			background-color: transparent;
+		}
+		button {
+			&.active {
+				border: 1px solid var(--theme-color-border);
+			}
+			&:hover {
+				border: 1px solid var(--theme-color-primary);
+			}
+		}
+	}
+</style>

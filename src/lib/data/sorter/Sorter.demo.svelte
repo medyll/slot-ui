@@ -21,6 +21,9 @@
 
 <div class="flex-v gap-large">
 	<h5>{'<Sorter />'}</h5>
+	<cite><p>
+		Then, what was before became the after.<br /> R. Hakran, 824
+	</p></cite>
 	<h5>Button mode</h5>
 	<div class="flex-h gap-small">
 		<div>

@@ -1,30 +1,39 @@
-<script>import { stickTo } from '../../uses/stickTo/stickTo';
-import { createEventForwarder } from '../../engine/engine';
-import { get_current_component } from 'svelte/internal';
-/*  common slotUi exports*/
-let className = '';
-export { className as class };
-export let element = null;
-const forwardEvents = createEventForwarder(get_current_component());
-/*  end slotUi exports*/
-export let data = undefined;
-export let options = [];
-let innerRef;
-let absolute = 'absolute';
-let isVisible = false;
-let timerClick;
-const show = (visible) => (event) => {
+<script lang="ts">
+  import {stickTo} from '../../uses/stickTo/stickTo';
+  import type {ElementProps} from 'src/types';
+  import {createEventForwarder} from '../../engine/engine';
+  import {get_current_component} from 'svelte/internal';
+
+  /*  common slotUi exports*/
+  let className = '';
+  export {className as class};
+  export let element: HTMLInputElement | null = null;
+  const forwardEvents                         = createEventForwarder(get_current_component());
+  /*  end slotUi exports*/
+
+  export let data: ElementProps['data'] | undefined                               = undefined;
+  export let options: { data?: ElementProps['data']; text: string; icon?: any }[] = [];
+
+  let innerRef;
+  let absolute           = 'absolute';
+  let isVisible: boolean = false;
+
+  let timerClick: any;
+
+  const show = (visible: boolean) => (event) => {
     timerClick = setTimeout(() => {
-        isVisible = visible;
+      isVisible = visible;
     }, 250);
-};
-const handleClick = (visible) => (event) => {
+  };
+
+
+  const handleClick = (visible: any) => (event: MouseEvent) => {
     event.stopPropagation();
     clearTimeout(timerClick);
     setTimeout(() => {
-        element.focus();
+      element.focus();
     }, 0);
-};
+  };
 </script>
 
 <input use:forwardEvents bind:this={element} id="cool" on:blur={show(false)} on:focus={show(true)}/>
@@ -41,9 +50,6 @@ const handleClick = (visible) => (event) => {
     {/each}
 </ul>
 
-<style global>:global(.selectRoot) {
-  background-color: var(--theme-overlay_color);
-  height: 160px;
-  width: 160px;
-  border-radius: 6px;
-}</style>
+<style global lang="scss">
+  @import "Select";
+</style>

@@ -1,21 +1,28 @@
-<script>import { custom_event, setContext } from 'svelte/internal';
-import { writable } from 'svelte/store';
-let className = '';
-export { className as class };
-export let element = undefined;
-export let data;
-const dataStore = writable({ data });
-setContext('dataListRow', dataStore);
-function handleClick(item) {
-    const event = custom_event('datalist:click', item, { bubbles: true });
-    if (element)
-        element.dispatchEvent(event);
-}
-function handleSelect(item) {
-    const event = custom_event('datalist:click', item, { bubbles: true });
-    if (element)
-        element.dispatchEvent(event);
-}
+<script lang="ts">
+	import type { Data } from '$types';
+	import { custom_event, setContext } from 'svelte/internal';
+	import { writable } from 'svelte/store';
+	import type { RowType } from './types';
+
+	let className = '';
+	export { className as class };
+	export let element: HTMLDivElement | undefined = undefined;
+
+	export let data: any;
+
+	const dataStore = writable<RowType>({data});
+	setContext('dataListRow', dataStore);
+
+	function handleClick(item: Data) {
+		const event = custom_event('datalist:click', item, { bubbles: true });
+		if (element) element.dispatchEvent(event);
+	}
+
+	function handleSelect(item: Data) {
+		const event = custom_event('datalist:click', item, { bubbles: true });
+		if (element) element.dispatchEvent(event);
+	}
+
 </script>
 
 <div

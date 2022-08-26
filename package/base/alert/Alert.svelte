@@ -1,41 +1,53 @@
-<script>import { fade } from 'svelte/transition';
-import Divider from '../divider/Divider.svelte';
-import IconButton from '../button/IconButton.svelte';
-import { createEventForwarder } from '../../engine/engine';
-import { createEventDispatcher, get_current_component } from 'svelte/internal';
-import Button from '../button/Button.svelte';
-const dispatch = createEventDispatcher();
-/*  common slotUi exports*/
-let className = '';
-export { className as class };
-export let element = null;
-const forwardEvents = createEventForwarder(get_current_component());
-/** type of levels */
-export let level = 'info';
-export let action = () => { };
-export let data = {};
-export let text = undefined;
-export let message = undefined;
-export let isDragable = false;
-export let isOpen = true;
-export const actions = {
-    open: () => {
-        isOpen = true;
-    },
-    toggle: () => {
-        isOpen = !isOpen;
-    },
-    close: () => {
-        isOpen = !isOpen;
-    }
-};
-const handleClick = (event) => {
-    if (event?.target?.attributes['data-close']) {
-        event.stopPropagation();
-        actions.close();
-        dispatch('alert:closed');
-    }
-};
+<script lang="ts">
+	import { fade } from 'svelte/transition';
+	import type { ElementProps } from '../../../types';
+	import Divider from '../divider/Divider.svelte';
+	import IconButton from '../button/IconButton.svelte';
+	import { createEventForwarder } from '../../engine/engine';
+	import { createEventDispatcher, get_current_component } from 'svelte/internal';
+	import Button from '../button/Button.svelte';
+
+	const dispatch = createEventDispatcher();
+
+	/*  common slotUi exports*/
+	let className = '';
+	export { className as class };
+	export let element: HTMLDivElement | null = null;
+	const forwardEvents = createEventForwarder(get_current_component());
+	/*  end slotUi exports*/
+
+	type LevelType = 'success' | 'info' | 'error' | 'warning' | 'alert' | 'discrete';
+	type action = ElementProps['action'];
+
+	/** type of levels */
+	export let level: LevelType = 'info';
+	export let action = () => {};
+	export let data = {};
+	export let text: string | undefined = undefined;
+	export let message: string | undefined = undefined;
+	export let isDragable: boolean = false;
+
+	export let isOpen: boolean = true;
+
+	export const actions: any = {
+		open: () => {
+			isOpen = true;
+		},
+		toggle: () => {
+			isOpen = !isOpen;
+		},
+		close: () => {
+			isOpen = !isOpen;
+		}
+	};
+
+	const handleClick = (event: PointerEvent) => {
+		if (event?.target?.attributes['data-close']) {
+			event.stopPropagation();
+			actions.close();
+			dispatch('alert:closed');
+		}
+	};
 </script>
 
 {#if isOpen}
@@ -81,28 +93,6 @@ const handleClick = (event) => {
 	</div>
 {/if}
 
-<style>.alert {
-  position: relative;
-  min-width: 350px;
-  display: inline-block;
-  border-radius: 6px;
-  border: 1px solid var(--theme-border_color);
-  background-color: var(--theme-color-background);
-  overflow: hidden;
-}
-.alert .dot {
-  display: inline-block;
-  padding: 0.25rem;
-  border: 1px solid var(--theme-border_color);
-  border-radius: 6px;
-  margin-right: 1rem;
-  transform: translate(-50%, 0);
-}
-.alert .close {
-  position: absolute;
-  right: 0;
-  top: 0;
-  border-radius: 6px;
-  margin: 0.25rem;
-  padding: 0.25rem;
-}</style>
+<style lang="scss">
+	@import 'Alert';
+</style>

@@ -16,8 +16,8 @@ __propDef: {
         /** active group field, usefull when several */ activeGroupField?: string | undefined;
         /** grouping function */ groupBy?: ((dataList: any[], groupField: string, opt?: {
             keepUngroupedData: boolean;
-            fieldTitle?: string | undefined;
-        } | undefined) => GroupedDataType) | undefined;
+            fieldTitle?: string;
+        }) => GroupedDataType) | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;

@@ -1,63 +1,84 @@
 <svelte:options accessors={true}
                 immutable={true}/>
 
-<script>import { getAppWindowStore, windowsStore } from '/src/lib/ui/window/window.store';
-import { draggable } from '@neodrag/svelte';
-import { onDestroy } from 'svelte';
-import IconButton from '../../base/button/IconButton.svelte';
-import Icon from '../../base/icon/Icon.svelte';
-export let frameId = '';
-export let self = null;
-export let defaultPosition = { x: 30, y: 30 };
-export let component = null;
-let frameRef;
-let activeFrame;
-let x = defaultPosition?.x ?? 350;
-let y = defaultPosition?.y ?? 50;
-let appWindowStore;
-let appWindow;
-let position;
-$: appWindowStore = getAppWindowStore(frameId);
-$: appWindow = $appWindowStore;
-$: position = {
-    position: $appWindowStore?.position ?? { x, y },
-};
-$: if (!appWindow?.open) {
-    if ($$props.self)
-        $$props.self.$destroy();
-}
-windowsStore.activeFrame.subscribe((value) => {
+<script lang="ts">
+  import type {IChromeArgs} from '/src/lib/ui/window/window.store';
+  import {getAppWindowStore, windowsStore} from '/src/lib/ui/window/window.store';
+  import {draggable} from '@neodrag/svelte';
+  import {onDestroy} from 'svelte';
+  import IconButton from '../../base/button/IconButton.svelte';
+  import Icon from '../../base/icon/Icon.svelte';
+
+  export let frameId                                   = '';
+  export let self                                      = null;
+  export let defaultPosition: { x: number, y: number } = {x: 30, y: 30};
+  export let component                                 = null;
+
+  let frameRef;
+  let activeFrame: string | number;
+  let x: number = defaultPosition?.x ?? 350;
+  let y: number = defaultPosition?.y ?? 50;
+
+  let appWindowStore;
+  let appWindow;
+  let position;
+
+  $: appWindowStore = getAppWindowStore(frameId);
+  $: appWindow = $appWindowStore as IChromeArgs;
+  $: position = {
+    position: $appWindowStore?.position ?? {x, y},
+  };
+
+  $: if (!appWindow?.open) {
+    if ($$props.self) $$props.self.$destroy();
+  }
+
+  windowsStore.activeFrame.subscribe((value: string | number) => {
     activeFrame = value;
-});
-const dragOptions = {
-    handle: '.handle',
-    defaultPosition: { x, y },
-    onDragStart: (args) => {
-        // updatePos(args);
-        appWindowStore.makeOnTop();
+  });
+
+  const dragOptions = {
+    handle         : '.handle',
+    defaultPosition: {x, y},
+    onDragStart    : (args: {
+      offsetX: number;
+      offsetY: number;
+      domRect: DOMRect;
+    }) => {
+      // updatePos(args);
+      appWindowStore.makeOnTop();
     },
-    onDrag: (args) => {
+    onDrag         : (args) => {
     },
-    onDragEnd: (args) => {
-        updatePos(args);
+    onDragEnd      : (args: {
+      offsetX: number;
+      offsetY: number;
+      domRect: DOMRect;
+    }) => {
+      updatePos(args);
     },
-};
-onDestroy(() => {
+  };
+
+  onDestroy(() => {
     console.log('destroyed !!!');
-});
-function updatePos(args) {
+  });
+
+  function updatePos(args: any) {
     appWindowStore.updatePos({
-        x: args.offsetX,
-        y: args.offsetY
+      x: args.offsetX,
+      y: args.offsetY
     });
-}
-function handleClick(args) {
+  }
+
+  function handleClick(args: PointerEvent) {
     windowsStore.activeFrame.set(frameId);
     appWindowStore.makeOnTop();
-}
-function handleClose(args) {
+  }
+
+  function handleClose(args: PointerEvent) {
     appWindowStore.remove();
-}
+  }
+
 </script>
 <div bind:this={frameRef}
      class="window"
@@ -92,40 +113,48 @@ function handleClose(args) {
     </div>
 </div>
 
-<style>.window {
-  display: block;
-  border-radius: 6px;
-  background-color: var(--theme-color-background);
-  color: var(--theme-color-text);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  min-width: 720px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  overflow: hidden;
-  z-index: 3000;
-}
-.window .bar {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  background-color: #3c3f41;
-  color: white;
-}
-.window .bar .handle {
-  flex: 1;
-  cursor: pointer;
-}
-.window .buttonZone {
-  border-top: 1px solid #ccc;
-  padding: 0.5rem;
-  display: flex;
-  justify-content: end;
-}
+<style lang="scss">
+  .window {
+    display: block;
+    border-radius: 6px;
+    background-color: var(--theme-color-background);
+    color: var(--theme-color-text);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    min-width: 720px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 3000;
 
-.iconZone {
-  display: flex;
-}
-.iconZone > {
-  color: red;
-}</style>
+    .bar {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      background-color: #3c3f41;
+      color: white;
+
+      .handle {
+        //padding: 0.75rem 0.5rem;
+        flex: 1;
+        cursor: pointer;
+      }
+    }
+
+    .buttonZone {
+      border-top: 1px solid #ccc;
+      padding: 0.5rem;
+      display: flex;
+      justify-content: end;
+    }
+  }
+
+  .iconZone {
+    display: flex;
+    // grid-gap: 0.5rem;
+
+    > {
+      color: red;
+    }
+  }
+</style>

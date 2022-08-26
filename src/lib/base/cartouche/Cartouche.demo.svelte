@@ -7,11 +7,14 @@
 
 <div class="flex-v gap-large">
 	<h5>{'<Cartouche />'}</h5>
+	<cite><p>
+		"Open up", they said. So we stacked<br /> G. Brahms, 1964
+	</p></cite>
 	<h5>Using slots</h5>
 	<Cartouche isOpen={true} class="marg-tb-1">
 		<span slot="primarySlot">This is a cartouche</span>
 		<Icon slot="cartoucheIconSlot" fontSize="small" icon="circle" />
-		<div class="pad">Cartouche content </div>
+		<div class="pad">Cartouche content</div>
 	</Cartouche>
     <h5>Stacked, using props</h5>
 	<div>

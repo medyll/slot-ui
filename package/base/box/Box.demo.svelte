@@ -1,7 +1,8 @@
-<script>import Box from './Box.svelte';
-import Icon from '../icon/Icon.svelte';
-import Divider from '../divider/Divider.svelte';
-import Button from '../button/Button.svelte';
+<script lang="ts">
+	import Box from './Box.svelte';
+	import Icon from '../icon/Icon.svelte';
+	import Divider from '../divider/Divider.svelte';
+	import Button from '../button/Button.svelte';
 </script>
 
 <div class="flex-v gap-large">

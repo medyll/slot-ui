@@ -9,7 +9,7 @@
 	import Icon from '../icon/Icon.svelte';
 
 	type DrawerTitleType = string | undefined;
-	export type toggle = () => void;
+	// export type toggle = () => void;
 
 	/*  common slotUi exports*/
 	let className = '';
@@ -34,7 +34,7 @@
 	 * position
 	 * @type 'wide' | 'inplace'
 	 */
-	export let flow: 'fixed' | 'relative' | 'absolute' = 'relative'; // fixed,relative,abolute
+	export let flow: 'fixed' | 'relative' | 'absolute' = 'relative'; // fixed,relative,absolute
 	export let stickTo: 'right' | 'left' | 'top' | 'bottom' = 'left';
 	export let showOpenerIcon: boolean = false;
 
@@ -42,14 +42,22 @@
 		isOpen = visibleSate !== undefined ? visibleSate : !isOpen;
 	}
 
+	/** default width of the drawer in vertical mode */
+	export let defaultWidth: string = '288px';
+	/** minimum width of the drawer in vertical mode and closed state */
+	export let defaultVisibleArea: string = '0px';
+
+	/** default height of the drawer in horizontal mode */
+	export let defaultHeight: string = '288px';
+
 	export let style: string = '';
 	let dspStyle: string | undefined = undefined;
 
 	const stickToStyle = {
 		right: 'right:0;top:0;height:100%;height:100%;',
 		left: 'left:0;top:0;bottom:0;height:100%;height:100%;',
-		top: 'left:0;right:0;top:0;height: 288px;',
-		bottom: 'left:0;right:0;bottom:0;height: 288px;'
+		top: `left:0;right:0;top:0;height:${defaultHeight};`,
+		bottom: `left:0;right:0;bottom:0;height:${defaultHeight};`
 	};
 
 	const openerIconStyle = {
@@ -78,13 +86,11 @@
 	$: dimKeyVary = ['top', 'bottom'].includes(stickTo) ? 'height' : 'width';
 
 	$: dspStyle = isOpen ? 'flex' : 'flex';
-	$: widthStyle = isOpen ? '288px' : '24px';
+	$: widthStyle = isOpen ? defaultWidth : defaultVisibleArea;
 
 	$: sens = 'chevron-' + sensSuffix;
-	$: pos = !isOpen ? '-32' : '0';
 
 	$: finalStyle = `display:${dspStyle};position:${flow};${stickToStyle[stickTo]};${dimKeyVary}:${widthStyle};${style};`;
-
 </script>
 
 <div

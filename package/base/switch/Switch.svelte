@@ -1,5 +1,8 @@
-<script>export let name;
-export let checked;
+<script lang="ts">
+
+  export let name: string;
+  export let checked: boolean;
+
 </script>
 
 <div class="switch">
@@ -9,4 +12,15 @@ export let checked;
 </div>
 <input name="{name}" type="hidden"/>
 
-<style></style>
+<style lang="scss">
+  .switch {
+    &.disabled {
+
+    }
+    .switchGutter {
+      .switchHandle {
+
+      }
+    }
+  }
+</style>

@@ -48,6 +48,9 @@
 	<h5>{`<Button />`}</h5>
 	<div class="flex-h gap-medium">
 		<h5 class="w-large" use:togglerSource={{ uid: 'tre' }}>default button</h5>
+		<cite><p>
+			There were a place where we used to click. You've called it a button, and we clicked yes.<br /> R. Falgt, 1354
+		</p></cite>
 		<div class="flex-v gap-medium" use:togglerTarget={{ uid: 'tre' }}>
 			<Button>default button</Button>
 			<div class="flex-h gap-medium grid-align-middle">

@@ -3,7 +3,7 @@
 alpha stage 
 
 slotui is a  component library built around svelte
-## Do not try at home
+## Do not try this at home
  
 ```bash
 # do not do that

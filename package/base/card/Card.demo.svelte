@@ -1,5 +1,6 @@
-<script>import Card from './Card.svelte';
-import Icon from '../icon/Icon.svelte';
+<script lang="ts">
+  import Card from './Card.svelte';
+  import Icon from '../icon/Icon.svelte';
 </script>
 
 <div class="gridDemo">
@@ -30,11 +31,13 @@ import Icon from '../icon/Icon.svelte';
 
 </div>
 
-<style>.gridDemo {
-  flex: 1;
-  width: 100%;
-  display: grid;
-  align-items: stretch;
-  grid-gap: 32px;
-  grid-template-columns: repeat(auto-fill, minmax(150px, auto));
-}</style>
+<style lang="scss">
+  .gridDemo {
+    flex:1;
+    width: 100%;
+    display: grid;
+    align-items: stretch;
+    grid-gap: 32px;
+    grid-template-columns: repeat(auto-fill, minmax(150px, auto));
+  }
+</style>

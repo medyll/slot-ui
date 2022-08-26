@@ -1,21 +1,27 @@
 <script context="module">
 
 </script>
-<script>import { createEventForwarder } from '../../engine/engine';
-import ContentSwitcher from '../../base/contentSwitcher/ContentSwitcher.svelte';
-import { get_current_component } from 'svelte/internal';
-/* common slotUi exports*/
-let className = '';
-export { className as class };
-export let element = null;
-export let style = null;
-const forwardEvents = createEventForwarder(get_current_component());
-/* end slotUi exports*/
-export let title;
-export let orientation = 'right';
-export let contentSwitcherIcon = 'search';
-const posTitle = orientation === 'right' ? 1 : 3;
-const posCloser = orientation === 'right' ? 3 : 1;
+<script lang="ts">
+  import {createEventForwarder} from '../../engine/engine';
+  import ContentSwitcher from '../../base/contentSwitcher/ContentSwitcher.svelte';
+  import {get_current_component} from 'svelte/internal';
+
+  type MenuBarTitleType = string | undefined;
+
+  /* common slotUi exports*/
+  let className = '';
+  export {className as class};
+  export let element: HTMLDivElement | null = null;
+  export let style: string | null           = null;
+  const forwardEvents                       = createEventForwarder(get_current_component());
+  /* end slotUi exports*/
+
+  export let title: MenuBarTitleType;
+  export let orientation: 'right' | 'left' = 'right';
+  export let contentSwitcherIcon: string   = 'search';
+
+  const posTitle  = orientation === 'right' ? 1 : 3;
+  const posCloser = orientation === 'right' ? 3 : 1;
 </script>
 
 <div bind:this={element}
@@ -46,16 +52,19 @@ const posCloser = orientation === 'right' ? 3 : 1;
         </div>
     {/if}
 </div>
-<style>.topBarRoot {
-  padding: var(--slotui-topbar-padding, var(--box-density-1));
-  display: flex;
-  border-bottom: 1px solid var(--slotui-topbar-border-bottom-color, var(--theme-color-border));
-  max-width: 100%;
-  min-width: auto;
-  position: relative;
-}
-.topBarRoot .topBarContent {
-  position: relative;
-  min-width: auto;
-  overflow: hidden;
-}</style>
+<style lang="scss">
+  .topBarRoot {
+    padding: var(--slotui-topbar-padding, var(--box-density-1));
+    display: flex;
+    border-bottom: 1px solid var(--slotui-topbar-border-bottom-color, var(--theme-color-border));
+    max-width: 100%;
+    min-width: auto;
+    position: relative;
+
+    .topBarContent {
+      position: relative;
+      min-width: auto;
+      overflow: hidden;
+    }
+  }
+</style>

@@ -1,5 +1,5 @@
 <script lang="ts">
-import { filter } from 'lodash';
+	import { filter } from 'lodash';
 	import Tree from './Tree.svelte';
 
 	let paths = [
@@ -20,24 +20,33 @@ import { filter } from 'lodash';
 		{ name: '', path: 'Categories/About' },
 		{ name: '', path: 'Categories/Demo' },
 		{ name: '', path: 'New/With/Some/Unique/Levels/Yep' },
-		{ name: '', path: 'New/With/Some/Other/Levels/Yep' ,data:{isbel:'or'}}
+		{ name: '', path: 'New/With/Some/Other/Levels/Yep', data: { isbel: 'or' } }
 	];
 
-	let data = [{ name: '', path: 'Categories/Demo/Vue/Demo' },{
-  "name": "",
-  "path": "New/With/Some/Unique/Levels/Yep"
- }];
+	let data = [
+		{ name: '', path: 'Categories/Demo/Vue/Demo' },
+		{
+			name: '',
+			path: 'New/With/Some/Unique/Levels/Yep'
+		}
+	];
 
 	let selectedData = [];
 </script>
 
-
 <div class="flex-v gap-large">
 	<h5>{'<Tree />'}</h5>
+	<cite><p>
+			We were looking for leaves and we found trees<br /> B. Esein, 1354
+		</p></cite>
 	<div class="flex-v gap-medium">
 		<div style="width:250px">
 			<Tree pathField="path" {data} paths={pathsData} bind:selectedData />
 		</div>
 	</div>
-	<pre>{JSON.stringify(selectedData.filter(x=>x), null, ' ')}</pre>
+	<pre>{JSON.stringify(
+			selectedData.filter((x) => x),
+			null,
+			' '
+		)}</pre>
 </div>

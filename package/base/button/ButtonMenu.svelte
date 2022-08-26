@@ -1,52 +1,66 @@
 <svelte:options accessors={true} />
 
-<script>import { get_current_component } from 'svelte/internal';
-import { openPopper } from '../../ui/popper/actions';
-import IconButton from './IconButton.svelte';
-import Menu from '../../ui/menu/Menu.svelte';
-import { createEventForwarder } from '../../engine/engine';
-export let icon = 'list';
-export let menuData = [];
-export let actionComponent = Menu;
-export let menuProps = {
-    menuList: menuData,
-    onMenuItemClick: () => {
-        console.log('redfered');
-    }
-};
-export let menuPosition = 'BL';
-/*  common slotUi exports*/
-let className = '';
-export { className as class };
-export let element = null;
-const forwardEvents = createEventForwarder(get_current_component());
-/*  end slotUi exports*/
-let componentProps = menuProps
-    ? menuProps
-    : {
-        menuList: menuData,
-        onMenuItemClick: () => { }
-    };
-const onActionClick = (event) => {
-    event.stopPropagation();
-    openPopper('settingActions', {
-        parentNode: event.currentTarget,
-        component: actionComponent,
-        componentProps: componentProps ?? {},
-        position: menuPosition
-    });
-};
-// on:menu:item:clicked
-// on:click={onActionClick}
-let openPoppOpt;
-$: openPoppOpt = {
-    parentNode: element,
-    component: actionComponent,
-    componentProps: componentProps ?? {},
-    position: 'BL',
-    disabled: false
-};
-// usePopperOpt={openPoppOpt}
+<script lang="ts">
+	import type { SvelteComponentDev } from 'svelte/internal';
+	import { get_current_component } from 'svelte/internal';
+	import { openPopper } from '../../ui/popper/actions';
+	import IconButton from './IconButton.svelte';
+	import Menu from '../../ui/menu/Menu.svelte';
+	import { createEventForwarder } from '../../engine/engine';
+	import type { SvelteComponent } from 'svelte';
+	import type { PopperPositionType } from '../../ui/popper/types';
+	import type { MenuItemProps, MenuProps } from '../../ui/menu/types';
+	import type { ElementProps } from 'src/types';
+	import type { UsePopperProps } from '../../ui/popper/usePopper';
+
+	export let icon: string = 'list';
+	export let menuData: MenuItemProps[] = [];
+	export let actionComponent: SvelteComponent | any = Menu;
+	export let menuProps: MenuProps = {
+		menuList: menuData,
+		onMenuItemClick: () => {
+			console.log('redfered');
+		}
+	};
+	export let menuPosition: PopperPositionType = 'BL';
+
+	/*  common slotUi exports*/
+	let className = '';
+	export { className as class };
+	export let element: HTMLElement | null = null as HTMLElement;
+	const forwardEvents = createEventForwarder(get_current_component());
+	/*  end slotUi exports*/
+
+	let componentProps = menuProps
+		? menuProps
+		: {
+				menuList: menuData,
+				onMenuItemClick: () => {}
+		  };
+
+	const onActionClick = (event: MouseEvent) => {
+		event.stopPropagation();
+		openPopper('settingActions', {
+			parentNode: event.currentTarget as HTMLElement,
+			component: actionComponent,
+			componentProps: componentProps ?? {},
+			position: menuPosition
+		});
+	};
+
+	// on:menu:item:clicked
+	// on:click={onActionClick}
+	let openPoppOpt: UsePopperProps;
+
+	$: openPoppOpt = {
+		parentNode: element,
+		component: actionComponent,
+		componentProps: componentProps ?? {},
+		position: 'BL',
+		disabled: false
+	};
+
+	// usePopperOpt={openPoppOpt}
 </script>
 
 <!-- {@debug componentProps} -->
@@ -61,34 +75,6 @@ $: openPoppOpt = {
 <slot />
 </IconButton>
 
-<style>.buttonActionRoot {
-  display: inline-block;
-  position: relative;
-  width: 64px;
-}
-
-.buttonText {
-  text-align: center;
-}
-
-.button {
-  display: block;
-  width: 64px;
-}
-.button:hover {
-  background-color: rgba(255, 255, 255, 0.3);
-}
-
-.action {
-  position: absolute;
-  display: block;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  background-color: rgba(255, 255, 255, 0.1);
-  width: 30%;
-  padding: 0.5rem;
-}
-.action:hover {
-  background-color: rgba(255, 255, 255, 0.5);
-}</style>
+<style lang="scss">
+	@import 'ButtonMenu';
+</style>

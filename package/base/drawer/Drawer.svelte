@@ -1,72 +1,96 @@
 <svelte:options accessors />
 
-<script>import BottomBar from '../bottomBar/BottomBar.svelte';
-import IconButton from '../button/IconButton.svelte';
-import { createEventForwarder } from '../../engine/engine';
-import { get_current_component } from 'svelte/internal';
-import Button from '../button/Button.svelte';
-import Icon from '../icon/Icon.svelte';
-/*  common slotUi exports*/
-let className = '';
-export { className as class };
-export let element = null;
-const forwardEvents = createEventForwarder(get_current_component());
-/*  end slotUi exports*/
-/** title of the drawer */
-export let primary = undefined;
-/** sub-title of the drawer */
-export let secondary = undefined;
-/** icon of the drawer */
-export let icon = undefined;
-/** Should the drawer be open */
-export let isOpen = true;
-/** Should the closer icon be hidden */
-export let hideCloseIcon = false;
-/**
- * position
- * @type 'wide' | 'inplace'
- */
-export let flow = 'relative'; // fixed,relative,abolute
-export let stickTo = 'left';
-export let showOpenerIcon = false;
-export function toggle(visibleSate) {
-    isOpen = visibleSate !== undefined ? visibleSate : !isOpen;
-}
-export let style = '';
-let dspStyle = undefined;
-const stickToStyle = {
-    right: 'right:0;top:0;height:100%;height:100%;',
-    left: 'left:0;top:0;bottom:0;height:100%;height:100%;',
-    top: 'left:0;right:0;top:0;height: 288px;',
-    bottom: 'left:0;right:0;bottom:0;height: 288px;'
-};
-const openerIconStyle = {
-    right: 'left:-16px;top:8px;',
-    left: 'right:-16px;top:8px;',
-    top: 'bottom:-16px;right:8px;',
-    bottom: 'top:-16px;right:8px;'
-};
-let sensSuffix = '';
-$: switch (stickTo) {
-    case 'top':
-        sensSuffix = isOpen ? 'up' : 'down';
-        break;
-    case 'right':
-        sensSuffix = isOpen ? 'right' : 'left';
-        break;
-    case 'bottom':
-        sensSuffix = isOpen ? 'down' : 'up';
-        break;
-    case 'left':
-        sensSuffix = isOpen ? 'left' : 'right';
-        break;
-}
-$: dimKeyVary = ['top', 'bottom'].includes(stickTo) ? 'height' : 'width';
-$: dspStyle = isOpen ? 'flex' : 'flex';
-$: widthStyle = isOpen ? '288px' : '24px';
-$: sens = 'chevron-' + sensSuffix;
-$: pos = !isOpen ? '-32' : '0';
-$: finalStyle = `display:${dspStyle};position:${flow};${stickToStyle[stickTo]};${dimKeyVary}:${widthStyle};${style};`;
+<script lang="ts">
+	import BottomBar from '../bottomBar/BottomBar.svelte';
+	import IconButton from '../button/IconButton.svelte';
+	import { createEventForwarder } from '../../engine/engine';
+	import { get_current_component } from 'svelte/internal';
+	import Button from '../button/Button.svelte';
+	import Icon from '../icon/Icon.svelte';
+
+	type DrawerTitleType = string | undefined;
+	// export type toggle = () => void;
+
+	/*  common slotUi exports*/
+	let className = '';
+	export { className as class };
+	export let element: HTMLDivElement | null = null;
+	const forwardEvents = createEventForwarder(get_current_component());
+	/*  end slotUi exports*/
+
+	/** title of the drawer */
+	export let primary: DrawerTitleType = undefined;
+	/** sub-title of the drawer */
+	export let secondary: DrawerTitleType = undefined;
+	/** icon of the drawer */
+	export let icon: string | undefined = undefined;
+
+	/** Should the drawer be open */
+	export let isOpen: boolean = true;
+	/** Should the closer icon be hidden */
+	export let hideCloseIcon: boolean = false;
+
+	/**
+	 * position
+	 * @type 'wide' | 'inplace'
+	 */
+	export let flow: 'fixed' | 'relative' | 'absolute' = 'relative'; // fixed,relative,absolute
+	export let stickTo: 'right' | 'left' | 'top' | 'bottom' = 'left';
+	export let showOpenerIcon: boolean = false;
+
+	export function toggle(visibleSate?: boolean) {
+		isOpen = visibleSate !== undefined ? visibleSate : !isOpen;
+	}
+
+	/** default width of the drawer in vertical mode */
+	export let defaultWidth: string = '288px';
+	/** minimum width of the drawer in vertical mode and closed state */
+	export let defaultVisibleArea: string = '0px';
+
+	/** default height of the drawer in horizontal mode */
+	export let defaultHeight: string = '288px';
+
+	export let style: string = '';
+	let dspStyle: string | undefined = undefined;
+
+	const stickToStyle = {
+		right: 'right:0;top:0;height:100%;height:100%;',
+		left: 'left:0;top:0;bottom:0;height:100%;height:100%;',
+		top: `left:0;right:0;top:0;height:${defaultHeight};`,
+		bottom: `left:0;right:0;bottom:0;height:${defaultHeight};`
+	};
+
+	const openerIconStyle = {
+		right: 'left:-16px;top:8px;',
+		left: 'right:-16px;top:8px;',
+		top: 'bottom:-16px;right:8px;',
+		bottom: 'top:-16px;right:8px;'
+	};
+
+	let sensSuffix = '';
+	$: switch (stickTo) {
+		case 'top':
+			sensSuffix = isOpen ? 'up' : 'down';
+			break;
+		case 'right':
+			sensSuffix = isOpen ? 'right' : 'left';
+			break;
+		case 'bottom':
+			sensSuffix = isOpen ? 'down' : 'up';
+			break;
+		case 'left':
+			sensSuffix = isOpen ? 'left' : 'right';
+			break;
+	}
+
+	$: dimKeyVary = ['top', 'bottom'].includes(stickTo) ? 'height' : 'width';
+
+	$: dspStyle = isOpen ? 'flex' : 'flex';
+	$: widthStyle = isOpen ? defaultWidth : defaultVisibleArea;
+
+	$: sens = 'chevron-' + sensSuffix;
+
+	$: finalStyle = `display:${dspStyle};position:${flow};${stickToStyle[stickTo]};${dimKeyVary}:${widthStyle};${style};`;
 </script>
 
 <div
@@ -136,33 +160,6 @@ $: finalStyle = `display:${dspStyle};position:${flow};${stickToStyle[stickTo]};$
 	{/if}
 </div>
 
-<style global>:global(.drawer) {
-  color: var(--css-drawer-color, inherit);
-  background-color: var(--slotui-drawer-bg-color, var(--theme-color-paper-alpha-low));
-  backdrop-filter: var(--slotui-drawer-backdrop-blur, blur(0px));
-  z-index: 3000;
-  box-shadow: var(--box-shad-3);
-  border-left: 1px solid var(--slotui-drawer-border-color, var(--theme-color-primary-alpha));
-  overflow: visible;
-  display: flex;
-  flex-direction: column;
-  transition: all 0.1s;
-}
-:global(.drawer) :global(.opener) {
-  position: absolute;
-  z-index: 8600;
-}
-:global(.drawer) :global(.header) {
-  border-bottom: 1px solid var(--theme-color-foreground-alpha-high);
-  box-shadow: var(--box-shad-1);
-  min-height: 48px;
-  display: flex;
-  align-items: center;
-}
-:global(.drawer) :global(.header) :global(.title) {
-  font-size: large;
-}
-:global(.drawer) :global(.content) {
-  flex: 1;
-  position: relative;
-}</style>
+<style global lang="scss">
+	@import 'Drawer';
+</style>
