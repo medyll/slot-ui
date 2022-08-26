@@ -194,7 +194,7 @@
 {/if}
 
 <style lang="scss">
-	@import '../../../lib/styles/presets.scss';
+	@import '../../styles/presets.scss';
 	.button,
 	button,
 	button[contained='true'],

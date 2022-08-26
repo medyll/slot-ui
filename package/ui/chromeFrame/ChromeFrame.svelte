@@ -1,26 +1,22 @@
 <svelte:options accessors/>
-<script lang="ts" context="module">
-  /* namespace __propDef {
-    vary : 'red'
-  } */
-	// import __propDef from
-	// declare const __propDef: { events: { 'chromeframe:close': CustomEvent<any>,'chromeframe:hide': CustomEvent<any> } };
+<script context="module">"use strict";
+/* namespace __propDef {
+  vary : 'red'
+} */
+// import __propDef from
+// declare const __propDef: { events: { 'chromeframe:close': CustomEvent<any>,'chromeframe:hide': CustomEvent<any> } };
 </script>
 
-<script lang="ts">
-	import { getChromeFrame } from './chromeFrame.utils';
-
-	export let frameId: string;
-	export let showCommands: boolean;
-
-	const frameStore = getChromeFrame(frameId);
-
-	function handleRemove() {
-		frameStore.remove();
-	}
-	function handleHide() {
-		frameStore.toggle();
-	}
+<script>import { getChromeFrame } from './chromeFrame.utils';
+export let frameId;
+export let showCommands;
+const frameStore = getChromeFrame(frameId);
+function handleRemove() {
+    frameStore.remove();
+}
+function handleHide() {
+    frameStore.toggle();
+}
 </script>
 
 <div
@@ -42,9 +38,7 @@
 	</div>
 </div>
 
-<style global lang="scss">
-	.chromeFrame {
-		color: var(--theme-color-foreground);
-		background-color: var(--theme-color-background);
-	}
-</style>
+<style global>:global(.chromeFrame) {
+  color: var(--theme-color-foreground);
+  background-color: var(--theme-color-background);
+}</style>

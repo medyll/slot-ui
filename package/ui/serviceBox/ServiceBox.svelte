@@ -1,13 +1,10 @@
-<script lang="ts">
-  import {clickAway} from '../../uses/clickAway/clickAway';
-  import IconButton from '../../base/button/IconButton.svelte';
-  import ButtonMenu from '../../base/button/ButtonAction.svelte';
-  import Debug from '../../base/debug/Debug.svelte';
-
-  const onclose = function () {
-    console.log('close ??')
-  };
-
+<script>import { clickAway } from '../../uses/clickAway/clickAway';
+import IconButton from '../../base/button/IconButton.svelte';
+import ButtonMenu from '../../base/button/ButtonAction.svelte';
+import Debug from '../../base/debug/Debug.svelte';
+const onclose = function () {
+    console.log('close ??');
+};
 </script>
 
 <div class="h-full flex-v serviceBox" >
@@ -24,16 +21,14 @@
     </div>
 </div>
 
-<style lang="scss">
-  .gridIconBis {
-    width: 100%;
-    display: grid;
-    grid-gap: 8px;
-    grid-template-columns: repeat(auto-fill, minmax(30%, auto));
-  }
+<style>.gridIconBis {
+  width: 100%;
+  display: grid;
+  grid-gap: 8px;
+  grid-template-columns: repeat(auto-fill, minmax(30%, auto));
+}
 
-  .serviceBox {
-    width: 360px;
-    height: 360px;
-  }
-</style>
+.serviceBox {
+  width: 360px;
+  height: 360px;
+}</style>

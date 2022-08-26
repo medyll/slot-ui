@@ -1,27 +1,20 @@
-<script lang="ts">
-  import {getContext} from 'svelte';
-  import type {IChromeArgs, WindowStoreListType} from '../ui/window/window.store';
-  import {windowsStore} from '../ui/window/window.store';
-  import {toggleStartMenu} from './wactions.utils';
-  import IconButton from '../base/button/IconButton.svelte';
-  import {openPopper} from '../ui/popper/actions';
-  import ServiceBox from '../ui/serviceBox/ServiceBox.svelte';  
-
-
-  const popServiceProps = {
-    component     : ServiceBox,
+<script>import { getContext } from 'svelte';
+import { windowsStore } from '../ui/window/window.store';
+import { toggleStartMenu } from './wactions.utils';
+import IconButton from '../base/button/IconButton.svelte';
+import { openPopper } from '../ui/popper/actions';
+import ServiceBox from '../ui/serviceBox/ServiceBox.svelte';
+const popServiceProps = {
+    component: ServiceBox,
     componentProps: {
-      some: 'what'
+        some: 'what'
     }
-  };
-
-  function toggleWindow(frame: IChromeArgs) {
+};
+function toggleWindow(frame) {
     let frameId = frame.frameId;
-  }
-
-  let windows;
-  $:   windows = $windowsStore as WindowStoreListType;
-
+}
+let windows;
+$: windows = $windowsStore;
 </script>
 {#each [...windows] as [key, value]}
     <IconButton on:click="{()=>{toggleWindow(value)}}" style="color:white;font-size: large" icon="home"/>

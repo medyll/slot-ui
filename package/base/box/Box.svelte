@@ -1,46 +1,38 @@
-<script lang="ts">
-  import TitleBar from '../titleBar/TitleBar.svelte';
-  import {createEventForwarder} from '../../engine/engine';
-  import {createEventDispatcher, get_current_component, null_to_empty} from 'svelte/internal';
-
-  const dispatch = createEventDispatcher();
-
-  /*  common slotUi exports*/
-  let className = '';
-  export {className as class};
-  export let element: HTMLDivElement | null = null;
-  const forwardEvents                       = createEventForwarder(get_current_component());
-  /*  end slotUi exports*/
-
-  export let isOpen: boolean  = true;
-  export let hasMenu: boolean = false;
-
-  export let title: string | undefined = undefined
-  export let icon: string | undefined = undefined
-  export let content: string | undefined = undefined
-  export let buttonZone: string | undefined = undefined
-
-  export const actions: any = {
-    open  : () => {
-      isOpen = true;
+<script>import TitleBar from '../titleBar/TitleBar.svelte';
+import { createEventForwarder } from '../../engine/engine';
+import { createEventDispatcher, get_current_component, null_to_empty } from 'svelte/internal';
+const dispatch = createEventDispatcher();
+/*  common slotUi exports*/
+let className = '';
+export { className as class };
+export let element = null;
+const forwardEvents = createEventForwarder(get_current_component());
+/*  end slotUi exports*/
+export let isOpen = true;
+export let hasMenu = false;
+export let title = undefined;
+export let icon = undefined;
+export let content = undefined;
+export let buttonZone = undefined;
+export const actions = {
+    open: () => {
+        isOpen = true;
     },
     toggle: () => {
-      isOpen = !isOpen;
+        isOpen = !isOpen;
     },
-    close : () => {
-      isOpen = !isOpen;
+    close: () => {
+        isOpen = !isOpen;
     }
-  };
-
-  const handleClick = (event: PointerEvent) => {
+};
+const handleClick = (event) => {
     if (event?.target?.attributes['data-close']) {
-      event.stopPropagation();
-      actions.close();
-      dispatch('box:closed');
+        event.stopPropagation();
+        actions.close();
+        dispatch('box:closed');
     }
-  };
-
-  export let onClose: () => void;
+};
+export let onClose;
 </script>
 
 <div class="boxRoot shad-3 flex-v {className}" use:forwardEvents>
@@ -58,6 +50,18 @@
     </div>
 </div>
 
-<style global lang="scss">
-  @import 'Box';
-</style>
+<style global>:global(.boxRoot) {
+  min-height: 160px;
+  min-width: 320px;
+  background-color: var(--theme-color-background);
+  border-bottom: 1px solid var(--theme-color-primary);
+  border-radius: 6px;
+  display: inline-block;
+}
+:global(.boxRoot) :global(.boxButtonZone) {
+  display: flex;
+  gap: --theme-gap-tiny;
+  text-align: right;
+  padding: 0.5rem;
+  justify-content: end;
+}</style>

@@ -1,71 +1,58 @@
-<script lang="ts">
-  import {email, Hint, HintGroup, required, useForm} from 'svelte-use-form';
-  import {fade} from 'svelte/transition';
-
-  import {userStore} from './store';
-  import Backdrop from '../../base/backdrop/Backdrop.svelte';
-  import {createEventForwarder} from '../../engine/engine';
-  import {get_current_component} from 'svelte/internal';
+<script>import { email, Hint, HintGroup, required, useForm } from 'svelte-use-form';
+import { fade } from 'svelte/transition';
+import { userStore } from './store';
+import Backdrop from '../../base/backdrop/Backdrop.svelte';
+import { createEventForwarder } from '../../engine/engine';
+import { get_current_component } from 'svelte/internal';
 import Button from '../../base/button/Button.svelte';
-
-  /*  common slotUi exports*/
-  let className = '';
-  export {className as class};
-  export let element: HTMLDivElement | null = null;
-  const forwardEvents                       = createEventForwarder(get_current_component());
-
-
-  export const actions = {
-    show         : () => {showLogin = true;},
-    hide         : () => {showLogin = false;},
-    toggle       : (lo?: boolean) => {showLogin = lo ?? !showLogin;},
-    toggleLoading: (lo?: boolean) => {loading = lo ?? !loading;},
-  };
-
-
-  export let showLogin: boolean = false;
-  export let transition         = {type: fade, args: {}};
-  export let fields             = {email: '', password: ''};
-
-  export let loading = false;
-  let submitting     = false;
-  let grantedError   = false;
-
-  const validData: any = {};
-
-  if (fields?.email) validData.email = {initial: fields?.email, validators: [required, email]};
-  if (fields?.password) validData.password = {initial: fields?.password, validators: [required]};
-
-  const form = useForm(validData);
-
-  export let onSubmit = function (args) {
+/*  common slotUi exports*/
+let className = '';
+export { className as class };
+export let element = null;
+const forwardEvents = createEventForwarder(get_current_component());
+export const actions = {
+    show: () => { showLogin = true; },
+    hide: () => { showLogin = false; },
+    toggle: (lo) => { showLogin = lo ?? !showLogin; },
+    toggleLoading: (lo) => { loading = lo ?? !loading; },
+};
+export let showLogin = false;
+export let transition = { type: fade, args: {} };
+export let fields = { email: '', password: '' };
+export let loading = false;
+let submitting = false;
+let grantedError = false;
+const validData = {};
+if (fields?.email)
+    validData.email = { initial: fields?.email, validators: [required, email] };
+if (fields?.password)
+    validData.password = { initial: fields?.password, validators: [required] };
+const form = useForm(validData);
+export let onSubmit = function (args) {
     return new Promise((resolve, reject) => {
-      return setTimeout(() => {resolve(true);}, 2000);
+        return setTimeout(() => { resolve(true); }, 2000);
     });
-  };
-
-  function validate() {
+};
+function validate() {
     try {
-      submitting = true;
-      return onSubmit($form.values).then(() => {
-        $userStore.logged = true;
-        showLogin         = false;
-        submitting        = false;
-      }).catch((e) => {
+        submitting = true;
+        return onSubmit($form.values).then(() => {
+            $userStore.logged = true;
+            showLogin = false;
+            submitting = false;
+        }).catch((e) => {
+            console.log(e);
+            grantedError = true;
+            submitting = false;
+        });
+    }
+    catch (e) {
         console.log(e);
         grantedError = true;
-        submitting   = false;
-      });
-
-    } catch (e) {
-      console.log(e);
-      grantedError = true;
-      submitting   = false;
+        submitting = false;
     }
     return false;
-  }
-
-
+}
 </script>
 {#if showLogin}
     <Backdrop loading={loading}>
@@ -109,40 +96,31 @@ import Button from '../../base/button/Button.svelte';
 {:else}
     <slot></slot>
 {/if}
-<style lang="scss">
-  form {
-    z-index: 1000;
-  }
+<style>form {
+  z-index: 1000;
+}
 
-  .form {
-    height: 33% !important;
-    width: 20%;
-
-    .avatarHolder {
-      width: 50%;
-      padding-bottom: 50%;
-      position: relative;
-
-      .avatar {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 0 5px 1px rgba(32, 123, 21, 0.3);
-        background-color: rgba(255, 255, 255, 0.3);
-      }
-    }
-
-    .name {
-      text-align: center;
-      margin: 0.5rem;
-    }
-
-    .input {
-
-    }
-  }
-</style>
+.form {
+  height: 33% !important;
+  width: 20%;
+}
+.form .avatarHolder {
+  width: 50%;
+  padding-bottom: 50%;
+  position: relative;
+}
+.form .avatarHolder .avatar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 5px 1px rgba(32, 123, 21, 0.3);
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.form .name {
+  text-align: center;
+  margin: 0.5rem;
+}</style>

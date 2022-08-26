@@ -1,37 +1,32 @@
-<script lang="ts">
-	import { filter } from 'lodash';
-	import Tree from './Tree.svelte';
-
-	let paths = [
-		'About.vue',
-		'Categories/Index.vue',
-		'Categories/Demo.vue',
-		'Categories/Flavors.vue',
-		'Categories/Demo',
-		'Categories/Demo/Flavors.vue'
-	];
-
-	let pathsData = [
-		{ name: '', path: 'Categories/Demo/Vue', other: 'item' },
-		{ name: '', path: 'About' },
-		{ name: '', path: 'More' },
-		{ name: '', path: 'Categories/Demo/Vue/Demo' },
-		{ name: '', path: 'Categories/Index' },
-		{ name: '', path: 'Categories/About' },
-		{ name: '', path: 'Categories/Demo' },
-		{ name: '', path: 'New/With/Some/Unique/Levels/Yep' },
-		{ name: '', path: 'New/With/Some/Other/Levels/Yep', data: { isbel: 'or' } }
-	];
-
-	let data = [
-		{ name: '', path: 'Categories/Demo/Vue/Demo' },
-		{
-			name: '',
-			path: 'New/With/Some/Unique/Levels/Yep'
-		}
-	];
-
-	let selectedData = [];
+<script>import { filter } from 'lodash';
+import Tree from './Tree.svelte';
+let paths = [
+    'About.vue',
+    'Categories/Index.vue',
+    'Categories/Demo.vue',
+    'Categories/Flavors.vue',
+    'Categories/Demo',
+    'Categories/Demo/Flavors.vue'
+];
+let pathsData = [
+    { name: '', path: 'Categories/Demo/Vue', other: 'item' },
+    { name: '', path: 'About' },
+    { name: '', path: 'More' },
+    { name: '', path: 'Categories/Demo/Vue/Demo' },
+    { name: '', path: 'Categories/Index' },
+    { name: '', path: 'Categories/About' },
+    { name: '', path: 'Categories/Demo' },
+    { name: '', path: 'New/With/Some/Unique/Levels/Yep' },
+    { name: '', path: 'New/With/Some/Other/Levels/Yep', data: { isbel: 'or' } }
+];
+let data = [
+    { name: '', path: 'Categories/Demo/Vue/Demo' },
+    {
+        name: '',
+        path: 'New/With/Some/Unique/Levels/Yep'
+    }
+];
+let selectedData = [];
 </script>
 
 <div class="flex-v gap-large">

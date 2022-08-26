@@ -1,6 +1,5 @@
-<script lang="ts">
-import Button from '../button/Button.svelte';
-	import Alert from './Alert.svelte';
+<script>import Button from '../button/Button.svelte';
+import Alert from './Alert.svelte';
 </script>
 
 <Alert level="success" message="Message as props" />
