@@ -1,10 +1,9 @@
-
-<script lang='ts'>
+<script lang="ts">
 	import github from 'svelte-highlight/styles/github';
 	// fabric default vars
 	import cssfabricVars from '@medyll/cssfabric/src/lib/styles/vars.min.css';
 	// fabric default
-	import cssfabric from "@medyll/cssfabric/src/lib/styles/cssfabric.min.css";
+	import cssfabric from '@medyll/cssfabric/src/lib/styles/cssfabric.min.css';
 	// import cssfabric themer
 	import cssfabricThemer from '../styles/cssfabric-theme.scss';
 
@@ -17,31 +16,23 @@
 	import IconButton from '$lib/base/button/IconButton.svelte';
 	import List from '$lib/base/list/List.svelte';
 	import ListItem from '$lib/base/list/ListItem.svelte';
-	import Frame from '$lib/ui/frame/Frame.svelte'; 
+	import Frame from '$lib/ui/frame/Frame.svelte';
 	import ChromeFrameList from '../lib/ui/chromeFrame/ChromeFrameList.svelte';
 	import ChromeFrameButtonList from '../lib/ui/chromeFrame/ChromeFrameButtonList.svelte';
 	import Explorer from '../components/pages/explorer/Explorer.svelte';
 	import Dashboard from '../../src/components/pages/dashboard/Dashboard.svelte';
 	import ThemeSwitcher from '$lib/ui/themeswitcher/ThemeSwitcher.svelte';
 	import { goto } from '$app/navigation';
-	import Button from '$lib/base/button/Button.svelte'; 
-
-	 
-	// importsNotUsedAsValues
-	function openCh(frameId: string, opt: any = {}) {
-		/* openChromeFrame(frameId, {
-			showCommandBar: false,
-			component: Dashboard,
-			title: frameId,
-			...opt
-		}); */
-	}
-
+	import Button from '$lib/base/button/Button.svelte';
+	import Icon from '$lib/base/icon/Icon.svelte';
+	import IntersectionObserver from '../components/IntersectionObserver.svelte';
+	let element: any;
+	let intersecting: boolean;
 </script>
 
 <svelte:head>
 	<title>SlotUi</title>
-	<link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet" /> 
+	<link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet" />
 	{@html github}
 	<style type="text/css">
 		 {
@@ -77,63 +68,28 @@
 	</script>
 </svelte:head>
 
-<StartMenu />
-<div class="h-full overflow-hidden flex-v">
-	<Login showLogin={false}>
-		<!-- <Taskbar>
-			<svelte:fragment slot="taskBarLeft">
-				<Button
-					size="auto"
-					primary="svelte-components"
-					on:click={handleClick('svelte-components')}
-				/>
-				<IconButton
-						icon="barcode"
-						on:click={toggleStartMenu}
-						style="color:white;font-size: large"
-					/>
-				<Button
-					on:click={() => {
-						openCh('btn1');
-					}}>button frame 1</Button
-				>
-				<Button
-					on:click={() => {
-						openCh('btn2');
-					}}>button 2</Button
-				>
-			</svelte:fragment>
-			<ChromeFrameButtonList let:chromeFrame />
-			<TaskBarContent />
-			<svelte:fragment slot="taskBarRight">
-				<ThemeSwitcher />
-			</svelte:fragment>
-		</Taskbar> -->
-		<div id="layout" class="flex-main overflow-hidden theme-bg-paper-alpha-high">
-			<div class="flex-h pad flex-align-middle shad-3 gap-small zI-10">
-				<h3>Slot Ui</h3>
-				<div />
-				<div class="flex-main" />
-				<a href="svelte-components">Components</a>
-				<ThemeSwitcher />
-				<!-- <a href="svelte-components">Documentation</a>
-				<a href="svelte-components">Github</a> -->
-			</div>
-
-			<slot />
-			<ChromeFrameList
-				chromeListConfig={{
-					showCommandBar: true,
-					parent: '#layout',
-					onClose: (chromeFrame) => {
-						console.log(chromeFrame);
-					}
-				}}
-			/>
-		</div>
-	</Login>
+<div class="content-slide">
+	<nav class="flex-h pos-sticky pad flex-align-middle shad-3 gap-small zI-10 w-full">
+		<Button icon="menu" iconFamily="mdi" />
+		<div>{intersecting ? 'Element is in view' : 'Element is not in view'}</div>
+		<div class="flex-main" />
+		<a href="svelte-components">Components</a>
+		<ThemeSwitcher />
+	</nav>
+	<slot />
 </div>
- 
+
+<!-- <div id="layout" class="h-full flex-main theme-bg-paper-alpha-high">
+	
+</div> -->
 <style global lang="scss">
-	 @import "../styles/main.scss"
+	@import '../styles/main.scss';
+
+
+	.content-slide {
+		height: 100%;
+		overflow: auto;
+		scroll-behavior: smooth;
+		scroll-padding-top: 25rem;
+	}
 </style>

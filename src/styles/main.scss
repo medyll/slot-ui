@@ -1,14 +1,14 @@
 html {
     font-size: 12px;
-    height: 100%;
     box-sizing: border-box;
+    font-family: "Rubik";
+    line-height: 1.45;
+    height: 100%;
 }
 
 body {
     height: 100%;
-    width: 100%;
-    overflow: hidden; 
-    font-family: 'Rubik';
+    max-height: 100%;
     background-color: var(--theme-color-background);
     color: var(--theme-color-foreground);
     box-sizing: border-box;
@@ -18,9 +18,6 @@ body {
     box-sizing: border-box;
 }
 
-#svelte {
-    height: 100%;
-}
 .inputBorder {
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }

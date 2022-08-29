@@ -1,11 +1,11 @@
 import type { PageLoad } from './$types';
-export async function load({params:PageLoad}){
- 
+export async function load({ params: PageLoad }) {
+    // console.log({params})
     return {
-        headers:{
-            Accept:'application/json',
+        headers: {
+            Accept: 'application/json',
         },
-        status:200,
-        body: {...params,from: '[component]'}
+        status: 200,
+        body: { from: '[component]' }
     }
 }

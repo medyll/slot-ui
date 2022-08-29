@@ -111,3 +111,34 @@ red
 		</Drawer>
 	</div>
 </Login>
+ 
+<!-- <StartMenu /> --> 
+	<!-- <Taskbar>
+		<svelte:fragment slot="taskBarLeft">
+			<Button
+				size="auto"
+				primary="svelte-components"
+				on:click={handleClick('svelte-components')}
+			/>
+			<IconButton
+					icon="barcode"
+					on:click={toggleStartMenu}
+					style="color:white;font-size: large"
+				/>
+			<Button
+				on:click={() => {
+					openCh('btn1');
+				}}>button frame 1</Button
+			>
+			<Button
+				on:click={() => {
+					openCh('btn2');
+				}}>button 2</Button
+			>
+		</svelte:fragment>
+		<ChromeFrameButtonList let:chromeFrame />
+		<TaskBarContent />
+		<svelte:fragment slot="taskBarRight">
+			<ThemeSwitcher />
+		</svelte:fragment>
+	</Taskbar> -->
