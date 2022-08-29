@@ -1,42 +1,44 @@
 <svelte:options accessors={true} />
 
 <script lang="ts">
-import Input from '$lib/base/input/Input.svelte';
+	import Input from '$lib/base/input/Input.svelte';
 	import { dataOp } from '$lib/engine/utils';
 
 	let className = '';
 	export { className as class };
-	export let element: HTMLDivElement | null = null;
+	export let element: HTMLElement | null = null;
 
 	export let data: any = [];
-	export let defaultField = 'name';
-
-	export let filteredData:any[] = [];
+	export let defaultField = '*';
+	export let mode: 'exact' | 'partial' = 'partial';
+	export let filteredData: any[] = [];
 
 	let searchString: string;
 
-	const doFind =
-		<T = Record<string, any>>(list: T[], kw: string, field: string) =>
-		(event) => {
+	const doFind = <T = Record<string,any>>(list: T[], kw: string, field: string) =>  {
+			let results: any[] 
 			// if kw empty
 			if (!kw) {
-				filteredData = data;
+				results = data;
 			} else {
-				filteredData = dataOp.filterList(list, kw, field); // filterList(list, kw, field);
+				results =
+					mode === 'exact'
+						? dataOp.filterList(list, kw, field)
+						: dataOp.searchList(list, kw, field); // filterList(list, kw, field);
 			}
-			// else
+			return results
 		};
 
+	$: filteredData = doFind(data,searchString,defaultField);
 	$: if (!searchString) filteredData = data;
 </script>
 
 <Input
 	bind:value={searchString}
-	bind:this={element}
-	on:keydown={doFind(data, this.value, defaultField)}
+	bind:this={element} 
 	placeholder="find"
 	type="search"
-	size="auto" 
+	size="auto"
 	{...$$restProps}
 />
 <slot name="noResultsSlot" />

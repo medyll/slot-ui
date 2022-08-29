@@ -31,10 +31,16 @@ export class dataOp {
     static filterListFirst(arr, kw, fieldname = 'id') {
         return this.filterList(arr, kw, fieldname)?.[0];
     }
-    static searchList(arr, kw, fieldname = 'id') {
+    static searchList(arr, kw, fieldname) {
+        // console.log(kw, fieldname)
         let reg = new RegExp(`${kw}`, 'i');
         return arr.filter((item) => {
-            return this.resolveDotPath(item, fieldname).search(reg);
+            if (fieldname !== '*')
+                return this.resolveDotPath(item, fieldname).search(reg);
+            if (fieldname === '*')
+                return Object.keys(item).some((key) => {
+                    return item?.[key].search(reg) !== -1;
+                });
         });
     }
     static groupBy(dataList, groupField, opt) {

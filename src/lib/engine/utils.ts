@@ -1,5 +1,5 @@
 
-export type PropsProxyProps<T = any, B = any> = [string: keyof T, string: keyof B | (()=>void) ][]
+export type PropsProxyProps<T = any, B = any> = [string: keyof T, string: keyof B | (() => void)][]
 
 export const propsProxy = <T = any, B = any, C = any>(props: PropsProxyProps<T, B>, data: any[]): Record<keyof B, any>[] => {
 
@@ -11,8 +11,8 @@ export const propsProxy = <T = any, B = any, C = any>(props: PropsProxyProps<T, 
 
       const keyListItem = prop[0] as string;
       const keyData: string | Function = prop[1] as any;
-      
-      out[keyListItem] = (typeof keyData === 'function')? keyData(dta): dta[keyData];
+
+      out[keyListItem] = (typeof keyData === 'function') ? keyData(dta) : dta[keyData];
     }
     // keep original data
     out['data'] = dta;
@@ -47,11 +47,16 @@ export class dataOp {
     return this.filterList<T>(arr, kw, fieldname)?.[0]
   }
 
-  static searchList<T = any>(arr: T[], kw: number | string, fieldname: string = 'id'): T[] {
+  static searchList<T = Record<string, any>>(arr: T[], kw: number | string, fieldname: string | '*'): T[] {
+
+    // console.log(kw, fieldname)
 
     let reg = new RegExp(`${kw}`, 'i');
-    return arr.filter((item) => {
-      return this.resolveDotPath(item, fieldname).search(reg)
+    return arr.filter((item: Record<string, any>) => {
+      if (fieldname !== '*') return this.resolveDotPath(item, fieldname).search(reg)
+      if (fieldname === '*') return Object.keys(item).some((key: string) => {
+        return item?.[key].search(reg) !== -1
+      })
     });
   }
 
@@ -85,9 +90,9 @@ export class dataOp {
    * @param key  object key to match with
    * @returns number
    */
-  static findObjectIndex<T=Record<string,any>>(arr: T[], value: any, key: string = 'id'):number {
-    return arr.findIndex((obj:T) => { 
-      return this.resolveDotPath(obj,key)  === value;
+  static findObjectIndex<T = Record<string, any>>(arr: T[], value: any, key: string = 'id'): number {
+    return arr.findIndex((obj: T) => {
+      return this.resolveDotPath(obj, key) === value;
     });
   }
 
