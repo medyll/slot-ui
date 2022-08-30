@@ -22,6 +22,7 @@ export const propsProxy = <T = any, B = any, C = any>(props: PropsProxyProps<T, 
   return ret;
 };
 
+/** data manipulation class */
 export class dataOp {
 
   /** sorting  */

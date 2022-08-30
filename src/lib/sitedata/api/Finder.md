@@ -3,9 +3,10 @@ __propDef: {
     props: {
         [x: string]: any;
         class?: string | undefined;
-        element?: HTMLDivElement | null | undefined;
+        element?: HTMLElement | null | undefined;
         data?: any;
         defaultField?: string | undefined;
+        mode?: "exact" | "partial" | undefined;
         filteredData?: any[] | undefined;
     };
     events: {

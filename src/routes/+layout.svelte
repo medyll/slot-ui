@@ -7,27 +7,30 @@
 	// import cssfabric themer
 	import cssfabricThemer from '../styles/cssfabric-theme.scss';
 
-	import Taskbar from '$lib/ui/taskbar/Taskbar.svelte';
-	import StartMenu from '$lib/ui/startMenu/StartMenu.svelte';
-	import Login from '$lib/ui/login/Login.svelte';
-	import TaskBarContent from '../lib/engine/TaskBarContent.svelte';
 	import Drawer from '$lib/base/drawer/Drawer.svelte';
-	import TopBar from '$lib/ui/topBar/TopBar.svelte';
-	import IconButton from '$lib/base/button/IconButton.svelte';
-	import List from '$lib/base/list/List.svelte';
-	import ListItem from '$lib/base/list/ListItem.svelte';
-	import Frame from '$lib/ui/frame/Frame.svelte';
-	import ChromeFrameList from '../lib/ui/chromeFrame/ChromeFrameList.svelte';
-	import ChromeFrameButtonList from '../lib/ui/chromeFrame/ChromeFrameButtonList.svelte';
-	import Explorer from '../components/pages/explorer/Explorer.svelte';
-	import Dashboard from '../../src/components/pages/dashboard/Dashboard.svelte';
 	import ThemeSwitcher from '$lib/ui/themeswitcher/ThemeSwitcher.svelte';
 	import { goto } from '$app/navigation';
 	import Button from '$lib/base/button/Button.svelte';
 	import Icon from '$lib/base/icon/Icon.svelte';
 	import IntersectionObserver from '../components/IntersectionObserver.svelte';
+	import LeftMenu from '$components/LeftMenu.svelte';
+	import { setContext, getContext } from 'svelte';
+	import { writable } from 'svelte/store';
+	import type { Writable } from 'svelte/store';
+	import type { UiContextType } from '$contexts/ui.context.js';
+
+	let store = writable<UiContextType>({ drawerFlow: 'fixed' });
+	setContext<Writable<UiContextType>>('uiContext', store);
+
+	let uiContext = getContext<Writable<UiContextType>>('uiContext');
 	let element: any;
 	let intersecting: boolean;
+
+	let DrawerRef: Drawer;
+
+	function onDrawerClick() {
+		DrawerRef.actions.toggle();
+	}
 </script>
 
 <svelte:head>
@@ -68,23 +71,25 @@
 	</script>
 </svelte:head>
 
-<div class="content-slide">
-	<nav class="flex-h pos-sticky pad flex-align-middle shad-3 gap-small zI-10 w-full">
-		<Button icon="menu" iconFamily="mdi" />
-		<div>{intersecting ? 'Element is in view' : 'Element is not in view'}</div>
-		<div class="flex-main" />
-		<a href="svelte-components">Components</a>
-		<ThemeSwitcher />
-	</nav>
-	<slot />
+<div class="flex-h">
+	<Drawer bind:this={DrawerRef} flow={$uiContext.drawerFlow} isOpen={true}>
+		<LeftMenu />
+	</Drawer>
+	<div class="v-full flex-main overflow-hidden">
+		<nav class="flex-h pos-sticky pad flex-align-middle shad-3 gap-small zI-20 w-full">
+			<Button on:click={onDrawerClick} icon="menu" iconFamily="mdi" />
+			<div>{$uiContext.drawerFlow}</div>
+			<div>{intersecting ? 'Element is in view' : 'Element is not in view'}</div>
+			<div class="flex-main" />
+			<a href="svelte-components">Components</a>
+			<ThemeSwitcher />
+		</nav>
+		<slot />
+	</div>
 </div>
 
-<!-- <div id="layout" class="h-full flex-main theme-bg-paper-alpha-high">
-	
-</div> -->
 <style global lang="scss">
 	@import '../styles/main.scss';
-
 
 	.content-slide {
 		height: 100%;

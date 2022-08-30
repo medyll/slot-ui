@@ -34,13 +34,20 @@
 	 * position
 	 * @type 'wide' | 'inplace'
 	 */
-	export let flow: 'fixed' | 'relative' | 'absolute' = 'relative'; // fixed,relative,absolute
+	export let flow: 'fixed' | 'relative' | 'absolute' = 'fixed'; // fixed,relative,absolute
 	export let stickTo: 'right' | 'left' | 'top' | 'bottom' = 'left';
 	export let showOpenerIcon: boolean = false;
 
-	export function toggle(visibleSate?: boolean) {
+	/** @deprecated use actions.toggle */
+	export function toggle(visibleSate?: boolean) {		
 		isOpen = visibleSate !== undefined ? visibleSate : !isOpen;
 	}
+	/** should be used  */
+	export const actions = {
+		toggle: (visibleSate?: boolean) => {
+			isOpen = visibleSate !== undefined ? visibleSate : !isOpen;
+		}
+	};
 
 	/** default width of the drawer in vertical mode */
 	export let defaultWidth: string = '288px';

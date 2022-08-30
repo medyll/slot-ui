@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { filter } from 'lodash';
+	import ComponentDemo from '$components/ComponentDemo.svelte';
 	import Tree from './Tree.svelte';
 
 	let paths = [
@@ -34,11 +35,10 @@
 	let selectedData = [];
 </script>
 
-<div class="flex-v gap-large">
-	<h5>{'<Tree />'}</h5>
-	<cite><p>
-			We were looking for leaves and we found trees<br /> B. Esein, 1354
-		</p></cite>
+<ComponentDemo
+	component="Tree"
+	cite="We were looking for leaves and we found trees<br /> B. Esein, 1354"
+>
 	<div class="flex-v gap-medium">
 		<div style="width:250px">
 			<Tree pathField="path" {data} paths={pathsData} bind:selectedData />
@@ -49,4 +49,4 @@
 			null,
 			' '
 		)}</pre>
-</div>
+</ComponentDemo>

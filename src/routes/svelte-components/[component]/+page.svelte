@@ -5,8 +5,9 @@
 	export let data:any = {} 
 
 	let tt: any;
-	$: tt = dataOp.filterListFirst(slotUiComponentList, data?.component, 'code');
+	$: tt = dataOp.filterListFirst(slotUiComponentList, data?.component, 'code'); 
 </script>
+
 <div>
 <svelte:component this={tt?.component} />
 </div>

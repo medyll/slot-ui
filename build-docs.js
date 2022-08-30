@@ -60,8 +60,8 @@ function createFile(fileList) {
 		.join('\r\n');
 }
 
-function createObject(fileList) {
-	const start = 'export const slotUiComponentList = [ ';
+function createObject(fileList, exportName="slotUiComponentList") {
+	const start = `export const ${fileName} = [ `;
 	const middle = fileList
 		?.map((fl) => {
 			const comp = fl.split('\\').slice(-1).toString()?.replace(/\./g, '');
@@ -93,10 +93,6 @@ function createMethods(fileList) {
 			const comp = file.split('\\').slice(-1)[0].split('.')[0];
 			const newContent = frag?.[0]?.replace(/export/gm, '');
 			const src = ('$lib/sitedata/api/' + comp + '.md').replace(/\\/g, '/');
-			/* console.log(file.replace(srcPackage,'---')) */
-			/* console.log(frag?.[0]?.replace(/export/gm,'')) */
-			// console.log(comp,src)
-			// not for .demo
 			if (!keyDone[comp.toLowerCase()] && !comp.toLowerCase().includes('demo')) {
 				objImport.push(`import ${comp}ReadMe from "${src}"`);
 				objObj.push(`${comp.toLowerCase()}:${comp}ReadMe`);
@@ -117,6 +113,7 @@ function createMethods(fileList) {
 // create a file
 
 const result = getAllFiles(srcLibDir);
+const resultPreview = getAllFiles(srcLibDir,[],'preview');
 const resultProps = getAllFiles(srcPackage, [], 'svelte.d.ts');
 
 // write methods from packaged components
@@ -125,7 +122,12 @@ createMethods(resultProps);
 // write component list
 fs.writeFileSync(
 	dirPath + '/componentList.ts',
-	createFile(result) + ' \r\n ' + createObject(result)
+	createFile(result) + ' \r\n ' + createObject(result,"slotUiComponentList")
 );
 
 console.log(dirPath, 'Documentation files created into /componentList.ts');
+fs.writeFileSync(
+	dirPath + '/componentPreviewList.ts',
+	createFile(result) + ' \r\n ' + createObject(result,"slotUiComponentPreviewList")
+);
+console.log(dirPath, 'Preview files created into /componentList.ts');
