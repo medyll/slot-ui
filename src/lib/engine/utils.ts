@@ -52,7 +52,7 @@ export class dataOp {
 
     let reg = new RegExp(`${kw}`, 'i');
     return arr.filter((item: Record<string, any>) => {
-      if (fieldname !== '*') return this.resolveDotPath(item, fieldname).search(reg)
+      if (fieldname !== '*') return this.resolveDotPath(item, fieldname).search(reg) === -1 ? false: true
       if (fieldname === '*') return Object.keys(item).some((key: string) => {
         if(typeof item?.[key] === 'object' && !Array.isArray(item?.[key])){
           return  false

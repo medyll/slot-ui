@@ -12,7 +12,7 @@
     "preview": "svelte-kit preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "make-docs": "node build-docs & exit 0",
-    "make-docs-watch": "nodemon -e demo.svelte -x \"npm run make-docs\"",
+    "make-docs-watch": "nodemon -e demo.svelte,preview.svelte -x \"npm run make-docs\"",
     "css-build": "sass sass/cssfabric.scss static/cssfabric/cssfabric.vars.css",
     "css-watch": "npm run css-build -- --watch",
     "precommit": "npm unlink @medyll/cssfabric & npm i @medyll/cssfabric ",

@@ -61,7 +61,7 @@ function createFile(fileList) {
 }
 
 function createObject(fileList, exportName="slotUiComponentList") {
-	const start = `export const ${fileName} = [ `;
+	const start = `export const ${exportName} = [ `;
 	const middle = fileList
 		?.map((fl) => {
 			const comp = fl.split('\\').slice(-1).toString()?.replace(/\./g, '');
@@ -128,6 +128,6 @@ fs.writeFileSync(
 console.log(dirPath, 'Documentation files created into /componentList.ts');
 fs.writeFileSync(
 	dirPath + '/componentPreviewList.ts',
-	createFile(result) + ' \r\n ' + createObject(result,"slotUiComponentPreviewList")
+	createFile(resultPreview) + ' \r\n ' + createObject(resultPreview,"slotUiComponentPreviewList")
 );
-console.log(dirPath, 'Preview files created into /componentList.ts');
+console.log(dirPath, 'Preview files created into /componentPreviewList.ts');

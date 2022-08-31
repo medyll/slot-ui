@@ -48,8 +48,7 @@
 			}
 		});
 	});
-
-	 $: console.log(contentSlide?.scrollTop); 
+ 
 </script>
 
 <svelte:head>
