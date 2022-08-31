@@ -71,20 +71,19 @@
 	</script>
 </svelte:head>
 
-<div class="flex-h">
+<div class="flex-h h-full overflow-hidden">
 	<Drawer bind:this={DrawerRef} flow={$uiContext.drawerFlow} isOpen={true}>
 		<LeftMenu />
 	</Drawer>
-	<div class="v-full flex-main overflow-hidden">
-		<nav class="flex-h pos-sticky pad flex-align-middle shad-3 gap-small zI-20 w-full">
-			<Button on:click={onDrawerClick} icon="menu" iconFamily="mdi" />
-			<div>{$uiContext.drawerFlow}</div>
-			<div>{intersecting ? 'Element is in view' : 'Element is not in view'}</div>
+	<div class="v-full flex-main overflow-auto">
+		<nav class="flex-h pos-sticky pad flex-align-middle shad-3 gap-small zI-10 w-full">
+			<Button on:click={onDrawerClick} icon="menu" iconFamily="mdi" /> 
+			<h3>Slotui</h3>
 			<div class="flex-main" />
 			<a href="svelte-components">Components</a>
 			<ThemeSwitcher />
 		</nav>
-		<slot />
+		<div class="zI-0"><slot /></div>
 	</div>
 </div>
 

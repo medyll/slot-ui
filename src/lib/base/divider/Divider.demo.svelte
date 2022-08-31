@@ -1,4 +1,5 @@
 <script lang="ts">
+import ComponentDemo from '$components/ComponentDemo.svelte';
 	import type { ElementProps } from 'src/types';
 	import Divider from './Divider.svelte';
 	type OptType = {
@@ -25,33 +26,29 @@
 	}
 </script>
 
-<div class="flex-v gap-large">
-	<h5>{'<Divider />'}</h5>
-	<cite
-		><p>
-			What is separating before from after is not a time nor a place : it's a component <br /> B. Franklin,
-			1854
-		</p></cite
-	>
-	<div class=" flex-v gap-small">
-		{#each Object.keys(options) as option}
-			<h5 class="pad">{option}</h5>
-			<div class=" flex-h flex-wrap gap-small">
-				{#each options[option] as optionVal}
-					{@const inlineObj = { [option]: optionVal }}
-					<div class="w-large pos-rel  text-center">
-						<div class="pad">{option} : {optionVal}</div>
-						<div class="position:relative;" class:flex-h={optionVal === 'vertical'}  class:flex-align-middle={optionVal === 'vertical'}>
-							<div> 
-								What is before<br />
-                                in fact
-							</div>
-							<Divider {...inlineObj} />
-							<div>could be after <br /> also ?</div>
+<ComponentDemo component='Divider'
+cite="What is separating before from after is not a time nor a place : it's a component <br /> B. Franklin,
+1854"
+>
+<div class=" flex-v gap-small">
+	{#each Object.keys(options) as option}
+		<h5 class="pad">{option}</h5>
+		<div class=" flex-h flex-wrap gap-small">
+			{#each options[option] as optionVal}
+				{@const inlineObj = { [option]: optionVal }}
+				<div class="w-large pos-rel  text-center">
+					<div class="pad">{option} : {optionVal}</div>
+					<div class="position:relative;" class:flex-h={optionVal === 'vertical'}  class:flex-align-middle={optionVal === 'vertical'}>
+						<div> 
+							What is before<br />
+							in fact
 						</div>
+						<Divider {...inlineObj} />
+						<div>could be after <br /> also ?</div>
 					</div>
-				{/each}
-			</div>
-		{/each}
-	</div>
+				</div>
+			{/each}
+		</div>
+	{/each}
 </div>
+</ComponentDemo>
