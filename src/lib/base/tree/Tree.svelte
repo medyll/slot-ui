@@ -15,9 +15,10 @@
 	export let element: HTMLDivElement | null = null;
 	const forwardEvents = createEventForwarder(get_current_component());
 
+
+	export let data: Data[] = [];
 	export let paths: Record<string, any>[] = [];
 	export let pathField: string = 'path';
-	export let data: Data[] = [];
 
 	let finalPaths: TreeItemType[];
 
@@ -92,9 +93,9 @@
 </script>
 
 <div bind:this={element} class="treeRoot {className}" use:forwardEvents>
-	{#if level === 0}
+	<!-- {#if level === 0}
 		<Finder />
-	{/if}
+	{/if} -->
 	{#each pathes as pat, k}
 		<div data-category={pat.path} class=" ">
 			<div
