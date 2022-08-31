@@ -18,7 +18,7 @@
 	import { writable } from 'svelte/store';
 	import type { Writable } from 'svelte/store';
 	import type { UiContextType } from '$contexts/ui.context.js';
-
+	import { onMount } from 'svelte';
 	let store = writable<UiContextType>({ drawerFlow: 'fixed' });
 	setContext<Writable<UiContextType>>('uiContext', store);
 
@@ -27,10 +27,29 @@
 	let intersecting: boolean;
 
 	let DrawerRef: Drawer;
+	let contentSlide: HTMLElement;
+	let innerSlide: HTMLElement;
+	let navElement: HTMLElement;
+
+	let scrolled: boolean = false;
 
 	function onDrawerClick() {
 		DrawerRef.actions.toggle();
 	}
+
+	onMount(() => {
+		contentSlide.addEventListener('scroll', function (event) { 
+			if (contentSlide?.scrollTop > 32 && !scrolled) {
+				scrolled = true;
+				navElement.classList.add('shad-3')
+			} else if (contentSlide?.scrollTop < 32) {
+				scrolled = false;
+				navElement.classList.remove('shad-3')
+			}
+		});
+	});
+
+	 $: console.log(contentSlide?.scrollTop); 
 </script>
 
 <svelte:head>
@@ -53,7 +72,7 @@
 		}
 	</style>
 	<script>
-		/*hack for legacy node app*/
+		/* hack for legacy node app */
 		var global = global || window;
 		var Buffer = Buffer || [];
 		var process = process || { env: { DEBUG: undefined }, version: [] };
@@ -75,30 +94,34 @@
 	<Drawer bind:this={DrawerRef} flow={$uiContext.drawerFlow} isOpen={true}>
 		<LeftMenu />
 	</Drawer>
-	<div class="v-full flex-main overflow-auto">
-		<nav class="nav flex-h pos-sticky pad flex-align-middle shad-3 gap-small zI-10 w-full h-4">
+	<div id="contentSlide" bind:this={contentSlide}>
+		<nav
+			bind:this={navElement}
+			class="nav flex-h pos-sticky pad flex-align-middle gap-small zI-10 w-full h-4 gap-medium"
+		>
 			<Button on:click={onDrawerClick} icon="menu" iconFamily="mdi" />
 			<h3>SlotUi</h3>
 			<div class="flex-main" />
 			<a href="svelte-components">Components</a>
 			<ThemeSwitcher iconFamily="mdi" icon="paint-outline" title="toggle theme" />
 		</nav>
-		<div class="zI-0"><slot /></div>
+		<div id="innerSlide" bind:this={innerSlide} class="zI-0"><slot /></div>
 	</div>
 </div>
 
 <style global lang="scss">
 	@import '../styles/main.scss';
 
-	.content-slide {
+	#contentSlide {
 		height: 100%;
 		overflow: auto;
+		flex: 1;
 		scroll-behavior: smooth;
 		scroll-padding-top: 25rem;
 	}
 
 	.nav {
-		background-color: var(--theme-color-paper-alpha);
-		backdrop-filter: blur(30px);
+		background-color: var(--theme-color-background-alpha);
+		backdrop-filter: blur(30px); 
 	}
 </style>
