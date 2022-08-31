@@ -1,5 +1,4 @@
-<script lang="ts">
-	import Dashboard from '$components/pages/dashboard/Dashboard.svelte';
+<script lang="ts"> 
 	import { slotUiComponentList } from '$sitedata/componentList';
 	import Paper from '$lib/base/paper/Paper.svelte';
 

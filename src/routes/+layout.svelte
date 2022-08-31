@@ -76,12 +76,12 @@
 		<LeftMenu />
 	</Drawer>
 	<div class="v-full flex-main overflow-auto">
-		<nav class="flex-h pos-sticky pad flex-align-middle shad-3 gap-small zI-10 w-full">
-			<Button on:click={onDrawerClick} icon="menu" iconFamily="mdi" /> 
-			<h3>Slotui</h3>
+		<nav class="nav flex-h pos-sticky pad flex-align-middle shad-3 gap-small zI-10 w-full h-4">
+			<Button on:click={onDrawerClick} icon="menu" iconFamily="mdi" />
+			<h3>SlotUi</h3>
 			<div class="flex-main" />
 			<a href="svelte-components">Components</a>
-			<ThemeSwitcher />
+			<ThemeSwitcher iconFamily="mdi" icon="paint-outline" title="toggle theme" />
 		</nav>
 		<div class="zI-0"><slot /></div>
 	</div>
@@ -95,5 +95,10 @@
 		overflow: auto;
 		scroll-behavior: smooth;
 		scroll-padding-top: 25rem;
+	}
+
+	.nav {
+		background-color: var(--theme-color-paper-alpha);
+		backdrop-filter: blur(30px);
 	}
 </style>

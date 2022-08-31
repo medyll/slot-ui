@@ -2,31 +2,13 @@
 
 @charset "utf-8";
 
-$theme: (
-        primary: #00B5E2,
-        secondary: #330c2f,
-        tertiary: #cacaaa,
-        foreground: #282230,
-        background: #f1f1f1,
-);
-
-$themes: (
-        light:(
-                foreground: #282230,
-                background: #f1f1f1,
-                paper: #ededed
-        ),
-        dark:(
-                foreground: #f1f1f1,
-                background: #27323a,
-                paper: #3a3b3b
-        ),
-); 
- 
- 
-$theme-color-primary: #00B5E2;
+$theme-color-primary: rgb(56, 21, 0);
 $theme-color-secondary: #330c2f;
 $theme-color-tertiary: #cacaaa;
+
+$theme-dark-color-foreground: #f1f1f1;
+$theme-dark-color-background: #27323a;
+$theme-dark-color-paper: #3a3b3b;
 
 // override cssFabric config
 // delivers new css_vars
