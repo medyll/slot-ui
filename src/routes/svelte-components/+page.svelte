@@ -3,6 +3,7 @@
 	import { slotUiComponentPreviewList } from '$sitedata/componentPreviewList';
 	import Paper from '$lib/base/paper/Paper.svelte';
 	import { dataOp } from '$lib/engine/utils';
+	import Divider from '$lib/base/divider/Divider.svelte';
 
 	function spliceArray(arrayIn, size) {
 		let out = [];
@@ -15,27 +16,30 @@
 	}
 
 	function filterList(component: string) {
-		console.log(component,dataOp.searchList(slotUiComponentPreviewList, component, 'code'))
+		console.log(component, dataOp.searchList(slotUiComponentPreviewList, component, 'code'));
 
 		return dataOp.searchList(slotUiComponentPreviewList, component, 'code')?.[0] ?? undefined;
 	}
- 
 </script>
 
 <div class="flex-main pad-4 overflow-auto ">
 	<div class="gridDemo">
 		{#each spliceArray(slotUiComponentList, 3) as spliced}
-		<div>
-			{#each spliced as component} 					 
-				<Paper density="kind">
-					{component.code}
-					{#if Boolean(filterList(component.code))} 
-						<svelte:component this={filterList(component.code).component} />  
-						<!-- {@debug red} -->
-					{/if}
-				</Paper>
-			{/each}
-		</div>
+			<div>
+				{#each spliced as component}
+					<Paper density="kind">
+						{component.name}
+						<Divider />
+						{#if Boolean(filterList(component.code))}
+							<svelte:component this={filterList(component.code).component} />
+						{/if}
+						<div class="flex-h flex-wrap gap-small">
+							<div class="flex-main"><a href="">{component.name} examples</a></div>
+							<div class="flex-main">{component.name} api</div>
+						</div>
+					</Paper>
+				{/each}
+			</div>
 		{/each}
 	</div>
 </div>
