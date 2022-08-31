@@ -51,65 +51,54 @@
 			<div class="gridDemo">
 				<div>
 					<Paper density="kind">
-						<Select let:option options={optionsData}>
+						<!-- <Select let:option options={optionsData}>
 							<Options text={option.text} />
-						</Select>
-						<Divider />
-						<div class="pad-4 dsp-block-inline flex-v flex-align-middle-center">
-							<Button primary="explorer" on:click={handleClick('explorer')} />
-							<br />
-							<Button primary="what" on:click={handleClick('what')} />
-							<Button primary="svelte-components" on:click={handleClick('svelte-components')} />
-						</div>
+						</Select> --> 
+						Button
 					</Paper>
 					<Paper density="kind">
-						<ButtonDemo />
+						Button
 					</Paper>
 					
 					<Paper density="kind">
-						<Avatar size="small">
-							<Icon icon="code" />
-						</Avatar>
-						<Avatar size="small">
-							<Icon icon="code" />
-						</Avatar>
+						Avatar
 					</Paper>
 					<Paper density="kind">
-						<TabsDemo />
+						Tabs
 					</Paper>
 					<Paper density="kind">
-						<CartoucheDemo />
+						Cartouche
 					</Paper>
 					<Paper density="kind">
-						<AlertDemo />
+						Alert
 					</Paper>
 				</div>
 				<div>
 					<Paper density="kind">
-						<InputDemo />
+						Input
 					</Paper>
 					<Paper density="kind">
-						<BoxDemo />
+						Box
 					</Paper>
 					<Paper>
-						<Menu menuList={menuData} />
+						Menu
 					</Paper>
 					<Paper>
-						<ListDemo />
+						List
 					</Paper>
 				</div>
 				<div>
 					<Paper density="kind">
-						<DataListDemo />
+						DataList
 					</Paper>
 					<Paper density="kind">
-						<CardDemo />
+						Card
 					</Paper>
 					<Paper density="kind">
-						<TreeDemo />
+						Tree
 					</Paper>
 					<Paper density="kind">
-						<GrouperDemo />
+						Grouper
 					</Paper>
 				</div>
 			</div>
