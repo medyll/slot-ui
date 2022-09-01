@@ -15,7 +15,8 @@
 			<h5 class="text-full">
 				SlotUi could be a component library for svelte<br />
 				Based on cssFabric at css properties level<br />
-				It's also rfee to not be used
+				It's also free to not be used<br />
+				Because SlotUi is primarily a way for me to learn Svelte
 			</h5>
 		</div>
 		<div class="w-full">
