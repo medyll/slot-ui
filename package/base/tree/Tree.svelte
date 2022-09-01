@@ -10,9 +10,9 @@ let className = '';
 export { className as class };
 export let element = null;
 const forwardEvents = createEventForwarder(get_current_component());
+export let data = [];
 export let paths = [];
 export let pathField = 'path';
-export let data = [];
 let finalPaths;
 // private use
 export let pathes = trans2Tree(paths, pathField);
@@ -78,9 +78,9 @@ function toggle(path, visibility) {
 </script>
 
 <div bind:this={element} class="treeRoot {className}" use:forwardEvents>
-	{#if level === 0}
+	<!-- {#if level === 0}
 		<Finder />
-	{/if}
+	{/if} -->
 	{#each pathes as pat, k}
 		<div data-category={pat.path} class=" ">
 			<div

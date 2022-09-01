@@ -12,6 +12,7 @@
 	export let data_1 = null;
 	export let data_2 = null;
 	export let data_3 = null;
+	export let data_4 = null;
 	export let errors;
 
 	if (!browser) {
@@ -44,7 +45,13 @@
 			<svelte:component this={components[1]} data={data_1} {errors}>
 				{#if components[3]}
 					<svelte:component this={components[2]} data={data_2} {errors}>
-						<svelte:component this={components[3]} data={data_3}/>
+						{#if components[4]}
+							<svelte:component this={components[3]} data={data_3} {errors}>
+								<svelte:component this={components[4]} data={data_4}/>
+							</svelte:component>
+						{:else}
+							<svelte:component this={components[3]} data={data_3} {errors} />
+						{/if}
 					</svelte:component>
 				{:else}
 					<svelte:component this={components[2]} data={data_2} {errors} />

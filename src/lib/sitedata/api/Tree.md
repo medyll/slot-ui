@@ -3,9 +3,9 @@ __propDef: {
     props: {
         class?: string | undefined;
         element?: HTMLDivElement | null | undefined;
+        data?: Data[] | undefined;
         paths?: Record<string, any>[] | undefined;
         pathField?: string | undefined;
-        data?: Data[] | undefined;
         pathes?: TreeItemType<Record<string, any>>[] | undefined;
         level?: number | undefined;
         selectedDataKeys?: string[] | undefined;

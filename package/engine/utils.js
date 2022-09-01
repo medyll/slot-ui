@@ -13,6 +13,7 @@ export const propsProxy = (props, data) => {
     }
     return ret;
 };
+/** data manipulation class */
 export class dataOp {
     /** sorting  */
     static sortBy(arr, by, sortDir = 'asc') {
@@ -35,7 +36,7 @@ export class dataOp {
         let reg = new RegExp(`${kw}`, 'i');
         return arr.filter((item) => {
             if (fieldname !== '*')
-                return this.resolveDotPath(item, fieldname).search(reg);
+                return this.resolveDotPath(item, fieldname).search(reg) === -1 ? false : true;
             if (fieldname === '*')
                 return Object.keys(item).some((key) => {
                     if (typeof item?.[key] === 'object' && !Array.isArray(item?.[key])) {

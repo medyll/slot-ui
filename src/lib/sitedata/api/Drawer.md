@@ -15,6 +15,9 @@ __propDef: {
         stickTo?: "left" | "right" | "top" | "bottom" | undefined;
         showOpenerIcon?: boolean | undefined;
         toggle?: ((visibleSate?: boolean) => void) | undefined;
+        /** should be used  */ actions?: {
+            toggle: (visibleSate?: boolean) => void;
+        } | undefined;
         /** default width of the drawer in vertical mode */ defaultWidth?: string | undefined;
         /** minimum width of the drawer in vertical mode and closed state */ defaultVisibleArea?: string | undefined;
         /** default height of the drawer in horizontal mode */ defaultHeight?: string | undefined;

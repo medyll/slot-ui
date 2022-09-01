@@ -27,12 +27,19 @@ export let hideCloseIcon = false;
  * position
  * @type 'wide' | 'inplace'
  */
-export let flow = 'relative'; // fixed,relative,absolute
+export let flow = 'fixed'; // fixed,relative,absolute
 export let stickTo = 'left';
 export let showOpenerIcon = false;
+/** @deprecated use actions.toggle */
 export function toggle(visibleSate) {
     isOpen = visibleSate !== undefined ? visibleSate : !isOpen;
 }
+/** should be used  */
+export const actions = {
+    toggle: (visibleSate) => {
+        isOpen = visibleSate !== undefined ? visibleSate : !isOpen;
+    }
+};
 /** default width of the drawer in vertical mode */
 export let defaultWidth = '288px';
 /** minimum width of the drawer in vertical mode and closed state */

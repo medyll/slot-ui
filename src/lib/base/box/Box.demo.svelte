@@ -14,13 +14,13 @@
 		<span slot="titleSlot">Title of the box</span>
 		Content of the box
 	</Box>
-	<Divider />
+	<br />
 	<Box class="marg" onClose="cdss">
 		<Icon fontSize="small" icon="clock" slot="iconSlot" />
 		<span slot="titleSlot">Title of the box</span>
 		Content of the box
 	</Box>
-	<Divider />
+	<br />
 	<Box hasMenu={true} onClose="cd">
 		<Icon fontSize="small" icon="faClock" slot="iconSlot" />
 		<span slot="titleSlot">Title of the box</span>
@@ -28,7 +28,7 @@
 			<Button>button</Button>
 			<Button>another button</Button>
 		</div>
-		Content of the boxs
+		Content of the box
 		<br />
 		with a button
 	</Box>

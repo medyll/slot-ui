@@ -7,12 +7,12 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const srcPackage = path.join(__dirname, 'package');
 const srcLibDir = path.join(__dirname, 'src', 'lib');
-const dirPath = path.join('src', 'lib','sitedata');
+const dirPath = path.join('src', 'lib', 'sitedata');
 const libShort = '$lib';
 
 let fileHead = '';
 
-mkdir(dirPath,{recursive:true},()=>{});
+mkdir(dirPath, { recursive: true }, () => {});
 
 const getAllFiles = function (dirPath, arrayOfFiles = [], fragment = 'demo.svelte') {
 	let files = fs.readdirSync(dirPath);
@@ -60,7 +60,7 @@ function createFile(fileList) {
 		.join('\r\n');
 }
 
-function createObject(fileList, exportName="slotUiComponentList") {
+function createObject(fileList, exportName = 'slotUiComponentList') {
 	const start = `export const ${exportName} = [ `;
 	const middle = fileList
 		?.map((fl) => {
@@ -80,8 +80,8 @@ function createObject(fileList, exportName="slotUiComponentList") {
 }
 
 function createMethods(fileList) {
-	mkdir(dirPath + '/api',{recursive:true},()=>{});
-	let keyDone = {}
+	mkdir(dirPath + '/api', { recursive: true }, () => {});
+	let keyDone = {};
 	let objImport = [];
 	let objObj = [];
 	fileList.forEach((file) => {
@@ -93,16 +93,17 @@ function createMethods(fileList) {
 			const comp = file.split('\\').slice(-1)[0].split('.')[0];
 			const newContent = frag?.[0]?.replace(/export/gm, '');
 			const src = ('$lib/sitedata/api/' + comp + '.md').replace(/\\/g, '/');
-			if (!keyDone[comp.toLowerCase()] && !comp.toLowerCase().includes('demo')) {
+			if (!keyDone[comp.toLowerCase()] &&  !file.toLowerCase().includes('demo') &&  !file.toLowerCase().includes('preview')) {
 				objImport.push(`import ${comp}ReadMe from "${src}"`);
 				objObj.push(`${comp.toLowerCase()}:${comp}ReadMe`);
-				keyDone[comp.toLowerCase()] = true
-			}
+				keyDone[comp.toLowerCase()] = true;
+				if (!newContent) newContent = data; // console.log({file, frag,data});; //newContent = data; //
 
-			fs.writeFileSync(
-				dirPath + '/api/' + comp + '.md',
-				newContent ? '```typescript \r\n' + newContent + '\r\n ```' : 'error !!'
-			);
+				fs.writeFileSync(
+					dirPath + '/api/' + comp + '.md',
+					newContent ? '```typescript \r\n' + newContent + '\r\n ```' : 'error !!'
+				);
+			}
 		} catch (e) {}
 	});
 	// write catalog object
@@ -113,7 +114,7 @@ function createMethods(fileList) {
 // create a file
 
 const result = getAllFiles(srcLibDir);
-const resultPreview = getAllFiles(srcLibDir,[],'preview');
+const resultPreview = getAllFiles(srcLibDir, [], 'preview');
 const resultProps = getAllFiles(srcPackage, [], 'svelte.d.ts');
 
 // write methods from packaged components
@@ -122,12 +123,12 @@ createMethods(resultProps);
 // write component list
 fs.writeFileSync(
 	dirPath + '/componentList.ts',
-	createFile(result) + ' \r\n ' + createObject(result,"slotUiComponentList")
+	createFile(result) + ' \r\n ' + createObject(result, 'slotUiComponentList')
 );
 
 console.log(dirPath, 'Documentation files created into /componentList.ts');
 fs.writeFileSync(
 	dirPath + '/componentPreviewList.ts',
-	createFile(resultPreview) + ' \r\n ' + createObject(resultPreview,"slotUiComponentPreviewList")
+	createFile(resultPreview) + ' \r\n ' + createObject(resultPreview, 'slotUiComponentPreviewList')
 );
 console.log(dirPath, 'Preview files created into /componentPreviewList.ts');

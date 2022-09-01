@@ -7,11 +7,14 @@ export const nodes = [
 	() => import('./nodes/3'),
 	() => import('./nodes/4'),
 	() => import('./nodes/5'),
-	() => import('./nodes/6')
+	() => import('./nodes/6'),
+	() => import('./nodes/7'),
+	() => import('./nodes/8')
 ];
 
 export const dictionary = {
-	"": [4],
-	"svelte-components": [5,[2]],
-	"svelte-components/[component]": [6,[2,3]]
+	"": [5],
+	"svelte-components": [6,[2]],
+	"svelte-components/[component]": [7,[2,3]],
+	"svelte-components/[component]/api": [8,[2,3,4]]
 };

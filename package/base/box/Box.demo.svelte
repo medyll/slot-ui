@@ -2,26 +2,24 @@
 import Icon from '../icon/Icon.svelte';
 import Divider from '../divider/Divider.svelte';
 import Button from '../button/Button.svelte';
+import ComponentDemo from '$components/ComponentDemo.svelte';
 </script>
 
-<div class="flex-v gap-large">
-	<h5>{'<Box />'}</h5>
-	<cite
-		><p>
-			Boxes, essentially, contain other boxes. That's the meaning we'll found if open them<br /> B. Franklin,
-			1854
-		</p></cite>
+<ComponentDemo
+	component="Box"
+	cite="Boxes, essentially, contain other boxes. That's the meaning we'll found if open them<br /> B. Franklin,1854"
+>
 	<Box class="marg">
 		<span slot="titleSlot">Title of the box</span>
 		Content of the box
 	</Box>
-	<Divider />
+	<br />
 	<Box class="marg" onClose="cdss">
 		<Icon fontSize="small" icon="clock" slot="iconSlot" />
 		<span slot="titleSlot">Title of the box</span>
 		Content of the box
 	</Box>
-	<Divider />
+	<br />
 	<Box hasMenu={true} onClose="cd">
 		<Icon fontSize="small" icon="faClock" slot="iconSlot" />
 		<span slot="titleSlot">Title of the box</span>
@@ -29,8 +27,8 @@ import Button from '../button/Button.svelte';
 			<Button>button</Button>
 			<Button>another button</Button>
 		</div>
-		Content of the boxs
+		Content of the box
 		<br />
 		with a button
 	</Box>
-</div>
+</ComponentDemo>

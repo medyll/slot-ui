@@ -5,7 +5,7 @@
 	import { dataOp } from '$lib/engine/utils';
 	import Divider from '$lib/base/divider/Divider.svelte';
 
-	function spliceArray(arrayIn, size) {
+	function spliceArray(arrayIn: any[], size: number) {
 		let out = [];
 		const parts = Math.ceil(arrayIn.length / size);
 
@@ -16,8 +16,6 @@
 	}
 
 	function filterList(component: string) {
-		console.log(component, dataOp.searchList(slotUiComponentPreviewList, component, 'code'));
-
 		return dataOp.searchList(slotUiComponentPreviewList, component, 'code')?.[0] ?? undefined;
 	}
 </script>
@@ -34,8 +32,8 @@
 							<svelte:component this={filterList(component.code).component} />
 						{/if}
 						<div class="flex-h flex-wrap gap-small">
-							<div class="flex-main"><a href="">{component.name} examples</a></div>
-							<div class="flex-main">{component.name} api</div>
+							<div class="flex-main"><a href="/svelte-components/{component.code}">{component.name} examples</a></div>
+							<div class="flex-main"><a href="/svelte-components/{component.code}/api">{component.name} api</a></div>
 						</div>
 					</Paper>
 				{/each}

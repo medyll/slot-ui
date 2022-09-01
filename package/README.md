@@ -1,8 +1,9 @@
 # SlotUi
 
-alpha stage 
+pre-alpha stage 
 
 slotui is a  component library built around svelte
+and for now, a place for me to learn svelte
 ## Do not try this at home
  
 ```bash
@@ -13,5 +14,5 @@ npm i medyll@slotui
 yarn add medyll@slotui
 ```
 
-> Note: about the purpose
+
  
