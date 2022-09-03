@@ -21,8 +21,7 @@ const config = {
 		}
 	},
 	optimizeDeps: {
-		include: ['highlight.js', 'highlight.js/lib/core'],
-		external:['@sveltejs/kit/install-fetch']
+		include: ['highlight.js', 'highlight.js/lib/core']
 	},    
 	package: {
 		dir: 'package',
@@ -30,9 +29,6 @@ const config = {
 		exports: (filepath) => true
 	},
 	external:['@sveltejs/kit/install-fetch'],
-	ssr:{
-		external:['@sveltejs/kit/install-fetch']
-	}
 };
 
 export default config;

@@ -18,7 +18,11 @@ const config = {
 	],
 	extensions: ['.svelte', '.md'],
 	kit: {
-		adapter: adapter(),
+		adapter: adapter({
+			edge: false,
+			external:['@sveltejs/kit/install-fetch'],
+			split:true
+		}),
 		paths: {
 			// base: dev ? "" : "",
 			base: ''
