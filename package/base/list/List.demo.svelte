@@ -25,7 +25,7 @@ $: data = [...Array(1000)].map((val, index) => {
 // sorterer={[{ sortByField: 'data.name' }]}
 function openIn() { }
 </script>
-
+<!-- 
 <div class="flex-v gap-large">
 	<h5>{'<List />'}</h5>
 	<cite><p>List differs from menu by the way you call it <br /> B. Franklin, 1854</p></cite>
@@ -193,4 +193,4 @@ function openIn() { }
 
 		 
 	</div>
-</div>
+</div> -->

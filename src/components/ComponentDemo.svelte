@@ -7,10 +7,20 @@
 </script>
 
 <div class="flex-v gap-large w-full">
-	<h5>{`<${component} />`}</h5>
+	<h4>{`<${component} />`}</h4>
 	<cite><p>{@html cite}</p></cite>
-	<div class="flex-h flex-wrap gap-large">
-		<div class="flex-main"><slot /></div>
-		<div><svelte:component this={finalCompReadMe} /></div>
+	<div  class="flex-v gap-medium " >
+		<h5>Component {component} examples :</h5>
+		<div class="marg-l-4"><slot /></div>
+	</div>
+	<div  class="flex-v gap-medium " >
+		<h5>Api preview :</h5>
+		<div  class="marg-l-4"><svelte:component this={finalCompReadMe} /></div>
+	</div>
+	<div  class="flex-v gap-medium " >
+		<h5>Link to api :</h5>
+		<div  class="marg-l-4">
+			<a href="/svelte-components/{component.toLowerCase()}/api">Api for component "{component}"</a>
+		</div>
 	</div>
 </div>

@@ -60,7 +60,7 @@ onMount(() => {
 				</li>
 			{/each}
 		</ul>
-		<div>
+		<div data-coll="red">
 			<slot name="tabsTitleSlot" />
 		</div>
 		<div>

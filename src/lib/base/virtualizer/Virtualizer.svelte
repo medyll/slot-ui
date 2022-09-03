@@ -173,9 +173,9 @@
 	style="height: {height};"
 >
 	<div bind:this={contents} style="padding-top: {top}px; padding-bottom: {bottom}px;">
-		<div data-header style="position:sticky;top:0;z-index:10">
+		<!-- <div data-header style="position:sticky;top:0;z-index:10">
 			<slot name="virtualizeHeaderSlot" />
-		</div>
+		</div> -->
 		{#if browser && visible !== undefined}
 			{#each visible as row}
 				<slot item={row?.data ?? {}}>Missing content</slot>

@@ -1,14 +1,12 @@
 <script>import TitleBar from '../titleBar/TitleBar.svelte';
-import { createEventForwarder } from '../../engine/engine';
+import { createEventForwarder } from '../../engine/engine.js';
 import { createEventDispatcher, get_current_component, null_to_empty } from 'svelte/internal';
 import Icon from '../icon/Icon.svelte';
 const dispatch = createEventDispatcher();
-/*  common slotUi exports*/
 let className = '';
 export { className as class };
 export let element = null;
 const forwardEvents = createEventForwarder(get_current_component());
-/*  end slotUi exports*/
 /** is the content visible */
 export let isOpen = true;
 /** used to activate the slotui.TitleBar component */

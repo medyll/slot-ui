@@ -3,17 +3,21 @@
 <script lang="ts">
 	import Input from '$lib/base/input/Input.svelte';
 	import { dataOp } from '$lib/engine/utils';
+	import ComponentDemo from '$components/ComponentDemo.svelte';
 	import type { ComponentProps } from 'svelte';
 	let className = '';
 	export { className as class };
 	export let element: HTMLElement | null = null;
 
+	/** initial data to look in */
 	export let data: any = [];
+	/** default field to be used, can be * */
 	export let defaultField = '*';
+	/** search mode : exact or partial match*/
 	export let mode: 'exact' | 'partial' = 'partial';
+	/** external bind use, to read filtered data */
 	export let filteredData: any[] = [];
-
-
+ 
 	let searchString: string;
 
 	const doFind = <T = Record<string, any>>(list: T[], kw: string, field: string) => {

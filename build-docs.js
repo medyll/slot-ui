@@ -82,8 +82,12 @@ function createObject(fileList, exportName = 'slotUiComponentList') {
 function createMethods(fileList) {
 	mkdir(dirPath + '/api', { recursive: true }, () => {});
 	let keyDone = {};
+
 	let objImport = [];
 	let objObj = [];
+	let objApiImport = [];
+	let objApiObj = [];
+
 	fileList.forEach((file) => {
 		try {
 			const data = fs.readFileSync(file, 'utf8');
@@ -93,22 +97,35 @@ function createMethods(fileList) {
 			const comp = file.split('\\').slice(-1)[0].split('.')[0];
 			const newContent = frag?.[0]?.replace(/export/gm, '');
 			const src = ('$lib/sitedata/api/' + comp + '.md').replace(/\\/g, '/');
+			const srcApiFull = ('$lib/sitedata/api/' + comp + '.api.md').replace(/\\/g, '/');
+
 			if (!keyDone[comp.toLowerCase()] &&  !file.toLowerCase().includes('demo') &&  !file.toLowerCase().includes('preview')) {
 				objImport.push(`import ${comp}ReadMe from "${src}"`);
 				objObj.push(`${comp.toLowerCase()}:${comp}ReadMe`);
-				keyDone[comp.toLowerCase()] = true;
-				if (!newContent) newContent = data; // console.log({file, frag,data});; //newContent = data; //
+				// if (!newContent) newContent = data; // console.log({file, frag,data});; //newContent = data; //
 
 				fs.writeFileSync(
 					dirPath + '/api/' + comp + '.md',
 					newContent ? '```typescript \r\n' + newContent + '\r\n ```' : 'error !!'
 				);
+
+				objApiImport.push(`import ${comp}ApiReadMe from "${srcApiFull}"`);
+				objApiObj.push(`${comp.toLowerCase()}Api:${comp}ApiReadMe`);
+
+				fs.writeFileSync(
+					dirPath + '/api/' + comp + '.api.md',
+					'```'+data+ '\r\n ```'
+				);
+
+				keyDone[comp.toLowerCase()] = true;
 			}
 		} catch (e) {}
 	});
 	// write catalog object
 	const finalObj = `export const componentReadMe = {${objObj.join(',\r\n')}}`;
+	const finalApiObj = `export const componentApiReadMe = {${objApiObj.join(',\r\n')}}`;
 	fs.writeFileSync(dirPath + '/api/index.ts', objImport.join(';\r\n') + ';\r\n\r\n' + finalObj);
+	fs.writeFileSync(dirPath + '/api/indexApiFull.ts', objApiImport.join(';\r\n') + ';\r\n\r\n' + finalApiObj);
 }
 
 // create a file

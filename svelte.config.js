@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-static';
+import adapter from '@sveltejs/adapter-vercel';
 import path from 'path';
 import preprocess from 'svelte-preprocess';
 import { sx4uPreprocess } from './src/lib/uses/sx4u/sx4uPreprocess.js';
@@ -18,13 +18,10 @@ const config = {
 	],
 	extensions: ['.svelte', '.md'],
 	kit: {
-		adapter: adapter({
-			pages: 'docs',
-			assets: 'docs'
-		}),
+		adapter: adapter(),
 		paths: {
-			// change below to your repo name
 			// base: dev ? "" : "",
+			base: ''
 		},
 		prerender: {
 			default: true

@@ -98,9 +98,9 @@
 >
 	{#if element}
 		<Virtualize height="100%" data={sortedData} let:item>
-			<svelte:fragment slot="virtualizeHeaderSlot">
+			<!-- <svelte:fragment slot="virtualizeHeaderSlot">
 				<slot name="head" />
-			</svelte:fragment>
+			</svelte:fragment> -->
 			{#if item}
 				{#if $$slots.default}
 					<slot {item} />

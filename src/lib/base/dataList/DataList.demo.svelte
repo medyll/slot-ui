@@ -15,27 +15,27 @@ is a datalist table <br /> B. Franklin, 1854'>
 <div class="flex-v gap-medium">
 	<h5>Automatique datalist</h5>
 	<div style="height:350px;width:350px;" class="what   pos-rel overflow-hidden pad-4">
-		<DataList {data} >
+		<!-- <DataList {data} >
 			<DataListHead slot="head">
 				<DataListCell  dataField="index">index</DataListCell>
 				<DataListCell  dataField="name">name</DataListCell>
 				<DataListCell  dataField="otherName"style="flex:1">otherName</DataListCell>
 			</DataListHead>
-		</DataList>
+		</DataList> -->
 	</div>
 	<h5>Automatique datalist slotted</h5>
 	<div style="height:350px;width:350px;" class="what   pos-rel overflow-hidden pad-4">
-		<DataList {data} on:datalist:click={()=>{}} >
+		<!-- <DataList {data} on:datalist:click={()=>{}} >
 			<DataListHead slot="head">
 				<DataListCell  dataField="index">index</DataListCell>
 				<DataListCell  dataField="name">name</DataListCell>
 				<DataListCell  dataField="otherName"style="flex:1">otherName</DataListCell>
 			</DataListHead>
-		</DataList>
+		</DataList> -->
 	</div>
 	<h5>Full slot datalist</h5>
 	<div style="height:350px;" class="what   pos-rel overflow-hidden pad-4">
-		<DataList {data} let:item>
+		<!-- <DataList {data} let:item>
 			<DataListHead slot="head">
 				<DataListCell style="width:50px;">index</DataListCell>
 				<DataListCell style="width:50px;">name</DataListCell>
@@ -52,7 +52,7 @@ is a datalist table <br /> B. Franklin, 1854'>
 				<DataListCell>vfbgfbgf</DataListCell>
 				<DataListCell>vfbgfbgf</DataListCell>
 			</DataListRow>
-		</DataList>
+		</DataList> -->
 	</div>
 </div>
 </ComponentDemo>

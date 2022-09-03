@@ -14,7 +14,7 @@
 </script>
  
 <Tabs activeTabCode="theTitle3" {items}>
-    <span slot="tabsTitleSlot">some tabs title</span>
-    <span slot="tabsButtonSlot" ><Button bordered >button</Button></span>
+    <!-- <span slot="tabsTitleSlot">some tabs title</span>
+    <span slot="tabsButtonSlot" ><Button bordered >button</Button></span> -->
 </Tabs>
 
