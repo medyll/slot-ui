@@ -18,6 +18,6 @@
 <!-- <div  class="flex-v gap-medium " >
 	<h5>Link to api :</h5>
 	<div  class="marg-l-4">
-		<a href="/svelte-components/{data.component.toLowerCase()}">Component "{data.component}" implementation examples</a>
+		<a href="/svelte-components/rought/{data.component.toLowerCase()}">Component "{data.component}" implementation examples</a>
 	</div>
 </div> -->
