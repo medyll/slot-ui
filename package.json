@@ -7,10 +7,10 @@
   },
   "scripts": {
     "dev": "vite dev  --port 3001 --host --open   ",
-    "build": "vite build",
+    "build": "svelte-kit sync && vite build",
     "package": "svelte-package",
-    "preview": "svelte-kit preview",
-    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "preview": "vite preview",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "make-docs": "node build-docs & exit 0",
     "make-docs-watch": "nodemon -e demo.svelte,preview.svelte -x \"npm run make-docs\"",
     "css-build": "sass sass/cssfabric.scss static/cssfabric/cssfabric.vars.css",

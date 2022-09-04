@@ -24,8 +24,7 @@
 	selectorField="code" 
 	height="100%"
 >
-	<ListItem data={listItem?.data}>
-		<span slot="primary">{null_to_empty(listItem?.primary)}</span>
-		<span slot="action">{null_to_empty(listItem?.action)}</span>
+	<ListItem data={listItem?.data}> 
+			<a slot="primary" href='/svelte-components/{listItem?.data?.code}'  >{null_to_empty(listItem?.primary)}</a> 
 	</ListItem>
 </List>

@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<base href="/">
+		<meta charset="utf-8" />
+		<meta name="description" content="" />
+		<link rel="icon" href="../favicon.png" />
+		<link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta http-equiv="content-security-policy" content=""><title>SlotUi sorter component details</title><link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet" data-svelte="svelte-yj60zk"><!-- HTML_TAG_START --><style>pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}/*!
+  Theme: GitHub
+  Description: Light theme as seen on github.com
+  Author: github.com
+  Maintainer: @Hirse
+  Updated: 2021-05-15
+
+  Outdated base version: https://github.com/primer/github-syntax-light
+  Current colors taken from GitHub's CSS
+*/.hljs{color:#24292e;background:#fff}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#d73a49}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#6f42c1}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#005cc5}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#032f62}.hljs-built_in,.hljs-symbol{color:#e36209}.hljs-code,.hljs-comment,.hljs-formula{color:#6a737d}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#22863a}.hljs-subst{color:#24292e}.hljs-section{color:#005cc5;font-weight:700}.hljs-bullet{color:#735c0f}.hljs-emphasis{color:#24292e;font-style:italic}.hljs-strong{color:#24292e;font-weight:700}.hljs-addition{color:#22863a;background-color:#f0fff4}.hljs-deletion{color:#b31d28;background-color:#ffeef0}</style><!-- HTML_TAG_END --><style type="text/css" data-svelte="svelte-yj60zk">{
+			@html cssfabricVars;
+		}
+	</style><style data-svelte="svelte-yj60zk">{
+			@html cssfabric;
+		}
+	</style><style type="text/css" data-svelte="svelte-yj60zk">{
+			@html cssfabricThemer;
+		}
+	</style><script data-svelte="svelte-yj60zk">/* hack for legacy node app */
+		var global = global || window;
+		var Buffer = Buffer || [];
+		var process = process || { env: { DEBUG: undefined }, version: [] };
+		if (document.body) {
+			document.body.setAttribute('data-theme', 'light');
+			if (localStorage && localStorage.getItem('themeMode')) {
+				document.body.setAttribute('data-theme', localStorage.getItem('themeMode'));
+			}
+		}
+		window.addEventListener('load', function (event) {
+			if (localStorage && localStorage.getItem('themeMode')) {
+				document.body.setAttribute('data-theme', localStorage.getItem('themeMode'));
+			}
+		});
+	</script><meta name="description" data-svelte="svelte-u61zo6"><meta name="description" data-svelte="svelte-awjfq1">
+	<link href="../_app/immutable/assets/+layout-47bf80b2.css" rel="stylesheet">
+	<link href="../_app/immutable/assets/Frame-e06116ae.css" rel="stylesheet">
+	<link rel="modulepreload" href="../_app/immutable/start-bc8496c4.js">
+	<link rel="modulepreload" href="../_app/immutable/chunks/index-97bbca98.js">
+	<link rel="modulepreload" href="../_app/immutable/chunks/singletons-dd8fb9a6.js">
+	<link rel="modulepreload" href="../_app/immutable/chunks/index-7150691d.js">
+	<link rel="modulepreload" href="../_app/immutable/components/pages/_layout.svelte-82f61bef.js">
+	<link rel="modulepreload" href="../_app/immutable/chunks/componentList-421e43d0.js">
+	<link rel="modulepreload" href="../_app/immutable/chunks/Frame.svelte_svelte_type_style_lang-b50ee946.js">
+	<link rel="modulepreload" href="../_app/immutable/components/pages/svelte-components/_layout.svelte-7a8faebc.js">
+	<link rel="modulepreload" href="../_app/immutable/components/pages/svelte-components/_component_/_layout.svelte-6dccc6a1.js">
+	<link rel="modulepreload" href="../_app/immutable/modules/pages/svelte-components/_component_/_layout.ts-48e0d700.js">
+	<link rel="modulepreload" href="../_app/immutable/chunks/_layout-781cbb69.js">
+	<link rel="modulepreload" href="../_app/immutable/components/pages/svelte-components/_component_/_page.svelte-1d49a65f.js">
+	<link rel="modulepreload" href="../_app/immutable/modules/pages/svelte-components/_component_/_page.ts-5b1c6aef.js">
+	<link rel="modulepreload" href="../_app/immutable/chunks/_page-74d72278.js">
+	</head>
+	<body  data-theme="dark" >
+		<script>
+			(function(l) {
+			  if (l.search[1] === '/' ) {
+				var decoded = l.search.slice(1).split('&').map(function(s) { 
+				  return s.replace(/~and~/g, '&')
+				}).join('?');
+				window.history.replaceState(null, '',
+					l.pathname.slice(0, -1) + decoded + l.hash
+				);
+			  }
+			}(window.location))
+	  </script>
+		
+
+
+
+
+<div class="flex-h h-full overflow-hidden">
+
+
+
+<div data-open="true" class="drawer flex-v h-full " style="display:flex;position:fixed;left:0;top:0;bottom:0;height:100%;height:100%;;width:288px;;"><div class="opener" style="right:-16px;top:8px;"></div>
+	<div class="header flex-h">
+				<div class="flex-main flex-align-middle "><div class="flex-v gap-tiny">
+						</div>
+					</div>
+				<div><button class=" w-auto  size svelte-1e42kt5" data-height="default" type="button" density="default" nowrap="false" link="false" bordered="false" contained="false" naked presetdefault="" iconFontSize="small"><div class="innerButton svelte-1e42kt5"><div class="startButtonSlot svelte-1e42kt5">
+					
+				</div>
+		
+		</div>
+	
+	</button>
+
+</div></div>
+		<div class="content" style="position:relative;flex:1;overflow:hidden">
+
+
+
+
+<ul class="density-default " style="position:relative;height:100%;margin:0;padding:0!important;;opacity:1;overflow:auto;" tabindex="0">
+	 
+		
+
+
+
+<li class="listItem density-default" style="opacity:$1;$"><span class="listItemChip"></span>
+	
+	<div class="listItemContent"><div><a slot="primary" href="/svelte-components/avatar">Avatar</a></div>
+		<div class="itemSecondary">
+				
+			</div></div>
+	<div class="listItemAction">
+			
+		</div></li>
+
+
+
+
+<li class="listItem density-default" style="opacity:$1;$"><span class="listItemChip"></span>
+	
+	<div class="listItemContent"><div><a slot="primary" href="/svelte-components/box">Box</a></div>
+		<div class="itemSecondary">
+				
+			</div></div>
+	<div class="listItemAction">
+			
+		</div></li>
+
+
+
+
+<li class="listItem density-default" style="opacity:$1;$"><span class="listItemChip"></span>
+	
+	<div class="listItemContent"><div><a slot="primary" href="/svelte-components/button">Button</a></div>
+		<div class="itemSecondary">
+				
+			</div></div>
+	<div class="listItemAction">
+			
+		</div></li>
+
+
+
+
+<li class="listItem density-default" style="opacity:$1;$"><span class="listItemChip"></span>
+	
+	<div class="listItemContent"><div><a slot="primary" href="/svelte-components/card">Card</a></div>
+		<div class="itemSecondary">
+				
+			</div></div>
+	<div class="listItemAction">
+			
+		</div></li>
+
+
+
+
+<li class="listItem density-default" style="opacity:$1;$"><span class="listItemChip"></span>
+	
+	<div class="listItemContent"><div><a slot="primary" href="/svelte-components/cartouche">Cartouche</a></div>
+		<div class="itemSecondary">
+				
+			</div></div>
+	<div class="listItemAction">
+			
+		</div></li>
+
+
+
+
+<li class="listItem density-default" style="opacity:$1;$"><span class="listItemChip"></span>
+	
+	<div class="listItemContent"><div><a slot="primary" href="/svelte-components/columner">Columner</a></div>
+		<div class="itemSecondary">
+				
+			</div></div>
+	<div class="listItemAction">
+			
+		</div></li>
+
+
+
+
+<li class="listItem density-default" style="opacity:$1;$"><span class="listItemChip"></span>
+	
+	<div class="listItemContent"><div><a slot="primary" href="/svelte-components/confirm">Confirm</a></div>
+		<div class="itemSecondary">
+				
+			</div></div>
+	<div class="listItemAction">
+			
+		</div></li>
+
+
+
+
+<li class="listItem density-default" style="opacity:$1;$"><span class="listItemChip"></span>
+	
+	<div class="listItemContent"><div><a slot="primary" href="/svelte-components/contentswitcher">ContentSwitcher</a></div>
+		<div class="itemSecondary">
+				
+			</div></div>
+	<div class="listItemAction">
+			
+		</div></li>
+
+
+
+
+<li class="listItem density-default" style="opacity:$1;$"><span class="listItemChip"></span>
+	
+	<div class="listItemContent"><div><a slot="primary" href="/svelte-components/datalist">DataList</a></div>
+		<div class="itemSecondary">
+				
+			</div></div>
+	<div class="listItemAction">
+			
+		</div></li>
+
+
+
+
+<li class="listItem density-default" style="opacity:$1;$"><span class="listItemChip"></span>
+	
+	<div class="listItemContent"><div><a slot="primary" href="/svelte-components/divider">Divider</a></div>
+		<div class="itemSecondary">
+				
+			</div></div>
+	<div class="listItemAction">
+			
+		</div></li>
+
+
+
+
+<li class="listItem density-default" style="opacity:$1;$"><span class="listItemChip"></span>
+	
+	<div class="listItemContent"><div><a slot="primary" href="/svelte-components/drawer">Drawer</a></div>
+		<div class="itemSecondary">
+				
+			</div></div>
+	<div class="listItemAction">
+			
+		</div></li>
+
+
+
+
+<li class="listItem density-default" style="opacity:$1;$"><span class="listItemChip"></span>
+	
+	<div class="listItemContent"><div><a slot="primary" href="/svelte-components/input">Input</a></div>
+		<div class="itemSecondary">
+				
+			</div></div>
+	<div class="listItemAction">
+			
+		</div></li>
+
+
+
+
+<li class="listItem density-default" style="opacity:$1;$"><span class="listItemChip"></span>
+	
+	<div class="listItemContent"><div><a slot="primary" href="/svelte-components/list">List</a></div>
+		<div class="itemSecondary">
+				
+			</div></div>
+	<div class="listItemAction">
+			
+		</div></li>
+
+
+
+
+<li class="listItem density-default" style="opacity:$1;$"><span class="listItemChip"></span>
+	
+	<div class="listItemContent"><div><a slot="primary" href="/svelte-components/loader">Loader</a></div>
+		<div class="itemSecondary">
+				
+			</div></div>
+	<div class="listItemAction">
+			
+		</div></li>
+
+
+
+
+<li class="listItem density-default" style="opacity:$1;$"><span class="listItemChip"></span>
+	
+	<div class="listItemContent"><div><a slot="primary" href="/svelte-components/rating">Rating</a></div>
+		<div class="itemSecondary">
+				
+			</div></div>
+	<div class="listItemAction">
+			
+		</div></li>
+
+
+
+
+<li class="listItem density-default" style="opacity:$1;$"><span class="listItemChip"></span>
+	
+	<div class="listItemContent"><div><a slot="primary" href="/svelte-components/tabs">Tabs</a></div>
+		<div class="itemSecondary">
+				
+			</div></div>
+	<div class="listItemAction">
+			
+		</div></li>
+
+
+
+
+<li class="listItem density-default" style="opacity:$1;$"><span class="listItemChip"></span>
+	
+	<div class="listItemContent"><div><a slot="primary" href="/svelte-components/tree">Tree</a></div>
+		<div class="itemSecondary">
+				
+			</div></div>
+	<div class="listItemAction">
+			
+		</div></li>
+
+
+
+
+<li class="listItem density-default" style="opacity:$1;$"><span class="listItemChip"></span>
+	
+	<div class="listItemContent"><div><a slot="primary" href="/svelte-components/finder">Finder</a></div>
+		<div class="itemSecondary">
+				
+			</div></div>
+	<div class="listItemAction">
+			
+		</div></li>
+
+
+
+
+<li class="listItem density-default" style="opacity:$1;$"><span class="listItemChip"></span>
+	
+	<div class="listItemContent"><div><a slot="primary" href="/svelte-components/grouper">Grouper</a></div>
+		<div class="itemSecondary">
+				
+			</div></div>
+	<div class="listItemAction">
+			
+		</div></li>
+
+
+
+
+<li class="listItem density-default" style="opacity:$1;$"><span class="listItemChip"></span>
+	
+	<div class="listItemContent"><div><a slot="primary" href="/svelte-components/jsoner">Jsoner</a></div>
+		<div class="itemSecondary">
+				
+			</div></div>
+	<div class="listItemAction">
+			
+		</div></li>
+
+
+
+
+<li class="listItem density-default" style="opacity:$1;$"><span class="listItemChip"></span>
+	
+	<div class="listItemContent"><div><a slot="primary" href="/svelte-components/sorter">Sorter</a></div>
+		<div class="itemSecondary">
+				
+			</div></div>
+	<div class="listItemAction">
+			
+		</div></li>
+
+
+
+
+<li class="listItem density-default" style="opacity:$1;$"><span class="listItemChip"></span>
+	
+	<div class="listItemContent"><div><a slot="primary" href="/svelte-components/frame">Frame</a></div>
+		<div class="itemSecondary">
+				
+			</div></div>
+	<div class="listItemAction">
+			
+		</div></li>
+
+</ul></div>
+		
+</div>
+	<div id="contentSlide"><nav class="nav flex-h pos-sticky pad flex-align-middle gap-small zI-10 w-full h-4 gap-medium"><button class=" w-auto  size svelte-1e42kt5" data-height="default" type="button" density="default" nowrap="false" link="false" bordered contained presetdefault="bordered contained"><div class="innerButton svelte-1e42kt5"><div class="startButtonSlot svelte-1e42kt5">
+					
+				</div>
+		
+		</div>
+	
+	</button>
+
+
+			<h3>SlotUi</h3>
+			<div class="flex-main"></div>
+			<a href="svelte-components">Components</a>
+			<button class=" w-auto  size svelte-1e42kt5" data-height="default" type="button" density="default" nowrap="false" contained naked presetdefault="" title="toggle theme"><div class="innerButton svelte-1e42kt5"><div class="startButtonSlot svelte-1e42kt5">
+					
+				</div>
+		<div class="central svelte-1e42kt5"></div>
+		</div>
+	
+	</button>
+
+</nav>
+		<div id="innerSlide" class="zI-0">
+<div class="pad-4 ">
+
+<div><div class="flex-v gap-large w-full"><h4>&lt;Sorter /></h4>
+	<cite><p><!-- HTML_TAG_START -->Then, what was before became the after.<br /> R. Hakran, 824<!-- HTML_TAG_END --></p></cite>
+	<div class="flex-v gap-medium "><h5>Component Sorter examples :</h5>
+		<div class="marg-l-4"><h5>Button mode</h5>
+<div class="flex-h gap-small"><div><div class="flex-h gap-small"><div><button class=" w-auto  size svelte-1e42kt5" data-height="default" type="button" density="default" nowrap="false" link="false" bordered="false" contained="false" naked presetdefault=""><div class="innerButton svelte-1e42kt5"><div class="startButtonSlot svelte-1e42kt5">
+					
+				</div>
+		<div class="central svelte-1e42kt5">id</div>
+		</div>
+	
+	</button>
+
+
+	
+	
+	
+	</div>
+			<div><button class=" w-auto  size svelte-1e42kt5" data-height="default" type="button" density="default" nowrap="false" link="false" bordered="false" contained="false" naked presetdefault=""><div class="innerButton svelte-1e42kt5"><div class="startButtonSlot svelte-1e42kt5">
+					
+				</div>
+		<div class="central svelte-1e42kt5">name</div>
+		</div>
+	
+	</button>
+
+
+	
+	
+	
+	</div>
+			<div><button class=" w-auto  size svelte-1e42kt5" data-height="default" type="button" density="default" nowrap="false" link="false" bordered="false" contained="false" naked presetdefault=""><div class="innerButton svelte-1e42kt5"><div class="startButtonSlot svelte-1e42kt5">
+					
+				</div>
+		<div class="central svelte-1e42kt5">directory</div>
+		</div>
+	
+	</button>
+
+
+	
+	
+	
+	</div>
+			<div><button class=" w-auto  size svelte-1e42kt5" data-height="default" type="button" density="default" nowrap="false" link="false" bordered="false" contained="false" naked presetdefault=""><div class="innerButton svelte-1e42kt5"><div class="startButtonSlot svelte-1e42kt5">
+					
+				</div>
+		<div class="central svelte-1e42kt5">nestedData.uuid</div>
+		</div>
+	
+	</button>
+
+
+	
+	
+	
+	</div></div>
+		<hr class="shad-3 svelte-77ivo9" style="margin-top:0.5rem;margin-bottom:0.5rem;">
+		
+<ul class="density-default " style="position:relative;height:100%;margin:0;padding:0!important;;opacity:1;overflow:hidden;" tabindex="0">
+	<virtualize-viewport style="height: 100%;" class="svelte-10x32wn"><div style="padding-top: 0px; padding-bottom: 0px;">
+		</div> 
+</virtualize-viewport>
+</ul></div>
+	<div class="flex-h gap-small"><div class="pad"><h6>Code</h6>
+			single field<br>
+			mutiple field <br>
+			nested field <br></div></div></div>
+<h5>&lt;Sorterer /></h5>
+<div><div class="flex-h flex-align-middle gap-tiny ">With a title :
+	<div><button class=" w-auto  size svelte-1e42kt5" data-height="default" type="button" density="default" nowrap="false" link="false" bordered="false" contained="false" naked presetdefault=""><div class="innerButton svelte-1e42kt5"><div class="startButtonSlot svelte-1e42kt5">
+					
+				</div>
+		<div class="central svelte-1e42kt5">name</div>
+		</div>
+	
+	</button>
+
+
+	
+	
+	
+	</div><div><button class=" w-auto  size svelte-1e42kt5" data-height="default" type="button" density="default" nowrap="false" link="false" bordered="false" contained="false" naked presetdefault=""><div class="innerButton svelte-1e42kt5"><div class="startButtonSlot svelte-1e42kt5">
+					
+				</div>
+		<div class="central svelte-1e42kt5">directory</div>
+		</div>
+	
+	</button>
+
+
+	
+	
+	
+	</div></div></div></div></div>
+	<div class="flex-v gap-medium "><h5>Api preview :</h5>
+		<div class="marg-l-4"><pre class="language-typescript"><!-- HTML_TAG_START --><code class="language-typescript">__propDef<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    props<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">/** Sorter mode */</span> sorterMode<span class="token operator">?</span><span class="token operator">:</span> <span class="token string">"button"</span> <span class="token operator">|</span> <span class="token string">"menu"</span> <span class="token operator">|</span> <span class="token string">"free"</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
+        <span class="token comment">/** binding : final sorted data as raw object  */</span> sortedData<span class="token operator">?</span><span class="token operator">:</span> SortItem<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
+        <span class="token comment">/** list of available sorts shown to user */</span> sortListItems<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
+        <span class="token comment">/** data to sort */</span> data<span class="token operator">:</span> Data<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token comment">/** field from data to sort by*/</span> sortByField<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
+        <span class="token comment">/** presented field from data to sort by*/</span> sortByTitleField<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
+        <span class="token comment">/** order on which the sorted list is sorted */</span> sortByOrder<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
+        <span class="token comment">/** binding, used when multiple buttons*/</span> activeCommonSortField<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    events<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        <span class="token punctuation">[</span>evt<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> CustomEvent<span class="token operator">&lt;</span><span class="token builtin">any</span><span class="token operator">></span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    slots<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">default</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+            primary<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
+            icon<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+            iconFamily<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+            selected<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
+            size<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+            showChip<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+</code><!-- HTML_TAG_END --></pre></div></div>
+	<div class="flex-v gap-medium "><h5>Link to api :</h5>
+		<div class="marg-l-4"></div></div></div></div></div></div></div>
+</div>
+
+
+		<script type="module" data-sveltekit-hydrate="11b8eyq">
+		import { set_public_env, start } from "../_app/immutable/start-bc8496c4.js";
+
+		set_public_env({});
+
+		start({
+			target: document.querySelector('[data-sveltekit-hydrate="11b8eyq"]').parentNode,
+			paths: {"base":"","assets":""},
+			route: true,
+			spa: false,
+			trailing_slash: "never",
+			hydrate: {
+				status: 200,
+				error: null,
+				node_ids: [0, 2, 3, 7],
+				params: {component:"sorter"},
+				routeId: "svelte-components/[component]"
+			}
+		});
+	</script>
+	
+	</body>
+</html>
