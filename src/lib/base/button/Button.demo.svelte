@@ -49,9 +49,9 @@ import ComponentDemo from '$components/ComponentDemo.svelte';
 component='Button'
 cite="There were a place where we used to click. You've called it a button, and we clicked yes.<br /> R. Falgt, 1354">
 <div class="flex-v gap-medium" use:togglerTarget={{ uid: 'tre' }}>
-	<Button>default button</Button>
+	<div><Button>default button</Button></div>
 	<div class="flex-h gap-medium grid-align-middle">
-		<Button bind:showChip>with chip</Button>
+		<Button bind:showChip>With chip</Button>
 		<span on:click={() => (showChip = !showChip)}> toggle chip</span>
 	</div>
 </div>

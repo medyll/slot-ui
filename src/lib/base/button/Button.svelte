@@ -119,8 +119,7 @@
 	use:popper={usePopper}
 	use:forwardEvents
 	use:useAutoFocus
-	on:click
-	class:size={'w-' + size}
+	on:click 
 	data-height={height} 
 	type={buttonType}
 	{density}
