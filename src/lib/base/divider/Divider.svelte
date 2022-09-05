@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { createEventForwarder } from '$lib/engine/eventForwarder'; 
+	import { createEventForwarder } from '$lib/engine/eventForwarder.js'; 
 	import { get_current_component } from 'svelte/internal';
-	import type { ElementProps } from '../../../types';
+	import type { ElementProps } from '$types/index.js';
 
 	let className = '';
 	export { className as class };

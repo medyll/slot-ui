@@ -3,61 +3,66 @@
 	import DataListRow from '$lib/base/dataList/DataListRow.svelte';
 	import DataListCell from '$lib/base/dataList/DataListCell.svelte';
 	import DataListHead from '$lib/base/dataList/DataListHead.svelte';
-import ComponentDemo from '$components/ComponentDemo.svelte';
+	import ComponentDemo from '$components/ComponentDemo.svelte';
 
 	let data = [...Array(200)].map((caches, index: number) => {
-		return { index, name: 'name '+index, otherName: 'otherName '+index };
+		return { index, name: 'name ' + index, otherName: 'otherName ' + index };
 	});
 </script>
-<ComponentDemo component='DataList'
-cite='Those who call they tables are the same who name stones as chairs. Reality is above : datalist
-is a datalist table <br /> B. Franklin, 1854'>
-<div class="flex-v gap-medium">
-	<h5>Automatique datalist</h5>
-	<div style="height:350px;width:350px;" class="what   pos-rel overflow-hidden pad-4">
-		<!-- <DataList {data} >
-			<DataListHead slot="head">
-				<DataListCell  dataField="index">index</DataListCell>
-				<DataListCell  dataField="name">name</DataListCell>
-				<DataListCell  dataField="otherName"style="flex:1">otherName</DataListCell>
-			</DataListHead>
-		</DataList> -->
-	</div>
-	<h5>Automatique datalist slotted</h5>
-	<div style="height:350px;width:350px;" class="what   pos-rel overflow-hidden pad-4">
-		<!-- <DataList {data} on:datalist:click={()=>{}} >
-			<DataListHead slot="head">
-				<DataListCell  dataField="index">index</DataListCell>
-				<DataListCell  dataField="name">name</DataListCell>
-				<DataListCell  dataField="otherName"style="flex:1">otherName</DataListCell>
-			</DataListHead>
-		</DataList> -->
-	</div>
-	<h5>Full slot datalist</h5>
-	<div style="height:350px;" class="what   pos-rel overflow-hidden pad-4">
-		<!-- <DataList {data} let:item>
-			<DataListHead slot="head">
-				<DataListCell style="width:50px;">index</DataListCell>
-				<DataListCell style="width:50px;">name</DataListCell>
-				<DataListCell style="width:100px">otherName 50%</DataListCell>
-				<DataListCell style="width:250px">250px</DataListCell>
-				<DataListCell style="width:100px ">TitleTitleTitleTitleTitleTitleTitle</DataListCell>
-				<DataListCell style="width:100px">Title</DataListCell>
-			</DataListHead>
-			<DataListRow data={item}>
-				<DataListCell>{item.index}</DataListCell>
-				<DataListCell>{item.name}</DataListCell>
-				<DataListCell>121512</DataListCell>
-				<DataListCell>vfbgfbgf</DataListCell>
-				<DataListCell>vfbgfbgf</DataListCell>
-				<DataListCell>vfbgfbgf</DataListCell>
-			</DataListRow>
-		</DataList> -->
-	</div>
-</div>
-</ComponentDemo>
 
- 
+<ComponentDemo
+	component="DataList"
+	cite="Those who call they tables are the same who name stones as chairs. Reality is above : datalist
+is a datalist table <br /> B. Franklin, 1854"
+>
+	<div class="flex-v gap-medium">
+		<h5>Automatique datalist</h5>
+		<div style="height:350px;width:350px;" class="what   pos-rel overflow-hidden pad-4">
+			<DataList {data}>
+				<svelte:fragment slot="head">
+					<DataListHead>
+						<DataListCell dataField="index">index</DataListCell>
+						<DataListCell dataField="name">name</DataListCell>
+						<DataListCell dataField="otherName" style="flex:1">otherName</DataListCell>
+					</DataListHead>
+				</svelte:fragment>
+			</DataList>
+		</div>
+		<h5>Automatique datalist slotted</h5>
+		<div style="height:350px;width:350px;" class="what   pos-rel overflow-hidden pad-4">
+			<DataList {data} on:datalist:click={() => {}}>
+				<svelte:fragment slot="head">
+					<DataListHead>
+						<DataListCell dataField="index">index</DataListCell>
+						<DataListCell dataField="name">name</DataListCell>
+						<DataListCell dataField="otherName" style="flex:1">otherName</DataListCell>
+					</DataListHead>
+				</svelte:fragment>
+			</DataList>
+		</div>
+		<h5>Full slot datalist</h5>
+		<div style="height:350px;" class="what   pos-rel overflow-hidden pad-4">
+			<DataList {data} let:item>
+				<DataListHead slot="head">
+					<DataListCell style="width:50px;">index</DataListCell>
+					<DataListCell style="width:50px;">name</DataListCell>
+					<DataListCell style="width:100px">otherName 50%</DataListCell>
+					<DataListCell style="width:250px">250px</DataListCell>
+					<DataListCell style="width:100px ">TitleTitleTitleTitleTitleTitleTitle</DataListCell>
+					<DataListCell style="width:100px">Title</DataListCell>
+				</DataListHead>
+				<DataListRow data={item}>
+					<DataListCell>{item.index}</DataListCell>
+					<DataListCell>{item.name}</DataListCell>
+					<DataListCell>121512</DataListCell>
+					<DataListCell>vfbgfbgf</DataListCell>
+					<DataListCell>vfbgfbgf</DataListCell>
+					<DataListCell>vfbgfbgf</DataListCell>
+				</DataListRow>
+			</DataList>
+		</div>
+	</div>
+</ComponentDemo>
 
 <style lang="scss">
 	.what {

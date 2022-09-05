@@ -5,12 +5,12 @@
 	import Virtualize from '../virtualizer/Virtualizer.svelte';
 	import { writable, type Writable } from 'svelte/store';
 	import { browser } from '$app/env';
-	import { slotUiComponentList } from '$lib/sitedata/componentList';
+	import { slotUiComponentList } from '$lib/sitedata/componentList.js';
 	import DataListRow from './DataListRow.svelte';
 	import DataListCell from './DataListCell.svelte';
-	import type { DataListStoreType } from './types';
-	import { dataOp } from '$lib/engine/utils';
-	import type { Data } from '$types';
+	import type { DataListStoreType } from '$types/index.js';
+	import { dataOp } from '$lib/engine/utils.js';
+	import type { Data } from '$types/index.js';
 
 	/*  common slotUi exports*/
 	let className = '';
@@ -98,9 +98,9 @@
 >
 	{#if element}
 		<Virtualize height="100%" data={sortedData} let:item>
-			<!-- <svelte:fragment slot="virtualizeHeaderSlot">
+			<svelte:fragment slot="virtualizeHeaderSlot">
 				<slot name="head" />
-			</svelte:fragment> -->
+			</svelte:fragment>
 			{#if item}
 				{#if $$slots.default}
 					<slot {item} />
