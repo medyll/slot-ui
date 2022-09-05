@@ -2,11 +2,10 @@
 
 <script lang="ts">
 	import type { SvelteComponentDev } from 'svelte/internal';
-	import { stickTo } from '../../uses/stickTo/stickTo';
-	import { clickAway } from '../../uses/clickAway/clickAway';
-	import { popperList } from './actions';
-	import type { PopperPositionType } from './types';
-	import Button from '$lib/base/button/Button.svelte';
+	import { stickTo } from '../../uses/stickTo/stickTo.js';
+	import { clickAway } from '../../uses/clickAway/clickAway.js';
+	import { popperList } from './actions.js';
+	import type { PopperPositionType } from './types'; 
 
 	let element: HTMLElement;
 	let zIndex;
@@ -50,6 +49,7 @@
 
 	// if no props parentNode, use element.parentNode 
 	$: if(!parentNode && element) parentNode = element?.parentElement ?? document.body
+
 </script>
 
 <slot name="button" />
@@ -81,5 +81,6 @@
 		backdrop-filter: blur(10px);
 		display: inline-block;
 		width: auto;
+		top:0
 	}
 </style>

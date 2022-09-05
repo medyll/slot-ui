@@ -24,6 +24,7 @@ const openPopper = (popperId: string, args: {
   }
 
   function createPopper() {
+ 
     popperList[popperId] = new Popper({
       target: document.body,
       intro: true,

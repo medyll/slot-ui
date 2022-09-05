@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { MenuItemProps } from '$lib/ui/menu/types';
 	import type { PopperPositionType } from '$lib/ui/popper/types';
-	import { popper, type UsePopperProps } from '$lib/ui/popper/usePopper';
+	import { popper, type UsePopperProps } from '$lib/ui/popper/usePopper.js';
 	import { togglerSource, togglerTarget } from '$lib/uses/toggler';
 import ComponentDemo from '$components/ComponentDemo.svelte';
 	import type { ElementProps } from 'src/types';
@@ -87,16 +87,17 @@ cite="There were a place where we used to click. You've called it a button, and 
 		</div>
 	</div>
 </div>
+<br />
 <div class="flex-h gap-medium">
 	<h5 class="w-large">description buttons</h5>
-
 	<div class="flex-v gap-small">
-		<div><Button primary="vall" secondary="some secondary <br /> test here ;)" /></div>
+		<div><Button size="full" primary="vall" secondary="some secondary <br /> test here ;)" /></div>
 	</div>
 </div>
+<br />
 <div class="flex-h gap-medium">
 	<h5 class="w-large">action buttons</h5>
-	<div class="flex-v gap-medium">
+	<div class="flex-v gap-large">
 		<span>several forms</span>
 		<div class="flex-h gap-medium">
 			<div>
@@ -116,11 +117,20 @@ cite="There were a place where we used to click. You've called it a button, and 
 				</Button>
 			</div> -->
 		</div>
-		<div>action's position</div>
-		<div class="flex-v gap-medium">
-			<div class="flex-v gap-medium">
+		<div>action's position</div> 
+		<div class="flex-v gap-large">
+			<div class="flex-h flex-wrap gap-large">
+				{#each popPos as pos}
+					{@const a = { ...usePopper, position: pos }}
+					<div>
+						<div>{pos}</div>
+						<div><Button usePopper={a} primary={pos} /></div>
+					</div>
+				{/each}
+			</div>
+			<!-- <div class="flex-v gap-medium">
 				<div>On whole button</div>
-				<div class="flex-h flex-wrap gap-medium">
+				<div class="flex-h flex-wrap gap-large">
 					{#each popPos as pos}
 						{@const a = { ...usePopper, position: pos }}
 						<div>
@@ -129,8 +139,8 @@ cite="There were a place where we used to click. You've called it a button, and 
 						</div>
 					{/each}
 				</div>
-			</div>
-			<div class="flex-v gap-medium">
+			</div> -->
+			<!-- <div class="flex-v gap-medium">
 				<div>On action zone</div>
 				<div class="flex-h flex-wrap gap-medium">
 					{#each popPos as pos}
@@ -147,30 +157,32 @@ cite="There were a place where we used to click. You've called it a button, and 
 						</div>
 					{/each}
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </div>
-
+<br>
 <div class="flex-h gap-medium">
 	<h5 class="w-large">chip button</h5>
-	<div>
-		<span on:click={() => (showChip = !showChip)}> toggle chip</span>
+	<div class="flex-h gap-medium flex-align-middle">
+		<a on:click={() => (showChip = !showChip)}> toggle chip</a>
 		<Button bind:showChip>with chip</Button>
 	</div>
 </div>
+<br/>
 <div class="flex-h gap-medium">
 	<h5 class="w-large">sized with buttons</h5>
 
-	<div class="flex-h flex-wrap gap-small">
+	<div class="flex-h flex-wrap gap-medium">
 		{#each parameters.sizes as size}
-			<div class="flex-v gap-small">
+			<div class="flex-v gap-medium">
 				<div>size {size}</div>
 				<div><Button nowrap={true} {size}>{size}</Button></div>
 			</div>
 		{/each}
 	</div>
 </div>
+<br />
 <div class="flex-h gap-medium">
 	<h5 class="w-large">sized height buttons</h5>
 
@@ -183,22 +195,23 @@ cite="There were a place where we used to click. You've called it a button, and 
 		{/each}
 	</div>
 </div>
-<div class="flex-h gap-medium">
+<br />
+<div class="flex-h  flex-align-middle gap-medium">
 	<h5 class="w-large">loading buttons</h5>
 	<div>
-		<span on:click={() => (loading = !loading)}> toggle loading</span>
-		<div class="flex-h gap-tiny">
-			<Button bind:loading>loading button</Button>
-			<Button height="large" bind:loading>
+		<div class="flex-h flex-align-middle gap-medium">
+		<a on:click={() => (loading = !loading)}> toggle loading</a>
+			<Button  bind:loading>loading button</Button>
+			<Button  on:click={() => (loading = !loading)} height="large" bind:loading>
 				<span slot="loadingIconButtonSlot"><Icon icon="spinner" class=" rotate" /></span>
 				loading button</Button
 			>
 		</div>
 	</div>
 </div>
+<br />
 <div class="flex-h gap-medium">
 	<h5 class="w-large">icon buttons</h5>
-
 	<div>
 		<div class="flex-h">
 			<Button class="w-medium">

@@ -1,5 +1,5 @@
 import { custom_event, type SvelteComponent, type SvelteComponentDev, } from "svelte/internal"
-import { openPopper } from "./actions"
+import { openPopper } from "./actions.js"
 import type { PopperPositionType } from "./types"
 
 export type UsePopperProps = {
@@ -23,9 +23,10 @@ export function popper(node: HTMLElement, props?: UsePopperProps) {
     // document.addEventListener('click', (event) => event.stopPropagation())
 
     const doPopperEvent = function (event: any) {
+        
         event.stopPropagation();
-        event.preventDefault();
- 
+        event.preventDefault(); 
+        
         openPopper(code, { ...props, parentNode: node });
     };
 
