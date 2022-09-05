@@ -16,7 +16,7 @@
 
 	export let style: string | undefined = undefined;
 	export let columnId: string | number | undefined = undefined;
-	/** if data has been provided, then cell got a fieldName */
+	/** if data has been provided, then cell got a fieldName and coumnId is defined */
 	export let dataField: string | undefined = undefined;
 	/** typeof the dataField. Used when exists Datalist.$$props.dataTypes */
 	export let dataFieldType: string | undefined = undefined;
@@ -29,6 +29,7 @@
 	// if inHeader, then monitor cell
 	onMount(async () => {
 		if (element && dataListContextStore) {
+			// find header.col by index
 			colIndex = [...element.parentElement.children].indexOf(element);
 
 			if (inHeader) {
@@ -42,7 +43,7 @@
 					// columnId = crypto.randomUUID();
 					// register colmun in store
 					// find header.col by index, create uniqid
-					pushToStore(colIndex, width);
+					columnId = pushToStore(colIndex, width);
 				}
 			}
 			if (!inHeader) {
@@ -59,7 +60,7 @@
 		};
 	});
 
-	const sortState: string[] = ['none', 'asc', 'desc'];
+	const sortState: string[] = ['none', 'asc', 'desc']; 
 
 	$: if (
 		!inHeader &&
@@ -97,7 +98,8 @@
 		element.style.minWidth=$dataListContextStore?.columns?.[colIndex]?.width 
 	}
 
-	const onSort = (columnId: string, order: 'asc' | 'desc' | 'none') => (e) => {
+	const onSort = (columnId: string, order: 'asc' | 'desc' | 'none')   => { 
+		
 		// find field from index
 		if ($dataListContextStore?.config?.isSortable && columnId && dataField) {
 			const event = custom_event(
@@ -106,6 +108,7 @@
 				{ bubbles: true }
 			);
 			if (element) element.dispatchEvent(event);
+
 		}
 	};
 
@@ -113,6 +116,7 @@
 		let columnId = crypto.randomUUID();
 		// register colmun in store
 		$dataListContextStore.columns.push({ index, columnId, width, dataField });
+		return columnId
 	}
 
 	function findColIdAtIndex(index: number) {
@@ -151,7 +155,7 @@
 	title={$dataListContextStore?.columns?.[colIndex]?.width}
 >
 	{#if inHeader}
-		<div on:click={onSort(columnId)} class="cellHeader">
+		<div on:click={()=>{onSort(columnId)}} class="cellHeader">
 			<div class="cellHeaderContent"><slot /></div>
 			{#if dataField && $dataListContextStore?.config?.isSortable}
 				<div class="cellHeaderSorter">

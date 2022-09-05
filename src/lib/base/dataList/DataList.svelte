@@ -64,7 +64,7 @@
 
 	let dataListContext = setContext<Writable<DataListStoreType>>('dataListContext', dataListStore);
 
-	function doSort(e: CustomEvent<{ field: string; order: 'asc' | 'desc' | 'none' }>) {
+	function doSort(e: CustomEvent<{ field: string; order: 'asc' | 'desc' | 'none' }>) { 
 		const next = sortState.indexOf(e.detail.order ?? sortByOrder) + 1;
 		let toggleOrder = sortState?.[next] ? sortState[next] : sortState[0];
 
