@@ -6,6 +6,7 @@
 	let uiContext = getContext<Writable<UiContextType>>('uiContext');
 
 	$uiContext.drawerFlow = 'relative';
+	$uiContext.drawerOpen = true;
 </script>
 <svelte:head>
 	<title>SlotUi compnents list</title>

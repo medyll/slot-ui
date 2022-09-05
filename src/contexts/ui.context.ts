@@ -5,4 +5,5 @@ import type { Writable } from 'svelte/store';
 
 export interface UiContextType {
     drawerFlow: 'fixed' | 'relative'
+    drawerOpen?: boolean
 }

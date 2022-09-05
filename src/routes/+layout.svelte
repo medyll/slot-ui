@@ -9,22 +9,18 @@
 
 	import Drawer from '$lib/base/drawer/Drawer.svelte';
 	import ThemeSwitcher from '$lib/ui/themeswitcher/ThemeSwitcher.svelte';
-	import { goto } from '$app/navigation';
 	import Button from '$lib/base/button/Button.svelte';
-	import Icon from '$lib/base/icon/Icon.svelte';
-	import IntersectionObserver from '../components/IntersectionObserver.svelte';
 	import LeftMenu from '$components/LeftMenu.svelte';
 	import { setContext, getContext } from 'svelte';
 	import { writable } from 'svelte/store';
 	import type { Writable } from 'svelte/store';
-	import type { UiContextType } from '$contexts/ui.context.js';
+	import type { UiContextType } from '$contexts/ui.context';
 	import { onMount } from 'svelte';
-	let store = writable<UiContextType>({ drawerFlow: 'fixed' });
+
+	let store = writable<UiContextType>({ drawerFlow: 'fixed', drawerOpen:false });
 	setContext<Writable<UiContextType>>('uiContext', store);
 
 	let uiContext = getContext<Writable<UiContextType>>('uiContext');
-	let element: any;
-	let intersecting: boolean;
 
 	let DrawerRef: Drawer;
 	let contentSlide: HTMLElement;
@@ -82,22 +78,21 @@
 			}
 		}
 		window.addEventListener('load', function (event) {
-			if (localStorage && localStorage.getItem('themeMode')) {
-				document.body.setAttribute('data-theme', localStorage.getItem('themeMode'));
+			if (localStorage) {
+				if(localStorage.getItem('themeMode')) document.body.setAttribute('data-theme', localStorage.getItem('themeMode')); 
 			}
 		});
 	</script>
 </svelte:head>
 
 <div class="flex-h h-full overflow-hidden">
-	<Drawer bind:this={DrawerRef} flow={$uiContext.drawerFlow} isOpen={true}>
+	<Drawer bind:this={DrawerRef} flow={$uiContext.drawerFlow} isOpen={$uiContext.drawerOpen}>
 		<LeftMenu />
 	</Drawer>
 	<div id="contentSlide" bind:this={contentSlide}>
 		<nav
 			bind:this={navElement}
-			class="nav flex-h pos-sticky pad flex-align-middle gap-small zI-10 w-full h-4 gap-medium"
-		>
+			class="nav flex-h pos-sticky pad flex-align-middle gap-small zI-10 w-full h-4 gap-medium">
 			<Button on:click={onDrawerClick} icon="menu" iconFamily="mdi" />
 			<h3>SlotUi</h3>
 			<div class="flex-main" />

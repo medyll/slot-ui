@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { setContext } from 'svelte';
-	import { createEventForwarder } from '../../engine/engine';
+	import { createEventForwarder } from '../../engine/engine.js';
 	import { custom_event, each, get_current_component } from 'svelte/internal';
 	import Virtualize from '../virtualizer/Virtualizer.svelte';
 	import { writable, type Writable } from 'svelte/store';
