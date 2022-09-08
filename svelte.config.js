@@ -9,7 +9,7 @@ const dev = 'production' === 'development';
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	package: {
-		emitTypes : false,
+		emitTypes : true,
 		exports: (filepath) => !mm.contains(filepath, ['*.demo.svelte', '*Demo.svelte', '*preview.svelte','*sitedata','*.md']),
 	   files: (filepath)=> !mm.contains(filepath, ['*.demo.svelte', '*Demo.svelte', '*preview.svelte','*sitedata','*.md'])
 	  },

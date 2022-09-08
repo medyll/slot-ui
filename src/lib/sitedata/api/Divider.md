@@ -3,7 +3,7 @@ __propDef: {
     props: {
         class?: string | undefined;
         element?: HTMLDivElement | null | undefined;
-        /** margins applied to divider */ density?: "none" | "tight" | "default" | "medium" | "kind" | undefined;
+        /** margins applied to divider */ density?: "medium" | "default" | "none" | "tight" | "kind" | undefined;
         /** default direction of the divider */ direction?: "vertical" | "horizontal" | undefined;
         /** expansion of the divider */ expansion?: "full" | "padded" | "centered" | undefined;
         /** give shadow to divider */ shadow?: boolean | undefined;

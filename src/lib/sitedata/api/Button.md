@@ -16,8 +16,8 @@ __propDef: {
         bordered?: boolean | undefined;
         link?: boolean | undefined;
         naked?: boolean | undefined;
-        size?: "default" | "medium" | "full" | "tiny" | "small" | "large" | "big" | "auto" | undefined;
-        density?: "none" | "tight" | "default" | "medium" | "kind" | undefined;
+        size?: "tiny" | "small" | "medium" | "default" | "large" | "big" | "full" | "auto" | undefined;
+        density?: "medium" | "default" | "none" | "tight" | "kind" | undefined;
         nowrap?: boolean | undefined;
         height?: string | undefined;
         selected?: boolean | undefined;

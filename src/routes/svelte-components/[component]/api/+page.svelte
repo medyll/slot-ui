@@ -5,6 +5,8 @@
 	export let data: any = {};
 
 	$: tt = componentApiReadMe?.[data.component + 'Api'];
+
+	console.log(tt)
 </script>
 
 <div>
@@ -16,8 +18,8 @@
 	<svelte:component this={tt} />
 </div>
 <div  class="flex-v gap-medium " >
-	<h5>Link to api :</h5>
+	<h5>Link to examples :</h5>
 	<div  class="marg-l-4">
-		<a href="/svelte-components/rought/{data.component.toLowerCase()}">Component "{data.component}" implementation examples</a>
+		<a  rel="external" href="/svelte-components/{data.component.toLowerCase()}">Component "{data.component}" implementation examples</a> 
 	</div>
 </div>

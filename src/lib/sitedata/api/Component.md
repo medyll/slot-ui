@@ -1,6 +1,8 @@
 ```typescript 
 __propDef: {
-    props: {};
+    props: {
+        test?: string | undefined;
+    };
     events: {
         [evt: string]: CustomEvent<any>;
     };

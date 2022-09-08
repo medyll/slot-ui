@@ -1,6 +1,6 @@
 ```import { SvelteComponentTyped } from "svelte";
 import type { SvelteComponent } from 'svelte';
-import type { MenuItemProps, MenuProps } from '../../ui/menu/types';
+import type { MenuItemProps, MenuProps } from '../../../ui/menu/types';
 declare const __propDef: {
     props: {
         icon?: string | undefined;

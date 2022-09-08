@@ -6,7 +6,7 @@ declare const __propDef: {
         parentNode: HTMLElement;
         component?: SvelteComponentDev | undefined;
         componentProps?: {} | undefined;
-        position?: import("../../uses/stickTo/stickTo").StickToPositionType | undefined;
+        position?: import("../../uses/stickTo/stickTo.js").StickToPositionType | undefined;
         content?: any | undefined;
         toggle?: (() => void) | undefined;
         hide?: (() => void) | undefined;
@@ -41,9 +41,9 @@ export default class Popper extends SvelteComponentTyped<PopperProps, PopperEven
     get componentProps(): {} | undefined;
     /**accessor*/
     set componentProps(_: {} | undefined);
-    get position(): import("../../uses/stickTo/stickTo").StickToPositionType | undefined;
+    get position(): import("../../uses/stickTo/stickTo.js").StickToPositionType | undefined;
     /**accessor*/
-    set position(_: import("../../uses/stickTo/stickTo").StickToPositionType | undefined);
+    set position(_: import("../../uses/stickTo/stickTo.js").StickToPositionType | undefined);
     get content(): any;
     /**accessor*/
     set content(_: any);

@@ -13,7 +13,6 @@ __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
-        virtualizeHeaderSlot: {};
         default: {
             item: any;
         };

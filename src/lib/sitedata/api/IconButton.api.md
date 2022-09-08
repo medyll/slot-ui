@@ -1,6 +1,6 @@
 ```import { SvelteComponentTyped } from "svelte";
 import type { ElementProps } from '../../../types';
-import { type UsePopperProps } from '../../ui/popper/usePopper';
+import { type UsePopperProps } from '../../../ui/popper/usePopper';
 declare const __propDef: {
     props: {
         class?: string | undefined;
@@ -8,7 +8,7 @@ declare const __propDef: {
         icon: ElementProps['icon'];
         iconFamily?: string | undefined;
         iconClassName?: string | undefined;
-        iconFontSize?: "default" | "medium" | "full" | "tiny" | "small" | "large" | "big" | "auto" | undefined;
+        iconFontSize?: "tiny" | "small" | "medium" | "default" | "large" | "big" | "full" | "auto" | undefined;
         style?: string | undefined;
         showShip?: boolean | undefined;
         usePopperOpt?: UsePopperProps | undefined;
