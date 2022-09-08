@@ -1,15 +1,18 @@
 import adapter from '@sveltejs/adapter-vercel';
 import path from 'path';
 import preprocess from 'svelte-preprocess';
-import { sx4uPreprocess } from './src/lib/uses/sx4u/sx4uPreprocess.js';
 import { mdsvex } from 'mdsvex';
-
+import mm from "micromatch"
 const dev = 'production' === 'development';
+
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	// Consult https://github.com/sveltejs/svelte-preprocess
-	// for more information about preprocessors
+	package: {
+		emitTypes : false,
+		exports: (filepath) => !mm.contains(filepath, ['*.demo.svelte', '*Demo.svelte', '*preview.svelte','*sitedata','*.md']),
+	   files: (filepath)=> !mm.contains(filepath, ['*.demo.svelte', '*Demo.svelte', '*preview.svelte','*sitedata','*.md'])
+	  },
 	preprocess: [
 		preprocess(),
 		mdsvex({
@@ -33,4 +36,4 @@ const config = {
 	}
 };
 
-export default config;
+export default config; 
