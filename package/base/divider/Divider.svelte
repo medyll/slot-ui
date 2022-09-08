@@ -1,4 +1,4 @@
-<script>import { createEventForwarder } from '../../engine/eventForwarder';
+<script>import { createEventForwarder } from '../../engine/eventForwarder.js';
 import { get_current_component } from 'svelte/internal';
 let className = '';
 export { className as class };

@@ -1,13 +1,13 @@
 <script>import { setContext } from 'svelte';
-import { createEventForwarder } from '../../engine/engine';
+import { createEventForwarder } from '../../engine/engine.js';
 import { custom_event, each, get_current_component } from 'svelte/internal';
 import Virtualize from '../virtualizer/Virtualizer.svelte';
 import { writable } from 'svelte/store';
 import { browser } from '$app/env';
-import { slotUiComponentList } from '../../sitedata/componentList';
+import { slotUiComponentList } from '../../sitedata/componentList.js';
 import DataListRow from './DataListRow.svelte';
 import DataListCell from './DataListCell.svelte';
-import { dataOp } from '../../engine/utils';
+import { dataOp } from '../../engine/utils.js';
 /*  common slotUi exports*/
 let className = '';
 export { className as class };

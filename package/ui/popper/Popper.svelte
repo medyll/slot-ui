@@ -1,9 +1,8 @@
 <svelte:options accessors={true} />
 
-<script>import { stickTo } from '../../uses/stickTo/stickTo';
-import { clickAway } from '../../uses/clickAway/clickAway';
-import { popperList } from './actions';
-import Button from '../../base/button/Button.svelte';
+<script>import { stickTo } from '../../uses/stickTo/stickTo.js';
+import { clickAway } from '../../uses/clickAway/clickAway.js';
+import { popperList } from './actions.js';
 let element;
 let zIndex;
 export let code;
@@ -70,4 +69,5 @@ $: if (!parentNode && element)
   backdrop-filter: blur(10px);
   display: inline-block;
   width: auto;
+  top: 0;
 }</style>

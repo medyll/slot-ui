@@ -60,12 +60,12 @@ onMount(() => {
 				</li>
 			{/each}
 		</ul>
-		<div data-coll="red">
+		<!-- <div data-coll='red'>
 			<slot name="tabsTitleSlot" />
 		</div>
 		<div>
 			<slot name="tabsButtonSlot" />
-		</div>
+		</div> -->
 	</nav>
 	<div class="tabsActiveCellContainer">
 		<div bind:this={activeCellElementRef} class="tabSlot" />

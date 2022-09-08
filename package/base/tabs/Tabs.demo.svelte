@@ -13,7 +13,7 @@ const items = [
 <Tabs activeTabCode="theTitle1" {items}/>
 <Divider density="kind" expansion="centered"/>
 <Tabs activeTabCode="theTitle3" {items}>
-    <span slot="tabsTitleSlot">some tabs title</span>
-    <span slot="tabsButtonSlot" ><Button bordered >button</Button></span>
+    <!-- <span slot="tabsTitleSlot">some tabs title</span>
+    <span slot="tabsButtonSlot" ><Button bordered >button</Button></span> -->
 </Tabs>
 
