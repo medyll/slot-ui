@@ -1,8 +1,8 @@
 export type TIcon = string;
 
-export namespace Drawer {
+/* export namespace Drawer {
   export let title: string;
-}
+} */
 
 export interface ElementProps {
   sizeType: 'tiny' | 'small' | 'medium' | 'default' | 'large' | 'big' | 'full' | 'auto',
