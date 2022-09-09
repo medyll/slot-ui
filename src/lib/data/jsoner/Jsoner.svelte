@@ -23,17 +23,17 @@
 
 {#if data}
 	{#if mode === 'array'}
-		<div class="flex-h  w-large flex-wrap border-l">
-			- {#each data as kdta, index}
-				<div><svelte:self data={kdta} /></div>
+		<div class="flex-h  w-large flex-wrap gap-small "> 
+			{#each data as kdta, index}
+				<div class="border-l"><svelte:self data={kdta} /></div>
 			{/each}
 		</div>
 	{/if}
 
 	{#if mode === 'object'}
-		<div class="flex-v   gap-small">
+		<div class="flex-v   gap-small ">  
 			{#each Object.keys(data) as kdta}
-				<div class="flex-v gap-small  flex-align-top">
+				<div class="flex-h gap-small  flex-align-top marg-l">
 					<div class="w-medium pad-1 border-b">- {kdta}</div>
 					<div style="margin-left:4rem;"><svelte:self data={data[kdta]} /></div>
 				</div>

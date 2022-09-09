@@ -11,7 +11,7 @@ export interface ElementProps {
   expansion: 'full' | 'padded' | 'centered',
   alignment: 'center' | 'left' | 'right',
   data: Record<string, any>;
-  action: (event, data: ElementProps['data']) => void;
+  action: (event:any, data: ElementProps['data']) => void;
   icon: | TIcon
   | { type: 'fa', name: TIcon };
 }

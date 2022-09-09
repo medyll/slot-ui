@@ -1,5 +1,5 @@
 <script lang="ts">
-import ComponentDemo from '$components/ComponentDemo.svelte';
+import ComponentDemo from '$components/ComponentExample.svelte';
 	import Jsoner from '../jsoner/Jsoner.svelte';
 import Finder from './Finder.svelte';
 
@@ -16,9 +16,9 @@ import Finder from './Finder.svelte';
 
 <ComponentDemo component="Finder" cite="This constant need about knowing what i was looking for, this need, i gave it a name.<br /> H.
 Maifield, 1996">
-<Finder bind:filteredData={findData} {data} />
+<Finder class="marg-b" bind:filteredData={findData} {data} />
 	<div class="flex-h gap-medium">
-		<div><Jsoner data={data} /></div>
-		<div><Jsoner data={findData} /></div>
+		<div class="w-large flex-main"><Jsoner data={data} /></div>
+		<div class="w-large flex-main"><Jsoner data={findData} /></div>
 	</div>
 </ComponentDemo> 

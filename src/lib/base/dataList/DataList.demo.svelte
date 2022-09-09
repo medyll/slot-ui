@@ -3,7 +3,7 @@
 	import DataListRow from '$lib/base/dataList/DataListRow.svelte';
 	import DataListCell from '$lib/base/dataList/DataListCell.svelte';
 	import DataListHead from '$lib/base/dataList/DataListHead.svelte';
-	import ComponentDemo from '$components/ComponentDemo.svelte';
+	import ComponentDemo from '$components/ComponentExample.svelte';
 
 	let data = [...Array(200)].map((caches, index: number) => {
 		return { index, name: 'name ' + index, otherName: 'otherName ' + index };

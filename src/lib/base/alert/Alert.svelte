@@ -1,19 +1,17 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import type { ElementProps } from '../../../types';
-	import Divider from '../divider/Divider.svelte';
-	import IconButton from '../button/IconButton.svelte';
-	import { createEventForwarder } from '../../engine/engine';
 	import { createEventDispatcher, get_current_component } from 'svelte/internal';
-	import Button from '../button/Button.svelte';
+	import type { ElementProps } from '$types/index.js';
+	import Divider from '$lib/base/divider/Divider.svelte';
+	import IconButton from '$lib/base/button/IconButton.svelte'; 
+	import Button from '$lib/base/button/Button.svelte';
 
 	const dispatch = createEventDispatcher();
 
 	/*  common slotUi exports*/
 	let className = '';
 	export { className as class };
-	export let element: HTMLDivElement | null = null;
-	const forwardEvents = createEventForwarder(get_current_component());
+	export let element: HTMLDivElement | null = null; 
 	/*  end slotUi exports*/
 
 	type LevelType = 'success' | 'info' | 'error' | 'warning' | 'alert' | 'discrete';
@@ -51,8 +49,7 @@
 </script>
 
 {#if isOpen}
-	<div
-		use:forwardEvents
+	<div 
 		bind:this={element}
 		transition:fade
 		class="alert shad-4 {className}"

@@ -1,10 +1,8 @@
-<script>import { createEventForwarder } from '../../engine/engine';
-import { get_current_component } from 'svelte/internal';
+<script>import { get_current_component } from 'svelte/internal';
 /*  common slotUi exports*/
 let className = '';
 export { className as class };
 export let element = null;
-const forwardEvents = createEventForwarder(get_current_component());
 /*  end slotUi exports*/
 export let value;
 export let ceiling;
@@ -25,7 +23,7 @@ const yM = {
 </script>
 
 {#if value > ceiling}
-	<div  use:forwardEvents bind:this={element} class="badge" style="{xM[position.x]};{yM[position.y]}">
+	<div   bind:this={element} class="badge" style="{xM[position.x]};{yM[position.y]}">
 		<slot>{value}</slot>
 	</div>
 {/if}

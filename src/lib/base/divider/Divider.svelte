@@ -1,12 +1,10 @@
-<script lang="ts">
-	import { createEventForwarder } from '$lib/engine/eventForwarder.js'; 
+<script lang="ts"> 
 	import { get_current_component } from 'svelte/internal';
 	import type { ElementProps } from '$types/index.js';
 
 	let className = '';
 	export { className as class };
-	export let element: HTMLDivElement | null = null;
-	const forwardEvents = createEventForwarder(get_current_component()); 
+	export let element: HTMLDivElement | null = null; 
 
 	/** margins applied to divider */
 	export let density: ElementProps['density'] = 'default';
@@ -72,7 +70,6 @@
 	class="{extensionClass[direction][expansion]} {className} {shadowClass}"
 	class:vertical={direction === 'vertical'}
 	style={addStyle}
-	use:forwardEvents 
 />
 
 

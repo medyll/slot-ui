@@ -41,6 +41,7 @@
 	placeholder="find"
 	type="search"
 	size="auto"
+	class={className}
 	{...$$restProps}
 />
 <slot name="noResultsSlot" />

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ComponentDemo from '$components/ComponentDemo.svelte';
+	import ComponentDemo from '$components/ComponentExample.svelte';
 	import Frame from './Frame.svelte';
 </script>
 

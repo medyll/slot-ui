@@ -1,18 +1,26 @@
-import adapter from '@sveltejs/adapter-vercel';
-import path from 'path';
+import adapter from '@sveltejs/adapter-vercel'; 
 import preprocess from 'svelte-preprocess';
 import { mdsvex } from 'mdsvex';
-import mm from "micromatch"
-const dev = 'production' === 'development';
+import mm from 'micromatch'; 
 
 
+function filterExport(filepath) {
+	
+	// return mm.contains(filepath,'Backdrop.svelte')
+	return !mm.contains(filepath, [
+		'*.demo.svelte',
+		'*Demo.svelte',
+		'*preview.svelte',
+		'*sitedata',
+		'*.md'
+	])
+}
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	package: {
-		emitTypes : true,
-		exports: (filepath) => !mm.contains(filepath, ['*.demo.svelte', '*Demo.svelte', '*preview.svelte','*sitedata','*.md']),
-	   files: (filepath)=> !mm.contains(filepath, ['*.demo.svelte', '*Demo.svelte', '*preview.svelte','*sitedata','*.md'])
-	  },
+		exports: (filepath) => filterExport(filepath),
+		files: (filepath) => filterExport(filepath),
+	},
 	preprocess: [
 		preprocess(),
 		mdsvex({
@@ -23,17 +31,13 @@ const config = {
 	kit: {
 		adapter: adapter({
 			edge: false,
-			external:['@sveltejs/kit/install-fetch'],
-			split:true
+			external: ['@sveltejs/kit/install-fetch'],
+			split: true
 		}),
-		paths: {
-			// base: dev ? "" : "",
+		paths: { 
 			base: ''
-		},
-		prerender: {
-			default: true
-		},
+		}
 	}
 };
 
-export default config; 
+export default config;

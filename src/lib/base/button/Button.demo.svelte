@@ -3,7 +3,7 @@
 	import type { PopperPositionType } from '$lib/ui/popper/types';
 	import { popper, type UsePopperProps } from '$lib/ui/popper/usePopper.js';
 	import { togglerSource, togglerTarget } from '$lib/uses/toggler';
-import ComponentDemo from '$components/ComponentDemo.svelte';
+import ComponentDemo from '$components/ComponentExample.svelte';
 	import type { ElementProps } from 'src/types';
 	import Box from '../box/Box.svelte';
 	import Debug from '../debug/Debug.svelte';
