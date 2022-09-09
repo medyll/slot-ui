@@ -3,7 +3,7 @@ __propDef: {
     props: {
         class?: string | undefined;
         element?: HTMLDivElement | null | undefined;
-        size?: "tiny" | "small" | "medium" | "large" | "full" | undefined;
+        size?: "small" | "tiny" | "medium" | "large" | "full" | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;

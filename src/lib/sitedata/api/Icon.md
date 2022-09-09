@@ -6,7 +6,7 @@ __propDef: {
         style?: string | undefined;
         icon?: string | undefined;
         iconFamily?: string | undefined;
-        fontSize?: "tiny" | "small" | "medium" | "default" | "large" | "big" | "full" | "auto" | undefined;
+        fontSize?: "small" | "tiny" | "medium" | "default" | "large" | "big" | "full" | "auto" | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;

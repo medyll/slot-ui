@@ -13,7 +13,7 @@ declare const __propDef: {
     };
     slots: {
         default: {
-            fieldData: import("../../../types").Data;
+            fieldData: any;
         };
     };
 };

@@ -1,3 +1,4 @@
+import ComponentExampleApiReadMe from "$lib/sitedata/api/ComponentExample.api.md";
 import AlertApiReadMe from "$lib/sitedata/api/Alert.api.md";
 import AvatarApiReadMe from "$lib/sitedata/api/Avatar.api.md";
 import BackdropApiReadMe from "$lib/sitedata/api/Backdrop.api.md";
@@ -50,7 +51,6 @@ import TooltipApiReadMe from "$lib/sitedata/api/Tooltip.api.md";
 import TreeApiReadMe from "$lib/sitedata/api/Tree.api.md";
 import VirtualizeApiReadMe from "$lib/sitedata/api/Virtualize.api.md";
 import VirtualizerApiReadMe from "$lib/sitedata/api/Virtualizer.api.md";
-import ComponentApiReadMe from "$lib/sitedata/api/Component.api.md";
 import DataBoxApiReadMe from "$lib/sitedata/api/DataBox.api.md";
 import FinderApiReadMe from "$lib/sitedata/api/Finder.api.md";
 import GrouperApiReadMe from "$lib/sitedata/api/Grouper.api.md";
@@ -80,7 +80,8 @@ import ToastApiReadMe from "$lib/sitedata/api/Toast.api.md";
 import TopBarApiReadMe from "$lib/sitedata/api/TopBar.api.md";
 import WindowApiReadMe from "$lib/sitedata/api/Window.api.md";
 
-export const componentApiReadMe = {alertApi:AlertApiReadMe,
+export const componentApiReadMe = {componentexampleApi:ComponentExampleApiReadMe,
+alertApi:AlertApiReadMe,
 avatarApi:AvatarApiReadMe,
 backdropApi:BackdropApiReadMe,
 badgeApi:BadgeApiReadMe,
@@ -132,7 +133,6 @@ tooltipApi:TooltipApiReadMe,
 treeApi:TreeApiReadMe,
 virtualizeApi:VirtualizeApiReadMe,
 virtualizerApi:VirtualizerApiReadMe,
-componentApi:ComponentApiReadMe,
 databoxApi:DataBoxApiReadMe,
 finderApi:FinderApiReadMe,
 grouperApi:GrouperApiReadMe,

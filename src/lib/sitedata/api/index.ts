@@ -1,3 +1,4 @@
+import ComponentExampleReadMe from "$lib/sitedata/api/ComponentExample.md";
 import AlertReadMe from "$lib/sitedata/api/Alert.md";
 import AvatarReadMe from "$lib/sitedata/api/Avatar.md";
 import BackdropReadMe from "$lib/sitedata/api/Backdrop.md";
@@ -50,7 +51,6 @@ import TooltipReadMe from "$lib/sitedata/api/Tooltip.md";
 import TreeReadMe from "$lib/sitedata/api/Tree.md";
 import VirtualizeReadMe from "$lib/sitedata/api/Virtualize.md";
 import VirtualizerReadMe from "$lib/sitedata/api/Virtualizer.md";
-import ComponentReadMe from "$lib/sitedata/api/Component.md";
 import DataBoxReadMe from "$lib/sitedata/api/DataBox.md";
 import FinderReadMe from "$lib/sitedata/api/Finder.md";
 import GrouperReadMe from "$lib/sitedata/api/Grouper.md";
@@ -80,7 +80,8 @@ import ToastReadMe from "$lib/sitedata/api/Toast.md";
 import TopBarReadMe from "$lib/sitedata/api/TopBar.md";
 import WindowReadMe from "$lib/sitedata/api/Window.md";
 
-export const componentReadMe = {alert:AlertReadMe,
+export const componentReadMe = {componentexample:ComponentExampleReadMe,
+alert:AlertReadMe,
 avatar:AvatarReadMe,
 backdrop:BackdropReadMe,
 badge:BadgeReadMe,
@@ -132,7 +133,6 @@ tooltip:TooltipReadMe,
 tree:TreeReadMe,
 virtualize:VirtualizeReadMe,
 virtualizer:VirtualizerReadMe,
-component:ComponentReadMe,
 databox:DataBoxReadMe,
 finder:FinderReadMe,
 grouper:GrouperReadMe,
