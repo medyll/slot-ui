@@ -11,7 +11,7 @@ const config = {
 		'$scripts': path.resolve('./src/lib/scripts'),
 		'$engine': path.resolve('./src/lib/engine'),
 		'$uses': path.resolve('./src/lib/uses'),
-		'$types': path.resolve('./src/lib/types'),
+		'$typings': path.resolve('./src/lib/types'),
 		'$sitedata': path.resolve('./src/lib/sitedata'),
 	}},
 	server: {

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { createEventForwarder } from '$lib/engine/engine';
 	import { popper, type UsePopperProps } from '$lib/ui/popper/usePopper';
-	import type { ElementProps } from 'src/types';
+	import type { ElementProps } from '$typings/index.js';
 	import { compute_slots, get_current_component, text } from 'svelte/internal';
 	import Button from '../button/Button.svelte';
 	import Icon from '../icon/Icon.svelte';

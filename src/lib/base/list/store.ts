@@ -1,5 +1,5 @@
 import { writable, get } from 'svelte/store';
-import type { Data, ElementProps } from '../../../types';
+import type { ElementProps,Data } from '$typings/index.js';
 import type { LisItemProps } from './types';
 
 type ListStoreType = {

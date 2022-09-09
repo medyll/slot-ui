@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ElementProps } from 'src/types';
+	import type { ElementProps } from '$typings/index.js';
 
 	import Input from '$lib/base/input/Input.svelte';
 	type ParameterType = {

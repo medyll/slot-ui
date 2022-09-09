@@ -1,6 +1,6 @@
 <script lang="ts"> 
 	import { get_current_component } from 'svelte/internal';
-	import type { ElementProps } from '$types/index.js';
+	import type { ElementProps } from '$typings/index.js';
 
 	let className = '';
 	export { className as class };

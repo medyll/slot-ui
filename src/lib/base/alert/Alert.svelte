@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import { createEventDispatcher, get_current_component } from 'svelte/internal';
-	import type { ElementProps } from '$types/index.js';
+	import type { ElementProps } from '$typings/index.js';
 	import Divider from '$lib/base/divider/Divider.svelte';
 	import IconButton from '$lib/base/button/IconButton.svelte'; 
 	import Button from '$lib/base/button/Button.svelte';

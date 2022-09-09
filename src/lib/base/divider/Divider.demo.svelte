@@ -1,6 +1,6 @@
 <script lang="ts">
 import ComponentDemo from '$components/ComponentExample.svelte';
-	import type { ElementProps } from 'src/types';
+import type { ElementProps } from '$typings/index.js';
 	import Divider from './Divider.svelte';
 	type OptType = {
 		density: ElementProps['density'][];

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type {ElementProps, TIcon} from '$lib/../../../types';
+  import type { ElementProps } from '$typings/index.js';
   import Iconify from '@iconify/svelte';
   import {createEventForwarder} from '../../engine/engine';
   import {get_current_component} from 'svelte/internal';

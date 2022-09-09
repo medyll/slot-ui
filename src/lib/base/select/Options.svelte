@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ElementProps } from 'src/types';
+	import type { ElementProps } from '$typings/index.js';
 
 	export let data: ElementProps['data'] | undefined = undefined;
 	export let text: string| undefined = undefined;

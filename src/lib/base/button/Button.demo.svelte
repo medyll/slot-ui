@@ -4,7 +4,7 @@
 	import { popper, type UsePopperProps } from '$lib/ui/popper/usePopper.js';
 	import { togglerSource, togglerTarget } from '$lib/uses/toggler';
 import ComponentDemo from '$components/ComponentExample.svelte';
-	import type { ElementProps } from 'src/types';
+import type { ElementProps } from '$typings/index.js';
 	import Box from '../box/Box.svelte';
 	import Debug from '../debug/Debug.svelte';
 	import Icon from '../icon/Icon.svelte';

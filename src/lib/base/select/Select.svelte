@@ -1,6 +1,6 @@
 <script lang="ts">
   import {stickTo} from '../../uses/stickTo/stickTo';
-  import type {ElementProps} from 'src/types';
+  import type { ElementProps } from '$typings/index.js';
   import {createEventForwarder} from '../../engine/engine';
   import {get_current_component} from 'svelte/internal';
 

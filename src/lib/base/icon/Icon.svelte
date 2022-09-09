@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
 	import Iconify from '@iconify/svelte';
 
-	import type { ElementProps } from 'src/types';
+	import type { ElementProps } from '$typings/index.js';
 	export type SizeType = keyof typeof sizes;
 	const sizes: Partial<Record<ElementProps['sizeType'], any>> = {
 		tiny: 8,

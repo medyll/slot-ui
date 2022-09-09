@@ -1,5 +1,4 @@
-import { writable, get } from 'svelte/store';
-import type { ElementProps } from '../../../types';
+import { writable, get } from 'svelte/store'; 
 import type { MenuProps } from './types';
 
 

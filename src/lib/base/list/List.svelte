@@ -3,7 +3,7 @@
 	import ListItem from './ListItem.svelte';
 	import { setContext } from 'svelte';
 	import { createListStore } from './store';
-	import type { ElementProps } from '../../../types';
+	import type { ElementProps } from '$typings/index.js';
 	import { compute_slots, get_current_component, null_to_empty } from 'svelte/internal';
 	import Icon from '../icon/Icon.svelte';
 	import ListTitle from './ListTitle.svelte';
