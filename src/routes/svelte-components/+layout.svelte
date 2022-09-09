@@ -9,7 +9,7 @@
 	$uiContext.drawerOpen = true;
 </script>
 <svelte:head>
-	<title>SlotUi compnents list</title>
+	<title>SlotUi component list</title>
 	<meta name="description" />
 </svelte:head>
 <div class="pad-4 ">

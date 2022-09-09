@@ -1,5 +1,5 @@
 ```import { SvelteComponentTyped } from "svelte";
-import type { ElementProps } from 'src/types';
+import type { ElementProps } from '$typings/index.js';
 export declare type SizeType = keyof typeof sizes;
 declare const sizes: Partial<Record<ElementProps['sizeType'], any>>;
 declare const __propDef: {
@@ -9,7 +9,7 @@ declare const __propDef: {
         style?: string | undefined;
         icon?: string | undefined;
         iconFamily?: string | undefined;
-        fontSize?: "default" | "medium" | "full" | "tiny" | "small" | "large" | "big" | "auto" | undefined;
+        fontSize?: "small" | "tiny" | "medium" | "default" | "large" | "big" | "full" | "auto" | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;

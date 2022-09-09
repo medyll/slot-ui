@@ -1,3 +1,4 @@
+
 // Function for forwarding DOM events to the component's declaration
 // Adapted from Tropix126/fluent-svelte from rgossiaux/svelte-headlessui which is modified from hperrin/svelte-material-ui
 import type {SvelteComponent} from 'svelte';
@@ -6,7 +7,7 @@ import {bubble, listen} from 'svelte/internal';
 type EventForwarderCallback = (event: any) => void;
 type EventArgs = (eventType: string, callback: EventForwarderCallback) => () => void
 
-/** @deprecated */
+/** @deprecated, not to be used */
 export function createEventForwarder(component: SvelteComponent, exclude: string[] = []) {
   
   // This is our pseudo $on function. It is defined on component mount.

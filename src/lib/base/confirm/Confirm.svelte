@@ -1,5 +1,4 @@
 <script lang="ts">
-	import ContentSwitcher from './../contentSwitcher/ContentSwitcher.demo.svelte';
 	import { autofocus } from '$lib/uses/autofocus/autofocus';
 	import { fade, slide } from 'svelte/transition';
 	import Button from '../button/Button.svelte';

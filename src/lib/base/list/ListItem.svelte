@@ -12,7 +12,7 @@
 
 	import { createEventForwarder } from '../../engine/engine';
 	import Icon from '../icon/Icon.svelte';
-	import type { ElementProps } from 'src/types';
+	import type { ElementProps } from '$typings/index.js';
 	import Divider from '../divider/Divider.svelte';
 
 	/*  common slotUi exports*/

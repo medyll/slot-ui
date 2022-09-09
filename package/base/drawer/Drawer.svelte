@@ -1,17 +1,14 @@
 <svelte:options accessors />
 
-<script>import BottomBar from '../bottomBar/BottomBar.svelte';
+<script>import { get_current_component } from 'svelte/internal';
+import BottomBar from '../bottomBar/BottomBar.svelte';
 import IconButton from '../button/IconButton.svelte';
-import { createEventForwarder } from '../../engine/engine';
-import { get_current_component } from 'svelte/internal';
 import Button from '../button/Button.svelte';
 import Icon from '../icon/Icon.svelte';
-// export type toggle = () => void;
 /*  common slotUi exports*/
 let className = '';
 export { className as class };
 export let element = null;
-const forwardEvents = createEventForwarder(get_current_component());
 /*  end slotUi exports*/
 /** title of the drawer */
 export let primary = undefined;
@@ -86,8 +83,7 @@ $: finalStyle = `display:${dspStyle};position:${flow};${stickToStyle[stickTo]};$
 	data-open={isOpen}
 	bind:this={element}
 	class="drawer flex-v h-full {className}"
-	style={finalStyle}
-	use:forwardEvents
+	style={finalStyle}  
 >
 	<div class="opener" style={openerIconStyle[stickTo]}>
 		{#if showOpenerIcon}

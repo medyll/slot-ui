@@ -6,7 +6,7 @@ __propDef: {
         icon: ElementProps['icon'];
         iconFamily?: string | undefined;
         iconClassName?: string | undefined;
-        iconFontSize?: "default" | "medium" | "full" | "tiny" | "small" | "large" | "big" | "auto" | undefined;
+        iconFontSize?: "small" | "tiny" | "medium" | "default" | "large" | "big" | "full" | "auto" | undefined;
         style?: string | undefined;
         showShip?: boolean | undefined;
         usePopperOpt?: UsePopperProps | undefined;

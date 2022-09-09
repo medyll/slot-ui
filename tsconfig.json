@@ -20,8 +20,8 @@
 			"$engine/*": ["src/engine/*"],
 			"$scripts": ["src/scripts"],
 			"$scripts/*": ["src/scripts/*"],
-			"$types": ["src/types"],
-			"$types/*": ["src/types/*"],
+			"$typings": ["src/lib/types"],
+			"$typings/*": ["src/lib/types/*"],
 			"$components": ["src/components"],
 			"$components/*": ["src/components/*"]
 		}

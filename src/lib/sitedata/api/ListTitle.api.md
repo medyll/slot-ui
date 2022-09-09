@@ -5,7 +5,7 @@ declare const __propDef: {
         /** displayed as H5*/ primary?: string | undefined;
         /** secondary title */ secondary?: string | undefined;
         action?: string | undefined;
-        density?: "none" | "tight" | "default" | "medium" | "kind" | undefined;
+        density?: "medium" | "default" | "none" | "tight" | "kind" | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;

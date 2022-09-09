@@ -1,3 +1,4 @@
+import Alertdemosvelte from "$lib/base/alert/Alert.demo.svelte"; 
 import Avatardemosvelte from "$lib/base/avatar/Avatar.demo.svelte"; 
 import Boxdemosvelte from "$lib/base/box/Box.demo.svelte"; 
 import Buttondemosvelte from "$lib/base/button/Button.demo.svelte"; 
@@ -20,7 +21,8 @@ import Grouperdemosvelte from "$lib/data/grouper/Grouper.demo.svelte";
 import Jsonerdemosvelte from "$lib/data/jsoner/Jsoner.demo.svelte"; 
 import Sorterdemosvelte from "$lib/data/sorter/Sorter.demo.svelte"; 
 import Framedemosvelte from "$lib/ui/frame/Frame.demo.svelte";  
- export const slotUiComponentList = [ {name:"Avatar",code:"avatar",component:Avatardemosvelte},
+ export const slotUiComponentList = [ {name:"Alert",code:"alert",component:Alertdemosvelte},
+{name:"Avatar",code:"avatar",component:Avatardemosvelte},
 {name:"Box",code:"box",component:Boxdemosvelte},
 {name:"Button",code:"button",component:Buttondemosvelte},
 {name:"Card",code:"card",component:Carddemosvelte},

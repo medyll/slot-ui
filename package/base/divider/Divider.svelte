@@ -1,9 +1,7 @@
-<script>import { createEventForwarder } from '../../engine/eventForwarder';
-import { get_current_component } from 'svelte/internal';
+<script>import { get_current_component } from 'svelte/internal';
 let className = '';
 export { className as class };
 export let element = null;
-const forwardEvents = createEventForwarder(get_current_component());
 /** margins applied to divider */
 export let density = 'default';
 /** default direction of the divider */
@@ -60,7 +58,6 @@ switch (direction) {
 	class="{extensionClass[direction][expansion]} {className} {shadowClass}"
 	class:vertical={direction === 'vertical'}
 	style={addStyle}
-	use:forwardEvents 
 />
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@medyll/slotui",
-  "version": "0.1.67",
+  "version": "0.1.69",
   "repository": {
     "type": "git",
     "url": "https://github.com/medyll/slot-ui.git"
@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "vite dev  --port 3001 --host --open   ",
     "build": "svelte-kit sync && vite build",
-    "package": "svelte-package",
+    "package": "svelte-kit sync && svelte-package",
     "preview": "vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "make-docs": "node build-docs & exit 0",
@@ -48,7 +48,7 @@
     "@sveltejs/adapter-node": "next",
     "@sveltejs/adapter-static": "next",
     "@sveltejs/adapter-vercel": "next",
-    "@sveltejs/kit": "next",
+    "@sveltejs/kit": "1.0.0-next.442",
     "@sveltejs/package": "next",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/svelte": "^3.1.0",

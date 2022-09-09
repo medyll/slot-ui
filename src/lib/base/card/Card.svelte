@@ -1,7 +1,7 @@
 <script lang="ts">
   import {createEventForwarder} from '../../engine/engine';
   import {get_current_component} from 'svelte/internal';
-  import type {ElementProps} from '../../../types';
+  import type { ElementProps } from '$typings/index.js';
   /*  common slotUi exports*/
   let className = '';
   export {className as class};

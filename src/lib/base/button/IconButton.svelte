@@ -2,7 +2,7 @@
 	import Icon from '../icon/Icon.svelte';
 	import { createEventForwarder } from '../../engine/engine';
 	import { get_current_component } from 'svelte/internal';
-	import type { ElementProps } from '../../../types';
+	import type { ElementProps } from '$typings/index.js';
 	import { popper, type UsePopperProps } from '$lib/ui/popper/usePopper';
 	/*  common slotUi exports*/
 	let className = '';

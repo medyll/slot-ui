@@ -1,3 +1,4 @@
+import ComponentExampleReadMe from "$lib/sitedata/api/ComponentExample.md";
 import AlertReadMe from "$lib/sitedata/api/Alert.md";
 import AvatarReadMe from "$lib/sitedata/api/Avatar.md";
 import BackdropReadMe from "$lib/sitedata/api/Backdrop.md";
@@ -79,7 +80,8 @@ import ToastReadMe from "$lib/sitedata/api/Toast.md";
 import TopBarReadMe from "$lib/sitedata/api/TopBar.md";
 import WindowReadMe from "$lib/sitedata/api/Window.md";
 
-export const componentReadMe = {alert:AlertReadMe,
+export const componentReadMe = {componentexample:ComponentExampleReadMe,
+alert:AlertReadMe,
 avatar:AvatarReadMe,
 backdrop:BackdropReadMe,
 badge:BadgeReadMe,

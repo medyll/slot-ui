@@ -1,3 +1,4 @@
+import ComponentExampleApiReadMe from "$lib/sitedata/api/ComponentExample.api.md";
 import AlertApiReadMe from "$lib/sitedata/api/Alert.api.md";
 import AvatarApiReadMe from "$lib/sitedata/api/Avatar.api.md";
 import BackdropApiReadMe from "$lib/sitedata/api/Backdrop.api.md";
@@ -79,7 +80,8 @@ import ToastApiReadMe from "$lib/sitedata/api/Toast.api.md";
 import TopBarApiReadMe from "$lib/sitedata/api/TopBar.api.md";
 import WindowApiReadMe from "$lib/sitedata/api/Window.api.md";
 
-export const componentApiReadMe = {alertApi:AlertApiReadMe,
+export const componentApiReadMe = {componentexampleApi:ComponentExampleApiReadMe,
+alertApi:AlertApiReadMe,
 avatarApi:AvatarApiReadMe,
 backdropApi:BackdropApiReadMe,
 badgeApi:BadgeApiReadMe,

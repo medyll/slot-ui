@@ -8,3 +8,7 @@ declare namespace App {
   // interface Session {}
   // interface Stuff {}
 }
+
+
+declare module "*.md";
+declare module 'svelte-highlight/styles/*' 

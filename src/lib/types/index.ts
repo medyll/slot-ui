@@ -1,8 +1,8 @@
 export type TIcon = string;
 
-export namespace Drawer {
+/* export namespace Drawer {
   export let title: string;
-}
+} */
 
 export interface ElementProps {
   sizeType: 'tiny' | 'small' | 'medium' | 'default' | 'large' | 'big' | 'full' | 'auto',
@@ -11,7 +11,7 @@ export interface ElementProps {
   expansion: 'full' | 'padded' | 'centered',
   alignment: 'center' | 'left' | 'right',
   data: Record<string, any>;
-  action: (event, data: ElementProps['data']) => void;
+  action: (event:any, data: ElementProps['data']) => void;
   icon: | TIcon
   | { type: 'fa', name: TIcon };
 }

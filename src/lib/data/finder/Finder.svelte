@@ -3,8 +3,7 @@
 <script lang="ts">
 	import Input from '$lib/base/input/Input.svelte';
 	import { dataOp } from '$lib/engine/utils.js';
-	import ComponentDemo from '$components/ComponentDemo.svelte';
-	import type { ComponentProps } from 'svelte';
+
 	let className = '';
 	export { className as class };
 	export let element: HTMLElement | null = null;
@@ -42,6 +41,7 @@
 	placeholder="find"
 	type="search"
 	size="auto"
+	class={className}
 	{...$$restProps}
 />
 <slot name="noResultsSlot" />

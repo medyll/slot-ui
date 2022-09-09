@@ -1,10 +1,11 @@
-<script>import Button from '../button/Button.svelte';
-import Alert from './Alert.svelte';
+<script lang="ts">
+	import Button from '$lib/base/button/Button.svelte';
+	import Alert from './Alert.svelte';
 </script>
 
 <Alert level="success" message="Message as props" />
 
-<Alert level="info" >
+<Alert level="info">
 	Simple alert with button
 	<Button slot="topButtonSlot">button</Button>
 </Alert>
@@ -12,9 +13,11 @@ import Alert from './Alert.svelte';
 <Alert level="alert" message="message here">Simple <br />alert</Alert>
 <Alert level="discrete" message="message here">Simple</Alert>
 <Alert
-		level="error"
-		on:alert:closed={()=>{alert('closed')}}
->Simple alerte with message
+	level="error"
+	on:alert:closed={() => {
+		alert('closed');
+	}}
+	>Simple alerte with message
 	<Button data-close slot="buttonZoneSlot">button close</Button>
 	<div slot="messageSlot">message here</div>
 </Alert>

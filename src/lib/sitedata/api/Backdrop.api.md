@@ -3,7 +3,7 @@ declare const __propDef: {
     props: {
         class?: string | undefined;
         element?: HTMLDivElement | null | undefined;
-        loading?: boolean | undefined;
+        /** if in loading state, it will show a loading icon or $$slots.loadingSlot */ loading?: boolean | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;

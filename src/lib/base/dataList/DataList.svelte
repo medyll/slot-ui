@@ -5,7 +5,6 @@
 	import Virtualize from '../virtualizer/Virtualizer.svelte';
 	import { writable, type Writable } from 'svelte/store';
 	import { browser } from '$app/env';
-	import { slotUiComponentList } from '$lib/sitedata/componentList.js';
 	import DataListRow from './DataListRow.svelte';
 	import DataListCell from './DataListCell.svelte';
 	import type { DataListStoreType } from '$types/index.js';

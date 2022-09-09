@@ -10,7 +10,7 @@ const rowContext = getContext('dataListRow');
 export let element = null;
 export let style = undefined;
 export let columnId = undefined;
-/** if data has been provided, then cell got a fieldName */
+/** if data has been provided, then cell got a fieldName and coumnId is defined */
 export let dataField = undefined;
 /** typeof the dataField. Used when exists Datalist.$$props.dataTypes */
 export let dataFieldType = undefined;
@@ -21,6 +21,7 @@ let colIndex = undefined;
 // if inHeader, then monitor cell
 onMount(async () => {
     if (element && dataListContextStore) {
+        // find header.col by index
         colIndex = [...element.parentElement.children].indexOf(element);
         if (inHeader) {
             const width = element.offsetWidth + 'px'; // element?.style?.width ?? element?.offsetWidth+'px';
@@ -30,7 +31,7 @@ onMount(async () => {
                 // columnId = crypto.randomUUID();
                 // register colmun in store
                 // find header.col by index, create uniqid
-                pushToStore(colIndex, width);
+                columnId = pushToStore(colIndex, width);
             }
         }
         if (!inHeader) {
@@ -74,7 +75,7 @@ $: if (element && !inHeader && $dataListContextStore?.columns?.[colIndex]?.width
     element.style.maxWidth = $dataListContextStore?.columns?.[colIndex]?.width;
     element.style.minWidth = $dataListContextStore?.columns?.[colIndex]?.width;
 }
-const onSort = (columnId, order) => (e) => {
+const onSort = (columnId, order) => {
     // find field from index
     if ($dataListContextStore?.config?.isSortable && columnId && dataField) {
         const event = custom_event('datalist:sort:clicked', { field: dataField, order }, { bubbles: true });
@@ -86,6 +87,7 @@ function pushToStore(index, width) {
     let columnId = crypto.randomUUID();
     // register colmun in store
     $dataListContextStore.columns.push({ index, columnId, width, dataField });
+    return columnId;
 }
 function findColIdAtIndex(index) {
     columnId = dataOp.filterListFirst($dataListContextStore.columns, index, 'index').columnId;
@@ -121,7 +123,7 @@ function resizeEnd() {
 	title={$dataListContextStore?.columns?.[colIndex]?.width}
 >
 	{#if inHeader}
-		<div on:click={onSort(columnId)} class="cellHeader">
+		<div on:click={()=>{onSort(columnId)}} class="cellHeader">
 			<div class="cellHeaderContent"><slot /></div>
 			{#if dataField && $dataListContextStore?.config?.isSortable}
 				<div class="cellHeaderSorter">

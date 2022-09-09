@@ -1,4 +1,4 @@
-import type { ElementProps } from "src/types"
+import type { ElementProps } from '$typings/index.js';
 
 
 export type MenuProps<T = any> = {

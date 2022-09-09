@@ -1,15 +1,13 @@
 <script>import { fade } from 'svelte/transition';
+import { createEventDispatcher, get_current_component } from 'svelte/internal';
 import Divider from '../divider/Divider.svelte';
 import IconButton from '../button/IconButton.svelte';
-import { createEventForwarder } from '../../engine/engine';
-import { createEventDispatcher, get_current_component } from 'svelte/internal';
 import Button from '../button/Button.svelte';
 const dispatch = createEventDispatcher();
 /*  common slotUi exports*/
 let className = '';
 export { className as class };
 export let element = null;
-const forwardEvents = createEventForwarder(get_current_component());
 /** type of levels */
 export let level = 'info';
 export let action = () => { };
@@ -39,8 +37,7 @@ const handleClick = (event) => {
 </script>
 
 {#if isOpen}
-	<div
-		use:forwardEvents
+	<div 
 		bind:this={element}
 		transition:fade
 		class="alert shad-4 {className}"

@@ -3,7 +3,7 @@ __propDef: {
     props: {
         class?: string | undefined;
         element?: HTMLDivElement | null | undefined;
-        density?: "none" | "tight" | "default" | "kind" | undefined;
+        density?: "medium" | "default" | "none" | "tight" | "kind" | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;
