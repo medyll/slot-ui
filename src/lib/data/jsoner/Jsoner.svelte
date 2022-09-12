@@ -10,7 +10,7 @@
 	/*  end slotUi exports*/
 	export let data: any = [];
 
-	export let mode: 'array' | 'object' | 'string' | undefined = undefined
+	export let mode: 'array' | 'object' | 'string' | 'number' | undefined = undefined
 
 	if (Array.isArray(data)) {
 		mode = 'array';
@@ -18,6 +18,8 @@
 		mode = 'object';
 	} else if (typeof data === 'string') {
 		mode = 'string';
+	}else if (typeof data === 'number') {
+		mode = 'number';
 	}
 </script>
 
@@ -41,7 +43,7 @@
 		</div>
 	{/if}
 
-	{#if mode === 'string'}
+	{#if ['string','number'].includes(mode)}
 		<div class="pad-1 ">{data}</div>
 	{/if}
 {/if}

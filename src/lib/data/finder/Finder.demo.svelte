@@ -4,9 +4,9 @@ import ComponentDemo from '$components/ComponentExample.svelte';
 import Finder from './Finder.svelte';
 
 	let data = [
-		{ name: 'i', surname: 'am', lastname: 'groot' },
-		{ name: 'he', surname: 'is', lastname: 'groot' },
-		{ name: 'you', surname: 'are', lastname: 'groot' }
+		{ id:1,name: 'i', surname: 'am', lastname: 'groot' },
+		{ id:2,name: 'he', surname: 'is', lastname: 'groot' },
+		{ id:3,name: 'you', surname: 'are', lastname: 'groot' }
 	];
 
 	let findData: any;
