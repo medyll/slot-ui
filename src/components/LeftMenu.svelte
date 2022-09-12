@@ -25,7 +25,7 @@
 	height="100%"
 >
 	<ListItem data={listItem?.data}>
-		<a slot="primary" href="/svelte-components/{listItem?.data?.code}"
+		<a slot="primary" href="./svelte-components/{listItem?.data?.code}"
 			>{null_to_empty(listItem?.primary)}</a
 		>
 	</ListItem>
