@@ -51,7 +51,7 @@
 	<title>SlotUi</title>
 	<link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet" />
 	{@html github}
-	<style type="text/css">
+	<!-- <style type="text/css">
 		 {
 			@html cssfabricVars;
 		}
@@ -65,7 +65,7 @@
 		 {
 			@html cssfabricThemer;
 		}
-	</style>
+	</style> -->
 	<script>
 		/* hack for legacy node app */
 		var global = global || window;
