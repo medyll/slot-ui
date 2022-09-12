@@ -1,7 +1,7 @@
 <script lang="ts">
   import Card from './Card.svelte';
   import Icon from '../icon/Icon.svelte';
-import ComponentDemo from '$components/ComponentExample.svelte';
+import ComponentDemo from '$_components/ComponentExample.svelte';
 </script>
 
 <ComponentDemo component='Box'

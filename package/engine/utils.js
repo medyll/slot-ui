@@ -42,7 +42,7 @@ export class dataOp {
                     if (typeof item?.[key] === 'object' && !Array.isArray(item?.[key])) {
                         return false;
                     }
-                    return typeof item?.[key] === 'string' ? item?.[key].search(reg) !== -1 : false;
+                    return ['string', 'number'].includes(typeof item?.[key]) ? `${item?.[key]}`.search(reg) !== -1 : false;
                 });
         });
     }

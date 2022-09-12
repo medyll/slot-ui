@@ -1,0 +1,11 @@
+hr {
+  border: none;
+  border-top: 1px solid var(--slotui-divider-color,var(--theme-color-foreground-alpha-high,#333) ) ;
+  background-color: var(--slotui-divider-color,var(--theme-color-foreground-alpha,#333) ) ;
+  display: block;
+ 
+  &.vertical {
+    width: 1px;   
+    border-right: 1px solid var(--slotui-divider-color,var(--theme-color-foreground-alpha,#333) ) ;
+  }
+}

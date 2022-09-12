@@ -14,5 +14,6 @@ npm i medyll@slotui
 yarn add medyll@slotui
 ```
 
+Possibly more info on 
 
- 
+[SlotUi website](https://slot-ui.vercel.app/ "SlotUi's Homepage")

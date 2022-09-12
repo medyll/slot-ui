@@ -3,7 +3,7 @@
 	import Icon from '../icon/Icon.svelte';
 	import Divider from '../divider/Divider.svelte';
 	import Button from '../button/Button.svelte';
-	import ComponentDemo from '$components/ComponentExample.svelte';
+	import ComponentDemo from '$_components/ComponentExample.svelte';
 </script>
 
 <ComponentDemo

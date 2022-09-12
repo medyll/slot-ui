@@ -4,7 +4,7 @@
 	import { custom_event, each, get_current_component } from 'svelte/internal';
 	import Virtualize from '../virtualizer/Virtualizer.svelte';
 	import { writable, type Writable } from 'svelte/store';
-	import { browser } from '$app/env';
+	import { browser } from '$app/environment';
 	import DataListRow from './DataListRow.svelte';
 	import DataListCell from './DataListCell.svelte';
 	import type { DataListStoreType } from '$types/index.js';
