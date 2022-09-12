@@ -20,7 +20,7 @@
 	<div  class="flex-v gap-medium " >
 		<h5>Link to api :</h5>
 		<div  class="marg-l-4">
-			<a href="./svelte-components/{component.toLowerCase()}/api">Api for component "{component}"</a>
+			<a href="svelte-components/{component.toLowerCase()}/api">Api for component "{component}"</a>
 		</div>
 	</div>
 </div>
