@@ -17,7 +17,7 @@
 	import type { UiContextType } from '$contexts/ui.context';
 	import { onMount } from 'svelte';
 
-	let store = writable<UiContextType>({ drawerFlow: 'fixed', drawerOpen:false });
+	let store = writable<UiContextType>({ drawerFlow: 'fixed', drawerOpen: false });
 	setContext<Writable<UiContextType>>('uiContext', store);
 
 	let uiContext = getContext<Writable<UiContextType>>('uiContext');
@@ -34,17 +34,16 @@
 	}
 
 	onMount(() => {
-		contentSlide.addEventListener('scroll', function (event) { 
+		contentSlide.addEventListener('scroll', function (event) {
 			if (contentSlide?.scrollTop > 32 && !scrolled) {
 				scrolled = true;
-				navElement.classList.add('shad-3')
+				navElement.classList.add('shad-3');
 			} else if (contentSlide?.scrollTop < 32) {
 				scrolled = false;
-				navElement.classList.remove('shad-3')
+				navElement.classList.remove('shad-3');
 			}
 		});
 	});
- 
 </script>
 
 <svelte:head>
@@ -71,6 +70,7 @@
 		var global = global || window;
 		var Buffer = Buffer || [];
 		var process = process || { env: { DEBUG: undefined }, version: [] };
+		 
 		if (document.body) {
 			document.body.setAttribute('data-theme', 'light');
 			if (localStorage && localStorage.getItem('themeMode')) {
@@ -79,20 +79,28 @@
 		}
 		window.addEventListener('load', function (event) {
 			if (localStorage) {
-				if(localStorage.getItem('themeMode')) document.body.setAttribute('data-theme', localStorage.getItem('themeMode')); 
+				if (localStorage.getItem('themeMode'))
+					document.body.setAttribute('data-theme', localStorage.getItem('themeMode'));
 			}
 		});
 	</script>
 </svelte:head>
 
 <div class="flex-h h-full overflow-hidden">
-	<Drawer bind:this={DrawerRef} flow={$uiContext.drawerFlow} isOpen={$uiContext.drawerOpen}>
+	<Drawer
+		bind:this={DrawerRef}
+		flow={$uiContext.drawerFlow}
+		isOpen={$uiContext.drawerOpen}
+		primary="Menu"
+		hideCloseIcon={$uiContext.drawerFlow!=='fixed'} 
+	>
 		<LeftMenu />
 	</Drawer>
 	<div id="contentSlide" bind:this={contentSlide}>
 		<nav
 			bind:this={navElement}
-			class="nav flex-h pos-sticky pad flex-align-middle gap-small zI-10 w-full h-4 gap-medium">
+			class="nav flex-h pos-sticky pad flex-align-middle gap-small zI-10 w-full h-4 gap-medium"
+		>
 			<Button on:click={onDrawerClick} icon="menu" iconFamily="mdi" />
 			<h3>SlotUi</h3>
 			<div class="flex-main" />
@@ -116,6 +124,6 @@
 
 	.nav {
 		background-color: var(--theme-color-background-alpha);
-		backdrop-filter: blur(30px); 
+		backdrop-filter: blur(30px);
 	}
 </style>

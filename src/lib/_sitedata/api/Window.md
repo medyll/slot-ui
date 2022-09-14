@@ -8,7 +8,6 @@ __propDef: {
             x: number;
             y: number;
         } | undefined;
-        component?: null | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;

@@ -13,9 +13,10 @@ __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
-        menuItemIconSlot: {};
+        iconSLot: {};
         default: {};
-        menuItemTextSlot: {};
+        textSlot: {};
+        actionSlot: {};
     };
 };
 

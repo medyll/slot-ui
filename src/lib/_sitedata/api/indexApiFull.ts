@@ -1,3 +1,4 @@
+import HeaderApiReadMe from "$sitedata/api/Header.api.md";
 import AlertApiReadMe from "$sitedata/api/Alert.api.md";
 import AvatarApiReadMe from "$sitedata/api/Avatar.api.md";
 import BackdropApiReadMe from "$sitedata/api/Backdrop.api.md";
@@ -34,7 +35,6 @@ import ListApiReadMe from "$sitedata/api/List.api.md";
 import ListItemApiReadMe from "$sitedata/api/ListItem.api.md";
 import ListTitleApiReadMe from "$sitedata/api/ListTitle.api.md";
 import LoaderApiReadMe from "$sitedata/api/Loader.api.md";
-import OverflowApiReadMe from "$sitedata/api/Overflow.api.md";
 import PaperApiReadMe from "$sitedata/api/Paper.api.md";
 import PortalApiReadMe from "$sitedata/api/Portal.api.md";
 import ProgressApiReadMe from "$sitedata/api/Progress.api.md";
@@ -78,8 +78,10 @@ import ThemeSwitcherApiReadMe from "$sitedata/api/ThemeSwitcher.api.md";
 import ToastApiReadMe from "$sitedata/api/Toast.api.md";
 import TopBarApiReadMe from "$sitedata/api/TopBar.api.md";
 import WindowApiReadMe from "$sitedata/api/Window.api.md";
+import ComponentExampleApiReadMe from "$sitedata/api/ComponentExample.api.md";
 
-export const componentApiReadMe = {alertApi:AlertApiReadMe,
+export const componentApiReadMe = {headerApi:HeaderApiReadMe,
+alertApi:AlertApiReadMe,
 avatarApi:AvatarApiReadMe,
 backdropApi:BackdropApiReadMe,
 badgeApi:BadgeApiReadMe,
@@ -115,7 +117,6 @@ listApi:ListApiReadMe,
 listitemApi:ListItemApiReadMe,
 listtitleApi:ListTitleApiReadMe,
 loaderApi:LoaderApiReadMe,
-overflowApi:OverflowApiReadMe,
 paperApi:PaperApiReadMe,
 portalApi:PortalApiReadMe,
 progressApi:ProgressApiReadMe,
@@ -158,4 +159,5 @@ taskbarApi:TaskbarApiReadMe,
 themeswitcherApi:ThemeSwitcherApiReadMe,
 toastApi:ToastApiReadMe,
 topbarApi:TopBarApiReadMe,
-windowApi:WindowApiReadMe}
+windowApi:WindowApiReadMe,
+componentexampleApi:ComponentExampleApiReadMe}

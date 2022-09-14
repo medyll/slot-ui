@@ -1,3 +1,4 @@
+import HeaderReadMe from "$sitedata/api/Header.md";
 import AlertReadMe from "$sitedata/api/Alert.md";
 import AvatarReadMe from "$sitedata/api/Avatar.md";
 import BackdropReadMe from "$sitedata/api/Backdrop.md";
@@ -34,7 +35,6 @@ import ListReadMe from "$sitedata/api/List.md";
 import ListItemReadMe from "$sitedata/api/ListItem.md";
 import ListTitleReadMe from "$sitedata/api/ListTitle.md";
 import LoaderReadMe from "$sitedata/api/Loader.md";
-import OverflowReadMe from "$sitedata/api/Overflow.md";
 import PaperReadMe from "$sitedata/api/Paper.md";
 import PortalReadMe from "$sitedata/api/Portal.md";
 import ProgressReadMe from "$sitedata/api/Progress.md";
@@ -78,8 +78,10 @@ import ThemeSwitcherReadMe from "$sitedata/api/ThemeSwitcher.md";
 import ToastReadMe from "$sitedata/api/Toast.md";
 import TopBarReadMe from "$sitedata/api/TopBar.md";
 import WindowReadMe from "$sitedata/api/Window.md";
+import ComponentExampleReadMe from "$sitedata/api/ComponentExample.md";
 
-export const componentReadMe = {alert:AlertReadMe,
+export const componentReadMe = {header:HeaderReadMe,
+alert:AlertReadMe,
 avatar:AvatarReadMe,
 backdrop:BackdropReadMe,
 badge:BadgeReadMe,
@@ -115,7 +117,6 @@ list:ListReadMe,
 listitem:ListItemReadMe,
 listtitle:ListTitleReadMe,
 loader:LoaderReadMe,
-overflow:OverflowReadMe,
 paper:PaperReadMe,
 portal:PortalReadMe,
 progress:ProgressReadMe,
@@ -158,4 +159,5 @@ taskbar:TaskbarReadMe,
 themeswitcher:ThemeSwitcherReadMe,
 toast:ToastReadMe,
 topbar:TopBarReadMe,
-window:WindowReadMe}
+window:WindowReadMe,
+componentexample:ComponentExampleReadMe}

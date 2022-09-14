@@ -1,6 +1,7 @@
 <svelte:options accessors={true} />
 
-<script>import { stickTo } from '../../uses/stickTo/stickTo.js';
+<script>import { custom_event } from 'svelte/internal';
+import { stickTo } from '../../uses/stickTo/stickTo.js';
 import { clickAway } from '../../uses/clickAway/clickAway.js';
 import { popperList } from './actions.js';
 let element;
@@ -20,14 +21,18 @@ export const hide = function () {
 export const show = function () {
     console.log('show');
 };
-const actions = ({
+const actions = {
+    show: () => {
+        console.log('show');
+    },
     destroy: () => {
+        console.log('destroy');
         popperList[code]?.$destroy();
     }
-});
-/** @deprecated */
-export const destroy = function () {
-    console.error('deprecated, use actions.destrtoy in caller');
+};
+export const clickedAway = function () {
+    const event = custom_event('clickAway', {}, { bubbles: true });
+    parentNode?.dispatchEvent(event);
     popperList[code]?.$destroy();
 };
 let siblings = [];
@@ -36,17 +41,18 @@ $: zIndex = siblings?.reduce((prev, val) => {
     // @ts-ignore
     return val?.style?.zIndex >= prev ? val?.style?.zIndex + 1 : prev;
 }, 0);
-// if no props parentNode, use element.parentNode 
+// if no props parentNode, use element.parentNode
 $: if (!parentNode && element)
     parentNode = element?.parentElement ?? document.body;
+// $: console.log(parentNode)
 </script>
 
 <slot name="button" />
 <div
 	bind:this={element}
-	class="popper"
+	class="popper border-4"
 	on:popper:close={actions.destroy}
-	use:clickAway={{ action: actions.destroy }}
+	use:clickAway={{ action: clickedAway }}
 	use:stickTo={{ parentNode, position: position }}
 >
 	<slot>

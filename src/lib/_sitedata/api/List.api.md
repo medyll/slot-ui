@@ -1,7 +1,7 @@
 ```import { SvelteComponentTyped } from "svelte";
 import type { LisItemProps } from './types';
-import type { Data } from '../../data/grouper/Grouper.svelte';
-import type { SorterFieldType } from '../../data/sorter/types';
+import type { Data } from '../../../data/grouper/Grouper.svelte';
+import type { SorterFieldType } from '../../../data/sorter/types';
 declare const __propDef: {
     props: {
         class?: string | undefined;

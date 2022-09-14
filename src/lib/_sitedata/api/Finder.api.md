@@ -3,9 +3,10 @@ declare const __propDef: {
     props: {
         [x: string]: any;
         class?: string | undefined;
-        element?: HTMLElement | null | undefined;
+        element?: HTMLDivElement | null | undefined;
         data?: any;
         defaultField?: string | undefined;
+        showSortMenu?: boolean | undefined;
         mode?: "exact" | "partial" | undefined;
         filteredData?: any[] | undefined;
     };
@@ -24,15 +25,18 @@ export default class Finder extends SvelteComponentTyped<FinderProps, FinderEven
     get class(): string | undefined;
     /**accessor*/
     set class(_: string | undefined);
-    get element(): HTMLElement | null | undefined;
+    get element(): HTMLDivElement | null | undefined;
     /**accessor*/
-    set element(_: HTMLElement | null | undefined);
+    set element(_: HTMLDivElement | null | undefined);
     get data(): any;
     /**accessor*/
     set data(_: any);
     get defaultField(): string | undefined;
     /**accessor*/
     set defaultField(_: string | undefined);
+    get showSortMenu(): boolean | undefined;
+    /**accessor*/
+    set showSortMenu(_: boolean | undefined);
     get mode(): "exact" | "partial" | undefined;
     /**accessor*/
     set mode(_: "exact" | "partial" | undefined);

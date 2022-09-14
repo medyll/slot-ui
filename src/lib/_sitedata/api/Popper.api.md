@@ -1,5 +1,5 @@
 ```import { SvelteComponentTyped } from "svelte";
-import type { SvelteComponentDev } from 'svelte/internal';
+import { type SvelteComponentDev } from 'svelte/internal';
 declare const __propDef: {
     props: {
         code: string;
@@ -11,7 +11,7 @@ declare const __propDef: {
         toggle?: (() => void) | undefined;
         hide?: (() => void) | undefined;
         show?: (() => void) | undefined;
-        /** @deprecated */ destroy?: (() => void) | undefined;
+        clickedAway?: (() => void) | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;
@@ -28,7 +28,7 @@ export default class Popper extends SvelteComponentTyped<PopperProps, PopperEven
     get toggle(): () => void;
     get hide(): () => void;
     get show(): () => void;
-    get destroy(): () => void;
+    get clickedAway(): () => void;
     get code(): string;
     /**accessor*/
     set code(_: string);

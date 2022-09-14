@@ -1,6 +1,6 @@
 {
   "name": "@medyll/slotui",
-  "version": "0.1.71",
+  "version": "0.1.73",
   "repository": {
     "type": "git",
     "url": "https://github.com/medyll/slot-ui.git"
@@ -117,7 +117,6 @@
     "./base/list/ListTitle.svelte": "./base/list/ListTitle.svelte",
     "./base/list/store": "./base/list/store.js",
     "./base/loader/Loader.svelte": "./base/loader/Loader.svelte",
-    "./base/overflow/Overflow.svelte": "./base/overflow/Overflow.svelte",
     "./base/paper/Paper.svelte": "./base/paper/Paper.svelte",
     "./base/portal/Portal.svelte": "./base/portal/Portal.svelte",
     "./base/progress/Progress.svelte": "./base/progress/Progress.svelte",
@@ -170,11 +169,11 @@
     "./ui/input/Input.svelte": "./ui/input/Input.svelte",
     "./ui/login/Login.svelte": "./ui/login/Login.svelte",
     "./ui/login/store": "./ui/login/store.js",
+    "./ui/menu/menu.scss": "./ui/menu/menu.scss",
     "./ui/menu/Menu.stories.svelte": "./ui/menu/Menu.stories.svelte",
     "./ui/menu/Menu.svelte": "./ui/menu/Menu.svelte",
     "./ui/menu/MenuItem.svelte": "./ui/menu/MenuItem.svelte",
     "./ui/menu/store": "./ui/menu/store.js",
-    "./ui/menu/style.scss": "./ui/menu/style.scss",
     "./ui/menu/types": "./ui/menu/types.js",
     "./ui/panel/Panel.svelte": "./ui/panel/Panel.svelte",
     "./ui/panel/PanelSlide.svelte": "./ui/panel/PanelSlide.svelte",
@@ -189,6 +188,7 @@
     "./ui/themeswitcher/ThemeSwitcher.svelte": "./ui/themeswitcher/ThemeSwitcher.svelte",
     "./ui/toast/Toast.svelte": "./ui/toast/Toast.svelte",
     "./ui/topBar/TopBar.svelte": "./ui/topBar/TopBar.svelte",
+    "./ui/window/window.actions": "./ui/window/window.actions.js",
     "./ui/window/window.store": "./ui/window/window.store.js",
     "./ui/window/Window.svelte": "./ui/window/Window.svelte",
     "./uses/autofocus/autofocus": "./uses/autofocus/autofocus.js",

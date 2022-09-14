@@ -13,6 +13,9 @@ type StickToProps = {
 
 export function stickTo(node: HTMLElement, props: StickToProps) {
   const { parentNode, position } = props;
+
+  let intervaller: any;
+
   if (node && parentNode) {
   
  
@@ -43,9 +46,9 @@ export function stickTo(node: HTMLElement, props: StickToProps) {
     switch (position) {
       case 'B':
         node.style.bottom = '';
-        node.style.right = '';
+        node.style.width = String(parentPos.width) + 'px';
         node.style.top = String(parentPos.bottom) + 'px';
-        node.style.left = String(parentPos.right - (node.offsetWidth - parentNode.offsetWidth)) + 'px';
+        node.style.left = String(parentPos.left) + 'px';
         break;
       case 'BL':
         node.style.bottom = '';
@@ -87,8 +90,11 @@ export function stickTo(node: HTMLElement, props: StickToProps) {
     return style;
   }
 
-  return {
+  intervaller = setInterval(()=>{setPosition(node, position, parentNode)},5);
+  
+  return { 
     destroy() {
+      clearInterval(intervaller)
       //  document.removeEventListener('click', doEvent);
     }
   };

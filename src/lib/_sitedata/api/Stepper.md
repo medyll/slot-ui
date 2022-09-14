@@ -1,13 +1,12 @@
 ```typescript 
 __propDef: {
     props: {
-        steps?: {
-            index: number;
-            text: string;
-            action: () => void;
-        }[] | undefined;
-        stepperOrientation?: ("vertical" | "horizontal") | undefined;
-        setActiveStep?: ((step: number) => void) | undefined;
+        /** Number of steps */ steps?: StepType[] | undefined;
+        /** orientation of the stepper */ stepperOrientation?: StepperOrientation | undefined;
+        /** Actual active step */ activeStep?: number | undefined;
+        /** ed actions for component */ actions?: {
+            setActiveStep: (step: number) => void;
+        } | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;

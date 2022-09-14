@@ -1,3 +1,5 @@
+import { custom_event } from "svelte/internal"
+
 type ClickAwayProps = {
   parent?: HTMLElement | string
   action?: () => void
@@ -9,32 +11,35 @@ const clickAwayParams = {
 }
 
 export function clickAway(node: HTMLElement, props: ClickAwayProps) {
-  const {action, disabled} = props
-  // if (props?.disabled) return false
-  // do not propagate if clicked element is node
-  node.addEventListener('click', (event: MouseEvent) => {
-    event.stopPropagation();
-  });
-  
-  
-  const doEvent = function (daNode: any)  {
+  const { action, disabled } = props
+
+  // treat outside click
+  document.addEventListener('click', doEvent,true);
+
+console.log('node',node)
+  function doEvent  (event: any) {
+
+    const bounds = node.getBoundingClientRect();
+
+
+    let inner = (event.pageX > bounds.left && event.pageX < bounds.right) && (event.pageY > bounds.top && event.pageY < bounds.bottom)
+
+    // console.log(inner)
     if (!disabled) {
-      if(action){
+      if (action && !inner) {
         action();
-        document.removeEventListener('click', doEvent);
+        console.log('doEvent',node)
+        const event = custom_event('clickAway', {}, { bubbles: true });
+        node?.dispatchEvent(event);
+        document.removeEventListener('click', doEvent,true);
       }
     }
   };
-  
- // if (!clickAwayParams.listenerSet) {
-    // treat outside click
-    document.addEventListener('click', doEvent);
-    clickAwayParams.listenerSet = true;
- //}
-  
+ 
+
   return {
     destroy() {
-       document.removeEventListener('click', doEvent);
+      document.removeEventListener('click', doEvent,true);
     }
   };
 }

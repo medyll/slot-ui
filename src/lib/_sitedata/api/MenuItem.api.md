@@ -1,5 +1,5 @@
 ```import { SvelteComponentTyped } from "svelte";
-import type { MenuItemProps } from './types';
+import type { MenuItemProps } from './types.js';
 declare const __propDef: {
     props: {
         class?: string | undefined;
@@ -14,9 +14,10 @@ declare const __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
-        menuItemIconSlot: {};
+        iconSLot: {};
         default: {};
-        menuItemTextSlot: {};
+        textSlot: {};
+        actionSlot: {};
     };
 };
 export declare type MenuItemProps = typeof __propDef.props;

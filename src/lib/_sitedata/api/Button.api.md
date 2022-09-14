@@ -1,5 +1,5 @@
 ```import { SvelteComponentTyped } from "svelte";
-import { type UsePopperProps } from '../../ui/popper/usePopper';
+import { type UsePopperProps } from '../../../ui/popper/usePopper.js';
 declare const __propDef: {
     props: {
         [x: string]: any;

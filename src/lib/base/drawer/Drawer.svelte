@@ -118,7 +118,7 @@
 		{/if}
 	</div>
 	{#if isOpen}
-		{#if $$slots.topBarSlot || Boolean(primary) || Boolean(icon) || $$slots.iconSlot || !hideCloseIcon}
+		{#if $$slots.topBarSlot || Boolean(primary) || Boolean(icon) || $$slots.iconSlot }
 			<div class="header flex-h">
 				{#if Boolean(icon) || $$slots.iconSlot}
 					<div class="pad-ii-1">

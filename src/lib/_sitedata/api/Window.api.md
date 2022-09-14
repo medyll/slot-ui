@@ -8,7 +8,6 @@ declare const __propDef: {
             x: number;
             y: number;
         } | undefined;
-        component?: null | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;
@@ -34,9 +33,6 @@ export default class Window extends SvelteComponentTyped<WindowProps, WindowEven
         x: number;
         y: number;
     } | undefined);
-    get component(): null | undefined;
-    /**accessor*/
-    set component(_: null | undefined);
 }
 export {};
 

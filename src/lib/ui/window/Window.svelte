@@ -9,12 +9,14 @@
   import IconButton from '../../base/button/IconButton.svelte';
   import Icon from '../../base/icon/Icon.svelte';
 
+  /** Id of the component's instance */
   export let frameId                                   = '';
+  /** internal use */
   export let self                                      = null;
+  /** default opneing position */
   export let defaultPosition: { x: number, y: number } = {x: 30, y: 30};
-  export let component                                 = null;
-
-  let frameRef;
+  /** reference to the component's DOM container */
+  let element;
   let activeFrame: string | number;
   let x: number = defaultPosition?.x ?? 350;
   let y: number = defaultPosition?.y ?? 50;
@@ -80,32 +82,34 @@
   }
 
 </script>
-<div bind:this={frameRef}
+<div bind:this={element}
      class="window"
      on:click={handleClick}
      style="z-index:{$appWindowStore?.zIndex}"
      use:draggable={{...dragOptions,...position }}>
     <div class="bar">
         <div class="pad-2">
-            <Icon fontSize="small" icon="faLinux"/>
+            <Icon fontSize="small" icon="linux"/>
         </div>
         <div class="handle">{$appWindowStore?.title}</div>
         <div class="iconZone" style="color:white">
             <div>
-                <IconButton icon="faWindowMinimize" iconFontSize="small"/>
+                <IconButton icon="window-minimize" iconFontSize="small"/>
             </div>
             <div>
-                <IconButton icon="faWindowMaximize" iconFontSize="small"/>
+                <IconButton icon="window-maximize" iconFontSize="small"/>
             </div>
             <div>
-                <IconButton icon="faWindowClose" iconFontSize="small" on:click={handleClose}/>
-                <i class="fa-solid fa-user"></i>
+                <IconButton icon="window-close" iconFontSize="small" on:click={handleClose}/>
             </div>
         </div>
     </div>
     <div>
         {#if $appWindowStore?.component}
             <svelte:component this={$appWindowStore.component} {...$appWindowStore.componentProps}/>
+        {/if}
+        {#if $appWindowStore?.contentHTML}
+            {@html $appWindowStore?.contentHTML}
         {/if}
     </div>
     <div class="buttonZone">

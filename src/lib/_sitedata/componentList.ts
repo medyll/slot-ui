@@ -14,13 +14,15 @@ import Inputdemosvelte from "$lib/base/input/Input.demo.svelte";
 import Listdemosvelte from "$lib/base/list/List.demo.svelte"; 
 import Loaderdemosvelte from "$lib/base/loader/Loader.demo.svelte"; 
 import Ratingdemosvelte from "$lib/base/rating/Rating.demo.svelte"; 
+import Stepperdemosvelte from "$lib/base/stepper/Stepper.demo.svelte"; 
 import Tabsdemosvelte from "$lib/base/tabs/Tabs.demo.svelte"; 
 import Treedemosvelte from "$lib/base/tree/Tree.demo.svelte"; 
 import Finderdemosvelte from "$lib/data/finder/Finder.demo.svelte"; 
 import Grouperdemosvelte from "$lib/data/grouper/Grouper.demo.svelte"; 
 import Jsonerdemosvelte from "$lib/data/jsoner/Jsoner.demo.svelte"; 
 import Sorterdemosvelte from "$lib/data/sorter/Sorter.demo.svelte"; 
-import Framedemosvelte from "$lib/ui/frame/Frame.demo.svelte";  
+import Framedemosvelte from "$lib/ui/frame/Frame.demo.svelte"; 
+import Windowdemosvelte from "$lib/ui/window/Window.demo.svelte";  
  export const slotUiComponentList = [ {name:"Alert",code:"alert",component:Alertdemosvelte},
 {name:"Avatar",code:"avatar",component:Avatardemosvelte},
 {name:"Box",code:"box",component:Boxdemosvelte},
@@ -37,10 +39,12 @@ import Framedemosvelte from "$lib/ui/frame/Frame.demo.svelte";
 {name:"List",code:"list",component:Listdemosvelte},
 {name:"Loader",code:"loader",component:Loaderdemosvelte},
 {name:"Rating",code:"rating",component:Ratingdemosvelte},
+{name:"Stepper",code:"stepper",component:Stepperdemosvelte},
 {name:"Tabs",code:"tabs",component:Tabsdemosvelte},
 {name:"Tree",code:"tree",component:Treedemosvelte},
 {name:"Finder",code:"finder",component:Finderdemosvelte},
 {name:"Grouper",code:"grouper",component:Grouperdemosvelte},
 {name:"Jsoner",code:"jsoner",component:Jsonerdemosvelte},
 {name:"Sorter",code:"sorter",component:Sorterdemosvelte},
-{name:"Frame",code:"frame",component:Framedemosvelte} ] 
+{name:"Frame",code:"frame",component:Framedemosvelte},
+{name:"Window",code:"window",component:Windowdemosvelte} ] 

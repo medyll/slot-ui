@@ -12,22 +12,19 @@
 
   &.density-tight {
     .menuItem {
-      padding: 0.5rem 0;
-      margin: 0.125rem 0;
+      padding: 0.25rem 0; 
     }
   }
 
   &.density-default {
     .menuItem {
-      padding: 1rem 0;
-      margin: 0.25rem 0;
+      padding: 0.5rem 0; 
     }
   }
 
   &.density-kind {
     .menuItem {
-      padding: 1.5rem 0;
-      margin: 0.5rem 0;
+      padding: 1rem 0; 
     }
   }
 
@@ -35,7 +32,7 @@
     border-radius: 6px;
     overflow: hidden;
     display: flex;
-
+    align-items: center; 
     &:hover {
       background-color: rgba(255, 255, 255, 0.3)
     }
@@ -48,22 +45,28 @@
     }
 
     .menuItemText {
-      padding: 0 0.25rem;
+      flex: 1;
+      padding-left: 0.25rem;
+    }
+
+    .menuItemActions {
+      // padding: inherit; 
+      display:block;
     }
 
     &.density-tight {
-      padding: 0.5rem 0;
-      margin: 0.125rem 0;
+      padding: 0.25rem 0;
+      //margin: 0.125rem 0;
     }
 
     &.density-default {
-      padding: 1rem 0;
-      margin: 0.25rem 0;
+      padding: 0.5rem 0;
+      // margin: 0.25rem 0;
     }
 
     &.density-kind {
-      padding: 1.5rem 0;
-      margin: 0.5rem 0;
+      padding: 1rem 0;
+      // margin: 0.5rem 0;
     }
   }
 }
