@@ -30,7 +30,7 @@
     "@sveltejs/adapter-auto": "next",
     "@sveltejs/adapter-node": "next",
     "@sveltejs/adapter-static": "next",
-    "@sveltejs/adapter-vercel": "next",
+    "@sveltejs/adapter-vercel": "1.0.0-next.75",
     "@sveltejs/kit": "1.0.0-next.480",
     "@sveltejs/package": "1.0.0-next.3",
     "@testing-library/jest-dom": "^5.16.3",

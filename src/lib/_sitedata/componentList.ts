@@ -6,7 +6,6 @@ import Carddemosvelte from "$lib/base/card/Card.demo.svelte";
 import Cartouchedemosvelte from "$lib/base/cartouche/Cartouche.demo.svelte"; 
 import Columnerdemosvelte from "$lib/base/columner/Columner.demo.svelte"; 
 import Confirmdemosvelte from "$lib/base/confirm/Confirm.demo.svelte"; 
-import ContentSwitcherdemosvelte from "$lib/base/contentSwitcher/ContentSwitcher.demo.svelte"; 
 import DataListdemosvelte from "$lib/base/dataList/DataList.demo.svelte"; 
 import Dividerdemosvelte from "$lib/base/divider/Divider.demo.svelte"; 
 import Drawerdemosvelte from "$lib/base/drawer/Drawer.demo.svelte"; 
@@ -31,7 +30,6 @@ import Windowdemosvelte from "$lib/ui/window/Window.demo.svelte";
 {name:"Cartouche",code:"cartouche",component:Cartouchedemosvelte},
 {name:"Columner",code:"columner",component:Columnerdemosvelte},
 {name:"Confirm",code:"confirm",component:Confirmdemosvelte},
-{name:"ContentSwitcher",code:"contentswitcher",component:ContentSwitcherdemosvelte},
 {name:"DataList",code:"datalist",component:DataListdemosvelte},
 {name:"Divider",code:"divider",component:Dividerdemosvelte},
 {name:"Drawer",code:"drawer",component:Drawerdemosvelte},

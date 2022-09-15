@@ -1,18 +1,14 @@
 <svelte:options accessors={true} />
 
 <script lang="ts">
-	import Header from './../../../components/pages/explorer/Header.svelte';
 	import Debug from '$lib/base/debug/Debug.svelte';
 	import Button from '$lib/base/button/Button.svelte';
 	import Input from '$lib/base/input/Input.svelte';
 	import { dataOp } from '$lib/engine/utils.js';
 	import type { UsePopperProps } from '$lib/ui/popper/usePopper.js';
-	import { stickTo } from '$lib/uses/stickTo/stickTo.js';
 	import Popper from '$lib/ui/popper/Popper.svelte';
 	import Menu from '$lib/ui/menu/Menu.svelte';
-	import type { MenuItemProps } from '$lib/ui/menu/types.js';
 	import MenuItem from '$lib/ui/menu/MenuItem.svelte';
-	import Icon from '$lib/base/icon/Icon.svelte';
 
 	let className = '';
 	export { className as class };
@@ -42,15 +38,7 @@
 				mode === 'exact' ? dataOp.filterList(list, kw, field) : dataOp.searchList(list, kw, field); // filterList(list, kw, field);
 		}
 		return results;
-	};
-
-	const usePopper: UsePopperProps = {
-		component: Debug,
-		componentProps: {
-			title: 'title box',
-			content: 'content'
-		}
-	};
+	}; 
 
 	let popperOpen: boolean;
 
