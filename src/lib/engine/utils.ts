@@ -35,10 +35,13 @@ export class dataOp {
   }
 
   /** search an object in an array */
-  static filterList<T = any>(arr: T[], kw: number | string, fieldname: string = 'id'): T[] {
+  static filterList<T = any>(arr: T[], kw: number | string, fieldname: string | '*' = 'id'): T[] {
 
-    return arr?.filter((item) => {
-      return this.resolveDotPath(item, fieldname) === kw;
+    return arr?.filter((item:Record<string,any>) => {
+      if (fieldname && fieldname !== '*') return this.resolveDotPath(item, fieldname) === kw;
+      if (!fieldname || fieldname === '*') return Object.keys(item).some((key: string) => { 
+        return  ['string','number'].includes(typeof  item?.[key]) ? item[key] == kw : false
+      })
     });
   }
 
@@ -52,7 +55,8 @@ export class dataOp {
 
     let reg = new RegExp(`${kw}`, 'i');
     return arr.filter((item: Record<string, any>) => {
-      if (fieldname !== '*') return this.resolveDotPath(item, fieldname).search(reg) === -1 ? false: true
+       
+      if (fieldname !== '*') return this.resolveDotPath(item, fieldname).toString().search(reg) === -1 ? false: true
       if (fieldname === '*') return Object.keys(item).some((key: string) => {
         if(typeof item?.[key] === 'object' && !Array.isArray(item?.[key])){
           return  false
@@ -81,7 +85,7 @@ export class dataOp {
   };
 
   static resolveDotPath(object: Record<string, any>, path: string, defaultValue?: any): any {
-    return path.split('.').reduce((r, s) => (r ? r[s] : defaultValue), object);
+    return path.split('.').reduce((r, s) => (r ? r[s] : defaultValue), object) ?? '';
   }
 
 

@@ -1,15 +1,24 @@
-<script>export let steps = [];
+<script context="module">export {};
+</script>
+
+<script>/** Number of steps */
+export let steps = [];
+/** orientation of the stepper */
 export let stepperOrientation = 'horizontal';
-export const setActiveStep = function (step) {
-    activeStep = step ?? 0;
+/** Actual active step */
+export let activeStep = 0;
+/** exported actions for component */
+export const actions = {
+    setActiveStep: function (step) {
+        activeStep = step ?? 0;
+    }
 };
-let activeStep = 0;
 </script>
 
 <div class="stepper">
-    {#each steps as step, index}
-        <div title="{step.text}" class="step"></div>
-    {/each}
+	{#each steps as step, index}
+		<div title={step.text} class="step" />
+	{/each}
 </div>
 
 <style>.stepper .step {

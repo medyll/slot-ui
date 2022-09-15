@@ -6,7 +6,7 @@ export type UseContentSwitcherProps = {
 
 export const useContentSwitcher = (node: HTMLElement, props: UseContentSwitcherProps) => {
 
-    console.log(node.parentNode)
+    
     return {
         destroy: () => {
 

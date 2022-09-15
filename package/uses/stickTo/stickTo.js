@@ -1,6 +1,7 @@
 import { elem } from '../../engine/elem';
 export function stickTo(node, props) {
     const { parentNode, position } = props;
+    let intervaller;
     if (node && parentNode) {
         document.body.appendChild(node);
         setPosition(node, position, parentNode);
@@ -27,9 +28,9 @@ export function stickTo(node, props) {
         switch (position) {
             case 'B':
                 node.style.bottom = '';
-                node.style.right = '';
+                node.style.width = String(parentPos.width) + 'px';
                 node.style.top = String(parentPos.bottom) + 'px';
-                node.style.left = String(parentPos.right - (node.offsetWidth - parentNode.offsetWidth)) + 'px';
+                node.style.left = String(parentPos.left) + 'px';
                 break;
             case 'BL':
                 node.style.bottom = '';
@@ -67,8 +68,10 @@ export function stickTo(node, props) {
         checkPos(node);
         return style;
     }
+    intervaller = setInterval(() => { setPosition(node, position, parentNode); }, 5);
     return {
         destroy() {
+            clearInterval(intervaller);
             //  document.removeEventListener('click', doEvent);
         }
     };

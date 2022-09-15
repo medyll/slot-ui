@@ -3,7 +3,7 @@
 	import { onMount, tick } from 'svelte';
 	import { createEventForwarder } from '../../engine/engine';
 	import { get_current_component, onDestroy, query_selector_all } from 'svelte/internal';
-	import { browser } from '$app/env';
+	import { browser } from '$app/environment';
 	import type { number } from 'svelte-use-form';
 
 	/*  common slotUi exports*/

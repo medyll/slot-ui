@@ -2,7 +2,7 @@
 	import Grouper, { type GroupedDataType } from './Grouper.svelte';
 	import { HighlightSvelte } from 'svelte-highlight';
 	import Paper from '$lib/base/paper/Paper.svelte';
-	import ComponentDemo from '$components/ComponentExample.svelte';
+	import ComponentDemo from '$_components/ComponentExample.svelte';
 
 	const data = [...Array(89)].map((r, i) => {
 		return {

@@ -1,6 +1,6 @@
 <script>import { createEventForwarder } from '../../engine/engine';
 import { get_current_component, get_slot_changes, null_to_empty } from 'svelte/internal';
-import { popper } from '../../ui/popper/usePopper';
+import { popper } from '../../ui/popper/usePopper.js';
 import { crossfade, fade, scale } from 'svelte/transition';
 import Divider from '../divider/Divider.svelte';
 import Menu from '../../ui/menu/Menu.svelte';

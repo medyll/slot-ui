@@ -1,5 +1,5 @@
 <script lang="ts">
-import ComponentDemo from '$components/ComponentExample.svelte';
+import ComponentDemo from '$_components/ComponentExample.svelte';
 import type { ElementProps } from '$typings/index.js';
 	import Divider from './Divider.svelte';
 	type OptType = {

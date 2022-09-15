@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { setContext } from 'svelte';
-	import type { MenuItemProps } from './types';
+	import type { MenuItemProps } from './types.js';
 	import type { ElementProps } from '$typings/index.js';
 	import MenuItem from './MenuItem.svelte';
-	import { createMenuStore } from './store';
-	import { createEventForwarder } from '$lib/engine/engine';
+	import { createMenuStore } from './store.js';
+	import { createEventForwarder } from '$lib/engine/engine.js';
 	import { custom_event, get_current_component } from 'svelte/internal';
 
 	/*  common slotUi exports*/
@@ -14,7 +14,7 @@
 	const forwardEvents = createEventForwarder(get_current_component());
 	/*  end slotUi exports*/
 
-	export let menuList: MenuItemProps[];
+	export let menuList: MenuItemProps[] = [];
 	export let density: ElementProps['density'] = 'tight';
 	export let onMenuItemClick: Function = () => {
 		console.log('not imlepented');
@@ -22,12 +22,12 @@
 
 	const menuStore = createMenuStore();
 	setContext('menuStateContext', menuStore);
-
+// density
 	$menuStore.density = density;
 
 	function onMenuClick(e: CustomEvent<any>) {
 		onMenuItemClick && onMenuItemClick(e.detail);
-		const event = custom_event('popper:close', {}, { bubbles: true });
+		const event = custom_event('menuitem:clicked', {}, { bubbles: true });
 		element.dispatchEvent(event); 
 	}
 
@@ -38,7 +38,7 @@
 	{#if menuList}
 		{#each menuList as menuItem}
 			<slot item={menuItem} {menuItem}>
-				<MenuItem {...menuItem} />
+				<MenuItem {...menuItem} /> 
 			</slot>
 		{/each}
 	{/if}
@@ -46,5 +46,5 @@
 </ul>
 
 <style lang="scss" global>
-	@import 'style';
+	@import 'menu';
 </style>
