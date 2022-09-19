@@ -11,6 +11,7 @@ const forwardEvents = createEventForwarder(get_current_component());
 /*  end slotUi exports*/
 export let menuList = [];
 export let density = 'tight';
+export let style = undefined;
 export let onMenuItemClick = () => {
     console.log('not imlepented');
 };
@@ -26,7 +27,7 @@ function onMenuClick(e) {
 function sayHello() { }
 </script>
 
-<ul bind:this={element} role="menu" class="density-{density} menu" on:menu:item:clicked={onMenuClick}>
+<ul bind:this={element} role="menu" class="density-{density} menu" {style} on:menu:item:clicked={onMenuClick}>
 	{#if menuList}
 		{#each menuList as menuItem}
 			<slot item={menuItem} {menuItem}>

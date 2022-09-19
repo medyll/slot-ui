@@ -42,7 +42,7 @@
 
 	let popperOpen: boolean;
 
-	$: dataKeys = Object.keys(data[0] || {}).sort((a: string, b: string) => {
+	$: dataKeys = Object.keys(data[0] || {}).filter(r=>['string','number'].includes(typeof data?.[0]?.[r])).sort((a: string, b: string) => {
 		return a > b ? 1 : a < b ? -1 : 0;
 	});
 	$: filteredData = doFind(data, searchString, defaultField);
@@ -79,7 +79,7 @@
 </container>
 {#if popperOpen}
 	<Popper code="ui" parentNode={container} position="B">
-		<Menu density="default">
+		<Menu style="max-height:350px;overflow:auto" density="default">
 			<MenuItem
 				divider={true}
 				text="strict"

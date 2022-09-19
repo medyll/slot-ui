@@ -16,6 +16,7 @@
 
 	export let menuList: MenuItemProps[] = [];
 	export let density: ElementProps['density'] = 'tight';
+	export let style:string |undefined = undefined;
 	export let onMenuItemClick: Function = () => {
 		console.log('not imlepented');
 	};
@@ -34,7 +35,7 @@
 	function sayHello() {}
 </script>
 
-<ul bind:this={element} role="menu" class="density-{density} menu" on:menu:item:clicked={onMenuClick}>
+<ul bind:this={element} role="menu" class="density-{density} menu" {style} on:menu:item:clicked={onMenuClick}>
 	{#if menuList}
 		{#each menuList as menuItem}
 			<slot item={menuItem} {menuItem}>
