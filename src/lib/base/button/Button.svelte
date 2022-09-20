@@ -34,6 +34,8 @@
 	export let loading: boolean = false;
 	/** show chip */
 	export let showChip: boolean = false;
+	/** show / hide popper, when $$slots.popper exists */
+	export let popperOpen: boolean = false;;
 
 	/** button style contained */
 	export let contained: boolean | undefined = undefined;
@@ -57,9 +59,13 @@
 	/**  give focus to button on display */
 	export let focus: boolean = false;
 
+	/** action button css style */
+	export let actionStyle: string | undefined = undefined;
+	/** whole container css style */
+	export let containerStyle: string | undefined = undefined;
+
 	export let primary: string | undefined = undefined;
-	export let secondary: string | undefined = undefined;
-	export let action: string | undefined = undefined;
+	export let secondary: string | undefined = undefined; 
 
 	/** reverse the order of the button zone*/
 	export let reverse: boolean = false;
@@ -84,16 +90,6 @@
 		if (focus) return autofocus(node);
 	}
 
-	const onActionClick = (event: MouseEvent) => {
-		event.stopPropagation();
-		/* openPopper('settingActions', {
-			parentNode: event.currentTarget as HTMLElement,
-			component: actionComponent,
-			componentProps: componentProps ?? {},
-			position: menuPosition
-		}); */
-	};
-
 	$: if (usePopper) {
 		usePopper.disabled = false;
 		usePopper.parentNode = element;
@@ -112,88 +108,122 @@
 	};
 </script>
 
-<button
-	class={className + ' w-' + size}
-	class:loading
-	bind:this={element}
-	use:popper={usePopper}
-	use:forwardEvents
-	use:useAutoFocus
-	on:click 
-	data-height={height} 
-	type={buttonType}
-	{density}
-	{nowrap}
-	{link}
-	{bordered}
-	{contained}
-	{naked}
-	{selected}
-	{presetDefault}
-	{...$$restProps}
->
-	<div class="innerButton">
-		{#if $$slots.startButtonSlot || icon}
-			<div class="startButtonSlot">
-				<slot name="startButtonSlot">
-					{#if icon}
-						<Icon fontSize="small" {icon} style="color:{iconColor}" {iconFamily} />
-					{/if}
-				</slot>
-			</div>
-		{/if}
-		{#if $$slots.default ?? primary}
-			<div class="central"><slot>{null_to_empty(primary)}</slot></div>
-		{/if}
-		{#if $$slots.actionIcon}
-			{#key $$slots.actionIcon}
-				<div class="action" on:click={(e)=>{e.stopPropagation();e.preventDefault()}}>
-					<slot name="actionIcon" />
+<container style="position:relative;display:flex;{containerStyle}">
+	<button
+		class={'w-' + size + ' ' +className}
+		class:loading
+		bind:this={element}
+		use:popper={usePopper}
+		use:forwardEvents
+		use:useAutoFocus
+		on:click
+		on:clickAway={() => {
+			popperOpen = false;
+		}}
+		data-height={height}
+		type={buttonType}
+		{density}
+		{nowrap}
+		{link}
+		{bordered}
+		{contained}
+		{naked}
+		{selected}
+		{presetDefault}
+		{...$$restProps}
+	>
+		<div class="innerButton">
+			{#if $$slots.startButtonSlot || icon}
+				<div class="startButtonSlot">
+					<slot name="startButtonSlot">
+						{#if icon}
+							<Icon fontSize="small" {icon} style="color:{iconColor}" {iconFamily} />
+						{/if}
+					</slot>
 				</div>
-			{/key}
-		{/if}
-	</div>
-	{#if loading} 
+			{/if}
+			{#if $$slots.default ?? primary}
+				<div class="central"><slot>{null_to_empty(primary)}</slot></div>
+			{/if}
+			{#if $$slots.actionIcon}
+				{#key $$slots.actionIcon}
+					<div
+						class="action"
+						on:click={(e) => {
+							e.stopPropagation();
+							e.preventDefault();
+						}}
+					>
+						<slot name="actionIcon" />
+					</div>
+				{/key}
+			{/if}
+		</div>
+		{#if loading}
 			<div
 				on:click={(event) => {
-					event.stopPropagation();
 					event.preventDefault();
+					event.stopPropagation();
 				}}
 				class="loadingButtonZone"
 			>
 				<div class="flex-h flex-align-middle gap-tiny">
 					<div>
-						<slot name="loadingIconButtonSlot" >
+						<slot name="loadingIconButtonSlot">
 							<div><Icon icon="spinner" class="rotate" /></div>
 						</slot>
 					</div>
 					<div>loading</div>
 				</div>
-			</div> 
+			</div>
+		{/if}
+		{#if showChip}
+			<span class="chip" />
+		{/if}
+	</button>
+	{#if element && $$slots.popper}
+		<svelte:self
+			contained
+			style="position:absolute;right:-20px;height:100%;{actionStyle}"
+			on:click={(event) => {
+				event.preventDefault();
+				popperOpen = !popperOpen;
+			}}
+			size="tiny"
+			icon="chevron-{popperOpen ? 'up' : 'down'}"
+			iconSize="small"
+			class="actionButton"
+		/>
+		{#if popperOpen}
+			<Popper code="button" {...actionArgs} parentNode={element}>
+				<slot name="popper" />
+			</Popper>
+		{/if}
 	{/if}
-	{#if showChip}
-		<span class="chip" />
-	{/if}
-</button>
+</container>
 {#if secondary}
 	<div style={`display:block;width:${element?.style?.width}px`}>
 		<Divider />
 		{@html secondary}
 	</div>
 {/if}
-{#if element && $$slots.popper}
-	<Popper {...actionArgs} parentNode={element}>
-		<span slot="button">button</span>
-		<slot name="popper">
-			{#if actionArgs?.component}
-				<svelte:component this={actionArgs.component} {...actionArgs?.componentProps} />
-			{/if}
-		</slot>
-	</Popper>
-{/if}
 
 <style lang="scss">
 	@import '../../styles/presets.scss';
+
+	.actionButton {
+		height: 100%;
+		background-color: rgba(255, 255, 255, 0.1);
+		width: var(--w-tiny);
+		cursor: pointer;
+		&:hover {
+			background-color: rgba(255, 255, 255, 0.5);
+		}
+	}
+
+	/* button *, .button *, input[type='button'] * {
+		pointer-events: none;
+	} */
 	.button,
 	button,
 	button[contained='true'],
@@ -317,7 +347,7 @@
 				display: flex;
 				align-items: center;
 				justify-content: space-around;
-				background-color:  var(--css-background-color, var(--theme-color-paper));
+				background-color: var(--css-background-color, var(--theme-color-paper));
 				color: var(--css-background-color, var(--theme-color-secondary));
 				backdrop-filter: blur(3px);
 			}

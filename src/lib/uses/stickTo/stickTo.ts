@@ -90,7 +90,8 @@ export function stickTo(node: HTMLElement, props: StickToProps) {
     return style;
   }
 
-  intervaller = setInterval(()=>{setPosition(node, position, parentNode)},5);
+  intervaller = setInterval(()=>{ 
+    setPosition(node, position, parentNode)},5);
   
   return { 
     destroy() {

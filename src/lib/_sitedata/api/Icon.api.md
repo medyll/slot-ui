@@ -12,6 +12,8 @@ declare const __propDef: {
         fontSize?: "small" | "tiny" | "medium" | "default" | "large" | "big" | "full" | "auto" | undefined;
     };
     events: {
+        click: any;
+    } & {
         [evt: string]: CustomEvent<any>;
     };
     slots: {};
