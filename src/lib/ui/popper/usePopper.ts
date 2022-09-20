@@ -1,6 +1,6 @@
 import { custom_event, type SvelteComponent, type SvelteComponentDev, } from "svelte/internal"
 import { openPopper } from "./actions.js"
-import type { PopperPositionType } from "./types"
+import type { PopperPositionType } from "./types.js"
 
 export type UsePopperProps = {
     code?: string

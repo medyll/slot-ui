@@ -3,16 +3,19 @@ import preprocess from 'svelte-preprocess';
 import { mdsvex } from 'mdsvex';
 import mm from 'micromatch'; 
 
-
-function filterExport(filepath) {
+function filterExport(filepath) { 
 	
 	// return mm.contains(filepath,'Backdrop.svelte')
+
 	return !mm.contains(filepath, [
-		'*.demo.svelte',
-		'*Demo.svelte',
-		'*preview.svelte',
-		'*sitedata',
-		'*.md'
+		'**/*.demo.svelte',
+		'**/*Demo.svelte',
+		'**/*preview.svelte',
+		'**/*sitedata*',
+		'**/*.md',
+		'**/*Example*',
+		'**/*indexApi*',
+		'**/*Readme*',
 	])
 }
 /** @type {import('@sveltejs/kit').Config} */

@@ -1,11 +1,11 @@
 <svelte:options accessors={true} />
 
 <script lang="ts">
-	import type { SvelteComponentDev } from 'svelte/internal';
+	import { custom_event, type SvelteComponentDev } from 'svelte/internal';
 	import { stickTo } from '../../uses/stickTo/stickTo.js';
 	import { clickAway } from '../../uses/clickAway/clickAway.js';
 	import { popperList } from './actions.js';
-	import type { PopperPositionType } from './types'; 
+	import type { PopperPositionType } from './types.js';
 
 	let element: HTMLElement;
 	let zIndex;
@@ -27,14 +27,20 @@
 		console.log('show');
 	};
 
-	const actions = ({
+	const actions = {
+		show : () => {
+			console.log('show');
+		},
 		destroy: () => {
-			popperList[code]?.$destroy();
+			console.log('destroy');
+			popperList[code]?.$destroy(); 
 		}
-	});
-	/** @deprecated */
-	export const destroy = function () {
-		console.error('deprecated, use actions.destrtoy in caller');
+	};
+	
+	export const clickedAway = function () { 
+		const event = custom_event('clickAway', {}, { bubbles: true });
+        parentNode?.dispatchEvent(event);
+
 		popperList[code]?.$destroy();
 	};
 
@@ -47,17 +53,18 @@
 		return val?.style?.zIndex >= prev ? val?.style?.zIndex + 1 : prev;
 	}, 0);
 
-	// if no props parentNode, use element.parentNode 
-	$: if(!parentNode && element) parentNode = element?.parentElement ?? document.body
+	// if no props parentNode, use element.parentNode
+	$: if (!parentNode && element) parentNode = element?.parentElement ?? document.body;
 
+	// $: console.log(parentNode)
 </script>
 
 <slot name="button" />
 <div
 	bind:this={element}
-	class="popper"
+	class="popper border-4"
 	on:popper:close={actions.destroy}
-	use:clickAway={{ action: actions.destroy }}
+	use:clickAway={{ action: clickedAway }}
 	use:stickTo={{ parentNode, position: position }}
 >
 	<slot>
@@ -81,6 +88,6 @@
 		backdrop-filter: blur(10px);
 		display: inline-block;
 		width: auto;
-		top:0
+		top: 0;
 	}
 </style>

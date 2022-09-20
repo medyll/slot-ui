@@ -15,8 +15,10 @@ export type IChromeArgs  = {
   onValidate?: () => {},
   
   component?: any,
-  componentProps?: any
-  
+  componentProps?: Record<string,any>
+
+  contentHTML?: string
+
   zIndex?: number
   position?: {
     x: number;

@@ -17,7 +17,7 @@
 	import { get_current_component } from 'svelte/internal';
 	import { onDestroy } from 'svelte';
 
-	import { browser } from '$app/env';
+	import { browser } from '$app/environment';
 
 	/*  common slotUi exports*/
 	let className = '';
@@ -32,6 +32,7 @@
 
 {#if browser}
 	<Iconify
+	on:click
 		style="font-size:{sizes[fontSize]}px;{style}"
 		icon="{iconFamily}:{icon}"
 		class={className}

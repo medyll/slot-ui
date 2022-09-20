@@ -3,7 +3,7 @@
 	import { onMount, tick } from 'svelte';
 	import { createEventForwarder } from '../../engine/engine';
 	import { get_current_component } from 'svelte/internal';
-	import { browser } from '$app/env';
+	import { browser } from '$app/environment';
 
 	/*  common slotUi exports*/
 	let className = '';

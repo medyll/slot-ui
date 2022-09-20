@@ -25,7 +25,12 @@ export class dataOp {
     /** search an object in an array */
     static filterList(arr, kw, fieldname = 'id') {
         return arr?.filter((item) => {
-            return this.resolveDotPath(item, fieldname) === kw;
+            if (fieldname && fieldname !== '*')
+                return this.resolveDotPath(item, fieldname) === kw;
+            if (!fieldname || fieldname === '*')
+                return Object.keys(item).some((key) => {
+                    return ['string', 'number'].includes(typeof item?.[key]) ? item[key] == kw : false;
+                });
         });
     }
     /** resolve first founded object in array */
@@ -36,7 +41,7 @@ export class dataOp {
         let reg = new RegExp(`${kw}`, 'i');
         return arr.filter((item) => {
             if (fieldname !== '*')
-                return this.resolveDotPath(item, fieldname).search(reg) === -1 ? false : true;
+                return this.resolveDotPath(item, fieldname).toString().search(reg) === -1 ? false : true;
             if (fieldname === '*')
                 return Object.keys(item).some((key) => {
                     if (typeof item?.[key] === 'object' && !Array.isArray(item?.[key])) {
@@ -58,7 +63,7 @@ export class dataOp {
     }
     ;
     static resolveDotPath(object, path, defaultValue) {
-        return path.split('.').reduce((r, s) => (r ? r[s] : defaultValue), object);
+        return path.split('.').reduce((r, s) => (r ? r[s] : defaultValue), object) ?? '';
     }
     /**
      *

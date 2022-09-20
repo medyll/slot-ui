@@ -7,7 +7,7 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const srcPackage = path.join(__dirname, 'package');
 const srcLibDir = path.join(__dirname, 'src', 'lib');
-const dirPath = path.join('src', 'lib', 'sitedata');
+const dirPath = path.join('src',  'lib','_sitedata');
 const libShort = '$lib';
 
 let fileHead = '';
@@ -101,8 +101,8 @@ function createMethods(fileList) {
 			const comp = file.split('\\').slice(-1)[0].split('.')[0];
 			const newContent = frag?.[0]?.replace(/export/gm, '');
 
-			const src = ('$lib/sitedata/api/' + comp + '.md').replace(/\\/g, '/');
-			const srcApiFull = ('$lib/sitedata/api/' + comp + '.api.md').replace(/\\/g, '/');
+			const src = ('$sitedata/api/' + comp + '.md').replace(/\\/g, '/');
+			const srcApiFull = ('$sitedata/api/' + comp + '.api.md').replace(/\\/g, '/');
 
 			if (!keyDone[comp.toLowerCase()] &&  !file.toLowerCase().includes('demo') &&  !file.toLowerCase().includes('preview')) {
 				objImport.push(`import ${comp}ReadMe from "${src}"`);
@@ -146,8 +146,8 @@ function createReadme(fileList) {
 			const comp = file.split('\\').slice(-1)[0].split('.')[0];
 			const newContent = frag?.[0]?.replace(/export/gm, '');
 			
-			const src = ('$lib/sitedata/api/' + comp + '.md').replace(/\\/g, '/');
-			const srcApiFull = ('$lib/sitedata/api/' + comp + '.api.md').replace(/\\/g, '/');
+			const src = ('$sitedata/api/' + comp + '.md').replace(/\\/g, '/');
+			const srcApiFull = ('$sitedata/api/' + comp + '.api.md').replace(/\\/g, '/');
 
 			if (!keyDone[comp.toLowerCase()] &&  !file.toLowerCase().includes('demo') &&  !file.toLowerCase().includes('preview')) {
 				objImport.push(`import ${comp}ReadMe from "${src}"`);
@@ -167,7 +167,7 @@ function createReadme(fileList) {
 	const finalObj = `export const componentReadMe = {${objObj.join(',\r\n')}}`;
 	const finalApiObj = `export const componentApiReadMe = {${objApiObj.join(',\r\n')}}`;
 
-	fs.writeFileSync(dirPath + '/api/index.ts', objImport.join(';\r\n') + ';\r\n\r\n' + finalObj);
+	fs.writeFileSync(dirPath + '/api/indexApi.ts', objImport.join(';\r\n') + ';\r\n\r\n' + finalObj);
 	fs.writeFileSync(dirPath + '/api/indexApiFull.ts', objApiImport.join(';\r\n') + ';\r\n\r\n' + finalApiObj);
 }
 

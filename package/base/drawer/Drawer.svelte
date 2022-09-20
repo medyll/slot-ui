@@ -100,7 +100,7 @@ $: finalStyle = `display:${dspStyle};position:${flow};${stickToStyle[stickTo]};$
 		{/if}
 	</div>
 	{#if isOpen}
-		{#if $$slots.topBarSlot || Boolean(primary) || Boolean(icon) || $$slots.iconSlot || !hideCloseIcon}
+		{#if $$slots.topBarSlot || Boolean(primary) || Boolean(icon) || $$slots.iconSlot }
 			<div class="header flex-h">
 				{#if Boolean(icon) || $$slots.iconSlot}
 					<div class="pad-ii-1">
@@ -163,7 +163,6 @@ $: finalStyle = `display:${dspStyle};position:${flow};${stickToStyle[stickTo]};$
 }
 :global(.drawer) :global(.header) {
   border-bottom: 1px solid var(--theme-color-foreground-alpha-high);
-  box-shadow: var(--box-shad-1);
   min-height: 48px;
   display: flex;
   align-items: center;
