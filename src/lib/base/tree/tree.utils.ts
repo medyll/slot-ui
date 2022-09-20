@@ -1,5 +1,5 @@
 import { forEach } from 'lodash';
-import type { PathDataType, PathsType, TreeItemType } from './types';
+import type { PathDataType, PathsType, TreeItemType } from './types.js';
 
 export const trans2Tree = (paths: PathsType, pathKey: keyof  PathDataType='path',splitter:string = '/'): TreeItemType[] => {
 

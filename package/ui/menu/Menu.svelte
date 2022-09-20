@@ -12,22 +12,23 @@ const forwardEvents = createEventForwarder(get_current_component());
 export let menuList = [];
 export let density = 'tight';
 export let style = undefined;
-export let onMenuItemClick = () => {
+/* export let onMenuItemClick: Function = () => {
     console.log('not imlepented');
-};
+}; */
 const menuStore = createMenuStore();
 setContext('menuStateContext', menuStore);
 // density
 $menuStore.density = density;
 function onMenuClick(e) {
-    onMenuItemClick && onMenuItemClick(e.detail);
-    const event = custom_event('menuitem:clicked', {}, { bubbles: true });
+    // onMenuItemClick && onMenuItemClick(e.detail);
+    const event = custom_event('menu:clicked', e.detail, { bubbles: true });
     element.dispatchEvent(event);
 }
 function sayHello() { }
 </script>
 
-<ul bind:this={element} role="menu" class="density-{density} menu" {style} on:menu:item:clicked={onMenuClick}>
+<ul use:forwardEvents bind:this={element} role="menu" class="density-{density} menu" {style} 
+on:menu:item:clicked={onMenuClick} >
 	{#if menuList}
 		{#each menuList as menuItem}
 			<slot item={menuItem} {menuItem}>

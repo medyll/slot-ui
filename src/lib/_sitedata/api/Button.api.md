@@ -13,6 +13,7 @@ declare const __propDef: {
         usePopper?: UsePopperProps | undefined;
         loading?: boolean | undefined;
         showChip?: boolean | undefined;
+        popperOpen?: boolean | undefined;
         contained?: boolean | undefined;
         bordered?: boolean | undefined;
         link?: boolean | undefined;
@@ -23,9 +24,10 @@ declare const __propDef: {
         height?: string | undefined;
         selected?: boolean | undefined;
         focus?: boolean | undefined;
+        actionStyle?: string | undefined;
+        containerStyle?: string | undefined;
         primary?: string | undefined;
         secondary?: string | undefined;
-        action?: string | undefined;
         reverse?: boolean | undefined;
     };
     events: {

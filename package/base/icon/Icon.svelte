@@ -24,6 +24,7 @@ export let fontSize = 'small';
 
 {#if browser}
 	<Iconify
+	on:click
 		style="font-size:{sizes[fontSize]}px;{style}"
 		icon="{iconFamily}:{icon}"
 		class={className}

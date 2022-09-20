@@ -68,7 +68,9 @@ export function stickTo(node, props) {
         checkPos(node);
         return style;
     }
-    intervaller = setInterval(() => { setPosition(node, position, parentNode); }, 5);
+    intervaller = setInterval(() => {
+        setPosition(node, position, parentNode);
+    }, 5);
     return {
         destroy() {
             clearInterval(intervaller);

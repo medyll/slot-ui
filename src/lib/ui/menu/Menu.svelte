@@ -17,9 +17,9 @@
 	export let menuList: MenuItemProps[] = [];
 	export let density: ElementProps['density'] = 'tight';
 	export let style:string |undefined = undefined;
-	export let onMenuItemClick: Function = () => {
+	/* export let onMenuItemClick: Function = () => {
 		console.log('not imlepented');
-	};
+	}; */
 
 	const menuStore = createMenuStore();
 	setContext('menuStateContext', menuStore);
@@ -27,15 +27,16 @@
 	$menuStore.density = density;
 
 	function onMenuClick(e: CustomEvent<any>) {
-		onMenuItemClick && onMenuItemClick(e.detail);
-		const event = custom_event('menuitem:clicked', {}, { bubbles: true });
+		// onMenuItemClick && onMenuItemClick(e.detail);
+		const event = custom_event('menu:clicked', e.detail, { bubbles: true });
 		element.dispatchEvent(event); 
 	}
 
 	function sayHello() {}
 </script>
 
-<ul bind:this={element} role="menu" class="density-{density} menu" {style} on:menu:item:clicked={onMenuClick}>
+<ul use:forwardEvents bind:this={element} role="menu" class="density-{density} menu" {style} 
+on:menu:item:clicked={onMenuClick} >
 	{#if menuList}
 		{#each menuList as menuItem}
 			<slot item={menuItem} {menuItem}>
