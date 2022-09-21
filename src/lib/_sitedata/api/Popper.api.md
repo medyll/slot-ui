@@ -2,12 +2,14 @@
 import { type SvelteComponentDev } from 'svelte/internal';
 declare const __propDef: {
     props: {
+        /** popper HTMLDivElement */ element: HTMLElement;
         code: string;
         parentNode: HTMLElement;
         component?: SvelteComponentDev | undefined;
         componentProps?: {} | undefined;
         position?: import("../../uses/stickTo/stickTo.js").StickToPositionType | undefined;
         content?: any | undefined;
+        style?: string | undefined;
         toggle?: (() => void) | undefined;
         hide?: (() => void) | undefined;
         show?: (() => void) | undefined;
@@ -29,6 +31,9 @@ export default class Popper extends SvelteComponentTyped<PopperProps, PopperEven
     get hide(): () => void;
     get show(): () => void;
     get clickedAway(): () => void;
+    get element(): HTMLElement;
+    /**accessor*/
+    set element(_: HTMLElement);
     get code(): string;
     /**accessor*/
     set code(_: string);
@@ -47,6 +52,9 @@ export default class Popper extends SvelteComponentTyped<PopperProps, PopperEven
     get content(): any;
     /**accessor*/
     set content(_: any);
+    get style(): string | undefined;
+    /**accessor*/
+    set style(_: string | undefined);
 }
 export {};
 

@@ -2,17 +2,16 @@
 __propDef: {
     props: {
         class?: string | undefined;
-        element?: HTMLDivElement | null | undefined;
-        parentElement?: HTMLDivElement | null | undefined;
-        component: SvelteComponent;
-        componentProps: Record<string, any>;
+        element?: HTMLElement | undefined;
+        parent?: HTMLElement | undefined;
+        component?: any | undefined;
+        componentProps?: Record<string, any> | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
-        title: {};
-        description: {};
+        default: {};
     };
 };
 
