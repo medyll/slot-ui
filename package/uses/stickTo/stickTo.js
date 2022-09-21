@@ -1,4 +1,4 @@
-import { elem } from '../../engine/elem';
+import { elem } from '../../engine/elem.js';
 export function stickTo(node, props) {
     const { parentNode, position } = props;
     let intervaller;
@@ -9,6 +9,7 @@ export function stickTo(node, props) {
     else {
         //  node.style.bottom = String(0)
         //  node.style.right = String(0)
+        return false;
     }
     node.addEventListener('click', (event) => event.preventDefault());
     function checkPos(node) {

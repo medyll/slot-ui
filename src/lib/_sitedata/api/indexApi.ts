@@ -45,7 +45,7 @@ import StepperReadMe from "$sitedata/api/Stepper.md";
 import SwitchReadMe from "$sitedata/api/Switch.md";
 import TabsReadMe from "$sitedata/api/Tabs.md";
 import TitleBarReadMe from "$sitedata/api/TitleBar.md";
-import TooltipReadMe from "$sitedata/api/Tooltip.md";
+import ToolTipReadMe from "$sitedata/api/ToolTip.md";
 import TreeReadMe from "$sitedata/api/Tree.md";
 import VirtualizeReadMe from "$sitedata/api/Virtualize.md";
 import VirtualizerReadMe from "$sitedata/api/Virtualizer.md";
@@ -125,7 +125,7 @@ stepper:StepperReadMe,
 switch:SwitchReadMe,
 tabs:TabsReadMe,
 titlebar:TitleBarReadMe,
-tooltip:TooltipReadMe,
+tooltip:ToolTipReadMe,
 tree:TreeReadMe,
 virtualize:VirtualizeReadMe,
 virtualizer:VirtualizerReadMe,

@@ -1,25 +1,23 @@
 ```import { SvelteComponentTyped } from "svelte";
-import { SvelteComponent } from 'svelte';
 declare const __propDef: {
     props: {
         class?: string | undefined;
-        element?: HTMLDivElement | null | undefined;
-        parentElement?: HTMLDivElement | null | undefined;
-        component: SvelteComponent;
-        componentProps: Record<string, any>;
+        element?: HTMLElement | undefined;
+        parent?: HTMLElement | undefined;
+        component?: any | undefined;
+        componentProps?: Record<string, any> | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
-        title: {};
-        description: {};
+        default: {};
     };
 };
-export declare type TooltipProps = typeof __propDef.props;
-export declare type TooltipEvents = typeof __propDef.events;
-export declare type TooltipSlots = typeof __propDef.slots;
-export default class Tooltip extends SvelteComponentTyped<TooltipProps, TooltipEvents, TooltipSlots> {
+export declare type ToolTipProps = typeof __propDef.props;
+export declare type ToolTipEvents = typeof __propDef.events;
+export declare type ToolTipSlots = typeof __propDef.slots;
+export default class ToolTip extends SvelteComponentTyped<ToolTipProps, ToolTipEvents, ToolTipSlots> {
 }
 export {};
 

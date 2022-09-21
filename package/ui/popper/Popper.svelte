@@ -4,7 +4,8 @@
 import { stickTo } from '../../uses/stickTo/stickTo.js';
 import { clickAway } from '../../uses/clickAway/clickAway.js';
 import { popperList } from './actions.js';
-let element;
+/** popper HTMLDivElement */
+export let element;
 let zIndex;
 export let code;
 export let parentNode;
@@ -12,6 +13,7 @@ export let component = undefined;
 export let componentProps = {};
 export let position = 'B';
 export let content = undefined;
+export let style = '';
 export const toggle = function () {
     popperList[code].$destroy();
 };
@@ -54,6 +56,7 @@ $: if (!parentNode && element)
 	on:popper:close={actions.destroy}
 	use:clickAway={{ action: clickedAway }}
 	use:stickTo={{ parentNode, position: position }}
+	{style}
 >
 	<slot>
 		{#if component}

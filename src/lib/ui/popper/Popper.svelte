@@ -7,7 +7,8 @@
 	import { popperList } from './actions.js';
 	import type { PopperPositionType } from './types.js';
 
-	let element: HTMLElement;
+	/** popper HTMLDivElement */
+	export let element: HTMLElement;
 	let zIndex;
 
 	export let code: string;
@@ -16,6 +17,7 @@
 	export let componentProps: {} | undefined = {};
 	export let position: PopperPositionType = 'B';
 	export let content: any | undefined = undefined;
+	export let style: string | '' = '';
 
 	export const toggle = function () {
 		popperList[code].$destroy();
@@ -66,6 +68,7 @@
 	on:popper:close={actions.destroy}
 	use:clickAway={{ action: clickedAway }}
 	use:stickTo={{ parentNode, position: position }}
+	{style}
 >
 	<slot>
 		{#if component}

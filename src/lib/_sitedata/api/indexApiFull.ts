@@ -45,7 +45,7 @@ import StepperApiReadMe from "$sitedata/api/Stepper.api.md";
 import SwitchApiReadMe from "$sitedata/api/Switch.api.md";
 import TabsApiReadMe from "$sitedata/api/Tabs.api.md";
 import TitleBarApiReadMe from "$sitedata/api/TitleBar.api.md";
-import TooltipApiReadMe from "$sitedata/api/Tooltip.api.md";
+import ToolTipApiReadMe from "$sitedata/api/ToolTip.api.md";
 import TreeApiReadMe from "$sitedata/api/Tree.api.md";
 import VirtualizeApiReadMe from "$sitedata/api/Virtualize.api.md";
 import VirtualizerApiReadMe from "$sitedata/api/Virtualizer.api.md";
@@ -125,7 +125,7 @@ stepperApi:StepperApiReadMe,
 switchApi:SwitchApiReadMe,
 tabsApi:TabsApiReadMe,
 titlebarApi:TitleBarApiReadMe,
-tooltipApi:TooltipApiReadMe,
+tooltipApi:ToolTipApiReadMe,
 treeApi:TreeApiReadMe,
 virtualizeApi:VirtualizeApiReadMe,
 virtualizerApi:VirtualizerApiReadMe,

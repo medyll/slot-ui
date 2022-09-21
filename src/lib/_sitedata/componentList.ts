@@ -15,6 +15,7 @@ import Loaderdemosvelte from "$lib/base/loader/Loader.demo.svelte";
 import Ratingdemosvelte from "$lib/base/rating/Rating.demo.svelte"; 
 import Stepperdemosvelte from "$lib/base/stepper/Stepper.demo.svelte"; 
 import Tabsdemosvelte from "$lib/base/tabs/Tabs.demo.svelte"; 
+import ToolTipdemosvelte from "$lib/base/tooltip/ToolTip.demo.svelte"; 
 import Treedemosvelte from "$lib/base/tree/Tree.demo.svelte"; 
 import Finderdemosvelte from "$lib/data/finder/Finder.demo.svelte"; 
 import Grouperdemosvelte from "$lib/data/grouper/Grouper.demo.svelte"; 
@@ -39,6 +40,7 @@ import Windowdemosvelte from "$lib/ui/window/Window.demo.svelte";
 {name:"Rating",code:"rating",component:Ratingdemosvelte},
 {name:"Stepper",code:"stepper",component:Stepperdemosvelte},
 {name:"Tabs",code:"tabs",component:Tabsdemosvelte},
+{name:"ToolTip",code:"tooltip",component:ToolTipdemosvelte},
 {name:"Tree",code:"tree",component:Treedemosvelte},
 {name:"Finder",code:"finder",component:Finderdemosvelte},
 {name:"Grouper",code:"grouper",component:Grouperdemosvelte},

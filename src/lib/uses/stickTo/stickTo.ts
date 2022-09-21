@@ -1,4 +1,4 @@
-import { elem } from '../../engine/elem';
+import { elem } from '../../engine/elem.js';
 
 export type StickToPositionType = 'TL' | 'TR' | 'BR' | 'B' | 'BL';
 export type NewStickToPositionType = | 'TT' | 'RR' | 'BB' | 'LL' | 'CC'
@@ -27,6 +27,7 @@ export function stickTo(node: HTMLElement, props: StickToProps) {
   } else {
     //  node.style.bottom = String(0)
     //  node.style.right = String(0)
+    return false;
   }
 
   node.addEventListener('click', (event) => event.preventDefault())

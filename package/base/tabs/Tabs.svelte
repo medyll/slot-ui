@@ -16,7 +16,7 @@ let activeCellElementRef;
 let boundingClientRect;
 const handleClick = (tabValue) => (event) => {
     activeTabCode = tabValue;
-    const node = elem(navElementRef).find(`[data-code=${activeTabCode}]`);
+    const node = elem(navElementRef).find(`li[data-code=${activeTabCode}]`);
     if (node && activeCellElementRef?.parentElement) {
         boundingClientRect = node.getBoundingClientRect();
         /* activeCellElementRef.style.left =
@@ -75,10 +75,12 @@ onMount(() => {
 	</div>
 	<div class="tabsContent flex-main pos-rel">
 		{#each items as item}
-			{@const display = activeTabCode === item.code ? 'flex' : 'none'}
+			{@const display = (activeTabCode === item.code) ? 'flex' : 'none'}
+			{#if activeTabCode === item.code}
 			<slot {item}>
-				<div
-					style="display:{display};height:100%;position:relative;display:flex;flex-direction:column"
+				<div  data-code={item.code}
+						data-activeTabCode={activeTabCode}
+					style="display:{display};height:100%;position:relative;flex-direction:column"
 				>
 					{#if Boolean(item?.secondary)}
 						<div class=" flex-h pad-tb gap-small">
@@ -88,7 +90,7 @@ onMount(() => {
 							<div class="flex-main pad-t-1">{@html item?.secondary}</div>
 						</div>
 					{/if}
-					<div style="flex:1;overflow:hidden;">
+					<div data-code={item.code} style="flex:1;overflow:hidden;position:relative;">
 						{#if activeTabCode === item.code}
 							{#if Boolean(item?.withComponent)}
 								<svelte:component this={item.withComponent} {...item.componentProps ?? {}} />
@@ -101,6 +103,7 @@ onMount(() => {
 					</div>
 				</div>
 			</slot>
+			{/if}
 		{/each}
 	</div>
 </div>
