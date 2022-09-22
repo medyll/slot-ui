@@ -152,7 +152,7 @@
 	on:resizer:resize={resizeOn}
 	on:resizer:end={resizeEnd}
 	{style}
-	title={$dataListContextStore?.columns?.[colIndex]?.width}
+	{...$$restProps}
 >
 	{#if inHeader}
 		<div on:click={()=>{onSort(columnId)}} class="cellHeader">
