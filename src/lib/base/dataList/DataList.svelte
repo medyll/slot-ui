@@ -7,7 +7,7 @@
 	import { browser } from '$app/environment';
 	import DataListRow from './DataListRow.svelte';
 	import DataListCell from './DataListCell.svelte';
-	import type { DataListStoreType } from './types.js';
+	import type { DataListStoreType,CellType } from './types.js';
 	import { dataOp } from '$lib/engine/utils.js';
 	import type { Data } from '$types/index.js';
 	import DataListHead from './DataListHead.svelte';
@@ -100,14 +100,16 @@
 {#if groupByField}
 	{#each Object.keys(groups) as red}
 		{@const groupProps = { data: groups[red], columns, columnsDef, style, dataListStore, groupByField: false }}
+		{@const item = groups[red]}
 		<div class="flex-v">
 			<div class="flex-h flex-align-middle pad-2">
-				<div>{groups[red]?.length}</div>
+				<slot name="groupTitleSlot"  {item} ><div>{groups[red]?.length}</div>
 				<div class="flex-main">{red}</div>
+			</slot>
 			</div>
 			<div class="flex-main pos-rel overflow:hidden">
 				<svelte:self {...groupProps} let:item> 
-				<slot />
+				<!-- <slot  /> -->
 				</svelte:self>
 			</div>
 		</div>
@@ -125,10 +127,10 @@
 			<Virtualize height="100%" data={sortedData} let:item>
 				<svelte:fragment slot="virtualizeHeaderSlot">
 					<slot name="head">
-						{#if !$$slots.head && $dataListContext.columns.length}
+						{#if !$$slots.head && Object.keys($dataListContext.columnsDef).length}
 							<DataListHead>
-								{#each $dataListContext.columns as column}
-									<DataListCell dataField={column.dataField}>{column.dataField}</DataListCell>
+								{#each Object.values($dataListContext.columnsDef) as column}
+									<DataListCell field={column.field}>{column.field}</DataListCell>
 								{/each}
 							</DataListHead>
 						{/if}
@@ -140,7 +142,7 @@
 					{:else}
 						<DataListRow data={item}>
 							{#each Object.keys(item) as inItem}
-								<DataListCell dataField={inItem}>
+								<DataListCell field={inItem}>
 									{item?.[inItem]}
 								</DataListCell>
 							{/each}

@@ -11,15 +11,15 @@
 	});
 
 	let columns: CellType[] = [
-		{ dataField: 'index' },
-		{ dataField: 'name' },
-		{ dataField: 'otherName' }
+		{ field: 'index' },
+		{ field: 'name' },
+		{ field: 'otherName' }
 	];
 
 	let columnsDef: CellType[] = {
-		index: { dataField: 'index' ,width:'190px',style:"color:red;"},
-		name: { dataField: 'name',style:'width:auto' },
-		otherName: { dataField: 'otherName',width:'auto' }
+		index: { field: 'index' ,width:'190px',style:"color:red;"},
+		name: { field: 'name',style:'width:auto' },
+		otherName: { field: 'otherName',width:'auto' }
 	};
 </script>
 
@@ -34,9 +34,9 @@ is a datalist table <br /> B. Franklin, 1854"
 			<DataList {data}>
 				<svelte:fragment slot="head">
 					<DataListHead>
-						<DataListCell dataField="index">index</DataListCell>
-						<DataListCell dataField="name">name</DataListCell>
-						<DataListCell dataField="otherName" style="flex:1">otherName</DataListCell>
+						<DataListCell field="index">index</DataListCell>
+						<DataListCell field="name">name</DataListCell>
+						<DataListCell field="otherName" style="flex:1">otherName</DataListCell>
 					</DataListHead>
 				</svelte:fragment>
 			</DataList>
@@ -46,9 +46,9 @@ is a datalist table <br /> B. Franklin, 1854"
 			<DataList {data} on:datalist:click={() => {}}>
 				<svelte:fragment slot="head">
 					<DataListHead>
-						<DataListCell dataField="index">index</DataListCell>
-						<DataListCell dataField="name">name</DataListCell>
-						<DataListCell dataField="otherName" style="flex:1">otherName</DataListCell>
+						<DataListCell field="index">index</DataListCell>
+						<DataListCell field="name">name</DataListCell>
+						<DataListCell field="otherName" style="flex:1">otherName</DataListCell>
 					</DataListHead>
 				</svelte:fragment>
 			</DataList>
@@ -74,7 +74,7 @@ is a datalist table <br /> B. Franklin, 1854"
 				</DataListRow>
 			</DataList>
 		</div>
-		<h5>Declarative</h5>
+		<h5>grouped Datatable</h5>
 		<div class="what   pos-rel   pad-4">
 			<DataList
 				style="height:300px!important;max-height:100%;overflow:auto;"
@@ -84,15 +84,16 @@ is a datalist table <br /> B. Franklin, 1854"
 				{data}
 				let:item
 			>
-				<!-- <DataListHead slot="head">
-					<DataListCell dataField="index" style="width:50px;">index</DataListCell>
-					<DataListCell dataField="name" style="width:50px;">name</DataListCell>
-					<DataListCell dataField="otherName" style="width:100px">otherName 50%</DataListCell> 
-				</DataListHead> -->
+			<span slot="groupTitleSlot" let:item>Ggroup {item[0].otherName}</span>
+				<DataListHead slot="head">
+					<DataListCell field="index" style="width:50px;">index de red</DataListCell>
+					<DataListCell field="name" style="width:50px;">name</DataListCell>
+					<DataListCell field="otherName" style="width:100px">otherName 50%</DataListCell> 
+				</DataListHead>
 				<DataListRow data={item}>
-					<DataListCell dataField="index">{item.index}</DataListCell>
-					<DataListCell dataField="name">{item.name}</DataListCell>
-					<DataListCell dataField="otherName">121512</DataListCell>
+					<DataListCell field="index">{item.index}</DataListCell>
+					<DataListCell field="name">{item.name}</DataListCell>
+					<DataListCell field="otherName">121512</DataListCell>
 				</DataListRow>
 			</DataList>
 		</div>

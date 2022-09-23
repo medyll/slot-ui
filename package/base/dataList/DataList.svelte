@@ -7,6 +7,7 @@ import { browser } from '$app/environment';
 import DataListRow from './DataListRow.svelte';
 import DataListCell from './DataListCell.svelte';
 import { dataOp } from '../../engine/utils.js';
+import DataListHead from './DataListHead.svelte';
 /*  common slotUi exports*/
 let className = '';
 export { className as class };
@@ -17,6 +18,8 @@ export let style = undefined;
 export let isSortable = true;
 /** order on which the sorted list is sorted */
 export let sortByOrder = 'none';
+/** order on which the sorted list is sorted */
+export let groupByField = undefined;
 /** binding, used when multiple buttons*/
 export let activeCommonSortField = '';
 /** set noWrap = true to have ellipsis on all cells content*/
@@ -27,6 +30,10 @@ export let dataTypes = undefined;
 export let data = [];
 /** used only if data is provided */
 export let idField = undefined;
+/** @deprecated columns declaration */
+export let columns = [];
+/** columns declaration */
+export let columnsDef = [];
 let sortedData;
 $: sortedData = data;
 const sortState = ['none', 'asc', 'desc'];
@@ -35,7 +42,7 @@ export let sortingIcons = {
     numeric: ['dots-horizontal', 'sort-bool-ascending', 'sort-bool-descending']
 };
 /** context store for dataList config and state */
-let dataListStore = writable({
+export let dataListStore = writable({
     config: {
         isSortable,
         defaultSortByField: undefined,
@@ -49,7 +56,8 @@ let dataListStore = writable({
         activeSortByOrder: 'none'
     },
     idField,
-    columns: [],
+    columns,
+    columnsDef,
     data
 });
 let dataListContext = setContext('dataListContext', dataListStore);
@@ -73,38 +81,66 @@ function doSort(e) {
         $dataListContext.sortBy.activeSortByOrder = toggleOrder;
     }
 }
+const groups = dataOp.groupBy(data, groupByField);
 </script>
 
-<div
-	use:forwardEvents
-	on:datalist:sort:clicked={doSort}
-	bind:this={element}
-	class="dataList  {className}"
-	{style}
-	tabindex="0"
->
-	{#if element}
-		<Virtualize height="100%" data={sortedData} let:item>
-			<svelte:fragment slot="virtualizeHeaderSlot">
-				<slot name="head" />
-			</svelte:fragment>
-			{#if item}
-				{#if $$slots.default}
-					<slot {item} />
-				{:else}
-					<DataListRow data={item}>
-						{#each Object.keys(item) as inItem}
-							<DataListCell dataField={inItem}>
-								{item?.[inItem]}
-							</DataListCell>
-						{/each}
-					</DataListRow>
+{#if groupByField}
+	{#each Object.keys(groups) as red}
+		{@const groupProps = { data: groups[red], columns, columnsDef, style, dataListStore, groupByField: false }}
+		{@const item = groups[red]}
+		<div class="flex-v">
+			<div class="flex-h flex-align-middle pad-2">
+				<slot name="groupTitleSlot"  {item} ><div>{groups[red]?.length}</div>
+				<div class="flex-main">{red}</div>
+			</slot>
+			</div>
+			<div class="flex-main pos-rel overflow:hidden">
+				<svelte:self {...groupProps} let:item> 
+				<!-- <slot  /> -->
+				</svelte:self>
+			</div>
+		</div>
+	{/each}
+{:else}
+	<div
+		use:forwardEvents
+		on:datalist:sort:clicked={doSort}
+		bind:this={element}
+		class="dataList  {className}"
+		{style}
+		tabindex="0"
+	>
+		{#if element}
+			<Virtualize height="100%" data={sortedData} let:item>
+				<svelte:fragment slot="virtualizeHeaderSlot">
+					<slot name="head">
+						{#if !$$slots.head && Object.keys($dataListContext.columnsDef).length}
+							<DataListHead>
+								{#each Object.values($dataListContext.columnsDef) as column}
+									<DataListCell field={column.field}>{column.field}</DataListCell>
+								{/each}
+							</DataListHead>
+						{/if}
+					</slot>
+				</svelte:fragment>
+				{#if item}
+					{#if $$slots.default}
+						<slot {item} />
+					{:else}
+						<DataListRow data={item}>
+							{#each Object.keys(item) as inItem}
+								<DataListCell field={inItem}>
+									{item?.[inItem]}
+								</DataListCell>
+							{/each}
+						</DataListRow>
+					{/if}
 				{/if}
-			{/if}
-		</Virtualize>
-	{/if}
-	<slot name="foot" />
-</div>
+			</Virtualize>
+		{/if}
+		<slot name="foot" />
+	</div>
+{/if}
 
 <style global>:global([data-theme=dark]) {
   --border-color: rgba(255, 255, 255, 0.1);

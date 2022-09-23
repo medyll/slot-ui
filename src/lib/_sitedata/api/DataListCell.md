@@ -4,9 +4,9 @@ __propDef: {
         [x: string]: any;
         element?: HTMLDivElement | null | undefined;
         style?: string | undefined;
+        field?: string | undefined;
+        fieldType?: string | undefined;
         columnId?: string | number | undefined;
-        dataField?: string | undefined;
-        dataFieldType?: string | undefined;
         noWrap?: boolean | undefined;
     };
     events: {

@@ -11,9 +11,9 @@
 <div style="height:350px;width:450px;" class="what   pos-rel overflow-hidden pad-1">
 	<DataList {data} >
 		<DataListHead slot="head">
-			<DataListCell  dataField="index">index</DataListCell>
-			<DataListCell  dataField="name">name</DataListCell>
-			<DataListCell  dataField="otherName"style="flex:1">otherName</DataListCell>
+			<DataListCell  field="index">index</DataListCell>
+			<DataListCell  field="name">name</DataListCell>
+			<DataListCell  field="otherName"style="flex:1">otherName</DataListCell>
 		</DataListHead>
 	</DataList>
 </div>

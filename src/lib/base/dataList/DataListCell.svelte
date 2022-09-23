@@ -3,10 +3,9 @@
 	import { dataOp } from '$lib/engine/utils.js';
 	import { getContext, onMount } from 'svelte';
 	import type { Writable } from 'svelte/store';
-	import Icon from '../icon/Icon.svelte';
 	import Button from '../button/Button.svelte';
 	import { custom_event } from 'svelte/internal';
-	import { resizer } from '$lib/uses/resizer/resizer';
+	import { resizer } from '$lib/uses/resizer/resizer.js';
 
 	const dataListContextStore = getContext<Writable<DataListStoreType>>('dataListContext');
 	const inHeader = getContext<Writable<CellType[]>>('dataListHead');
@@ -16,27 +15,26 @@
 
 	export let style: string | undefined = undefined;
 	/** if data has been provided, then cell got a fieldName and coumnId is defined */
-	export let dataField: string | undefined = undefined;
-	/** typeof the dataField. Used when exists Datalist.$$props.dataTypes */
-	export let dataFieldType: string | undefined = undefined;
-	export let columnId: string | number | undefined = dataField ?? crypto.randomUUID();
+	export let field: string | undefined = undefined;
+	/** typeof the field. Used when exists Datalist.$$props.dataTypes */
+	export let fieldType: string | undefined = undefined;
+	export let columnId: string | number | undefined = field ?? crypto.randomUUID();
 	/** set noWrap = true to have ellipsis on this cell content*/
 	export let noWrap: boolean = true;
 
-	let addStyle: string;
 	let colIndex: number | undefined = undefined;
 	let columnsDef: CellType | undefined = undefined;
 
-	if (!$dataListContextStore.columnsDef?.[dataField ?? columnId]) {
-		$dataListContextStore.columnsDef[dataField ?? columnId] = {};
+	if (!$dataListContextStore.columnsDef?.[field ?? columnId]) {
+		$dataListContextStore.columnsDef[field ?? columnId] = {};
 	}
-	columnsDef = $dataListContextStore.columnsDef?.[dataField ?? columnId];
+	columnsDef = $dataListContextStore.columnsDef?.[field ?? columnId];
 
 	onMount(async () => {
 		colIndex = element ? [...element.parentElement.children].indexOf(element) : undefined;
 
 		if (inHeader) {
-			// set width and style from config if present (with appField)
+			// set width and style from config if present (with field)
 			if (columnsDef?.style || columnsDef?.width) {
 				if (columnsDef?.style) {
 					element.style = columnsDef.style;
@@ -52,7 +50,7 @@
 			}
 			// register HTML element for reference
 			columnsDef.htmlElement = element;
-			columnsDef.dataField = dataField ?? columnId;
+			columnsDef.field = field ?? columnId;
 		}
 
 		return () => {
@@ -63,28 +61,28 @@
 	const sortState: string[] = ['none', 'asc', 'desc'];
 
 	$: sorticon =
-		$dataListContextStore.sortBy.activeSortByField === dataField
+		$dataListContextStore.sortBy.activeSortByField === field
 			? $dataListContextStore?.config?.sortingIcons?.default[
 					sortState.indexOf($dataListContextStore?.sortBy?.activeSortByOrder)
 			  ]
 			: 'dots-horizontal';
 
-	$: showChip = $dataListContextStore.sortBy.activeSortByField === dataField;
+	$: showChip = $dataListContextStore.sortBy.activeSortByField === field;
 
 	$: width =
-		$dataListContextStore?.columnsDef?.[dataField ?? columnId]?.htmlElement?.offsetWidth + 'px';
+		$dataListContextStore?.columnsDef?.[field ?? columnId]?.htmlElement?.offsetWidth + 'px';
 
 	$: if (
 		element &&
 		!inHeader &&
-		$dataListContextStore?.columnsDef?.[dataField ?? columnId]?.htmlElement
+		$dataListContextStore?.columnsDef?.[field ?? columnId]?.htmlElement
 	) {
 		element.style.width = width;
 		element.style.maxWidth = width;
 		element.style.minWidth = width;
 	}
 
-	$: if (Boolean(element) && !inHeader && !dataField) {
+	$: if (Boolean(element) && !inHeader && !field) {
 		const field = Object.keys($dataListContextStore.columnsDef)[colIndex];
 		const fieldDef = $dataListContextStore.columnsDef[field];
 		const widthHtml = fieldDef.htmlElement.offsetWidth  + 'px';
@@ -96,27 +94,15 @@
 
 	const onSort = (columnId: string, order: 'asc' | 'desc' | 'none') => {
 		// find field from index
-		if ($dataListContextStore?.config?.isSortable && columnId && dataField) {
+		if ($dataListContextStore?.config?.isSortable && columnId && field) {
 			const event = custom_event(
 				'datalist:sort:clicked',
-				{ field: dataField, order },
+				{ field: field, order },
 				{ bubbles: true }
 			);
 			if (element) element.dispatchEvent(event);
 		}
 	};
-
-	function pushToStore(index: any, width: any) {
-		if (dataField && $dataListContextStore.columnsDef[dataField]) return dataField;
-		let columnId = dataField ?? crypto.randomUUID();
-		// register colmun in store
-		$dataListContextStore.columns.push({ index, columnId, width, dataField, style });
-		return columnId;
-	}
-
-	function findColIdAtIndex(index: number) {
-		columnId = dataOp.filterListFirst($dataListContextStore.columns, index, 'index').columnId;
-	}
 
 	// not pure
 	const useResizer = (node: HTMLElement, opt?: any) => {
@@ -153,10 +139,9 @@
 			class="cellHeader"
 		>
 			<div class="cellHeaderContent">
-				{columnId}
 				<slot />
 			</div>
-			{#if dataField && $dataListContextStore?.config?.isSortable}
+			{#if field && $dataListContextStore?.config?.isSortable}
 				<div class="cellHeaderSorter">
 					<Button naked iconFamily="mdi" icon={sorticon} {showChip} />
 				</div>

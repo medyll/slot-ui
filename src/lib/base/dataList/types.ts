@@ -9,7 +9,7 @@ export interface CellType {
     width: string
     style?: string
     order?: number
-    dataField?: string | ((data: any) => void)
+    field?: string
     htmlElement?: HTMLElement
 }
 
