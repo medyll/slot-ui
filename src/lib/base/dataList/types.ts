@@ -7,8 +7,10 @@ export interface CellType {
     /** column identifier data.id ?? generated */
     columnId: string | number,
     width: string
+    style?: string
     order?: number
     dataField?: string | ((data: any) => void)
+    htmlElement?: HTMLElement
 }
 
 export interface RowType { 
@@ -31,5 +33,6 @@ export interface DataListStoreType {
     idField?: string
     selectedRowId?: string
     columns: CellType[]
+    columnsDef: Record<string,CellType>
     data: Data[]
 }

@@ -7,9 +7,10 @@
 	import { browser } from '$app/environment';
 	import DataListRow from './DataListRow.svelte';
 	import DataListCell from './DataListCell.svelte';
-	import type { DataListStoreType } from '$types/index.js';
+	import type { DataListStoreType } from './types.js';
 	import { dataOp } from '$lib/engine/utils.js';
 	import type { Data } from '$types/index.js';
+	import DataListHead from './DataListHead.svelte';
 
 	/*  common slotUi exports*/
 	let className = '';
@@ -22,6 +23,8 @@
 	export let isSortable: boolean = true;
 	/** order on which the sorted list is sorted */
 	export let sortByOrder: 'asc' | 'desc' | 'none' | string = 'none';
+	/** order on which the sorted list is sorted */
+	export let groupByField: string | undefined = undefined;
 	/** binding, used when multiple buttons*/
 	export let activeCommonSortField: string = '';
 	/** set noWrap = true to have ellipsis on all cells content*/
@@ -32,6 +35,10 @@
 	export let data: any[] = [];
 	/** used only if data is provided */
 	export let idField: string | undefined = undefined;
+	/** @deprecated columns declaration */
+	export let columns: CellType[] = [];
+	/** columns declaration */
+	export let columnsDef: CellType[] = [];
 
 	let sortedData: any[];
 	$: sortedData = data;
@@ -43,7 +50,7 @@
 	};
 
 	/** context store for dataList config and state */
-	let dataListStore = writable<DataListStoreType>({
+	export let dataListStore = writable<DataListStoreType>({
 		config: {
 			isSortable,
 			defaultSortByField: undefined,
@@ -57,13 +64,14 @@
 			activeSortByOrder: 'none'
 		},
 		idField,
-		columns: [],
+		columns,
+		columnsDef,
 		data
 	});
 
 	let dataListContext = setContext<Writable<DataListStoreType>>('dataListContext', dataListStore);
 
-	function doSort(e: CustomEvent<{ field: string; order: 'asc' | 'desc' | 'none' }>) { 
+	function doSort(e: CustomEvent<{ field: string; order: 'asc' | 'desc' | 'none' }>) {
 		const next = sortState.indexOf(e.detail.order ?? sortByOrder) + 1;
 		let toggleOrder = sortState?.[next] ? sortState[next] : sortState[0];
 
@@ -85,38 +93,65 @@
 			$dataListContext.sortBy.activeSortByOrder = toggleOrder;
 		}
 	}
+
+	const groups = dataOp.groupBy(data, groupByField);
 </script>
 
-<div
-	use:forwardEvents
-	on:datalist:sort:clicked={doSort}
-	bind:this={element}
-	class="dataList  {className}"
-	{style}
-	tabindex="0"
->
-	{#if element}
-		<Virtualize height="100%" data={sortedData} let:item>
-			<svelte:fragment slot="virtualizeHeaderSlot">
-				<slot name="head" />
-			</svelte:fragment>
-			{#if item}
-				{#if $$slots.default}
-					<slot {item} />
-				{:else}
-					<DataListRow data={item}>
-						{#each Object.keys(item) as inItem}
-							<DataListCell dataField={inItem}>
-								{item?.[inItem]}
-							</DataListCell>
-						{/each}
-					</DataListRow>
+{#if groupByField}
+	{#each Object.keys(groups) as red}
+		{@const groupProps = { data: groups[red], columns, columnsDef, style, dataListStore, groupByField: false }}
+		<div class="flex-v">
+			<div class="flex-h flex-align-middle pad-2">
+				<div>{groups[red]?.length}</div>
+				<div class="flex-main">{red}</div>
+			</div>
+			<div class="flex-main pos-rel overflow:hidden">
+				<svelte:self {...groupProps} let:item> 
+				<slot />
+				</svelte:self>
+			</div>
+		</div>
+	{/each}
+{:else}
+	<div
+		use:forwardEvents
+		on:datalist:sort:clicked={doSort}
+		bind:this={element}
+		class="dataList  {className}"
+		{style}
+		tabindex="0"
+	>
+		{#if element}
+			<Virtualize height="100%" data={sortedData} let:item>
+				<svelte:fragment slot="virtualizeHeaderSlot">
+					<slot name="head">
+						{#if !$$slots.head && $dataListContext.columns.length}
+							<DataListHead>
+								{#each $dataListContext.columns as column}
+									<DataListCell dataField={column.dataField}>{column.dataField}</DataListCell>
+								{/each}
+							</DataListHead>
+						{/if}
+					</slot>
+				</svelte:fragment>
+				{#if item}
+					{#if $$slots.default}
+						<slot {item} />
+					{:else}
+						<DataListRow data={item}>
+							{#each Object.keys(item) as inItem}
+								<DataListCell dataField={inItem}>
+									{item?.[inItem]}
+								</DataListCell>
+							{/each}
+						</DataListRow>
+					{/if}
 				{/if}
-			{/if}
-		</Virtualize>
-	{/if}
-	<slot name="foot" />
-</div>
+			</Virtualize>
+		{/if}
+		<slot name="foot" />
+	</div>
+{/if}
 
 <style global lang="scss">
 	[data-theme='dark'] {
