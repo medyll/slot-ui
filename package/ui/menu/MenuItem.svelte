@@ -14,9 +14,11 @@ const forwardEvents = createEventForwarder(get_current_component());
 export let text;
 export let icon = undefined;
 export let iconColor = undefined;
-export let iconSize = "small";
+export let iconSize = 'small';
 export let divider = false;
 export let data = { empty: 'menu item data' };
+/** highlight menu item when selected*/
+export let selected = false;
 export let onMenuItemClick = () => { };
 const menuStateContext = getContext('menuStateContext');
 if (icon || $$slots.iconSLot) {
@@ -28,11 +30,11 @@ const handleClick = (data) => () => {
         element.dispatchEvent(event);
     onMenuItemClick(data);
 };
-// cons
 </script>
 
 <li
 	class="menuItem"
+	class:selected
 	role="menuitem"
 	bind:this={element}
 	use:forwardEvents
@@ -41,7 +43,8 @@ const handleClick = (data) => () => {
 	{#if $menuStateContext?.hasIcon}
 		<div class="menuItemIcon">
 			<slot name="iconSLot">
-				<Icon {icon} color={iconColor} fontSize={iconSize} /></slot>
+				<Icon {icon} color={iconColor} fontSize={iconSize} /></slot
+			>
 		</div>
 	{/if}
 	<div class="menuItemText">
@@ -87,7 +90,10 @@ const handleClick = (data) => () => {
   align-items: center;
 }
 :global(.menu) :global(.menuItem:hover) {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: var(--theme-bg-paper, rgba(255, 255, 255, 0.3));
+}
+:global(.menu) :global(.menuItem.selected) {
+  background-color: var(--theme-bg-paper, rgba(255, 255, 255, 0.3));
 }
 :global(.menu) :global(.menuItem) :global(.menuItemIcon) {
   width: 24px;

@@ -22,6 +22,7 @@
 	export let iconColor: string | undefined = undefined;
 	export let iconSize: ElementProps['sizeType'] | undefined = 'small';
 	export let divider: MenuItemProps['divider'] = false;
+	export let dividerBefore: MenuItemProps['divider'] = false;
 	export let data: Record<string, any> = { empty: 'menu item data' };
 	/** highlight menu item when selected*/
 	export let selected: boolean = false;
@@ -39,7 +40,6 @@
 		onMenuItemClick(data);
 	};
 
-	// cons
 </script>
 
 <li
@@ -50,6 +50,11 @@
 	use:forwardEvents
 	on:click={handleClick(data)}
 >
+{#if dividerBefore}
+	<li>
+		<slot name="divider"><Divider density="tight" expansion="centered" /></slot>
+	</li>
+{/if}
 	{#if $menuStateContext?.hasIcon}
 		<div class="menuItemIcon">
 			<slot name="iconSLot">
@@ -70,7 +75,7 @@
 </li>
 {#if divider}
 	<li>
-		<Divider density="tight" expansion="centered" />
+		<slot name="divider"><Divider density="tight" expansion="centered" /></slot>
 	</li>
 {/if}
 

@@ -65,7 +65,10 @@ on:menu:item:clicked={onMenuClick} >
   align-items: center;
 }
 :global(.menu) :global(.menuItem:hover) {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: var(--theme-bg-paper, rgba(255, 255, 255, 0.3));
+}
+:global(.menu) :global(.menuItem.selected) {
+  background-color: var(--theme-bg-paper, rgba(255, 255, 255, 0.3));
 }
 :global(.menu) :global(.menuItem) :global(.menuItemIcon) {
   width: 24px;
