@@ -17,7 +17,7 @@
 	const forwardEvents = createEventForwarder(get_current_component());
 	/*  end slotUi exports*/
 
-	export let text: MenuItemProps['text'];
+	export let text: string | undefined = undefined;
 	export let icon: MenuItemProps['icon'] | undefined = undefined;
 	export let iconColor: string | undefined = undefined;
 	export let iconSize: ElementProps['sizeType'] | undefined = 'small';
@@ -42,6 +42,11 @@
 
 </script>
 
+{#if dividerBefore}
+	<li>
+		<slot name="divider"><Divider density="tight" expansion="centered" /></slot>
+	</li>
+{/if}
 <li
 	class="menuItem"
 	class:selected
@@ -50,11 +55,6 @@
 	use:forwardEvents
 	on:click={handleClick(data)}
 >
-{#if dividerBefore}
-	<li>
-		<slot name="divider"><Divider density="tight" expansion="centered" /></slot>
-	</li>
-{/if}
 	{#if $menuStateContext?.hasIcon}
 		<div class="menuItemIcon">
 			<slot name="iconSLot">
@@ -64,7 +64,7 @@
 	{/if}
 	<div class="menuItemText">
 		<slot>
-			<slot name="textSlot">{text}</slot>
+			<slot name="textSlot">{null_to_empty(text)}</slot>
 		</slot>
 	</div>
 	{#if $$slots.actionSlot}

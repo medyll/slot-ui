@@ -11,6 +11,7 @@ import ButtonMenuApiReadMe from "$sitedata/api/ButtonMenu.api.md";
 import IconButtonApiReadMe from "$sitedata/api/IconButton.api.md";
 import CardApiReadMe from "$sitedata/api/Card.api.md";
 import CartoucheApiReadMe from "$sitedata/api/Cartouche.api.md";
+import ChipperApiReadMe from "$sitedata/api/Chipper.api.md";
 import ChromeApiReadMe from "$sitedata/api/Chrome.api.md";
 import ChromeContentApiReadMe from "$sitedata/api/ChromeContent.api.md";
 import ChromeNavApiReadMe from "$sitedata/api/ChromeNav.api.md";
@@ -29,7 +30,6 @@ import DrawerApiReadMe from "$sitedata/api/Drawer.api.md";
 import ElementorApiReadMe from "$sitedata/api/Elementor.api.md";
 import ElipsisBoxApiReadMe from "$sitedata/api/ElipsisBox.api.md";
 import IconApiReadMe from "$sitedata/api/Icon.api.md";
-import IconProxyApiReadMe from "$sitedata/api/IconProxy.api.md";
 import InputApiReadMe from "$sitedata/api/Input.api.md";
 import ListApiReadMe from "$sitedata/api/List.api.md";
 import ListItemApiReadMe from "$sitedata/api/ListItem.api.md";
@@ -78,6 +78,7 @@ import ThemeSwitcherApiReadMe from "$sitedata/api/ThemeSwitcher.api.md";
 import ToastApiReadMe from "$sitedata/api/Toast.api.md";
 import TopBarApiReadMe from "$sitedata/api/TopBar.api.md";
 import WindowApiReadMe from "$sitedata/api/Window.api.md";
+import ComponentExampleApiReadMe from "$sitedata/api/ComponentExample.api.md";
 
 export const componentApiReadMe = {alertApi:AlertApiReadMe,
 avatarApi:AvatarApiReadMe,
@@ -92,6 +93,7 @@ buttonmenuApi:ButtonMenuApiReadMe,
 iconbuttonApi:IconButtonApiReadMe,
 cardApi:CardApiReadMe,
 cartoucheApi:CartoucheApiReadMe,
+chipperApi:ChipperApiReadMe,
 chromeApi:ChromeApiReadMe,
 chromecontentApi:ChromeContentApiReadMe,
 chromenavApi:ChromeNavApiReadMe,
@@ -110,7 +112,6 @@ drawerApi:DrawerApiReadMe,
 elementorApi:ElementorApiReadMe,
 elipsisboxApi:ElipsisBoxApiReadMe,
 iconApi:IconApiReadMe,
-iconproxyApi:IconProxyApiReadMe,
 inputApi:InputApiReadMe,
 listApi:ListApiReadMe,
 listitemApi:ListItemApiReadMe,
@@ -158,4 +159,5 @@ taskbarApi:TaskbarApiReadMe,
 themeswitcherApi:ThemeSwitcherApiReadMe,
 toastApi:ToastApiReadMe,
 topbarApi:TopBarApiReadMe,
-windowApi:WindowApiReadMe}
+windowApi:WindowApiReadMe,
+componentexampleApi:ComponentExampleApiReadMe}

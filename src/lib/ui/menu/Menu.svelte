@@ -15,15 +15,14 @@
 	/*  end slotUi exports*/
 
 	export let menuList: MenuItemProps[] = [];
-	export let density: ElementProps['density'] = 'tight';
+	export let density: 'none' | 'tight' | 'default' | 'medium' | 'kind' = 'tight';
 	export let style:string |undefined = undefined;
-	/* export let onMenuItemClick: Function = () => {
-		console.log('not imlepented');
-	}; */
+	/** menu can have no border */
+	export let bordered:boolean |undefined = true;
 
 	const menuStore = createMenuStore();
 	setContext('menuStateContext', menuStore);
-// density
+
 	$menuStore.density = density;
 
 	function onMenuClick(e: CustomEvent<any>) {
@@ -35,7 +34,8 @@
 	function sayHello() {}
 </script>
 
-<ul use:forwardEvents bind:this={element} role="menu" class="density-{density} menu" {style} 
+<ul use:forwardEvents bind:this={element} role="menu" class="density-{density} menu {className}" {style} 
+class:bordered
 on:menu:item:clicked={onMenuClick} >
 	{#if menuList}
 		{#each menuList as menuItem}

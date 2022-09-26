@@ -18,6 +18,15 @@ export declare type DataListRowProps = typeof __propDef.props;
 export declare type DataListRowEvents = typeof __propDef.events;
 export declare type DataListRowSlots = typeof __propDef.slots;
 export default class DataListRow extends SvelteComponentTyped<DataListRowProps, DataListRowEvents, DataListRowSlots> {
+    get class(): string | undefined;
+    /**accessor*/
+    set class(_: string | undefined);
+    get element(): HTMLDivElement | undefined;
+    /**accessor*/
+    set element(_: HTMLDivElement | undefined);
+    get data(): any;
+    /**accessor*/
+    set data(_: any);
 }
 export {};
 

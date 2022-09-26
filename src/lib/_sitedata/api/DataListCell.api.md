@@ -2,7 +2,7 @@
 declare const __propDef: {
     props: {
         [x: string]: any;
-        element?: HTMLDivElement | null | undefined;
+        element?: HTMLElement | undefined;
         style?: string | undefined;
         field?: string | undefined;
         fieldType?: string | undefined;

@@ -174,7 +174,6 @@
     "./ui/login/Login.svelte": "./ui/login/Login.svelte",
     "./ui/login/store": "./ui/login/store.js",
     "./ui/menu/menu.scss": "./ui/menu/menu.scss",
-    "./ui/menu/Menu.stories.svelte": "./ui/menu/Menu.stories.svelte",
     "./ui/menu/Menu.svelte": "./ui/menu/Menu.svelte",
     "./ui/menu/MenuItem.svelte": "./ui/menu/MenuItem.svelte",
     "./ui/menu/store": "./ui/menu/store.js",

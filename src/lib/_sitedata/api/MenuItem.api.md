@@ -1,19 +1,25 @@
 ```import { SvelteComponentTyped } from "svelte";
 import type { MenuItemProps } from './types.js';
+import type { ElementProps } from '$typings/index.js';
 declare const __propDef: {
     props: {
         class?: string | undefined;
         element?: HTMLElement | undefined;
-        text: MenuItemProps['text'];
+        text?: string | undefined;
         icon?: MenuItemProps['icon'] | undefined;
+        iconColor?: string | undefined;
+        iconSize?: ElementProps['sizeType'] | undefined;
         divider?: MenuItemProps['divider'];
+        dividerBefore?: MenuItemProps['divider'];
         data?: Record<string, any> | undefined;
+        /** highlight menu item when selected*/ selected?: boolean | undefined;
         onMenuItemClick?: Function | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
+        divider: {};
         iconSLot: {};
         default: {};
         textSlot: {};
@@ -30,18 +36,30 @@ export default class MenuItem extends SvelteComponentTyped<MenuItemProps, MenuIt
     get element(): HTMLElement | undefined;
     /**accessor*/
     set element(_: HTMLElement | undefined);
-    get text(): string;
+    get text(): string | undefined;
     /**accessor*/
-    set text(_: string);
+    set text(_: string | undefined);
     get icon(): string | undefined;
     /**accessor*/
     set icon(_: string | undefined);
+    get iconColor(): string | undefined;
+    /**accessor*/
+    set iconColor(_: string | undefined);
+    get iconSize(): "default" | "small" | "tiny" | "medium" | "large" | "big" | "full" | "auto" | undefined;
+    /**accessor*/
+    set iconSize(_: "default" | "small" | "tiny" | "medium" | "large" | "big" | "full" | "auto" | undefined);
     get divider(): boolean | "full" | "padded" | "centered" | undefined;
     /**accessor*/
     set divider(_: boolean | "full" | "padded" | "centered" | undefined);
+    get dividerBefore(): boolean | "full" | "padded" | "centered" | undefined;
+    /**accessor*/
+    set dividerBefore(_: boolean | "full" | "padded" | "centered" | undefined);
     get data(): Record<string, any> | undefined;
     /**accessor*/
     set data(_: Record<string, any> | undefined);
+    get selected(): boolean | undefined;
+    /**accessor*/
+    set selected(_: boolean | undefined);
     get onMenuItemClick(): Function | undefined;
     /**accessor*/
     set onMenuItemClick(_: Function | undefined);

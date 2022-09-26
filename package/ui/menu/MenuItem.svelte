@@ -11,7 +11,7 @@ export { className as class };
 export let element = undefined;
 const forwardEvents = createEventForwarder(get_current_component());
 /*  end slotUi exports*/
-export let text;
+export let text = undefined;
 export let icon = undefined;
 export let iconColor = undefined;
 export let iconSize = 'small';
@@ -33,6 +33,11 @@ const handleClick = (data) => () => {
 };
 </script>
 
+{#if dividerBefore}
+	<li>
+		<slot name="divider"><Divider density="tight" expansion="centered" /></slot>
+	</li>
+{/if}
 <li
 	class="menuItem"
 	class:selected
@@ -41,11 +46,6 @@ const handleClick = (data) => () => {
 	use:forwardEvents
 	on:click={handleClick(data)}
 >
-{#if dividerBefore}
-	<li>
-		<slot name="divider"><Divider density="tight" expansion="centered" /></slot>
-	</li>
-{/if}
 	{#if $menuStateContext?.hasIcon}
 		<div class="menuItemIcon">
 			<slot name="iconSLot">
@@ -55,7 +55,7 @@ const handleClick = (data) => () => {
 	{/if}
 	<div class="menuItemText">
 		<slot>
-			<slot name="textSlot">{text}</slot>
+			<slot name="textSlot">{null_to_empty(text)}</slot>
 		</slot>
 	</div>
 	{#if $$slots.actionSlot}
@@ -75,8 +75,11 @@ const handleClick = (data) => () => {
   min-width: 150px;
   padding: 0.25rem;
   cursor: pointer;
+  display: inline-block;
   background-color: var(--theme-color-background);
   color: var(--theme-color-text);
+}
+:global(.menu.bordered) {
   border: 0.5px solid rgba(255, 255, 255, 0.1);
   border-radius: 6px;
 }
@@ -89,37 +92,39 @@ const handleClick = (data) => () => {
 :global(.menu.density-kind) :global(.menuItem) {
   padding: 1rem 0;
 }
-:global(.menu) :global(.menuItem) {
+
+:global(.menuItem) {
   border-radius: 6px;
   overflow: hidden;
   display: flex;
   align-items: center;
 }
-:global(.menu) :global(.menuItem:hover) {
-  background-color: var(--theme-bg-paper, rgba(255, 255, 255, 0.3));
+:global(.menuItem:hover) {
+  background-color: var(--theme-color-paper, rgba(255, 255, 255, 0.3));
 }
-:global(.menu) :global(.menuItem.selected) {
-  background-color: var(--theme-bg-paper, rgba(255, 255, 255, 0.3));
+:global(.menuItem.selected) {
+  background-color: var(--theme-color-paper, rgba(255, 255, 255, 0.9));
+  box-shadow: var(--box-shad-1);
 }
-:global(.menu) :global(.menuItem) :global(.menuItemIcon) {
+:global(.menuItem) :global(.menuItemIcon) {
   width: 24px;
   max-width: 24px;
   text-align: center;
   overflow: hidden;
 }
-:global(.menu) :global(.menuItem) :global(.menuItemText) {
+:global(.menuItem) :global(.menuItemText) {
   flex: 1;
   padding-left: 0.25rem;
 }
-:global(.menu) :global(.menuItem) :global(.menuItemActions) {
+:global(.menuItem) :global(.menuItemActions) {
   display: block;
 }
-:global(.menu) :global(.menuItem.density-tight) {
+:global(.menuItem.density-tight) {
   padding: 0.25rem 0;
 }
-:global(.menu) :global(.menuItem.density-default) {
+:global(.menuItem.density-default) {
   padding: 0.5rem 0;
 }
-:global(.menu) :global(.menuItem.density-kind) {
+:global(.menuItem.density-kind) {
   padding: 1rem 0;
 }</style>

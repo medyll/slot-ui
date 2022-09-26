@@ -11,6 +11,7 @@ import ButtonMenuReadMe from "$sitedata/api/ButtonMenu.md";
 import IconButtonReadMe from "$sitedata/api/IconButton.md";
 import CardReadMe from "$sitedata/api/Card.md";
 import CartoucheReadMe from "$sitedata/api/Cartouche.md";
+import ChipperReadMe from "$sitedata/api/Chipper.md";
 import ChromeReadMe from "$sitedata/api/Chrome.md";
 import ChromeContentReadMe from "$sitedata/api/ChromeContent.md";
 import ChromeNavReadMe from "$sitedata/api/ChromeNav.md";
@@ -29,7 +30,6 @@ import DrawerReadMe from "$sitedata/api/Drawer.md";
 import ElementorReadMe from "$sitedata/api/Elementor.md";
 import ElipsisBoxReadMe from "$sitedata/api/ElipsisBox.md";
 import IconReadMe from "$sitedata/api/Icon.md";
-import IconProxyReadMe from "$sitedata/api/IconProxy.md";
 import InputReadMe from "$sitedata/api/Input.md";
 import ListReadMe from "$sitedata/api/List.md";
 import ListItemReadMe from "$sitedata/api/ListItem.md";
@@ -78,6 +78,7 @@ import ThemeSwitcherReadMe from "$sitedata/api/ThemeSwitcher.md";
 import ToastReadMe from "$sitedata/api/Toast.md";
 import TopBarReadMe from "$sitedata/api/TopBar.md";
 import WindowReadMe from "$sitedata/api/Window.md";
+import ComponentExampleReadMe from "$sitedata/api/ComponentExample.md";
 
 export const componentReadMe = {alert:AlertReadMe,
 avatar:AvatarReadMe,
@@ -92,6 +93,7 @@ buttonmenu:ButtonMenuReadMe,
 iconbutton:IconButtonReadMe,
 card:CardReadMe,
 cartouche:CartoucheReadMe,
+chipper:ChipperReadMe,
 chrome:ChromeReadMe,
 chromecontent:ChromeContentReadMe,
 chromenav:ChromeNavReadMe,
@@ -110,7 +112,6 @@ drawer:DrawerReadMe,
 elementor:ElementorReadMe,
 elipsisbox:ElipsisBoxReadMe,
 icon:IconReadMe,
-iconproxy:IconProxyReadMe,
 input:InputReadMe,
 list:ListReadMe,
 listitem:ListItemReadMe,
@@ -158,4 +159,5 @@ taskbar:TaskbarReadMe,
 themeswitcher:ThemeSwitcherReadMe,
 toast:ToastReadMe,
 topbar:TopBarReadMe,
-window:WindowReadMe}
+window:WindowReadMe,
+componentexample:ComponentExampleReadMe}

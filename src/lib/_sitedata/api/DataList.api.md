@@ -1,20 +1,25 @@
 ```import { SvelteComponentTyped } from "svelte";
-import type { CellType } from './types.js';
+import type { DataCellType, groupByOptions } from './types.js';
 declare const __propDef: {
     props: {
         class?: string | undefined;
         element?: HTMLDivElement | null | undefined;
         style?: string | undefined;
+        /** show or hide the dataList body */ hideBody?: boolean | undefined;
+        /** show or hide the dataList headere */ showHeader?: boolean | undefined;
         /** is the datalist sortable */ isSortable?: boolean | undefined;
         /** order on which the sorted list is sorted */ sortByOrder?: string | undefined;
-        /** order on which the sorted list is sorted */ groupByField?: string | undefined;
+        /** group field on which data will be grouped, can use dot notation as dot path */ groupByField?: string | string[] | undefined;
+        /** options used when props.groupByField is defined */ groupByOptions?: groupByOptions | undefined;
+        /** field used for selection*/ selectorField?: string | undefined;
+        /** field value used for selection*/ selectorFieldValue?: any | undefined;
         /** binding, used when multiple buttons*/ activeCommonSortField?: string | undefined;
         /** set noWrap = true to have ellipsis on all cells content*/ noWrap?: boolean | undefined;
         /** represents your data types used to display values */ dataTypes?: Record<string, any> | undefined;
         /** data to loop  trought */ data?: any[] | undefined;
         /** used only if data is provided */ idField?: string | undefined;
-        /** @deprecated columns declaration */ columns?: CellType[] | undefined;
-        /** columns declaration */ columnsDef?: CellType[] | undefined;
+        /** columns declaration */ columns?: Record<string, DataCellType> | undefined;
+        virtualizer?: boolean | undefined;
         sortingIcons?: {
             default: string[];
             numeric: string[];
@@ -27,12 +32,7 @@ declare const __propDef: {
         groupTitleSlot: {
             item: any;
         };
-        head: {
-            onSort: (e: CustomEvent<{
-                field: string;
-                order: string;
-            }>) => void;
-        };
+        head: {};
         default: {
             item: any;
         };
@@ -52,15 +52,30 @@ export default class DataList extends SvelteComponentTyped<DataListProps, DataLi
     get style(): string | undefined;
     /**accessor*/
     set style(_: string | undefined);
+    get hideBody(): boolean | undefined;
+    /**accessor*/
+    set hideBody(_: boolean | undefined);
+    get showHeader(): boolean | undefined;
+    /**accessor*/
+    set showHeader(_: boolean | undefined);
     get isSortable(): boolean | undefined;
     /**accessor*/
     set isSortable(_: boolean | undefined);
     get sortByOrder(): string | undefined;
     /**accessor*/
     set sortByOrder(_: string | undefined);
-    get groupByField(): string | undefined;
+    get groupByField(): string | string[] | undefined;
     /**accessor*/
-    set groupByField(_: string | undefined);
+    set groupByField(_: string | string[] | undefined);
+    get groupByOptions(): groupByOptions | undefined;
+    /**accessor*/
+    set groupByOptions(_: groupByOptions | undefined);
+    get selectorField(): string | undefined;
+    /**accessor*/
+    set selectorField(_: string | undefined);
+    get selectorFieldValue(): any;
+    /**accessor*/
+    set selectorFieldValue(_: any);
     get activeCommonSortField(): string | undefined;
     /**accessor*/
     set activeCommonSortField(_: string | undefined);
@@ -76,12 +91,12 @@ export default class DataList extends SvelteComponentTyped<DataListProps, DataLi
     get idField(): string | undefined;
     /**accessor*/
     set idField(_: string | undefined);
-    get columns(): CellType[] | undefined;
+    get columns(): Record<string, DataCellType> | undefined;
     /**accessor*/
-    set columns(_: CellType[] | undefined);
-    get columnsDef(): CellType[] | undefined;
+    set columns(_: Record<string, DataCellType> | undefined);
+    get virtualizer(): boolean | undefined;
     /**accessor*/
-    set columnsDef(_: CellType[] | undefined);
+    set virtualizer(_: boolean | undefined);
     get sortingIcons(): {
         default: string[];
         numeric: string[];
