@@ -20,6 +20,7 @@ import ConfirmReadMe from "$sitedata/api/Confirm.md";
 import ContentSwitcherReadMe from "$sitedata/api/ContentSwitcher.md";
 import DataListReadMe from "$sitedata/api/DataList.md";
 import DataListCellReadMe from "$sitedata/api/DataListCell.md";
+import DataListeContextReadMe from "$sitedata/api/DataListeContext.md";
 import DataListHeadReadMe from "$sitedata/api/DataListHead.md";
 import DataListRowReadMe from "$sitedata/api/DataListRow.md";
 import DebugReadMe from "$sitedata/api/Debug.md";
@@ -100,6 +101,7 @@ confirm:ConfirmReadMe,
 contentswitcher:ContentSwitcherReadMe,
 datalist:DataListReadMe,
 datalistcell:DataListCellReadMe,
+datalistecontext:DataListeContextReadMe,
 datalisthead:DataListHeadReadMe,
 datalistrow:DataListRowReadMe,
 debug:DebugReadMe,

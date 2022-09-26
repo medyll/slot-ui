@@ -1,4 +1,4 @@
-```typescript 
+```ts 
 __propDef: {
     props: {
         class?: string | undefined;
@@ -18,7 +18,6 @@ __propDef: {
             default: string[];
             numeric: string[];
         } | undefined;
-        /** context store for dataList config and state */ dataListStore?: Writable<DataListStoreType> | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;
@@ -27,7 +26,12 @@ __propDef: {
         groupTitleSlot: {
             item: any;
         };
-        head: {};
+        head: {
+            onSort: (e: CustomEvent<{
+                field: string;
+                order: string;
+            }>) => void;
+        };
         default: {
             item: any;
         };

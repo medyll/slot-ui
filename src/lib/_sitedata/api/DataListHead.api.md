@@ -4,6 +4,7 @@ declare const __propDef: {
         style?: string | undefined;
         element?: HTMLDivElement | undefined;
         stickyHeader?: boolean | undefined;
+        onSort?: Function | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;

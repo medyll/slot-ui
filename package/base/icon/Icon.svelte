@@ -1,4 +1,4 @@
-<script context="module">import Iconify from '@iconify/svelte';
+<script context="module">import 'iconify-icon';
 const sizes = {
     tiny: 8,
     small: 16,
@@ -6,33 +6,32 @@ const sizes = {
     default: 32,
     large: 48,
     big: 64,
+    full: 0,
+    auto: 0
 };
 </script>
 
-<script>import { get_current_component } from 'svelte/internal';
-import { onDestroy } from 'svelte';
-import { browser } from '$app/environment';
-/*  common slotUi exports*/
+<script>/*  common slotUi exports*/
 let className = '';
 export { className as class };
 export let style = '';
 /*  end slotUi exports*/
 export let icon = 'question';
-export let iconFamily = 'fa-solid';
+export let iconFamily = 'mdi'; // fa-solid // mdi
 export let fontSize = 'small';
+export let rotate = false;
+export let color = undefined;
+$: iconName = icon.includes(':') ? icon : `${iconFamily}:${icon}`;
 </script>
-
-{#if browser}
-	<Iconify
+ 
+<iconify-icon
+	class={className}
+	class:rotate
+	style="display:block;font-size:{sizes[fontSize]}px;color:{color};{style}"
 	on:click
-		style="font-size:{sizes[fontSize]}px;{style}"
-		icon="{iconFamily}:{icon}"
-		class={className}
-		inline={false}
-		{...$$restProps}
-	/>
-{/if}
-
+	icon={iconName}
+	{...$$restProps}
+/> 
 <style global>:global(.rotate) {
   animation: spinner-frames 3s infinite linear;
 }

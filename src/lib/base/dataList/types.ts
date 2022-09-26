@@ -1,15 +1,18 @@
 import type { Data } from "$types"
 
 
-export interface CellType {
+export interface DataCellType {
     /** internal use */
     index: number,
     /** column identifier data.id ?? generated */
     columnId: string | number,
     width: string
+    headerStyle?: string
     style?: string
     order?: number
     field?: string
+    fieldTitle?: string
+    getter?: (data: Record<string, unknown>) => void
     htmlElement?: HTMLElement
 }
 
@@ -17,6 +20,12 @@ export interface RowType {
     data?: Data 
 }
 
+export interface groupByOptions {
+    showMainHeader?: boolean,
+    showSubGroupsHeader?: boolean
+    showEmptyGroup?: boolean
+    subPaginationSize?: number 
+}
 export interface DataListStoreType {
     config: {
         isSortable?: boolean
@@ -30,9 +39,14 @@ export interface DataListStoreType {
         activeSortByField?: string
         activeSortByOrder?: 'asc' | 'desc' | 'none' | string
     }
+    groupBy:{
+        groupByField: string | string[]
+        groupByOptions: groupByOptions
+    }
     idField?: string
     selectedRowId?: string
-    columns: CellType[]
-    columnsDef: Record<string,CellType>
+    columns: Record<string,DataCellType>
+    headerNodes?: Record<string,DataCellType>,
+    hasColumnsProps?: boolean;
     data: Data[]
 }

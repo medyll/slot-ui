@@ -20,6 +20,7 @@ import ConfirmApiReadMe from "$sitedata/api/Confirm.api.md";
 import ContentSwitcherApiReadMe from "$sitedata/api/ContentSwitcher.api.md";
 import DataListApiReadMe from "$sitedata/api/DataList.api.md";
 import DataListCellApiReadMe from "$sitedata/api/DataListCell.api.md";
+import DataListeContextApiReadMe from "$sitedata/api/DataListeContext.api.md";
 import DataListHeadApiReadMe from "$sitedata/api/DataListHead.api.md";
 import DataListRowApiReadMe from "$sitedata/api/DataListRow.api.md";
 import DebugApiReadMe from "$sitedata/api/Debug.api.md";
@@ -100,6 +101,7 @@ confirmApi:ConfirmApiReadMe,
 contentswitcherApi:ContentSwitcherApiReadMe,
 datalistApi:DataListApiReadMe,
 datalistcellApi:DataListCellApiReadMe,
+datalistecontextApi:DataListeContextApiReadMe,
 datalistheadApi:DataListHeadApiReadMe,
 datalistrowApi:DataListRowApiReadMe,
 debugApi:DebugApiReadMe,

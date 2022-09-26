@@ -1,6 +1,5 @@
 ```import { SvelteComponentTyped } from "svelte";
-import { type Writable } from 'svelte/store';
-import type { DataListStoreType, CellType } from './types.js';
+import type { CellType } from './types.js';
 declare const __propDef: {
     props: {
         class?: string | undefined;
@@ -20,7 +19,6 @@ declare const __propDef: {
             default: string[];
             numeric: string[];
         } | undefined;
-        /** context store for dataList config and state */ dataListStore?: Writable<DataListStoreType> | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;
@@ -29,7 +27,12 @@ declare const __propDef: {
         groupTitleSlot: {
             item: any;
         };
-        head: {};
+        head: {
+            onSort: (e: CustomEvent<{
+                field: string;
+                order: string;
+            }>) => void;
+        };
         default: {
             item: any;
         };
@@ -40,6 +43,54 @@ export declare type DataListProps = typeof __propDef.props;
 export declare type DataListEvents = typeof __propDef.events;
 export declare type DataListSlots = typeof __propDef.slots;
 export default class DataList extends SvelteComponentTyped<DataListProps, DataListEvents, DataListSlots> {
+    get class(): string | undefined;
+    /**accessor*/
+    set class(_: string | undefined);
+    get element(): HTMLDivElement | null | undefined;
+    /**accessor*/
+    set element(_: HTMLDivElement | null | undefined);
+    get style(): string | undefined;
+    /**accessor*/
+    set style(_: string | undefined);
+    get isSortable(): boolean | undefined;
+    /**accessor*/
+    set isSortable(_: boolean | undefined);
+    get sortByOrder(): string | undefined;
+    /**accessor*/
+    set sortByOrder(_: string | undefined);
+    get groupByField(): string | undefined;
+    /**accessor*/
+    set groupByField(_: string | undefined);
+    get activeCommonSortField(): string | undefined;
+    /**accessor*/
+    set activeCommonSortField(_: string | undefined);
+    get noWrap(): boolean | undefined;
+    /**accessor*/
+    set noWrap(_: boolean | undefined);
+    get dataTypes(): Record<string, any> | undefined;
+    /**accessor*/
+    set dataTypes(_: Record<string, any> | undefined);
+    get data(): any[] | undefined;
+    /**accessor*/
+    set data(_: any[] | undefined);
+    get idField(): string | undefined;
+    /**accessor*/
+    set idField(_: string | undefined);
+    get columns(): CellType[] | undefined;
+    /**accessor*/
+    set columns(_: CellType[] | undefined);
+    get columnsDef(): CellType[] | undefined;
+    /**accessor*/
+    set columnsDef(_: CellType[] | undefined);
+    get sortingIcons(): {
+        default: string[];
+        numeric: string[];
+    } | undefined;
+    /**accessor*/
+    set sortingIcons(_: {
+        default: string[];
+        numeric: string[];
+    } | undefined);
 }
 export {};
 

@@ -1,17 +1,21 @@
 <script lang="ts">
-	import type { CellType, DataListStoreType, RowType } from './types';
+	import type { DataCellType, DataListStoreType, RowType } from './types.js';
 	import { dataOp } from '$lib/engine/utils.js';
-	import { getContext, onMount } from 'svelte';
+	import { getContext, onMount, tick } from 'svelte/internal';
 	import type { Writable } from 'svelte/store';
 	import Button from '../button/Button.svelte';
 	import { custom_event } from 'svelte/internal';
 	import { resizer } from '$lib/uses/resizer/resizer.js';
+	import type { Data } from '$lib/types/index.js';
+	import { error } from '@sveltejs/kit';
+	import Icon from '../icon/Icon.svelte';
+	import Chipper from '../chipper/Chipper.svelte';
 
-	const dataListContextStore = getContext<Writable<DataListStoreType>>('dataListContext');
-	const inHeader = getContext<Writable<CellType[]>>('dataListHead');
+	const dataListContext = getContext<Writable<DataListStoreType>>('dataListContext');
+	const inHeader = getContext<Writable<DataCellType[]>>('dataListHead');
 	const rowContext = getContext<Writable<RowType>>('dataListRow');
 
-	export let element: HTMLDivElement | null = null;
+	export let element: HTMLElement | undefined = undefined;
 
 	export let style: string | undefined = undefined;
 	/** if data has been provided, then cell got a fieldName and coumnId is defined */
@@ -22,35 +26,57 @@
 	/** set noWrap = true to have ellipsis on this cell content*/
 	export let noWrap: boolean = true;
 
-	let colIndex: number | undefined = undefined;
-	let columnsDef: CellType | undefined = undefined;
-
-	if (!$dataListContextStore.columnsDef?.[field ?? columnId]) {
-		$dataListContextStore.columnsDef[field ?? columnId] = {};
-	}
-	columnsDef = $dataListContextStore.columnsDef?.[field ?? columnId];
+	let colIndex: number;
 
 	onMount(async () => {
-		colIndex = element ? [...element.parentElement.children].indexOf(element) : undefined;
+		colIndex = element ? [...(element.parentElement?.children ?? [])].indexOf(element) : -1;
+		// if inHeader take the width from
+		// - the columns and dataField :  set it to the element
+		// - the columns and element index :  set it to the element
+		// - the element with : don't do nothing, but should ! throw error ?
 
 		if (inHeader) {
-			// set width and style from config if present (with field)
-			if (columnsDef?.style || columnsDef?.width) {
-				if (columnsDef?.style) {
-					element.style = columnsDef.style;
+			if ($dataListContext.hasColumnsProps && field) {
+				//console.log('hasColumnsProps && field');
+				if (!$dataListContext.columns[field]) {
+					createColumnsDef(element, field, colIndex);
+					// throw new Error('columns exists but does not have field : '+field);
 				}
-				if (columnsDef?.width) {
-					element.style.width = columnsDef.width;
-					element.style.maxWidth = columnsDef.width;
-					element.style.minWidth = columnsDef.width;
+				applyColumnsDefStyle(element, $dataListContext.columns[field]);
+
+				if (!$dataListContext.columns[field].width) {
+					updateColumnsDef(field, { width: element.offsetWidth + 'px' });
 				}
+			} else if ($dataListContext.hasColumnsProps) {
+				//console.log('hasColumnsProps');
+				const def: DataCellType = Object.values($dataListContext.columns)[colIndex];
+				applyColumnsDefStyle(element, def);
+				// grab and declare field from data
+				field = getAutoFields($dataListContext.data)[colIndex];
+			} else if (field) {
+				//console.log('field');
+				// throw new Error('props.field found without column declaration : '+field);
+				createColumnsDef(element, field, colIndex);
 			} else {
-				// find header.col by index
-				colIndex = [...element.parentElement.children].indexOf(element);
+				console.log('naked');
+				// create a dummy field for reference
+				createColumnsDef(element, crypto.randomUUID(), colIndex);
 			}
-			// register HTML element for reference
-			columnsDef.htmlElement = element;
-			columnsDef.field = field ?? columnId;
+		}
+
+		// if not in header set the width of element from
+		// - the columns with dataField
+		// - the columns with element index => set field
+		// - there is always a columns
+
+		if (!inHeader) {
+			if (!$dataListContext?.hasColumnsProps) throw new Error('No columns have been found');
+
+			let def: DataCellType;
+			if (field) def = $dataListContext?.columns[field];
+			else def = Object.values($dataListContext?.columns)[colIndex];
+
+			applyColumnsDefStyle(element, def);
 		}
 
 		return () => {
@@ -59,49 +85,67 @@
 	});
 
 	const sortState: string[] = ['none', 'asc', 'desc'];
+	let sorticon: string;
+	let showChip: boolean;
 
-	$: sorticon =
-		$dataListContextStore.sortBy.activeSortByField === field
-			? $dataListContextStore?.config?.sortingIcons?.default[
-					sortState.indexOf($dataListContextStore?.sortBy?.activeSortByOrder)
-			  ]
-			: 'dots-horizontal';
+	$: if (inHeader) {
+		sorticon =
+			$dataListContext.sortBy.activeSortByField === field
+				? $dataListContext?.config?.sortingIcons?.default[
+						sortState.indexOf($dataListContext?.sortBy?.activeSortByOrder)
+				  ]
+				: 'mdi:dots-horizontal';
 
-	$: showChip = $dataListContextStore.sortBy.activeSortByField === field;
-
-	$: width =
-		$dataListContextStore?.columnsDef?.[field ?? columnId]?.htmlElement?.offsetWidth + 'px';
-
-	$: if (
-		element &&
-		!inHeader &&
-		$dataListContextStore?.columnsDef?.[field ?? columnId]?.htmlElement
-	) {
-		element.style.width = width;
-		element.style.maxWidth = width;
-		element.style.minWidth = width;
+		showChip = $dataListContext.sortBy.activeSortByField === field;
 	}
 
-	$: if (Boolean(element) && !inHeader && !field) {
-		const field = Object.keys($dataListContextStore.columnsDef)[colIndex];
-		const fieldDef = $dataListContextStore.columnsDef[field];
-		const widthHtml = fieldDef.htmlElement.offsetWidth  + 'px';
-		
-		element.style.width = widthHtml;
-		element.style.maxWidth = widthHtml;
-		element.style.minWidth = widthHtml;
-	}
+	const createColumnsDef = (element: HTMLElement | undefined, field: string, index: number) => {
+		if (!element) return;
+		console.log(field, 'createColumnsDef', $dataListContext.columns);
+		$dataListContext.columns[field] = {
+			field,
+			style: 'style:' + element.offsetWidth + 'px;' + (element.getAttribute('style') ?? ''),
+			width: element.offsetWidth + 'px',
+			order: Boolean(element.style?.order) ? eval(element.style.order) : index,
+			index: index,
+			columnId: field
+		};
+		$dataListContext.hasColumnsProps = true;
+	};
 
-	const onSort = (columnId: string, order: 'asc' | 'desc' | 'none') => {
-		// find field from index
-		if ($dataListContextStore?.config?.isSortable && columnId && field) {
-			const event = custom_event(
-				'datalist:sort:clicked',
-				{ field: field, order },
-				{ bubbles: true }
-			);
-			if (element) element.dispatchEvent(event);
-		}
+	const updateColumnsDef = (field: string, payload: Record<string, any>) => {
+		$dataListContext.columns[field] = {
+			...$dataListContext.columns[field],
+			...payload
+		};
+		$dataListContext.hasColumnsProps = true;
+	};
+
+	const applyColumnsDefStyle = async (element: HTMLElement | undefined, colDef: DataCellType) => {
+		if (!element) return;
+		if (!colDef) return;
+		// throw new Error('Column definition is undefined : could not apply to element ' + colIndex);
+		await tick();
+		if (colDef.style) setStyle(element, colDef);
+	};
+
+	/**
+	 * used if no columns and no props.field
+	 * @param data
+	 */
+	const getAutoFields = (data: Record<string, any>[]): string[] => {
+		return Object.keys(data[0]);
+	};
+
+	const setStyle = async (element: HTMLElement, colDef: DataCellType) => {
+		if (!element) return;
+		await tick();
+		element.setAttribute('style', element.getAttribute('style') + ';' + colDef.style);
+	};
+
+	const onSort = (field: string) => {
+		const event = custom_event('datalist:sort:clicked', { field }, { bubbles: true });
+		if (element) element.dispatchEvent(event);
 	};
 
 	// not pure
@@ -112,42 +156,58 @@
 	function resizeStart() {}
 
 	function resizeOn(data: CustomEvent<{ width: any }>) {
-		$dataListContextStore.columnsDef[columnId].width = data.detail.width + 'px';
+		$dataListContext.columns[field].width = data.detail.width + 'px';
 	}
 	function resizeEnd() {}
 </script>
 
-<div
-	data-sortable={true}
-	data-column-id={columnId}
-	data-noWrap={noWrap}
-	bind:this={element}
-	class="dataListCell"
-	use:useResizer
-	on:resizer:start={resizeStart}
-	on:resizer:resize={resizeOn}
-	on:resizer:end={resizeEnd}
-	{style}
-	{...$$restProps}
->
-	{#if inHeader}
-		<div
-			on:click={() => {
-				onSort(columnId);
-			}}
-			style:width={$dataListContextStore.columnsDef[columnId]?.width}
-			class="cellHeader"
-		>
+{#if inHeader}
+	<div
+		bind:this={element}
+		data-sortable={true}
+		data-column-id={columnId}
+		data-noWrap={noWrap}
+		class="dataListCell"
+		use:useResizer
+		on:resizer:start={resizeStart}
+		on:resizer:resize={resizeOn}
+		on:resizer:end={resizeEnd}
+		style={style ??
+			$dataListContext.columns[field]?.headerStyle ??
+			$dataListContext.columns[field]?.style}
+		style:width={$dataListContext.columns[field]?.width}
+		style:maxWidth={$dataListContext.columns[field]?.width}
+		style:minWidth={$dataListContext.columns[field]?.width}
+		{...$$restProps}
+	>
+		<div on:click={() => onSort(field)} class="cellHeader">
 			<div class="cellHeaderContent">
 				<slot />
 			</div>
-			{#if field && $dataListContextStore?.config?.isSortable}
-				<div class="cellHeaderSorter">
-					<Button naked iconFamily="mdi" icon={sorticon} {showChip} />
+			{#if field && $dataListContext?.config?.isSortable}
+				<div class="cellHeaderSorter" title={sorticon}>
+					<!-- <Chipper class="pad-tb-1">
+						<Icon naked icon={sorticon} {showChip} />
+					</Chipper> -->
+					<!-- <Icon naked icon={sorticon} {showChip} /> -->
+					<Button naked icon={sorticon} {showChip} />
 				</div>
 			{/if}
 		</div>
-	{:else}
-		<slot fieldData={$rowContext?.data ?? {}} />
-	{/if}
-</div>
+	</div>
+{:else}
+	<div
+		bind:this={element}
+		data-column-id={columnId}
+		data-noWrap={noWrap}
+		class="dataListCell"
+		{style}
+		style:width={$dataListContext.columns[field]?.width}
+		style:maxWidth={$dataListContext.columns[field]?.width}
+		style:minWidth={$dataListContext.columns[field]?.width}
+		{...$$restProps}
+		title="{$rowContext?.data?.[field]} {field} {$dataListContext.columns[field]?.width}"
+	>
+		<slot fieldData={$rowContext?.data?.[field] ?? {}} />
+	</div>
+{/if}

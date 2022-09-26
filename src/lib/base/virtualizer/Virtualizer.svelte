@@ -44,25 +44,25 @@
 	}
 
 	// whenever `data` changes, invalidate the current heightmap
-	$: if (mounted) refresh(data, viewport_height, itemHeight);
+	$: if (mounted && rows) refresh(data, viewport_height, itemHeight,rows);
 
 	$: scrollTop = viewport?.scrollTop;
 
-	async function refresh(data: any, viewport_height: number, itemHeight: number) {
+	async function refresh(data: any, viewport_height: number, itemHeight: number,rows: NodeList) {
 		//const { scrollTop } = viewport;
-
+		 
 		await tick(); // wait until the DOM is up to date
 
 		let content_height = top - scrollTop;
 		let i = start;
 
 		while (content_height < viewport_height + 10 && i < data.length) {
-			let row = rows[i - start];
+			let row = rows?.[i - start];
 
 			if (!row) {
 				end = i + 1;
 				await tick(); // render the newly visible row
-				row = rows[i - start];
+				row = rows?.[i - start];
 			}
 
 			const row_height = (height_map[i] = itemHeight || row?.getBoundingClientRect().height);
@@ -150,20 +150,21 @@
 		await tick();
 		rows = contents.querySelectorAll('*:not([data-header])');
 		await tick();
-		return (() => {
+		return () => {
 			visible = [];
 			mounted = false;
-			data = [];  
-		});
+			data = [];
+		};
 	});
 
 	onDestroy(() => {
 		visible = [];
 		mounted = false;
 		data = [];
-		handle_scroll = undefined; 
+		handle_scroll = undefined;
 	});
-	
+
+	$: console.log({viewport_height})
 </script>
 
 <viewport
