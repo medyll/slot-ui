@@ -3,6 +3,7 @@
 <script>import { getContext } from 'svelte';
 import { custom_event, get_current_component, null_to_empty } from 'svelte/internal';
 import Divider from '../../base/divider/Divider.svelte';
+import Icon from '../../base/icon/Icon.svelte';
 import { createEventForwarder } from '../../engine/engine.js';
 /*  common slotUi exports*/
 let className = '';
@@ -12,6 +13,8 @@ const forwardEvents = createEventForwarder(get_current_component());
 /*  end slotUi exports*/
 export let text;
 export let icon = undefined;
+export let iconColor = undefined;
+export let iconSize = "small";
 export let divider = false;
 export let data = { empty: 'menu item data' };
 export let onMenuItemClick = () => { };
@@ -37,7 +40,8 @@ const handleClick = (data) => () => {
 >
 	{#if $menuStateContext?.hasIcon}
 		<div class="menuItemIcon">
-			<slot name="iconSLot">{null_to_empty(icon)}</slot>
+			<slot name="iconSLot">
+				<Icon {icon} color={iconColor} fontSize={iconSize} /></slot>
 		</div>
 	{/if}
 	<div class="menuItemText">

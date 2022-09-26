@@ -1,8 +1,19 @@
-<script lang="ts" context="module">
+<script lang="ts">
 	import 'iconify-icon';
 
 	import type { ElementProps } from '$typings/index.js';
-	export type SizeType = keyof typeof sizes;
+	/*  common slotUi exports*/
+	let className = '';
+	export { className as class };
+	export let style: string = '';
+	/*  end slotUi exports*/
+
+	export let icon: string = 'question';
+	export let iconFamily: string = 'mdi'; // fa-solid // mdi
+	export let fontSize: ElementProps['sizeType'] = 'small';
+
+	export let rotate: boolean = false;
+	export let color: string | undefined = undefined;
 
 	const sizes: Record<ElementProps['sizeType'], number> = {
 		tiny: 8,
@@ -14,25 +25,10 @@
 		full: 0,
 		auto: 0
 	} as const;
-</script>
-
-<script lang="ts">
-	/*  common slotUi exports*/
-	let className = '';
-	export { className as class };
-	export let style: string = '';
-	/*  end slotUi exports*/
-
-	export let icon: string = 'question';
-	export let iconFamily: string = 'mdi'; // fa-solid // mdi
-	export let fontSize: SizeType = 'small';
-
-	export let rotate: boolean = false;
-	export let color: string | undefined = undefined;
 
 	$: iconName = icon.includes(':') ? icon : `${iconFamily}:${icon}`;
 </script>
- 
+
 <iconify-icon
 	class={className}
 	class:rotate
@@ -40,7 +36,8 @@
 	on:click
 	icon={iconName}
 	{...$$restProps}
-/> 
+/>
+
 <style global lang="scss">
 	.rotate {
 		animation: spinner-frames 3s infinite linear;

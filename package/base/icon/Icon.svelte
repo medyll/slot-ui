@@ -1,4 +1,14 @@
-<script context="module">import 'iconify-icon';
+<script>import 'iconify-icon';
+/*  common slotUi exports*/
+let className = '';
+export { className as class };
+export let style = '';
+/*  end slotUi exports*/
+export let icon = 'question';
+export let iconFamily = 'mdi'; // fa-solid // mdi
+export let fontSize = 'small';
+export let rotate = false;
+export let color = undefined;
 const sizes = {
     tiny: 8,
     small: 16,
@@ -9,21 +19,9 @@ const sizes = {
     full: 0,
     auto: 0
 };
-</script>
-
-<script>/*  common slotUi exports*/
-let className = '';
-export { className as class };
-export let style = '';
-/*  end slotUi exports*/
-export let icon = 'question';
-export let iconFamily = 'mdi'; // fa-solid // mdi
-export let fontSize = 'small';
-export let rotate = false;
-export let color = undefined;
 $: iconName = icon.includes(':') ? icon : `${iconFamily}:${icon}`;
 </script>
- 
+
 <iconify-icon
 	class={className}
 	class:rotate
@@ -31,7 +29,8 @@ $: iconName = icon.includes(':') ? icon : `${iconFamily}:${icon}`;
 	on:click
 	icon={iconName}
 	{...$$restProps}
-/> 
+/>
+
 <style global>:global(.rotate) {
   animation: spinner-frames 3s infinite linear;
 }
