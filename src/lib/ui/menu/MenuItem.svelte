@@ -18,6 +18,8 @@
 	/*  end slotUi exports*/
 
 	export let text: string | undefined = undefined;
+	/** text props, shown on the right side of the menuItem*/
+	export let action: string | undefined = undefined;
 	export let icon: MenuItemProps['icon'] | undefined = undefined;
 	export let iconColor: string | undefined = undefined;
 	export let iconSize: ElementProps['sizeType'] | undefined = 'small';
@@ -48,7 +50,7 @@
 	</li>
 {/if}
 <li
-	class="menuItem"
+	class="menuItem {className}"
 	class:selected
 	role="menuitem"
 	bind:this={element}
@@ -67,9 +69,9 @@
 			<slot name="textSlot">{null_to_empty(text)}</slot>
 		</slot>
 	</div>
-	{#if $$slots.actionSlot}
+	{#if $$slots.actionSlot || action}
 		<div class="menuItemActions">
-			<slot name="actionSlot" />
+			<slot name="actionSlot" >{action}</slot>
 		</div>
 	{/if}
 </li>

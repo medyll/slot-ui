@@ -4,6 +4,7 @@ __propDef: {
         class?: string | undefined;
         element?: HTMLElement | undefined;
         text?: string | undefined;
+        /** text props, shown on the right side of the menuItem*/ action?: string | undefined;
         icon?: MenuItemProps['icon'] | undefined;
         iconColor?: string | undefined;
         iconSize?: ElementProps['sizeType'] | undefined;

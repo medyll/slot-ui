@@ -3,16 +3,24 @@
 <script lang="ts">
 	import sanitizeHtml from 'sanitize-html';
 	import type { Data } from './$types';
-	import { custom_event, getContext, null_to_empty, setContext } from 'svelte/internal';
+	import {
+		custom_event,
+		getContext,
+		get_current_component,
+		null_to_empty,
+		setContext
+	} from 'svelte/internal';
 	import { writable, type Writable } from 'svelte/store';
 	import DataListCell from './DataListCell.svelte';
 	import type { DataCellType, DataListStoreType } from './types.js';
 	import type { RowType } from './types.js';
 	import { dataOp } from '$lib/engine/utils.js';
+	import { createEventForwarder } from '$lib/engine/engine.js';
 
 	let className = '';
 	export { className as class };
 	export let element: HTMLDivElement | undefined = undefined;
+	const forwardEvents = createEventForwarder(get_current_component());
 
 	export let data: any;
 
@@ -45,6 +53,7 @@
 </script>
 
 <div
+	use:forwardEvents
 	bind:this={element}
 	on:datalist:sort:clicked
 	on:click={() => {
@@ -70,7 +79,7 @@
 	{:else}
 		{#each Object.keys(data) as inItem}
 			<DataListCell field={inItem}>
-				<slot></slot>
+				<slot />
 			</DataListCell>
 		{/each}
 	{/if}

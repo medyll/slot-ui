@@ -1,13 +1,15 @@
 <svelte:options accessors={true} />
 
 <script>import sanitizeHtml from 'sanitize-html';
-import { custom_event, getContext, null_to_empty, setContext } from 'svelte/internal';
+import { custom_event, getContext, get_current_component, null_to_empty, setContext } from 'svelte/internal';
 import { writable } from 'svelte/store';
 import DataListCell from './DataListCell.svelte';
 import { dataOp } from '../../engine/utils.js';
+import { createEventForwarder } from '../../engine/engine.js';
 let className = '';
 export { className as class };
 export let element = undefined;
+const forwardEvents = createEventForwarder(get_current_component());
 export let data;
 const dataStore = writable({ data });
 setContext('dataListRow', dataStore);
@@ -35,6 +37,7 @@ function checkGetter(columns, field, data) {
 </script>
 
 <div
+	use:forwardEvents
 	bind:this={element}
 	on:datalist:sort:clicked
 	on:click={() => {
@@ -60,7 +63,7 @@ function checkGetter(columns, field, data) {
 	{:else}
 		{#each Object.keys(data) as inItem}
 			<DataListCell field={inItem}>
-				<slot></slot>
+				<slot />
 			</DataListCell>
 		{/each}
 	{/if}

@@ -54,6 +54,8 @@
 	export let idField: string | undefined = undefined;
 	/** columns declaration */
 	export let columns: Record<string, DataCellType> = {};
+	/** columns declaration */
+	export let keepUngrouped: boolean = false;
 
 	export let virtualizer: boolean = false;
 
@@ -123,11 +125,13 @@
 			style,
 			groupByField: false,
 			groupByOptions,
-			showHeader: groupByOptions.showSubGroupsHeader
+			showHeader: groupByOptions.showSubGroupsHeader,
+			selectorField,
+			selectorFieldValue
 		};
 	}
 
-	$: groups = groupByField ? dataOp.groupBy(data, groupByField, { keepUngroupedData: true }) : {};
+	$: groups = groupByField ? dataOp.groupBy(data, groupByField, { keepUngroupedData: keepUngrouped }) : {};
 </script>
 
 {#if groupByField}
@@ -158,7 +162,7 @@
 						</div>
 					</slot>
 				</div>
-				<div class="flex-main pos-rel">
+				<div class="flex-main pos-rel" use:forwardEvents>
 					{#if !hidedGroups[red]}
 						<svelte:self {...groupProps}>
 							<svelte:fragment slot="groupTitleSlot" />
@@ -174,12 +178,12 @@
 		on:datalist:sorted={doSort}
 		on:datalist:select={doSelect}
 		bind:this={element}
-		class="dataList  {className}"
+		class="dataList  pos-rel {className}"
 		{style}
 		tabindex="0"
 	>
 		{#if element && virtualizer}
-			<Virtualize height="250px" data={sortedData} let:item>
+			<Virtualize height="350px" data={sortedData} let:item>
 				<svelte:fragment slot="virtualizeHeaderSlot">
 					<slot name="head">
 						<DataListHead />

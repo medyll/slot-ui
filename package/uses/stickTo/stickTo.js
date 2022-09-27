@@ -33,6 +33,12 @@ export function stickTo(node, props) {
                 node.style.top = String(parentPos.bottom) + 'px';
                 node.style.left = String(parentPos.left) + 'px';
                 break;
+            case 'BC':
+                node.style.bottom = '';
+                node.style.minWidth = String(parentPos.width) + 'px';
+                node.style.top = String(parentPos.bottom) + 'px';
+                node.style.left = String((parentPos.left + (parentPos.width / 2)) - (node.offsetWidth / 2)) + 'px';
+                break;
             case 'BL':
                 node.style.bottom = '';
                 node.style.right = '';
@@ -65,15 +71,22 @@ export function stickTo(node, props) {
                 node.style.top = String(parentPos.top - node.offsetHeight) + 'px';
                 node.style.left = String(parentPos.left - (node.offsetWidth - parentNode.offsetWidth)) + 'px';
                 break;
+            case 'TC':
+                node.style.bottom = '';
+                node.style.minWidth = String(parentPos.width) + 'px';
+                node.style.top = String(parentPos.top - node.offsetHeight) + 'px';
+                node.style.left = String((parentPos.left + (parentPos.width / 2)) - (node.offsetWidth / 2)) + 'px';
+                break;
         }
         checkPos(node);
         return style;
     }
     intervaller = setInterval(() => {
         setPosition(node, position, parentNode);
-    }, 5);
+    }, 50);
     return {
         destroy() {
+            node.remove();
             clearInterval(intervaller);
             //  document.removeEventListener('click', doEvent);
         }

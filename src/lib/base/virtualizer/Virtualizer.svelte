@@ -1,7 +1,7 @@
 <script lang="ts">
 	// from svelte-virtual-list ([demo](https://svelte.dev/repl/f78ddd84a1a540a9a40512df39ef751b))
 	import { onMount, tick } from 'svelte';
-	import { createEventForwarder } from '../../engine/engine';
+	import { createEventForwarder } from '../../engine/engine.js';
 	import { get_current_component, onDestroy, query_selector_all } from 'svelte/internal';
 	import { browser } from '$app/environment';
 	import type { number } from 'svelte-use-form';
@@ -44,13 +44,13 @@
 	}
 
 	// whenever `data` changes, invalidate the current heightmap
-	$: if (mounted && rows) refresh(data, viewport_height, itemHeight,rows);
+	$: if (mounted && rows) refresh(data, viewport_height, itemHeight, rows);
 
 	$: scrollTop = viewport?.scrollTop;
 
-	async function refresh(data: any, viewport_height: number, itemHeight: number,rows: NodeList) {
+	async function refresh(data: any, viewport_height: number, itemHeight: number, rows: NodeList) {
 		//const { scrollTop } = viewport;
-		 
+
 		await tick(); // wait until the DOM is up to date
 
 		let content_height = top - scrollTop;
@@ -163,11 +163,11 @@
 		data = [];
 		handle_scroll = undefined;
 	});
-
-	$: console.log({viewport_height})
+ 
 </script>
 
 <viewport
+	use:forwardEvents
 	bind:offsetHeight={viewport_height}
 	bind:this={viewport}
 	on:scroll={handle_scroll}

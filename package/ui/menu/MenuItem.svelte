@@ -12,6 +12,8 @@ export let element = undefined;
 const forwardEvents = createEventForwarder(get_current_component());
 /*  end slotUi exports*/
 export let text = undefined;
+/** text props, shown on the right side of the menuItem*/
+export let action = undefined;
 export let icon = undefined;
 export let iconColor = undefined;
 export let iconSize = 'small';
@@ -39,7 +41,7 @@ const handleClick = (data) => () => {
 	</li>
 {/if}
 <li
-	class="menuItem"
+	class="menuItem {className}"
 	class:selected
 	role="menuitem"
 	bind:this={element}
@@ -58,9 +60,9 @@ const handleClick = (data) => () => {
 			<slot name="textSlot">{null_to_empty(text)}</slot>
 		</slot>
 	</div>
-	{#if $$slots.actionSlot}
+	{#if $$slots.actionSlot || action}
 		<div class="menuItemActions">
-			<slot name="actionSlot" />
+			<slot name="actionSlot" >{action}</slot>
 		</div>
 	{/if}
 </li>

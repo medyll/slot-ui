@@ -13,9 +13,9 @@
 	export let isEmpty: boolean = false;
 
 	/** icon sources */
-	export let iconisLoading: string = 'spinner';
-	export let iconisError: string = 'alert-circle-outline';
-	export let iconisEmpty: string = 'database-search-outline';
+	export let iconisLoading: string = 'fa-solid:spinner';
+	export let iconisError: string = 'mdi:alert-circle-outline';
+	export let iconisEmpty: string = 'mdi:database-search-outline';
 
 	/** message to display */
 	export let message: string | undefined = undefined;
@@ -37,9 +37,9 @@
 			{#if isLoading}
 				<Icon
 					style="color:var(--theme-color-primary)"
-					class="rotate"
 					icon={iconisLoading}
 					fontSize="big"
+					rotate
 				/>
 			{/if}
 			{#if isError}
@@ -74,12 +74,15 @@
 			box-shadow: var(--box-shad-5);
 			border-radius: var(--radius-tiny);
 			border: 1px solid var(--theme-color-foreground-alpha-high);
-			padding: 2rem 0;
+			padding: 1rem 0;
 			min-width: 128px;
 			width: 100%;
 			margin: 1rem;
 			text-align: center;
 			background-color: var(--theme-color-background-alpha);
+			display:flex;
+			flex-direction: column;
+			align-items: center;
 			.message {
 				background-color: var(--theme-color-paper);
 				padding: var(--box-density-1) var(--box-density-2);

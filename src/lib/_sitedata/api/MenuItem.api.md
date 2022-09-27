@@ -6,6 +6,7 @@ declare const __propDef: {
         class?: string | undefined;
         element?: HTMLElement | undefined;
         text?: string | undefined;
+        /** text props, shown on the right side of the menuItem*/ action?: string | undefined;
         icon?: MenuItemProps['icon'] | undefined;
         iconColor?: string | undefined;
         iconSize?: ElementProps['sizeType'] | undefined;
@@ -39,6 +40,9 @@ export default class MenuItem extends SvelteComponentTyped<MenuItemProps, MenuIt
     get text(): string | undefined;
     /**accessor*/
     set text(_: string | undefined);
+    get action(): string | undefined;
+    /**accessor*/
+    set action(_: string | undefined);
     get icon(): string | undefined;
     /**accessor*/
     set icon(_: string | undefined);
@@ -48,12 +52,12 @@ export default class MenuItem extends SvelteComponentTyped<MenuItemProps, MenuIt
     get iconSize(): "default" | "small" | "tiny" | "medium" | "large" | "big" | "full" | "auto" | undefined;
     /**accessor*/
     set iconSize(_: "default" | "small" | "tiny" | "medium" | "large" | "big" | "full" | "auto" | undefined);
-    get divider(): boolean | "full" | "padded" | "centered" | undefined;
+    get divider(): boolean | undefined;
     /**accessor*/
-    set divider(_: boolean | "full" | "padded" | "centered" | undefined);
-    get dividerBefore(): boolean | "full" | "padded" | "centered" | undefined;
+    set divider(_: boolean | undefined);
+    get dividerBefore(): boolean | undefined;
     /**accessor*/
-    set dividerBefore(_: boolean | "full" | "padded" | "centered" | undefined);
+    set dividerBefore(_: boolean | undefined);
     get data(): Record<string, any> | undefined;
     /**accessor*/
     set data(_: Record<string, any> | undefined);

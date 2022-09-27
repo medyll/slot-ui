@@ -19,6 +19,7 @@ declare const __propDef: {
         /** data to loop  trought */ data?: any[] | undefined;
         /** used only if data is provided */ idField?: string | undefined;
         /** columns declaration */ columns?: Record<string, DataCellType> | undefined;
+        /** columns declaration */ keepUngrouped?: boolean | undefined;
         virtualizer?: boolean | undefined;
         sortingIcons?: {
             default: string[];
@@ -94,6 +95,9 @@ export default class DataList extends SvelteComponentTyped<DataListProps, DataLi
     get columns(): Record<string, DataCellType> | undefined;
     /**accessor*/
     set columns(_: Record<string, DataCellType> | undefined);
+    get keepUngrouped(): boolean | undefined;
+    /**accessor*/
+    set keepUngrouped(_: boolean | undefined);
     get virtualizer(): boolean | undefined;
     /**accessor*/
     set virtualizer(_: boolean | undefined);

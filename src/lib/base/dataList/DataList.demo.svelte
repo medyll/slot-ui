@@ -6,24 +6,34 @@
 	import ComponentDemo from '$_components/ComponentExample.svelte';
 	import appSchemeData from '../../../demoData/appscheme.json';
 	import type { DataCellType } from './types';
+	import Button from '$lib/base/button/Button.svelte';
+	import Popper from '$lib/ui/popper/Popper.svelte';
 
-	let data = [...Array(10)].map((caches, index: number) => {
+	let data = [...Array(1500)].map((caches, index: number) => {
 		return {
-			id:index,
+			id: index,
 			index,
 			name: 'name ' + index,
 			lastName: 'lastName ' + index,
-			group: 'group-'+getRandomInt(4),
-			featueFlags: [{name: 'feature-'+getRandomInt(4)},{name: 'feature-'+getRandomInt(4)}],
-			groupObject: {group: 'group-'+getRandomInt(4)},
+			group: 'group-' + getRandomInt(4),
+			groupedArrayOfObjects: [
+				{ name: 'nested' + getRandomInt(4) },
+				{ name: 'nested' + getRandomInt(4) }
+			],
+			groupObject: { group: 'group-' + getRandomInt(4) }
 		};
 	});
 
 	let columns: Record<string, DataCellType> = {
-		index: { field: 'index', width: '90px'    },
+		index: { field: 'index', width: '90px' },
 		name: { field: 'name' },
-		lastName: { field: 'lastName', getter:(data: any)=>{return data.lastName + ' - getter'} },
-		group: {style: 'flex:1', field: 'group'  }
+		lastName: {
+			field: 'lastName',
+			getter: (data: any) => {
+				return data.lastName + ' - getter';
+			}
+		},
+		group: { field: 'group' }
 	};
 
 	let columnsAppscheme: Record<string, DataCellType> = {
@@ -43,6 +53,8 @@
 	function getRandomInt(max) {
 		return Math.floor(Math.random() * max);
 	}
+
+	let isOpen = false;;
 </script>
 
 <ComponentDemo
@@ -51,14 +63,39 @@
 is a datalist table <br /> B. Franklin, 1854"
 >
 	<div class="flex-v gap-medium">
-		<!-- <div>
-			<div class="grid grid-auto-flow-cols grid-wrap">
-				<div><div class="w-large">heredere</div></div>
+		<div>
+			<div class="grid grid-cols-3 gap-large border ">
+				<div style="width:100px" class="border">heredere</div>
 				<div><div>heredere</div></div>
 				<div><div>heredere</div></div>
 				<div><div>heredere</div></div>
 			</div>
-		</div> -->
+		</div>
+		<div class="flex-h flex-align-middle-center gap-small pos-rel">
+			<!-- <Button naked size="tiny" icon="chevron-left" />
+			<div class="text-center">page<br />3</div>
+			<Button naked size="tiny" icon="chevron-right" /> -->
+			<!-- <Popper bind:isOpen position="BC" autoClose  class="w-large marg-t-1"  >
+				<div slot="holderSlot"  class="flex-h flex-align-middle-center gap-small pos-rel {isOpen ? 'theme-bg-paper shad-3' : ''}">
+					<Button naked size="tiny" icon="chevron-left" />
+					<div on:click={()=>{isOpen=!isOpen}} style="cursor:pointer" class="text-center pointer">page<br />3</div>
+					<Button naked size="tiny" icon="chevron-right" />
+				</div>
+				<div class="pad text-center text-800 border-b">Choose page :</div>
+				<div class="grid grid-cols-6 gap-small pad w-large">
+					{#each [...Array(10)] as page, idx}
+						<Button size="tiny" naked>{idx +1}</Button>
+					{/each}
+				</div>
+				<div class="pad text-center border-b">Choose rows per page :</div>
+				<div class="grid grid-cols-3 gap-small pad text-center">
+					{#each [...Array(6)] as page, idx}
+						<Button size="full" naked>{(idx+1) * 50}</Button>
+					{/each}
+				</div>
+			</Popper> -->
+		</div>
+
 		<!-- <h5>Automatique datalist, without columns definitions</h5>
 		<div class="what   pos-rel  pad">
 			<DataList style="height:150px;width:350px;overflow:auto;" {data}>
@@ -71,21 +108,21 @@ is a datalist table <br /> B. Franklin, 1854"
 				</svelte:fragment>
 			</DataList>
 		</div> -->
-		<h5>grouped Datatable</h5>  
+		<h5>grouped Datatable</h5>
 		<!-- groupByField="group" -->
-		<div class="what   pos-rel   pad">
+		<div class="what   pos-rel   pad" style="height:750px;overflow:auto;">
 			<DataList
-				style="max-height:100%;overflow:auto;"
+				style="max-height:250px;overflow:auto;"
 				{columns}
 				{data}
 				let:item
-				groupByField="featueFlags.name"
+				virtualizer={true}
+				groupByField="groupedArrayOfObjects.name"
 			>
-				 
 				<DataListHead slot="head">
-					<DataListCell field="index" >index</DataListCell>
-					<DataListCell field="name" >name</DataListCell>
-					<DataListCell field="lastName"  >group</DataListCell>
+					<DataListCell field="index">index</DataListCell>
+					<DataListCell field="name">name</DataListCell>
+					<DataListCell field="lastName">group</DataListCell>
 					<DataListCell field="group" style="flex:1">group</DataListCell>
 				</DataListHead>
 				<!-- <DataListRow data={item}>
@@ -144,7 +181,6 @@ is a datalist table <br /> B. Franklin, 1854"
 				</DataListRow>
 			</DataList>
 		</div> -->
-		
 	</div>
 </ComponentDemo>
 

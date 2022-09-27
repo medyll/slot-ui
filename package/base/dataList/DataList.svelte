@@ -48,6 +48,8 @@ export let data = [];
 export let idField = undefined;
 /** columns declaration */
 export let columns = {};
+/** columns declaration */
+export let keepUngrouped = false;
 export let virtualizer = false;
 let hidedGroups = {};
 let sortedData;
@@ -109,10 +111,12 @@ function getGroupProps(content) {
         style,
         groupByField: false,
         groupByOptions,
-        showHeader: groupByOptions.showSubGroupsHeader
+        showHeader: groupByOptions.showSubGroupsHeader,
+        selectorField,
+        selectorFieldValue
     };
 }
-$: groups = groupByField ? dataOp.groupBy(data, groupByField, { keepUngroupedData: true }) : {};
+$: groups = groupByField ? dataOp.groupBy(data, groupByField, { keepUngroupedData: keepUngrouped }) : {};
 </script>
 
 {#if groupByField}
@@ -143,7 +147,7 @@ $: groups = groupByField ? dataOp.groupBy(data, groupByField, { keepUngroupedDat
 						</div>
 					</slot>
 				</div>
-				<div class="flex-main pos-rel">
+				<div class="flex-main pos-rel" use:forwardEvents>
 					{#if !hidedGroups[red]}
 						<svelte:self {...groupProps}>
 							<svelte:fragment slot="groupTitleSlot" />
@@ -159,12 +163,12 @@ $: groups = groupByField ? dataOp.groupBy(data, groupByField, { keepUngroupedDat
 		on:datalist:sorted={doSort}
 		on:datalist:select={doSelect}
 		bind:this={element}
-		class="dataList  {className}"
+		class="dataList  pos-rel {className}"
 		{style}
 		tabindex="0"
 	>
 		{#if element && virtualizer}
-			<Virtualize height="250px" data={sortedData} let:item>
+			<Virtualize height="350px" data={sortedData} let:item>
 				<svelte:fragment slot="virtualizeHeaderSlot">
 					<slot name="head">
 						<DataListHead />
@@ -257,7 +261,6 @@ $: groups = groupByField ? dataOp.groupBy(data, groupByField, { keepUngroupedDat
   border-bottom: 1px solid var(--border-color);
   /* border-radius: 6px;
   	margin: 0.25rem 0; */
-  content-visibility: auto;
 }
 :global(.dataListRow:last-of-type) {
   border-bottom: 1px solid transparent;

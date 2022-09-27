@@ -40,9 +40,9 @@
 				//console.log('hasColumnsProps && field');
 				if (!$dataListContext.columns[field]) {
 					createColumnsDef(element, field, colIndex);
+					applyColumnsDefStyle(element, $dataListContext.columns[field]);
 					// throw new Error('columns exists but does not have field : '+field);
 				}
-				applyColumnsDefStyle(element, $dataListContext.columns[field]);
 
 				if (!$dataListContext.columns[field].width) {
 					updateColumnsDef(field, { width: element.offsetWidth + 'px' });
@@ -140,7 +140,7 @@
 	const setStyle = async (element: HTMLElement, colDef: DataCellType) => {
 		if (!element) return;
 		await tick();
-		element.setAttribute('style', element.getAttribute('style') + ';' + colDef.style);
+		// element.setAttribute('style', element.getAttribute('style') + ';' + colDef.style);
 	};
 
 	const onSort = (field: string) => {
