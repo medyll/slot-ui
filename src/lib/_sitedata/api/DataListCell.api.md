@@ -1,12 +1,13 @@
 ```import { SvelteComponentTyped } from "svelte";
 declare const __propDef: {
     props: {
-        element?: HTMLDivElement | null | undefined;
+        [x: string]: any;
+        element?: HTMLElement | undefined;
         style?: string | undefined;
+        field?: string | undefined;
+        fieldType?: string | undefined;
         columnId?: string | number | undefined;
-        /** if data has been provided, then cell got a fieldName and coumnId is defined */ dataField?: string | undefined;
-        /** typeof the dataField. Used when exists Datalist.$$props.dataTypes */ dataFieldType?: string | undefined;
-        /** set noWrap = true to have ellipsis on this cell content*/ noWrap?: boolean | undefined;
+        noWrap?: boolean | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;

@@ -12,12 +12,10 @@ const forwardEvents = createEventForwarder(get_current_component());
 export let menuList = [];
 export let density = 'tight';
 export let style = undefined;
-/* export let onMenuItemClick: Function = () => {
-    console.log('not imlepented');
-}; */
+/** menu can have no border */
+export let bordered = true;
 const menuStore = createMenuStore();
 setContext('menuStateContext', menuStore);
-// density
 $menuStore.density = density;
 function onMenuClick(e) {
     // onMenuItemClick && onMenuItemClick(e.detail);
@@ -27,7 +25,8 @@ function onMenuClick(e) {
 function sayHello() { }
 </script>
 
-<ul use:forwardEvents bind:this={element} role="menu" class="density-{density} menu" {style} 
+<ul use:forwardEvents bind:this={element} role="menu" class="density-{density} menu {className}" {style} 
+class:bordered
 on:menu:item:clicked={onMenuClick} >
 	{#if menuList}
 		{#each menuList as menuItem}
@@ -44,8 +43,11 @@ on:menu:item:clicked={onMenuClick} >
   min-width: 150px;
   padding: 0.25rem;
   cursor: pointer;
+  display: inline-block;
   background-color: var(--theme-color-background);
   color: var(--theme-color-text);
+}
+:global(.menu.bordered) {
   border: 0.5px solid rgba(255, 255, 255, 0.1);
   border-radius: 6px;
 }
@@ -58,34 +60,39 @@ on:menu:item:clicked={onMenuClick} >
 :global(.menu.density-kind) :global(.menuItem) {
   padding: 1rem 0;
 }
-:global(.menu) :global(.menuItem) {
+
+:global(.menuItem) {
   border-radius: 6px;
   overflow: hidden;
   display: flex;
   align-items: center;
 }
-:global(.menu) :global(.menuItem:hover) {
-  background-color: rgba(255, 255, 255, 0.3);
+:global(.menuItem:hover) {
+  background-color: var(--theme-color-paper, rgba(255, 255, 255, 0.3));
 }
-:global(.menu) :global(.menuItem) :global(.menuItemIcon) {
+:global(.menuItem.selected) {
+  background-color: var(--theme-color-paper, rgba(255, 255, 255, 0.9));
+  box-shadow: var(--box-shad-1);
+}
+:global(.menuItem) :global(.menuItemIcon) {
   width: 24px;
   max-width: 24px;
   text-align: center;
   overflow: hidden;
 }
-:global(.menu) :global(.menuItem) :global(.menuItemText) {
+:global(.menuItem) :global(.menuItemText) {
   flex: 1;
   padding-left: 0.25rem;
 }
-:global(.menu) :global(.menuItem) :global(.menuItemActions) {
+:global(.menuItem) :global(.menuItemActions) {
   display: block;
 }
-:global(.menu) :global(.menuItem.density-tight) {
+:global(.menuItem.density-tight) {
   padding: 0.25rem 0;
 }
-:global(.menu) :global(.menuItem.density-default) {
+:global(.menuItem.density-default) {
   padding: 0.5rem 0;
 }
-:global(.menu) :global(.menuItem.density-kind) {
+:global(.menuItem.density-kind) {
   padding: 1rem 0;
 }</style>

@@ -9,6 +9,7 @@ declare const __propDef: {
         frameDrawerRef?: typeof Drawer | undefined;
         hideCloseIcon?: boolean | undefined;
         showOpenerIcon?: boolean | undefined;
+        drawerWidth?: string | undefined;
         actions?: {
             openNavLeft: () => void;
             toggleNavLeft: () => void;
@@ -57,6 +58,9 @@ export default class Frame extends SvelteComponentTyped<FrameProps, FrameEvents,
     get showOpenerIcon(): boolean | undefined;
     /**accessor*/
     set showOpenerIcon(_: boolean | undefined);
+    get drawerWidth(): string | undefined;
+    /**accessor*/
+    set drawerWidth(_: string | undefined);
 }
 export {};
 

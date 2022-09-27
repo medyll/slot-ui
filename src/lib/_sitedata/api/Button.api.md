@@ -1,5 +1,5 @@
 ```import { SvelteComponentTyped } from "svelte";
-import { type UsePopperProps } from '../../ui/popper/usePopper.js';
+import { type UsePopperProps } from '../../../ui/popper/usePopper.js';
 declare const __propDef: {
     props: {
         [x: string]: any;
@@ -18,8 +18,8 @@ declare const __propDef: {
         bordered?: boolean | undefined;
         link?: boolean | undefined;
         naked?: boolean | undefined;
-        size?: "small" | "tiny" | "medium" | "default" | "large" | "big" | "full" | "auto" | undefined;
-        density?: "medium" | "default" | "none" | "tight" | "kind" | undefined;
+        size?: "default" | "small" | "tiny" | "medium" | "large" | "big" | "full" | "auto" | undefined;
+        density?: "default" | "medium" | "none" | "tight" | "kind" | undefined;
         nowrap?: boolean | undefined;
         height?: string | undefined;
         selected?: boolean | undefined;

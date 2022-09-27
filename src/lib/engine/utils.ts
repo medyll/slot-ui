@@ -37,10 +37,10 @@ export class dataOp {
   /** search an object in an array */
   static filterList<T = any>(arr: T[], kw: number | string, fieldname: string | '*' = 'id'): T[] {
 
-    return arr?.filter((item:Record<string,any>) => {
+    return arr?.filter((item: Record<string, any>) => {
       if (fieldname && fieldname !== '*') return this.resolveDotPath(item, fieldname) === kw;
-      if (!fieldname || fieldname === '*') return Object.keys(item).some((key: string) => { 
-        return  ['string','number'].includes(typeof  item?.[key]) ? item[key] == kw : false
+      if (!fieldname || fieldname === '*') return Object.keys(item).some((key: string) => {
+        return ['string', 'number'].includes(typeof item?.[key]) ? item[key] == kw : false
       })
     });
   }
@@ -55,37 +55,62 @@ export class dataOp {
 
     let reg = new RegExp(`${kw}`, 'i');
     return arr.filter((item: Record<string, any>) => {
-       
-      if (fieldname !== '*') return this.resolveDotPath(item, fieldname).toString().search(reg) === -1 ? false: true
+
+      if (fieldname !== '*') return this.resolveDotPath(item, fieldname).toString().search(reg) === -1 ? false : true
       if (fieldname === '*') return Object.keys(item).some((key: string) => {
-        if(typeof item?.[key] === 'object' && !Array.isArray(item?.[key])){
-          return  false
+        if (typeof item?.[key] === 'object' && !Array.isArray(item?.[key])) {
+          return false
         }
-        return  ['string','number'].includes(typeof  item?.[key]) ? `${item?.[key]}`.search(reg) !== -1 : false
+        return ['string', 'number'].includes(typeof item?.[key]) ? `${item?.[key]}`.search(reg) !== -1 : false
       })
     });
   }
 
   static groupBy(
     dataList: any[],
-    groupField: string,
+    groupField: string | string[],
     opt?: { keepUngroupedData: boolean; fieldTitle?: string }
   ) {
-    const out: any = [];
+
+    const groupKey: string[] = typeof groupField === 'string' ? [groupField] : groupField
 
     return dataList.reduce((result, currentValue) => {
+
+      if (typeof dataOp.resolveDotPath(currentValue, groupField) === "undefined") {
+        const rootField = groupField.split('.')[0];
+        const restField = groupField.split('.').slice(1).join('.');
+
+        // check type of root, to be able to traverse arrays
+        switch (typeof currentValue[rootField]) {
+          case "object":
+            if (Array.isArray(currentValue[rootField])) {
+              for (const red of currentValue[rootField]) {
+                const arrKey = opt?.keepUngroupedData
+                  ? dataOp.resolveDotPath(red, restField) ?? '- ungrouped'
+                  : dataOp.resolveDotPath(red, restField);
+                if (arrKey) (result[arrKey] = result[arrKey] || []).push(currentValue);
+              }
+            }
+            break;
+        }
+      }
+
       const key = opt?.keepUngroupedData
-        ? currentValue[groupField] ?? 'ungrouped'
-        : currentValue[groupField];
-      (result[key] = result[key] || []).push(currentValue);
+        ? dataOp.resolveDotPath(currentValue, groupField) ?? '- ungrouped'
+        : dataOp.resolveDotPath(currentValue, groupField);
+
+      const tmpKey = groupKey.map(key => dataOp.resolveDotPath(currentValue, key, undefined)).join(' ')
+
+      if (key!==undefined) (result[key] = result[key] || []).push(currentValue);
 
       return result;
     }, {});
 
   };
 
-  static resolveDotPath(object: Record<string, any>, path: string, defaultValue?: any): any {
-    return path.split('.').reduce((r, s) => (r ? r[s] : defaultValue), object) ?? '';
+  static resolveDotPath(object: Record<string, any>, path: string, defaultValue?: any): any | undefined {
+
+    return path.split('.').reduce((r, s) => (r ? r[s] : defaultValue), object) ?? undefined;
   }
 
 

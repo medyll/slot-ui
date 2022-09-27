@@ -1,17 +1,27 @@
 <svelte:options accessors={true} />
 
-<script>import { custom_event } from 'svelte/internal';
+<script>import { custom_event, onMount } from 'svelte/internal';
 import { stickTo } from '../../uses/stickTo/stickTo.js';
 import { clickAway } from '../../uses/clickAway/clickAway.js';
 import { popperList } from './actions.js';
-let element;
+import { fade } from 'svelte/transition';
+/** popper HTMLDivElement */
+export let element = undefined;
+let className = '';
+export { className as class };
 let zIndex;
-export let code;
-export let parentNode;
+export let code = undefined;
+export let parentNode = undefined;
 export let component = undefined;
 export let componentProps = {};
-export let position = 'B';
+export let position = 'BC';
 export let content = undefined;
+export let style = '';
+let holderSlotRef;
+/** The popper will be closed on clickAway*/
+export let autoClose = false;
+/** binding : The popper will be opened or is opened */
+export let isOpen = false;
 export const toggle = function () {
     popperList[code].$destroy();
 };
@@ -34,26 +44,44 @@ export const clickedAway = function () {
     const event = custom_event('clickAway', {}, { bubbles: true });
     parentNode?.dispatchEvent(event);
     popperList[code]?.$destroy();
+    if (autoClose) {
+        isOpen = false;
+    }
 };
+onMount(() => {
+    // who is the parent for stickTo ??
+    if (parentNode) {
+    }
+    else if ($$slots.holderSlot) {
+        // if holderSlot, then make it the stickTo parentNode
+        parentNode = holderSlotRef ?? document.body;
+    }
+    else {
+        // if no props parentNode, use element.parentNode
+        parentNode = element?.parentElement ?? document.body;
+    }
+});
 let siblings = [];
 $: siblings = Array.prototype.slice.call(element?.parentElement?.children ?? []) ?? [];
 $: zIndex = siblings?.reduce((prev, val) => {
     // @ts-ignore
     return val?.style?.zIndex >= prev ? val?.style?.zIndex + 1 : prev;
 }, 0);
-// if no props parentNode, use element.parentNode
-$: if (!parentNode && element)
-    parentNode = element?.parentElement ?? document.body;
-// $: console.log(parentNode)
 </script>
 
-<slot name="button" />
+{#if $$slots.holderSlot}
+<div bind:this={holderSlotRef} style="position:relative;display:inline-block">
+	<slot name="holderSlot" />
+</div>
+{/if}
+{#if (parentNode && ((isOpen && autoClose) || (!autoClose))) }
 <div
 	bind:this={element}
-	class="popper border-4"
+	class="popper {className}"
 	on:popper:close={actions.destroy}
 	use:clickAway={{ action: clickedAway }}
 	use:stickTo={{ parentNode, position: position }}
+	{style} 
 >
 	<slot>
 		{#if component}
@@ -64,16 +92,15 @@ $: if (!parentNode && element)
 		{/if}
 	</slot>
 </div>
-
+{/if}
 <style>.popper {
   z-index: 10000;
-  border-radius: var(--css-popper-radius, var(--radius-small));
+  border-radius: var(--css-popper-radius, var(--radius-tiny));
   overflow: hidden;
   position: absolute;
   box-shadow: var(--box-shad-4);
   background-color: var(--theme-color-background-alpha);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(30px);
   display: inline-block;
-  width: auto;
   top: 0;
 }</style>

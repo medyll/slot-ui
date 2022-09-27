@@ -1,7 +1,7 @@
 ```import { SvelteComponentTyped } from "svelte";
 import type { LisItemProps } from './types';
-import type { Data } from '../../data/grouper/Grouper.svelte';
-import type { SorterFieldType } from '../../data/sorter/types';
+import type { Data } from '../../../data/grouper/Grouper.svelte';
+import type { SorterFieldType } from '../../../data/sorter/types';
 declare const __propDef: {
     props: {
         class?: string | undefined;
@@ -29,7 +29,7 @@ declare const __propDef: {
         /** icon for the  title  zone*/ icon?: string | undefined;
         /** fieldName by wich we will group */ groupBy?: string | undefined;
         /** List will not be clickable and will gain opacity */ disabled?: boolean | undefined;
-        density?: "medium" | "default" | "none" | "tight" | "kind" | undefined;
+        density?: "default" | "medium" | "none" | "tight" | "kind" | undefined;
         /** binding for selectedData */ activeData?: Record<string, any> | undefined;
     };
     events: {

@@ -17,9 +17,16 @@ declare const __propDef: {
         tabLabelSlot: {
             item: import("./types").Items;
         };
+        tabsTitleSlot: {};
+        tabsButtonSlot: {};
         commandBarSlot: {};
         default: {
             item: import("./types").Items;
+            activeTabCode: string;
+        };
+        innerTabSlot: {
+            item: import("./types").Items;
+            activeTabCode: string;
         };
     };
 };

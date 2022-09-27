@@ -1,4 +1,4 @@
-```typescript 
+```ts 
 __propDef: {
     props: {
         /** Number of steps */ steps?: StepType[] | undefined;

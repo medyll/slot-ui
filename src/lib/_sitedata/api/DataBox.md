@@ -1,4 +1,4 @@
-```typescript 
+```ts 
 __propDef: {
     props: {
         loading?: boolean | undefined;

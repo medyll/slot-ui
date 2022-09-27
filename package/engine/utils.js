@@ -52,18 +52,38 @@ export class dataOp {
         });
     }
     static groupBy(dataList, groupField, opt) {
-        const out = [];
+        const groupKey = typeof groupField === 'string' ? [groupField] : groupField;
         return dataList.reduce((result, currentValue) => {
+            if (typeof dataOp.resolveDotPath(currentValue, groupField) === "undefined") {
+                const rootField = groupField.split('.')[0];
+                const restField = groupField.split('.').slice(1).join('.');
+                // check type of root, to be able to traverse arrays
+                switch (typeof currentValue[rootField]) {
+                    case "object":
+                        if (Array.isArray(currentValue[rootField])) {
+                            for (const red of currentValue[rootField]) {
+                                const arrKey = opt?.keepUngroupedData
+                                    ? dataOp.resolveDotPath(red, restField) ?? '- ungrouped'
+                                    : dataOp.resolveDotPath(red, restField);
+                                if (arrKey)
+                                    (result[arrKey] = result[arrKey] || []).push(currentValue);
+                            }
+                        }
+                        break;
+                }
+            }
             const key = opt?.keepUngroupedData
-                ? currentValue[groupField] ?? 'ungrouped'
-                : currentValue[groupField];
-            (result[key] = result[key] || []).push(currentValue);
+                ? dataOp.resolveDotPath(currentValue, groupField) ?? '- ungrouped'
+                : dataOp.resolveDotPath(currentValue, groupField);
+            const tmpKey = groupKey.map(key => dataOp.resolveDotPath(currentValue, key, undefined)).join(' ');
+            if (key !== undefined)
+                (result[key] = result[key] || []).push(currentValue);
             return result;
         }, {});
     }
     ;
     static resolveDotPath(object, path, defaultValue) {
-        return path.split('.').reduce((r, s) => (r ? r[s] : defaultValue), object) ?? '';
+        return path.split('.').reduce((r, s) => (r ? r[s] : defaultValue), object) ?? undefined;
     }
     /**
      *

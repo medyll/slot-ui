@@ -12,7 +12,7 @@ declare const __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
-        iconSLot: {};
+        iconSlot: {};
         menuBarTitle: {};
         menuBarButtons: {};
         menuBarSwitcher: {};

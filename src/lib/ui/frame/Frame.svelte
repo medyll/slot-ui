@@ -18,6 +18,8 @@
   export let hideCloseIcon: boolean  = true;
   export let showOpenerIcon: boolean = true;
 
+  export let drawerWidth:string = '288px';
+
   let defaultOpen = true;
 
   export const actions = {
@@ -50,6 +52,7 @@
                     flow="relative"
                     stickTo="left"
                     style="flex:1;position:relative;"
+                    defaultWidth={drawerWidth}
                     showOpenerIcon={showOpenerIcon}>
                 <slot name="frameDrawerSlot">
 

@@ -1,48 +1,45 @@
-<script lang="ts" context="module">
-	import Iconify from '@iconify/svelte';
+<script lang="ts">
+	import 'iconify-icon';
 
 	import type { ElementProps } from '$typings/index.js';
-	export type SizeType = keyof typeof sizes;
-	const sizes: Partial<Record<ElementProps['sizeType'], any>> = {
+	/*  common slotUi exports*/
+	let className = '';
+	export { className as class };
+	export let style: string = '';
+	/*  end slotUi exports*/
+
+	export let icon: string = 'question';
+	export let iconFamily: string = 'mdi'; // fa-solid // mdi
+	export let fontSize: ElementProps['sizeType'] = 'small';
+
+	export let rotate: boolean = false;
+	export let color: string | undefined = undefined;
+
+	const sizes: Record<ElementProps['sizeType'], number> = {
 		tiny: 8,
 		small: 16,
 		medium: 24,
 		default: 32,
 		large: 48,
-		big: 64, 
-	} as const; 
+		big: 64,
+		full: 0,
+		auto: 0
+	} as const;
+
+	$: iconName = icon.includes(':') ? icon : `${iconFamily}:${icon}`;
 </script>
 
-<script lang="ts"> 
-	import { get_current_component } from 'svelte/internal';
-	import { onDestroy } from 'svelte';
-
-	import { browser } from '$app/environment';
-
-	/*  common slotUi exports*/
-	let className = '';
-	export { className as class };
-	export let style: string = ''; 
-	/*  end slotUi exports*/
-
-	export let icon: string = 'question';
-	export let iconFamily: string = 'fa-solid';
-	export let fontSize: SizeType = 'small';
-</script>
-
-{#if browser}
-	<Iconify
+<iconify-icon
+	class={className}
+	class:rotate
+	style="display:block;font-size:{sizes[fontSize]}px;color:{color};{style}"
 	on:click
-		style="font-size:{sizes[fontSize]}px;{style}"
-		icon="{iconFamily}:{icon}"
-		class={className}
-		inline={false}
-		{...$$restProps}
-	/>
-{/if}
+	icon={iconName}
+	{...$$restProps}
+/>
 
-<style global lang="scss"> 
-	.rotate  {
+<style global lang="scss">
+	.rotate {
 		animation: spinner-frames 3s infinite linear;
 	}
 	@keyframes spinner-frames {

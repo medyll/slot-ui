@@ -1,15 +1,18 @@
+<svelte:options accessors={true} />
+
 <script lang="ts">
-	import { setContext } from 'svelte';
+	import { setContext, getContext, hasContext } from 'svelte/internal';
 	import { createEventForwarder } from '../../engine/engine.js';
-	import { custom_event, each, get_current_component } from 'svelte/internal';
+	import { get_current_component } from 'svelte/internal';
 	import Virtualize from '../virtualizer/Virtualizer.svelte';
 	import { writable, type Writable } from 'svelte/store';
-	import { browser } from '$app/environment';
 	import DataListRow from './DataListRow.svelte';
-	import DataListCell from './DataListCell.svelte';
-	import type { DataListStoreType } from '$types/index.js';
+	import type { DataListStoreType, DataCellType, groupByOptions } from './types.js';
 	import { dataOp } from '$lib/engine/utils.js';
-	import type { Data } from '$types/index.js';
+	import DataListHead from './DataListHead.svelte';
+	import Icon from '../icon/Icon.svelte';
+	import Button from '../button/Button.svelte';
+	import type { Data } from '$lib/types/index.js';
 
 	/*  common slotUi exports*/
 	let className = '';
@@ -18,10 +21,27 @@
 	const forwardEvents = createEventForwarder(get_current_component());
 
 	export let style: string | undefined = undefined;
+	/** show or hide the dataList body */
+	export let hideBody: boolean = false;
+	/** show or hide the dataList headere */
+	export let showHeader: boolean = true;
 	/** is the datalist sortable */
 	export let isSortable: boolean = true;
 	/** order on which the sorted list is sorted */
 	export let sortByOrder: 'asc' | 'desc' | 'none' | string = 'none';
+	/** group field on which data will be grouped, can use dot notation as dot path */
+	export let groupByField: string | string[] | undefined = undefined;
+	/** options used when props.groupByField is defined */
+	export let groupByOptions: groupByOptions = {
+		showMainHeader: true,
+		showSubGroupsHeader: true,
+		showEmptyGroup: false
+	};
+
+	/** field used for selection*/
+	export let selectorField: string = 'id';
+	/** field value used for selection*/
+	export let selectorFieldValue: any | undefined = undefined;
 	/** binding, used when multiple buttons*/
 	export let activeCommonSortField: string = '';
 	/** set noWrap = true to have ellipsis on all cells content*/
@@ -32,174 +52,167 @@
 	export let data: any[] = [];
 	/** used only if data is provided */
 	export let idField: string | undefined = undefined;
+	/** columns declaration */
+	export let columns: Record<string, DataCellType> = {}; 
+
+	export let virtualizer: boolean = false;
+
+	let hidedGroups: Data = {};
 
 	let sortedData: any[];
-	$: sortedData = data;
+	$: sortedData = data?.filter((x) => x);
 
-	const sortState: string[] = ['none', 'asc', 'desc'];
 	export let sortingIcons = {
-		default: ['dots-horizontal', 'sort-bool-ascending', 'sort-bool-descending'],
-		numeric: ['dots-horizontal', 'sort-bool-ascending', 'sort-bool-descending']
+		default: ['mdi:dots-horizontal', 'mdi:sort-bool-ascending', 'mdi:sort-bool-descending'],
+		numeric: ['mdi:dots-horizontal', 'mdi:sort-bool-ascending', 'mdi:sort-bool-descending']
 	};
 
-	/** context store for dataList config and state */
-	let dataListStore = writable<DataListStoreType>({
-		config: {
-			isSortable,
-			defaultSortByField: undefined,
-			defaultSortByOrder: sortByOrder,
-			sortingIcons,
-			noWrap,
-			dataTypes
-		},
-		sortBy: {
-			activeSortByField: undefined,
-			activeSortByOrder: 'none'
-		},
-		idField,
-		columns: [],
-		data
-	});
+	if (hasContext('dataListContext')) {
+		getContext<Writable<DataListStoreType>>('dataListContext');
+	} else {
+		/** context store for dataList config and state */
+		let dataListStore = writable<DataListStoreType>({
+			config: {
+				isSortable,
+				defaultSortByField: undefined,
+				defaultSortByOrder: sortByOrder,
+				sortingIcons,
+				noWrap,
+				dataTypes
+			},
+			sortBy: {
+				activeSortByField: undefined,
+				activeSortByOrder: 'none'
+			},
+			groupBy: {
+				groupByField,
+				groupByOptions
+			},
+			idField,
+			columns,
+			hasColumnsProps: Boolean(Object.keys(columns).length),
+			data
+		});
 
-	let dataListContext = setContext<Writable<DataListStoreType>>('dataListContext', dataListStore);
+		setContext<Writable<DataListStoreType>>('dataListContext', dataListStore);
+	}
 
-	function doSort(e: CustomEvent<{ field: string; order: 'asc' | 'desc' | 'none' }>) { 
-		const next = sortState.indexOf(e.detail.order ?? sortByOrder) + 1;
-		let toggleOrder = sortState?.[next] ? sortState[next] : sortState[0];
-
-		// let toggleOrder = order === 'asc' ? 'desc' : 'asc';
-
-		if (toggleOrder === 'none') toggleOrder = 'asc';
-
+	function doSort(e: CustomEvent<{ field: string; order: string }>) {
 		if (e.detail.field) {
 			activeCommonSortField = e.detail.field;
-			sortByOrder = toggleOrder ?? 'none';
+			sortByOrder = e.detail.order;
 
 			if (e.detail.order === 'none') {
 				sortedData = data;
 			} else {
-				sortedData = dataOp.sortBy(data, e.detail.field, toggleOrder);
+				sortedData = dataOp.sortBy(data, e.detail.field, e.detail.order);
 			}
-			// update context
-			$dataListContext.sortBy.activeSortByField = e.detail.field;
-			$dataListContext.sortBy.activeSortByOrder = toggleOrder;
 		}
 	}
+
+	function doSelect(e: CustomEvent<Data>) {
+		const selectedItem = e.detail;
+		selectorFieldValue = selectedItem?.[selectorField];
+		console.log(selectorField, e.detail);
+	}
+
+	function getGroupProps(content: any) {
+		return {
+			...content,
+			columns,
+			style,
+			groupByField: false,
+			groupByOptions,
+			showHeader: groupByOptions.showSubGroupsHeader,
+			selectorField,
+			selectorFieldValue
+		};
+	}
+
+	$: groups = groupByField ? dataOp.groupBy(data, groupByField, { keepUngroupedData: Boolean(groupByOptions.showEmptyGroup) }) : {};
 </script>
 
-<div
-	use:forwardEvents
-	on:datalist:sort:clicked={doSort}
-	bind:this={element}
-	class="dataList  {className}"
-	{style}
-	tabindex="0"
->
-	{#if element}
-		<Virtualize height="100%" data={sortedData} let:item>
-			<svelte:fragment slot="virtualizeHeaderSlot">
-				<slot name="head" />
-			</svelte:fragment>
-			{#if item}
-				{#if $$slots.default}
-					<slot {item} />
-				{:else}
-					<DataListRow data={item}>
-						{#each Object.keys(item) as inItem}
-							<DataListCell dataField={inItem}>
-								{item?.[inItem]}
-							</DataListCell>
-						{/each}
-					</DataListRow>
-				{/if}
-			{/if}
-		</Virtualize>
+{#if groupByField}
+	{#if groupByOptions?.showMainHeader}
+		<DataListHead />
 	{/if}
-	<slot name="foot" />
-</div>
+	<div bind:this={element} class="flex-v h-full">
+		{#each Object.keys(groups) as red}
+			{@const groupProps = getGroupProps({ data: groups[red] })}
+			{@const item = groups[red]}
+			<div class="flex-v h-full">
+				<div class="">
+					<slot name="groupTitleSlot" {item}>
+						<div class="flex-h flex-align-middle pad gap-medium">
+							<div><Icon icon="folder" /></div>
+							<div class="flex-main">{groupByField} : {red}</div>
+							<div>{groups[red]?.length}</div>
+							<div class="pad-l border-l">
+								<Button
+									on:click={() => {
+										hidedGroups[red] = !hidedGroups[red]
+										// hideBody = !hideBody;
+									}}
+									icon={hidedGroups[red] ? 'chevron-up' : 'chevron-down'}
+									naked
+								/>
+							</div>
+						</div>
+					</slot>
+				</div>
+				<div class="flex-main pos-rel" use:forwardEvents>
+					{#if !hidedGroups[red]}
+						<svelte:self {...groupProps}>
+							<svelte:fragment slot="groupTitleSlot" />
+						</svelte:self>
+					{/if}
+				</div>
+			</div>
+		{/each}
+	</div>
+{:else}
+	<div
+		use:forwardEvents
+		on:datalist:sorted={doSort}
+		on:datalist:select={doSelect}
+		bind:this={element}
+		class="dataList  pos-rel {className}"
+		{style}
+		tabindex="0"
+	>
+		{#if element && virtualizer}
+			<Virtualize height="350px" data={sortedData} let:item>
+				<svelte:fragment slot="virtualizeHeaderSlot">
+					<slot name="head">
+						<DataListHead />
+					</slot>
+				</svelte:fragment>
+				<slot {item}>
+					<DataListRow data={item ?? {}} />
+				</slot>
+			</Virtualize>
+		{/if}
+		{#if !virtualizer && element}
+			{#if showHeader}
+				<slot name="head">
+					<DataListHead />
+				</slot>
+			{/if}
+			{#if !hideBody}
+				{#each sortedData as item}
+					<slot {item}>
+						<DataListRow
+							class={item[selectorField] === selectorFieldValue ? 'theme-bg-paper' : ''}
+							data={item}
+						/>
+					</slot>
+				{/each}
+			{/if}
+		{/if}
+		<slot name="foot" />
+	</div>
+{/if}
 
 <style global lang="scss">
-	[data-theme='dark'] {
-		--border-color: rgba(255, 255, 255, 0.1);
-	}
-	[data-theme='light'] {
-		--border-color: rgba(0, 0, 0, 0.1);
-	}
-	.dataList {
-		height: 100%;
-		position: relative;
-		.dataListHead {
-			display: flex;
-			margin-bottom: 0.5rem;
-			align-items: stretch;
-			height: 32px;
-			background-color: var(--theme-color-paper-alpha-low);
-			backdrop-filter: blur(1px);
-			// border-radius: var(--radius-tiny);
-			.dataListCell {
-				display: flex;
-				align-items: stretch;
-				overflow: hidden;
-				border-right: 1px solid var(--border-color);
-				position: relative;
-				&[data-sortable='true'] {
-					cursor: pointer;
-					&:hover {
-						background-color: var(--theme-color-primary-alpha);
-					}
-				}
-
-				.cellHeader {
-					display: flex;
-					align-items: center;
-					// border: 1px solid red;
-					min-width: 0;
-					width: 100%;
-					.cellHeaderContent {
-						flex: 1;
-						overflow: hidden;
-						padding: 0 8px;
-					}
-					.cellHeaderSorter {
-						//padding: 0 4px;
-					}
-				}
-			}
-		}
-
-		.dataListRow {
-			display: flex;
-			border-bottom: 1px solid var(--border-color);
-
-			//border-radius: 6px;
-			// margin: 0.25rem 0;
-
-			&:hover {
-				background-color: var(--theme-color-paper);
-				.dataListCell {
-				}
-			}
-			&[data-selected='true'] {
-				background-color: var(--theme-color-primary);
-				.dataListCell {
-					color: white;
-				}
-			}
-
-			.dataListCell {
-				padding: 8px;
-				color: var(--theme-color-text);
-				border-right: 1px solid var(--border-color);
-				&[data-noWrap='true'] {
-					display: box;
-					overflow: hidden;
-					text-overflow: ellipsis;
-					white-space: nowrap;
-					/* display: -webkit-box;
-					-webkit-line-clamp: 1;
-					-webkit-box-orient: vertical; */
-				}
-			}
-		}
-	}
+	@import './DataList.scss';
 </style>

@@ -16,5 +16,6 @@ export type MenuItemProps<T = any> = {
     data?: T
     action?: () => void
     divider?: | boolean
+    dividerBefore?: | boolean
     | ElementProps['expansion'];
 }

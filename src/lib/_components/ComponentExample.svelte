@@ -9,10 +9,12 @@
 <div class="flex-v gap-large w-full">
 	<h4>{`<${component} />`}</h4>
 	<cite><p>{@html cite}</p></cite>
+	{#if $$slots.default}
 	<div  class="flex-v gap-medium " >
 		<h5>Component {component} examples :</h5>
 		<div class="marg-l-4"><slot /></div>
 	</div>
+	{/if}
 	<div  class="flex-v gap-medium " >
 		<h5>Api preview :</h5>
 		<div  class="marg-l-4"><svelte:component this={finalCompReadMe} /></div>

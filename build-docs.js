@@ -111,7 +111,7 @@ function createMethods(fileList) {
 
 				fs.writeFileSync(
 					dirPath + '/api/' + comp + '.md',
-					newContent ? '```typescript \r\n' + newContent + '\r\n ```' : 'missing'
+					newContent ? '```ts \r\n' + newContent + '\r\n ```' : 'missing'
 				);
 
 				objApiImport.push(`import ${comp}ApiReadMe from "${srcApiFull}"`);

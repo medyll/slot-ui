@@ -1,4 +1,4 @@
-```typescript 
+```ts 
 __propDef: {
     props: {
         class?: string | undefined;
@@ -8,6 +8,7 @@ __propDef: {
         frameDrawerRef?: typeof Drawer | undefined;
         hideCloseIcon?: boolean | undefined;
         showOpenerIcon?: boolean | undefined;
+        drawerWidth?: string | undefined;
         actions?: {
             openNavLeft: () => void;
             toggleNavLeft: () => void;

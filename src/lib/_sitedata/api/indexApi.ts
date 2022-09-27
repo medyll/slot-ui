@@ -1,3 +1,4 @@
+import ComponentExampleReadMe from "$sitedata/api/ComponentExample.md";
 import AlertReadMe from "$sitedata/api/Alert.md";
 import AvatarReadMe from "$sitedata/api/Avatar.md";
 import BackdropReadMe from "$sitedata/api/Backdrop.md";
@@ -11,6 +12,7 @@ import ButtonMenuReadMe from "$sitedata/api/ButtonMenu.md";
 import IconButtonReadMe from "$sitedata/api/IconButton.md";
 import CardReadMe from "$sitedata/api/Card.md";
 import CartoucheReadMe from "$sitedata/api/Cartouche.md";
+import ChipperReadMe from "$sitedata/api/Chipper.md";
 import ChromeReadMe from "$sitedata/api/Chrome.md";
 import ChromeContentReadMe from "$sitedata/api/ChromeContent.md";
 import ChromeNavReadMe from "$sitedata/api/ChromeNav.md";
@@ -20,6 +22,7 @@ import ConfirmReadMe from "$sitedata/api/Confirm.md";
 import ContentSwitcherReadMe from "$sitedata/api/ContentSwitcher.md";
 import DataListReadMe from "$sitedata/api/DataList.md";
 import DataListCellReadMe from "$sitedata/api/DataListCell.md";
+import DataListeContextReadMe from "$sitedata/api/DataListeContext.md";
 import DataListHeadReadMe from "$sitedata/api/DataListHead.md";
 import DataListRowReadMe from "$sitedata/api/DataListRow.md";
 import DebugReadMe from "$sitedata/api/Debug.md";
@@ -28,7 +31,6 @@ import DrawerReadMe from "$sitedata/api/Drawer.md";
 import ElementorReadMe from "$sitedata/api/Elementor.md";
 import ElipsisBoxReadMe from "$sitedata/api/ElipsisBox.md";
 import IconReadMe from "$sitedata/api/Icon.md";
-import IconProxyReadMe from "$sitedata/api/IconProxy.md";
 import InputReadMe from "$sitedata/api/Input.md";
 import ListReadMe from "$sitedata/api/List.md";
 import ListItemReadMe from "$sitedata/api/ListItem.md";
@@ -45,7 +47,6 @@ import StepperReadMe from "$sitedata/api/Stepper.md";
 import SwitchReadMe from "$sitedata/api/Switch.md";
 import TabsReadMe from "$sitedata/api/Tabs.md";
 import TitleBarReadMe from "$sitedata/api/TitleBar.md";
-import ToolTipReadMe from "$sitedata/api/ToolTip.md";
 import TreeReadMe from "$sitedata/api/Tree.md";
 import VirtualizeReadMe from "$sitedata/api/Virtualize.md";
 import VirtualizerReadMe from "$sitedata/api/Virtualizer.md";
@@ -78,7 +79,8 @@ import ToastReadMe from "$sitedata/api/Toast.md";
 import TopBarReadMe from "$sitedata/api/TopBar.md";
 import WindowReadMe from "$sitedata/api/Window.md";
 
-export const componentReadMe = {alert:AlertReadMe,
+export const componentReadMe = {componentexample:ComponentExampleReadMe,
+alert:AlertReadMe,
 avatar:AvatarReadMe,
 backdrop:BackdropReadMe,
 badge:BadgeReadMe,
@@ -91,6 +93,7 @@ buttonmenu:ButtonMenuReadMe,
 iconbutton:IconButtonReadMe,
 card:CardReadMe,
 cartouche:CartoucheReadMe,
+chipper:ChipperReadMe,
 chrome:ChromeReadMe,
 chromecontent:ChromeContentReadMe,
 chromenav:ChromeNavReadMe,
@@ -100,6 +103,7 @@ confirm:ConfirmReadMe,
 contentswitcher:ContentSwitcherReadMe,
 datalist:DataListReadMe,
 datalistcell:DataListCellReadMe,
+datalistecontext:DataListeContextReadMe,
 datalisthead:DataListHeadReadMe,
 datalistrow:DataListRowReadMe,
 debug:DebugReadMe,
@@ -108,7 +112,6 @@ drawer:DrawerReadMe,
 elementor:ElementorReadMe,
 elipsisbox:ElipsisBoxReadMe,
 icon:IconReadMe,
-iconproxy:IconProxyReadMe,
 input:InputReadMe,
 list:ListReadMe,
 listitem:ListItemReadMe,
@@ -125,7 +128,6 @@ stepper:StepperReadMe,
 switch:SwitchReadMe,
 tabs:TabsReadMe,
 titlebar:TitleBarReadMe,
-tooltip:ToolTipReadMe,
 tree:TreeReadMe,
 virtualize:VirtualizeReadMe,
 virtualizer:VirtualizerReadMe,

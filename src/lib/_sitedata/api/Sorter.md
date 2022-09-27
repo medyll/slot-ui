@@ -1,4 +1,4 @@
-```typescript 
+```ts 
 __propDef: {
     props: {
         /** Sorter mode */ sorterMode?: "button" | "menu" | "free" | undefined;

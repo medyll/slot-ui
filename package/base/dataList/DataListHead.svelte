@@ -1,25 +1,43 @@
 <script>import { getContext, setContext } from 'svelte';
 import { writable } from 'svelte/store';
-export const style = undefined;
+import DataListCell from './DataListCell.svelte';
+import { custom_event } from 'svelte/internal';
+export let style = undefined;
 export let element = undefined;
 export let stickyHeader = true;
-const dataListStore = getContext('dataListContext');
+export let onSort = () => { };
+const dataListContext = getContext('dataListContext');
 // this head is a head
 // cells give width for the whole dataList
 const headerer = writable([]);
 setContext('dataListHead', headerer);
-let clientWidth;
-$: if (element?.children)
-    [...element?.children].forEach((node, index) => {
-        const width = node.offsetWidth + 'px';
-    });
-function reDraw() {
-    console.log('redraw');
+function doSort(e) {
+    let activeSortByOrder = $dataListContext.sortBy.activeSortByOrder;
+    const sortByOrder = activeSortByOrder === 'none' ? 'desc' : activeSortByOrder === 'asc' ? 'desc' : 'asc';
+    $dataListContext.sortBy.activeSortByField = e.detail.field;
+    $dataListContext.sortBy.activeSortByOrder = sortByOrder;
+    // fire event
+    const event = custom_event('datalist:sorted', { field: e.detail.field, order: sortByOrder }, { bubbles: true });
+    if (element)
+        element.dispatchEvent(event);
 }
+// $: console.log($dataListContext.columns)
 </script>
 
-<div bind:this={element} bind:clientWidth class:pos-sticky={stickyHeader}  class="dataListHead shad-2" {style}>
-	<slot />
+<div
+	bind:this={element}
+	on:datalist:sort:clicked={doSort}
+	class:pos-sticky={stickyHeader}
+	class="dataListHead"
+	{style}
+>
+	<slot>
+		{#if $dataListContext.hasColumnsProps}
+			{#each Object.values($dataListContext.columns) as column}
+				<DataListCell field={column.field}>{column.fieldTitle ?? column.field}</DataListCell>
+			{/each}
+		{/if}
+	</slot>
 </div>
 
 <style global>:global(.dataListHead) {

@@ -1,6 +1,7 @@
-import { elem } from '../../engine/elem';
+import { includes, replace } from 'lodash';
+import { elem } from '../../engine/elem.js';
 
-export type StickToPositionType = 'TL' | 'TR' | 'BR' | 'B' | 'BL';
+export type StickToPositionType = 'TL' | 'TR' | 'TC' | 'T' | 'BR' | 'B' | 'BL' | 'BC';
 export type NewStickToPositionType = | 'TT' | 'RR' | 'BB' | 'LL' | 'CC'
 
 
@@ -17,21 +18,32 @@ export function stickTo(node: HTMLElement, props: StickToProps) {
   let intervaller: any;
 
   if (node && parentNode) {
-  
- 
     document.body.appendChild(node)
-
     setPosition(node, position, parentNode)
-
-
   } else {
-    //  node.style.bottom = String(0)
-    //  node.style.right = String(0)
+    return false;
   }
 
-  node.addEventListener('click', (event) => event.preventDefault())
+  function checkPos(node: HTMLElement, parentNode: HTMLElement, position: string) {
+    const nodePos = node.getBoundingClientRect();
+    const parentPos = parentNode.getBoundingClientRect();
+    let newPos: string = position;
 
-  function checkPos(node: HTMLElement,) {
+    if (parentPos.top + nodePos.height > document.body.offsetHeight) {
+      newPos = position.replace('B', 'T')
+    } else if (parentPos.top + nodePos.height < document.body.offsetHeight) {
+      newPos = position.replace('T', 'B')
+    }
+    if (parentPos.right + nodePos.width > document.body.offsetWidth) {
+      newPos = position.replace('R', 'L')
+    } else if (parentPos.right + nodePos.width < document.body.offsetWidth) {
+      newPos = position.replace('L', 'R')
+    }
+
+    return newPos
+  }
+
+  function checkBoundaries(node: HTMLElement,) {
     const nodePos = parentNode.getBoundingClientRect();
     if (nodePos.left < 0) node.style.left = '0px'
     if (nodePos.top < 0) node.style.top = '0px'
@@ -40,63 +52,47 @@ export function stickTo(node: HTMLElement, props: StickToProps) {
   }
 
   function setPosition(node: HTMLElement, position: any, parentNode: HTMLElement) {
-    const style: Record<string, any> = {}
+ 
     const parentPos = parentNode.getBoundingClientRect();
 
-    switch (position) {
-      case 'B':
-        node.style.bottom = '';
-        node.style.width = String(parentPos.width) + 'px';
-        node.style.top = String(parentPos.bottom) + 'px';
-        node.style.left = String(parentPos.left) + 'px';
-        break;
-      case 'BL':
-        node.style.bottom = '';
-        node.style.right = '';
-        node.style.top = String(parentPos.bottom) + 'px';
-        node.style.left = String(parentPos.left) + 'px';
-        break;
-      case 'BR':
-        node.style.bottom = '';
-        node.style.right = '';
-        node.style.top = String(parentPos.bottom) + 'px';
-        // node.style.left = String(parentPos.right) + 'px';
-        node.style.left = String(parentPos.left - (node.offsetWidth - parentNode.offsetWidth)) + 'px';
+    const newPosition = checkPos(node, parentNode, position)
 
-        break;
-      case 'T':
-        node.style.bottom = '';
-        node.style.right = '';
-        node.style.top = String(parentPos.bottom - (node.offsetHeight)) + 'px';
-        node.style.left = String(parentPos.right - (node.offsetWidth - parentNode.offsetWidth)) + 'px';
-        break;
-      case 'TL':
-        node.style.bottom = '';
-        node.style.right = '';
-        node.style.top = String(parentPos.top - node.offsetHeight) + 'px';
-        node.style.left = String(parentPos.left) + 'px';
-        break;
-      default:
-      case 'TR':
-        node.style.right = '';
-        node.style.bottom = '';
-        node.style.top = String(parentPos.top - node.offsetHeight) + 'px';
-        node.style.left = String(parentPos.left - (node.offsetWidth - parentNode.offsetWidth)) + 'px';
-        break;
+    node.style.right = '';
+    node.style.left = '';
+    node.style.bottom = '';
+    node.style.top = '';
+
+    if (newPosition.includes('B')) {
+      node.style.bottom = '';
+      node.style.top = String(parentPos.bottom) + 'px';
+    }
+    if (newPosition.includes('T')) {
+      node.style.bottom = '';
+      node.style.top = String(parentPos.top - node.offsetHeight) + 'px';
+    }
+    if (newPosition.includes('L')) {
+      node.style.left = String(parentPos.left) + 'px';
+    }
+    if (newPosition.includes('R')) {
+      node.style.left = String(parentPos.left - node.offsetWidth + parentPos.width) + 'px';
     }
 
-    checkPos(node)
+    if (newPosition.includes('C')) {
+      node.style.left = String((parentPos.left + (parentPos.width / 2)) - (node.offsetWidth / 2)) + 'px';
+    }
 
-    return style;
+    checkBoundaries(node)
+ 
   }
 
-  intervaller = setInterval(()=>{ 
-    setPosition(node, position, parentNode)},5);
-  
-  return { 
+  intervaller = setInterval(() => {
+    setPosition(node, position, parentNode)
+  }, 5000);
+
+  return {
     destroy() {
+      node.remove()
       clearInterval(intervaller)
-      //  document.removeEventListener('click', doEvent);
     }
   };
 }

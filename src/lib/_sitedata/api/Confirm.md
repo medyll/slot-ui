@@ -1,4 +1,4 @@
-```typescript 
+```ts 
 __propDef: {
     props: {
         /** text displayed on confirm button */ tooltipInitial?: string | undefined;

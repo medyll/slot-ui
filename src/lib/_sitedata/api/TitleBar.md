@@ -1,4 +1,4 @@
-```typescript 
+```ts 
 __propDef: {
     props: {
         onClose: () => void;

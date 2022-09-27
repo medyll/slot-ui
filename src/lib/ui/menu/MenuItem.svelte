@@ -5,8 +5,10 @@
 	import { custom_event, get_current_component, null_to_empty } from 'svelte/internal';
 
 	import Divider from '$lib/base/divider/Divider.svelte';
+	import Icon from '$lib/base/icon/Icon.svelte';
 	import { createEventForwarder } from '$lib/engine/engine.js';
 	import type { MenuItemProps } from './types.js';
+	import type { ElementProps } from '$typings/index.js';
 
 	/*  common slotUi exports*/
 	let className = '';
@@ -15,16 +17,22 @@
 	const forwardEvents = createEventForwarder(get_current_component());
 	/*  end slotUi exports*/
 
-	export let text: MenuItemProps['text'];
+	export let text: string | undefined = undefined;
+	/** text props, shown on the right side of the menuItem*/
+	export let action: string | undefined = undefined;
 	export let icon: MenuItemProps['icon'] | undefined = undefined;
+	export let iconColor: string | undefined = undefined;
+	export let iconSize: ElementProps['sizeType'] | undefined = 'small';
 	export let divider: MenuItemProps['divider'] = false;
+	export let dividerBefore: MenuItemProps['divider'] = false;
 	export let data: Record<string, any> = { empty: 'menu item data' };
-
+	/** highlight menu item when selected*/
+	export let selected: boolean = false;
 	export let onMenuItemClick: Function = () => {};
 
 	const menuStateContext = getContext<any>('menuStateContext');
 
-	if (icon || $$slots.iconSLot) {
+	if (icon || $$slots.iconSlot) {
 		$menuStateContext.hasIcon = true;
 	}
 
@@ -34,11 +42,16 @@
 		onMenuItemClick(data);
 	};
 
-	// cons
 </script>
 
+{#if dividerBefore}
+	<li>
+		<slot name="divider"><Divider density="tight" expansion="centered" /></slot>
+	</li>
+{/if}
 <li
-	class="menuItem"
+	class="menuItem {className}"
+	class:selected
 	role="menuitem"
 	bind:this={element}
 	use:forwardEvents
@@ -46,23 +59,25 @@
 >
 	{#if $menuStateContext?.hasIcon}
 		<div class="menuItemIcon">
-			<slot name="iconSLot">{null_to_empty(icon)}</slot>
+			<slot name="iconSlot">
+				<Icon {icon} color={iconColor} fontSize={iconSize} /></slot
+			>
 		</div>
 	{/if}
 	<div class="menuItemText">
 		<slot>
-			<slot name="textSlot">{text}</slot>
+			<slot name="textSlot">{null_to_empty(text)}</slot>
 		</slot>
 	</div>
-	{#if $$slots.actionSlot}
+	{#if $$slots.actionSlot || action}
 		<div class="menuItemActions">
-			<slot name="actionSlot" />
+			<slot name="actionSlot" >{action}</slot>
 		</div>
 	{/if}
 </li>
 {#if divider}
 	<li>
-		<Divider density="tight" expansion="centered" />
+		<slot name="divider"><Divider density="tight" expansion="centered" /></slot>
 	</li>
 {/if}
 

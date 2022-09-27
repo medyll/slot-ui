@@ -15,8 +15,7 @@ export function clickAway(node: HTMLElement, props: ClickAwayProps) {
 
   // treat outside click
   document.addEventListener('click', doEvent,true);
-
-console.log('node',node)
+ 
   function doEvent  (event: any) {
 
     const bounds = node.getBoundingClientRect();
@@ -28,7 +27,6 @@ console.log('node',node)
     if (!disabled) {
       if (action && !inner) {
         action();
-        console.log('doEvent',node)
         const event = custom_event('clickAway', {}, { bubbles: true });
         node?.dispatchEvent(event);
         document.removeEventListener('click', doEvent,true);

@@ -21,9 +21,9 @@ const posCloser = orientation === 'right' ? 3 : 1;
 <div bind:this={element}
      class="flex-h topBarRoot w-full  flex-align-middle {className} gap-2"
      style={style} use:forwardEvents>
-    {#if $$slots.iconSLot}
+    {#if $$slots.iconSlot}
         <div class="pad-l-i">
-            <slot name="iconSLot"/>
+            <slot name="iconSlot"/>
         </div>
     {/if}
     <div class="title flex-main text-500" style="order:{posTitle};min-width:auto">

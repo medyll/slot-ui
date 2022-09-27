@@ -1,5 +1,4 @@
-<svelte:options accessors={true} />
-
+<svelte:options accessors={true} immutable={true} /> 
 <script lang="ts">
 	import Debug from '$lib/base/debug/Debug.svelte';
 	import Button from '$lib/base/button/Button.svelte';
@@ -9,6 +8,7 @@
 	import Popper from '$lib/ui/popper/Popper.svelte';
 	import Menu from '$lib/ui/menu/Menu.svelte';
 	import MenuItem from '$lib/ui/menu/MenuItem.svelte';
+	import { onMount } from 'svelte';
 
 	let className = '';
 	export { className as class };
@@ -23,7 +23,7 @@
 	/** search mode : exact or partial match*/
 	export let mode: 'exact' | 'partial' = 'partial';
 	/** external bind use, to read filtered data */
-	export let filteredData: any[] = [];
+	export let filteredData: any[] = data;
 
 	let searchString: string;
 	let container: HTMLDivElement;
@@ -45,8 +45,16 @@
 	$: dataKeys = Object.keys(data[0] || {}).filter(r=>['string','number'].includes(typeof data?.[0]?.[r])).sort((a: string, b: string) => {
 		return a > b ? 1 : a < b ? -1 : 0;
 	});
-	$: filteredData = doFind(data, searchString, defaultField);
-	$: if (!searchString) filteredData = data;
+
+	$: filteredData = (!searchString) ? data : doFind(data, searchString, defaultField);
+
+	onMount(()=>{
+
+		return ()=>{
+			 
+		} 
+	})
+
 </script>
 
 <container
@@ -71,6 +79,7 @@
 				event.preventDefault();
 				popperOpen = !popperOpen;
 			}}
+			naked
 			size="tiny"
 			icon="chevron-{popperOpen ? 'up' : 'down'}"
 			iconSize="small"

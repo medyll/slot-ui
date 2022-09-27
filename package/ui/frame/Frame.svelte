@@ -11,6 +11,7 @@ export let elementNav = null;
 export let frameDrawerRef = null;
 export let hideCloseIcon = true;
 export let showOpenerIcon = true;
+export let drawerWidth = '288px';
 let defaultOpen = true;
 export const actions = {
     openNavLeft: () => {
@@ -39,6 +40,7 @@ export const actions = {
                     flow="relative"
                     stickTo="left"
                     style="flex:1;position:relative;"
+                    defaultWidth={drawerWidth}
                     showOpenerIcon={showOpenerIcon}>
                 <slot name="frameDrawerSlot">
 

@@ -1,72 +1,79 @@
-
 .menu {
-  margin:0;
+  margin: 0;
   min-width: 150px;
   padding: 0.25rem;
   cursor: pointer;
-
+  display: inline-block;
   background-color: var(--theme-color-background);
   color: var(--theme-color-text);
-  border: 0.5px solid rgba(255, 255, 255, 0.1);
-  border-radius: 6px;
+
+  &.bordered {
+    border: 0.5px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+  }
 
   &.density-tight {
     .menuItem {
-      padding: 0.25rem 0; 
+      padding: 0.25rem 0;
     }
   }
 
   &.density-default {
     .menuItem {
-      padding: 0.5rem 0; 
+      padding: 0.5rem 0;
     }
   }
 
   &.density-kind {
     .menuItem {
-      padding: 1rem 0; 
+      padding: 1rem 0;
     }
   }
+}
 
-  .menuItem {
-    border-radius: 6px;
+.menuItem {
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  &:hover {
+    background-color: var(--theme-color-paper, rgba(255, 255, 255, 0.3));
+  }
+
+  &.selected {
+    background-color: var(--theme-color-paper, rgba(255, 255, 255, 0.9));
+    box-shadow: var(--box-shad-1);
+  }
+
+  .menuItemIcon {
+    width: 24px;
+    max-width: 24px;
+    text-align: center;
     overflow: hidden;
-    display: flex;
-    align-items: center; 
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.3)
-    }
+  }
 
-    .menuItemIcon {
-      width: 24px;
-      max-width: 24px;
-      text-align: center;
-      overflow: hidden;
-    }
+  .menuItemText {
+    flex: 1;
+    padding-left: 0.25rem;
+  }
 
-    .menuItemText {
-      flex: 1;
-      padding-left: 0.25rem;
-    }
+  .menuItemActions {
+    // padding: inherit;
+    display: block;
+  }
 
-    .menuItemActions {
-      // padding: inherit; 
-      display:block;
-    }
+  &.density-tight {
+    padding: 0.25rem 0;
+    //margin: 0.125rem 0;
+  }
 
-    &.density-tight {
-      padding: 0.25rem 0;
-      //margin: 0.125rem 0;
-    }
+  &.density-default {
+    padding: 0.5rem 0;
+    // margin: 0.25rem 0;
+  }
 
-    &.density-default {
-      padding: 0.5rem 0;
-      // margin: 0.25rem 0;
-    }
-
-    &.density-kind {
-      padding: 1rem 0;
-      // margin: 0.5rem 0;
-    }
+  &.density-kind {
+    padding: 1rem 0;
+    // margin: 0.5rem 0;
   }
 }

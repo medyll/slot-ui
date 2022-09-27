@@ -1,7 +1,5 @@
 ```import { SvelteComponentTyped } from "svelte";
-import type { ElementProps } from '$typings/index.js';
-export declare type SizeType = keyof typeof sizes;
-declare const sizes: Partial<Record<ElementProps['sizeType'], any>>;
+import 'iconify-icon';
 declare const __propDef: {
     props: {
         [x: string]: any;
@@ -9,10 +7,12 @@ declare const __propDef: {
         style?: string | undefined;
         icon?: string | undefined;
         iconFamily?: string | undefined;
-        fontSize?: "small" | "tiny" | "medium" | "default" | "large" | "big" | "full" | "auto" | undefined;
+        fontSize?: "default" | "small" | "tiny" | "medium" | "large" | "big" | "full" | "auto" | undefined;
+        rotate?: boolean | undefined;
+        color?: string | undefined;
     };
     events: {
-        click: any;
+        click: MouseEvent;
     } & {
         [evt: string]: CustomEvent<any>;
     };
