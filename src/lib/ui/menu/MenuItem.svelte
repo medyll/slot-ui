@@ -32,7 +32,7 @@
 
 	const menuStateContext = getContext<any>('menuStateContext');
 
-	if (icon || $$slots.iconSLot) {
+	if (icon || $$slots.iconSlot) {
 		$menuStateContext.hasIcon = true;
 	}
 
@@ -59,7 +59,7 @@
 >
 	{#if $menuStateContext?.hasIcon}
 		<div class="menuItemIcon">
-			<slot name="iconSLot">
+			<slot name="iconSlot">
 				<Icon {icon} color={iconColor} fontSize={iconSize} /></slot
 			>
 		</div>
