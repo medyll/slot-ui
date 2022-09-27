@@ -24,7 +24,7 @@ export let data = { empty: 'menu item data' };
 export let selected = false;
 export let onMenuItemClick = () => { };
 const menuStateContext = getContext('menuStateContext');
-if (icon || $$slots.iconSLot) {
+if (icon || $$slots.iconSlot) {
     $menuStateContext.hasIcon = true;
 }
 const handleClick = (data) => () => {
@@ -50,7 +50,7 @@ const handleClick = (data) => () => {
 >
 	{#if $menuStateContext?.hasIcon}
 		<div class="menuItemIcon">
-			<slot name="iconSLot">
+			<slot name="iconSlot">
 				<Icon {icon} color={iconColor} fontSize={iconSize} /></slot
 			>
 		</div>

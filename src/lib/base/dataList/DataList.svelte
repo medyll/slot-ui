@@ -53,9 +53,7 @@
 	/** used only if data is provided */
 	export let idField: string | undefined = undefined;
 	/** columns declaration */
-	export let columns: Record<string, DataCellType> = {};
-	/** columns declaration */
-	export let keepUngrouped: boolean = false;
+	export let columns: Record<string, DataCellType> = {}; 
 
 	export let virtualizer: boolean = false;
 
@@ -131,7 +129,7 @@
 		};
 	}
 
-	$: groups = groupByField ? dataOp.groupBy(data, groupByField, { keepUngroupedData: keepUngrouped }) : {};
+	$: groups = groupByField ? dataOp.groupBy(data, groupByField, { keepUngroupedData: Boolean(groupByOptions.showEmptyGroup) }) : {};
 </script>
 
 {#if groupByField}

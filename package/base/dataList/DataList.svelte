@@ -48,8 +48,6 @@ export let data = [];
 export let idField = undefined;
 /** columns declaration */
 export let columns = {};
-/** columns declaration */
-export let keepUngrouped = false;
 export let virtualizer = false;
 let hidedGroups = {};
 let sortedData;
@@ -116,7 +114,7 @@ function getGroupProps(content) {
         selectorFieldValue
     };
 }
-$: groups = groupByField ? dataOp.groupBy(data, groupByField, { keepUngroupedData: keepUngrouped }) : {};
+$: groups = groupByField ? dataOp.groupBy(data, groupByField, { keepUngroupedData: Boolean(groupByOptions.showEmptyGroup) }) : {};
 </script>
 
 {#if groupByField}
