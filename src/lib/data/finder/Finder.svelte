@@ -87,8 +87,8 @@
 	{/if}
 </container>
 {#if popperOpen}
-	<Popper code="ui" parentNode={container} position="B">
-		<Menu style="max-height:350px;overflow:auto" density="default">
+	<Popper code="ui" parentNode={container} position="BC" stickToHookWidth={true}>
+		<Menu style="max-height:350px;overflow:auto;width:100%;" density="default">
 			<MenuItem
 				divider={true}
 				text="strict"

@@ -16,6 +16,7 @@
 
 	export let code: string | undefined = undefined;
 	export let parentNode: HTMLElement | undefined = undefined;
+	export let stickToHookWidth: boolean = false;
 	export let component: SvelteComponentDev | undefined = undefined;
 	export let componentProps: {} | undefined = {};
 	export let position: StickToPositionType = 'BC';
@@ -41,8 +42,14 @@
 	};
 
 	const actions = {
+		toggle: () => {
+			console.log('toggle');
+		},
 		show: () => {
 			console.log('show');
+		},
+		hide: () => {
+			console.log('hide');
 		},
 		destroy: () => {
 			console.log('destroy');
@@ -54,9 +61,7 @@
 		const event = custom_event('clickAway', {}, { bubbles: true });
 		parentNode?.dispatchEvent(event);
 		popperList[code]?.$destroy();
-		if (autoClose) {
-			isOpen=false
-		}
+		if (autoClose) isOpen=false
 	};
 
 	onMount(()=>{
@@ -95,7 +100,7 @@
 	class="popper {className}"
 	on:popper:close={actions.destroy}
 	use:clickAway={{ action: clickedAway }}
-	use:stickTo={{ parentNode, position: position }}
+	use:stickTo={{ parentNode, position: position,stickToHookWidth }}
 	{style} 
 >
 	<slot>

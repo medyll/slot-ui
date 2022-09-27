@@ -7,13 +7,14 @@ export type NewStickToPositionType = | 'TT' | 'RR' | 'BB' | 'LL' | 'CC'
 
 
 type StickToProps = {
-  parentNode: HTMLElement
+  parentNode: HTMLElement | undefined 
   position?: StickToPositionType
   disabled?: boolean
+  stickToHookWidth?: boolean
 }
 
 export function stickTo(node: HTMLElement, props: StickToProps) {
-  const { parentNode, position } = props;
+  const { parentNode, position,stickToHookWidth } = props;
 
   let intervaller: any;
 
@@ -62,6 +63,9 @@ export function stickTo(node: HTMLElement, props: StickToProps) {
     node.style.bottom = '';
     node.style.top = '';
 
+    if(stickToHookWidth) node.style.minWidth = String(parentPos.width)+'px'
+
+
     if (newPosition.includes('B')) {
       node.style.bottom = '';
       node.style.top = String(parentPos.bottom) + 'px';
@@ -87,7 +91,7 @@ export function stickTo(node: HTMLElement, props: StickToProps) {
 
   intervaller = setInterval(() => {
     setPosition(node, position, parentNode)
-  }, 5000);
+  }, 250);
 
   return {
     destroy() {
