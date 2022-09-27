@@ -1,4 +1,4 @@
-import {writable, get, readable, derived} from 'svelte/store';
+import {writable, get, readable, derived, type Writable} from 'svelte/store';
 
 
 export type IChromeArgs  = {
@@ -95,7 +95,7 @@ export function createWindowStore() {
 
 export const windowsStore = createWindowStore();
 
-export function getAppWindowStore(frameId: string | number) {
+export function getAppWindowStore(frameId: string | number): Writable<WindowStoreListType> {
   
   const {subscribe} = derived([windowsStore], ([$windowsStore]) => {
     

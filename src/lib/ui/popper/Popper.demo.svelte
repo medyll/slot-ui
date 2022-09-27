@@ -6,7 +6,7 @@
 	let isOpen = false;
 </script>
 
-<ComponentExample component="Popper">
+<ComponentExample component="Popper" cite="This Popper is the base of all the flyout stuff">
 	<div class="flex-v gap-large">
 		<h5>Popper slot</h5>
 		<div>
