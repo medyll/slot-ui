@@ -1,7 +1,7 @@
 import { includes, replace } from 'lodash';
 import { elem } from '../../engine/elem.js';
 export function stickTo(node, props) {
-    const { parentNode, position } = props;
+    const { parentNode, position, stickToHookWidth } = props;
     let intervaller;
     if (node && parentNode) {
         document.body.appendChild(node);
@@ -46,6 +46,8 @@ export function stickTo(node, props) {
         node.style.left = '';
         node.style.bottom = '';
         node.style.top = '';
+        if (stickToHookWidth)
+            node.style.minWidth = String(parentPos.width) + 'px';
         if (newPosition.includes('B')) {
             node.style.bottom = '';
             node.style.top = String(parentPos.bottom) + 'px';
@@ -67,7 +69,7 @@ export function stickTo(node, props) {
     }
     intervaller = setInterval(() => {
         setPosition(node, position, parentNode);
-    }, 5000);
+    }, 250);
     return {
         destroy() {
             node.remove();

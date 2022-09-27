@@ -7,6 +7,7 @@ declare const __propDef: {
         class?: string | undefined;
         code?: string | undefined;
         parentNode?: HTMLElement | undefined;
+        stickToHookWidth?: boolean | undefined;
         component?: SvelteComponentDev | undefined;
         componentProps?: {} | undefined;
         position?: StickToPositionType | undefined;
@@ -47,6 +48,9 @@ export default class Popper extends SvelteComponentTyped<PopperProps, PopperEven
     get parentNode(): HTMLElement | undefined;
     /**accessor*/
     set parentNode(_: HTMLElement | undefined);
+    get stickToHookWidth(): boolean | undefined;
+    /**accessor*/
+    set stickToHookWidth(_: boolean | undefined);
     get component(): SvelteComponentDev | undefined;
     /**accessor*/
     set component(_: SvelteComponentDev | undefined);
