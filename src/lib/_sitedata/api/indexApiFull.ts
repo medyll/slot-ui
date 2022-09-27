@@ -1,3 +1,4 @@
+import ComponentExampleApiReadMe from "$sitedata/api/ComponentExample.api.md";
 import AlertApiReadMe from "$sitedata/api/Alert.api.md";
 import AvatarApiReadMe from "$sitedata/api/Avatar.api.md";
 import BackdropApiReadMe from "$sitedata/api/Backdrop.api.md";
@@ -78,9 +79,9 @@ import ThemeSwitcherApiReadMe from "$sitedata/api/ThemeSwitcher.api.md";
 import ToastApiReadMe from "$sitedata/api/Toast.api.md";
 import TopBarApiReadMe from "$sitedata/api/TopBar.api.md";
 import WindowApiReadMe from "$sitedata/api/Window.api.md";
-import ComponentExampleApiReadMe from "$sitedata/api/ComponentExample.api.md";
 
-export const componentApiReadMe = {alertApi:AlertApiReadMe,
+export const componentApiReadMe = {componentexampleApi:ComponentExampleApiReadMe,
+alertApi:AlertApiReadMe,
 avatarApi:AvatarApiReadMe,
 backdropApi:BackdropApiReadMe,
 badgeApi:BadgeApiReadMe,
@@ -159,5 +160,4 @@ taskbarApi:TaskbarApiReadMe,
 themeswitcherApi:ThemeSwitcherApiReadMe,
 toastApi:ToastApiReadMe,
 topbarApi:TopBarApiReadMe,
-windowApi:WindowApiReadMe,
-componentexampleApi:ComponentExampleApiReadMe}
+windowApi:WindowApiReadMe}

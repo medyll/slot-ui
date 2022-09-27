@@ -2,7 +2,7 @@
 
 <script>import { getAppWindowStore, windowsStore } from './window.store.js';
 import { draggable } from '@neodrag/svelte';
-import { onDestroy } from 'svelte';
+import { onDestroy, onMount } from 'svelte';
 import IconButton from '../../base/button/IconButton.svelte';
 import Button from '../../base/button/Button.svelte';
 import Icon from '../../base/icon/Icon.svelte';
@@ -17,7 +17,7 @@ export let description = '';
 /** boolean to show the window */
 export let open = true;
 /** state of the window */
-export let minimized = true;
+export let minimized = false;
 export let maximized = true;
 /** is on top of others*/
 export let active = true;
@@ -26,29 +26,36 @@ export let onClose = () => { };
 export let onCancel = () => { };
 export let onValidate = () => { };
 /** default opneing position */
-export let defaultPosition = { x: 960, y: 960 };
+export let defaultPosition = { x: 0, y: 0 };
 /** internal use */
 export let self = null;
 /** reference to the component's DOM container */
 let element;
 let activeFrame;
-let x = defaultPosition?.x ?? 350;
-let y = defaultPosition?.y ?? 50;
+let x = defaultPosition?.x ?? '100px';
+let y = defaultPosition?.y ?? '50px';
 let appWindowStore;
-let appWindow;
 let position;
 $: appWindowStore = getAppWindowStore(frameId);
 if (!$appWindowStore) {
-    console.log('nope');
     windowsStore.create({
-        frameId
+        frameId,
+        title,
+        secondaryTitle,
+        description,
+        open,
+        minimized,
+        maximized,
+        active,
+        onClose,
+        onCancel,
+        onValidate
     });
 }
-$: appWindow = $appWindowStore;
 $: position = {
     position: $appWindowStore?.position ?? { x, y }
 };
-$: if (!appWindow?.open) {
+$: if (!$appWindowStore?.open) {
     if ($$props.self)
         $$props.self.$destroy();
 }
@@ -60,7 +67,7 @@ const dragOptions = {
     defaultPosition: { x, y },
     onDragStart: (args) => {
         // updatePos(args);
-        appWindowStore.makeOnTop();
+        $appWindowStore.makeOnTop();
     },
     onDrag: (args) => { },
     onDragEnd: (args) => {
@@ -70,21 +77,27 @@ const dragOptions = {
 onDestroy(() => {
     console.log('destroyed !!!');
 });
+onMount(() => {
+    if (element.parentNode !== document.body)
+        document.body.appendChild(element);
+});
 function updatePos(args) {
-    appWindowStore.updatePos({
+    /* $appWindowStore.updatePos({
         x: args.offsetX,
         y: args.offsetY
-    });
+    }); */
 }
 function handleClick(args) {
     windowsStore.activeFrame.set(frameId);
-    appWindowStore.makeOnTop();
+    $appWindowStore.makeOnTop();
 }
 function handleClose(args) {
-    appWindowStore.remove();
+    $appWindowStore.close();
+    if ($$props.self)
+        $appWindowStore.remove();
 }
 </script>
-
+{#if $appWindowStore.open}
 <div
 	bind:this={element}
 	class="window"
@@ -124,19 +137,19 @@ function handleClose(args) {
 		<Button on:click={handleClose}>Validate {frameId}</Button>
 	</div>
 </div>
-
+{/if}
 <style>.window {
   display: block;
+  position: absolute;
   border-radius: 6px;
   background-color: var(--theme-color-background);
   color: var(--theme-color-text);
   border: 1px solid rgba(255, 255, 255, 0.1);
   min-width: 250px;
-  position: absolute;
   top: 0;
   left: 0;
   overflow: hidden;
-  z-index: 5000;
+  z-index: 70000;
   max-height: 100%;
 }
 .window .bar {

@@ -3,7 +3,7 @@ import { type SvelteComponentDev } from 'svelte/internal';
 import { type StickToPositionType } from '../../uses/stickTo/stickTo.js';
 declare const __propDef: {
     props: {
-        /** popper HTMLDivElement */ element?: HTMLElement | undefined;
+        /** popper HTMLDivElement */ element?: Element | undefined;
         class?: string | undefined;
         code?: string | undefined;
         parentNode?: HTMLElement | undefined;
@@ -35,9 +35,9 @@ export default class Popper extends SvelteComponentTyped<PopperProps, PopperEven
     get hide(): () => void;
     get show(): () => void;
     get clickedAway(): () => void;
-    get element(): HTMLElement | undefined;
+    get element(): Element | undefined;
     /**accessor*/
-    set element(_: HTMLElement | undefined);
+    set element(_: Element | undefined);
     get class(): string | undefined;
     /**accessor*/
     set class(_: string | undefined);

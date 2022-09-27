@@ -1,7 +1,7 @@
 ```ts 
 __propDef: {
     props: {
-        /** popper HTMLDivElement */ element?: HTMLElement | undefined;
+        /** popper HTMLDivElement */ element?: Element | undefined;
         class?: string | undefined;
         code?: string | undefined;
         parentNode?: HTMLElement | undefined;
