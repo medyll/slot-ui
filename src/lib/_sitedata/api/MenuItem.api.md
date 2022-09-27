@@ -21,7 +21,7 @@ declare const __propDef: {
     };
     slots: {
         divider: {};
-        iconSLot: {};
+        iconSlot: {};
         default: {};
         textSlot: {};
         actionSlot: {};

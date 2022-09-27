@@ -23,6 +23,7 @@ import Jsonerdemosvelte from "$lib/data/jsoner/Jsoner.demo.svelte";
 import Sorterdemosvelte from "$lib/data/sorter/Sorter.demo.svelte"; 
 import Framedemosvelte from "$lib/ui/frame/Frame.demo.svelte"; 
 import Menudemosvelte from "$lib/ui/menu/Menu.demo.svelte"; 
+import Popperdemosvelte from "$lib/ui/popper/Popper.demo.svelte"; 
 import Windowdemosvelte from "$lib/ui/window/Window.demo.svelte";  
  export const slotUiComponentList = [ {name:"Alert",code:"alert",component:Alertdemosvelte},
 {name:"Avatar",code:"avatar",component:Avatardemosvelte},
@@ -49,4 +50,5 @@ import Windowdemosvelte from "$lib/ui/window/Window.demo.svelte";
 {name:"Sorter",code:"sorter",component:Sorterdemosvelte},
 {name:"Frame",code:"frame",component:Framedemosvelte},
 {name:"Menu",code:"menu",component:Menudemosvelte},
+{name:"Popper",code:"popper",component:Popperdemosvelte},
 {name:"Window",code:"window",component:Windowdemosvelte} ] 

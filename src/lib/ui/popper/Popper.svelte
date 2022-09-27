@@ -1,7 +1,7 @@
 <svelte:options accessors={true} />
 
 <script lang="ts">
-	import { custom_event, type SvelteComponentDev } from 'svelte/internal';
+	import { custom_event, onMount, type SvelteComponentDev } from 'svelte/internal';
 	import { stickTo, type StickToPositionType } from '../../uses/stickTo/stickTo.js';
 	import { clickAway } from '../../uses/clickAway/clickAway.js';
 	import { popperList } from './actions.js';
@@ -9,7 +9,7 @@
 	import { fade } from 'svelte/transition';
 
 	/** popper HTMLDivElement */
-	export let element: HTMLElement | undefined = undefined;
+	export let element: Element | undefined = undefined;
 	let className = '';
 	export { className as class };
 	let zIndex;
@@ -59,6 +59,19 @@
 		}
 	};
 
+	onMount(()=>{
+		// who is the parent for stickTo ??
+		if(parentNode){
+
+		}else if($$slots.holderSlot){ 
+			// if holderSlot, then make it the stickTo parentNode
+			parentNode =  holderSlotRef ?? document.body;
+		}else{
+			// if no props parentNode, use element.parentNode
+			parentNode = element?.parentElement ?? document.body
+		}
+	})
+
 	let siblings: HTMLCollection | any[] = [];
 
 	$: siblings = Array.prototype.slice.call(element?.parentElement?.children ?? []) ?? [];
@@ -67,20 +80,16 @@
 		// @ts-ignore
 		return val?.style?.zIndex >= prev ? val?.style?.zIndex + 1 : prev;
 	}, 0);
-
-	// if holderSlot, then make it the stickTo parentNode
-	$: if ($$slots.holderSlot  && element && holderSlotRef) parentNode = holderSlotRef ?? document.body;
-	// if no props parentNode, use element.parentNode
-	$: if (!$$slots.holderSlot && !parentNode && element) parentNode = element?.parentElement ?? document.body;
+ 
  
 </script>
 
 {#if $$slots.holderSlot}
-<div bind:this={holderSlotRef} style="position:relative">
+<div bind:this={holderSlotRef} style="position:relative;display:inline-block">
 	<slot name="holderSlot" />
 </div>
 {/if}
-{#if ((isOpen && autoClose) || (!autoClose)) }
+{#if (parentNode && ((isOpen && autoClose) || (!autoClose))) }
 <div
 	bind:this={element}
 	class="popper {className}"
@@ -102,14 +111,13 @@
 <style lang="scss">
 	.popper {
 		z-index: 10000;
-		border-radius: var(--css-popper-radius, var(--radius-small));
+		border-radius: var(--css-popper-radius, var(--radius-tiny));
 		overflow: hidden;
 		position: absolute;
 		box-shadow: var(--box-shad-4);
-		background-color: var(--theme-color-background-alpha-low);
-		backdrop-filter: blur(10px);
+		background-color: var(--theme-color-background-alpha);
+		backdrop-filter: blur(30px);
 		display: inline-block;
-		width: auto;
 		top: 0;
 
 	}

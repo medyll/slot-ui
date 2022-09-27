@@ -63,38 +63,6 @@
 is a datalist table <br /> B. Franklin, 1854"
 >
 	<div class="flex-v gap-medium">
-		<div>
-			<div class="grid grid-cols-3 gap-large border ">
-				<div style="width:100px" class="border">heredere</div>
-				<div><div>heredere</div></div>
-				<div><div>heredere</div></div>
-				<div><div>heredere</div></div>
-			</div>
-		</div>
-		<div class="flex-h flex-align-middle-center gap-small pos-rel">
-			<!-- <Button naked size="tiny" icon="chevron-left" />
-			<div class="text-center">page<br />3</div>
-			<Button naked size="tiny" icon="chevron-right" /> -->
-			<!-- <Popper bind:isOpen position="BC" autoClose  class="w-large marg-t-1"  >
-				<div slot="holderSlot"  class="flex-h flex-align-middle-center gap-small pos-rel {isOpen ? 'theme-bg-paper shad-3' : ''}">
-					<Button naked size="tiny" icon="chevron-left" />
-					<div on:click={()=>{isOpen=!isOpen}} style="cursor:pointer" class="text-center pointer">page<br />3</div>
-					<Button naked size="tiny" icon="chevron-right" />
-				</div>
-				<div class="pad text-center text-800 border-b">Choose page :</div>
-				<div class="grid grid-cols-6 gap-small pad w-large">
-					{#each [...Array(10)] as page, idx}
-						<Button size="tiny" naked>{idx +1}</Button>
-					{/each}
-				</div>
-				<div class="pad text-center border-b">Choose rows per page :</div>
-				<div class="grid grid-cols-3 gap-small pad text-center">
-					{#each [...Array(6)] as page, idx}
-						<Button size="full" naked>{(idx+1) * 50}</Button>
-					{/each}
-				</div>
-			</Popper> -->
-		</div>
 
 		<!-- <h5>Automatique datalist, without columns definitions</h5>
 		<div class="what   pos-rel  pad">

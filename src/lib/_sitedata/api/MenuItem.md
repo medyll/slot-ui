@@ -19,7 +19,7 @@ __propDef: {
     };
     slots: {
         divider: {};
-        iconSLot: {};
+        iconSlot: {};
         default: {};
         textSlot: {};
         actionSlot: {};
