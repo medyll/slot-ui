@@ -5,6 +5,7 @@ __propDef: {
         class?: string | undefined;
         code?: string | undefined;
         parentNode?: HTMLElement | undefined;
+        stickToHookWidth?: boolean | undefined;
         component?: SvelteComponentDev | undefined;
         componentProps?: {} | undefined;
         position?: StickToPositionType | undefined;

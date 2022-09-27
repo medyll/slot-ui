@@ -12,6 +12,7 @@ export { className as class };
 let zIndex;
 export let code = undefined;
 export let parentNode = undefined;
+export let stickToHookWidth = false;
 export let component = undefined;
 export let componentProps = {};
 export let position = 'BC';
@@ -32,8 +33,14 @@ export const show = function () {
     console.log('show');
 };
 const actions = {
+    toggle: () => {
+        console.log('toggle');
+    },
     show: () => {
         console.log('show');
+    },
+    hide: () => {
+        console.log('hide');
     },
     destroy: () => {
         console.log('destroy');
@@ -44,9 +51,8 @@ export const clickedAway = function () {
     const event = custom_event('clickAway', {}, { bubbles: true });
     parentNode?.dispatchEvent(event);
     popperList[code]?.$destroy();
-    if (autoClose) {
+    if (autoClose)
         isOpen = false;
-    }
 };
 onMount(() => {
     // who is the parent for stickTo ??
@@ -80,7 +86,7 @@ $: zIndex = siblings?.reduce((prev, val) => {
 	class="popper {className}"
 	on:popper:close={actions.destroy}
 	use:clickAway={{ action: clickedAway }}
-	use:stickTo={{ parentNode, position: position }}
+	use:stickTo={{ parentNode, position: position,stickToHookWidth }}
 	{style} 
 >
 	<slot>
