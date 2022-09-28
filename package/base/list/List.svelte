@@ -89,13 +89,18 @@ $: if (data) {
         ], data);
     }
     else {
-        listItems = data.map((dta) => {
-            return {
-                primary: dta?.name ?? dta.code,
-                secondary: dta?.id,
-                data: dta
-            };
-        });
+        try {
+            listItems = data.map((dta) => {
+                return {
+                    primary: dta?.name ?? dta.code,
+                    secondary: dta?.id,
+                    data: dta
+                };
+            });
+        }
+        catch (e) {
+            console.log(e);
+        }
     }
 }
 // $: console.log({ sortedData, data });

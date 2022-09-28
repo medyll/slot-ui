@@ -107,13 +107,16 @@
 				data
 			);
 		} else {
-			listItems = data.map((dta: Data) => {
+			try{
+				listItems = data.map((dta: Data) => {
 				return {
 					primary: dta?.name ?? dta.code,
 					secondary: dta?.id,
 					data: dta
 				};
 			});
+			}catch (e) {console.log(e)}
+			
 		}
 	}
 
