@@ -258,7 +258,7 @@
 	{/if}
 </ul>
 
-<style global lang="scss">
+<style   lang="scss">
 	@import 'List';
 
 </style>

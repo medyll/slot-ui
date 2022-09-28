@@ -230,7 +230,7 @@ let showTitleZone = $$slots.title || title || primary || secondary; // || sorter
 
 <style global>:global(ul) {
   display: flex;
-  flex-direction: columns;
+  flex-direction: column;
 }
 
 :global(ul:focus) {

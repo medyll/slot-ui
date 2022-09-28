@@ -97,7 +97,7 @@ $: if ($listStateContext?.selectorField) {
 
 <style global>:global(ul) {
   display: flex;
-  flex-direction: columns;
+  flex-direction: column;
 }
 
 :global(ul:focus) {

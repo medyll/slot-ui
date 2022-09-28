@@ -23,7 +23,9 @@
 	const handleClick = (tabValue: any) => (event?: Event) => {
 		activeTabCode = tabValue;
 		if(!elem(navElementRef) || !activeTabCode) return 
-		const node = elem(navElementRef).find(`li[data-code=${activeTabCode}]`);
+		const node = elem(navElementRef).find(`[data-code=${activeTabCode}]`);
+
+console.log(node)
 
 		if (node && activeCellElementRef?.parentElement) {
 			boundingClientRect = node.getBoundingClientRect();
@@ -54,28 +56,28 @@
 	class="tabsRoot flex-v {className}"
 	{...$$restProps}
 >
-	<nav bind:this={tabsElementRef} class="tabsNav  flex-align-middle pos-rel">
+	<div bind:this={tabsElementRef} class="tabsNav  flex-align-middle pos-rel">
 		<div>
 			<slot name="tabsFirstTitleSlot" />
 		</div>
-		<ul bind:this={navElementRef} class="tabsRail">
+		<nav bind:this={navElementRef} class="tabsRail">
 			{#each items as item}
-				<li
+				<div
 					data-code={item.code}
 					on:click={handleClick(item.code)}
 					class={activeTabCode === item.code ? 'active' : ''}
 				>
 					<slot {item} name="tabLabelSlot">{item.label}</slot>
-				</li>
+				</div>
 			{/each}
-		</ul>
+		</nav>
 		<div data-coll='red'>
 			<slot name="tabsTitleSlot" />
 		</div>
 		<div>
 			<slot name="tabsButtonSlot" />
 		</div>
-	</nav>
+	</div>
 	<div class="tabsActiveCellContainer">
 		<div bind:this={activeCellElementRef} class="tabSlot" />
 	</div>
@@ -93,9 +95,9 @@
 						style="display:{display};height:100%;position:relative;flex-direction:column"
 					>
 						{#if Boolean(item?.secondary)}
-							<div class=" flex-h pad-tb gap-small">
-								<div class="border-r pad-1 shad-3 radius-tiny theme-bg-paper">
-									<Icon style="display:block" inline={false} icon="info-circle" />
+							<div class=" flex-h pad-tb-2 gap-small">
+								<div class="border-r pad-1 shad-3 radius-tiny ">
+									<Icon style="display:block" inline={false} icon="mdi:info-circle" />
 								</div>
 								<div class="flex-main pad-t-1">{@html item?.secondary}</div>
 							</div>

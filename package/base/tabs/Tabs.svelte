@@ -113,7 +113,11 @@ onMount(() => {
 	</div>
 </div>
 
-<style>.tabsRoot {
+<style>li {
+  display: block;
+}
+
+.tabsRoot {
   position: relative;
   display: flex;
 }
@@ -151,6 +155,7 @@ onMount(() => {
   flex-direction: column;
 }
 .tabsRoot .tabsNav .tabsRail {
+  display: flex;
   flex: 1;
 }
 .tabsRoot .tabsContent {
