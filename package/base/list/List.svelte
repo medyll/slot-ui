@@ -228,7 +228,17 @@ let showTitleZone = $$slots.title || title || primary || secondary; // || sorter
 	{/if}
 </ul>
 
-<style global>:global(li.listItemTitle),
+<style global>:global(ul) {
+  display: flex;
+  flex-direction: columns;
+}
+
+:global(ul:focus) {
+  outline: 0;
+  outline-offset: -4px;
+}
+
+:global(li.listItemTitle),
 :global(li.listItem) {
   display: flex;
   align-items: center;
@@ -274,17 +284,14 @@ let showTitleZone = $$slots.title || title || primary || secondary; // || sorter
 :global(li.listItemTitle.density-tight),
 :global(li.listItem.density-tight) {
   padding: 0.5rem 0;
-  margin: 0.125rem 0.5rem;
 }
 :global(li.listItemTitle.density-default),
 :global(li.listItem.density-default) {
   padding: 1rem 0;
-  margin: 0.25rem 0.5rem;
 }
 :global(li.listItemTitle.density-kind),
 :global(li.listItem.density-kind) {
   padding: 1.5rem 0;
-  margin: 0.5rem 0.5rem;
 }
 
 :global(li.listItemTitle) {
@@ -310,9 +317,4 @@ let showTitleZone = $$slots.title || title || primary || secondary; // || sorter
   background-color: var(--theme-color-primary);
   border-radius: 8px;
   left: -1px;
-}
-
-:global(ul:focus) {
-  outline: 0;
-  outline-offset: -4px;
 }</style>

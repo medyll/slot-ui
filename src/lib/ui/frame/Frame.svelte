@@ -83,30 +83,18 @@
     flex-direction: column;
     overflow: hidden;
     position: relative;
-    background-color: var(--css-frame-bg-color, var(--theme-bg));
-    //backdrop-filter: var(--css-frame-backdrop-blur, blur(30px));
+    background-color: var(--css-frame-bg-color, var(--theme-bg-paper));
+    backdrop-filter: var(--css-frame-backdrop-blur, blur(30px));
     overflow:hidden;
 
     .frameContainer {
 
       .navLeft {
         z-index:1;
-        max-width: 288px;
         border-right: 1px solid var(--theme-color-primary);
-        //background-color: red;
         height: 100%;
         position:relative;
-        //box-shadow: var(--box-shad-3);
       }
-
-      /* .content {
-        flex: 1 auto;
-        z-index:0;
-        position:relative;
-        background-color: red;
-        // box-shadow: var(--box-shad-3);
-
-      } */
     }
 
   }

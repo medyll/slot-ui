@@ -44,7 +44,7 @@ onMount(() => {
 <div
 	bind:this={element}
 	data-orientation={orientation}
-	class="tabsRoot {className}"
+	class="tabsRoot flex-v {className}"
 	{...$$restProps}
 >
 	<nav bind:this={tabsElementRef} class="tabsNav  flex-align-middle pos-rel">

@@ -260,10 +260,5 @@
 
 <style global lang="scss">
 	@import 'List';
-	ul {
-	}
-	ul:focus {
-		outline: 0;
-		outline-offset: -4px;
-	}
+
 </style>
