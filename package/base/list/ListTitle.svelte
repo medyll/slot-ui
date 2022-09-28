@@ -52,7 +52,6 @@ export let density = 'default';
   align-items: center;
   position: relative;
   border-radius: 4px;
-  margin: 0 0.25rem;
   max-width: 100%;
 }
 :global(li.listItemTitle) :global(.listItemContent),

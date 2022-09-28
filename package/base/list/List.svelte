@@ -176,8 +176,8 @@ let showTitleZone = $$slots.title || title || primary || secondary; // || sorter
 		<slot name="commandBarSlot" />
 	{/if}
 	{#if virtualize}
-		<Virtualize height="100%" items={listItems} let:item> 
-			<svelte:fragment slot="virtualizeHeaderSlot"> 
+		<Virtualize height="100%" items={listItems} let:item>
+			<svelte:fragment slot="virtualizeHeaderSlot">
 				{#if showTitleZone}
 					<slot name="title">
 						<ListTitle primary={primary ?? title} {secondary} {icon}>
@@ -189,7 +189,9 @@ let showTitleZone = $$slots.title || title || primary || secondary; // || sorter
 			{#if item}
 				<slot listItem={item}>
 					<ListItem class="" {showIcon} {density} data={item.data}>
-						<span slot="icon"><Icon fontSize="tiny" icon={item?.icon} /></span>
+						<span slot="icon">
+							{#if item?.icon}<Icon fontSize="tiny" icon={item?.icon} />{/if}
+						</span>
 						<span slot="primary">{null_to_empty(item?.primary)}</span>
 						<span slot="secondary">{null_to_empty(item?.secondary)}</span>
 						<span slot="action">{null_to_empty(item?.action)}</span>
@@ -202,8 +204,8 @@ let showTitleZone = $$slots.title || title || primary || secondary; // || sorter
 			<slot name="title">
 				<ListTitle primary={primary ?? title} {secondary} {icon} />
 			</slot>
-		{/if} 
-		{#if listItems} 
+		{/if}
+		{#if listItems}
 			{#each listItems as item}
 				<slot listItem={item}>
 					<ListItem
@@ -222,13 +224,13 @@ let showTitleZone = $$slots.title || title || primary || secondary; // || sorter
 					</ListItem>
 				</slot>
 			{/each}
-		{:else} 
-		<slot></slot>
+		{:else}
+			<slot />
 		{/if}
 	{/if}
 </ul>
 
-<style  >ul {
+<style>ul {
   display: flex;
   flex-direction: column;
 }
@@ -244,7 +246,6 @@ li.listItem {
   align-items: center;
   position: relative;
   border-radius: 4px;
-  margin: 0 0.25rem;
   max-width: 100%;
 }
 li.listItemTitle .listItemContent,

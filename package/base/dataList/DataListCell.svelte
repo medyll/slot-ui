@@ -86,7 +86,6 @@ $: if (inHeader) {
 const createColumnsDef = (element, field, index) => {
     if (!element)
         return;
-    console.log(field, 'createColumnsDef', $dataListContext.columns);
     $dataListContext.columns[field] = {
         field,
         style: 'style:' + element.offsetWidth + 'px;' + (element.getAttribute('style') ?? ''),
