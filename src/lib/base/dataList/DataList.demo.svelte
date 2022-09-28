@@ -9,13 +9,13 @@
 	import Button from '$lib/base/button/Button.svelte';
 	import Popper from '$lib/ui/popper/Popper.svelte';
 
-	let data = [...Array(50)].map((caches, index: number) => {
+	let data = [...Array(1500)].map((caches, index: number) => {
 		return {
 			id: index,
 			index,
 			name: 'name ' + index,
 			lastName: 'lastName ' + index,
-			group: 'group-' + getRandomInt(4),
+			group: 'group-' + getRandomInt(100),
 			groupedArrayOfObjects: [
 				{ name: 'nested' + getRandomInt(4) },
 				{ name: 'nested' + getRandomInt(4) }
