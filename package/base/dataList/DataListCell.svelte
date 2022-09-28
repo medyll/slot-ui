@@ -27,6 +27,7 @@ onMount(async () => {
     // - the element with : don't do nothing, but should ! throw error ?
     if (inHeader) {
         if ($dataListContext.hasColumnsProps && field) {
+            await tick();
             //console.log('hasColumnsProps && field');
             if (!$dataListContext.columns[field]) {
                 createColumnsDef(element, field, colIndex);
@@ -38,6 +39,7 @@ onMount(async () => {
             }
         }
         else if ($dataListContext.hasColumnsProps) {
+            await tick();
             //console.log('hasColumnsProps');
             const def = Object.values($dataListContext.columns)[colIndex];
             applyColumnsDefStyle(element, def);
@@ -83,9 +85,10 @@ $: if (inHeader) {
             : 'mdi:dots-horizontal';
     showChip = $dataListContext.sortBy.activeSortByField === field;
 }
-const createColumnsDef = (element, field, index) => {
+const createColumnsDef = async (element, field, index) => {
     if (!element)
         return;
+    await tick();
     $dataListContext.columns[field] = {
         field,
         style: 'style:' + element.offsetWidth + 'px;' + (element.getAttribute('style') ?? ''),
@@ -96,7 +99,8 @@ const createColumnsDef = (element, field, index) => {
     };
     $dataListContext.hasColumnsProps = true;
 };
-const updateColumnsDef = (field, payload) => {
+const updateColumnsDef = async (field, payload) => {
+    await tick();
     $dataListContext.columns[field] = {
         ...$dataListContext.columns[field],
         ...payload
@@ -110,8 +114,7 @@ const applyColumnsDefStyle = async (element, colDef) => {
         return;
     // throw new Error('Column definition is undefined : could not apply to element ' + colIndex);
     await tick();
-    if (colDef.style)
-        setStyle(element, colDef);
+    // if (colDef.style) setStyle(element, colDef);
 };
 /**
  * used if no columns and no props.field

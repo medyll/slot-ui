@@ -37,8 +37,9 @@
 
 		if (inHeader) {
 			if ($dataListContext.hasColumnsProps && field) {
+				await tick()
 				//console.log('hasColumnsProps && field');
-				if (!$dataListContext.columns[field]) {
+				if (!$dataListContext.columns[field]) {					
 					createColumnsDef(element, field, colIndex);
 					applyColumnsDefStyle(element, $dataListContext.columns[field]);
 					// throw new Error('columns exists but does not have field : '+field);
@@ -48,6 +49,8 @@
 					updateColumnsDef(field, { width: element.offsetWidth + 'px' });
 				}
 			} else if ($dataListContext.hasColumnsProps) {
+				
+				await tick()
 				//console.log('hasColumnsProps');
 				const def: DataCellType = Object.values($dataListContext.columns)[colIndex];
 				applyColumnsDefStyle(element, def);
@@ -99,8 +102,9 @@
 		showChip = $dataListContext.sortBy.activeSortByField === field;
 	}
 
-	const createColumnsDef = (element: HTMLElement | undefined, field: string, index: number) => {
+	const createColumnsDef = async (element: HTMLElement | undefined, field: string, index: number) => {
 		if (!element) return; 
+		await tick()
 		$dataListContext.columns[field] = {
 			field,
 			style: 'style:' + element.offsetWidth + 'px;' + (element.getAttribute('style') ?? ''),
@@ -112,7 +116,8 @@
 		$dataListContext.hasColumnsProps = true;
 	};
 
-	const updateColumnsDef = (field: string, payload: Record<string, any>) => {
+	const updateColumnsDef = async (field: string, payload: Record<string, any>) => {
+		await tick()
 		$dataListContext.columns[field] = {
 			...$dataListContext.columns[field],
 			...payload
@@ -125,7 +130,7 @@
 		if (!colDef) return;
 		// throw new Error('Column definition is undefined : could not apply to element ' + colIndex);
 		await tick();
-		if (colDef.style) setStyle(element, colDef);
+		// if (colDef.style) setStyle(element, colDef);
 	};
 
 	/**

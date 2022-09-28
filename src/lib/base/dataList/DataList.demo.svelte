@@ -9,7 +9,7 @@
 	import Button from '$lib/base/button/Button.svelte';
 	import Popper from '$lib/ui/popper/Popper.svelte';
 
-	let data = [...Array(1500)].map((caches, index: number) => {
+	let data = [...Array(50)].map((caches, index: number) => {
 		return {
 			id: index,
 			index,
@@ -78,14 +78,14 @@ is a datalist table <br /> B. Franklin, 1854"
 		</div> -->
 		<h5>grouped Datatable</h5>
 		<!-- groupByField="group" -->
-		<div class="what   pos-rel   pad" style="height:750px;overflow:auto;">
+		<div class="what   pos-rel   pad" style="height:550px;overflow:auto;">
 			<DataList
 				style="max-height:250px;overflow:auto;"
 				{columns}
 				{data}
 				let:item
 				virtualizer={true}
-				groupByField="groupedArrayOfObjects.name"
+				groupByField="group"
 			>
 				<DataListHead slot="head">
 					<DataListCell field="index">index</DataListCell>
