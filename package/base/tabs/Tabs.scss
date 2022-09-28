@@ -1,25 +1,33 @@
-li{
-  display:block;
-}
 .tabsRoot {
   position: relative;
-  display: flex;   
+  display: flex;
   &[data-orientation="horizontal"] {
     ul {
-      flex-direction: column; 
+      flex-direction: column;
     }
   }
   &[data-orientation="vertical"] {
     flex-direction: column;
   }
-  ul {
+}
+
+.tabsNav {
+  padding: 0.25rem 0; 
+  border-bottom: 1px solid var(--slotui-tabs-nav-border-color, var(--theme-color-primary-alpha-high));
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  &[data-orientation="horizontal"] {
+    flex-direction: column;
+  }
+  .tabsRail {
     display: flex;
+    flex: 1;
     flex-wrap: wrap;
     padding-left: 0;
     margin-bottom: 0;
-    list-style: none;
-
-    li {
+    > div {
       padding: var(--box-density-preset-small);
       min-width: 48px;
       cursor: pointer;
@@ -29,44 +37,27 @@ li{
       }
     }
   }
-
-  .tabsNav {
-    padding: 0.25rem 0;
-    gap: 1rem;
-    border-bottom: 1px solid var(--slotui-tabs-nav-border-color,var(--theme-color-primary-alpha-high));
-    position: relative;
-    display:flex;
-    align-items:center;
-    width:100%;
-    &[data-orientation="horizontal"] {
-      flex-direction: column;
-    }
-    .tabsRail{display:flex;flex:1}
-  }
-
-  .tabsContent {
-    border: 1px solid var(--slotui-tabs-content-border-color,var(--theme-color-foreground-alpha-high)) ;
-    border-top: 1px solid transparent;
-    border-radius: 3px;
-    padding: 0.5rem;
+ 
+  .tabsContent {    
     background-color: var(--theme-color-background);
     position: relative;
-    width:100%;
+    width: 100%;
   }
 
   .tabsActiveCellContainer {
     top: auto;
     position: relative;
-    height: 4px;
+    min-height: 4px;
     transition: all 0.25s;
-
-    .tabSlot {
-      border-radius: 6px;
-      height: 4px;
-      background-color: var(--theme-color-primary);
-      width: 100%;
-      position: absolute;
-      transition: all 0.25s;
-    }
   }
 }
+
+  .tabSlot {
+    border-radius: 6px;
+    min-height: 4px;
+    background-color: var(--theme-color-primary);
+    width: 100%;
+    position: absolute;
+    transition: all 0.25s;
+    z-index:200
+  }

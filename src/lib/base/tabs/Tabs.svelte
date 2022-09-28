@@ -24,8 +24,7 @@
 		activeTabCode = tabValue;
 		if(!elem(navElementRef) || !activeTabCode) return 
 		const node = elem(navElementRef).find(`[data-code=${activeTabCode}]`);
-
-console.log(node)
+ 
 
 		if (node && activeCellElementRef?.parentElement) {
 			boundingClientRect = node.getBoundingClientRect();

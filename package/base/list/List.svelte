@@ -228,18 +228,18 @@ let showTitleZone = $$slots.title || title || primary || secondary; // || sorter
 	{/if}
 </ul>
 
-<style global>:global(ul) {
+<style  >ul {
   display: flex;
   flex-direction: column;
 }
 
-:global(ul:focus) {
+ul:focus {
   outline: 0;
   outline-offset: -4px;
 }
 
-:global(li.listItemTitle),
-:global(li.listItem) {
+li.listItemTitle,
+li.listItem {
   display: flex;
   align-items: center;
   position: relative;
@@ -247,54 +247,54 @@ let showTitleZone = $$slots.title || title || primary || secondary; // || sorter
   margin: 0 0.25rem;
   max-width: 100%;
 }
-:global(li.listItemTitle) :global(.listItemContent),
-:global(li.listItem) :global(.listItemContent) {
+li.listItemTitle .listItemContent,
+li.listItem .listItemContent {
   flex: 1;
   padding: 0 0.5rem;
   min-width: auto;
   overflow: hidden;
 }
-:global(li.listItemTitle) :global(.listItemContent) :global([slot=primary]),
-:global(li.listItem) :global(.listItemContent) :global([slot=primary]) {
+li.listItemTitle .listItemContent [slot=primary],
+li.listItem .listItemContent [slot=primary] {
   text-overflow: ellipsis;
   display: block;
   width: 100%;
   overflow: hidden;
 }
-:global(li.listItemTitle) :global(.listItemContent) :global([slot=secondary]),
-:global(li.listItem) :global(.listItemContent) :global([slot=secondary]) {
+li.listItemTitle .listItemContent [slot=secondary],
+li.listItem .listItemContent [slot=secondary] {
   opacity: 0.8;
   text-overflow: ellipsis;
   display: block;
   width: 100%;
   overflow: hidden;
 }
-:global(li.listItemTitle) :global(.listItemAction),
-:global(li.listItem) :global(.listItemAction) {
+li.listItemTitle .listItemAction,
+li.listItem .listItemAction {
   padding: 0 0.5rem;
 }
-:global(li.listItemTitle) :global(.listItemIcon),
-:global(li.listItem) :global(.listItemIcon) {
+li.listItemTitle .listItemIcon,
+li.listItem .listItemIcon {
   text-align: center;
   width: 2rem;
   min-width: 2rem;
   overflow: hidden;
   opacity: 0.8;
 }
-:global(li.listItemTitle.density-tight),
-:global(li.listItem.density-tight) {
+li.listItemTitle.density-tight,
+li.listItem.density-tight {
   padding: 0.5rem 0;
 }
-:global(li.listItemTitle.density-default),
-:global(li.listItem.density-default) {
+li.listItemTitle.density-default,
+li.listItem.density-default {
   padding: 1rem 0;
 }
-:global(li.listItemTitle.density-kind),
-:global(li.listItem.density-kind) {
+li.listItemTitle.density-kind,
+li.listItem.density-kind {
   padding: 1.5rem 0;
 }
 
-:global(li.listItemTitle) {
+li.listItemTitle {
   position: sticky;
   margin-top: 1px !important;
   top: 1px;
@@ -303,14 +303,14 @@ let showTitleZone = $$slots.title || title || primary || secondary; // || sorter
   z-index: 1;
 }
 
-:global(li.listItem:hover) {
+li.listItem:hover {
   background-color: rgba(255, 255, 255, 0.3);
 }
-:global(li.listItem.isActive) {
+li.listItem.isActive {
   background-color: var(--slotui-listitem-active-background, var(--theme-color-primary-alpha-high, black));
   box-shadow: var(--slotui-listitem-active-boxshadow, var(shad-3));
 }
-:global(li.listItem.isActive) :global(.listItemChip) {
+li.listItem.isActive .listItemChip {
   position: absolute;
   height: 50%;
   width: 3px;

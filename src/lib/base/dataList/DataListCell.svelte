@@ -100,8 +100,7 @@
 	}
 
 	const createColumnsDef = (element: HTMLElement | undefined, field: string, index: number) => {
-		if (!element) return;
-		console.log(field, 'createColumnsDef', $dataListContext.columns);
+		if (!element) return; 
 		$dataListContext.columns[field] = {
 			field,
 			style: 'style:' + element.offsetWidth + 'px;' + (element.getAttribute('style') ?? ''),
