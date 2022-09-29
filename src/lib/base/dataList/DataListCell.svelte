@@ -25,6 +25,8 @@
 	export let columnId: string | number | undefined = field ?? crypto.randomUUID();
 	/** set noWrap = true to have ellipsis on this cell content*/
 	export let noWrap: boolean = true;
+/** title */
+export let title:string | undefined = undefined
 
 	let colIndex: number;
 
@@ -156,9 +158,7 @@
 	function resizeEnd() {}
 </script>
 
-{#if inHeader}
-	{@const headStyle =
-		style ?? $dataListContext.columns[field]?.headerStyle ?? $dataListContext.columns[field]?.style}
+{#if inHeader} 
 	<div
 		bind:this={element}
 		data-sortable={true}
@@ -169,7 +169,7 @@
 		on:resizer:start={resizeStart}
 		on:resizer:resize={resizeOn}
 		on:resizer:end={resizeEnd}
-		style="{headStyle};--cell-width:{$dataListContext.columns[field]?.width}"
+		style="{style ?? $dataListContext.columns[field]?.headerStyle ?? $dataListContext.columns[field]?.style};--cell-width:{$dataListContext.columns[field]?.width}"
 		style:width={$dataListContext.columns[field]?.width}
 		style:minWidth={$dataListContext.columns[field]?.width}
 		style:maxWidth={$dataListContext.columns[field]?.width}
@@ -202,7 +202,7 @@
 		style:minWidth={$dataListContext.columns[field]?.width}
 		style:maxWidth={$dataListContext.columns[field]?.width}
 		{...$$restProps}
-		title="{$rowContext?.data?.[field]}"
+		{title}
 	>
 		<slot fieldData={$rowContext?.data?.[field] ?? {}} />
 	</div>

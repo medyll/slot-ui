@@ -47,7 +47,7 @@
 	function checkGetter(columns: Record<string, DataCellType>, field: string, data: Data) {
 		const ret = columns[field]?.getter ? columns[field]?.getter(data) : data[field];
 		// console.log(ret, columns[field])
-		return ret;
+		return sanitizeHtml(ret);
 		//  fieldOrFunction(data?.[field], field)
 	}
 </script>
@@ -69,8 +69,7 @@
 			{@const field = $dataListContext.columns[inItem].field}
 			{@const final = checkGetter($dataListContext.columns, field, data)}
 			<!--  fieldOrFunction(data?.[field], field) -->
-			<DataListCell {field}>
-				<!-- {data?.[field]} -->
+			<DataListCell title={final} {field}>
 				{@html null_to_empty(
 					sanitizeHtml(checkGetter({ ...$dataListContext.columns }, field, data))
 				)}

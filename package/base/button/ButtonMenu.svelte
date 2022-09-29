@@ -14,7 +14,7 @@ export let menuProps = {
         console.log('redfered');
     }
 };
-export let menuPosition = 'BL';
+export let menuPosition = 'BC';
 /*  common slotUi exports*/
 let className = '';
 export { className as class };
@@ -43,7 +43,7 @@ $: openPoppOpt = {
     parentNode: element,
     component: actionComponent,
     componentProps: componentProps ?? {},
-    position: 'BL',
+    position: 'BC',
     disabled: false
 };
 // usePopperOpt={openPoppOpt}

@@ -1,10 +1,12 @@
 .cartoucheHolder {
   border-radius: 6px;
   overflow: hidden;
-  border: 1px solid var(--theme-color-foreground-alpha-high);
 
-  .cartoucheContent {
-    padding: 0.5rem;
+  &[data-bordered=true]{
+    border: 1px solid var(--theme-color-foreground-alpha-high);
+  }
+
+  .cartoucheContent { 
     overflow: hidden;
     background-color: var(--theme-color-background);
   }
@@ -12,25 +14,24 @@
 
 .cartouche {
   display: flex;
-  grid-gap: 8px;
+  gap: 8px;
   background-color: var(--theme-color-background);
   align-items: center;
-
+  padding:0.25rem;
   &:hover {
     background-color: rgba(255, 255, 255, 0.4);
   }
 
-  .cartoucheLabel {
-    flex: 1;
-    cursor:pointer;
-  }
-
-  .icon {
-    // border-right: 1px solid #ededed;
-  }
-
-  .chevron {
-    padding: 0 1rem;
+  .cartoucheLabel { 
     cursor: pointer;
+  }
+ 
+
+  .chevron { 
+    cursor: pointer;
+  }
+
+  .divider{
+    border-bottom: 1px solid var(--theme-color-foreground-alpha); 
   }
 }
