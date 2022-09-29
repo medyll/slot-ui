@@ -41,10 +41,9 @@
 				//console.log('hasColumnsProps && field');
 				if (!$dataListContext.columns[field]) {
 					createColumnsDef(element, field, colIndex);
-					// throw new Error('columns exists but does not have field : '+field);
 				}
 
-				if (!$dataListContext.columns[field].width) {
+				if (!$dataListContext.columns[field]?.width) {
 					updateColumnsDef(field, { width: element.offsetWidth + 'px' });
 				}
 			} else if ($dataListContext.hasColumnsProps) {
@@ -66,7 +65,7 @@
 		// - there is always a columns
 
 		if (!inHeader) {
-			if (!$dataListContext?.hasColumnsProps) throw new Error('No columns have been found');
+			// if (!$dataListContext?.hasColumnsProps) throw new Error('No columns have been found');
 
 			let def: DataCellType;
 			if (field) def = $dataListContext?.columns[field];
@@ -171,6 +170,9 @@
 		on:resizer:resize={resizeOn}
 		on:resizer:end={resizeEnd}
 		style="{headStyle};--cell-width:{$dataListContext.columns[field]?.width}"
+		style:width={$dataListContext.columns[field]?.width}
+		style:minWidth={$dataListContext.columns[field]?.width}
+		style:maxWidth={$dataListContext.columns[field]?.width}
 		{...$$restProps}
 	>
 		<div on:click={() => onSort(field)} class="cellHeader">
@@ -188,6 +190,7 @@
 			{/if}
 		</div>
 	</div>
+	<!-- <div style="height:900px;margin-top:3rem" class="border-3" /> -->
 {:else}
 	<div
 		bind:this={element}
@@ -195,8 +198,11 @@
 		data-noWrap={noWrap}
 		class="dataListCell cellDimensions"
 		style="{style};--cell-width:{$dataListContext.columns[field]?.width}"
+		style:width={$dataListContext.columns[field]?.width}
+		style:minWidth={$dataListContext.columns[field]?.width}
+		style:maxWidth={$dataListContext.columns[field]?.width}
 		{...$$restProps}
-		title="{$rowContext?.data?.[field]} {field} {$dataListContext.columns[field]?.width}"
+		title="{$rowContext?.data?.[field]}"
 	>
 		<slot fieldData={$rowContext?.data?.[field] ?? {}} />
 	</div>
@@ -204,8 +210,8 @@
 
 <style lang="scss">
 	.cellDimensions {
-		width: var(--cell-width);
+		/* width: var(--cell-width);
 		min-width: var(--cell-width);
-		max-width: var(--cell-width);
+		max-width: var(--cell-width); */
 	}
 </style>
