@@ -10,6 +10,8 @@ __propDef: {
         /** can be set as a prop or as a className */ stacked?: boolean | undefined;
         component?: SvelteComponent | undefined;
         componentProps?: Record<string, any> | undefined;
+        /** show the title divider line */ showTitleDivider?: boolean | undefined;
+        /** show the default border style */ bordered?: boolean | undefined;
         isOpen?: boolean | undefined;
         /** use to control cartouche */ actions?: {
             open: () => void;
