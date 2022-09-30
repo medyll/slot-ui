@@ -4,6 +4,7 @@ declare const __propDef: {
         class?: string | undefined;
         element?: HTMLDivElement | undefined;
         data: any;
+        style?: string | undefined;
     };
     events: {
         'datalist:sort:clicked': Event | MouseEvent | UIEvent | PointerEvent | FocusEvent | ProgressEvent<EventTarget> | ClipboardEvent | AnimationEvent | InputEvent | CompositionEvent | DragEvent | ErrorEvent | FormDataEvent | KeyboardEvent | SecurityPolicyViolationEvent | SubmitEvent | TouchEvent | TransitionEvent | WheelEvent;
@@ -27,6 +28,9 @@ export default class DataListRow extends SvelteComponentTyped<DataListRowProps, 
     get data(): any;
     /**accessor*/
     set data(_: any);
+    get style(): string | undefined;
+    /**accessor*/
+    set style(_: string | undefined);
 }
 export {};
 
