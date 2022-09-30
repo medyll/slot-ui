@@ -53,7 +53,7 @@
 	/** used only if data is provided */
 	export let idField: string | undefined = undefined;
 	/** columns declaration */
-	export let columns: Record<string, DataCellType> = {}; 
+	export let columns: Record<string, DataCellType> = {};
 
 	export let virtualizer: boolean = false;
 
@@ -129,7 +129,11 @@
 		};
 	}
 
-	$: groups = groupByField ? dataOp.groupBy(data, groupByField, { keepUngroupedData: Boolean(groupByOptions.showEmptyGroup) }) : {};
+	$: groups = groupByField
+		? dataOp.groupBy(data, groupByField, {
+				keepUngroupedData: Boolean(groupByOptions.showEmptyGroup)
+		  })
+		: {};
 </script>
 
 {#if groupByField}
@@ -140,17 +144,18 @@
 		{#each Object.keys(groups) as red}
 			{@const groupProps = getGroupProps({ data: groups[red] })}
 			{@const item = groups[red]}
-			<div class="flex-v border-b">
+			<div class="flex-v">
 				<div class="">
 					<slot name="groupTitleSlot" {item}>
-						<div class="flex-h flex-align-middle pad gap-medium">
-							<div><Icon icon="folder" /></div>
-							<div class="flex-main">{groupByField} : {red}</div>
+						<div class="flex-h flex-align-middle pad gap-medium groupHead">
+							<div class="iconGroup"><Icon class="iconGroup"   icon="cil:object-group" /></div>
+							<div>{groupByField} : <span class="text-bold">{red}</span></div>
+							<div class="flex-main border-b divider" />
 							<div>{groups[red]?.length}</div>
-							<div class="pad-l border-l">
+							<div class="pad-l border-l iconGroup">
 								<Button
 									on:click={() => {
-										hidedGroups[red] = !hidedGroups[red]
+										hidedGroups[red] = !hidedGroups[red];
 										// hideBody = !hideBody;
 									}}
 									icon={hidedGroups[red] ? 'chevron-up' : 'chevron-down'}
@@ -215,4 +220,18 @@
 
 <style global lang="scss">
 	@import './DataList.scss';
+
+	.groupHead {
+		.iconGroup {
+				color: #999;
+			}
+		&:hover {
+			.iconGroup {
+				color: var(--theme-color-primary);
+			}
+			.divider {
+				border-color: var(--theme-color-primary, red);
+			}
+		}
+	}
 </style>
