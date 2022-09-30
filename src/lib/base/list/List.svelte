@@ -221,7 +221,7 @@
 				<slot listItem={item}>
 					<ListItem class="" {showIcon} {density} data={item.data}>
 						<span slot="icon">
-							{#if item?.icon}<Icon fontSize="tiny" icon={item?.icon} />{/if}
+							{#if item?.icon}<Icon fontSize="small" icon={item?.icon} />{/if}
 						</span>
 						<span slot="primary">{null_to_empty(item?.primary)}</span>
 						<span slot="secondary">{null_to_empty(item?.secondary)}</span>
@@ -248,7 +248,9 @@
 						data={item.data}
 						icon={item?.icon}
 					>
-						<span slot="icon" />
+						<span slot="icon">
+							{#if item?.icon}<Icon fontSize="small" icon={item?.icon} />{/if}
+						</span>
 						<span slot="primary">{null_to_empty(item?.primary)}</span>
 						<span slot="secondary">{null_to_empty(item?.secondary)}</span>
 						<span slot="action">{null_to_empty(item?.action)}</span>

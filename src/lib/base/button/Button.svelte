@@ -25,7 +25,7 @@
 	/** icon as a parameter*/
 	export let icon: string | undefined = undefined;
 	/** icon as a parameter*/
-	export let iconFamily: string | undefined = 'fa-solid';
+	export let iconFamily: string | undefined = 'mdi';
 	/** icon color as a parameter*/
 	export let iconColor: string = '#666';
 	/** paramters for usePopper */
@@ -170,7 +170,7 @@
 				<div class="flex-h flex-align-middle gap-tiny">
 					<div>
 						<slot name="loadingIconButtonSlot">
-							<div><Icon icon="spinner" class="rotate" /></div>
+							<div><Icon icon="loading" rotate /></div>
 						</slot>
 					</div>
 					<div>loading</div>
