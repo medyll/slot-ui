@@ -19,7 +19,7 @@ export { buttonType as type };
 /** icon as a parameter*/
 export let icon = undefined;
 /** icon as a parameter*/
-export let iconFamily = 'fa-solid';
+export let iconFamily = 'mdi';
 /** icon color as a parameter*/
 export let iconColor = '#666';
 /** paramters for usePopper */
@@ -158,7 +158,7 @@ $: actionArgs = {
 				<div class="flex-h flex-align-middle gap-tiny">
 					<div>
 						<slot name="loadingIconButtonSlot">
-							<div><Icon icon="spinner" class="rotate" /></div>
+							<div><Icon icon="loading" rotate /></div>
 						</slot>
 					</div>
 					<div>loading</div>
