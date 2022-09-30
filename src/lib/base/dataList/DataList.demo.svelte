@@ -7,13 +7,13 @@
 	import appSchemeData from '../../../demoData/appscheme.json';
 	import type { DataCellType } from './types'; 
 
-	let data = [...Array(100)].map((caches, index: number) => {
+	let data = [...Array(50)].map((caches, index: number) => {
 		return {
 			id: index,
 			index,
 			name: 'name ' + index,
 			lastName: 'lastName ' + index,
-			group: 'group-' + getRandomInt(100),
+			group: 'group-' + getRandomInt(7),
 			groupedArrayOfObjects: [
 				{ name: 'nested' + getRandomInt(4) },
 				{ name: 'nested' + getRandomInt(4) }
@@ -69,7 +69,7 @@ is a datalist table <br /> B. Franklin, 1854"
 					<DataListHead>
 						<DataListCell field="index">index</DataListCell>
 						<DataListCell field="name">name</DataListCell>
-						<DataListCell field="lastName" style="flex:1">lastName</DataListCell>
+						<DataListCell field="lastName">lastName</DataListCell>
 					</DataListHead>
 				</svelte:fragment>
 			</DataList>
@@ -81,9 +81,7 @@ is a datalist table <br /> B. Franklin, 1854"
 				style="max-height:250px;overflow:auto;"
 				{columns}
 				{data}
-				let:item
-				virtualizer={true} 
-				groupByField="group"
+				let:item 
 			>
 				<DataListHead slot="head">
 					<DataListCell field="index">index</DataListCell>

@@ -111,7 +111,8 @@ function getGroupProps(content) {
         groupByOptions,
         showHeader: groupByOptions.showSubGroupsHeader,
         selectorField,
-        selectorFieldValue
+        selectorFieldValue,
+        virtualizer
     };
 }
 $: groups = groupByField
@@ -171,7 +172,7 @@ $: groups = groupByField
 		tabindex="0"
 	>
 		{#if element && virtualizer}
-			<Virtualize height="350px" data={sortedData} let:item>
+			<Virtualize style="border:1px solid red;height:100%;"  data={sortedData} let:item>
 				<svelte:fragment slot="virtualizeHeaderSlot">
 					<slot name="head">
 						<DataListHead />
@@ -217,7 +218,6 @@ $: groups = groupByField
 }
 
 :global(.dataListHead) {
-  display: flex;
   margin: 0.5rem 0;
   align-items: stretch;
   height: 32px;
@@ -260,7 +260,6 @@ $: groups = groupByField
   padding: 0 8px;
 }
 :global(.dataListRow) {
-  display: flex;
   border-bottom: 1px solid var(--border-color);
   /* border-radius: 6px;
   	margin: 0.25rem 0; */

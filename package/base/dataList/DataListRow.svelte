@@ -1,7 +1,7 @@
 <svelte:options accessors={true} />
 
 <script>import sanitizeHtml from 'sanitize-html';
-import { custom_event, getContext, get_current_component, null_to_empty, setContext } from 'svelte/internal';
+import { current_component, custom_event, getContext, get_current_component, null_to_empty, prevent_default, setContext } from 'svelte/internal';
 import { writable } from 'svelte/store';
 import DataListCell from './DataListCell.svelte';
 import { dataOp } from '../../engine/utils.js';
@@ -11,6 +11,7 @@ export { className as class };
 export let element = undefined;
 const forwardEvents = createEventForwarder(get_current_component());
 export let data;
+export let style = undefined;
 const dataStore = writable({ data });
 setContext('dataListRow', dataStore);
 const dataListContext = getContext('dataListContext');
@@ -34,6 +35,9 @@ function checkGetter(columns, field, data) {
     return sanitizeHtml(ret);
     //  fieldOrFunction(data?.[field], field)
 }
+$: cssVars = Object.values($dataListContext.columns ?? []).reduce((previous, current, currentIndex) => {
+    return `${previous} ${current?.width}`;
+}, '--template-columns:');
 </script>
 
 <div
@@ -45,6 +49,7 @@ function checkGetter(columns, field, data) {
 		if (data) handleSelect(data);
 	}}
 	class="dataListRow {className}"
+	style="{style};{cssVars}"
 >
 	{#if $$slots.default}
 		<slot />
@@ -67,3 +72,9 @@ function checkGetter(columns, field, data) {
 		{/each}
 	{/if}
 </div>
+
+
+<style>.dataListRow {
+  display: grid;
+  grid-template-columns: var(--template-columns);
+}</style>

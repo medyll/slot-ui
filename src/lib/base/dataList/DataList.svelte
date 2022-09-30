@@ -125,7 +125,8 @@
 			groupByOptions,
 			showHeader: groupByOptions.showSubGroupsHeader,
 			selectorField,
-			selectorFieldValue
+			selectorFieldValue,
+			virtualizer
 		};
 	}
 
@@ -186,7 +187,7 @@
 		tabindex="0"
 	>
 		{#if element && virtualizer}
-			<Virtualize height="350px" data={sortedData} let:item>
+			<Virtualize style="border:1px solid red;height:100%;"  data={sortedData} let:item>
 				<svelte:fragment slot="virtualizeHeaderSlot">
 					<slot name="head">
 						<DataListHead />

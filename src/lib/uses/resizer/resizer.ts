@@ -7,19 +7,21 @@ interface ResizerProps {
 export const resizer = (node: HTMLElement, props: ResizerProps = {}) => {
 
     let handle: HTMLElement;
-    let width = node.offsetWidth
+    let width = eval(node.style.width.replace('px', '')) ?? node.offsetWidth
     let x = 0
 
     const { direction = 'horizontal' } = props
 
     let expanding: boolean | null = null
-    let start: number | null = null, initial: { x: number, width: number } | null = null
+    let start: number | null = null,
+        initial: { x: number, width: number } | null = null
 
 
     const eventStart = custom_event('resizer:start', {}, { bubbles: true });
     const eventEnd = custom_event('resizer:end', {}, { bubbles: true });
 
-
+const arrPool:string[]=[]
+let timer:any = null
 
     if (node.parentNode) {
         node.parentNode.addEventListener('mousemove', expand);
@@ -29,7 +31,7 @@ export const resizer = (node: HTMLElement, props: ResizerProps = {}) => {
     if (!node.querySelector('data-resizer')) {
         handle = document.createElement('div')
         handle.setAttribute('data-resizer', 'true')
-        handle.setAttribute('style', 'border-radius:6px;position:absolute;height:100%;right:0;cursor:col-resize;width:8px;background-color:transparent;z-index:10')
+        handle.setAttribute('style', 'position:absolute;height:100%;right:0;cursor:col-resize;width:8px;background-color:red;z-index:10')
         handle.innerHTML = ''
         node.appendChild(handle)
     } else {
@@ -37,7 +39,7 @@ export const resizer = (node: HTMLElement, props: ResizerProps = {}) => {
     }
 
 
-    if (handle) handle.addEventListener('mousedown', startExpand); 
+    if (handle) handle.addEventListener('mousedown', startExpand);
 
 
     async function expand(event: any) {
@@ -46,17 +48,19 @@ export const resizer = (node: HTMLElement, props: ResizerProps = {}) => {
 
         if (direction == 'horizontal') {
             if (start) {
-                const delta = event.pageX - start
-                width = initial.width + delta
+                clearTimeout(timer);
 
-                if (width) {
-                    await tick();
-                    node.style.width = width + 'px'
-                }
-
-                const eventResize = custom_event('resizer:resize', { width }, { bubbles: true });
-                node.dispatchEvent(eventResize);
-
+                timer = setTimeout(()=>{
+                    const delta = event.pageX - start
+                    width = initial.width + delta
+    
+                    if (width) { 
+                        node.style.width = width + 'px'
+                    }
+    
+                    const eventResize = custom_event('resizer:resize', { width }, { bubbles: true });
+                    node.dispatchEvent(eventResize);
+                },10);                
             }
         }
     }
@@ -67,6 +71,7 @@ export const resizer = (node: HTMLElement, props: ResizerProps = {}) => {
         if (!expanding) {
             expanding = true
             start = event.pageX
+            width = eval(node.style.width.replace('px', '')) ?? node.offsetWidth
             initial = { x, width }
             node.dispatchEvent(eventStart);
         }
@@ -81,7 +86,7 @@ export const resizer = (node: HTMLElement, props: ResizerProps = {}) => {
 
     return {
         destroy() {
-            if(handle) handle.removeEventListener('mousedown', startExpand);
+            if (handle) handle.removeEventListener('mousedown', startExpand);
             if (node.parentNode) {
                 node.parentNode.removeEventListener('mousemove', expand);
                 node.parentNode.removeEventListener('mouseup', stopExpand);

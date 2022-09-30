@@ -21,7 +21,14 @@ function doSort(e) {
     if (element)
         element.dispatchEvent(event);
 }
-// $: console.log($dataListContext.columns)
+function setCssGrid(columns) {
+    if (Object.values(columns ?? []).every(e => e.width)) {
+        return Object.values(columns ?? []).reduce((previous, current, currentIndex) => {
+            return `${previous} ${current?.width}`;
+        }, '--template-columns:');
+    }
+}
+$: cssVars = setCssGrid($dataListContext.columns ?? []);
 </script>
 
 <div
@@ -29,7 +36,7 @@ function doSort(e) {
 	on:datalist:sort:clicked={doSort}
 	class:pos-sticky={stickyHeader}
 	class="dataListHead"
-	{style}
+	style="{style};{cssVars}"
 >
 	<slot>
 		{#if $dataListContext.hasColumnsProps}
@@ -39,13 +46,9 @@ function doSort(e) {
 		{/if}
 	</slot>
 </div>
-
-<style global>:global(.dataListHead) {
-  /* width: 900px;
-        display: flex;
-        border: 1px solid green; */
-}
-:global(.dataListHead) :global(.dataListCell) {
-  /* flex: 1;
-  background-color: red; */
+ 
+<style>.dataListHead {
+  display: grid;
+  grid-template-columns: var(--template-columns) auto;
+  transition: all 0.1s;
 }</style>

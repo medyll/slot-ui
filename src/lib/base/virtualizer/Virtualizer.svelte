@@ -11,6 +11,7 @@
 	export { className as class };
 	export let element: HTMLDivElement | null = null;
 	const forwardEvents = createEventForwarder(get_current_component());
+	export let style:string='';
 	/*  end slotUi exports*/
 
 	// props
@@ -171,7 +172,7 @@
 	bind:offsetHeight={viewport_height}
 	bind:this={viewport}
 	on:scroll={handle_scroll}
-	style="height: {height};"
+	style="height: {height};{style}"
 >
 	<div bind:this={contents} style="padding-top: {top}px; padding-bottom: {bottom}px;">
 		<div data-header style="position:sticky;top:0;z-index:10">
