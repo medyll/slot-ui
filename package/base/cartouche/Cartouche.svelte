@@ -4,6 +4,7 @@ import { createEventForwarder } from '../../engine/eventForwarder';
 import { get_current_component } from 'svelte/internal';
 import { elem } from '../../engine/elem';
 import Divider from '../divider/Divider.svelte';
+import Button from '../button/Button.svelte';
 /** @restProps {button | a} */
 let className = '';
 export { className as class };
@@ -19,6 +20,10 @@ export let icon = undefined;
 export let stacked = false;
 export let component = undefined;
 export let componentProps = {};
+/** show the title divider line */
+export let showTitleDivider = false;
+/** show the default border style */
+export let bordered = true;
 export let isOpen = false;
 /** use to control cartouche */
 export const actions = {
@@ -38,34 +43,40 @@ $: chevronIcon = !isOpen ? 'chevron-down' : 'chevron-up';
 	bind:this={element}
 	class="cartoucheHolder {className}"
 	{style}
+	data-bordered={bordered ?? false}
 	use:forwardEvents
 >
-	<div class="cartouche pad-tb-2" on:click={actions.toggle}>
+	<div class="cartouche" on:click={actions.toggle}>
 		{#if icon || $$slots.cartoucheIconSlot}
-			<div class="icon pad-l-1"><slot name="cartoucheIconSlot">
-        <Icon {icon} />
-      </slot></div>
+			<div class="icon pad-l-1">
+				<slot name="cartoucheIconSlot">
+					<Icon {icon} />
+				</slot>
+			</div>
 		{/if}
 		<div class="cartoucheLabel  pad-l-1">
 			{#if primary || $$slots.primarySlot}
-      <slot name="primarySlot">{primary}</slot>
-      <div><slot name="secondarySlot">{secondary ?? ''}</slot></div>
+				<slot name="primarySlot">{primary}</slot>
+				<div><slot name="secondarySlot">{secondary ?? ''}</slot></div>
 			{/if}
 		</div>
-		<div
-			on:click={(event) => {
-				event.preventDefault();
-				event.stopPropagation();
-			}}
-			class="cartoucheAction"
-		>
-			<slot name="cartoucheActionSlot" />
-		</div>
+		<div class={showTitleDivider ? 'divider' : ''} style="flex:1" />
+		{#if $$slots.cartoucheActionSlot}
+			<div
+				on:click={(event) => {
+					event.preventDefault();
+					event.stopPropagation();
+				}}
+				class="cartoucheAction"
+			>
+				<slot name="cartoucheActionSlot" />
+			</div>
+		{/if}
 		<div class="chevron">
-			<Icon fontSize="tiny" icon={chevronIcon} />
+			<Button naked icon={chevronIcon} />
 		</div>
 	</div>
-	<Divider expansion="padded" density="none" shadow />
+
 	{#if isOpen}
 		<div class="cartoucheContent" transition:slide>
 			{#if component}
@@ -79,30 +90,33 @@ $: chevronIcon = !isOpen ? 'chevron-down' : 'chevron-up';
 <style>.cartoucheHolder {
   border-radius: 6px;
   overflow: hidden;
+}
+.cartoucheHolder[data-bordered=true] {
   border: 1px solid var(--theme-color-foreground-alpha-high);
 }
 .cartoucheHolder .cartoucheContent {
-  padding: 0.5rem;
   overflow: hidden;
   background-color: var(--theme-color-background);
 }
 
 .cartouche {
   display: flex;
-  grid-gap: 8px;
+  gap: 8px;
   background-color: var(--theme-color-background);
   align-items: center;
+  padding: 0.25rem;
 }
 .cartouche:hover {
   background-color: rgba(255, 255, 255, 0.4);
 }
 .cartouche .cartoucheLabel {
-  flex: 1;
   cursor: pointer;
 }
 .cartouche .chevron {
-  padding: 0 1rem;
   cursor: pointer;
+}
+.cartouche .divider {
+  border-bottom: 1px solid var(--theme-color-foreground-alpha);
 }
 
 .cartoucheHolder.stacked {

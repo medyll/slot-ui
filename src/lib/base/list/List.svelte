@@ -107,13 +107,17 @@
 				data
 			);
 		} else {
-			listItems = data.map((dta: Data) => {
-				return {
-					primary: dta?.name ?? dta.code,
-					secondary: dta?.id,
-					data: dta
-				};
-			});
+			try {
+				listItems = data.map((dta: Data) => {
+					return {
+						primary: dta?.name ?? dta.code,
+						secondary: dta?.id,
+						data: dta
+					};
+				});
+			} catch (e) {
+				console.log(e);
+			}
 		}
 	}
 
@@ -203,8 +207,8 @@
 		<slot name="commandBarSlot" />
 	{/if}
 	{#if virtualize}
-		<Virtualize height="100%" items={listItems} let:item> 
-			<svelte:fragment slot="virtualizeHeaderSlot"> 
+		<Virtualize height="100%" items={listItems} let:item>
+			<svelte:fragment slot="virtualizeHeaderSlot">
 				{#if showTitleZone}
 					<slot name="title">
 						<ListTitle primary={primary ?? title} {secondary} {icon}>
@@ -216,7 +220,9 @@
 			{#if item}
 				<slot listItem={item}>
 					<ListItem class="" {showIcon} {density} data={item.data}>
-						<span slot="icon"><Icon fontSize="tiny" icon={item?.icon} /></span>
+						<span slot="icon">
+							{#if item?.icon}<Icon fontSize="small" icon={item?.icon} />{/if}
+						</span>
 						<span slot="primary">{null_to_empty(item?.primary)}</span>
 						<span slot="secondary">{null_to_empty(item?.secondary)}</span>
 						<span slot="action">{null_to_empty(item?.action)}</span>
@@ -229,8 +235,8 @@
 			<slot name="title">
 				<ListTitle primary={primary ?? title} {secondary} {icon} />
 			</slot>
-		{/if} 
-		{#if listItems} 
+		{/if}
+		{#if listItems}
 			{#each listItems as item}
 				<slot listItem={item}>
 					<ListItem
@@ -242,25 +248,21 @@
 						data={item.data}
 						icon={item?.icon}
 					>
-						<span slot="icon" />
+						<span slot="icon">
+							{#if item?.icon}<Icon fontSize="small" icon={item?.icon} />{/if}
+						</span>
 						<span slot="primary">{null_to_empty(item?.primary)}</span>
 						<span slot="secondary">{null_to_empty(item?.secondary)}</span>
 						<span slot="action">{null_to_empty(item?.action)}</span>
 					</ListItem>
 				</slot>
 			{/each}
-		{:else} 
-		<slot></slot>
+		{:else}
+			<slot />
 		{/if}
 	{/if}
 </ul>
 
-<style global lang="scss">
+<style lang="scss">
 	@import 'List';
-	ul {
-	}
-	ul:focus {
-		outline: 0;
-		outline-offset: -4px;
-	}
 </style>

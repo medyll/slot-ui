@@ -216,7 +216,7 @@
 				<a on:click={() => (loading = !loading)}> toggle loading</a>
 				<Button bind:loading>loading button</Button>
 				<Button on:click={() => (loading = !loading)} height="large" bind:loading>
-					<span slot="loadingIconButtonSlot"><Icon icon="spinner" class=" rotate" /></span>
+					<span slot="loadingIconButtonSlot"><Icon icon="loading" rotate /></span>
 					loading button</Button
 				>
 			</div>

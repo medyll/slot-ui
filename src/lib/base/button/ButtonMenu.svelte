@@ -22,7 +22,7 @@
 			console.log('redfered');
 		}
 	};
-	export let menuPosition: PopperPositionType = 'BL';
+	export let menuPosition: PopperPositionType = 'BC';
 
 	/*  common slotUi exports*/
 	let className = '';
@@ -56,7 +56,7 @@
 		parentNode: element,
 		component: actionComponent,
 		componentProps: componentProps ?? {},
-		position: 'BL',
+		position: 'BC',
 		disabled: false
 	};
 

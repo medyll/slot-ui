@@ -8,6 +8,7 @@ __propDef: {
         fieldType?: string | undefined;
         columnId?: string | number | undefined;
         noWrap?: boolean | undefined;
+        title?: string | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;

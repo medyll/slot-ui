@@ -36,13 +36,22 @@ export let density = 'default';
 	{/if}
 </li>
 
-<style global>:global(li.listItemTitle),
+<style global>:global(ul) {
+  display: flex;
+  flex-direction: column;
+}
+
+:global(ul:focus) {
+  outline: 0;
+  outline-offset: -4px;
+}
+
+:global(li.listItemTitle),
 :global(li.listItem) {
   display: flex;
   align-items: center;
   position: relative;
   border-radius: 4px;
-  margin: 0 0.25rem;
   max-width: 100%;
 }
 :global(li.listItemTitle) :global(.listItemContent),
@@ -82,17 +91,14 @@ export let density = 'default';
 :global(li.listItemTitle.density-tight),
 :global(li.listItem.density-tight) {
   padding: 0.5rem 0;
-  margin: 0.125rem 0.5rem;
 }
 :global(li.listItemTitle.density-default),
 :global(li.listItem.density-default) {
   padding: 1rem 0;
-  margin: 0.25rem 0.5rem;
 }
 :global(li.listItemTitle.density-kind),
 :global(li.listItem.density-kind) {
   padding: 1.5rem 0;
-  margin: 0.5rem 0.5rem;
 }
 
 :global(li.listItemTitle) {

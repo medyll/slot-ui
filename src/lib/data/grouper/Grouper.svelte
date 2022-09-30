@@ -20,6 +20,7 @@
 
 <script lang="ts">
 import Button from '$lib/base/button/Button.svelte';
+import ButtonMenu from '$lib/base/button/ButtonMenu.svelte';
 
 	import type { MenuItemProps } from '$lib/ui/menu/types';
 
@@ -145,11 +146,11 @@ import Button from '$lib/base/button/Button.svelte';
 
 <div bind:this={element}>
 	{#if grouperMode === 'menu'}
-		<Button
+		<ButtonMenu
 			on:click={(e) => { 
 				console.log(e);
 			}}
-			{menuProps}>menu group by</Button
+			{menuProps}>menu group by</ButtonMenu
 		>
 	{/if}
 	{#if grouperMode === 'button' && groupByField}

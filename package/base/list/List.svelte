@@ -89,13 +89,18 @@ $: if (data) {
         ], data);
     }
     else {
-        listItems = data.map((dta) => {
-            return {
-                primary: dta?.name ?? dta.code,
-                secondary: dta?.id,
-                data: dta
-            };
-        });
+        try {
+            listItems = data.map((dta) => {
+                return {
+                    primary: dta?.name ?? dta.code,
+                    secondary: dta?.id,
+                    data: dta
+                };
+            });
+        }
+        catch (e) {
+            console.log(e);
+        }
     }
 }
 // $: console.log({ sortedData, data });
@@ -171,8 +176,8 @@ let showTitleZone = $$slots.title || title || primary || secondary; // || sorter
 		<slot name="commandBarSlot" />
 	{/if}
 	{#if virtualize}
-		<Virtualize height="100%" items={listItems} let:item> 
-			<svelte:fragment slot="virtualizeHeaderSlot"> 
+		<Virtualize height="100%" items={listItems} let:item>
+			<svelte:fragment slot="virtualizeHeaderSlot">
 				{#if showTitleZone}
 					<slot name="title">
 						<ListTitle primary={primary ?? title} {secondary} {icon}>
@@ -184,7 +189,9 @@ let showTitleZone = $$slots.title || title || primary || secondary; // || sorter
 			{#if item}
 				<slot listItem={item}>
 					<ListItem class="" {showIcon} {density} data={item.data}>
-						<span slot="icon"><Icon fontSize="tiny" icon={item?.icon} /></span>
+						<span slot="icon">
+							{#if item?.icon}<Icon fontSize="small" icon={item?.icon} />{/if}
+						</span>
 						<span slot="primary">{null_to_empty(item?.primary)}</span>
 						<span slot="secondary">{null_to_empty(item?.secondary)}</span>
 						<span slot="action">{null_to_empty(item?.action)}</span>
@@ -197,8 +204,8 @@ let showTitleZone = $$slots.title || title || primary || secondary; // || sorter
 			<slot name="title">
 				<ListTitle primary={primary ?? title} {secondary} {icon} />
 			</slot>
-		{/if} 
-		{#if listItems} 
+		{/if}
+		{#if listItems}
 			{#each listItems as item}
 				<slot listItem={item}>
 					<ListItem
@@ -210,79 +217,87 @@ let showTitleZone = $$slots.title || title || primary || secondary; // || sorter
 						data={item.data}
 						icon={item?.icon}
 					>
-						<span slot="icon" />
+						<span slot="icon">
+							{#if item?.icon}<Icon fontSize="small" icon={item?.icon} />{/if}
+						</span>
 						<span slot="primary">{null_to_empty(item?.primary)}</span>
 						<span slot="secondary">{null_to_empty(item?.secondary)}</span>
 						<span slot="action">{null_to_empty(item?.action)}</span>
 					</ListItem>
 				</slot>
 			{/each}
-		{:else} 
-		<slot></slot>
+		{:else}
+			<slot />
 		{/if}
 	{/if}
 </ul>
 
-<style global>:global(li.listItemTitle),
-:global(li.listItem) {
+<style>ul {
+  display: flex;
+  flex-direction: column;
+}
+
+ul:focus {
+  outline: 0;
+  outline-offset: -4px;
+}
+
+li.listItemTitle,
+li.listItem {
   display: flex;
   align-items: center;
   position: relative;
   border-radius: 4px;
-  margin: 0 0.25rem;
   max-width: 100%;
 }
-:global(li.listItemTitle) :global(.listItemContent),
-:global(li.listItem) :global(.listItemContent) {
+li.listItemTitle .listItemContent,
+li.listItem .listItemContent {
   flex: 1;
   padding: 0 0.5rem;
   min-width: auto;
   overflow: hidden;
 }
-:global(li.listItemTitle) :global(.listItemContent) :global([slot=primary]),
-:global(li.listItem) :global(.listItemContent) :global([slot=primary]) {
+li.listItemTitle .listItemContent [slot=primary],
+li.listItem .listItemContent [slot=primary] {
   text-overflow: ellipsis;
   display: block;
   width: 100%;
   overflow: hidden;
 }
-:global(li.listItemTitle) :global(.listItemContent) :global([slot=secondary]),
-:global(li.listItem) :global(.listItemContent) :global([slot=secondary]) {
+li.listItemTitle .listItemContent [slot=secondary],
+li.listItem .listItemContent [slot=secondary] {
   opacity: 0.8;
   text-overflow: ellipsis;
   display: block;
   width: 100%;
   overflow: hidden;
 }
-:global(li.listItemTitle) :global(.listItemAction),
-:global(li.listItem) :global(.listItemAction) {
+li.listItemTitle .listItemAction,
+li.listItem .listItemAction {
   padding: 0 0.5rem;
 }
-:global(li.listItemTitle) :global(.listItemIcon),
-:global(li.listItem) :global(.listItemIcon) {
+li.listItemTitle .listItemIcon,
+li.listItem .listItemIcon {
   text-align: center;
   width: 2rem;
   min-width: 2rem;
   overflow: hidden;
   opacity: 0.8;
 }
-:global(li.listItemTitle.density-tight),
-:global(li.listItem.density-tight) {
+li.listItemTitle.density-tight,
+li.listItem.density-tight {
   padding: 0.5rem 0;
-  margin: 0.125rem 0.5rem;
 }
-:global(li.listItemTitle.density-default),
-:global(li.listItem.density-default) {
+li.listItemTitle.density-default,
+li.listItem.density-default {
   padding: 1rem 0;
-  margin: 0.25rem 0.5rem;
 }
-:global(li.listItemTitle.density-kind),
-:global(li.listItem.density-kind) {
+li.listItemTitle.density-kind,
+li.listItem.density-kind {
   padding: 1.5rem 0;
-  margin: 0.5rem 0.5rem;
 }
 
-:global(li.listItemTitle) {
+li.listItemTitle {
   position: sticky;
   margin-top: 1px !important;
   top: 1px;
@@ -291,23 +306,18 @@ let showTitleZone = $$slots.title || title || primary || secondary; // || sorter
   z-index: 1;
 }
 
-:global(li.listItem:hover) {
+li.listItem:hover {
   background-color: rgba(255, 255, 255, 0.3);
 }
-:global(li.listItem.isActive) {
+li.listItem.isActive {
   background-color: var(--slotui-listitem-active-background, var(--theme-color-primary-alpha-high, black));
   box-shadow: var(--slotui-listitem-active-boxshadow, var(shad-3));
 }
-:global(li.listItem.isActive) :global(.listItemChip) {
+li.listItem.isActive .listItemChip {
   position: absolute;
   height: 50%;
   width: 3px;
   background-color: var(--theme-color-primary);
   border-radius: 8px;
   left: -1px;
-}
-
-:global(ul:focus) {
-  outline: 0;
-  outline-offset: -4px;
 }</style>

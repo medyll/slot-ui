@@ -18,7 +18,7 @@ const handleClick = (tabValue) => (event) => {
     activeTabCode = tabValue;
     if (!elem(navElementRef) || !activeTabCode)
         return;
-    const node = elem(navElementRef).find(`li[data-code=${activeTabCode}]`);
+    const node = elem(navElementRef).find(`[data-code=${activeTabCode}]`);
     if (node && activeCellElementRef?.parentElement) {
         boundingClientRect = node.getBoundingClientRect();
         /* activeCellElementRef.style.left =
@@ -44,31 +44,31 @@ onMount(() => {
 <div
 	bind:this={element}
 	data-orientation={orientation}
-	class="tabsRoot {className}"
+	class="tabsRoot flex-v {className}"
 	{...$$restProps}
 >
-	<nav bind:this={tabsElementRef} class="tabsNav  flex-align-middle pos-rel">
+	<div bind:this={tabsElementRef} class="tabsNav  flex-align-middle pos-rel">
 		<div>
 			<slot name="tabsFirstTitleSlot" />
 		</div>
-		<ul bind:this={navElementRef} class="tabsRail">
+		<nav bind:this={navElementRef} class="tabsRail">
 			{#each items as item}
-				<li
+				<div
 					data-code={item.code}
 					on:click={handleClick(item.code)}
 					class={activeTabCode === item.code ? 'active' : ''}
 				>
 					<slot {item} name="tabLabelSlot">{item.label}</slot>
-				</li>
+				</div>
 			{/each}
-		</ul>
+		</nav>
 		<div data-coll='red'>
 			<slot name="tabsTitleSlot" />
 		</div>
 		<div>
 			<slot name="tabsButtonSlot" />
 		</div>
-	</nav>
+	</div>
 	<div class="tabsActiveCellContainer">
 		<div bind:this={activeCellElementRef} class="tabSlot" />
 	</div>
@@ -86,9 +86,9 @@ onMount(() => {
 						style="display:{display};height:100%;position:relative;flex-direction:column"
 					>
 						{#if Boolean(item?.secondary)}
-							<div class=" flex-h pad-tb gap-small">
-								<div class="border-r pad-1 shad-3 radius-tiny theme-bg-paper">
-									<Icon style="display:block" inline={false} icon="info-circle" />
+							<div class=" flex-h pad-tb-2 gap-small">
+								<div class="border-r pad-1 shad-3 radius-tiny ">
+									<Icon style="display:block" inline={false} icon="mdi:info-circle" />
 								</div>
 								<div class="flex-main pad-t-1">{@html item?.secondary}</div>
 							</div>
@@ -123,56 +123,51 @@ onMount(() => {
 .tabsRoot[data-orientation=vertical] {
   flex-direction: column;
 }
-.tabsRoot ul {
-  display: flex;
-  flex-wrap: wrap;
-  padding-left: 0;
-  margin-bottom: 0;
-  list-style: none;
-}
-.tabsRoot ul li {
-  padding: var(--box-density-preset-small);
-  min-width: 48px;
-  cursor: pointer;
-}
-.tabsRoot ul li.active {
-  font-weight: bold;
-}
-.tabsRoot .tabsNav {
+
+.tabsNav {
   padding: 0.25rem 0;
-  gap: 1rem;
   border-bottom: 1px solid var(--slotui-tabs-nav-border-color, var(--theme-color-primary-alpha-high));
   position: relative;
   display: flex;
   align-items: center;
   width: 100%;
 }
-.tabsRoot .tabsNav[data-orientation=horizontal] {
+.tabsNav[data-orientation=horizontal] {
   flex-direction: column;
 }
-.tabsRoot .tabsNav .tabsRail {
+.tabsNav .tabsRail {
+  display: flex;
   flex: 1;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 0;
 }
-.tabsRoot .tabsContent {
-  border: 1px solid var(--slotui-tabs-content-border-color, var(--theme-color-foreground-alpha-high));
-  border-top: 1px solid transparent;
-  border-radius: 3px;
-  padding: 0.5rem;
+.tabsNav .tabsRail > div {
+  padding: var(--box-density-preset-small);
+  min-width: 48px;
+  cursor: pointer;
+}
+.tabsNav .tabsRail > div.active {
+  font-weight: bold;
+}
+.tabsNav .tabsContent {
   background-color: var(--theme-color-background);
   position: relative;
   width: 100%;
 }
-.tabsRoot .tabsActiveCellContainer {
+.tabsNav .tabsActiveCellContainer {
   top: auto;
   position: relative;
-  height: 4px;
+  min-height: 4px;
   transition: all 0.25s;
 }
-.tabsRoot .tabsActiveCellContainer .tabSlot {
+
+.tabSlot {
   border-radius: 6px;
-  height: 4px;
+  min-height: 4px;
   background-color: var(--theme-color-primary);
   width: 100%;
   position: absolute;
   transition: all 0.25s;
+  z-index: 200;
 }</style>

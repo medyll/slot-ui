@@ -125,7 +125,7 @@ $: groups = groupByField ? dataOp.groupBy(data, groupByField, { keepUngroupedDat
 		{#each Object.keys(groups) as red}
 			{@const groupProps = getGroupProps({ data: groups[red] })}
 			{@const item = groups[red]}
-			<div class="flex-v h-full">
+			<div class="flex-v border-b">
 				<div class="">
 					<slot name="groupTitleSlot" {item}>
 						<div class="flex-h flex-align-middle pad gap-medium">

@@ -14,7 +14,7 @@ let sorterer={  sortByField: 'data.name'  };
 		return {
 			primary: 'Primary title ' + index,
 			secondary: 'secondary sub-title ' + index,
-			icon: 'user',
+			icon: 'file',
 			data: { id: index,name: index }
 		};
 	});
@@ -110,89 +110,6 @@ let sorterer={  sortByField: 'data.name'  };
 				selectorField="id"
 				primary="ListItems, no slots"
 				secondary="secondary text"
-			/>
-		</div>
-		<h5>virtualized</h5>
-		<div class="flex-h gap-small" >
-			<List
-				density="default"
-				height="350px"
-				onItemClick={openIn}
-				selectorField="name"
-				primary="Data, slots"
-				secondary="secondary text"
-				virtualize={true}
-				let:listItem
-				{data}
-				dataFieldPrimary={(data) => {
-					return data?.name;
-				}}
-				dataFieldSecondary={(data) => {
-					return data?.secondary + data?.icon;
-				}}
-				dataFieldIcon={(data) => {
-					return data?.icon;
-				}}
-				
-			>
-				<ListItem data={listItem.data} density={'default'}>
-					<span slot="icon">
-						{#if listItem?.icon}<Icon fontSize="tiny" icon={listItem?.icon} />{/if}
-					</span>
-					<span slot="primary">{null_to_empty(listItem?.primary)}</span>
-					<span slot="secondary">{null_to_empty(listItem?.secondary)}</span>
-				</ListItem>
-			</List>
-			<List
-				density="default"
-				height="350px"
-				onItemClick={openIn}
-				selectorField="name"
-				primary="Data, no slots"
-				secondary="secondary text"
-				{data}
-				virtualize={true}
-
-				dataFieldPrimary={(data) => {
-					return data?.name;
-				}}
-				dataFieldSecondary={(data) => {
-					return data?.secondary + data?.icon;
-				}}
-				dataFieldIcon={(data) => {
-					return data?.icon;
-				}}
-		 
-			/>
-			<List
-				density="default"
-				height="350px"
-				let:listItem
-				{listItems}
-				virtualize={true}
-
-				onItemClick={openIn}
-				selectorField="id"
-				primary="ListItems, slots"
-				secondary="secondary text" 
-			>
-				<ListItem data={listItem.data} density={'default'}>
-					<span slot="icon"><Icon fontSize="tiny" icon={listItem?.icon} /></span>
-					<span slot="primary">{null_to_empty(listItem?.primary)}</span>
-					<span slot="secondary">{null_to_empty(listItem?.secondary)}</span>
-					<span slot="action">{null_to_empty(listItem?.action)}</span>
-				</ListItem>
-			</List>
-			<List
-				density="default"
-				height="350px"
-				{listItems}
-				virtualize={true}
-
-				onItemClick={openIn}
-				selectorField="id"
-				primary="ListItems, no slots"
-				secondary="secondary text" 
 			/>
 		</div>
 

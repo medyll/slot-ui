@@ -18,7 +18,7 @@ declare const __propDef: {
         bordered?: boolean | undefined;
         link?: boolean | undefined;
         naked?: boolean | undefined;
-        size?: "default" | "small" | "tiny" | "medium" | "large" | "big" | "full" | "auto" | undefined;
+        size?: "small" | "default" | "tiny" | "medium" | "large" | "big" | "full" | "auto" | undefined;
         density?: "default" | "medium" | "none" | "tight" | "kind" | undefined;
         nowrap?: boolean | undefined;
         height?: string | undefined;

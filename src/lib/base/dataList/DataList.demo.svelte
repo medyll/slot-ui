@@ -5,17 +5,15 @@
 	import DataListHead from '$lib/base/dataList/DataListHead.svelte';
 	import ComponentDemo from '$_components/ComponentExample.svelte';
 	import appSchemeData from '../../../demoData/appscheme.json';
-	import type { DataCellType } from './types';
-	import Button from '$lib/base/button/Button.svelte';
-	import Popper from '$lib/ui/popper/Popper.svelte';
+	import type { DataCellType } from './types'; 
 
-	let data = [...Array(1500)].map((caches, index: number) => {
+	let data = [...Array(100)].map((caches, index: number) => {
 		return {
 			id: index,
 			index,
 			name: 'name ' + index,
 			lastName: 'lastName ' + index,
-			group: 'group-' + getRandomInt(4),
+			group: 'group-' + getRandomInt(100),
 			groupedArrayOfObjects: [
 				{ name: 'nested' + getRandomInt(4) },
 				{ name: 'nested' + getRandomInt(4) }
@@ -64,7 +62,7 @@ is a datalist table <br /> B. Franklin, 1854"
 >
 	<div class="flex-v gap-medium">
 
-		<!-- <h5>Automatique datalist, without columns definitions</h5>
+		<h5>Automatique datalist, without columns definitions</h5>
 		<div class="what   pos-rel  pad">
 			<DataList style="height:150px;width:350px;overflow:auto;" {data}>
 				<svelte:fragment slot="head">
@@ -75,23 +73,23 @@ is a datalist table <br /> B. Franklin, 1854"
 					</DataListHead>
 				</svelte:fragment>
 			</DataList>
-		</div> -->
+		</div>
 		<h5>grouped Datatable</h5>
 		<!-- groupByField="group" -->
-		<div class="what   pos-rel   pad" style="height:750px;overflow:auto;">
+		<div class="what   pos-rel   pad" style="height:550px;overflow:auto;">
 			<DataList
 				style="max-height:250px;overflow:auto;"
 				{columns}
 				{data}
 				let:item
-				virtualizer={true}
-				groupByField="groupedArrayOfObjects.name"
+				virtualizer={true} 
+				groupByField="group"
 			>
 				<DataListHead slot="head">
 					<DataListCell field="index">index</DataListCell>
 					<DataListCell field="name">name</DataListCell>
 					<DataListCell field="lastName">group</DataListCell>
-					<DataListCell field="group" style="flex:1">group</DataListCell>
+					<DataListCell field="group"  >group</DataListCell>
 				</DataListHead>
 				<!-- <DataListRow data={item}>
 					<DataListCell field="index">{item.index}</DataListCell>
