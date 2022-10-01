@@ -10,6 +10,7 @@ import { dataOp } from '../../engine/utils.js';
 import DataListHead from './DataListHead.svelte';
 import Icon from '../icon/Icon.svelte';
 import Button from '../button/Button.svelte';
+import { slide } from 'svelte/transition';
 /*  common slotUi exports*/
 let className = '';
 export { className as class };
@@ -49,6 +50,7 @@ export let idField = undefined;
 /** columns declaration */
 export let columns = {};
 export let virtualizer = false;
+export let isLoading = false;
 let hidedGroups = {};
 let sortedData;
 $: sortedData = data?.filter((x) => x);
@@ -107,12 +109,13 @@ function getGroupProps(content) {
         ...content,
         columns,
         style,
-        groupByField: false,
+        groupByField: undefined,
         groupByOptions,
         showHeader: groupByOptions.showSubGroupsHeader,
         selectorField,
         selectorFieldValue,
-        virtualizer
+        virtualizer,
+        isLoading
     };
 }
 $: groups = groupByField
@@ -136,13 +139,14 @@ $: groups = groupByField
 						<div class="flex-h flex-align-middle pad gap-medium groupHead">
 							<div class="iconGroup"><Icon class="iconGroup"   icon="cil:object-group" /></div>
 							<div>{groupByField} : <span class="text-bold">{red}</span></div>
-							<div class="flex-main border-b divider" />
+							<div class="flex-main border-b divider"  on:click={() => {
+								hidedGroups[red] = !hidedGroups[red];
+							}} />
 							<div>{groups[red]?.length}</div>
 							<div class="pad-l border-l iconGroup">
 								<Button
 									on:click={() => {
 										hidedGroups[red] = !hidedGroups[red];
-										// hideBody = !hideBody;
 									}}
 									icon={hidedGroups[red] ? 'chevron-up' : 'chevron-down'}
 									naked
@@ -302,4 +306,5 @@ $: groups = groupByField
 }
 :global(.groupHead:hover) :global(.divider) {
   border-color: var(--theme-color-primary, red);
+  cursor: pointer;
 }</style>

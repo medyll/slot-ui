@@ -50,5 +50,6 @@ $: cssVars = setCssGrid($dataListContext.columns ?? []);
 <style>.dataListHead {
   display: grid;
   grid-template-columns: var(--template-columns) auto;
+  grid-auto-columns: min-content;
   transition: all 0.1s;
 }</style>

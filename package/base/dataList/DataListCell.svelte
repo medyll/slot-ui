@@ -21,29 +21,27 @@ export let noWrap = true;
 /** title */
 export let title = undefined;
 let colIndex;
-let minWidth = "114px";
+let minWidth = '114px';
 onMount(async () => {
-    colIndex = element ? [...(element.parentElement?.children ?? [])].indexOf(element) : -1;
     // if inHeader take the width from
     // - the columns and dataField :  set it to the element
     // - the columns and element index :  set it to the element
     // - the element with : don't do nothing, but should ! throw error ?
     if (inHeader) {
+        colIndex = element ? [...(element.parentElement?.children ?? [])].indexOf(element) : -1;
         if ($dataListContext.hasColumnsProps && field) {
-            await tick();
             //console.log('hasColumnsProps && field');
             if (!$dataListContext.columns[field]) {
-                console.log('create');
+                await tick();
                 createColumnsDef(element, field, colIndex);
             }
             if (!$dataListContext.columns[field]?.width) {
-                console.log(element?.offsetWidth);
-                updateColumnsDef(field, { width: minWidth });
+                await tick();
+                $dataListContext.columns[field].width = (element.offsetWidth + 16) + 'px';
             }
         }
         else if ($dataListContext.hasColumnsProps) {
             await tick();
-            console.log('no field');
             // grab and declare field from data
             field = getAutoFields($dataListContext.data)[colIndex];
         }
@@ -55,17 +53,6 @@ onMount(async () => {
             // create a dummy field for reference
             createColumnsDef(element, crypto.randomUUID(), colIndex);
         }
-    }
-    // if not in header set the width of element from
-    // - the columns with dataField
-    // - the columns with element index => set field
-    // - there is always a columns
-    if (!inHeader) {
-        let def;
-        if (field)
-            def = $dataListContext?.columns[field];
-        else
-            def = Object.values($dataListContext?.columns)[colIndex];
     }
     return () => {
         columnId = undefined;
@@ -87,8 +74,8 @@ const createColumnsDef = async (element, field, index) => {
     await tick();
     $dataListContext.columns[field] = {
         field,
-        style: (element.getAttribute('style') ?? ''),
-        width: minWidth,
+        style: element.getAttribute('style') ?? '',
+        width: element.offsetWidth + 'px',
         order: Boolean(element.style?.order) ? eval(element.style.order) : index,
         index: index,
         columnId: field
@@ -101,7 +88,6 @@ const updateColumnsDef = async (field, payload) => {
         ...$dataListContext.columns[field],
         ...payload
     };
-    // $dataListContext.hasColumnsProps = true;
 };
 /**
  * used if no columns and no props.field
@@ -128,7 +114,7 @@ async function resizeOn(data) {
 function resizeEnd() { }
 </script>
 
-{#if inHeader} 
+{#if inHeader}
 	<div
 		bind:this={element}
 		data-sortable={true}
@@ -139,10 +125,9 @@ function resizeEnd() { }
 		on:resizer:start={resizeStart}
 		on:resizer:resize={resizeOn}
 		on:resizer:end={resizeEnd}
-		style="{style ?? $dataListContext.columns[field]?.headerStyle ?? $dataListContext.columns[field]?.style};--cell-width:{$dataListContext.columns[field]?.width}"
-		style:width={$dataListContext.columns[field]?.width}
-		style:minWidth={$dataListContext.columns[field]?.width}
-		style:maxWidth={$dataListContext.columns[field]?.width}
+		style="{style ??
+			$dataListContext.columns[field]?.headerStyle ??
+			$dataListContext.columns[field]?.style};--cell-width:{$dataListContext.columns[field]?.width}"
 		{...$$restProps}
 	>
 		<div on:click={() => onSort(field)} class="cellHeader">
@@ -151,11 +136,11 @@ function resizeEnd() { }
 			</div>
 			{#if field && $dataListContext?.config?.isSortable}
 				<div class="cellHeaderSorter" title={sorticon}>
-					<!-- <Chipper class="pad-tb-1">
-						<Icon naked icon={sorticon} {showChip} />
-					</Chipper> -->
+					<Chipper class="pad" {showChip} position={(showChip && $dataListContext.sortBy?.activeSortByOrder==='desc')? 'top':'bottom'}>
+						<Icon naked icon={sorticon}  />
+					</Chipper>
 					<!-- <Icon naked icon={sorticon} {showChip} /> -->
-					<Button naked icon={sorticon} {showChip} />
+					<!-- <Button naked icon={sorticon} {showChip} /> -->
 				</div>
 			{/if}
 		</div>

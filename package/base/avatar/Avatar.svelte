@@ -1,12 +1,15 @@
 <script>import { get_current_component } from 'svelte/internal';
 import { createEventForwarder } from '../../engine/engine';
+import Icon from '../icon/Icon.svelte';
 /*  common slotUi exports*/
 let className = '';
 export { className as class };
 export let element = null;
 const forwardEvents = createEventForwarder(get_current_component());
 /*  end slotUi exports*/
+export let icon = 'icon-park-outline:avatar';
 export let size = 'large';
+export let iconSize = 'large';
 const sizes = {
     tiny: '2rem',
     small: '4rem',
@@ -17,13 +20,15 @@ const sizes = {
 </script>
 
 <div
-        bind:this={element}
-        class="avatar {className}"
-        style="width:{sizes[size]};height:{sizes[size]}"
-        use:forwardEvents
+	bind:this={element}
+	class="avatar {className}"
+	style="width:{sizes[size]};height:{sizes[size]}"
+	use:forwardEvents
 >
-    <slot name="badge"/>
-    <slot/>
+	<slot name="badge" />
+	<slot>
+		<Icon {icon} fontSize={iconSize}   />
+	</slot>
 </div>
 
 <style>.avatar {

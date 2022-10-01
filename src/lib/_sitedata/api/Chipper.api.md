@@ -3,6 +3,9 @@ declare const __propDef: {
     props: {
         class?: string | undefined;
         element?: HTMLDivElement | undefined;
+        style?: string | undefined;
+        position?: "left" | "right" | "top" | "bottom" | undefined;
+        showChip?: boolean | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;

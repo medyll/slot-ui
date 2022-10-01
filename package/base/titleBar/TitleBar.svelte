@@ -21,7 +21,7 @@ export let hasMenu = false;
             <!--<ButtonAction/>-->
         </div>
     {/if}
-    {#if onClose}
+    {#if Boolean(onClose)}
         <div class="">
             <Button on:click={onClose} naked  icon="window-close" size="auto" />
         </div>

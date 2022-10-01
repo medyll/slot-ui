@@ -1,32 +1,52 @@
-<script>/*  common slotUi exports*/
+<svelte:options accessors />
+
+<script>import Icon from '../icon/Icon.svelte';
+/*  common slotUi exports*/
 let className = '';
 export { className as class };
 export let element = null;
+export let style = undefined;
+/** show or hide the backdrop */
+export let isOpen = false;
 /** if in loading state, it will show a loading icon or $$slots.loadingSlot */
-export let loading = false;
+export let isLoading = false;
+/** css position mode of the backdrop */
+export let flow = 'fixed';
 </script>
 
-<div bind:this={element} class="backdropRoot h-full w-full pos-fix top-0 zI-10 {className}">
-	<div class="backdropContent pos-abs  h-full w-full">
-		{#if loading}
-			<div class="pos-abs  h-full w-full flex-h flex-align-middle-center  zI-10">
-				<slot name="loadingSlot">
-					<i class="fa fa-spinner fa-spin fa-4x theme-text-primary-complement" />
-				</slot>
-			</div>
-		{:else}
-			<slot />
-		{/if}
+{#if isOpen}
+	<div
+		on:click
+		bind:this={element}
+		class="backdropRoot    {className}"
+		style="position:{flow};{style}"
+	>
+		<div class="backdropContent pos-abs  h-full w-full">
+			{#if isLoading}
+				<div class="flex-h flex-align-middle-center">
+					<slot name="loadingSlot">
+						<Icon icon="mdi:loading" fontSize="large" rotate />
+					</slot>
+				</div>
+			{:else}
+				<slot />
+			{/if}
+		</div>
 	</div>
-</div>
+{/if}
 
 <style>.backdropRoot {
-  position: absolute;
-  z-index: 1000;
+  z-index: 10000;
   height: 100%;
   width: 100%;
+  top: 0;
+  left: 0;
 }
 .backdropRoot .backdropContent {
-  background-color: var(--theme-color-foreground-alpha);
+  z-index: 10001;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: var(--backdrop-background-color, var(--theme-color-foreground-alpha));
   backdrop-filter: blur(5px);
 }</style>

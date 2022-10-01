@@ -20,6 +20,7 @@ declare const __propDef: {
         /** used only if data is provided */ idField?: string | undefined;
         /** columns declaration */ columns?: Record<string, DataCellType> | undefined;
         virtualizer?: boolean | undefined;
+        isLoading?: boolean | undefined;
         sortingIcons?: {
             default: string[];
             numeric: string[];
@@ -97,6 +98,9 @@ export default class DataList extends SvelteComponentTyped<DataListProps, DataLi
     get virtualizer(): boolean | undefined;
     /**accessor*/
     set virtualizer(_: boolean | undefined);
+    get isLoading(): boolean | undefined;
+    /**accessor*/
+    set isLoading(_: boolean | undefined);
     get sortingIcons(): {
         default: string[];
         numeric: string[];

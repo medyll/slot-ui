@@ -3,15 +3,16 @@ declare const __propDef: {
     props: {
         class?: string | undefined;
         element?: HTMLDivElement | null | undefined;
+        style?: string | undefined;
         /** is the content visible */ isOpen?: boolean | undefined;
+        /** show a working closer icon */ showCloseControl?: boolean | undefined;
         /** used to activate the slotui.TitleBar component */ hasMenu?: boolean | undefined;
         /** text to be shown in the title bar */ title?: string | undefined;
         /** alternative to iconSlot, icon to be used with the internat iconify component */ icon?: string | undefined;
         iconFamily?: string | undefined;
         /** alternative to contentSlot,  content to be shown in the main area */ content?: string | undefined;
-        /** alternative to buttonZoneSlot, content to be shown in the bottom button zone */ buttonZone?: string | undefined;
+        /** alternative to slot.bottomZone, content to be shown in the bottom button zone */ bottomZone?: string | undefined;
         /** component actions */ actions?: any;
-        onClose: () => void;
     };
     events: {
         [evt: string]: CustomEvent<any>;
@@ -25,7 +26,7 @@ declare const __propDef: {
         };
         contentSlot: {};
         default: {};
-        buttonZoneSlot: {};
+        bottomZone: {};
     };
 };
 export declare type BoxProps = typeof __propDef.props;

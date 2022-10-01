@@ -77,4 +77,5 @@ $: cssVars = Object.values($dataListContext.columns ?? []).reduce((previous, cur
 <style>.dataListRow {
   display: grid;
   grid-template-columns: var(--template-columns);
+  grid-auto-columns: min-content;
 }</style>
