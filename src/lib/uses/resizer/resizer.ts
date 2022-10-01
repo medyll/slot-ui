@@ -20,8 +20,8 @@ export const resizer = (node: HTMLElement, props: ResizerProps = {}) => {
     const eventStart = custom_event('resizer:start', {}, { bubbles: true });
     const eventEnd = custom_event('resizer:end', {}, { bubbles: true });
 
-const arrPool:string[]=[]
-let timer:any = null
+    const arrPool: string[] = []
+    let timer: any = null
 
     if (node.parentNode) {
         node.parentNode.addEventListener('mousemove', expand);
@@ -31,7 +31,7 @@ let timer:any = null
     if (!node.querySelector('data-resizer')) {
         handle = document.createElement('div')
         handle.setAttribute('data-resizer', 'true')
-        handle.setAttribute('style', 'position:absolute;height:100%;right:0;cursor:col-resize;width:8px;background-color:red;z-index:10')
+        handle.setAttribute('style', 'position:absolute;height:100%;right:0;cursor:col-resize;width:8px;background-color:transparent;z-index:10')
         handle.innerHTML = ''
         node.appendChild(handle)
     } else {
@@ -50,17 +50,17 @@ let timer:any = null
             if (start) {
                 clearTimeout(timer);
 
-                timer = setTimeout(()=>{
+                timer = setTimeout(() => {
                     const delta = event.pageX - start
-                    width = initial.width + delta
-    
-                    if (width) { 
+
+                    if (initial?.width) {
+                        width = initial.width + delta;
                         node.style.width = width + 'px'
                     }
-    
+
                     const eventResize = custom_event('resizer:resize', { width }, { bubbles: true });
                     node.dispatchEvent(eventResize);
-                },10);                
+                }, 10);
             }
         }
     }

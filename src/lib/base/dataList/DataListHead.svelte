@@ -69,7 +69,7 @@
 <style lang="scss">
 	.dataListHead{
 		display:grid;
-		grid-template-columns: var(--template-columns) auto; 
+		grid-template-columns: var(--template-columns) auto; grid-auto-columns: min-content;
 		transition: all  0.1s; 
 	}
 </style>

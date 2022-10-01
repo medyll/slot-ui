@@ -25,36 +25,33 @@
 	export let columnId: string | number | undefined = field ?? crypto.randomUUID();
 	/** set noWrap = true to have ellipsis on this cell content*/
 	export let noWrap: boolean = true;
-/** title */
-export let title:string | undefined = undefined
+	/** title */
+	export let title: string | undefined = undefined;
 
 	let colIndex: number;
 
-	let minWidth = "114px";
-	
+	let minWidth = '114px';
+
 	onMount(async () => {
-		colIndex = element ? [...(element.parentElement?.children ?? [])].indexOf(element) : -1;
 		// if inHeader take the width from
 		// - the columns and dataField :  set it to the element
 		// - the columns and element index :  set it to the element
 		// - the element with : don't do nothing, but should ! throw error ?
 
 		if (inHeader) {
+		colIndex = element ? [...(element.parentElement?.children ?? [])].indexOf(element) : -1;
 			if ($dataListContext.hasColumnsProps && field) {
-				await tick();
 				//console.log('hasColumnsProps && field');
 				if (!$dataListContext.columns[field]) {
-					console.log('create')
+					await tick();
 					createColumnsDef(element, field, colIndex);
 				}
-
-				if (!$dataListContext.columns[field]?.width) { 
-					console.log(element?.offsetWidth)
-					updateColumnsDef(field, { width:   minWidth });
+				if (!$dataListContext.columns[field]?.width) {
+					await tick();
+					$dataListContext.columns[field].width = (element.offsetWidth + 16) + 'px';
 				}
 			} else if ($dataListContext.hasColumnsProps) {
 				await tick();
-					console.log('no field')
 				// grab and declare field from data
 				field = getAutoFields($dataListContext.data)[colIndex];
 			} else if (field) {
@@ -64,19 +61,6 @@ export let title:string | undefined = undefined
 				// create a dummy field for reference
 				createColumnsDef(element, crypto.randomUUID(), colIndex);
 			}
-		}
-
-		// if not in header set the width of element from
-		// - the columns with dataField
-		// - the columns with element index => set field
-		// - there is always a columns
-
-		if (!inHeader) {
-
-			let def: DataCellType;
-			if (field) def = $dataListContext?.columns[field];
-			else def = Object.values($dataListContext?.columns)[colIndex];
- 
 		}
 
 		return () => {
@@ -108,8 +92,8 @@ export let title:string | undefined = undefined
 		await tick();
 		$dataListContext.columns[field] = {
 			field,
-			style: (element.getAttribute('style') ?? ''),
-			width: minWidth,
+			style: element.getAttribute('style') ?? '',
+			width: element.offsetWidth + 'px',
 			order: Boolean(element.style?.order) ? eval(element.style.order) : index,
 			index: index,
 			columnId: field
@@ -123,8 +107,7 @@ export let title:string | undefined = undefined
 			...$dataListContext.columns[field],
 			...payload
 		};
-		// $dataListContext.hasColumnsProps = true;
-	}; 
+	};
 
 	/**
 	 * used if no columns and no props.field
@@ -147,14 +130,13 @@ export let title:string | undefined = undefined
 	function resizeStart() {}
 
 	async function resizeOn(data: CustomEvent<{ width: any }>) {
-		await tick()
+		await tick();
 		$dataListContext.columns[field].width = data.detail.width + 'px';
-			
 	}
 	function resizeEnd() {}
 </script>
 
-{#if inHeader} 
+{#if inHeader}
 	<div
 		bind:this={element}
 		data-sortable={true}
@@ -165,10 +147,9 @@ export let title:string | undefined = undefined
 		on:resizer:start={resizeStart}
 		on:resizer:resize={resizeOn}
 		on:resizer:end={resizeEnd}
-		style="{style ?? $dataListContext.columns[field]?.headerStyle ?? $dataListContext.columns[field]?.style};--cell-width:{$dataListContext.columns[field]?.width}"
-		style:width={$dataListContext.columns[field]?.width}
-		style:minWidth={$dataListContext.columns[field]?.width}
-		style:maxWidth={$dataListContext.columns[field]?.width}
+		style="{style ??
+			$dataListContext.columns[field]?.headerStyle ??
+			$dataListContext.columns[field]?.style};--cell-width:{$dataListContext.columns[field]?.width}"
 		{...$$restProps}
 	>
 		<div on:click={() => onSort(field)} class="cellHeader">
@@ -177,11 +158,11 @@ export let title:string | undefined = undefined
 			</div>
 			{#if field && $dataListContext?.config?.isSortable}
 				<div class="cellHeaderSorter" title={sorticon}>
-					<!-- <Chipper class="pad-tb-1">
-						<Icon naked icon={sorticon} {showChip} />
-					</Chipper> -->
+					<Chipper class="pad" {showChip} position={(showChip && $dataListContext.sortBy?.activeSortByOrder==='desc')? 'top':'bottom'}>
+						<Icon naked icon={sorticon}  />
+					</Chipper>
 					<!-- <Icon naked icon={sorticon} {showChip} /> -->
-					<Button naked icon={sorticon} {showChip} />
+					<!-- <Button naked icon={sorticon} {showChip} /> -->
 				</div>
 			{/if}
 		</div>
@@ -203,6 +184,6 @@ export let title:string | undefined = undefined
 
 <style lang="scss">
 	.dataListCell {
-		// transition: all  0.1s; 
+		// transition: all  0.1s;
 	}
 </style>

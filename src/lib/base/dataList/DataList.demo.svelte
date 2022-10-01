@@ -5,20 +5,21 @@
 	import DataListHead from '$lib/base/dataList/DataListHead.svelte';
 	import ComponentDemo from '$_components/ComponentExample.svelte';
 	import appSchemeData from '../../../demoData/appscheme.json';
-	import type { DataCellType } from './types'; 
+	import type { DataCellType } from './types';
+	import Demoer from '../demoer/Demoer.svelte';
 
-	let data = [...Array(50)].map((caches, index: number) => {
+	let data = [...Array(5)].map((caches, index: number) => {
 		return {
 			id: index,
 			index,
 			name: 'name ' + index,
 			lastName: 'lastName ' + index,
 			group: 'group-' + getRandomInt(7),
-			groupedArrayOfObjects: [
+			groupByArrayObjectKey: [
 				{ name: 'nested' + getRandomInt(4) },
 				{ name: 'nested' + getRandomInt(4) }
 			],
-			groupObject: { group: 'group-' + getRandomInt(4) }
+			groupByObjectKey: { group: 'group-' + getRandomInt(4) }
 		};
 	});
 
@@ -52,7 +53,28 @@
 		return Math.floor(Math.random() * max);
 	}
 
-	let isOpen = false;;
+	let isOpen = false;
+
+	let parameters: any = {
+		groupByField: {
+			type: 'string',
+			values: ['group', 'groupByObjectKey', 'groupByArrayObjectKey', undefined]
+		},
+		virtualizer: {
+			type: 'boolean',
+			values: [true, false]
+		},
+		isSortable: {
+			type: 'boolean',
+			values: [true, false]
+		}
+	};
+
+	let componentArgs = {
+		data,
+		virtualizer: false,
+		isSortable: true
+	};
 </script>
 
 <ComponentDemo
@@ -61,40 +83,33 @@
 is a datalist table <br /> B. Franklin, 1854"
 >
 	<div class="flex-v gap-medium">
-
 		<h5>Automatique datalist, without columns definitions</h5>
 		<div class="what   pos-rel  pad">
-			<DataList style="height:150px;width:350px;overflow:auto;" {data}>
-				<svelte:fragment slot="head">
-					<DataListHead>
-						<DataListCell field="index">index</DataListCell>
-						<DataListCell field="name">name</DataListCell>
-						<DataListCell field="lastName">lastName</DataListCell>
-					</DataListHead>
-				</svelte:fragment>
-			</DataList>
+			<Demoer {parameters}  {componentArgs} component={DataList} let:activeParams >  
+				<DataList style="height:150px;width:350px;overflow:auto;" {...activeParams}>
+					<svelte:fragment slot="head">
+						<DataListHead>
+							<DataListCell field="index">index</DataListCell>
+							<DataListCell field="name">name</DataListCell>
+							<DataListCell field="lastName">lastName</DataListCell>
+						</DataListHead>
+					</svelte:fragment>
+				</DataList>
+			</Demoer>
 		</div>
-		<h5>grouped Datatable</h5>
-		<!-- groupByField="group" -->
-		<div class="what   pos-rel   pad" style="height:550px;overflow:auto;">
-			<DataList
-				style="max-height:250px;overflow:auto;"
-				{columns}
-				{data}
-				let:item 
-			>
-				<DataListHead slot="head">
-					<DataListCell field="index">index</DataListCell>
-					<DataListCell field="name">name</DataListCell>
-					<DataListCell field="lastName">group</DataListCell>
-					<DataListCell field="group"  >group</DataListCell>
-				</DataListHead>
-				<!-- <DataListRow data={item}>
-					<DataListCell field="index">{item.index}</DataListCell>
-					<DataListCell field="name">{item.name}</DataListCell>
-					<DataListCell field="lastName">121512</DataListCell>
-				</DataListRow> -->
-			</DataList>
+		<h5>With columns definitions</h5>
+		<div class="what   pos-rel  pad">
+			<Demoer {parameters} componentArgs={{ ...componentArgs, columns }} let:activeParams>
+				<DataList style="max-height:250px;overflow:auto;" {...activeParams}>
+					<svelte:fragment slot="head">
+						<DataListHead>
+							<DataListCell field="index">index</DataListCell>
+							<DataListCell field="name">name</DataListCell>
+							<DataListCell field="lastName">lastName</DataListCell>
+						</DataListHead>
+					</svelte:fragment>
+				</DataList>
+			</Demoer>
 		</div>
 		<!-- <h5>appSchemeData</h5>
 		<div style="width:100%;" class="what pad-1   pos-rel overflow-auto">

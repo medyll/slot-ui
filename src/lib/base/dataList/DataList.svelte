@@ -13,6 +13,7 @@
 	import Icon from '../icon/Icon.svelte';
 	import Button from '../button/Button.svelte';
 	import type { Data } from '$lib/types/index.js';
+	import { slide } from 'svelte/transition';
 
 	/*  common slotUi exports*/
 	let className = '';
@@ -56,6 +57,7 @@
 	export let columns: Record<string, DataCellType> = {};
 
 	export let virtualizer: boolean = false;
+	export let isLoading: boolean = false;
 
 	let hidedGroups: Data = {};
 
@@ -121,12 +123,13 @@
 			...content,
 			columns,
 			style,
-			groupByField: false,
+			groupByField: undefined,
 			groupByOptions,
 			showHeader: groupByOptions.showSubGroupsHeader,
 			selectorField,
 			selectorFieldValue,
-			virtualizer
+			virtualizer,
+			isLoading
 		};
 	}
 
@@ -135,6 +138,7 @@
 				keepUngroupedData: Boolean(groupByOptions.showEmptyGroup)
 		  })
 		: {};
+	
 </script>
 
 {#if groupByField}
@@ -151,13 +155,14 @@
 						<div class="flex-h flex-align-middle pad gap-medium groupHead">
 							<div class="iconGroup"><Icon class="iconGroup"   icon="cil:object-group" /></div>
 							<div>{groupByField} : <span class="text-bold">{red}</span></div>
-							<div class="flex-main border-b divider" />
+							<div class="flex-main border-b divider"  on:click={() => {
+								hidedGroups[red] = !hidedGroups[red];
+							}} />
 							<div>{groups[red]?.length}</div>
 							<div class="pad-l border-l iconGroup">
 								<Button
 									on:click={() => {
 										hidedGroups[red] = !hidedGroups[red];
-										// hideBody = !hideBody;
 									}}
 									icon={hidedGroups[red] ? 'chevron-up' : 'chevron-down'}
 									naked
@@ -232,7 +237,9 @@
 			}
 			.divider {
 				border-color: var(--theme-color-primary, red);
+				cursor:pointer;
 			}
 		}
 	}
+
 </style>

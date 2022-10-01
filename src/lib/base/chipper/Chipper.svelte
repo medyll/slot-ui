@@ -2,12 +2,19 @@
 	let className = '';
 	export { className as class };
 	export let element: HTMLDivElement | undefined = undefined;
+
+	export let style: string | undefined = undefined;
+	export let position: 'top' | 'bottom' | 'left' | 'right' = 'bottom'
+
+	export let showChip:boolean = true
 </script>
 
-<div bind:this={element} class="pos-rel gap-tiny {className}">
+{#if showChip}
+<div  bind:this={element} style="{style};" class="pos-rel gap-tiny {className} {position}">
 	<slot />
-	<chip />
+	<chip data-position="{position}" />
 </div>
+{/if}
 
 <style lang="scss">
 	chip {
@@ -18,7 +25,13 @@
 		transform: translate(-50%, 0);
 		width: 50%;
 		background-color: var(--css-button-chip-color, var(--theme-color-primary));
-		border-radius: 16px;
-		bottom: 2px;
+		border-radius: 16px; 
+		transition: all 0.25s;
+		&[data-position=top]{
+			top:2px;
+		}
+		&[data-position=bottom]{
+			bottom:2px;
+		}
 	}
 </style>

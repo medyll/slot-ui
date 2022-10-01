@@ -98,5 +98,6 @@
 	.dataListRow{
 		display:grid;
 		grid-template-columns: var(--template-columns);
+		grid-auto-columns: min-content;
 	}
 </style>
