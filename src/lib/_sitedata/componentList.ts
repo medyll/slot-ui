@@ -1,5 +1,6 @@
 import Alertdemosvelte from "$lib/base/alert/Alert.demo.svelte"; 
 import Avatardemosvelte from "$lib/base/avatar/Avatar.demo.svelte"; 
+import Backdropdemosvelte from "$lib/base/backdrop/Backdrop.demo.svelte"; 
 import Boxdemosvelte from "$lib/base/box/Box.demo.svelte"; 
 import Buttondemosvelte from "$lib/base/button/Button.demo.svelte"; 
 import Carddemosvelte from "$lib/base/card/Card.demo.svelte"; 
@@ -26,6 +27,7 @@ import Popperdemosvelte from "$lib/ui/popper/Popper.demo.svelte";
 import Windowdemosvelte from "$lib/ui/window/Window.demo.svelte";  
  export const slotUiComponentList = [ {name:"Alert",code:"alert",component:Alertdemosvelte},
 {name:"Avatar",code:"avatar",component:Avatardemosvelte},
+{name:"Backdrop",code:"backdrop",component:Backdropdemosvelte},
 {name:"Box",code:"box",component:Boxdemosvelte},
 {name:"Button",code:"button",component:Buttondemosvelte},
 {name:"Card",code:"card",component:Carddemosvelte},
