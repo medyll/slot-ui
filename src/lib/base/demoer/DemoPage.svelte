@@ -11,7 +11,7 @@
 {#if code || $$slots.code}
 	<h6 class="border-b w-medium pad ">code</h6>
 	<div class="pad-2 pad-l-8">
-		<slot name="code">{code}</slot>
+		<slot name="code"><code>{`${code}`}</code></slot>
 	</div>
 {/if}
 <h6 class="border-b pad  dsp-inline">{codeT}</h6>
