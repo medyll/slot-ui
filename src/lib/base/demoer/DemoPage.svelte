@@ -15,6 +15,6 @@
 	</div>
 {/if}
 <h6 class="border-b pad  dsp-inline">{codeT}</h6>
-<div class="pad-l-8">
+<div class="pad-l-8 pos-rel">
 	<slot />
 </div>
