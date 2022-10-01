@@ -50,7 +50,7 @@
 			{#each Object.keys(parameters) as parameter}
 				<div class="flex flex-align-middle gap-small w-mid-min">
 					<div class="border-b w-medium-min text-bold  ">{parameter}</div>
-					<div class="w-small  ">{parameters?.[parameter]?.type}</div>
+					<div class="w-medium  ">{parameters?.[parameter]?.type}</div>
 					<div />
 					{#each parameters?.[parameter]?.values ?? [] as value}
 						<Button
