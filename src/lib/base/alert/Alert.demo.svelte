@@ -61,8 +61,7 @@
 	<DemoPage title="Using props" component="Alert" code={code1}>
 		<Demoer {parameters} {componentArgs2} let:activeParams>
 			<div class="flex-h flex-wrap gap-medium">
-				<Alert {...activeParams} />
-				 
+				<Alert {...activeParams} />				 
 			</div>
 		</Demoer>
 	</DemoPage>

@@ -18,7 +18,7 @@
 	let:listItem
 	density="default"
 	onItemClick={openIn}
-	data={slotUiComponentList}
+	data={slotUiComponentList.sort((a,b)=> a.name>b.name ? 1 : -1)}
 	selectorField="code"
 	height="100%"
 >

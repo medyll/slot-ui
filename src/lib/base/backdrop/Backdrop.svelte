@@ -6,9 +6,10 @@
 
 	/** if in loading state, it will show a loading icon or $$slots.loadingSlot */
 	export let loading = false;
+	export let flow: 'absolute' | 'fixed' | 'relative' = 'fixed';
 </script>
 
-<div bind:this={element} class="backdropRoot h-full w-full pos-fix top-0 zI-10 {className}">
+<div bind:this={element} class="backdropRoot h-full w-full top-0 zI-10 {className}" style="position:{flow};">
 	<div class="backdropContent pos-abs  h-full w-full">
 		{#if loading}
 			<div class="pos-abs  h-full w-full flex-h flex-align-middle-center  zI-10">

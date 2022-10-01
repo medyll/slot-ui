@@ -9,7 +9,7 @@
 
 	let parameters: ParameterType = {
 		sizes: ['tiny', 'small', 'medium', 'large'],
-		inputHeight: ['tiny', 'small', 'default', 'large']
+		inputHeight: ['tiny', 'small', 'old', 'large']
 	};
 </script>
 

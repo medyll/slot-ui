@@ -137,7 +137,7 @@
 				<div class="startButtonSlot">
 					<slot name="startButtonSlot">
 						{#if icon}
-							<Icon fontSize="small" {icon} style="color:{iconColor}" {iconFamily} />
+							<Icon fontSize="small" {icon} color={iconColor} {iconFamily} />
 						{/if}
 					</slot>
 				</div>

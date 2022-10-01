@@ -3,11 +3,16 @@
 <script lang="ts">
 	import Button from '../button/Button.svelte';
 	import Icon from '../icon/Icon.svelte';
-	export let parameters: Record<string, Record<string, any>> = {};
+	export let parameters: Record<string, Record<string, { type?: string; values?: any[] }>> = {};
 	export let componentArgs: any;
 	export let component: any;
+	export let multiple: Record<string, any>;
 
 	let activeParams = { ...componentArgs };
+
+	$: Object.keys(parameters).forEach((parameter) => {
+		if (parameter?.type === 'boolean') parameters[parameter].values = [true, false];
+	});
 </script>
 
 <div class="pad flex-v gap-small">
@@ -16,12 +21,27 @@
 			<Icon icon="cib:svelte" />
 		</div>
 		<div class="pad-2">
-			<slot {activeParams}>
-				<svelte:component this={component} {componentArgs} />
-			</slot>
+			{#if multiple}
+				<div class="flex-h flex-align-middle flex-wrap gap-medium">
+					{#each Object.keys(multiple) as tiple}
+						{#each Object.keys(multiple[tiple]) as params}
+							<div> 
+								<slot activeParams={{...activeParams,[tiple]:params}} >
+									<svelte:component   this={component} {componentArgs} {...multiple[tiple][params]} />
+								</slot>
+								<div class="pad text-center">{tiple} {params}</div>
+							</div>
+						{/each}
+					{/each}
+				</div>
+			{:else}
+				<slot {activeParams}>
+					<svelte:component this={component} {componentArgs} />
+				</slot>
+			{/if}
 		</div>
 	</div>
-    <div class="border-b" />
+	<div class="border-b" />
 	<div class="flex-h  marg-t-2">
 		<div class="pad-2 border-r">
 			<Icon icon="clarity:command-line" />
