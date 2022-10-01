@@ -3,6 +3,8 @@
 <script lang="ts">
 	import Button from '../button/Button.svelte';
 	import Icon from '../icon/Icon.svelte';
+
+	export let title: string | undefined = undefined;
 	export let parameters: Record<string, Record<string, { type?: string; values?: any[] }>> = {};
 	export let componentArgs: any;
 	export let component: any;
@@ -15,6 +17,9 @@
 	});
 </script>
 
+{#if title}
+	<div class="pad">{title}</div>
+{/if}
 <div class="pad flex-v gap-small">
 	<div class="flex-h  marg-b-2">
 		<div class="pad-2 border-r flex-v flex-align-bottom">
@@ -25,9 +30,9 @@
 				<div class="flex-h flex-align-middle flex-wrap gap-medium">
 					{#each Object.keys(multiple) as tiple}
 						{#each Object.keys(multiple[tiple]) as params}
-							<div> 
-								<slot activeParams={{...activeParams,[tiple]:params}} >
-									<svelte:component   this={component} {componentArgs} {...multiple[tiple][params]} />
+							<div>
+								<slot activeParams={{ ...activeParams, [tiple]: params }}>
+									<svelte:component this={component} {componentArgs} {...multiple[tiple][params]} />
 								</slot>
 								<div class="pad text-center">{tiple} {params}</div>
 							</div>
