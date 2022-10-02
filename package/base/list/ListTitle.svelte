@@ -53,6 +53,17 @@ export let density = 'default';
   position: relative;
   border-radius: 4px;
   max-width: 100%;
+  /* &.density-tight {
+    padding: 0.5rem 0;
+  }
+
+  &.density-default {
+    padding: 1rem 0;
+  }
+
+  &.density-kind {
+    padding: 1.5rem 0;
+  } */
 }
 :global(li.listItemTitle) :global(.listItemContent),
 :global(li.listItem) :global(.listItemContent) {
@@ -88,18 +99,6 @@ export let density = 'default';
   overflow: hidden;
   opacity: 0.8;
 }
-:global(li.listItemTitle.density-tight),
-:global(li.listItem.density-tight) {
-  padding: 0.5rem 0;
-}
-:global(li.listItemTitle.density-default),
-:global(li.listItem.density-default) {
-  padding: 1rem 0;
-}
-:global(li.listItemTitle.density-kind),
-:global(li.listItem.density-kind) {
-  padding: 1.5rem 0;
-}
 
 :global(li.listItemTitle) {
   position: sticky;
@@ -123,5 +122,6 @@ export let density = 'default';
   width: 3px;
   background-color: var(--theme-color-primary);
   border-radius: 8px;
-  left: -1px;
+  left: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }</style>

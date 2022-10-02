@@ -11,12 +11,17 @@ declare const __propDef: {
         iconisError?: string | undefined;
         iconisEmpty?: string | undefined;
         /** message to display */ message?: string | undefined;
-        /** used if message props is omitted */ messages?: any;
+        /** used if props.message   is omitted */ messages?: any;
     };
     events: {
         [evt: string]: CustomEvent<any>;
     };
-    slots: {};
+    slots: {
+        loadingSlot: {};
+        errorSlot: {};
+        emptySlot: {};
+        messageSlot: {};
+    };
 };
 export declare type LoaderProps = typeof __propDef.props;
 export declare type LoaderEvents = typeof __propDef.events;

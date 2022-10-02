@@ -28,9 +28,9 @@ declare const __propDef: {
     };
     slots: {
         iconSlot: {};
-        topBarSlot: {};
+        topSlot: {};
         default: {};
-        drawerBottomBarSlot: {};
+        bottomSlot: {};
     };
 };
 export declare type DrawerProps = typeof __propDef.props;

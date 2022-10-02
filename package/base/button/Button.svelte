@@ -22,6 +22,8 @@ export let icon = undefined;
 export let iconFamily = 'mdi';
 /** icon color as a parameter*/
 export let iconColor = '#666';
+/** background color theme */
+export let bgTheme = undefined;
 /** paramters for usePopper */
 export let usePopper = undefined;
 /** show loading state */
@@ -98,7 +100,7 @@ $: actionArgs = {
 
 <container style="position:relative;display:flex;{containerStyle}">
 	<button
-		class={'w-' + size + ' ' +className}
+		class={className}
 		class:loading
 		bind:this={element}
 		use:popper={usePopper}
@@ -119,6 +121,9 @@ $: actionArgs = {
 		{selected}
 		{presetDefault}
 		{...$$restProps}
+		data-width="{size}"
+		style:background="var(--theme-color-{bgTheme})"
+		style:color={bgTheme ? 'white': ''}
 	>
 		<div class="innerButton">
 			{#if $$slots.startButtonSlot || icon}
@@ -225,6 +230,84 @@ input[type=submit] {
   color: var(--theme-color-foreground);
   padding: 0;
   transition: all 0.2s;
+}
+.button[data-height=tiny],
+button[data-height=tiny],
+button[contained=true][data-height=tiny],
+input[type=button][data-height=tiny],
+input[type=submit][data-height=tiny] {
+  height: calc(1rem - var(--slotui-border-bottom-size, 2px));
+  padding: 0;
+}
+.button[data-height=small],
+button[data-height=small],
+button[contained=true][data-height=small],
+input[type=button][data-height=small],
+input[type=submit][data-height=small] {
+  height: calc(1.9rem - var(--slotui-border-bottom-size, 2px));
+}
+.button[data-height=default],
+button[data-height=default],
+button[contained=true][data-height=default],
+input[type=button][data-height=default],
+input[type=submit][data-height=default] {
+  height: calc(2.5rem - var(--slotui-border-bottom-size, 2px));
+}
+.button[data-height=large],
+button[data-height=large],
+button[contained=true][data-height=large],
+input[type=button][data-height=large],
+input[type=submit][data-height=large] {
+  height: calc(4rem - var(--slotui-border-bottom-size, 2px));
+}
+.button[borderless=true],
+button[borderless=true],
+button[contained=true][borderless=true],
+input[type=button][borderless=true],
+input[type=submit][borderless=true] {
+  border: 0px solid none;
+}
+.button[data-width=tiny],
+button[data-width=tiny],
+button[contained=true][data-width=tiny],
+input[type=button][data-width=tiny],
+input[type=submit][data-width=tiny] {
+  width: 2rem;
+}
+.button[data-width=small],
+button[data-width=small],
+button[contained=true][data-width=small],
+input[type=button][data-width=small],
+input[type=submit][data-width=small] {
+  width: 6rem;
+}
+.button[data-width=medium],
+button[data-width=medium],
+button[contained=true][data-width=medium],
+input[type=button][data-width=medium],
+input[type=submit][data-width=medium] {
+  width: 8rem;
+}
+.button[data-width=default],
+button[data-width=default],
+button[contained=true][data-width=default],
+input[type=button][data-width=default],
+input[type=submit][data-width=default] {
+  width: 12rem;
+}
+.button[data-width=large],
+button[data-width=large],
+button[contained=true][data-width=large],
+input[type=button][data-width=large],
+input[type=submit][data-width=large] {
+  width: 16rem;
+}
+.button[data-width=auto],
+button[data-width=auto],
+button[contained=true][data-width=auto],
+input[type=button][data-width=auto],
+input[type=submit][data-width=auto] {
+  width: auto;
 }
 .button::before, .button::after,
 button::before,
@@ -348,7 +431,6 @@ button[bordered=true] {
   color: var(--theme-color-foreground);
   border: 0.5px solid var(--theme-color-border);
   box-shadow: var(--box-shad-1);
-  background-color: transparent;
 }
 .button[bordered=true]:hover,
 button[bordered=true]:hover {
@@ -357,7 +439,7 @@ button[bordered=true]:hover {
 .button[contained=true],
 button[contained=true] {
   color: var(--theme-color-foreground);
-  background-color: var(--theme-color-paper-alpha-low, rgba(255, 255, 255, 0.1)) !important;
+  background-color: var(--theme-color-paper-alpha-low, rgba(255, 255, 255, 0.1));
 }
 .button[contained=true]:hover,
 button[contained=true]:hover {
@@ -372,9 +454,8 @@ button[contained=true]:focus {
 .button[link=true],
 button[link=true] {
   color: var(--theme-color-primary);
-  background-color: transparent;
   text-decoration: underline;
-  text-underline-offset: 0.25rem;
+  text-underline-offset: 0.35rem;
   cursor: pointer;
 }
 .button[link=true]:hover,

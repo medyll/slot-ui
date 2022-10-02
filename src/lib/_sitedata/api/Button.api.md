@@ -10,6 +10,7 @@ declare const __propDef: {
         icon?: string | undefined;
         iconFamily?: string | undefined;
         iconColor?: string | undefined;
+        bgTheme?: string | undefined;
         usePopper?: UsePopperProps | undefined;
         loading?: boolean | undefined;
         showChip?: boolean | undefined;

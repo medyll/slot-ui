@@ -1,29 +1,93 @@
 <script lang="ts">
-	import Column from '../columner/Column.svelte';
-	import Columner from '../columner/Columner.svelte';
-	import Loader from './Loader.svelte';
+  import Loader from './Loader.svelte';
+
+  /* demo */
+  import ComponentDemo from '$components/ComponentExample.svelte';
+  import Demoer from '$lib/base/demoer/Demoer.svelte';
+  import DemoPage from '$lib/base/demoer/DemoPage.svelte';
+  import {defaultsArgsFromProps} from '../demoer/demoer.utils.js';
+  import Icon from '$lib/base/icon/Icon.svelte';
+  /* demo */
+
+  let parametersSlot: any = {
+    status: {
+      type  : 'string',
+      values: ['loading', 'success', 'error', 'empty', undefined],
+    },
+  };
+
+  let componentArgsSlot = {
+    status: defaultsArgsFromProps('status', parametersSlot),
+  };
+
+  let codeSlot = `
+<Loader on:status:change={()=>{}} >
+    <Icon slot="loadingSlot" icon="mdi:loading" rotate/>
+    <Icon slot="errorSlot" icon="mdi:alert-circle-outline"/>
+    <Icon slot="emptySlot" icon="mdi:database-search-outline"/>
+    <Icon slot="successSlot" icon="clarity:success-standard-line"/>
+    <div slot="messageSlot" class="border-b pad radius-tiny border-color-palette-green">status message</div>
+</Loader>`;
+
+  let codeProps = `
+<Loader
+    status={"loading"}
+    messages={{
+        loading: 'Loading dataset',
+        error  : 'An error occurred',
+        empty  : 'Empty results',
+        success: 'Success !'
+      }}
+    emptyIcon="mdi:database-search-outline"
+    errorIcon="mdi:alert-circle-outline"
+    loadingIcon="mdi:loading"
+    successIcon="clarity:success-standard-line" />`;
 </script>
 
-<div class="flex-v gap-large">
-	<h5>{'<Loader />'}</h5>
-	<cite><p>
-		And suddenly, in this dark cabinet, i realized that the most pleasant phase was that of waiting.<br /> D. Pentes, 824
-	</p></cite>
-	<div class="flex-v gap-medium w-large pos-rel">
-		<h5>Loading</h5>
-
-		<div class="pos-rel h-large">
-			<Loader isLoading={true} />
-		</div>
-		<h5>On error</h5>
-
-		<div class="pos-rel h-large">
-			<Loader isError={true} />
-		</div>
-		<h5>Is empty</h5>
-
-		<div class="pos-rel h-large">
-			<Loader isEmpty={true} />
-		</div>
-	</div>
-</div>
+<ComponentDemo
+        cite="And suddenly, in this dark cabinet, i realized that the most pleasant
+	phase was that of waiting.<br /> D. Pentes, 824"
+        component="Loader"
+>
+    <div class="flex-v gap-large">
+        <DemoPage code={codeSlot} component="Loading" title="Using slots">
+            <Demoer
+                    componentArgs={componentArgsSlot}
+                    let:activeParams
+                    parameters={parametersSlot}
+            >
+                <div class="pos-rel h-large w-large">
+                    <Loader {...activeParams} on:status:change={()=>{}}>
+                        <Icon color="orange" fontSize="big" icon="mdi:loading" rotate slot="loadingSlot"/>
+                        <Icon color="red" fontSize="big" icon="mdi:alert-circle-outline" slot="errorSlot"/>
+                        <Icon color="gray" fontSize="big" icon="mdi:database-search-outline" slot="emptySlot"/>
+                        <Icon color="green" fontSize="big" icon="clarity:success-standard-line" slot="successSlot"/>
+                    </Loader>
+                </div>
+            </Demoer>
+        </DemoPage>
+        <DemoPage code={codeProps} component="Loading" title="Using props">
+            <Demoer
+                    componentArgs={componentArgsSlot}
+                    let:activeParams
+                    parameters={parametersSlot}
+            >
+                <div class="pos-rel h-large w-large">
+                    <Loader status="loading"
+                            {...activeParams}
+                            messages={{
+                                loading: 'Loading dataset',
+                                error  : 'An error occurred',
+                                empty  : 'Empty results',
+                                success: 'Success !'
+                              }}
+                            emptyIcon="mdi:database-search-outline"
+                            errorIcon="mdi:alert-circle-outline"
+                            loadingIcon="mdi:loading"
+                            messages: successIcon="clarity:success-standard-line"
+                    />
+                </div>
+            </Demoer>
+        </DemoPage>
+    </div>
+</ComponentDemo>

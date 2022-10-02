@@ -5,13 +5,14 @@ __propDef: {
         element?: HTMLDivElement | undefined;
         style?: string | undefined;
         position?: "left" | "right" | "top" | "bottom" | undefined;
-        showChip?: boolean | undefined;
+        /** sho or hide the chip */ showChip?: boolean | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
         default: {};
+        chipSlot: {};
     };
 };
 

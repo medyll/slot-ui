@@ -3,7 +3,7 @@
 <script>import { getContext } from 'svelte';
 import { fade, slide } from 'svelte/transition';
 import { createEventDispatcher, custom_event, get_current_component, null_to_empty } from 'svelte/internal';
-import { createEventForwarder } from '../../engine/engine';
+import { createEventForwarder } from '../../engine/engine.js';
 import Icon from '../icon/Icon.svelte';
 import Divider from '../divider/Divider.svelte';
 /*  common slotUi exports*/
@@ -35,24 +35,21 @@ let listStateContext = getContext('listStateContext');
 const handleClick = () => () => {
     // send whole listItem
     /** @deprecated */
-    const eventDeprecated = custom_event('listclicked', data, { bubbles: true });
+    const eventDeprecated = custom_event('listclick', data, { bubbles: true });
     element?.dispatchEvent(eventDeprecated);
-    const event = custom_event('listitem:clicked', { ...$$props }, { bubbles: true });
+    const event = custom_event('listitem:click', { ...$$props }, { bubbles: true });
     element?.dispatchEvent(event);
 };
 const handleDblClick = () => () => {
     // send whole listItem
     /** @deprecated */
-    const eventDeprecated = custom_event('list:dblclicked', data, { bubbles: true });
+    const eventDeprecated = custom_event('list:dblclick', data, { bubbles: true });
     element?.dispatchEvent(eventDeprecated);
-    const event = custom_event('listitem:dblclicked', { ...$$props }, { bubbles: true });
+    const event = custom_event('listitem:dblclick', { ...$$props }, { bubbles: true });
     element?.dispatchEvent(event);
 };
-function doTransition() {
-    return transition;
-}
 let isActive = false;
-$: if ($listStateContext?.selectorField) {
+$: if ($listStateContext?.selectorField && Object.keys(data ?? {}).length) {
     isActive = listStateContext.selector($listStateContext.selectorField, data);
 }
 </script>
@@ -67,9 +64,9 @@ $: if ($listStateContext?.selectorField) {
 >
 	<span class="listItemChip" />
 	{#if $$slots.icon || icon}
-		<div class="listItemIcon">
+		<div class="listItemIcon pad-ii ">
 			<slot name="icon">
-				{#if icon}<div><Icon {icon} /></div>{/if}
+				{#if icon}<Icon {icon} />{/if}
 			</slot>
 		</div>
 	{/if}
@@ -92,7 +89,7 @@ $: if ($listStateContext?.selectorField) {
 	</div>
 </li>
 {#if showDivider}
-	<Divider {...dividerProps}  />
+	<Divider {...dividerProps} />
 {/if}
 
 <style global>:global(ul) {
@@ -112,6 +109,17 @@ $: if ($listStateContext?.selectorField) {
   position: relative;
   border-radius: 4px;
   max-width: 100%;
+  /* &.density-tight {
+    padding: 0.5rem 0;
+  }
+
+  &.density-default {
+    padding: 1rem 0;
+  }
+
+  &.density-kind {
+    padding: 1.5rem 0;
+  } */
 }
 :global(li.listItemTitle) :global(.listItemContent),
 :global(li.listItem) :global(.listItemContent) {
@@ -147,18 +155,6 @@ $: if ($listStateContext?.selectorField) {
   overflow: hidden;
   opacity: 0.8;
 }
-:global(li.listItemTitle.density-tight),
-:global(li.listItem.density-tight) {
-  padding: 0.5rem 0;
-}
-:global(li.listItemTitle.density-default),
-:global(li.listItem.density-default) {
-  padding: 1rem 0;
-}
-:global(li.listItemTitle.density-kind),
-:global(li.listItem.density-kind) {
-  padding: 1.5rem 0;
-}
 
 :global(li.listItemTitle) {
   position: sticky;
@@ -182,7 +178,8 @@ $: if ($listStateContext?.selectorField) {
   width: 3px;
   background-color: var(--theme-color-primary);
   border-radius: 8px;
-  left: -1px;
+  left: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* li:focus{
@@ -190,16 +187,16 @@ $: if ($listStateContext?.selectorField) {
 	outline-offset: -1px;
 } */
 :global(.listItem.density-tight) {
-  padding: 0.5rem 0;
+  padding: 0.5rem 0.25rem;
   margin: 0.125rem 0;
 }
 
 :global(.listItem.density-default) {
-  padding: 1rem 0;
+  padding: 1rem 0.25rem;
   margin: 0.25rem 0;
 }
 
 :global(.listItem.density-kind) {
-  padding: 1.5rem 0;
+  padding: 1.5rem 0.25rem;
   margin: 0.5rem 0;
 }</style>
