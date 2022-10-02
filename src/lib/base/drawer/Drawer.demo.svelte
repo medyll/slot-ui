@@ -8,9 +8,17 @@
 	import ListItem from '$lib/base/list/ListItem.svelte';
 	import Drawer from './Drawer.svelte';
 
+	/* demo */
+	import ComponentDemo from '$_components/ComponentExample.svelte';
+	import Demoer from '$lib/base/demoer/Demoer.svelte';
+	import DemoPage from '$lib/base/demoer/DemoPage.svelte';
+	import { defaultsArgsFromProps } from '../demoer/demoer.utils.js';
+	import Icon from '../icon/Icon.svelte';
+	/* demo */
+
 	let drawerRef: Drawer;
 	let withTopBar: boolean = false;
-	let attrs = { primary: 'A Drawer', secondary: 'drawer seconday text',stickTo:'right' };
+	let attrs = { primary: 'A Drawer', secondary: 'drawer seconday text', stickTo: 'right' };
 
 	const options = {
 		stickTo: ['left', 'right', 'top', 'bottom'],
@@ -25,74 +33,83 @@
 	function changeAttr(attr: any) {
 		attrs = { ...attrs, ...attr };
 	}
+
+	let parametersSlot: any = {
+		isOpen: {
+			type: 'boolean',
+			values: [true, false]
+		},
+		stickTo: {
+			type: 'position-preset',
+			values: ['right', 'left', 'top', 'bottom']
+		},
+		flow: {
+			type: 'flow-preset',
+			values: ['relative', 'fixed', 'abolute']
+		},
+		showOpenerIcon: {
+			type: 'boolean',
+			values: [true, false]
+		}
+	};
+
+	let componentArgsSlot = {
+		isOpen: defaultsArgsFromProps('isOpen', parametersSlot),
+		stickTo: defaultsArgsFromProps('stickTo', parametersSlot),
+		flow: defaultsArgsFromProps('flow', parametersSlot),
+		showOpenerIcon: defaultsArgsFromProps('showOpenerIcon', parametersSlot)
+	};
+
+	let parametersProps: any = {
+		...parametersSlot
+	};
+
+	let componentArgsProps = {
+		primary: 'A Drawer',
+		secondary: 'drawer seconday text',
+		...componentArgsSlot
+	};
+
+	let codeSlot = `<Drawer>
+						<div slot="topSlot" class="pad-2" >								
+							Drawer's title				
+						</div>
+						<div class="pad-2">Drawer's content</div>
+						<div slot="bottomSlot" class="pad-2" >								
+							Drawer's bottom zone				
+						</div>
+					</Drawer>`;
 </script>
 
-<div class="flex-v gap-large">
-	<h5>{'<Drawer />'}</h5>
-	<div class="flex-v gap-medium">
-		<div><Button size="medium" primary="toggle drawer" on:click={onButtonClick} /></div>
-		<div>
-			<Button
-				size="medium"
-				primary="with top bar"
-				on:click={() => {
-
-					withTopBar = !withTopBar;
-					changeAttr({ primary: withTopBar ? undefined : 'A Drawer', secondary: withTopBar ? undefined : 'drawer seconday text' });
-				}}
-			/>
-		</div>
-		<h5>stickTo</h5>
-
-		<div class="flex-h gap-small">
-			{#each options.stickTo as stickTo}
-				<div>
-					<Button
-						on:click={() => {
-							changeAttr({ stickTo, primary: stickTo });
-						}}
-						size="medium"
-						primary="Stick to {stickTo}"
-					/>
+<ComponentDemo component="Drawer">
+	<div class="flex-v gap-medium w-full">
+		<DemoPage title="Using slots" component="Drawer" code={codeSlot}>
+			<Demoer parameters={parametersSlot} componentArgs={componentArgsSlot} let:activeParams>
+				<div style="width:450px;height:500px;position:relative;" class="pad flex-h">
+					<div class="flex-main pad-4 text-right">
+						Side content Side content Side content Side content
+					</div>
+					<Drawer {...activeParams}>
+						<div slot="iconSlot" class="pad-2" >								
+							<Icon icon="window" />		
+						</div>
+						<div slot="topSlot" class="pad-2" >								
+							Drawer's title				
+						</div>
+						<div class="pad-2">Drawer's content</div> 
+						<div slot="bottomSlot" class="pad-2" >								
+							Drawer's bottom zone				
+						</div>
+					</Drawer>
 				</div>
-			{/each}
-		</div>
-		<h5>flow</h5>
-
-		<div class="flex-h gap-small">
-			{#each options.flow as flow}
-				<div>
-					<Button
-						on:click={() => {
-							changeAttr({ flow, primary: flow });
-						}}
-						size="medium"
-						primary="position {flow}"
-					/>
-				</div>
-			{/each}
-		</div>
-		<h5>showOpenerIcon</h5>
-		<div class="flex-h gap-small">
-			{#each options.showOpenerIcon as showOpenerIcon}
-				<div>
-					<Button
-						on:click={() => {
-							changeAttr({ showOpenerIcon, primary: showOpenerIcon });
-						}}
-						size="medium"
-						primary="showOpenerIcon {showOpenerIcon}"
-					/>
-				</div>
-			{/each}
-		</div>
+			</Demoer>
+		</DemoPage>
 	</div>
-	<Jsoner data={attrs} />
-	<!-- {JSON.stringify(attrs,null,' ')} -->
-</div>
-<div style="width:80%;height:500px;position:relative;" class="border">
+</ComponentDemo>
+
+<!-- <div style="width:80%;height:500px;position:relative;" class="border">
 	<Drawer bind:this={drawerRef} isOpen={true} icon="edit" flow="fixed" {...attrs}>
-		<div slot="topBarSlot">
+		<div slot="topSlot">
 			{#if withTopBar}
 				<TopBar title="Drawer with top bar ">
 					<svelte:fragment slot="menuBarSwitcher">
@@ -103,8 +120,8 @@
 				</TopBar>
 			{/if}
 		</div>
-		<div style="height:100%;overflow:hidden;"> 
-			<List height="100%"   onItemClick={() => {}}>
+		<div style="height:100%;overflow:hidden;">
+			<List height="100%" onItemClick={() => {}}>
 				{#each [...Array(20)] as key, val}
 					<ListItem>
 						<span slot="primary">Some idioms {val}</span>
@@ -114,6 +131,6 @@
 				{/each}
 			</List>
 		</div>
-		<div slot="drawerBottomBarSlot">Bottom bar</div>
+		<div slot="bottomSlot">Bottom bar</div>
 	</Drawer>
-</div>
+</div> -->

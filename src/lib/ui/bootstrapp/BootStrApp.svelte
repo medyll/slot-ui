@@ -88,7 +88,7 @@ red
 			/> -->
 		</div>
 		<Drawer isOpen={false}>
-			<svelte:fragment slot="topBarSlot">
+			<svelte:fragment slot="topSlot">
 				<TopBar title="Drawer with menu bar ">
 					<svelte:fragment slot="menuBarSwitcher">
 						<div class="pad-1">
