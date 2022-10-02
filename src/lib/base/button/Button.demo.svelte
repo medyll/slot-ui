@@ -13,6 +13,7 @@
   import Menu from "$lib/ui/menu/Menu.svelte";
   import MenuItem from "$lib/ui/menu/MenuItem.svelte";
   import { uiPresets } from "$lib/engine/presets.js";
+	import { defaultsArgs } from "../demoer/demoer.utils";
 
   type ParameterType = {
     sizes: ElementProps["sizeType"][];
@@ -47,6 +48,7 @@
 
   let multiple = {
     bgTheme: {
+      none: { bgTheme: undefined },
       primary: { bgTheme: "primary" },
       secondary: { bgTheme: "secondary" },
       tertiary: { bgTheme: "tertiary" },
@@ -60,10 +62,10 @@
     },
   };
 
-  let parametersStyle: any = {
+  let styleParameters: any = {
     color: {
       type: "color-preset",
-      values: ["primary", "secondary", "tertiary"],
+      values: [undefined,"primary", "secondary", "tertiary"],
     },
     naked: {
       type: "boolean",
@@ -82,6 +84,8 @@
       values: [true, false],
     },
   };
+
+  let styleDefaultArgs = defaultsArgs(styleParameters);
 
   let parameters: any = {
     size: {
@@ -130,6 +134,8 @@
     ...parameters,
   };
 
+console.log(styleDefaultArgs);
+
   let componentArgs = {
     icon: "icon-park-outline:avatar",
     size: "default",
@@ -168,9 +174,9 @@ let code = `
     </DemoPage>
     <DemoPage subTitle="Styling props" component="Button">
       <Demoer
-        parameters={parametersStyle}
+        parameters={styleParameters}
         {multiple}
-        {componentArgs}
+        componentArgs={componentArgs}
         let:activeParams
       >
         <Button {...activeParams}
