@@ -194,8 +194,8 @@
 	class="density-{density} {className}"
 	on:listclicked={onListItemClick_Deprecated}
 	on:list:dblclicked={onListItemClick_Deprecated}
-	on:listitem:clicked={onListItemClick}
-	on:listitem:dblclicked={onListItemClick}
+	on:listitem:click={onListItemClick}
+	on:listitem:dblclick={onListItemClick}
 	style="position:relative;height:{height};margin:0;padding:0!important;{style};opacity:{disabled
 		? 0.6
 		: 1};overflow:{virtualize ? 'hidden' : 'auto'};"

@@ -49,20 +49,20 @@
 	const handleClick = () => () => {
 		// send whole listItem
 		/** @deprecated */
-		const eventDeprecated = custom_event('listclicked', data, { bubbles: true });
+		const eventDeprecated = custom_event('listclick', data, { bubbles: true });
 		element?.dispatchEvent(eventDeprecated);
 
-		const event = custom_event('listitem:clicked', { ...$$props }, { bubbles: true });
+		const event = custom_event('listitem:click', { ...$$props }, { bubbles: true });
 		element?.dispatchEvent(event);
 	};
 
 	const handleDblClick = () => () => {
 		// send whole listItem
 		/** @deprecated */
-		const eventDeprecated = custom_event('list:dblclicked', data, { bubbles: true });
+		const eventDeprecated = custom_event('list:dblclick', data, { bubbles: true });
 		element?.dispatchEvent(eventDeprecated);
 
-		const event = custom_event('listitem:dblclicked', { ...$$props }, { bubbles: true });
+		const event = custom_event('listitem:dblclick', { ...$$props }, { bubbles: true });
 		element?.dispatchEvent(event);
 	};
 
