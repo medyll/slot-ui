@@ -53,7 +53,8 @@
 		shadow: defaultsArgsFromProps('shadow', parametersSlot)
 	};
 
-	let codeSlot = `<Divider />`;
+	let codeSlot = `
+	<Divider />`;
 </script>
 
 <ComponentDemo

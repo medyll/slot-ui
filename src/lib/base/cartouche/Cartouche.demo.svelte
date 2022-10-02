@@ -48,15 +48,17 @@
 		secondary: 'Some subtitle'
 	};
 
-	let code1 = `<Cartouche isOpen={true} class="marg-tb-1">
-					<Icon slot="cartoucheIconSlot" fontSize="small" icon="circle" />
-					<span slot="primarySlot">This is a cartouche</span> 
-					<Button size="medium" slot="cartoucheActionSlot">a button</Button>
-					<div class="pad-2 border-t">Some <br />Cartouche <br />content</div>
-				</Cartouche> `;
+	let code1 = `
+	<Cartouche isOpen={true} class="marg-tb-1">
+		<Icon slot="cartoucheIconSlot" fontSize="small" icon="circle" />
+		<span slot="primarySlot">This is a cartouche</span> 
+		<Button size="medium" slot="cartoucheActionSlot">a button</Button>
+		<div class="pad-2 border-t">Some <br />Cartouche <br />content</div>
+	</Cartouche> `;
 
-	let code2 = `<Cartouche 
-					class="marg-tb-1" />`;
+	let code2 = `
+	<Cartouche 
+		class="marg-tb-1" />`;
 </script>
 
 <ComponentDemo

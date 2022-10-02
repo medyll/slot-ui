@@ -11,9 +11,9 @@
 	let codeT = subTitle ? subTitle : `component ${component} demo ${title?.toLowerCase()}`;
 
 	Prism.plugins.NormalizeWhitespace.setDefaults({
-		'remove-trailing': false,
+		'remove-trailing': true,
 		'remove-indent': false,
-		'left-trim': false,
+		'left-trim': true,
 		'right-trim': false,
 		'break-lines': 80,
 		indent: 0,

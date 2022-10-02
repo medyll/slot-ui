@@ -33,11 +33,14 @@
         iconSize: 'default',
 	};
 
-    let code1 = `<Avatar {...activeParams}><Icon icon={activeParams?.icon} /></Avatar>`
+    let code1 = `
+	<Avatar>
+		<Icon icon={activeParams?.icon} />
+	</Avatar>`
 
         
-    let code2 = `<Avatar 
-					icon={activeParams?.icon} />`
+    let code2 = `
+	<Avatar icon={icon} />`
 
 </script>
 

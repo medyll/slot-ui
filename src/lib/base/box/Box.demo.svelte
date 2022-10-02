@@ -49,16 +49,17 @@
 		bottomZone: 'bottomZone as text / html',
 
 	};
-	let code = `<Box class="marg">
-					<span slot="titleSlot">Title of the box</span>
-					<Icon  slot="iconSlot" fontSize="small" icon="clock" />
-					<div class="pad-2">
-						Content of the box
-					</div>
-					<div  slot="bottomZone" class="flex-h gap-small pad border-t marg-ii-1">
-						bottom zoone
-					</div>
-				</Box>`
+	let code = `
+	<Box class="marg">
+		<span slot="titleSlot">Title of the box</span>
+		<Icon  slot="iconSlot" fontSize="small" icon="clock" />
+		<div class="pad-2">
+			Content of the box
+		</div>
+		<div  slot="bottomZone" class="flex-h gap-small pad border-t marg-ii-1">
+			bottom zoone
+		</div>
+	</Box>`
 </script>
 
 <ComponentDemo

@@ -150,6 +150,18 @@
 		iconSize: 'default',
 		showChip: false
 	};
+
+	let code = `
+<Button on:click={()=>{}} >
+	My button
+	<Icon slot="startButtonSlot" icon="..." />
+	<Icon slot="endButtonSlot" icon="..." />
+</Button>`
+
+let code2 = `
+<Button on:click={()=>{}} >
+	My button
+</Button>`
 </script>
 
 <ComponentDemo
@@ -157,7 +169,7 @@
 	cite="There were a place where we used to click. You've called it a button, and we clicked yes.<br /> R. Falgt, 1354"
 >
 	<div class="flex-v gap-medium">
-		<DemoPage title="Using slots" component="Button">
+		<DemoPage title="Using slots" code={code} component="Button">
 			<Demoer {parameters} {componentArgs} let:activeParams>
 				<Button {...activeParams}
 					>Using slots
@@ -199,7 +211,7 @@
 				</Button>
 			</Demoer>
 		</DemoPage>
-		<DemoPage title="Using props" component="Button">
+		<DemoPage title="Using props" code={code2} component="Button">
 			<Demoer parameters={parametersProps} {componentArgs} let:activeParams>
 				<Button {...activeParams}>Using props</Button>
 			</Demoer>

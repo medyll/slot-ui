@@ -70,15 +70,16 @@
 		...componentArgsSlot
 	};
 
-	let codeSlot = `<Drawer>
-						<div slot="topSlot" class="pad-2" >								
-							Drawer's title				
-						</div>
-						<div class="pad-2">Drawer's content</div>
-						<div slot="bottomSlot" class="pad-2" >								
-							Drawer's bottom zone				
-						</div>
-					</Drawer>`;
+	let codeSlot = `
+	<Drawer>
+		<div slot="topSlot" class="pad-2" >								
+			Drawer's title				
+		</div>
+		<div class="pad-2">Drawer's content</div>
+		<div slot="bottomSlot" class="pad-2" >								
+			Drawer's bottom zone				
+		</div>
+	</Drawer>`;
 </script>
 
 <ComponentDemo component="Drawer">
