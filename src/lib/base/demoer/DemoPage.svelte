@@ -3,6 +3,7 @@
 	import 'prismjs/plugins/normalize-whitespace/prism-normalize-whitespace';
 	import 'prism-svelte';
 
+	import DemoerCode from "./DemoerCode.svelte"
 	export let title: undefined = undefined;
 	export let code: string = '';
 	export let subTitle: undefined = undefined;
@@ -22,20 +23,15 @@
 		'spaces-to-tabs': 1
 	});
 
-	const highlighted = Prism.highlight(code, Prism.languages.svelte, 'svelte'); 
+	const highlighted = Prism.highlight(code, Prism.languages.svelte, 'svelte');
 </script>
 
 <div>
 	{#if title}<h5>{title}</h5>{/if}
 	{#if code || $$slots.code}
-		<h6 class="border-b w-medium pad ">code</h6>
-		<div class="pad pad-l-8">
-			<slot name="code"
-				><pre>
-				<code lang="language-svelte">{@html highlighted}</code>
-			</pre></slot
-			>
-		</div>
+		<slot name="code" >
+			<DemoerCode  {code} />
+		</slot >
 	{/if}
 	<h6 class="border-b pad  dsp-inline">{codeT}</h6>
 	<div class="pad-l-8 pos-rel">

@@ -29,13 +29,14 @@
 			{#if multiple}
 				<div class="flex-h flex-align-middle flex-wrap gap-medium">
 					{#each Object.keys(multiple) as tiple}
-						{#each Object.keys(multiple[tiple]) as params}
+						{#each Object.keys(multiple[tiple]) as params} 
 							<div>
-								<slot activeParams={{ ...activeParams, [tiple]: params }}>
+								<slot activeParams={{ ...activeParams, ...multiple[tiple][params] }}>
 									<svelte:component this={component} {componentArgs} {...multiple[tiple][params]} />
 								</slot>
-								<div class="pad text-center">{tiple} {params}</div>
+								<div class="pad-2 text-center">{tiple} {params}</div>
 							</div>
+							<div class="border-r pad-tb-4" />
 						{/each}
 					{/each}
 				</div>
