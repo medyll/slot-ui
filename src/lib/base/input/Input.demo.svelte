@@ -47,11 +47,13 @@
 		...componentArgsSlot
 	};
 
-	let codeSlot = `<Input >
-							<Icon slot="startInputSlot" icon="close" />
-							<Icon slot="endInputSlot" icon="close" />
-						</Input>`;
-	let codeSlotProps = `<Input icon={icon} endIcon={icon} />`;
+	let codeSlot = `
+	<Input >
+		<Icon slot="startInputSlot" icon="close" />
+		<Icon slot="endInputSlot" icon="close" />
+	</Input>`;
+	let codeSlotProps = `
+	<Input icon={icon} endIcon={icon} />`;
 </script>
 
 <ComponentDemo component="Input">
