@@ -27,10 +27,13 @@
 	};
 
 
-	let code1 = `<Alert >
-					Simple alert with a button
-					<Button slot="topButtonSlot">button</Button>
-				</Alert>`
+let code1 = `
+<Alert >
+	Simple alert with a button
+	<Button slot="topButtonSlot">button</Button>
+</Alert>`
+let code2 = `
+<Alert />	`
 </script>
 
 <ComponentDemo
@@ -58,7 +61,7 @@
 			</div>
 		</Demoer>
 	</DemoPage>
-	<DemoPage title="Using props" component="Alert" code={code1}>
+	<DemoPage title="Using props" component="Alert" code={code2}>
 		<Demoer {parameters} {componentArgs2} let:activeParams>
 			<div class="flex-h flex-wrap gap-medium">
 				<Alert {...activeParams} />				 

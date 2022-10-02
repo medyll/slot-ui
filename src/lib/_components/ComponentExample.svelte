@@ -2,6 +2,9 @@
 	import { componentReadMe } from '$sitedata/api/indexApi.js';
 	export let component: string = '';
 	export let cite: string = '';
+	import Prism from 'prismjs';
+	import 'prism-svelte';
+ 
 
 	$: finalCompReadMe = componentReadMe?.[component.toLowerCase()];
 </script>
@@ -17,7 +20,9 @@
 	{/if}
 	<div  class="flex-v gap-medium " >
 		<h5>Api preview :</h5>
-		<div  class="marg-l-4"><svelte:component this={finalCompReadMe} /></div>
+		<div  class="marg-l-4">
+		<pre  class="language-ts"><code><svelte:component this={finalCompReadMe} /></code></pre>	
+		</div>
 	</div>
 	<div  class="flex-v gap-medium " >
 		<h5>Link to api :</h5>

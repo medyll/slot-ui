@@ -63,7 +63,7 @@
 	component="Cartouche"
 	cite="'Open up', they said. So we stacked<br /> G. Brahms, 1964"
 >
-	<div class="flex-v gap-large" style="width:450px">
+	<div class="flex-v gap-large" >
 		<DemoPage title="Using slots" component="Cartouche" code={code1}>
 			<Demoer
 				title="A simple cartouche"
