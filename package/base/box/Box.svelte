@@ -6,9 +6,12 @@ const dispatch = createEventDispatcher();
 let className = '';
 export { className as class };
 export let element = null;
+export let style = '';
 const forwardEvents = createEventForwarder(get_current_component());
 /** is the content visible */
 export let isOpen = true;
+/** show a working closer icon */
+export let showCloseControl = true;
 /** used to activate the slotui.TitleBar component */
 export let hasMenu = false;
 /** text to be shown in the title bar */
@@ -18,8 +21,8 @@ export let icon = undefined;
 export let iconFamily = undefined;
 /** alternative to contentSlot,  content to be shown in the main area */
 export let content = undefined;
-/** alternative to buttonZoneSlot, content to be shown in the bottom button zone */
-export let buttonZone = undefined;
+/** alternative to slot.bottomZone, content to be shown in the bottom button zone */
+export let bottomZone = undefined;
 /** component actions */
 export const actions = {
     open: () => {
@@ -39,11 +42,12 @@ const handleClick = (event) => {
         dispatch('box:closed');
     }
 };
-export let onClose;
+$: closer = !showCloseControl ? {} : { onClose: () => actions.close() };
 </script>
 
-<div class="boxRoot shad-3 flex-v {className}" use:forwardEvents>
-	<TitleBar {hasMenu} {onClose}>
+{#if isOpen}
+<div class="boxRoot shad-3 flex-v {className}" {style} use:forwardEvents>
+	<TitleBar {hasMenu} {...closer}>
 		<slot name="titleSlot" slot="titleSlot">{null_to_empty(title)}</slot>
 		<slot name="iconSlot" slot="iconSlot">
 			{#if icon}
@@ -51,16 +55,16 @@ export let onClose;
 			{/if}
 		</slot>
 	</TitleBar>
-	<div class="boxContent flex-main pad-2">
+	<div class="boxContent flex-main">
 		<slot name="contentSlot">
 			<slot>{@html null_to_empty(content)}</slot>
 		</slot>
 	</div>
-	<div class="boxButtonZone">
-		<slot name="buttonZoneSlot">{@html null_to_empty(buttonZone)}</slot>
+	<div class="boxButtonSlot">
+		<slot name="bottomZone">{@html null_to_empty(bottomZone)}</slot>
 	</div>
 </div>
-
+{/if}
 <style global>:global(.boxRoot) {
   min-height: 160px;
   min-width: 320px;

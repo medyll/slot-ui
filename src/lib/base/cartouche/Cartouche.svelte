@@ -99,7 +99,7 @@
 <style lang="scss">
 	@import 'Cartouche';
 
-	.cartoucheHolder {
+	.cartoucheHolder { 
 		&.stacked {
 			border-radius: 0;
 			&:first-child {

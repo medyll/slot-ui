@@ -1,9 +1,11 @@
 import Alertdemosvelte from "$lib/base/alert/Alert.demo.svelte"; 
 import Avatardemosvelte from "$lib/base/avatar/Avatar.demo.svelte"; 
+import Backdropdemosvelte from "$lib/base/backdrop/Backdrop.demo.svelte"; 
 import Boxdemosvelte from "$lib/base/box/Box.demo.svelte"; 
 import Buttondemosvelte from "$lib/base/button/Button.demo.svelte"; 
 import Carddemosvelte from "$lib/base/card/Card.demo.svelte"; 
 import Cartouchedemosvelte from "$lib/base/cartouche/Cartouche.demo.svelte"; 
+import Chipperdemosvelte from "$lib/base/chipper/Chipper.demo.svelte"; 
 import Columnerdemosvelte from "$lib/base/columner/Columner.demo.svelte"; 
 import Confirmdemosvelte from "$lib/base/confirm/Confirm.demo.svelte"; 
 import DataListdemosvelte from "$lib/base/dataList/DataList.demo.svelte"; 
@@ -26,10 +28,12 @@ import Popperdemosvelte from "$lib/ui/popper/Popper.demo.svelte";
 import Windowdemosvelte from "$lib/ui/window/Window.demo.svelte";  
  export const slotUiComponentList = [ {name:"Alert",code:"alert",component:Alertdemosvelte},
 {name:"Avatar",code:"avatar",component:Avatardemosvelte},
+{name:"Backdrop",code:"backdrop",component:Backdropdemosvelte},
 {name:"Box",code:"box",component:Boxdemosvelte},
 {name:"Button",code:"button",component:Buttondemosvelte},
 {name:"Card",code:"card",component:Carddemosvelte},
 {name:"Cartouche",code:"cartouche",component:Cartouchedemosvelte},
+{name:"Chipper",code:"chipper",component:Chipperdemosvelte},
 {name:"Columner",code:"columner",component:Columnerdemosvelte},
 {name:"Confirm",code:"confirm",component:Confirmdemosvelte},
 {name:"DataList",code:"datalist",component:DataListdemosvelte},

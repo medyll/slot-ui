@@ -28,9 +28,9 @@ __propDef: {
     };
     slots: {
         iconSlot: {};
-        topBarSlot: {};
+        topSlot: {};
         default: {};
-        drawerBottomBarSlot: {};
+        bottomSlot: {};
     };
 };
 

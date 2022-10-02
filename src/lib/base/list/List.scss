@@ -51,7 +51,7 @@ li.listItem {
     opacity: 0.8;
   }
 
-  &.density-tight {
+  /* &.density-tight {
     padding: 0.5rem 0;
   }
 
@@ -61,7 +61,7 @@ li.listItem {
 
   &.density-kind {
     padding: 1.5rem 0;
-  }
+  } */
 }
 
 
@@ -90,7 +90,8 @@ li.listItem {
       width: 3px;
       background-color: var(--theme-color-primary);
       border-radius: 8px;
-      left: -1px;
+      left: 3px;
+      border:1px solid rgba(255,255,255,0.1)
     }
   }
 }

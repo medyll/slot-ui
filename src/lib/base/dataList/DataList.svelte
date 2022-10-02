@@ -13,6 +13,7 @@
 	import Icon from '../icon/Icon.svelte';
 	import Button from '../button/Button.svelte';
 	import type { Data } from '$lib/types/index.js';
+	import { slide } from 'svelte/transition';
 
 	/*  common slotUi exports*/
 	let className = '';
@@ -53,9 +54,10 @@
 	/** used only if data is provided */
 	export let idField: string | undefined = undefined;
 	/** columns declaration */
-	export let columns: Record<string, DataCellType> = {}; 
+	export let columns: Record<string, DataCellType> = {};
 
 	export let virtualizer: boolean = false;
+	export let isLoading: boolean = false;
 
 	let hidedGroups: Data = {};
 
@@ -121,15 +123,22 @@
 			...content,
 			columns,
 			style,
-			groupByField: false,
+			groupByField: undefined,
 			groupByOptions,
 			showHeader: groupByOptions.showSubGroupsHeader,
 			selectorField,
-			selectorFieldValue
+			selectorFieldValue,
+			virtualizer,
+			isLoading
 		};
 	}
 
-	$: groups = groupByField ? dataOp.groupBy(data, groupByField, { keepUngroupedData: Boolean(groupByOptions.showEmptyGroup) }) : {};
+	$: groups = groupByField
+		? dataOp.groupBy(data, groupByField, {
+				keepUngroupedData: Boolean(groupByOptions.showEmptyGroup)
+		  })
+		: {};
+	
 </script>
 
 {#if groupByField}
@@ -140,18 +149,20 @@
 		{#each Object.keys(groups) as red}
 			{@const groupProps = getGroupProps({ data: groups[red] })}
 			{@const item = groups[red]}
-			<div class="flex-v border-b">
+			<div class="flex-v">
 				<div class="">
 					<slot name="groupTitleSlot" {item}>
-						<div class="flex-h flex-align-middle pad gap-medium">
-							<div><Icon icon="folder" /></div>
-							<div class="flex-main">{groupByField} : {red}</div>
+						<div class="flex-h flex-align-middle pad gap-medium groupHead">
+							<div class="iconGroup"><Icon class="iconGroup"   icon="cil:object-group" /></div>
+							<div>{groupByField} : <span class="text-bold">{red}</span></div>
+							<div class="flex-main border-b divider"  on:click={() => {
+								hidedGroups[red] = !hidedGroups[red];
+							}} />
 							<div>{groups[red]?.length}</div>
-							<div class="pad-l border-l">
+							<div class="pad-l border-l iconGroup">
 								<Button
 									on:click={() => {
-										hidedGroups[red] = !hidedGroups[red]
-										// hideBody = !hideBody;
+										hidedGroups[red] = !hidedGroups[red];
 									}}
 									icon={hidedGroups[red] ? 'chevron-up' : 'chevron-down'}
 									naked
@@ -181,7 +192,7 @@
 		tabindex="0"
 	>
 		{#if element && virtualizer}
-			<Virtualize height="350px" data={sortedData} let:item>
+			<Virtualize style="border:1px solid red;height:100%;"  data={sortedData} let:item>
 				<svelte:fragment slot="virtualizeHeaderSlot">
 					<slot name="head">
 						<DataListHead />
@@ -215,4 +226,20 @@
 
 <style global lang="scss">
 	@import './DataList.scss';
+
+	.groupHead {
+		.iconGroup {
+				color: #999;
+			}
+		&:hover {
+			.iconGroup {
+				color: var(--theme-color-primary);
+			}
+			.divider {
+				border-color: var(--theme-color-primary, red);
+				cursor:pointer;
+			}
+		}
+	}
+
 </style>

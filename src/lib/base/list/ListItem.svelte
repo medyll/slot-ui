@@ -10,7 +10,7 @@
 		null_to_empty
 	} from 'svelte/internal';
 
-	import { createEventForwarder } from '../../engine/engine';
+	import { createEventForwarder } from '../../engine/engine.js';
 	import Icon from '../icon/Icon.svelte';
 	import type { ElementProps } from '$typings/index.js';
 	import Divider from '../divider/Divider.svelte';
@@ -35,7 +35,7 @@
 	export let showIcon: boolean = true;
 	/** show divider after listItem */
 	export let showDivider: boolean = false;
-	export let dividerProps: Record<string,any>  = {}
+	export let dividerProps: Record<string, any> = {};
 	export let transition: __sveltets_2_SvelteTransitionReturnType | undefined = undefined;
 
 	export let disabled: boolean = false;
@@ -49,29 +49,25 @@
 	const handleClick = () => () => {
 		// send whole listItem
 		/** @deprecated */
-		const eventDeprecated = custom_event('listclicked', data, { bubbles: true });
+		const eventDeprecated = custom_event('listclick', data, { bubbles: true });
 		element?.dispatchEvent(eventDeprecated);
 
-		const event = custom_event('listitem:clicked', { ...$$props }, { bubbles: true });
+		const event = custom_event('listitem:click', { ...$$props }, { bubbles: true });
 		element?.dispatchEvent(event);
 	};
 
 	const handleDblClick = () => () => {
 		// send whole listItem
 		/** @deprecated */
-		const eventDeprecated = custom_event('list:dblclicked', data, { bubbles: true });
+		const eventDeprecated = custom_event('list:dblclick', data, { bubbles: true });
 		element?.dispatchEvent(eventDeprecated);
 
-		const event = custom_event('listitem:dblclicked', { ...$$props }, { bubbles: true });
+		const event = custom_event('listitem:dblclick', { ...$$props }, { bubbles: true });
 		element?.dispatchEvent(event);
 	};
 
-	function doTransition() {
-		return transition;
-	}
-
 	let isActive: boolean = false;
-	$: if ($listStateContext?.selectorField) {
+	$: if ($listStateContext?.selectorField && Object.keys(data ?? {}).length) {	 
 		isActive = listStateContext.selector($listStateContext.selectorField, data);
 	}
 </script>
@@ -86,9 +82,9 @@
 >
 	<span class="listItemChip" />
 	{#if $$slots.icon || icon}
-		<div class="listItemIcon">
+		<div class="listItemIcon pad-ii ">
 			<slot name="icon">
-				{#if icon}<div><Icon {icon} /></div>{/if}
+				{#if icon}<Icon {icon} />{/if}
 			</slot>
 		</div>
 	{/if}
@@ -111,7 +107,7 @@
 	</div>
 </li>
 {#if showDivider}
-	<Divider {...dividerProps}  />
+	<Divider {...dividerProps} />
 {/if}
 
 <style lang="scss" global>
@@ -122,17 +118,17 @@
 		outline-offset: -1px;
 	} */
 	.listItem.density-tight {
-		padding: 0.5rem 0;
+		padding: 0.5rem 0.25rem;
 		margin: 0.125rem 0;
 	}
 
 	.listItem.density-default {
-		padding: 1rem 0;
+		padding: 1rem 0.25rem;
 		margin: 0.25rem 0;
 	}
 
 	.listItem.density-kind {
-		padding: 1.5rem 0;
+		padding: 1.5rem 0.25rem;
 		margin: 0.5rem 0;
 	}
 </style>

@@ -1,52 +1,87 @@
 <script lang="ts">
-	import { filter } from 'lodash';
-	import ComponentDemo from '$_components/ComponentExample.svelte';
-	import Tree from './Tree.svelte';
+  import Tree from './Tree.svelte';
 
-	let paths = [
-		'About.vue',
-		'Categories/Index.vue',
-		'Categories/Demo.vue',
-		'Categories/Flavors.vue',
-		'Categories/Demo',
-		'Categories/Demo/Flavors.vue'
-	];
+  /* demo */
+  import ComponentDemo from '$components/ComponentExample.svelte';
+  import DemoPage from '$lib/base/demoer/DemoPage.svelte';
+  import Demoer from '../demoer/Demoer.svelte';
+  import {defaultsArgsFromProps} from '../demoer/demoer.utils';
+  /* demo */
 
-	let pathsData = [
-		{ name: '', path: 'Categories/Demo/Vue', other: 'item' },
-		{ name: '', path: 'About' },
-		{ name: '', path: 'More' },
-		{ name: '', path: 'Categories/Demo/Vue/Demo' },
-		{ name: '', path: 'Categories/Index' },
-		{ name: '', path: 'Categories/About' },
-		{ name: '', path: 'Categories/Demo' },
-		{ name: '', path: 'New/With/Some/Unique/Levels/Yep' },
-		{ name: '', path: 'New/With/Some/Other/Levels/Yep', data: { isbel: 'or' } }
-	];
+  let paths = [
+    'About.vue',
+    'Categories/Index.vue',
+    'Categories/Demo.vue',
+    'Categories/Flavors.vue',
+    'Categories/Demo',
+    'Categories/Demo/Flavors.vue'
+  ];
 
-	let data = [
-		{ name: '', path: 'Categories/Demo/Vue/Demo' },
-		{
-			name: '',
-			path: 'New/With/Some/Unique/Levels/Yep'
-		}
-	];
+  let pathsData = [
+    {name: '', path: 'Categories/Demo/Vue', other: 'item'},
+    {name: '', path: 'About'},
+    {name: '', path: 'More'},
+    {name: '', path: 'Categories/Demo/Vue/Demo'},
+    {name: '', path: 'Categories/Index'},
+    {name: '', path: 'Categories/About'},
+    {name: '', path: 'Categories/Demo'},
+    {name: '', path: 'New/With/Some/Unique/Levels/Yep'},
+    {name: '', path: 'New/With/Some/Other/Levels/Yep', data: {isbel: 'or'}}
+  ];
 
-	let selectedData = [];
+  let data = [
+    {name: '', path: 'Categories/Demo/Vue/Demo'},
+    {
+      name: '',
+      path: 'New/With/Some/Unique/Levels/Yep'
+    }
+  ];
+
+  let selectedData = [];
+
+  let parametersSlot: any = {
+    status: {
+      type  : 'string',
+      values: ['loading', 'success', 'error', 'empty', undefined],
+    },
+  };
+
+  let componentArgsSlot = {
+    status: defaultsArgsFromProps('status', parametersSlot),
+  };
+
+  let codeSlot = `
+<Tree bind:selectedData
+    {data}
+    pathField="path"
+    paths={pathsData} />`;
 </script>
 
 <ComponentDemo
-	component="Tree"
-	cite="We were looking for leaves and we found trees<br /> B. Esein, 1354"
+        cite="We were looking for leaves and we found trees<br /> B. Esein, 1354"
+        component="Tree"
 >
-	<div class="flex-v gap-medium">
-		<div style="width:250px">
-			<Tree pathField="path" {data} paths={pathsData} bind:selectedData />
-		</div>
-	</div>
-	<pre>{JSON.stringify(
-			selectedData.filter((x) => x),
-			null,
-			' '
-		)}</pre>
+    <div class="flex-v gap-large">
+        <DemoPage code={codeSlot} component="Loading" title="Using slots">
+            <Demoer
+                    componentArgs={componentArgsSlot}
+                    let:activeParams
+                    parameters={parametersSlot}>
+                <div class="pos-rel flex-h">
+                    <div style="width:250px;" class="h-large overflow-auto">
+                        <Tree bind:selectedData {data} pathField="path" paths={pathsData}/>
+                    </div>
+                    <div style="width:250px;" class="h-large overflow-auto">
+                    <pre>{JSON.stringify(
+                        selectedData.filter((x) => x),
+                        null,
+                        ' '
+                    )}</pre>
+                    </div>
+                </div>
+            </Demoer>
+        </DemoPage>
+    </div>
+
+
 </ComponentDemo>

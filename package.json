@@ -1,6 +1,6 @@
 {
   "name": "@medyll/slotui",
-  "version": "0.1.87-dev",
+  "version": "0.1.90-dev",
   "repository": {
     "type": "git",
     "url": "https://github.com/medyll/slot-ui.git"
@@ -35,6 +35,8 @@
     "iconify-icon": "^1.0.0",
     "lodash": "^4.17.21",
     "postcss-load-config": "^4.0.1",
+    "prism-svelte": "^0.5.0",
+    "prismjs": "^1.29.0",
     "sanitize-html": "^2.7.2",
     "svelte-css-vars": "^0.0.3",
     "svelte-markdown": "^0.2.2",
@@ -64,8 +66,6 @@
     "jest": "^27.5.1",
     "mdsvex": "^0.10.6",
     "nodemon": "^2.0.18",
-    "prettier": "^2.4.1",
-    "prettier-plugin-svelte": "^2.7.0",
     "svelte": "^3.44.0",
     "svelte-check": "^2.8.0",
     "svelte-highlight": "^6.2.0",

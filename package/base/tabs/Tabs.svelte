@@ -1,28 +1,34 @@
 <script>import { onMount } from 'svelte';
 import { elem } from '../../engine/elem';
 import Icon from '../icon/Icon.svelte';
+import { custom_event, get_current_component } from 'svelte/internal';
+import { createEventForwarder } from '../../engine/engine';
 /*  common slotUi exports*/
 let className = '';
 export { className as class };
 export let element = null;
+const forwardEvents = createEventForwarder(get_current_component());
 /*  end slotUi exports*/
 export let items = [];
 export let activeTabCode = '';
 /** orientation */
 export let orientation = 'vertical';
+export let onTabClick = (item) => { };
 let navElementRef;
 let tabsElementRef;
 let activeCellElementRef;
 let boundingClientRect;
-const handleClick = (tabValue) => (event) => {
-    activeTabCode = tabValue;
-    if (!elem(navElementRef) || !activeTabCode)
+const handleClick = (item) => {
+    onTabClick(item);
+    const event = custom_event('on:tabs:click', item, { bubbles: true });
+    element.dispatchEvent(event);
+};
+const setChipPos = (code) => {
+    if (!elem(navElementRef) || !code)
         return;
-    const node = elem(navElementRef).find(`[data-code=${activeTabCode}]`);
+    const node = elem(navElementRef).find(`[data-code=${code}]`);
     if (node && activeCellElementRef?.parentElement) {
         boundingClientRect = node.getBoundingClientRect();
-        /* activeCellElementRef.style.left =
-            boundingClientRect.left - activeCellElementRef.parentElement.offsetLeft + 'px'; */
         if (orientation === 'vertical') {
             activeCellElementRef.style.left = node?.offsetLeft + 'px';
             activeCellElementRef.style.width = boundingClientRect.width + 'px';
@@ -32,85 +38,87 @@ const handleClick = (tabValue) => (event) => {
             activeCellElementRef.style.height = boundingClientRect.height + 'px';
             activeCellElementRef.style.width = '3px';
         }
-        // activeCellElementRef.style.top = tabsElementRef.offsetHeight + 'px';
-        // activeCellElementRef.style.marginLeft = (boundingClientRect.width) / 2 + 'px';
     }
 };
+$: if (activeTabCode && element) {
+    setChipPos(activeTabCode);
+}
 onMount(() => {
-    handleClick(activeTabCode)();
+    setChipPos(activeTabCode);
 });
 </script>
 
 <div
-	bind:this={element}
-	data-orientation={orientation}
-	class="tabsRoot flex-v {className}"
-	{...$$restProps}
+        {...$$restProps}
+        bind:this={element}
+        class="tabsRoot flex-v {className}"
+        data-orientation={orientation}
+        use:forwardEvents
 >
-	<div bind:this={tabsElementRef} class="tabsNav  flex-align-middle pos-rel">
-		<div>
-			<slot name="tabsFirstTitleSlot" />
-		</div>
-		<nav bind:this={navElementRef} class="tabsRail">
-			{#each items as item}
-				<div
-					data-code={item.code}
-					on:click={handleClick(item.code)}
-					class={activeTabCode === item.code ? 'active' : ''}
-				>
-					<slot {item} name="tabLabelSlot">{item.label}</slot>
-				</div>
-			{/each}
-		</nav>
-		<div data-coll='red'>
-			<slot name="tabsTitleSlot" />
-		</div>
-		<div>
-			<slot name="tabsButtonSlot" />
-		</div>
-	</div>
-	<div class="tabsActiveCellContainer">
-		<div bind:this={activeCellElementRef} class="tabSlot" />
-	</div>
-	<div>
-		<slot name="commandBarSlot" />
-	</div>
-	<div class="tabsContent flex-main pos-rel">
-		{#each items as item}
-			{@const display = activeTabCode === item.code ? 'flex' : 'none'}
-			{#if activeTabCode === item.code}
-				<slot {item} {activeTabCode}>
-					<div
-						data-code={item.code}
-						data-activeTabCode={activeTabCode}
-						style="display:{display};height:100%;position:relative;flex-direction:column"
-					>
-						{#if Boolean(item?.secondary)}
-							<div class=" flex-h pad-tb-2 gap-small">
-								<div class="border-r pad-1 shad-3 radius-tiny ">
-									<Icon style="display:block" inline={false} icon="mdi:info-circle" />
-								</div>
-								<div class="flex-main pad-t-1">{@html item?.secondary}</div>
-							</div>
-						{/if}
-						<slot name="innerTabSlot" {item} {activeTabCode}>
-							<div data-code={item.code} style="flex:1;overflow:hidden;position:relative;">
-								{#if activeTabCode === item.code}
-									{#if Boolean(item?.withComponent)}
-										<svelte:component this={item.withComponent} {...item.componentProps ?? {}} />
-									{:else if Boolean(item?.withContent)}
-										{item.withContent}
-									{:else if Boolean(item?.withUid)}
-										{item.withUid}
-									{/if}
-								{/if}
-							</div>
-						</slot>
-					</div>
-				</slot>
-			{/if}
-		{/each}
-	</div>
+    <div bind:this={tabsElementRef} class="tabsNav  flex-align-middle pos-rel">
+        <div>
+            <slot name="tabsFirstTitleSlot"/>
+        </div>
+        <nav bind:this={navElementRef} class="tabsRail">
+            {#each items as item}
+                <div
+                        data-code={item?.code}
+                        on:click={()=>{activeTabCode=item.code;handleClick(item)}}
+                        class={activeTabCode === item.code ? 'active' : ''}
+                >
+                    <slot {item} name="tabLabelSlot">{item.label}</slot>
+                </div>
+            {/each}
+        </nav>
+        <div data-coll='red'>
+            <slot name="tabsTitleSlot"/>
+        </div>
+        <div>
+            <slot name="tabsButtonSlot"/>
+        </div>
+    </div>
+    <div class="tabsActiveCellContainer">
+        <div bind:this={activeCellElementRef} class="tabSlot"/>
+    </div>
+    <div>
+        <slot name="commandBarSlot"/>
+    </div>
+    <div class="tabsContent flex-main pos-rel">
+        {#each items as item}
+            {@const display = activeTabCode === item?.code ? 'flex' : 'none'}
+            {#if item && activeTabCode === item?.code}
+                <slot {item} {activeTabCode}>
+                    <div
+                            data-code={item.code}
+                            data-activeTabCode={activeTabCode}
+                            style="display:{display};height:100%;position:relative;flex-direction:column"
+                    >
+                        {#if Boolean(item?.secondary)}
+                            <div class=" flex-h pad-tb-2 gap-small">
+                                <div class="border-r pad-1 shad-3 radius-tiny ">
+                                    <Icon style="display:block" inline={false} icon="mdi:info-circle"/>
+                                </div>
+                                <div class="flex-main pad-t-1">{@html item?.secondary}</div>
+                            </div>
+                        {/if}
+                        <slot name="innerTabSlot" {item} {activeTabCode}>
+                            <div data-code={item.code} style="flex:1;overflow:hidden;position:relative;">
+                                {#if activeTabCode === item.code}
+                                    {#if Boolean(item?.withComponent)}
+                                        <svelte:component this={item.withComponent} {...item.componentProps ?? {}}/>
+                                    {:else if Boolean(item?.withContent)}
+                                        {item.withContent}
+                                    {:else if Boolean(item?.withUid)}
+                                        {item.withUid}
+                                    {/if}
+                                {/if}
+                            </div>
+                        </slot>
+                    </div>
+                </slot>
+            {/if}
+        {/each}
+    </div>
 </div>
 
 <style>.tabsRoot {

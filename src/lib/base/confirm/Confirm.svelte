@@ -69,10 +69,10 @@
 {#if step === 'confirm'}
 	<span in:fade bind:this={contentRef} class="contentSlot">
 		<span on:click={handleClickCancel}>
-			<Button naked icon={cancelIcon} size="auto" title="cancel" />
+			<Button naked icon={cancelIcon}  title="cancel" />
 		</span>
 		<slot>
-			<Button on:click={handleAction} {iconColor} {icon} iconFamily="mdi" size="auto" {primary} focus />
+			<Button on:click={handleAction} {iconColor} {icon}  size="auto" {primary} focus />
 		</slot>
 	</span>
 {/if}

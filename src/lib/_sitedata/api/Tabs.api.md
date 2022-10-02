@@ -1,5 +1,5 @@
 ```import { SvelteComponentTyped } from "svelte";
-import type { TabsItemsProps } from './types';
+import type { Items, TabsItemsProps } from './types';
 declare const __propDef: {
     props: {
         [x: string]: any;
@@ -8,6 +8,7 @@ declare const __propDef: {
         items?: TabsItemsProps | undefined;
         activeTabCode?: string | undefined;
         orientation?: "vertical" | "horizontal" | undefined;
+        onTabClick?: ((item: Items) => void) | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;
@@ -15,17 +16,17 @@ declare const __propDef: {
     slots: {
         tabsFirstTitleSlot: {};
         tabLabelSlot: {
-            item: import("./types").Items;
+            item: Items;
         };
         tabsTitleSlot: {};
         tabsButtonSlot: {};
         commandBarSlot: {};
         default: {
-            item: import("./types").Items;
+            item: Items;
             activeTabCode: string;
         };
         innerTabSlot: {
-            item: import("./types").Items;
+            item: Items;
             activeTabCode: string;
         };
     };

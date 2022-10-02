@@ -1,6 +1,7 @@
 <script lang="ts"> 
 	import { get_current_component } from 'svelte/internal';
 	import type { ElementProps } from '$typings/index.js';
+	import { uiPresets } from '$lib/engine/presets.js';
 
 	let className = '';
 	export { className as class };
@@ -43,16 +44,9 @@
 			addStyle += `height:calc(${maxHeight}px - ${getDensity(density)});`;
 	}
 
-	function getDensity(density: ElementProps['density']) {
-		const denses: Record<ElementProps['density'], any> = {
-			none: '0',
-			tight: '0.25rem',
-			default: '0.5rem',
-			medium: '1rem',
-			kind: '1.5rem'
-		};
+	function getDensity(density: ElementProps['density']) { 
 
-		return denses[density];
+		return uiPresets.density?.[density];
 	}
 
 	switch (direction) {

@@ -4,32 +4,86 @@
 	import Divider from '../divider/Divider.svelte';
 	import Button from '../button/Button.svelte';
 	import ComponentDemo from '$_components/ComponentExample.svelte';
+	import Demoer from '$lib/base/demoer/Demoer.svelte';
+	import DemoPage from '$lib/base/demoer/DemoPage.svelte';
+
+	let parametersSlot: any = {
+		isOpen: {
+			type: 'boolean',
+			values: [true, false]
+		},
+		showCloseControl: {
+			type: 'boolean',
+			values: [true, false]
+		},
+	};
+
+	let parametersProps: any = {
+		title:{
+			type: 'string',
+			values: ['A smart title on a smart box', 'second title']
+		},
+		content:{
+			type: 'string',
+			values: ['Some content as text / html', 'second content']
+		},
+		bottomZone:{
+			type: 'string',
+			values: ['bottomZone as text / html', 'second bottomZone']
+		},
+		icon:{
+			type: 'icon',
+			values: ['mdi:window', 'mdi:user',undefined]
+		},
+		...parametersSlot,
+	};
+
+	let componentArgs = {
+		isOpen: true
+	};
+
+	let componentArgsProps = {
+		...componentArgs,
+		title: 'A smart title on a smart box',
+		content: 'Some content as text / html',
+		bottomZone: 'bottomZone as text / html',
+
+	};
+	let code = `
+	<Box class="marg">
+		<span slot="titleSlot">Title of the box</span>
+		<Icon  slot="iconSlot" fontSize="small" icon="clock" />
+		<div class="pad-2">
+			Content of the box
+		</div>
+		<div  slot="bottomZone" class="flex-h gap-small pad border-t marg-ii-1">
+			bottom zoone
+		</div>
+	</Box>`
 </script>
 
 <ComponentDemo
 	component="Box"
 	cite="Boxes, essentially, contain other boxes. That's the meaning we'll found if open them<br /> B. Franklin,1854"
->
-	<Box class="marg">
-		<span slot="titleSlot">Title of the box</span>
-		Content of the box
-	</Box>
-	<br />
-	<Box class="marg" onClose="cdss">
-		<Icon fontSize="small" icon="clock" slot="iconSlot" />
-		<span slot="titleSlot">Title of the box</span>
-		Content of the box
-	</Box>
-	<br />
-	<Box hasMenu={true} onClose="cd">
-		<Icon fontSize="small" icon="faClock" slot="iconSlot" />
-		<span slot="titleSlot">Title of the box</span>
-		<div slot="buttonZoneSlot">
-			<Button>button</Button>
-			<Button>another button</Button>
-		</div>
-		Content of the box
-		<br />
-		with a button
-	</Box>
+	><div class="flex-v gap-medium">
+		<DemoPage  {code} title="Using slots" component="Box">
+			<Demoer parameters={parametersSlot} {componentArgs} let:activeParams>
+				<Box {...activeParams} onClose="cdss" class="marg">
+					<span slot="titleSlot">Title of the box</span>
+					<Icon fontSize="small" icon="clock" slot="iconSlot" />
+					<div class="pad-2">
+						Content of the box
+					</div>
+					<div class="flex-h gap-small pad border-t marg-ii-1" slot="bottomZone">
+						bottom zoone
+					</div>
+				</Box>
+			</Demoer>
+		</DemoPage>
+		<DemoPage title="Using props" component="Box">
+			<Demoer parameters={parametersProps} componentArgs={componentArgsProps} let:activeParams>
+				<Box {...activeParams}   class="marg" />
+			</Demoer>
+		</DemoPage>
+	</div> 
 </ComponentDemo>

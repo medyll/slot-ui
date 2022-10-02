@@ -118,7 +118,7 @@
 		{/if}
 	</div>
 	{#if isOpen}
-		{#if $$slots.topBarSlot || Boolean(primary) || Boolean(icon) || $$slots.iconSlot }
+		{#if $$slots.topSlot || Boolean(primary) || Boolean(icon) || $$slots.iconSlot }
 			<div class="header flex-h">
 				{#if Boolean(icon) || $$slots.iconSlot}
 					<div class="pad-ii-1">
@@ -136,7 +136,7 @@
 							<div class="pad-l-1">{secondary}</div>
 						{/if}
 					</div>
-					<slot name="topBarSlot" />
+					<slot name="topSlot" />
 				</div>
 				{#if !hideCloseIcon && !showOpenerIcon}
 					<div>
@@ -155,9 +155,9 @@
 		<div class="content" style="position:relative;flex:1;overflow:hidden">
 			<slot />
 		</div>
-		{#if $$slots.drawerBottomBarSlot}
+		{#if $$slots.bottomSlot}
 			<BottomBar density="tight">
-				<slot name="drawerBottomBarSlot" />
+				<slot name="bottomSlot" />
 			</BottomBar>
 		{/if}
 	{/if}

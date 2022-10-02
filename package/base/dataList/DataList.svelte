@@ -10,6 +10,7 @@ import { dataOp } from '../../engine/utils.js';
 import DataListHead from './DataListHead.svelte';
 import Icon from '../icon/Icon.svelte';
 import Button from '../button/Button.svelte';
+import { slide } from 'svelte/transition';
 /*  common slotUi exports*/
 let className = '';
 export { className as class };
@@ -49,6 +50,7 @@ export let idField = undefined;
 /** columns declaration */
 export let columns = {};
 export let virtualizer = false;
+export let isLoading = false;
 let hidedGroups = {};
 let sortedData;
 $: sortedData = data?.filter((x) => x);
@@ -107,14 +109,20 @@ function getGroupProps(content) {
         ...content,
         columns,
         style,
-        groupByField: false,
+        groupByField: undefined,
         groupByOptions,
         showHeader: groupByOptions.showSubGroupsHeader,
         selectorField,
-        selectorFieldValue
+        selectorFieldValue,
+        virtualizer,
+        isLoading
     };
 }
-$: groups = groupByField ? dataOp.groupBy(data, groupByField, { keepUngroupedData: Boolean(groupByOptions.showEmptyGroup) }) : {};
+$: groups = groupByField
+    ? dataOp.groupBy(data, groupByField, {
+        keepUngroupedData: Boolean(groupByOptions.showEmptyGroup)
+    })
+    : {};
 </script>
 
 {#if groupByField}
@@ -125,18 +133,20 @@ $: groups = groupByField ? dataOp.groupBy(data, groupByField, { keepUngroupedDat
 		{#each Object.keys(groups) as red}
 			{@const groupProps = getGroupProps({ data: groups[red] })}
 			{@const item = groups[red]}
-			<div class="flex-v border-b">
+			<div class="flex-v">
 				<div class="">
 					<slot name="groupTitleSlot" {item}>
-						<div class="flex-h flex-align-middle pad gap-medium">
-							<div><Icon icon="folder" /></div>
-							<div class="flex-main">{groupByField} : {red}</div>
+						<div class="flex-h flex-align-middle pad gap-medium groupHead">
+							<div class="iconGroup"><Icon class="iconGroup"   icon="cil:object-group" /></div>
+							<div>{groupByField} : <span class="text-bold">{red}</span></div>
+							<div class="flex-main border-b divider"  on:click={() => {
+								hidedGroups[red] = !hidedGroups[red];
+							}} />
 							<div>{groups[red]?.length}</div>
-							<div class="pad-l border-l">
+							<div class="pad-l border-l iconGroup">
 								<Button
 									on:click={() => {
-										hidedGroups[red] = !hidedGroups[red]
-										// hideBody = !hideBody;
+										hidedGroups[red] = !hidedGroups[red];
 									}}
 									icon={hidedGroups[red] ? 'chevron-up' : 'chevron-down'}
 									naked
@@ -166,7 +176,7 @@ $: groups = groupByField ? dataOp.groupBy(data, groupByField, { keepUngroupedDat
 		tabindex="0"
 	>
 		{#if element && virtualizer}
-			<Virtualize height="350px" data={sortedData} let:item>
+			<Virtualize style="border:1px solid red;height:100%;"  data={sortedData} let:item>
 				<svelte:fragment slot="virtualizeHeaderSlot">
 					<slot name="head">
 						<DataListHead />
@@ -212,7 +222,6 @@ $: groups = groupByField ? dataOp.groupBy(data, groupByField, { keepUngroupedDat
 }
 
 :global(.dataListHead) {
-  display: flex;
   margin: 0.5rem 0;
   align-items: stretch;
   height: 32px;
@@ -255,7 +264,6 @@ $: groups = groupByField ? dataOp.groupBy(data, groupByField, { keepUngroupedDat
   padding: 0 8px;
 }
 :global(.dataListRow) {
-  display: flex;
   border-bottom: 1px solid var(--border-color);
   /* border-radius: 6px;
   	margin: 0.25rem 0; */
@@ -288,4 +296,15 @@ $: groups = groupByField ? dataOp.groupBy(data, groupByField, { keepUngroupedDat
   /* display: -webkit-box;
   	-webkit-line-clamp: 1;
   	-webkit-box-orient: vertical; */
+}
+
+:global(.groupHead) :global(.iconGroup) {
+  color: #999;
+}
+:global(.groupHead:hover) :global(.iconGroup) {
+  color: var(--theme-color-primary);
+}
+:global(.groupHead:hover) :global(.divider) {
+  border-color: var(--theme-color-primary, red);
+  cursor: pointer;
 }</style>

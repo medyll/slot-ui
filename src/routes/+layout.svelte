@@ -1,5 +1,8 @@
 <script lang="ts">
 	import github from 'svelte-highlight/styles/github';
+import { HighlightSvelte } from 'svelte-highlight';
+import Prism from 'prismjs';
+import 'prism-svelte';
 	// fabric default vars
 	import cssfabricVars from '@medyll/cssfabric/src/lib/styles/vars.min.css';
 	// fabric default
@@ -49,6 +52,10 @@
 <svelte:head>
 	<title>SlotUi</title>
 	<link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet" />
+	<link
+		href="https://cdn.jsdelivr.net/npm/prism-themes@1.4.0/themes/prism-material-dark.css"
+		rel="stylesheet"
+	/>
 	{@html github}
 	<!-- <style type="text/css">
 		 {

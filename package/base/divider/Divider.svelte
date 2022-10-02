@@ -1,4 +1,5 @@
 <script>import { get_current_component } from 'svelte/internal';
+import { uiPresets } from '../../engine/presets.js';
 let className = '';
 export { className as class };
 export let element = null;
@@ -34,14 +35,7 @@ $: if ((direction === 'vertical') && (element?.nextElementSibling ?? element?.pr
     addStyle += `height:calc(${maxHeight}px - ${getDensity(density)});`;
 }
 function getDensity(density) {
-    const denses = {
-        none: '0',
-        tight: '0.25rem',
-        default: '0.5rem',
-        medium: '1rem',
-        kind: '1.5rem'
-    };
-    return denses[density];
+    return uiPresets.density?.[density];
 }
 switch (direction) {
     case 'horizontal':

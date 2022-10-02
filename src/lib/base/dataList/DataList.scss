@@ -10,7 +10,7 @@
 		position: relative;
 	}
 	.dataListHead {
-		display: flex;
+		//display: flex;
 		margin: 0.5rem 0;
 		align-items: stretch;
 		height: 32px;
@@ -59,7 +59,7 @@
 	}
 
 	.dataListRow {
-		display: flex;
+		// display: flex;
 		border-bottom: 1px solid var(--border-color);
 		// margin: 0 0.5rem;
 		/* border-radius: 6px;

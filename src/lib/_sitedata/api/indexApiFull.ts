@@ -13,9 +13,6 @@ import IconButtonApiReadMe from "$sitedata/api/IconButton.api.md";
 import CardApiReadMe from "$sitedata/api/Card.api.md";
 import CartoucheApiReadMe from "$sitedata/api/Cartouche.api.md";
 import ChipperApiReadMe from "$sitedata/api/Chipper.api.md";
-import ChromeApiReadMe from "$sitedata/api/Chrome.api.md";
-import ChromeContentApiReadMe from "$sitedata/api/ChromeContent.api.md";
-import ChromeNavApiReadMe from "$sitedata/api/ChromeNav.api.md";
 import ColumnApiReadMe from "$sitedata/api/Column.api.md";
 import ColumnerApiReadMe from "$sitedata/api/Columner.api.md";
 import ConfirmApiReadMe from "$sitedata/api/Confirm.api.md";
@@ -94,9 +91,6 @@ iconbuttonApi:IconButtonApiReadMe,
 cardApi:CardApiReadMe,
 cartoucheApi:CartoucheApiReadMe,
 chipperApi:ChipperApiReadMe,
-chromeApi:ChromeApiReadMe,
-chromecontentApi:ChromeContentApiReadMe,
-chromenavApi:ChromeNavApiReadMe,
 columnApi:ColumnApiReadMe,
 columnerApi:ColumnerApiReadMe,
 confirmApi:ConfirmApiReadMe,

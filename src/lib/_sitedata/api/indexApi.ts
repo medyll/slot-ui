@@ -13,9 +13,6 @@ import IconButtonReadMe from "$sitedata/api/IconButton.md";
 import CardReadMe from "$sitedata/api/Card.md";
 import CartoucheReadMe from "$sitedata/api/Cartouche.md";
 import ChipperReadMe from "$sitedata/api/Chipper.md";
-import ChromeReadMe from "$sitedata/api/Chrome.md";
-import ChromeContentReadMe from "$sitedata/api/ChromeContent.md";
-import ChromeNavReadMe from "$sitedata/api/ChromeNav.md";
 import ColumnReadMe from "$sitedata/api/Column.md";
 import ColumnerReadMe from "$sitedata/api/Columner.md";
 import ConfirmReadMe from "$sitedata/api/Confirm.md";
@@ -94,9 +91,6 @@ iconbutton:IconButtonReadMe,
 card:CardReadMe,
 cartouche:CartoucheReadMe,
 chipper:ChipperReadMe,
-chrome:ChromeReadMe,
-chromecontent:ChromeContentReadMe,
-chromenav:ChromeNavReadMe,
 column:ColumnReadMe,
 columner:ColumnerReadMe,
 confirm:ConfirmReadMe,

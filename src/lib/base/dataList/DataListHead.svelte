@@ -38,7 +38,16 @@
 		if (element) element.dispatchEvent(event);
 	}
 
-	// $: console.log($dataListContext.columns)
+	function setCssGrid(columns:DataCellType[]){
+		if(Object.values(columns ?? []).every(e=> e.width)){
+			return  Object.values(columns ?? []).reduce((previous,current,currentIndex)=>{
+		return `${previous} ${current?.width}`  
+	},'--template-columns:')
+		}
+	}
+
+	$: cssVars = setCssGrid($dataListContext.columns ?? []) 
+ 
 </script>
 
 <div
@@ -46,7 +55,7 @@
 	on:datalist:sort:clicked={doSort}
 	class:pos-sticky={stickyHeader}
 	class="dataListHead"
-	{style}
+	style="{style};{cssVars}"
 >
 	<slot>
 		{#if $dataListContext.hasColumnsProps}
@@ -56,15 +65,11 @@
 		{/if}
 	</slot>
 </div>
-
-<style global lang="scss">
-	.dataListHead {
-		/* width: 900px;
-        display: flex;
-        border: 1px solid green; */
-		.dataListCell {
-			/* flex: 1;
-			background-color: red; */
-		}
+ 
+<style lang="scss">
+	.dataListHead{
+		display:grid;
+		grid-template-columns: var(--template-columns) auto; grid-auto-columns: min-content;
+		transition: all  0.1s; 
 	}
 </style>

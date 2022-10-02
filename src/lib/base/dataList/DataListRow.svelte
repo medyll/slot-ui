@@ -4,10 +4,12 @@
 	import sanitizeHtml from 'sanitize-html';
 	import type { Data } from './$types';
 	import {
+	current_component,
 		custom_event,
 		getContext,
 		get_current_component,
 		null_to_empty,
+		prevent_default,
 		setContext
 	} from 'svelte/internal';
 	import { writable, type Writable } from 'svelte/store';
@@ -23,6 +25,7 @@
 	const forwardEvents = createEventForwarder(get_current_component());
 
 	export let data: any;
+	export let style: string |undefined= undefined;
 
 	const dataStore = writable<RowType>({ data });
 	setContext('dataListRow', dataStore);
@@ -50,6 +53,11 @@
 		return sanitizeHtml(ret);
 		//  fieldOrFunction(data?.[field], field)
 	}
+
+	$: cssVars = Object.values($dataListContext.columns ?? []).reduce((previous,current,currentIndex)=>{
+		return `${previous} ${current?.width}`  
+	},'--template-columns:')
+
 </script>
 
 <div
@@ -61,6 +69,7 @@
 		if (data) handleSelect(data);
 	}}
 	class="dataListRow {className}"
+	style="{style};{cssVars}"
 >
 	{#if $$slots.default}
 		<slot />
@@ -83,3 +92,12 @@
 		{/each}
 	{/if}
 </div>
+
+
+<style lang="scss">
+	.dataListRow{
+		display:grid;
+		grid-template-columns: var(--template-columns);
+		grid-auto-columns: min-content;
+	}
+</style>

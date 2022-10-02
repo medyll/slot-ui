@@ -163,8 +163,8 @@ let showTitleZone = $$slots.title || title || primary || secondary; // || sorter
 	class="density-{density} {className}"
 	on:listclicked={onListItemClick_Deprecated}
 	on:list:dblclicked={onListItemClick_Deprecated}
-	on:listitem:clicked={onListItemClick}
-	on:listitem:dblclicked={onListItemClick}
+	on:listitem:click={onListItemClick}
+	on:listitem:dblclick={onListItemClick}
 	style="position:relative;height:{height};margin:0;padding:0!important;{style};opacity:{disabled
 		? 0.6
 		: 1};overflow:{virtualize ? 'hidden' : 'auto'};"
@@ -249,6 +249,17 @@ li.listItem {
   position: relative;
   border-radius: 4px;
   max-width: 100%;
+  /* &.density-tight {
+    padding: 0.5rem 0;
+  }
+
+  &.density-default {
+    padding: 1rem 0;
+  }
+
+  &.density-kind {
+    padding: 1.5rem 0;
+  } */
 }
 li.listItemTitle .listItemContent,
 li.listItem .listItemContent {
@@ -284,18 +295,6 @@ li.listItem .listItemIcon {
   overflow: hidden;
   opacity: 0.8;
 }
-li.listItemTitle.density-tight,
-li.listItem.density-tight {
-  padding: 0.5rem 0;
-}
-li.listItemTitle.density-default,
-li.listItem.density-default {
-  padding: 1rem 0;
-}
-li.listItemTitle.density-kind,
-li.listItem.density-kind {
-  padding: 1.5rem 0;
-}
 
 li.listItemTitle {
   position: sticky;
@@ -319,5 +318,6 @@ li.listItem.isActive .listItemChip {
   width: 3px;
   background-color: var(--theme-color-primary);
   border-radius: 8px;
-  left: -1px;
+  left: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }</style>

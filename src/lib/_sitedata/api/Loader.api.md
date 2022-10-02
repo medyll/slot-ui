@@ -4,19 +4,27 @@ declare const __propDef: {
         class?: string | undefined;
         element?: HTMLDivElement | null | undefined;
         style?: string | undefined;
-        isLoading?: boolean | undefined;
+        status: 'loading' | 'success' | 'error' | 'empty';
+        /** @deprecated */ isLoading?: boolean | undefined;
         isError?: boolean | undefined;
         isEmpty?: boolean | undefined;
-        /** icon sources */ iconisLoading?: string | undefined;
-        iconisError?: string | undefined;
-        iconisEmpty?: string | undefined;
+        /** icon sources */ loadingIcon?: string | undefined;
+        errorIcon?: string | undefined;
+        emptyIcon?: string | undefined;
+        successIcon?: string | undefined;
         /** message to display */ message?: string | undefined;
-        /** used if message props is omitted */ messages?: any;
+        /** used if props.message   is omitted */ messages?: any;
     };
     events: {
         [evt: string]: CustomEvent<any>;
     };
-    slots: {};
+    slots: {
+        loadingSlot: {};
+        errorSlot: {};
+        successSlot: {};
+        emptySlot: {};
+        messageSlot: {};
+    };
 };
 export declare type LoaderProps = typeof __propDef.props;
 export declare type LoaderEvents = typeof __propDef.events;

@@ -9,11 +9,14 @@
 	let className = '';
 	export { className as class };
 	export let element: HTMLDivElement | null = null;
+	export let style: string = '';
 	const forwardEvents = createEventForwarder(get_current_component());
 
 
 	/** is the content visible */
 	export let isOpen: boolean = true;
+	/** show a working closer icon */
+	export let showCloseControl: boolean = true;
 	/** used to activate the slotui.TitleBar component */
 	export let hasMenu: boolean = false;
 	/** text to be shown in the title bar */
@@ -23,8 +26,8 @@
 	export let iconFamily: string | undefined = undefined;
 	/** alternative to contentSlot,  content to be shown in the main area */
 	export let content: string | undefined = undefined;
-	/** alternative to buttonZoneSlot, content to be shown in the bottom button zone */
-	export let buttonZone: string | undefined = undefined;
+	/** alternative to slot.bottomZone, content to be shown in the bottom button zone */
+	export let bottomZone: string | undefined = undefined;
 
   /** component actions */
 	export const actions: any = {
@@ -46,12 +49,14 @@
 			dispatch('box:closed');
 		}
 	};
+ 
 
-	export let onClose: () => void;
+	$: closer = !showCloseControl ? {} : {onClose:()=>actions.close() }
 </script>
 
-<div class="boxRoot shad-3 flex-v {className}" use:forwardEvents>
-	<TitleBar {hasMenu} {onClose}>
+{#if isOpen}
+<div class="boxRoot shad-3 flex-v {className}" {style} use:forwardEvents>
+	<TitleBar {hasMenu} {...closer}>
 		<slot name="titleSlot" slot="titleSlot">{null_to_empty(title)}</slot>
 		<slot name="iconSlot" slot="iconSlot">
 			{#if icon}
@@ -59,16 +64,16 @@
 			{/if}
 		</slot>
 	</TitleBar>
-	<div class="boxContent flex-main pad-2">
+	<div class="boxContent flex-main">
 		<slot name="contentSlot">
 			<slot>{@html null_to_empty(content)}</slot>
 		</slot>
 	</div>
-	<div class="boxButtonZone">
-		<slot name="buttonZoneSlot">{@html null_to_empty(buttonZone)}</slot>
+	<div class="boxButtonSlot">
+		<slot name="bottomZone">{@html null_to_empty(bottomZone)}</slot>
 	</div>
 </div>
-
+{/if}
 <style global lang="scss">
 	@import 'Box';
 </style>
