@@ -28,6 +28,8 @@
 	export let iconFamily: string | undefined = 'mdi';
 	/** icon color as a parameter*/
 	export let iconColor: string = '#666';
+	/** background color theme */
+	export let bgTheme: string | undefined  = undefined;
 	/** paramters for usePopper */
 	export let usePopper: UsePopperProps | undefined = undefined;
 	/** show loading state */
@@ -110,7 +112,7 @@
 
 <container style="position:relative;display:flex;{containerStyle}">
 	<button
-		class={'w-' + size + ' ' +className}
+		class={className}
 		class:loading
 		bind:this={element}
 		use:popper={usePopper}
@@ -131,6 +133,9 @@
 		{selected}
 		{presetDefault}
 		{...$$restProps}
+		data-width="{size}"
+		style:background="var(--theme-color-{bgTheme})"
+		style:color={bgTheme ? 'white': ''}
 	>
 		<div class="innerButton">
 			{#if $$slots.startButtonSlot || icon}
@@ -229,6 +234,8 @@
 	button[contained='true'],
 	input[type='button'],
 	input[type='submit'] {
+		@include input-sizes-presets;
+		@include ui-width-presets;
 		vertical-align: middle;
 		font-size: var(--slotui-button-font-size, 11px);
 		// padding: var(--box-density-small, 0.5rem) 0.75rem;
@@ -291,14 +298,13 @@
 			color: var(--theme-color-foreground);
 			border: 0.5px solid var(--theme-color-border);
 			box-shadow: var(--box-shad-1);
-			background-color: transparent;
 			&:hover {
 				border: 0.5px solid var(--theme-color-primary);
 			}
 		}
 		&[contained='true'] {
 			color: var(--theme-color-foreground);
-			background-color: var(--theme-color-paper-alpha-low, rgba(255, 255, 255, 0.1)) !important;
+			background-color: var(--theme-color-paper-alpha-low, rgba(255, 255, 255, 0.1)) ;
 			// background-color: var(--theme-color-primary-alpha, rgba(255, 255, 255, 0.1)) !important;
 			&:hover {
 				// background-color: var(--theme-color-paper) !important;
@@ -312,9 +318,8 @@
 		}
 		&[link='true'] {
 			color: var(--theme-color-primary);
-			background-color: transparent;
 			text-decoration: underline;
-			text-underline-offset: 0.25rem;
+			text-underline-offset: 0.35rem;
 			cursor: pointer;
 			&:hover {
 				text-decoration: underline;

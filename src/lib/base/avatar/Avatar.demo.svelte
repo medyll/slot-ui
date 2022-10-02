@@ -34,9 +34,9 @@
 	};
 
     let code1 = `
-	<Avatar>
-		<Icon icon={activeParams?.icon} />
-	</Avatar>`
+<Avatar>
+	<Icon icon={activeParams?.icon} />
+</Avatar>`
 
         
     let code2 = `

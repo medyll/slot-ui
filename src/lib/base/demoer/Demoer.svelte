@@ -56,8 +56,7 @@
 			{#each Object.keys(parameters) as parameter}
 				<div class="flex flex-align-middle gap-small w-mid-min">
 					<div class="border-b w-medium-min text-bold  ">{parameter}</div>
-					<div class="w-medium  ">{parameters?.[parameter]?.type}</div>
-					<div />
+					<div class="w-medium  ">{parameters?.[parameter]?.type}</div> 
 					{#each parameters?.[parameter]?.values ?? [] as value}
 						<Button
 							naked
@@ -68,6 +67,7 @@
 						>
 							{value}
 						</Button>
+					<div class="border-r pad-tb-1" />
 					{/each}
 					{#if parameters?.[parameter]?.type === 'object'}
 						<svelte:self parameters={parameters?.[parameter]} />

@@ -137,12 +137,12 @@
 					height="350px"
 					on:listitem:click={(ce) => console.log(ce.detail)}
 					on:listitem:dblclick={(ce) => console.log(ce.detail)}
-					selectorField="primary"
+					selectorField="name" 
 					sorterer={[{ sortByField: 'name' }]}
 					style="width:240px"
 					class="shad-3 radius-small overflow-hidden"
 				>
-					<ListItem>
+					<ListItem data={listItem.data}>
 						<Icon slot="icon" icon={listItem.data.icon} />
 						<span slot="primary">{listItem.data.name}</span>
 						<span slot="secondary">{listItem.data.secondary}</span>
@@ -150,7 +150,7 @@
 				</List>
 			</Demoer>
 		</DemoPage>
-		<DemoPage title="Using props" component="List">
+		<!-- <DemoPage title="Using props" component="List">
 			<div slot="code">
 				<DemoerCode title="Using a simple dataset" code={code3} />
 				<DemoerCode title="Using a props.listItems declaration list" code={code4} />
@@ -174,6 +174,6 @@
 					class="border radius-small overflow-hidden"
 				/>
 			</Demoer>
-		</DemoPage>		
+		</DemoPage>		 -->
 	</div>
 </ComponentDemo>

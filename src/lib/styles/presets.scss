@@ -25,16 +25,18 @@
 @mixin ui-width-presets {
     &[data-width="tiny"] {
         width: 2rem;
-        padding: 0;
     }
     &[data-width="small"] {
-        width: 4rem;
+        width: 6rem;
     }
-    &[data-width="default"],&[data-width="medium"] {
+    &[data-width="medium"] {
+        width: 8rem;
+    }
+    &[data-width="default"]{
         width: 12rem ;
     }
     &[data-width="large"] {
-        width: 4rem
+        width: 16rem
     } 
     &[data-width="auto"] {
         width: auto
