@@ -54,8 +54,7 @@
             <Demoer
                     componentArgs={componentArgsSlot}
                     let:activeParams
-                    parameters={parametersSlot}
-            >
+                    parameters={parametersSlot}>
                 <div class="pos-rel h-large w-large">
                     <Loader {...activeParams} on:status:change={()=>{}}>
                         <Icon color="orange" fontSize="big" icon="mdi:loading" rotate slot="loadingSlot"/>
@@ -73,18 +72,18 @@
                     parameters={parametersSlot}
             >
                 <div class="pos-rel h-large w-large">
-                    <Loader status="loading"
-                            {...activeParams}
+                    <Loader {...activeParams}
+                            emptyIcon="mdi:database-search-outline"
+                            errorIcon="mdi:alert-circle-outline"
+                            loadingIcon="mdi:loading"
                             messages={{
                                 loading: 'Loading dataset',
                                 error  : 'An error occurred',
                                 empty  : 'Empty results',
                                 success: 'Success !'
                               }}
-                            emptyIcon="mdi:database-search-outline"
-                            errorIcon="mdi:alert-circle-outline"
-                            loadingIcon="mdi:loading"
-                            messages: successIcon="clarity:success-standard-line"
+                            messages:
+                            status="loading" successIcon="clarity:success-standard-line"
                     />
                 </div>
             </Demoer>
