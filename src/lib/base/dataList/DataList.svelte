@@ -150,14 +150,14 @@
 			{@const groupProps = getGroupProps({ data: groups[red] })}
 			{@const item = groups[red]}
 			<div class="flex-v">
-				<div class="">
+				<div class=""  >
 					<slot name="groupTitleSlot" {item}>
-						<div class="flex-h flex-align-middle pad gap-medium groupHead">
+						<div class="flex-h flex-align-middle pad gap-medium groupHead"  on:click={() => {
+							hidedGroups[red] = !hidedGroups[red];
+						}}>
 							<div class="iconGroup"><Icon class="iconGroup"   icon="cil:object-group" /></div>
 							<div>{groupByField} : <span class="text-bold">{red}</span></div>
-							<div class="flex-main border-b divider"  on:click={() => {
-								hidedGroups[red] = !hidedGroups[red];
-							}} />
+							<div class="flex-main border-b divider" />
 							<div>{groups[red]?.length}</div>
 							<div class="pad-l border-l iconGroup">
 								<Button
@@ -228,6 +228,7 @@
 	@import './DataList.scss';
 
 	.groupHead {
+				cursor:pointer;
 		.iconGroup {
 				color: #999;
 			}

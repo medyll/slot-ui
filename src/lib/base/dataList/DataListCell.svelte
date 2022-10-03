@@ -1,189 +1,224 @@
 <script lang="ts">
-	import type { DataCellType, DataListStoreType, RowType } from './types.js';
-	import { dataOp } from '$lib/engine/utils.js';
-	import { getContext, onMount, tick } from 'svelte/internal';
-	import type { Writable } from 'svelte/store';
-	import Button from '../button/Button.svelte';
-	import { custom_event } from 'svelte/internal';
-	import { resizer } from '$lib/uses/resizer/resizer.js';
-	import type { Data } from '$lib/types/index.js';
-	import { error } from '@sveltejs/kit';
-	import Icon from '../icon/Icon.svelte';
-	import Chipper from '../chipper/Chipper.svelte';
+  import type { DataCellType, DataListStoreType, RowType } from "./types.js";
+  import { dataOp } from "$lib/engine/utils.js";
+  import { getContext, onMount, tick } from "svelte/internal";
+  import type { Writable } from "svelte/store";
+  import Button from "../button/Button.svelte";
+  import { custom_event } from "svelte/internal";
+  import { resizer } from "$lib/uses/resizer/resizer.js";
+  import type { Data } from "$lib/types/index.js";
+  import { error } from "@sveltejs/kit";
+  import Icon from "../icon/Icon.svelte";
+  import Chipper from "../chipper/Chipper.svelte";
 
-	const dataListContext = getContext<Writable<DataListStoreType>>('dataListContext');
-	const inHeader = getContext<Writable<DataCellType[]>>('dataListHead');
-	const rowContext = getContext<Writable<RowType>>('dataListRow');
+  const dataListContext =
+    getContext<Writable<DataListStoreType>>("dataListContext");
+  const inHeader = getContext<Writable<DataCellType[]>>("dataListHead");
+  const rowContext = getContext<Writable<RowType>>("dataListRow");
 
-	export let element: HTMLElement | undefined = undefined;
+  export let element: HTMLElement | undefined = undefined;
 
-	export let style: string | undefined = undefined;
-	/** if data has been provided, then cell got a fieldName and coumnId is defined */
-	export let field: string | undefined = undefined;
-	/** typeof the field. Used when exists Datalist.$$props.dataTypes */
-	export let fieldType: string | undefined = undefined;
-	export let columnId: string | number | undefined = field ?? crypto.randomUUID();
-	/** set noWrap = true to have ellipsis on this cell content*/
-	export let noWrap: boolean = true;
-	/** title */
-	export let title: string | undefined = undefined;
+  export let style: string | undefined = undefined;
+  /** if data has been provided, then cell got a fieldName and coumnId is defined */
+  export let field: string | undefined = undefined;
+  /** typeof the field. Used when exists Datalist.$$props.dataTypes */
+  export let fieldType: string | undefined = undefined;
+  export let columnId: string | number | undefined =
+    field ?? crypto.randomUUID();
+  /** set noWrap = true to have ellipsis on this cell content*/
+  export let noWrap: boolean = true;
+  /** title */
+  export let title: string | undefined = undefined;
 
-	let colIndex: number;
+  let colIndex: number;
 
-	let minWidth = '114px';
+  let minWidth = "114px";
 
-	onMount(async () => {
-		// if inHeader take the width from
-		// - the columns and dataField :  set it to the element
-		// - the columns and element index :  set it to the element
-		// - the element with : don't do nothing, but should ! throw error ?
+  onMount(async () => {
+    // if inHeader take the width from
+    // - the columns and dataField :  set it to the element
+    // - the columns and element index :  set it to the element
+    // - the element with : don't do nothing, but should ! throw error ?
 
-		if (inHeader) {
-		colIndex = element ? [...(element.parentElement?.children ?? [])].indexOf(element) : -1;
-			if ($dataListContext.hasColumnsProps && field) {
-				//console.log('hasColumnsProps && field');
-				if (!$dataListContext.columns[field]) {
-					await tick();
-					createColumnsDef(element, field, colIndex);
-				}
-				if (!$dataListContext.columns[field]?.width) {
-					await tick();
-					$dataListContext.columns[field].width = (element.offsetWidth + 16) + 'px';
-				}
-			} else if ($dataListContext.hasColumnsProps) {
-				await tick();
-				// grab and declare field from data
-				field = getAutoFields($dataListContext.data)[colIndex];
-			} else if (field) {
-				// throw new Error('props.field found without column declaration : '+field);
-				createColumnsDef(element, field, colIndex);
-			} else {
-				// create a dummy field for reference
-				createColumnsDef(element, crypto.randomUUID(), colIndex);
-			}
-		}
+    if (inHeader) {
+      colIndex = element
+        ? [...(element.parentElement?.children ?? [])].indexOf(element)
+        : -1;
+      if ($dataListContext.hasColumnsProps && field) {
+        // console.log('hasColumnsProps && field');
+        if (!$dataListContext.columns[field]) {
+          await tick();
+          // console.log(0);
+          createColumnsDef(element, field, colIndex);
+        }
+        if (!$dataListContext.columns[field]?.width) {
+          await tick();
+          // console.log(field, element.offsetWidth);
+          $dataListContext.columns[field].width = element.offsetWidth + "px";
+        }
+      } else if ($dataListContext.hasColumnsProps) {
+        await tick();
+        // console.log(2);
+        // grab and declare field from data
+        field = getAutoFields($dataListContext.data)[colIndex];
+      } else if (field) {
+        // console.log(3);
 
-		return () => {
-			columnId = undefined;
-		};
-	});
+        // throw new Error('props.field found without column declaration : '+field);
+        createColumnsDef(element, field, colIndex);
+      } else {
+        // console.log(4);
+        // create a dummy field for reference
+        createColumnsDef(element, crypto.randomUUID(), colIndex);
+      }
+    }
 
-	const sortState: string[] = ['none', 'asc', 'desc'];
-	let sorticon: string;
-	let showChip: boolean;
+    return () => {
+      columnId = undefined;
+    };
+  });
 
-	$: if (inHeader) {
-		sorticon =
-			$dataListContext.sortBy.activeSortByField === field
-				? $dataListContext?.config?.sortingIcons?.default[
-						sortState.indexOf($dataListContext?.sortBy?.activeSortByOrder)
-				  ]
-				: 'mdi:dots-horizontal';
+  const createColumnsDef = async (
+    element: HTMLElement | undefined,
+    field: string,
+    index: number
+  ) => {
+    if (!element) return;
+    await tick();
+    $dataListContext.columns[field] = {
+      field,
+      style: element.getAttribute("style") ?? "",
+      width: element.offsetWidth + "px",
+      order: Boolean(element.style?.order) ? eval(element.style.order) : index,
+      index: index,
+      columnId: field,
+    };
+    $dataListContext.hasColumnsProps = true;
+  };
 
-		showChip = $dataListContext.sortBy.activeSortByField === field;
-	}
+  const updateColumnsDef = async (
+    field: string,
+    payload: Record<string, any>
+  ) => {
+    await tick();
+    $dataListContext.columns[field] = {
+      ...$dataListContext.columns[field],
+      ...payload,
+    };
+  };
 
-	const createColumnsDef = async (
-		element: HTMLElement | undefined,
-		field: string,
-		index: number
-	) => {
-		if (!element) return;
-		await tick();
-		$dataListContext.columns[field] = {
-			field,
-			style: element.getAttribute('style') ?? '',
-			width: element.offsetWidth + 'px',
-			order: Boolean(element.style?.order) ? eval(element.style.order) : index,
-			index: index,
-			columnId: field
-		};
-		$dataListContext.hasColumnsProps = true;
-	};
+  /**
+   * used if no columns and no props.field
+   * @param data
+   */
+  const getAutoFields = (data: Record<string, any>[]): string[] => {
+    return Object.keys(data[0]);
+  };
 
-	const updateColumnsDef = async (field: string, payload: Record<string, any>) => {
-		await tick();
-		$dataListContext.columns[field] = {
-			...$dataListContext.columns[field],
-			...payload
-		};
-	};
+  const onSort = (field: string) => {
+    const event = custom_event(
+      "datalist:sort:clicked",
+      { field },
+      { bubbles: true }
+    );
+    if (element) element.dispatchEvent(event);
+  };
 
-	/**
-	 * used if no columns and no props.field
-	 * @param data
-	 */
-	const getAutoFields = (data: Record<string, any>[]): string[] => {
-		return Object.keys(data[0]);
-	};
+  // not pure
+  const useResizer = (node: HTMLElement, opt?: any) => {
+    if (inHeader) resizer(node, opt);
+  };
 
-	const onSort = (field: string) => {
-		const event = custom_event('datalist:sort:clicked', { field }, { bubbles: true });
-		if (element) element.dispatchEvent(event);
-	};
+  function resizeStart() {}
 
-	// not pure
-	const useResizer = (node: HTMLElement, opt?: any) => {
-		if (inHeader) resizer(node, opt);
-	};
+  async function resizeOn(data: CustomEvent<{ width: any }>) {
+    await tick();
+    $dataListContext.columns[field].width = data.detail.width + "px";
+  }
+  function resizeEnd() {}
 
-	function resizeStart() {}
+  const sortState: string[] = ["none", "asc", "desc"];
+  let sorticon: string;
+  let showChip: boolean;
 
-	async function resizeOn(data: CustomEvent<{ width: any }>) {
-		await tick();
-		$dataListContext.columns[field].width = data.detail.width + 'px';
-	}
-	function resizeEnd() {}
+  let timerWidth: any;
+  let finalWidthStyle: string = "";
+
+  $: if (inHeader) {
+    sorticon =
+      $dataListContext.sortBy.activeSortByField === field
+        ? $dataListContext?.config?.sortingIcons?.default[
+            sortState.indexOf($dataListContext?.sortBy?.activeSortByOrder)
+          ]
+        : "mdi:dots-horizontal";
+
+    showChip = $dataListContext.sortBy.activeSortByField === field;
+  }
+
+  /* $: if ($dataListContext.columns[field].width) {
+    const w = $dataListContext.columns[field].width;
+    finalWidthStyle = `min-width:${w};width:max-width:${w};`;
+  } */
 </script>
 
 {#if inHeader}
-	<div
-		bind:this={element}
-		data-sortable={true}
-		data-column-id={columnId}
-		data-noWrap={noWrap}
-		class="dataListCell cellDimensions"
-		use:useResizer
-		on:resizer:start={resizeStart}
-		on:resizer:resize={resizeOn}
-		on:resizer:end={resizeEnd}
-		style="{style ??
-			$dataListContext.columns[field]?.headerStyle ??
-			$dataListContext.columns[field]?.style};--cell-width:{$dataListContext.columns[field]?.width}"
-		{...$$restProps}
-	>
-		<div on:click={() => onSort(field)} class="cellHeader">
-			<div class="cellHeaderContent">
-				<slot />
-			</div>
-			{#if field && $dataListContext?.config?.isSortable}
-				<div class="cellHeaderSorter" title={sorticon}>
-					<Chipper class="pad" {showChip} position={(showChip && $dataListContext.sortBy?.activeSortByOrder==='desc')? 'top':'bottom'}>
-						<Icon naked icon={sorticon}  />
-					</Chipper>
-					<!-- <Icon naked icon={sorticon} {showChip} /> -->
-					<!-- <Button naked icon={sorticon} {showChip} /> -->
-				</div>
-			{/if}
-		</div>
-	</div>
-	<!-- <div style="height:900px;margin-top:3rem" class="border-3" /> -->
+  <div
+    bind:this={element}
+    data-sortable={true}
+    data-column-id={columnId}
+    data-noWrap={noWrap}
+    class="dataListCell cellDimensions"
+    use:useResizer
+    on:resizer:start={resizeStart}
+    on:resizer:resize={resizeOn}
+    on:resizer:end={resizeEnd}
+    style="{style ??
+      $dataListContext.columns[field]?.headerStyle ??
+      $dataListContext.columns[field]?.style};}"
+    style:width={$dataListContext.columns[field]?.width ?? minWidth}
+    style:minWidth={$dataListContext.columns[field]?.width ?? minWidth}
+    style:maxWidth={$dataListContext.columns[field]?.width ?? minWidth}
+    {...$$restProps}>
+    <div on:click={() => onSort(field)} class="cellHeader">
+      <div class="cellHeaderContent">
+        <slot />
+      </div>
+      {#if field && $dataListContext?.config?.isSortable}
+        <div class="cellHeaderSorter" title={sorticon}>
+          <Chipper
+            class="pad"
+            {showChip}
+            position={showChip &&
+            $dataListContext.sortBy?.activeSortByOrder === "desc"
+              ? "top"
+              : "bottom"}>
+            <Icon naked icon={sorticon} />
+          </Chipper>
+          <!-- <Icon naked icon={sorticon} {showChip} /> -->
+          <!-- <Button naked icon={sorticon} {showChip} /> -->
+        </div>
+      {/if}
+    </div>
+  </div>
+  <!-- <div style="height:900px;margin-top:3rem" class="border-3" /> -->
 {:else}
-	<div
-		bind:this={element}
-		data-column-id={columnId}
-		data-noWrap={noWrap}
-		class="dataListCell cellDimensions"
-		style="{style};--cell-width:{$dataListContext.columns[field]?.width}"
-		{...$$restProps}
-		{title}
-	>
-		<slot fieldData={$rowContext?.data?.[field] ?? {}} />
-	</div>
+  <div
+    bind:this={element}
+    data-column-id={columnId}
+    data-noWrap={noWrap}
+    class="dataListCell cellDimensions"
+    {style}
+    {...$$restProps}
+    style:width={$dataListContext.columns[field]?.width ?? minWidth}
+    style:minWidth={$dataListContext.columns[field]?.width ?? minWidth}
+    style:maxWidth={$dataListContext.columns[field]?.width ?? minWidth}
+    {title}>
+    <slot fieldData={$rowContext?.data?.[field] ?? {}} />
+  </div>
 {/if}
 
 <style lang="scss">
-	.dataListCell {
-		// transition: all  0.1s;
-	}
+  .dataListCell {
+    // transition: all  0.1s;
+  }
 </style>

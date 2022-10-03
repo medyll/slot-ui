@@ -24,15 +24,15 @@
 	});
 
 	let columns: Record<string, DataCellType> = {
-		index: { field: 'index', width: '90px' },
-		name: { field: 'name' },
+		index: { field: 'index' },
+		name: { field: 'name', width: '90px' },
+		group: { field: 'group' },
 		lastName: {
 			field: 'lastName',
 			getter: (data: any) => {
 				return data.lastName + ' - getter';
 			}
 		},
-		group: { field: 'group' }
 	};
 
 	let columnsAppscheme: Record<string, DataCellType> = {
@@ -83,9 +83,9 @@
 is a datalist table <br /> B. Franklin, 1854"
 >
 	<div class="flex-v gap-medium">
-		<h5>Automatique datalist, without columns definitions</h5>
+		<!-- <h5>Automatique datalist, without columns definitions</h5>
 		<div class="what   pos-rel  pad">
-			<Demoer {parameters}  {componentArgs} component={DataList} let:activeParams >  
+			<Demoer {parameters} let:activeParams >  
 				<DataList style="height:150px;width:350px;overflow:auto;" {...activeParams}>
 					<svelte:fragment slot="head">
 						<DataListHead>
@@ -96,16 +96,17 @@ is a datalist table <br /> B. Franklin, 1854"
 					</svelte:fragment>
 				</DataList>
 			</Demoer>
-		</div>
+		</div> -->
 		<h5>With columns definitions</h5>
 		<div class="what   pos-rel  pad">
 			<Demoer {parameters} componentArgs={{ ...componentArgs, columns }} let:activeParams>
-				<DataList style="max-height:250px;overflow:auto;" {...activeParams}>
+				<DataList style="max-height:250px;overflow:auto;width:450px;" {...activeParams}>
 					<svelte:fragment slot="head">
 						<DataListHead>
 							<DataListCell field="index">index</DataListCell>
 							<DataListCell field="name">name</DataListCell>
-							<DataListCell field="lastName">lastName</DataListCell>
+							<DataListCell field="group">group</DataListCell> 
+							<DataListCell field="lastName">lastName</DataListCell> 
 						</DataListHead>
 					</svelte:fragment>
 				</DataList>

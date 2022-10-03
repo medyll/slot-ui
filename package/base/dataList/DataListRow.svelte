@@ -11,7 +11,7 @@ export { className as class };
 export let element = undefined;
 const forwardEvents = createEventForwarder(get_current_component());
 export let data;
-export let style = undefined;
+export let style = '';
 const dataStore = writable({ data });
 setContext('dataListRow', dataStore);
 const dataListContext = getContext('dataListContext');
@@ -30,13 +30,15 @@ function fieldOrFunction(item, field, defaultValue) {
     return typeof resolved === 'function' ? resolved(item) : resolved;
 }
 function checkGetter(columns, field, data) {
-    const ret = columns[field]?.getter ? columns[field]?.getter(data) : data[field];
+    const ret = columns[field]?.getter ? columns[field]?.getter(data) : dataOp.resolveDotPath(data, field);
+    // console.log(ret)
     // console.log(ret, columns[field])
     return sanitizeHtml(ret);
     //  fieldOrFunction(data?.[field], field)
 }
 $: cssVars = Object.values($dataListContext.columns ?? []).reduce((previous, current, currentIndex) => {
-    return `${previous} ${current?.width}`;
+    const witdh = current?.width ?? 'auto';
+    return `${previous} minmax(${witdh},${witdh})`;
 }, '--template-columns:');
 </script>
 
@@ -75,7 +77,7 @@ $: cssVars = Object.values($dataListContext.columns ?? []).reduce((previous, cur
 
 
 <style>.dataListRow {
-  display: grid;
-  grid-template-columns: var(--template-columns);
-  grid-auto-columns: min-content;
+  display: flex;
+  /* grid-template-columns: var(--template-columns);
+  grid-auto-columns: min-content; */
 }</style>
