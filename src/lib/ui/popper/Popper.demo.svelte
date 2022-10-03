@@ -6,13 +6,12 @@
   import ComponentDemo from "$components/ComponentExample.svelte";
   import Demoer from "$lib/base/demoer/Demoer.svelte";
   import DemoPage from "$lib/base/demoer/DemoPage.svelte";
-
   import Icon from "$lib/base/icon/Icon.svelte";
   import { uiPresets } from "$lib/engine/presets.js";
   /* demo */
 
   let parametersSlot: any = {
-    autoClose: {
+    autoClose: { 
       type: "boolean",
       values: [true,false],
     },

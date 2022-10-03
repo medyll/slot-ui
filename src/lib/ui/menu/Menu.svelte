@@ -18,7 +18,7 @@
 	export let density: 'none' | 'tight' | 'default' | 'medium' | 'kind' = 'tight';
 	export let style:string |undefined = undefined;
 	/** menu can have no border */
-	export let bordered:boolean |undefined = true;
+	export let bordered:boolean |undefined = false;
 
 	const menuStore = createMenuStore();
 	setContext('menuStateContext', menuStore);
@@ -47,6 +47,6 @@ on:menu:item:clicked={onMenuClick} >
 	<slot />
 </ul>
 
-<style lang="scss" global>
+<style lang="scss" >
 	@import 'menu';
 </style>
