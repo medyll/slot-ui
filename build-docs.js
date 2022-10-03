@@ -67,13 +67,15 @@ function createObject(fileList, exportName = 'slotUiComponentList') {
 	const start = `export const ${exportName} = [ `;
 	const middle = fileList
 		?.map((fl) => {
+			const group = fl.split('\\')[1];
+			console.log(group)
 			const comp = fl.split('\\').slice(-1).toString()?.replace(/\./g, '');
 			const compName = fl.split('\\').slice(-1)[0].split('.')[0];
 			const code = compName.toLowerCase();
 
 			const src = fl.replace(/\\/g, '/');
 
-			return `{name:"${compName}",code:"${code}",component:${comp}}`;
+			return `{name:"${compName}",code:"${code}",component:${comp},group:"${group}"}`;
 		})
 		.join(',\r\n');
 
@@ -182,6 +184,7 @@ createReadme(resultProps);
 console.log(dirPath, 'index files for component.api.md and component.md');
 
 const result = getAllFiles(srcLibDir,'demo.svelte');
+// console.log(result)
 const resultPreview = getAllFiles(srcLibDir, 'preview.svelte');
 // write component list
 fs.writeFileSync(

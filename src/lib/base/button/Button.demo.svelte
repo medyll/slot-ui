@@ -58,7 +58,7 @@
   let parametersMenu: any = {
     position: {
       type: "position",
-      values: ["TC", "TL", "TR", "BC", "BL", "BR"],
+      values: uiPresets.position,
     },
   };
 

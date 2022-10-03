@@ -14,4 +14,5 @@ export const uiPresets = {
     large: "16rem",
     auto: "auto",
   },
+  position: ["TC", "TL", "TR", "BC", "BL", "BR"],
 };

@@ -59,6 +59,7 @@
 					<div class="w-medium  ">{parameters?.[parameter]?.type}</div> 
 					{#each parameters?.[parameter]?.values ?? [] as value}
 						<Button
+						class="w-small-min"
 							naked
 							showChip={activeParams[parameter] === value}
 							on:click={() => {

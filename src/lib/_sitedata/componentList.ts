@@ -20,37 +20,37 @@ import Tabsdemosvelte from "$lib/base/tabs/Tabs.demo.svelte";
 import Treedemosvelte from "$lib/base/tree/Tree.demo.svelte"; 
 import Finderdemosvelte from "$lib/data/finder/Finder.demo.svelte"; 
 import Grouperdemosvelte from "$lib/data/grouper/Grouper.demo.svelte"; 
-import Jsonerdemosvelte from "$lib/data/jsoner/Jsoner.demo.svelte"; 
+import Jsonerdemosvelte from "$lib/data/jsoner/Jsoner.wip.svelte"; 
 import Sorterdemosvelte from "$lib/data/sorter/Sorter.demo.svelte"; 
 import Framedemosvelte from "$lib/ui/frame/Frame.demo.svelte"; 
 import Menudemosvelte from "$lib/ui/menu/Menu.demo.svelte"; 
 import Popperdemosvelte from "$lib/ui/popper/Popper.demo.svelte"; 
 import Windowdemosvelte from "$lib/ui/window/Window.demo.svelte";  
- export const slotUiComponentList = [ {name:"Alert",code:"alert",component:Alertdemosvelte},
-{name:"Avatar",code:"avatar",component:Avatardemosvelte},
-{name:"Backdrop",code:"backdrop",component:Backdropdemosvelte},
-{name:"Box",code:"box",component:Boxdemosvelte},
-{name:"Button",code:"button",component:Buttondemosvelte},
-{name:"Card",code:"card",component:Carddemosvelte},
-{name:"Cartouche",code:"cartouche",component:Cartouchedemosvelte},
-{name:"Chipper",code:"chipper",component:Chipperdemosvelte},
-{name:"Columner",code:"columner",component:Columnerdemosvelte},
-{name:"Confirm",code:"confirm",component:Confirmdemosvelte},
-{name:"DataList",code:"datalist",component:DataListdemosvelte},
-{name:"Divider",code:"divider",component:Dividerdemosvelte},
-{name:"Drawer",code:"drawer",component:Drawerdemosvelte},
-{name:"Input",code:"input",component:Inputdemosvelte},
-{name:"List",code:"list",component:Listdemosvelte},
-{name:"Loader",code:"loader",component:Loaderdemosvelte},
-{name:"Rating",code:"rating",component:Ratingdemosvelte},
-{name:"Stepper",code:"stepper",component:Stepperdemosvelte},
-{name:"Tabs",code:"tabs",component:Tabsdemosvelte},
-{name:"Tree",code:"tree",component:Treedemosvelte},
-{name:"Finder",code:"finder",component:Finderdemosvelte},
-{name:"Grouper",code:"grouper",component:Grouperdemosvelte},
-{name:"Jsoner",code:"jsoner",component:Jsonerdemosvelte},
-{name:"Sorter",code:"sorter",component:Sorterdemosvelte},
-{name:"Frame",code:"frame",component:Framedemosvelte},
-{name:"Menu",code:"menu",component:Menudemosvelte},
-{name:"Popper",code:"popper",component:Popperdemosvelte},
-{name:"Window",code:"window",component:Windowdemosvelte} ] 
+ export const slotUiComponentList = [ {name:"Alert",code:"alert",component:Alertdemosvelte,group:"base"},
+{name:"Avatar",code:"avatar",component:Avatardemosvelte,group:"base"},
+{name:"Backdrop",code:"backdrop",component:Backdropdemosvelte,group:"base"},
+{name:"Box",code:"box",component:Boxdemosvelte,group:"base"},
+{name:"Button",code:"button",component:Buttondemosvelte,group:"base"},
+{name:"Card",code:"card",component:Carddemosvelte,group:"base"},
+{name:"Cartouche",code:"cartouche",component:Cartouchedemosvelte,group:"base"},
+{name:"Chipper",code:"chipper",component:Chipperdemosvelte,group:"base"},
+{name:"Columner",code:"columner",component:Columnerdemosvelte,group:"base"},
+{name:"Confirm",code:"confirm",component:Confirmdemosvelte,group:"base"},
+{name:"DataList",code:"datalist",component:DataListdemosvelte,group:"base"},
+{name:"Divider",code:"divider",component:Dividerdemosvelte,group:"base"},
+{name:"Drawer",code:"drawer",component:Drawerdemosvelte,group:"base"},
+{name:"Input",code:"input",component:Inputdemosvelte,group:"base"},
+{name:"List",code:"list",component:Listdemosvelte,group:"base"},
+{name:"Loader",code:"loader",component:Loaderdemosvelte,group:"base"},
+{name:"Rating",code:"rating",component:Ratingdemosvelte,group:"base"},
+{name:"Stepper",code:"stepper",component:Stepperdemosvelte,group:"base"},
+{name:"Tabs",code:"tabs",component:Tabsdemosvelte,group:"base"},
+{name:"Tree",code:"tree",component:Treedemosvelte,group:"base"},
+{name:"Finder",code:"finder",component:Finderdemosvelte,group:"data"},
+{name:"Grouper",code:"grouper",component:Grouperdemosvelte,group:"data"},
+{name:"Jsoner",code:"jsoner",component:Jsonerdemosvelte,group:"data"},
+{name:"Sorter",code:"sorter",component:Sorterdemosvelte,group:"data"},
+{name:"Frame",code:"frame",component:Framedemosvelte,group:"ui"},
+{name:"Menu",code:"menu",component:Menudemosvelte,group:"ui"},
+{name:"Popper",code:"popper",component:Popperdemosvelte,group:"ui"},
+{name:"Window",code:"window",component:Windowdemosvelte,group:"ui"} ] 
