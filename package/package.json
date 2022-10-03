@@ -148,6 +148,7 @@
     "./data/finder/Finder.svelte": "./data/finder/Finder.svelte",
     "./data/grouper/Grouper.svelte": "./data/grouper/Grouper.svelte",
     "./data/jsoner/Jsoner.svelte": "./data/jsoner/Jsoner.svelte",
+    "./data/jsoner/Jsoner.wip.svelte": "./data/jsoner/Jsoner.wip.svelte",
     "./data/sorter/Sorter.svelte": "./data/sorter/Sorter.svelte",
     "./data/sorter/Sorterer.svelte": "./data/sorter/Sorterer.svelte",
     "./data/sorter/types": "./data/sorter/types.js",

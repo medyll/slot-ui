@@ -1,25 +1,25 @@
 <script lang="ts">
   import { componentReadMe } from "$sitedata/api/indexApi.js";
-  import { slotUiComponentList } from "$sitedata/componentList.js";
+  //import { slotUiComponentList } from "$sitedata/componentList.js";
   export let component: string = "";
   export let cite: string = "";
   import Prism from "prismjs";
   import "prism-svelte";
 
-  $: finalCompReadMe = componentReadMe?.[component.toLowerCase()];
+  /* $: finalCompReadMe = componentReadMe?.[component.toLowerCase()];
 
   const compDet = slotUiComponentList.find((x) => x.name === component);
 
   console.log(
     component,
     slotUiComponentList.find((x) => x.name === component)
-  );
+  ); */
 </script>
 
 <div class="flex-v gap-large w-full">
   <div class="flex-h gap-small flex-align-middle">
     <h4>{`<${component} />`}</h4>
-    <span>{compDet?.group}/{compDet?.code}.svelte</span>
+    <!-- <span>{compDet?.group}/{compDet?.code}.svelte</span> -->
   </div>
   <cite><p>{@html cite}</p></cite>
   {#if $$slots.default}

@@ -3,7 +3,7 @@
 	import Confirm from './Confirm.svelte';
 
 	/* demo */
-	import ComponentDemo from '$_components/ComponentExample.svelte';
+	import ComponentDemo from '$components/ComponentExample.svelte';
 	import Demoer from '$lib/base/demoer/Demoer.svelte';
 	import DemoPage from '$lib/base/demoer/DemoPage.svelte';
 	/* demo */

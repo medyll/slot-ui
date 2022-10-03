@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ComponentDemo from '$_components/ComponentExample.svelte';
+	import ComponentDemo from '$components/ComponentExample.svelte';
 	import Column from './Column.svelte';
 	import Columner from './Columner.svelte';
 </script>

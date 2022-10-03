@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ComponentDemo from '$_components/ComponentExample.svelte';
+	import ComponentDemo from '$components/ComponentExample.svelte';
 	import Jsoner from '../jsoner/Jsoner.svelte';
 	import Finder from './Finder.svelte';
 
