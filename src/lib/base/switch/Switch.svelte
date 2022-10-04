@@ -3,7 +3,7 @@
 <script lang="ts">
   export let name: string;
   export let checked: boolean = false;
-  export let disabled: boolean = false; 
+  export let disabled: boolean = false;
 
   let className = "";
   export { className as class };
@@ -14,10 +14,17 @@
 </script>
 
 <input bind:this={hiddenRef} {name} id={name} value={checked} type="hidden" />
-<label bind:this={element} for="_{name}" class="switch {className}"  {style} >
+<label bind:this={element} for="_{name}" class="switch {className}" {style}>
   <slot name="label" />
   <div class="switchGutter">
-    <input on:change={(event)=>{hiddenRef.value=event.currentTarget.checked}} id="_{name}" {checked} {disabled} type="checkbox" />
+    <input
+      on:change={(event) => {
+        hiddenRef.value = event.currentTarget.checked;
+      }}
+      id="_{name}"
+      {checked}
+      {disabled}
+      type="checkbox" />
     <div class="switchHandle"><slot /></div>
   </div>
 </label>
@@ -27,16 +34,22 @@
     background-color: transparent;
     border: none;
     padding: 0;
-    min-width:64px;
+    min-width: 64px;
   }
   .switch {
     display: inline-block;
-    
+
     position: relative;
     border-radius: var(--radius-small);
     overflow: hidden;
     cursor: pointer;
     &.disabled {
+    }
+
+    :hover {
+      .switchHandle {
+        background-color: var(--theme-color-secondary)!important;
+      }
     }
 
     .switchGutter {
@@ -70,6 +83,7 @@
         transition: all 0.25s;
         background-color: var(--theme-color-background);
         border: 1px solid var(--theme-color-secondary-alpha);
+        box-shadow: var(--box-shad-1);
       }
     }
   }

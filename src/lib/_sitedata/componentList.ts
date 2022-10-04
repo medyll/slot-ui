@@ -22,6 +22,7 @@ import Treedemosvelte from "$lib/base/tree/Tree.demo.svelte";
 import Finderdemosvelte from "$lib/data/finder/Finder.demo.svelte"; 
 import Grouperdemosvelte from "$lib/data/grouper/Grouper.demo.svelte"; 
 import Sorterdemosvelte from "$lib/data/sorter/Sorter.demo.svelte"; 
+import Selectdemosvelte from "$lib/form/select/Select.demo.svelte"; 
 import Framedemosvelte from "$lib/ui/frame/Frame.demo.svelte"; 
 import Menudemosvelte from "$lib/ui/menu/Menu.demo.svelte"; 
 import Popperdemosvelte from "$lib/ui/popper/Popper.demo.svelte"; 
@@ -50,6 +51,7 @@ import Windowdemosvelte from "$lib/ui/window/Window.demo.svelte";
 {name:"Finder",code:"finder",component:Finderdemosvelte,group:"data"},
 {name:"Grouper",code:"grouper",component:Grouperdemosvelte,group:"data"},
 {name:"Sorter",code:"sorter",component:Sorterdemosvelte,group:"data"},
+{name:"Select",code:"select",component:Selectdemosvelte,group:"form"},
 {name:"Frame",code:"frame",component:Framedemosvelte,group:"ui"},
 {name:"Menu",code:"menu",component:Menudemosvelte,group:"ui"},
 {name:"Popper",code:"popper",component:Popperdemosvelte,group:"ui"},

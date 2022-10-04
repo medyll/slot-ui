@@ -1,3 +1,4 @@
+<svelte:options accessors />
 <script lang="ts">
 	import { createEventForwarder } from '$lib/engine/engine';
 	import { popper, type UsePopperProps } from '$lib/ui/popper/usePopper';
@@ -27,7 +28,7 @@
 	/** paramters for usePopper */
 	export let usePopper: UsePopperProps | undefined = undefined;
 	/** with of the input using  presets */
-	export let size: ElementProps['sizeType'] | 'full' = 'medium';
+	export let size: ElementProps['sizeType'] | 'full' = 'default';
 	/** height of the input, using preset values */
 	export let height: string = 'default';
 	/** has no border */
@@ -77,7 +78,7 @@
 			use:forwardEvents
 			use:popper={usePopper}
 			type="text"
-			class={className + ' w-' + size}
+			class="w-{size} {className}"
 			data-height={height}
 			data-width={size}
 			{borderless}
@@ -92,7 +93,7 @@
 		use:forwardEvents
 		use:popper={usePopper}
 		type="text"
-		class={className + ' w-' + size}
+		class="w-{size} {className}"
 		data-height={height}
 		{borderless}
 		{style}
