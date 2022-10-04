@@ -1,6 +1,6 @@
 import Window from './Window.svelte';
-import type { IChromeArgs } from './window.store.js';
-import { windowsStore } from '$lib/ui/window/window.store.js';
+import type { IChromeArgs } from './store.js';
+import { windowsStore } from '$lib/ui/window/store.js';
 import { get, writable } from 'svelte/store';
 // import Debug from '../base/debug/Debug.svelte';
 
@@ -10,15 +10,28 @@ export const openWindow = (frameId: string, args: Partial<IChromeArgs> = {}) => 
 
   const appW = get(windowsStore).get(frameId);
 
-  windowsStore.open({
+  console.log(appW)
+  /* windowsStore.open({
     title: frameId,
     defaultPosition: { x: 0, y: 0 },
-    //component: Debug,
     ...args,
-    frameId: frameId, // cannot overwrite+
-  });
+    frameId: frameId, 
+  }); */
+
 
   if (!appW) {
+
+
+    get(windowsStore).set(frameId,{ 
+      ...args,
+      frameId: frameId, 
+    })
+
+    /* windowsStore.create({ 
+      ...args,
+      frameId: frameId, 
+    }); */
+
     windowList[frameId] = new Window({
       target: document.body,
       props: {

@@ -1,8 +1,8 @@
 <svelte:options accessors={true} immutable={true} />
 
 <script lang="ts">
-	import type { IChromeArgs } from '$lib/ui/window/window.store.js';
-	import { getAppWindowStore, windowsStore } from '$lib/ui/window/window.store.js';
+	import type { IChromeArgs } from '$lib/ui/window/store.js';
+	import { getAppWindowStore, windowsStore } from '$lib/ui/window/store.js';
 	import { draggable } from '@neodrag/svelte';
 	import { onDestroy, onMount } from 'svelte';
 	import IconButton from '$lib/base/button/IconButton.svelte';
@@ -24,6 +24,10 @@
 	export let maximized: boolean = true;
 	/** is on top of others*/
 	export let active: boolean = true;
+
+	export let component: any = undefined;
+	export let componentProps: any = undefined;
+	export let contentHTML: any = undefined;
 
 	/** actions triggered on click*/
 	export let onClose: () => void = () => {};
@@ -49,7 +53,7 @@
 
 	$: appWindowStore = getAppWindowStore(frameId);
 
-	if (!$appWindowStore) {
+	if (!$appWindowStore) { 
 		windowsStore.create({
 			frameId,
 			title,
@@ -59,6 +63,9 @@
 			minimized,
 			maximized,
 			active,
+			component,
+			componentProps,
+			contentHTML,
 			onClose,
 			onCancel,
 			onValidate
@@ -82,7 +89,7 @@
 		defaultPosition: { x, y },
 		onDragStart: (args: { offsetX: number; offsetY: number; domRect: DOMRect }) => {
 			// updatePos(args);
-			$appWindowStore.makeOnTop();
+			appWindowStore.makeOnTop();
 		},
 		onDrag: (args) => {},
 		onDragEnd: (args: { offsetX: number; offsetY: number; domRect: DOMRect }) => {
@@ -91,7 +98,7 @@
 	};
 
 	onDestroy(() => {
-		console.log('destroyed !!!');
+		// console.log('destroyed !!!');
 	});
 
 	onMount(() => {
@@ -106,19 +113,19 @@
 	}
 
 	function handleClick(args: PointerEvent) {
-		windowsStore.activeFrame.set(frameId);
-		$appWindowStore.makeOnTop();
+		windowsStore.activeFrame.set(frameId); 
+		appWindowStore.makeOnTop();
 	}
 
 	function handleClose(args: PointerEvent) {
-		$appWindowStore.close();
-		if ($$props.self) $appWindowStore.remove();
+		appWindowStore.remove();
+		if ($$props.self) appWindowStore.remove();
 	}
 </script>
-{#if $appWindowStore.open}
+{#if $appWindowStore?.open}
 <div
 	bind:this={element}
-	class="window"
+	class="window shad-3"
 	on:click={handleClick}
 	style="z-index:{$appWindowStore?.zIndex}"
 	use:draggable={{ ...dragOptions, ...position }}
@@ -142,17 +149,19 @@
 	</div>
 	<div>
 		<slot>
+			{#key $appWindowStore?.component}
 			{#if $appWindowStore?.component}
 				<svelte:component this={$appWindowStore.component} {...$appWindowStore.componentProps} />
 			{/if}
+			{/key}
 			{#if $appWindowStore?.contentHTML}
 				{@html $appWindowStore?.contentHTML}
 			{/if}
 		</slot>
 	</div>
 	<div class="buttonZone">
-		<Button naked on:click={handleClose}>Close {frameId}</Button>
-		<Button on:click={handleClose}>Validate {frameId}</Button>
+		<Button naked on:click={handleClose}>Close</Button>
+		<Button on:click={handleClose}>Validate</Button>
 	</div>
 </div>
 {/if}
