@@ -11,7 +11,7 @@ __propDef: {
         /**
              * position
              * @type 'wide' | 'inplace'
-             */ flow?: "fixed" | "relative" | "absolute" | undefined;
+             */ flow?: "relative" | "absolute" | "fixed" | undefined;
         stickTo?: "left" | "right" | "top" | "bottom" | undefined;
         showOpenerIcon?: boolean | undefined;
         toggle?: ((visibleSate?: boolean) => void) | undefined;

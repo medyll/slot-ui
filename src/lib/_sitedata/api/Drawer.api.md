@@ -11,7 +11,7 @@ declare const __propDef: {
         /**
              * position
              * @type 'wide' | 'inplace'
-             */ flow?: "fixed" | "relative" | "absolute" | undefined;
+             */ flow?: "relative" | "absolute" | "fixed" | undefined;
         stickTo?: "left" | "right" | "top" | "bottom" | undefined;
         showOpenerIcon?: boolean | undefined;
         toggle?: ((visibleSate?: boolean) => void) | undefined;
@@ -62,9 +62,9 @@ export default class Drawer extends SvelteComponentTyped<DrawerProps, DrawerEven
     get hideCloseIcon(): boolean | undefined;
     /**accessor*/
     set hideCloseIcon(_: boolean | undefined);
-    get flow(): "fixed" | "relative" | "absolute" | undefined;
+    get flow(): "relative" | "absolute" | "fixed" | undefined;
     /**accessor*/
-    set flow(_: "fixed" | "relative" | "absolute" | undefined);
+    set flow(_: "relative" | "absolute" | "fixed" | undefined);
     get stickTo(): "left" | "right" | "top" | "bottom" | undefined;
     /**accessor*/
     set stickTo(_: "left" | "right" | "top" | "bottom" | undefined);

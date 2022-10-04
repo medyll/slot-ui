@@ -6,7 +6,7 @@ declare const __propDef: {
         style?: string | undefined;
         /** show or hide the backdrop */ isOpen?: boolean | undefined;
         /** if in loading state, it will show a loading icon or $$slots.loadingSlot */ isLoading?: boolean | undefined;
-        /** css position mode of the backdrop */ flow?: "fixed" | "relative" | "absolute" | undefined;
+        /** css position mode of the backdrop */ flow?: "relative" | "absolute" | "fixed" | undefined;
     };
     events: {
         click: MouseEvent;
@@ -37,9 +37,9 @@ export default class Backdrop extends SvelteComponentTyped<BackdropProps, Backdr
     get isLoading(): boolean | undefined;
     /**accessor*/
     set isLoading(_: boolean | undefined);
-    get flow(): "fixed" | "relative" | "absolute" | undefined;
+    get flow(): "relative" | "absolute" | "fixed" | undefined;
     /**accessor*/
-    set flow(_: "fixed" | "relative" | "absolute" | undefined);
+    set flow(_: "relative" | "absolute" | "fixed" | undefined);
 }
 export {};
 
