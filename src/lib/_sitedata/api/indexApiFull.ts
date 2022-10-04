@@ -36,8 +36,6 @@ import PaperApiReadMe from "$sitedata/api/Paper.api.md";
 import PortalApiReadMe from "$sitedata/api/Portal.api.md";
 import ProgressApiReadMe from "$sitedata/api/Progress.api.md";
 import RatingApiReadMe from "$sitedata/api/Rating.api.md";
-import OptionsApiReadMe from "$sitedata/api/Options.api.md";
-import SelectApiReadMe from "$sitedata/api/Select.api.md";
 import SliderApiReadMe from "$sitedata/api/Slider.api.md";
 import StepperApiReadMe from "$sitedata/api/Stepper.api.md";
 import SwitchApiReadMe from "$sitedata/api/Switch.api.md";
@@ -54,6 +52,8 @@ import SorterApiReadMe from "$sitedata/api/Sorter.api.md";
 import SortererApiReadMe from "$sitedata/api/Sorterer.api.md";
 import DynCompApiReadMe from "$sitedata/api/DynComp.api.md";
 import TaskBarContentApiReadMe from "$sitedata/api/TaskBarContent.api.md";
+import OptionsApiReadMe from "$sitedata/api/Options.api.md";
+import SelectApiReadMe from "$sitedata/api/Select.api.md";
 import BootStrAppApiReadMe from "$sitedata/api/BootStrApp.api.md";
 import DynPageApiReadMe from "$sitedata/api/DynPage.api.md";
 import ChromeFrameApiReadMe from "$sitedata/api/ChromeFrame.api.md";
@@ -114,8 +114,6 @@ paperApi:PaperApiReadMe,
 portalApi:PortalApiReadMe,
 progressApi:ProgressApiReadMe,
 ratingApi:RatingApiReadMe,
-optionsApi:OptionsApiReadMe,
-selectApi:SelectApiReadMe,
 sliderApi:SliderApiReadMe,
 stepperApi:StepperApiReadMe,
 switchApi:SwitchApiReadMe,
@@ -132,6 +130,8 @@ sorterApi:SorterApiReadMe,
 sortererApi:SortererApiReadMe,
 dyncompApi:DynCompApiReadMe,
 taskbarcontentApi:TaskBarContentApiReadMe,
+optionsApi:OptionsApiReadMe,
+selectApi:SelectApiReadMe,
 bootstrappApi:BootStrAppApiReadMe,
 dynpageApi:DynPageApiReadMe,
 chromeframeApi:ChromeFrameApiReadMe,

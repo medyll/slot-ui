@@ -11,10 +11,17 @@ let hiddenRef;
 </script>
 
 <input bind:this={hiddenRef} {name} id={name} value={checked} type="hidden" />
-<label bind:this={element} for="_{name}" class="switch {className}"  {style} >
+<label bind:this={element} for="_{name}" class="switch {className}" {style}>
   <slot name="label" />
   <div class="switchGutter">
-    <input on:change={(event)=>{hiddenRef.value=event.currentTarget.checked}} id="_{name}" {checked} {disabled} type="checkbox" />
+    <input
+      on:change={(event) => {
+        hiddenRef.value = event.currentTarget.checked;
+      }}
+      id="_{name}"
+      {checked}
+      {disabled}
+      type="checkbox" />
     <div class="switchHandle"><slot /></div>
   </div>
 </label>
@@ -32,6 +39,9 @@ let hiddenRef;
   border-radius: var(--radius-small);
   overflow: hidden;
   cursor: pointer;
+}
+.switch :hover .switchHandle {
+  background-color: var(--theme-color-secondary) !important;
 }
 .switch .switchGutter {
   border: 1px solid var(--theme-color-primary-alpha);
@@ -61,4 +71,5 @@ let hiddenRef;
   transition: all 0.25s;
   background-color: var(--theme-color-background);
   border: 1px solid var(--theme-color-secondary-alpha);
+  box-shadow: var(--box-shad-1);
 }</style>

@@ -36,10 +36,26 @@
     data: [{id:1,name:'name'},{id:2,name:'name'},{id:3,name:'name'},{id:4,name:'name'}],
   };
 
-  let codeSlot = `
-<Select  name={'switcher'} class="w-small" >
-  <span slot="label" />
-</Select>`;
+  let codeSlot = `<script>
+    const data = [{id:1,name:'name'},{id:2,name:'name'}];
+<script> 
+
+<Select
+  let:optionsData
+  value="2"
+  name={"input_select"}
+  {data} >
+  <MenuItem  data={optionsData} >{optionsData.name}</MenuItem>
+</Select>
+
+<Select
+  let:optionsData
+  value="2"
+  name={"input_select"}
+  {data}
+  dataFieldName={"name"} />
+</Select>
+`;
 
   let codeProps = `
 <Loader

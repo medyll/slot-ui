@@ -36,8 +36,6 @@ import PaperReadMe from "$sitedata/api/Paper.md";
 import PortalReadMe from "$sitedata/api/Portal.md";
 import ProgressReadMe from "$sitedata/api/Progress.md";
 import RatingReadMe from "$sitedata/api/Rating.md";
-import OptionsReadMe from "$sitedata/api/Options.md";
-import SelectReadMe from "$sitedata/api/Select.md";
 import SliderReadMe from "$sitedata/api/Slider.md";
 import StepperReadMe from "$sitedata/api/Stepper.md";
 import SwitchReadMe from "$sitedata/api/Switch.md";
@@ -54,6 +52,8 @@ import SorterReadMe from "$sitedata/api/Sorter.md";
 import SortererReadMe from "$sitedata/api/Sorterer.md";
 import DynCompReadMe from "$sitedata/api/DynComp.md";
 import TaskBarContentReadMe from "$sitedata/api/TaskBarContent.md";
+import OptionsReadMe from "$sitedata/api/Options.md";
+import SelectReadMe from "$sitedata/api/Select.md";
 import BootStrAppReadMe from "$sitedata/api/BootStrApp.md";
 import DynPageReadMe from "$sitedata/api/DynPage.md";
 import ChromeFrameReadMe from "$sitedata/api/ChromeFrame.md";
@@ -114,8 +114,6 @@ paper:PaperReadMe,
 portal:PortalReadMe,
 progress:ProgressReadMe,
 rating:RatingReadMe,
-options:OptionsReadMe,
-select:SelectReadMe,
 slider:SliderReadMe,
 stepper:StepperReadMe,
 switch:SwitchReadMe,
@@ -132,6 +130,8 @@ sorter:SorterReadMe,
 sorterer:SortererReadMe,
 dyncomp:DynCompReadMe,
 taskbarcontent:TaskBarContentReadMe,
+options:OptionsReadMe,
+select:SelectReadMe,
 bootstrapp:BootStrAppReadMe,
 dynpage:DynPageReadMe,
 chromeframe:ChromeFrameReadMe,
