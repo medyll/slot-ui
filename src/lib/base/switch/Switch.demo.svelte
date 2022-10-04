@@ -28,17 +28,9 @@
   let componentArgsSlot = defaultsArgs(parametersSlot);
 
   let codeSlot = `
-<Popper bind:isOpen position="BC" autoClose class="w-large">
-	<Button
-		slot="holderSlot"
-		on:click={() => ()}
-		style="cursor:pointer">
-		Popper button
-	</Button>
-	<div class="pad-4 text-center">
-		Popper content
-	</div>
-</Popper>`;
+<Switch  name={'switcher'} class="w-small" >
+  <span slot="label" />
+</Switch>`;
 
   let codeProps = `
 <Loader

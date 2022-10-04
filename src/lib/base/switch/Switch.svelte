@@ -2,20 +2,22 @@
 
 <script lang="ts">
   export let name: string;
-  export let checked: boolean;
-  export let disabled: boolean = false;
-  export let value: any;
+  export let checked: boolean = false;
+  export let disabled: boolean = false; 
 
   let className = "";
   export { className as class };
   export let element: HTMLDivElement | null = null;
   export let style: string = "";
+
+  let hiddenRef;
 </script>
 
-<label bind:this={element} for={name} class="switch {className}"  {style} >
+<input bind:this={hiddenRef} {name} id={name} value={checked} type="hidden" />
+<label bind:this={element} for="_{name}" class="switch {className}"  {style} >
   <slot name="label" />
   <div class="switchGutter">
-    <input {checked} {name} id={name} {value} {disabled} type="checkbox" />
+    <input on:change={(event)=>{hiddenRef.value=event.currentTarget.checked}} id="_{name}" {checked} {disabled} type="checkbox" />
     <div class="switchHandle"><slot /></div>
   </div>
 </label>
@@ -25,6 +27,7 @@
     background-color: transparent;
     border: none;
     padding: 0;
+    min-width:64px;
   }
   .switch {
     display: inline-block;
