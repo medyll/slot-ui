@@ -1,6 +1,6 @@
 <svelte:options accessors={true} immutable={true} />
 
-<script>import { getAppWindowStore, windowsStore } from './window.store.js';
+<script>import { getAppWindowStore, windowsStore } from './store.js';
 import { draggable } from '@neodrag/svelte';
 import { onDestroy, onMount } from 'svelte';
 import IconButton from '../../base/button/IconButton.svelte';
@@ -21,6 +21,9 @@ export let minimized = false;
 export let maximized = true;
 /** is on top of others*/
 export let active = true;
+export let component = undefined;
+export let componentProps = undefined;
+export let contentHTML = undefined;
 /** actions triggered on click*/
 export let onClose = () => { };
 export let onCancel = () => { };
@@ -47,6 +50,9 @@ if (!$appWindowStore) {
         minimized,
         maximized,
         active,
+        component,
+        componentProps,
+        contentHTML,
         onClose,
         onCancel,
         onValidate
@@ -67,7 +73,7 @@ const dragOptions = {
     defaultPosition: { x, y },
     onDragStart: (args) => {
         // updatePos(args);
-        $appWindowStore.makeOnTop();
+        appWindowStore.makeOnTop();
     },
     onDrag: (args) => { },
     onDragEnd: (args) => {
@@ -75,7 +81,7 @@ const dragOptions = {
     }
 };
 onDestroy(() => {
-    console.log('destroyed !!!');
+    // console.log('destroyed !!!');
 });
 onMount(() => {
     if (element.parentNode !== document.body)
@@ -89,18 +95,18 @@ function updatePos(args) {
 }
 function handleClick(args) {
     windowsStore.activeFrame.set(frameId);
-    $appWindowStore.makeOnTop();
+    appWindowStore.makeOnTop();
 }
 function handleClose(args) {
-    $appWindowStore.close();
+    appWindowStore.remove();
     if ($$props.self)
-        $appWindowStore.remove();
+        appWindowStore.remove();
 }
 </script>
-{#if $appWindowStore.open}
+{#if $appWindowStore?.open}
 <div
 	bind:this={element}
-	class="window"
+	class="window shad-3"
 	on:click={handleClick}
 	style="z-index:{$appWindowStore?.zIndex}"
 	use:draggable={{ ...dragOptions, ...position }}
@@ -124,17 +130,19 @@ function handleClose(args) {
 	</div>
 	<div>
 		<slot>
+			{#key $appWindowStore?.component}
 			{#if $appWindowStore?.component}
 				<svelte:component this={$appWindowStore.component} {...$appWindowStore.componentProps} />
 			{/if}
+			{/key}
 			{#if $appWindowStore?.contentHTML}
 				{@html $appWindowStore?.contentHTML}
 			{/if}
 		</slot>
 	</div>
 	<div class="buttonZone">
-		<Button naked on:click={handleClose}>Close {frameId}</Button>
-		<Button on:click={handleClose}>Validate {frameId}</Button>
+		<Button naked on:click={handleClose}>Close</Button>
+		<Button on:click={handleClose}>Validate</Button>
 	</div>
 </div>
 {/if}

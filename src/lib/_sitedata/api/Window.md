@@ -10,6 +10,9 @@ __propDef: {
         minimized?: boolean | undefined;
         maximized?: boolean | undefined;
         active?: boolean | undefined;
+        component?: any;
+        componentProps?: any;
+        contentHTML?: any;
         onClose?: (() => void) | undefined;
         onCancel?: (() => void) | undefined;
         onValidate?: (() => void) | undefined;

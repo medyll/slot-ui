@@ -10,6 +10,9 @@ declare const __propDef: {
         minimized?: boolean | undefined;
         maximized?: boolean | undefined;
         active?: boolean | undefined;
+        component?: any;
+        componentProps?: any;
+        contentHTML?: any;
         onClose?: (() => void) | undefined;
         onCancel?: (() => void) | undefined;
         onValidate?: (() => void) | undefined;
@@ -54,6 +57,15 @@ export default class Window extends SvelteComponentTyped<WindowProps, WindowEven
     get active(): boolean | undefined;
     /**accessor*/
     set active(_: boolean | undefined);
+    get component(): any;
+    /**accessor*/
+    set component(_: any);
+    get componentProps(): any;
+    /**accessor*/
+    set componentProps(_: any);
+    get contentHTML(): any;
+    /**accessor*/
+    set contentHTML(_: any);
     get onClose(): (() => void) | undefined;
     /**accessor*/
     set onClose(_: (() => void) | undefined);
