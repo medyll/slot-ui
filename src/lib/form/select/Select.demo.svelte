@@ -5,7 +5,7 @@
   import {
     defaultsArgs,
     defaultsArgsFromProps,
-  } from "$lib/base/demoer/demoer.utils";
+  } from "$lib/base/demoer/demoer.utils.js";
   import ComponentDemo from "$lib/_components/ComponentExample.svelte";
   import Demoer from "$lib/base/demoer/Demoer.svelte";
   import DemoPage from "$lib/base/demoer/DemoPage.svelte";

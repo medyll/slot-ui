@@ -15,4 +15,5 @@ export const uiPresets = {
     auto: "auto",
   },
   position: ["TC", "TL", "TR", "BC", "BL", "BR"],
+  flow: ["relative", "absolute", "fixed"],
 };

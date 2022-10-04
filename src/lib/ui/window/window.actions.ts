@@ -41,8 +41,12 @@ export const openWindow = (frameId: string, args: Partial<IChromeArgs> = {}) => 
       },
     });
 
+console.log(windowList[frameId])
+
     windowList[frameId].$set({
       self: windowList[frameId]
     });
+
+    return windowList[frameId];
   }
 }

@@ -1,8 +1,6 @@
 <script lang="ts">
   import github from "svelte-highlight/styles/github";
   import { HighlightSvelte } from "svelte-highlight";
-  import Prism from "prismjs";
-  import "prism-svelte";
   // fabric default vars
   import cssfabricVars from "@medyll/cssfabric/src/lib/styles/vars.min.css";
   // fabric default

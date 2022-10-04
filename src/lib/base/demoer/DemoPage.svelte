@@ -1,7 +1,4 @@
-<script lang="ts">
-  import Prism from "prismjs";
-  import "prismjs/plugins/normalize-whitespace/prism-normalize-whitespace";
-  import "prism-svelte";
+<script lang="ts"> 
   import Icon from "$lib/base/icon/Icon.svelte";
   import DemoerCode from "./DemoerCode.svelte";
   export let title: undefined = undefined;
@@ -13,19 +10,8 @@
     ? subTitle
     : `component ${component} demo ${title?.toLowerCase()}`;
 
-  Prism.plugins.NormalizeWhitespace.setDefaults({
-    "remove-trailing": true,
-    "remove-indent": false,
-    "left-trim": true,
-    "right-trim": false,
-    "break-lines": 80,
-    indent: 0,
-    "remove-initial-line-feed": false,
-    "tabs-to-spaces": 1,
-    "spaces-to-tabs": 1,
-  });
-
-  const highlighted = Prism.highlight(code, Prism.languages.svelte, "svelte");
+  
+ 
 </script>
 
 <div>

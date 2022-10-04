@@ -10,6 +10,7 @@ export interface ElementProps {
   density: 'none' | 'tight' | 'default' | 'medium' | 'kind'
   expansion: 'full' | 'padded' | 'centered',
   alignment: 'center' | 'left' | 'right',
+  flow: 'relative'|'absolute'|'fixed'
   data: Record<string, any>;
   action: (event:any, data: ElementProps['data']) => void;
   icon: | TIcon
