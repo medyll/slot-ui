@@ -3,10 +3,10 @@
 	import DataListRow from '$lib/base/dataList/DataListRow.svelte';
 	import DataListCell from '$lib/base/dataList/DataListCell.svelte';
 	import DataListHead from '$lib/base/dataList/DataListHead.svelte';
-	import ComponentDemo from '$components/ComponentExample.svelte';
+	import ComponentDemo from '$lib/_components/ComponentExample.svelte';
 	import appSchemeData from '../../../demoData/appscheme.json';
-	import type { DataCellType } from './types';
-	import Demoer from '../demoer/Demoer.svelte';
+	import type { DataCellType } from './types.js';
+	import Demoer from '$lib/base/demoer/Demoer.svelte';
 
 	let data = [...Array(5)].map((caches, index: number) => {
 		return {

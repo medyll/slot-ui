@@ -1,12 +1,11 @@
 <script lang="ts">
   import type { MenuItemProps } from "$lib/ui/menu/types.js";
-  import type { PopperPositionType } from "$lib/ui/popper/types";
+  import type { PopperPositionType } from "$lib/ui/popper/types.js";
   import { type UsePopperProps } from "$lib/ui/popper/usePopper.js";
-  import ComponentDemo from "$components/ComponentExample.svelte";
+  import ComponentDemo from "$lib/_components/ComponentExample.svelte";
   import Demoer from "$lib/base/demoer/Demoer.svelte";
   import DemoPage from "$lib/base/demoer/DemoPage.svelte";
   import type { ElementProps } from "$typings/index.js";
-  import Box from "../box/Box.svelte";
   import Debug from "../debug/Debug.svelte";
   import Icon from "../icon/Icon.svelte";
   import Button from "./Button.svelte";

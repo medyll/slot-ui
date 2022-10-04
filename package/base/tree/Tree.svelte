@@ -96,7 +96,7 @@ function toggle(path, visibility) {
 			>
 				<div class="cellArrow">
 					{#if pat?.children?.length}
-						<Icon icon="chevron-{visibleChildChild[pat.path] ? 'down' : 'right'}" fontSize="tiny" />
+						<Icon icon="chevron-{visibleChildChild[pat.path] ? 'down' : 'right'}"   />
 					{/if}
 				</div>
 				<div class="cellTitleGutter">

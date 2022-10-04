@@ -3,13 +3,13 @@
   import { dataOp } from "$lib/engine/utils.js";
   import { getContext, onMount, tick } from "svelte/internal";
   import type { Writable } from "svelte/store";
-  import Button from "../button/Button.svelte";
+  import Button from "$lib/base/button/Button.svelte";
   import { custom_event } from "svelte/internal";
   import { resizer } from "$lib/uses/resizer/resizer.js";
   import type { Data } from "$lib/types/index.js";
   import { error } from "@sveltejs/kit";
-  import Icon from "../icon/Icon.svelte";
-  import Chipper from "../chipper/Chipper.svelte";
+  import Icon from "$lib/base/icon/Icon.svelte";
+  import Chipper from "$lib/base/chipper/Chipper.svelte";
 
   const dataListContext =
     getContext<Writable<DataListStoreType>>("dataListContext");

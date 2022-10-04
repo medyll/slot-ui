@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Divider from '$lib/base/divider/Divider.svelte';
 	import List from '$lib/base/list/List.svelte';
-import ComponentDemo from '$components/ComponentExample.svelte';
+import ComponentDemo from '$lib/_components/ComponentExample.svelte';
 	import Sorter from './Sorter.svelte';
 	import Sorterer from './Sorterer.svelte';
 

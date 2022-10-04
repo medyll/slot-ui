@@ -122,7 +122,7 @@
     <nav
       bind:this={navElement}
       class="nav flex-h pos-sticky pad flex-align-middle gap-small zI-10 w-full h-4 gap-medium">
-      <Button on:click={onDrawerClick} icon="menu" iconFamily="mdi" />
+      <Button on:click={onDrawerClick} icon="menu" bgTheme="primary" iconFamily="mdi" />
       <h3>SlotUi</h3>
       <div class="flex-main" />
       <a href="svelte-components">Components</a>

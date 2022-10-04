@@ -1,7 +1,7 @@
 <script lang="ts">
-  import Popper from "./Popper.svelte";
+  import Switch from "./Switch.svelte";
   import Button from "$lib/base/button/Button.svelte";
-  import { defaultsArgs, defaultsArgsFromProps } from "../../base/demoer/demoer.utils.js";
+  import { defaultsArgs, defaultsArgsFromProps } from "../demoer/demoer.utils";
   /* demo */
   import ComponentDemo from "$lib/_components/ComponentExample.svelte";
   import Demoer from "$lib/base/demoer/Demoer.svelte";
@@ -11,13 +11,13 @@
   /* demo */
 
   let parametersSlot: any = {
-    autoClose: { 
+    autoClose: {
       type: "boolean",
-      values: [true,false],
+      values: [true, false],
     },
     stickToHookWidth: {
       type: "boolean",
-      values: [true,false],
+      values: [true, false],
     },
     position: {
       type: "string",
@@ -57,34 +57,16 @@
   let isOpen = false;
 </script>
 
-<ComponentDemo
-  component="Popper"
-  cite="This Popper is the base of all the flyout stuff: it pops">
+<ComponentDemo component="Switch">
   <div class="flex-v gap-large">
-    <DemoPage code={codeSlot} component="Popper" title="Using slots">
-      <Demoer
-        componentArgs={componentArgsSlot}
-        let:activeParams
-        parameters={parametersSlot}>
-        <div class="pos-rel">
-          <Popper
-            bind:isOpen
-            position="BC"
-            {...activeParams}
-            class="w-large marg-t-1">
-            <Button
-              slot="holderSlot"
-              on:click={() => (isOpen = !isOpen)}
-              style="cursor:pointer"
-              class="border text-center pointer {isOpen
-                ? 'theme-bg-paper shad-3'
-                : ''}">
-              popper
-            </Button>
-            <div class="pad-4">Popper content</div>
-          </Popper>
-        </div>
-      </Demoer>
+    <DemoPage code={codeSlot} component="Switch" title="Using slots">
+      <Demoer {parametersSlot} {componentArgsSlot} let:activeParams>
+      <div class="pad-2">
+        <Switch {...activeParams} name={'switcher'} class="flex-h flex-align-middle w-small" >
+          <span slot="label" />
+        </Switch>
+      </div>
+    </Demoer>
     </DemoPage>
   </div>
 </ComponentDemo>

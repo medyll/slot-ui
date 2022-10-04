@@ -1,6 +1,6 @@
 <script>import Icon from '../icon/Icon.svelte';
-import { openPopper } from '../../ui/popper/actions';
-import { createEventForwarder } from '../../engine/engine';
+import { openPopper } from '../../ui/popper/actions.js';
+import { createEventForwarder } from '../../engine/engine.js';
 import { get_current_component } from 'svelte/internal';
 /*  common slotUi exports*/
 let className = '';

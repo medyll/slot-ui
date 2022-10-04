@@ -22,8 +22,8 @@
 			"$scripts/*": ["src/scripts/*"],
 			"$typings": ["src/lib/types"],
 			"$typings/*": ["src/lib/types/*"],
-			"$components": ["src/lib/_components"],
-			"$components/*": ["src/lib/_components/*"]
+			"$components": ["src/components"],
+			"$components/*": ["src/components/*"]
 		}
 	}
 }

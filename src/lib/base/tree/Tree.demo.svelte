@@ -2,10 +2,10 @@
   import Tree from './Tree.svelte';
 
   /* demo */
-  import ComponentDemo from '$components/ComponentExample.svelte';
+  import ComponentDemo from '$lib/_components/ComponentExample.svelte';
   import DemoPage from '$lib/base/demoer/DemoPage.svelte';
   import Demoer from '../demoer/Demoer.svelte';
-  import {defaultsArgsFromProps} from '../demoer/demoer.utils';
+  import {defaultsArgsFromProps} from '$lib/base/demoer/demoer.utils.js';
   /* demo */
 
   let paths = [
@@ -39,11 +39,7 @@
 
   let selectedData = [];
 
-  let parametersSlot: any = {
-    status: {
-      type  : 'string',
-      values: ['loading', 'success', 'error', 'empty', undefined],
-    },
+  let parametersSlot: any = { 
   };
 
   let componentArgsSlot = {

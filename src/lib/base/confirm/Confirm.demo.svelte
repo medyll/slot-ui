@@ -1,9 +1,9 @@
 <script lang="ts">
-	import Button from '../button/Button.svelte';
+	import Button from '$lib/base/button/Button.svelte';
 	import Confirm from './Confirm.svelte';
 
 	/* demo */
-	import ComponentDemo from '$components/ComponentExample.svelte';
+	import ComponentDemo from '$lib/_components/ComponentExample.svelte';
 	import Demoer from '$lib/base/demoer/Demoer.svelte';
 	import DemoPage from '$lib/base/demoer/DemoPage.svelte';
 	/* demo */

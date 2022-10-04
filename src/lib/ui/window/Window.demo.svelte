@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { openWindow } from './window.actions.js';
-	import ComponentDemo from '$components/ComponentExample.svelte';
+	import ComponentDemo from '$lib/_components/ComponentExample.svelte';
 	import Button from '$lib/base/button/Button.svelte';
 	import Debug from '$lib/base/debug/Debug.svelte';
 	import Window from './Window.svelte';

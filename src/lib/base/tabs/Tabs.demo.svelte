@@ -6,7 +6,7 @@
   import Divider from '../divider/Divider.svelte';
   import Button from '../button/Button.svelte';
   /* demo */
-  import ComponentDemo from '$components/ComponentExample.svelte';
+  import ComponentDemo from '$lib/_components/ComponentExample.svelte';
   import DemoPage from '$lib/base/demoer/DemoPage.svelte';
   import Demoer from '../demoer/Demoer.svelte';
   import {defaultsArgsFromProps} from '../demoer/demoer.utils';

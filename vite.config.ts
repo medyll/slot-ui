@@ -6,7 +6,7 @@ import path from 'path'
 const config = {
 	plugins: [sveltekit()],
 	resolve: {alias:{
-		'$components': path.resolve('./src/lib/_components'),  
+		'$components': path.resolve('./src/components'),  
 		'$contexts': path.resolve('./src/contexts'),
 		'$scripts': path.resolve('./src/lib/scripts'),
 		'$engine': path.resolve('./src/lib/engine'),

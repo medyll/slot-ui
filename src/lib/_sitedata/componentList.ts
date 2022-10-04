@@ -16,11 +16,11 @@ import Listdemosvelte from "$lib/base/list/List.demo.svelte";
 import Loaderdemosvelte from "$lib/base/loader/Loader.demo.svelte"; 
 import Ratingdemosvelte from "$lib/base/rating/Rating.demo.svelte"; 
 import Stepperdemosvelte from "$lib/base/stepper/Stepper.demo.svelte"; 
+import Switchdemosvelte from "$lib/base/switch/Switch.demo.svelte"; 
 import Tabsdemosvelte from "$lib/base/tabs/Tabs.demo.svelte"; 
 import Treedemosvelte from "$lib/base/tree/Tree.demo.svelte"; 
 import Finderdemosvelte from "$lib/data/finder/Finder.demo.svelte"; 
 import Grouperdemosvelte from "$lib/data/grouper/Grouper.demo.svelte"; 
-import Jsonerdemosvelte from "$lib/data/jsoner/Jsoner.wip.svelte"; 
 import Sorterdemosvelte from "$lib/data/sorter/Sorter.demo.svelte"; 
 import Framedemosvelte from "$lib/ui/frame/Frame.demo.svelte"; 
 import Menudemosvelte from "$lib/ui/menu/Menu.demo.svelte"; 
@@ -44,11 +44,11 @@ import Windowdemosvelte from "$lib/ui/window/Window.demo.svelte";
 {name:"Loader",code:"loader",component:Loaderdemosvelte,group:"base"},
 {name:"Rating",code:"rating",component:Ratingdemosvelte,group:"base"},
 {name:"Stepper",code:"stepper",component:Stepperdemosvelte,group:"base"},
+{name:"Switch",code:"switch",component:Switchdemosvelte,group:"base"},
 {name:"Tabs",code:"tabs",component:Tabsdemosvelte,group:"base"},
 {name:"Tree",code:"tree",component:Treedemosvelte,group:"base"},
 {name:"Finder",code:"finder",component:Finderdemosvelte,group:"data"},
 {name:"Grouper",code:"grouper",component:Grouperdemosvelte,group:"data"},
-{name:"Jsoner",code:"jsoner",component:Jsonerdemosvelte,group:"data"},
 {name:"Sorter",code:"sorter",component:Sorterdemosvelte,group:"data"},
 {name:"Frame",code:"frame",component:Framedemosvelte,group:"ui"},
 {name:"Menu",code:"menu",component:Menudemosvelte,group:"ui"},

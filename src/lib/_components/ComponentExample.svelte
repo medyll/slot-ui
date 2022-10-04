@@ -1,25 +1,19 @@
 <script lang="ts">
-  import { componentReadMe } from "$sitedata/api/indexApi.js";
-  //import { slotUiComponentList } from "$sitedata/componentList.js";
+  // import { componentReadMe } from "$sitedata/api/indexApi.js";
+  import { slotuiCatalog } from "$lib/slotuiCatalog.js";
   export let component: string = "";
   export let cite: string = "";
-  import Prism from "prismjs";
-  import "prism-svelte";
 
-  /* $: finalCompReadMe = componentReadMe?.[component.toLowerCase()];
+  // $: finalCompReadMe = componentReadMe?.[component.toLowerCase()];
 
-  const compDet = slotUiComponentList.find((x) => x.name === component);
+  const compDet = Object.values(slotuiCatalog).find((x) => x.name === component);
 
-  console.log(
-    component,
-    slotUiComponentList.find((x) => x.name === component)
-  ); */
-</script>
+ </script>
 
 <div class="flex-v gap-large w-full">
   <div class="flex-h gap-small flex-align-middle">
     <h4>{`<${component} />`}</h4>
-    <!-- <span>{compDet?.group}/{compDet?.code}.svelte</span> -->
+    <span>{compDet?.group}/{compDet?.code}.svelte</span>
   </div>
   <cite><p>{@html cite}</p></cite>
   {#if $$slots.default}
@@ -30,10 +24,10 @@
   {/if}
   <div class="flex-v gap-medium ">
     <h5>Api preview :</h5>
-    <div class="marg-l-4">
+    <!-- <div class="marg-l-4">
       <pre class="language-ts"><code
           ><svelte:component this={finalCompReadMe} /></code></pre>
-    </div>
+    </div> -->
   </div>
   <div class="flex-v gap-medium ">
     <h5>Link to api :</h5>

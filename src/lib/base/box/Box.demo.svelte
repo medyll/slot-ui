@@ -1,9 +1,7 @@
 <script lang="ts">
 	import Box from './Box.svelte';
 	import Icon from '../icon/Icon.svelte';
-	import Divider from '../divider/Divider.svelte';
-	import Button from '../button/Button.svelte';
-	import ComponentDemo from '$components/ComponentExample.svelte';
+	import ComponentDemo from '$lib/_components/ComponentExample.svelte';
 	import Demoer from '$lib/base/demoer/Demoer.svelte';
 	import DemoPage from '$lib/base/demoer/DemoPage.svelte';
 

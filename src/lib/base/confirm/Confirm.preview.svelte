@@ -1,5 +1,4 @@
 <script lang="ts">
-	import ComponentDemo from '$components/ComponentExample.svelte';
 	import Button from '../button/Button.svelte';
 	import Confirm from './Confirm.svelte';
 </script>

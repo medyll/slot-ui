@@ -2,8 +2,7 @@
 import Icon from '../icon/Icon.svelte';
 import { createEventForwarder } from '../../engine/eventForwarder';
 import { get_current_component } from 'svelte/internal';
-import { elem } from '../../engine/elem';
-import Divider from '../divider/Divider.svelte';
+import { elem } from '../../engine/elem.js';
 import Button from '../button/Button.svelte';
 /** @restProps {button | a} */
 let className = '';

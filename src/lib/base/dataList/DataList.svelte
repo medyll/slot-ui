@@ -2,16 +2,16 @@
 
 <script lang="ts">
 	import { setContext, getContext, hasContext } from 'svelte/internal';
-	import { createEventForwarder } from '../../engine/engine.js';
+	import { createEventForwarder } from '$lib/engine/engine.js';
 	import { get_current_component } from 'svelte/internal';
-	import Virtualize from '../virtualizer/Virtualizer.svelte';
+	import Virtualize from '$lib/base/virtualizer/Virtualizer.svelte';
 	import { writable, type Writable } from 'svelte/store';
 	import DataListRow from './DataListRow.svelte';
 	import type { DataListStoreType, DataCellType, groupByOptions } from './types.js';
 	import { dataOp } from '$lib/engine/utils.js';
 	import DataListHead from './DataListHead.svelte';
-	import Icon from '../icon/Icon.svelte';
-	import Button from '../button/Button.svelte';
+	import Icon from '$lib/base/icon/Icon.svelte';
+	import Button from '$lib/base/button/Button.svelte';
 	import type { Data } from '$lib/types/index.js';
 	import { slide } from 'svelte/transition';
 

@@ -3,9 +3,8 @@
 	import Demoer from '$lib/base/demoer/Demoer.svelte';
 	import DemoPage from '$lib/base/demoer/DemoPage.svelte';
 	import Icon from '$lib/base/icon/Icon.svelte';
-	import Divider from '$lib/base/divider/Divider.svelte';
 	import Button from '../button/Button.svelte';
-	import ComponentDemo from '$components/ComponentExample.svelte';
+	import ComponentDemo from '$lib/_components/ComponentExample.svelte';
 
 	let parametersSlot: any = {
 		isOpen: {

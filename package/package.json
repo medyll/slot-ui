@@ -162,6 +162,7 @@
     "./engine/utils": "./engine/utils.js",
     "./engine/wactions.utils": "./engine/wactions.utils.js",
     ".": "./index.js",
+    "./slotuiCatalog": "./slotuiCatalog.js",
     "./styles/presets.scss": "./styles/presets.scss",
     "./types": "./types/index.js",
     "./ui/bootstrapp/BootStrApp.svelte": "./ui/bootstrapp/BootStrApp.svelte",
