@@ -26,6 +26,7 @@ import Selectdemosvelte from "$lib/form/select/Select.demo.svelte";
 import Framedemosvelte from "$lib/ui/frame/Frame.demo.svelte"; 
 import Menudemosvelte from "$lib/ui/menu/Menu.demo.svelte"; 
 import Popperdemosvelte from "$lib/ui/popper/Popper.demo.svelte"; 
+import Starterdemosvelte from "$lib/ui/starter/Starter.demo.svelte"; 
 import Windowdemosvelte from "$lib/ui/window/Window.demo.svelte";  
  export const slotUiComponentList = [ {name:"Alert",code:"alert",component:Alertdemosvelte,group:"base"},
 {name:"Avatar",code:"avatar",component:Avatardemosvelte,group:"base"},
@@ -55,4 +56,5 @@ import Windowdemosvelte from "$lib/ui/window/Window.demo.svelte";
 {name:"Frame",code:"frame",component:Framedemosvelte,group:"ui"},
 {name:"Menu",code:"menu",component:Menudemosvelte,group:"ui"},
 {name:"Popper",code:"popper",component:Popperdemosvelte,group:"ui"},
+{name:"Starter",code:"starter",component:Starterdemosvelte,group:"ui"},
 {name:"Window",code:"window",component:Windowdemosvelte,group:"ui"} ] 

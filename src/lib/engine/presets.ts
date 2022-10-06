@@ -14,6 +14,16 @@ export const uiPresets = {
     large: "16rem",
     auto: "auto",
   },
+  iconSize: {
+    tiny: "8px",
+    small: "16px",
+    medium: "24px",
+    default: "32px",
+    large: "48px",
+    big: "64px",
+    full: "100%",
+    auto: "auto",
+  },
   position: ["TC", "TL", "TR", "BC", "BL", "BR"],
   flow: ["relative", "absolute", "fixed"],
 };

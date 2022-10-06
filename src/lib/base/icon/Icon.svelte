@@ -2,6 +2,7 @@
 	import 'iconify-icon';
 
 	import type { ElementProps } from '$typings/index.js';
+  import { uiPresets } from '$lib/engine/presets.js';
 	/*  common slotUi exports*/
 	let className = '';
 	export { className as class };
@@ -15,16 +16,7 @@
 	export let rotate: boolean = false;
 	export let color: string | undefined = undefined;
 
-	const sizes: Record<ElementProps['sizeType'], number> = {
-		tiny: 8,
-		small: 16,
-		medium: 24,
-		default: 32,
-		large: 48,
-		big: 64,
-		full: 0,
-		auto: 0
-	} as const;
+	const sizes: Record<ElementProps['sizeType'], number> = uiPresets.iconSize  ;
 
 	$: iconName = icon.includes(':') ? icon : `${iconFamily}:${icon}`;
 </script>
@@ -32,7 +24,7 @@
 <iconify-icon
 	class={className}
 	class:rotate
-	style="display:block;font-size:{sizes[fontSize]}px;color:{color};{style}"
+	style="display:block;font-size:{sizes[fontSize]};color:{color};{style}"
 	on:click
 	icon={iconName}
 	{...$$restProps}

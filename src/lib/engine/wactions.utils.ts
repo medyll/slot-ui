@@ -1,6 +1,6 @@
 import Window from '/src/lib/ui/window/Window.svelte';
-import type {IChromeArgs} from '../ui/window/window.store';
-import {windowsStore} from '../ui/window/window.store';
+import type {IChromeArgs} from '../ui/window/store.js';
+import {windowsStore} from '../ui/window/store.js';
 import {get, writable} from 'svelte/store';
 import Debug from '../base/debug/Debug.svelte';
 
@@ -34,7 +34,7 @@ function openWindow(frameId: string, args: Partial<IChromeArgs> = {}) {
   }
 }
 
-export const startMenuStore = writable<boolean>(false);
+export const startMenuStore = writable<boolean>(true);
 
 function toggleStartMenu(event: PointerEvent) {
   if (event) event.stopPropagation();

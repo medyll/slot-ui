@@ -28,7 +28,7 @@
 	/** paramters for usePopper */
 	export let usePopper: UsePopperProps | undefined = undefined;
 	/** with of the input using  presets */
-	export let size: ElementProps['sizeType'] | 'full' = 'default';
+	export let size: ElementProps['sizeType'] | 'full' = 'auto';
 	/** height of the input, using preset values */
 	export let height: string = 'default';
 	/** has no border */
@@ -52,7 +52,7 @@
 </script>
 
 {#if icon || endIcon  || inputType === 'search' || $$slots.startInputSlot || $$slots.endInputSlot}
-	<div style="position:relative;display:inline-block">
+	<div style="position:relative;display:block">
 		{#if icon || $$slots.startInputSlot}
 			<div class="inpuStart">
 				<slot name="startInputSlot">

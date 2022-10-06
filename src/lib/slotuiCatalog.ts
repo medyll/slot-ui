@@ -26,4 +26,5 @@ select:{name:"Select",code:"select",group:"form"},
 frame:{name:"Frame",code:"frame",group:"ui"},
 menu:{name:"Menu",code:"menu",group:"ui"},
 popper:{name:"Popper",code:"popper",group:"ui"},
+starter:{name:"Starter",code:"starter",group:"ui"},
 window:{name:"Window",code:"window",group:"ui"} } 

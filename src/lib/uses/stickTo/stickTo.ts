@@ -2,8 +2,6 @@ import { includes, replace } from 'lodash';
 import { elem } from '../../engine/elem.js';
 
 export type StickToPositionType = 'TL' | 'TR' | 'TC' | 'T' | 'BR' | 'B' | 'BL' | 'BC';
-export type NewStickToPositionType = | 'TT' | 'RR' | 'BB' | 'LL' | 'CC'
-
 
 
 type StickToProps = {

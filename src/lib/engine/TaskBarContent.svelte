@@ -1,7 +1,7 @@
 <script lang="ts">
   import {getContext} from 'svelte';
-  import type {IChromeArgs, WindowStoreListType} from '$lib/ui/window/window.store';
-  import {windowsStore} from '$lib/ui/window/window.store';
+  import type {IChromeArgs, WindowStoreListType} from '$lib/ui/window/store.js';
+  import {windowsStore} from '$lib/ui/window/store.js';
   import {toggleStartMenu} from './wactions.utils';
   import IconButton from '../base/button/IconButton.svelte';
   import {openPopper} from '$lib/ui/popper/actions';

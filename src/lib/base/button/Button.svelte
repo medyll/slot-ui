@@ -22,12 +22,20 @@
 	let buttonType = 'button';
 	export { buttonType as type };
 
-	/** icon as a parameter*/
+	/** icon as a parameter */
 	export let icon: string | undefined = undefined;
 	/** icon as a parameter*/
 	export let iconFamily: string | undefined = 'mdi';
 	/** icon color as a parameter*/
 	export let iconColor: string = '#666';
+
+	/** endIcon as a parameter */
+	export let endIcon: string | undefined = undefined; 
+	/** endIcon color as a parameter*/
+	export let endIconColor: string = '#666';
+	/** endIcon color as a parameter*/
+	export let endIconSize: string = 'small';
+
 	/** background color theme */
 	export let bgTheme: string | undefined  = undefined;
 	/** paramters for usePopper */
@@ -64,7 +72,7 @@
 	/** action button css style */
 	export let actionStyle: string | undefined = undefined;
 	/** whole container css style */
-	export let containerStyle: string | undefined = undefined;
+	export let htmlRootStyle: string | undefined = undefined;
 
 	export let primary: string | undefined = undefined;
 	export let secondary: string | undefined = undefined; 
@@ -110,7 +118,7 @@
 	};
 </script>
 
-<container style="position:relative;display:flex;{containerStyle}">
+<container style="position:relative;display:flex;{htmlRootStyle}">
 	<button
 		class={className}
 		class:loading
@@ -150,18 +158,14 @@
 			{#if $$slots.default ?? primary}
 				<div class="central"><slot>{null_to_empty(primary)}</slot></div>
 			{/if}
-			{#if $$slots.actionIcon}
-				{#key $$slots.actionIcon}
+			{#if $$slots.actionIcon || endIcon}
 					<div
 						class="action"
-						on:click={(e) => {
-							e.stopPropagation();
-							e.preventDefault();
-						}}
 					>
-						<slot name="actionIcon" />
+						<slot name="actionIcon" >
+							<Icon fontSize="small" icon={endIcon} color={endIconColor}   />
+						</slot>
 					</div>
-				{/key}
 			{/if}
 		</div>
 		{#if loading}
@@ -368,7 +372,7 @@
 			justify-content: center;
 			height: 100%;
 			.startButtonSlot {
-				padding: 0 var(--box-density-preset-small, 0.25rem);
+				padding: 0 var(--box-density-preset-tiny, 0.25rem);
 				display: flex;
 				justify-content: center;
 				align-items: center;
