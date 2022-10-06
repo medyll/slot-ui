@@ -22,6 +22,8 @@ declare const __propDef: {
         useStickTo?: ((node: any) => void) | undefined;
     };
     events: {
+        click: MouseEvent;
+    } & {
         [evt: string]: CustomEvent<any>;
     };
     slots: {

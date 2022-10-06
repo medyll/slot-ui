@@ -1,4 +1,4 @@
-<script lang="ts"> 
+<script lang="ts">
   import Prism from "prismjs";
   // fabric default vars
   import cssfabricVars from "@medyll/cssfabric/src/lib/styles/vars.min.css";
@@ -14,8 +14,10 @@
   import { setContext, getContext } from "svelte";
   import { writable } from "svelte/store";
   import type { Writable } from "svelte/store";
-  import type { UiContextType } from "$contexts/ui.context";
+  import type { UiContextType } from "$contexts/ui.context.js";
   import { onMount } from "svelte";
+  import AutoComplete from "$lib/data/autocomplete/AutoComplete.svelte";
+  import { slotuiCatalog } from "$lib/slotuiCatalog.js";
 
   let store = writable<UiContextType>({
     drawerFlow: "fixed",
@@ -46,15 +48,12 @@
         navElement.classList.remove("shad-3");
       }
     });
-
-
-	
   });
 </script>
 
 <svelte:head>
   <title>SlotUi</title>
-  <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet" />  
+  <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet" />
   <script>
     /* hack for legacy node app */
     var global = global || window;
@@ -80,19 +79,19 @@
       }
     });
 
-	  
-	if(!document.getElementById('prismjs')){
-		var linkTag = document.createElement ("link");
-		linkTag.rel = "stylesheet";
-		linkTag.href = "https://cdn.jsdelivr.net/npm/prism-themes@1.4.0/themes/prism-nord.css"; 
-		document.getElementsByTagName ("head")[0].appendChild (linkTag);
-	}
+    if (!document.getElementById("prismjs")) {
+      var linkTag = document.createElement("link");
+      linkTag.rel = "stylesheet";
+      linkTag.href =
+        "https://cdn.jsdelivr.net/npm/prism-themes@1.4.0/themes/prism-nord.css";
+      document.getElementsByTagName("head")[0].appendChild(linkTag);
+    }
   </script>
 </svelte:head>
 
 <div class="flex-h h-full overflow-hidden">
   <Drawer
-  class="overflow-auto"
+    class="overflow-auto"
     bind:this={DrawerRef}
     flow={$uiContext.drawerFlow}
     isOpen={$uiContext.drawerOpen}
@@ -104,10 +103,15 @@
     <nav
       bind:this={navElement}
       class="nav flex-h pos-sticky pad flex-align-middle gap-small zI-10 w-full h-4 gap-medium">
-      <Button on:click={onDrawerClick} icon="menu" bgTheme="primary" iconFamily="mdi" />
+      <Button
+        on:click={onDrawerClick}
+        icon="menu"
+        bgTheme="primary"
+        iconFamily="mdi" />
       <h3>SlotUi</h3>
       <div class="flex-main" />
       <a href="svelte-components">Components</a>
+      <AutoComplete data={Object.values(slotuiCatalog ?? {})} />
       <ThemeSwitcher
         iconFamily="mdi"
         icon="paint-outline"

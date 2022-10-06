@@ -9,7 +9,6 @@ import ButtonReadMe from "$sitedata/api/Button.md";
 import ButtonActionReadMe from "$sitedata/api/ButtonAction.md";
 import ButtonMenuReadMe from "$sitedata/api/ButtonMenu.md";
 import IconButtonReadMe from "$sitedata/api/IconButton.md";
-import CardReadMe from "$sitedata/api/Card.md";
 import CartoucheReadMe from "$sitedata/api/Cartouche.md";
 import ChipperReadMe from "$sitedata/api/Chipper.md";
 import ColumnReadMe from "$sitedata/api/Column.md";
@@ -25,7 +24,6 @@ import DebugReadMe from "$sitedata/api/Debug.md";
 import DividerReadMe from "$sitedata/api/Divider.md";
 import DrawerReadMe from "$sitedata/api/Drawer.md";
 import ElementorReadMe from "$sitedata/api/Elementor.md";
-import ElipsisBoxReadMe from "$sitedata/api/ElipsisBox.md";
 import IconReadMe from "$sitedata/api/Icon.md";
 import InputReadMe from "$sitedata/api/Input.md";
 import ListReadMe from "$sitedata/api/List.md";
@@ -33,7 +31,6 @@ import ListItemReadMe from "$sitedata/api/ListItem.md";
 import ListTitleReadMe from "$sitedata/api/ListTitle.md";
 import LoaderReadMe from "$sitedata/api/Loader.md";
 import PaperReadMe from "$sitedata/api/Paper.md";
-import PortalReadMe from "$sitedata/api/Portal.md";
 import ProgressReadMe from "$sitedata/api/Progress.md";
 import RatingReadMe from "$sitedata/api/Rating.md";
 import SliderReadMe from "$sitedata/api/Slider.md";
@@ -44,6 +41,7 @@ import TitleBarReadMe from "$sitedata/api/TitleBar.md";
 import TreeReadMe from "$sitedata/api/Tree.md";
 import VirtualizeReadMe from "$sitedata/api/Virtualize.md";
 import VirtualizerReadMe from "$sitedata/api/Virtualizer.md";
+import AutoCompleteReadMe from "$sitedata/api/AutoComplete.md";
 import FinderReadMe from "$sitedata/api/Finder.md";
 import GrouperReadMe from "$sitedata/api/Grouper.md";
 import JsonerReadMe from "$sitedata/api/Jsoner.md";
@@ -86,7 +84,6 @@ button:ButtonReadMe,
 buttonaction:ButtonActionReadMe,
 buttonmenu:ButtonMenuReadMe,
 iconbutton:IconButtonReadMe,
-card:CardReadMe,
 cartouche:CartoucheReadMe,
 chipper:ChipperReadMe,
 column:ColumnReadMe,
@@ -102,7 +99,6 @@ debug:DebugReadMe,
 divider:DividerReadMe,
 drawer:DrawerReadMe,
 elementor:ElementorReadMe,
-elipsisbox:ElipsisBoxReadMe,
 icon:IconReadMe,
 input:InputReadMe,
 list:ListReadMe,
@@ -110,7 +106,6 @@ listitem:ListItemReadMe,
 listtitle:ListTitleReadMe,
 loader:LoaderReadMe,
 paper:PaperReadMe,
-portal:PortalReadMe,
 progress:ProgressReadMe,
 rating:RatingReadMe,
 slider:SliderReadMe,
@@ -121,6 +116,7 @@ titlebar:TitleBarReadMe,
 tree:TreeReadMe,
 virtualize:VirtualizeReadMe,
 virtualizer:VirtualizerReadMe,
+autocomplete:AutoCompleteReadMe,
 finder:FinderReadMe,
 grouper:GrouperReadMe,
 jsoner:JsonerReadMe,

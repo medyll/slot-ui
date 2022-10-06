@@ -9,7 +9,6 @@ import ButtonApiReadMe from "$sitedata/api/Button.api.md";
 import ButtonActionApiReadMe from "$sitedata/api/ButtonAction.api.md";
 import ButtonMenuApiReadMe from "$sitedata/api/ButtonMenu.api.md";
 import IconButtonApiReadMe from "$sitedata/api/IconButton.api.md";
-import CardApiReadMe from "$sitedata/api/Card.api.md";
 import CartoucheApiReadMe from "$sitedata/api/Cartouche.api.md";
 import ChipperApiReadMe from "$sitedata/api/Chipper.api.md";
 import ColumnApiReadMe from "$sitedata/api/Column.api.md";
@@ -25,7 +24,6 @@ import DebugApiReadMe from "$sitedata/api/Debug.api.md";
 import DividerApiReadMe from "$sitedata/api/Divider.api.md";
 import DrawerApiReadMe from "$sitedata/api/Drawer.api.md";
 import ElementorApiReadMe from "$sitedata/api/Elementor.api.md";
-import ElipsisBoxApiReadMe from "$sitedata/api/ElipsisBox.api.md";
 import IconApiReadMe from "$sitedata/api/Icon.api.md";
 import InputApiReadMe from "$sitedata/api/Input.api.md";
 import ListApiReadMe from "$sitedata/api/List.api.md";
@@ -33,7 +31,6 @@ import ListItemApiReadMe from "$sitedata/api/ListItem.api.md";
 import ListTitleApiReadMe from "$sitedata/api/ListTitle.api.md";
 import LoaderApiReadMe from "$sitedata/api/Loader.api.md";
 import PaperApiReadMe from "$sitedata/api/Paper.api.md";
-import PortalApiReadMe from "$sitedata/api/Portal.api.md";
 import ProgressApiReadMe from "$sitedata/api/Progress.api.md";
 import RatingApiReadMe from "$sitedata/api/Rating.api.md";
 import SliderApiReadMe from "$sitedata/api/Slider.api.md";
@@ -44,6 +41,7 @@ import TitleBarApiReadMe from "$sitedata/api/TitleBar.api.md";
 import TreeApiReadMe from "$sitedata/api/Tree.api.md";
 import VirtualizeApiReadMe from "$sitedata/api/Virtualize.api.md";
 import VirtualizerApiReadMe from "$sitedata/api/Virtualizer.api.md";
+import AutoCompleteApiReadMe from "$sitedata/api/AutoComplete.api.md";
 import FinderApiReadMe from "$sitedata/api/Finder.api.md";
 import GrouperApiReadMe from "$sitedata/api/Grouper.api.md";
 import JsonerApiReadMe from "$sitedata/api/Jsoner.api.md";
@@ -86,7 +84,6 @@ buttonApi:ButtonApiReadMe,
 buttonactionApi:ButtonActionApiReadMe,
 buttonmenuApi:ButtonMenuApiReadMe,
 iconbuttonApi:IconButtonApiReadMe,
-cardApi:CardApiReadMe,
 cartoucheApi:CartoucheApiReadMe,
 chipperApi:ChipperApiReadMe,
 columnApi:ColumnApiReadMe,
@@ -102,7 +99,6 @@ debugApi:DebugApiReadMe,
 dividerApi:DividerApiReadMe,
 drawerApi:DrawerApiReadMe,
 elementorApi:ElementorApiReadMe,
-elipsisboxApi:ElipsisBoxApiReadMe,
 iconApi:IconApiReadMe,
 inputApi:InputApiReadMe,
 listApi:ListApiReadMe,
@@ -110,7 +106,6 @@ listitemApi:ListItemApiReadMe,
 listtitleApi:ListTitleApiReadMe,
 loaderApi:LoaderApiReadMe,
 paperApi:PaperApiReadMe,
-portalApi:PortalApiReadMe,
 progressApi:ProgressApiReadMe,
 ratingApi:RatingApiReadMe,
 sliderApi:SliderApiReadMe,
@@ -121,6 +116,7 @@ titlebarApi:TitleBarApiReadMe,
 treeApi:TreeApiReadMe,
 virtualizeApi:VirtualizeApiReadMe,
 virtualizerApi:VirtualizerApiReadMe,
+autocompleteApi:AutoCompleteApiReadMe,
 finderApi:FinderApiReadMe,
 grouperApi:GrouperApiReadMe,
 jsonerApi:JsonerApiReadMe,

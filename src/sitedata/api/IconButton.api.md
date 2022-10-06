@@ -1,5 +1,5 @@
 ```import { SvelteComponentTyped } from "svelte";
-import type { ElementProps } from '$typings/index.js';
+import type { ElementProps } from '../../../types/index.js';
 import { type UsePopperProps } from '../../../ui/popper/usePopper';
 declare const __propDef: {
     props: {

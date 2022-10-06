@@ -1,5 +1,5 @@
 ```import { SvelteComponentTyped } from "svelte";
-import type { ElementProps } from "$typings/index.js";
+import type { ElementProps } from "../../../types/index.js";
 declare const __propDef: {
     props: {
         class?: string | undefined;

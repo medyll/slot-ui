@@ -14,6 +14,7 @@ import Ratingdemosvelte from "$lib/base/rating/Rating.demo.svelte";
 import Stepperdemosvelte from "$lib/base/stepper/Stepper.demo.svelte"; 
 import Tabsdemosvelte from "$lib/base/tabs/Tabs.demo.svelte"; 
 import Treedemosvelte from "$lib/base/tree/Tree.demo.svelte"; 
+import AutoCompletedemosvelte from "$lib/data/autocomplete/AutoComplete.demo.svelte"; 
 import DataListdemosvelte from "$lib/data/dataList/DataList.demo.svelte"; 
 import Finderdemosvelte from "$lib/data/finder/Finder.demo.svelte"; 
 import Grouperdemosvelte from "$lib/data/grouper/Grouper.demo.svelte"; 
@@ -45,6 +46,7 @@ import Windowdemosvelte from "$lib/ui/window/Window.demo.svelte";
 {name:"Stepper",code:"stepper",component:Stepperdemosvelte,group:"base"},
 {name:"Tabs",code:"tabs",component:Tabsdemosvelte,group:"base"},
 {name:"Tree",code:"tree",component:Treedemosvelte,group:"base"},
+{name:"AutoComplete",code:"autocomplete",component:AutoCompletedemosvelte,group:"data"},
 {name:"DataList",code:"datalist",component:DataListdemosvelte,group:"data"},
 {name:"Finder",code:"finder",component:Finderdemosvelte,group:"data"},
 {name:"Grouper",code:"grouper",component:Grouperdemosvelte,group:"data"},

@@ -7,7 +7,7 @@ __propDef: {
         style?: string | undefined;
     };
     events: {
-        'datalist:sort:clicked': Event | MouseEvent | UIEvent | PointerEvent | FocusEvent | ProgressEvent<EventTarget> | ClipboardEvent | AnimationEvent | InputEvent | CompositionEvent | DragEvent | ErrorEvent | FormDataEvent | KeyboardEvent | SecurityPolicyViolationEvent | SubmitEvent | TouchEvent | TransitionEvent | WheelEvent;
+        'datalist:sort:clicked': Event | MouseEvent | UIEvent | PointerEvent | ProgressEvent<EventTarget> | FocusEvent | ClipboardEvent | AnimationEvent | InputEvent | CompositionEvent | DragEvent | ErrorEvent | FormDataEvent | KeyboardEvent | SecurityPolicyViolationEvent | SubmitEvent | TouchEvent | TransitionEvent | WheelEvent;
     } & {
         [evt: string]: CustomEvent<any>;
     };
