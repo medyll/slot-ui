@@ -3,12 +3,12 @@
 	import ComponentExample from '$components/demo/ComponentExample.svelte';
 	import Demoer from '$lib/base/demoer/Demoer.svelte';
 	import DemoPage from '$lib/base/demoer/DemoPage.svelte';
-	import { defaultsArgsFromProps } from '../demoer/demoer.utils.js';
-	import Icon from '../icon/Icon.svelte';
+	import { defaultsArgsFromProps } from '$lib/base/demoer/demoer.utils.js';
+	import Icon from '$lib/base/icon/Icon.svelte';
 	/* demo */
 
 	import Input from '$lib/base/input/Input.svelte';
-	import type { ElementProps } from '$typings/index.js';
+	import type { ElementProps } from '$lib/types/index.js';
 
 	type ParameterType = {
 		sizes: ElementProps['sizeType'][];

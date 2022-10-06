@@ -34,7 +34,7 @@
 			type: 'string',
 			values: ['Some subtitle', 'And some other subtitle', undefined]
 		},
-		...parametersSlot
+		...{...parametersSlot}
 	};
 
 	let componentArgs = {
@@ -83,8 +83,7 @@
 				title="Some stacked cartouches"
 				parameters={parametersSlot}
 				{componentArgs}
-				let:activeParams
-			>
+				let:activeParams >
 				<Cartouche {...activeParams} stacked={true}>
 					<span slot="primarySlot">This is a cartouche title</span>
 					<div class="pad-4 border-t">Cartouche content</div>

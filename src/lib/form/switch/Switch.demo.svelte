@@ -1,7 +1,7 @@
 <script lang="ts">
   import Switch from "./Switch.svelte";
   import Button from "$lib/base/button/Button.svelte";
-  import { defaultsArgs, defaultsArgsFromProps } from "../demoer/demoer.utils";
+  import { defaultsArgs, defaultsArgsFromProps } from "$lib/base/demoer/demoer.utils";
   /* demo */
   import ComponentExample from "$components/demo/ComponentExample.svelte";
   import Demoer from "$lib/base/demoer/Demoer.svelte";

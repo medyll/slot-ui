@@ -5,6 +5,7 @@ export const uiPresets = {
     default: "0.5rem",
     medium: "1rem",
     kind: "1.5rem",
+    unset: "1.5rem",
   },
   width: {
     tiny: "2rem",

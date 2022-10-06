@@ -1,10 +1,10 @@
 <script lang="ts">
-  // import { componentReadMe } from "$sitedata/api/indexApi.js";
+   import { componentReadMe } from "$sitedata/api/indexApi.js";
   import { slotuiCatalog } from "$lib/slotuiCatalog.js";
   export let component: string = "";
   export let cite: string = "";
 
-  // $: finalCompReadMe = componentReadMe?.[component.toLowerCase()];
+   $: finalCompReadMe = componentReadMe?.[component.toLowerCase()];
 
   const compDet = Object.values(slotuiCatalog).find((x) => x.name === component);
 
@@ -24,10 +24,10 @@
   {/if}
   <div class="flex-v gap-medium ">
     <h5>Api preview :</h5>
-    <!-- <div class="marg-l-4">
+    <div class="marg-l-4">
       <pre class="language-ts"><code
           ><svelte:component this={finalCompReadMe} /></code></pre>
-    </div> -->
+    </div>
   </div>
   <div class="flex-v gap-medium ">
     <h5>Link to api :</h5>

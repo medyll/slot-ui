@@ -3,7 +3,7 @@
 	import ListItem from './ListItem.svelte';
 	import { setContext } from 'svelte';
 	import { createListStore } from './store';
-	import type { ElementProps } from '$typings/index.js';
+	import type { ElementProps } from '$lib/types/index.js';
 	import { compute_slots, get_current_component, null_to_empty } from 'svelte/internal';
 	import Icon from '../icon/Icon.svelte';
 	import ListTitle from './ListTitle.svelte';
@@ -188,7 +188,7 @@
 	// vars for display rules
 	let showTitleZone = $$slots.title || title || primary || secondary; // || sorterer;
 </script>
-
+ 
 <ul
 	bind:this={element}
 	class="density-{density} {className}"
@@ -219,7 +219,7 @@
 			</svelte:fragment>
 			{#if item}
 				<slot listItem={item}>
-					<ListItem class="" {showIcon} {density} data={item.data}>
+					<ListItem {showIcon} {density} data={item.data}>
 						<span slot="icon">
 							{#if item?.icon}<Icon fontSize="small" icon={item?.icon} />{/if}
 						</span>
@@ -238,7 +238,7 @@
 		{/if}
 		{#if listItems}
 			{#each listItems as item}
-				<slot listItem={item}>
+				<slot listItem={item}  >
 					<ListItem
 						style="content-visibility:hidden;"
 						{showIcon}

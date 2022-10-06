@@ -1,3 +1,4 @@
+/** slotui generated definition file */
 import BottomBar from "./BottomBar.svelte";
-                    export * from "./BottomBar.svelte";
-                    export {BottomBar};
+export * from "./BottomBar.svelte";
+export {BottomBar};

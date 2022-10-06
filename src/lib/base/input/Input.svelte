@@ -1,8 +1,11 @@
 <svelte:options accessors />
+<!-- 
+	@deprecated use form/Input.svelte
+ -->
 <script lang="ts">
 	import { createEventForwarder } from '$lib/engine/engine';
 	import { popper, type UsePopperProps } from '$lib/ui/popper/usePopper';
-	import type { ElementProps } from '$typings/index.js';
+	import type { ElementProps } from '$lib/types/index.js';
 	import { compute_slots, get_current_component, text } from 'svelte/internal';
 	import Button from '../button/Button.svelte';
 	import Icon from '../icon/Icon.svelte';

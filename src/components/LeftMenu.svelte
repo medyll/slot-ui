@@ -1,36 +1,36 @@
-<svelte:options accessors />
-
 <script lang="ts">
-	import { null_to_empty } from 'svelte/internal';
-	import { goto } from '$app/navigation';
- 
-	import { slotuiCatalog } from '$lib/slotuiCatalog.js';
-	import List from '$lib/base/list/List.svelte';
-	import ListItem from '$lib/base/list/ListItem.svelte';
+  import { null_to_empty } from "svelte/internal";
+  import { goto } from "$app/navigation";
 
-	function openIn(event: any) {
-		goto('svelte-components/' + event?.data?.code);
-	}
- 
+  import { slotuiCatalog } from "$lib/slotuiCatalog.js";
+  import List from "$lib/base/list/List.svelte";
+  import ListItem from "$lib/base/list/ListItem.svelte";
+  import ListTitle from "$lib/base/list/ListTitle.svelte";
+  import { dataOp } from "$lib/engine/utils.js";
+
+  const groupedData = dataOp.groupBy(
+    Object.values(slotuiCatalog).sort((a, b) => (a.name > b.name ? 1 : -1)),
+    "group"
+  );
 </script>
 
-<List
-	let:listItem
-	density="default"
-	onItemClick={openIn}
-	data={Object.values(slotuiCatalog).sort((a,b)=> a.name>b.name ? 1 : -1)}
-	selectorField="code"
-	height="100%"
->
-	<ListItem data={listItem?.data}>
-		<a slot="primary" href="svelte-components/{listItem?.data?.code}">
-			{null_to_empty(listItem?.data?.name)}
-		</a>
-	</ListItem>
+<List density="default" selectorField="code" height="100%">
+  {#each Object.keys(groupedData) as group}
+    <ListTitle density="default" class="text-bold">
+      Slot-ui {null_to_empty(group)}
+    </ListTitle>
+    {#each groupedData[group] as catalog}
+      <ListItem data={catalog} density="small" class="pad-l-4">
+        <a slot="primary" href="svelte-components/{catalog?.code}">
+          {null_to_empty(catalog?.name)}
+        </a>
+      </ListItem>
+    {/each}
+  {/each}
 </List>
 
 <style lang="scss">
-	a {
-		text-decoration: none;
-	}
+  a {
+    text-decoration: none;
+  }
 </style>

@@ -103,8 +103,8 @@
 	class="drawer flex-v h-full {className}"
 	style={finalStyle}  
 >
-	<div class="opener" style={openerIconStyle[stickTo]}>
 		{#if showOpenerIcon}
+	<div class="opener" style={openerIconStyle[stickTo]}>
 			<IconButton
 				--css-button-radius="50%"
 				style="width:32px;height:32px"
@@ -115,11 +115,11 @@
 					toggle();
 				}}
 			/>
-		{/if}
 	</div>
+		{/if}
 	{#if isOpen}
 		{#if $$slots.topSlot || Boolean(primary) || Boolean(icon) || $$slots.iconSlot }
-			<div class="header flex-h">
+			<div class="header flex-h pos-sticky top-0">
 				{#if Boolean(icon) || $$slots.iconSlot}
 					<div class="pad-ii-1">
 						<slot name="iconSlot">

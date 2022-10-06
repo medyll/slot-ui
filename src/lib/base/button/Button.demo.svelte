@@ -5,7 +5,7 @@
   import ComponentExample from "$components/demo/ComponentExample.svelte";
   import Demoer from "$lib/base/demoer/Demoer.svelte";
   import DemoPage from "$lib/base/demoer/DemoPage.svelte";
-  import type { ElementProps } from "$typings/index.js";
+  import type { ElementProps } from "$lib/types/index.js";
   import Debug from "../debug/Debug.svelte";
   import Icon from "../icon/Icon.svelte";
   import Button from "./Button.svelte";

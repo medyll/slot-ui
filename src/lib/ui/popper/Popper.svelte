@@ -90,6 +90,17 @@
     }
   };
 
+  const makeOnTop = ()=>{
+    let max = Math.max(
+          ...Array.from(document.querySelectorAll("body *"), (el) =>
+            parseFloat(window.getComputedStyle(el).zIndex)
+          ).filter((zIndex) => !Number.isNaN(zIndex)),
+          0
+        );
+
+        return max +1;
+  }
+
   let siblings: HTMLCollection | any[] = [];
 
   $: siblings =
@@ -100,7 +111,7 @@
     return val?.style?.zIndex >= prev ? val?.style?.zIndex + 1 : prev;
   }, 0);
 </script>
-
+ 
 {#if $$slots.holderSlot}
   <div bind:this={holderSlotRef} style="position:relative;display:inline-block">
     <slot name="holderSlot" />
@@ -111,9 +122,11 @@
     bind:this={element}
     class="popper {className}"
     on:popper:close={actions.destroy}
+    on:click
     use:clickAway={{ action: clickedAway }}
-    use:stickTo={useStickTo}
-    {style}>
+    use:stickTo={{ parentNode, position , stickToHookWidth }}
+    {style}
+    style:zIndex={makeOnTop()}>
     <slot>
       {#if mounted}
         {#if component}
@@ -129,7 +142,6 @@
 
 <style lang="scss">
   .popper {
-    z-index: 10000;
     border-radius: var(--css-popper-radius, var(--radius-tiny));
     overflow: hidden;
     position: absolute;

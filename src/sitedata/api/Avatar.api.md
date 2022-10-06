@@ -5,7 +5,7 @@ declare const __propDef: {
         element?: HTMLDivElement | null | undefined;
         icon?: string | undefined;
         size?: "small" | "tiny" | "medium" | "large" | "full" | undefined;
-        iconSize?: "small" | "default" | "tiny" | "medium" | "large" | "big" | undefined;
+        iconSize?: "default" | "small" | "tiny" | "medium" | "large" | "big" | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;

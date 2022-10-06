@@ -22,27 +22,7 @@ const getAllFiles = function (dirPath, fragment = '.svelte', arrayOfFiles = []) 
 
         } else {
             if (file.includes(fragment) && !file.includes('preview') && !file.includes('wip') && !file.includes('demo') && !file.includes('.ts') && !file.includes('.js') && !file.includes('css')) {
-                // console.log(fragment,path.join(cleanPath, file))
-                // console.log({arrayOfFiles})
                 arrayOfFiles.push(path.join(dirPath, file));
-                // fsx.writeFile('index.ts')
-
-                fs.ensureFile(tDir + '/index.ts', async (err) => {
-                    // content read
-                    const indexContent = await fs.readFile(tDir + '/index.ts', 'utf8');
-                    // filename
-                    const fileName = file.split('.')[0]
-                    const finFile = file.replace('.ts', '.js')
-                    // 
-                    let content = `
-                    import ${fileName} from "./${finFile}";
-                    export * from "./${finFile}";
-                    export {${fileName}};
-                    `.trim()
-
-                    
-
-                })
             }
         }
     });
@@ -58,32 +38,39 @@ const allFiles = getAllFiles(srcLibDir);
 for (const filePath of allFiles) {
     const file = filePath.split('\\').slice(-1).toString();
     const path = filePath.replace(file, '')
-
+    
     const indexContent = await fs.readFile(path + '/index.ts', 'utf8');
-    if (indexContent?.includes('generated')) await fs.writeFile(path + '/index.ts', '/** slotui generated definition file */\r\n');
+    if (indexContent?.includes('generated') || !indexContent?.length) await fs.writeFile(path + '/index.ts', '/** slotui generated definition file */\r\n');
 
 }
 // forge new ones
 for (const filePath of allFiles) {
     const file = filePath.split('\\').slice(-1).toString();
-    const path = filePath.replace(file, '') 
+    const path = filePath.replace(file, '')
 
+    await fs.ensureFile(path + '/index.ts');
     fs.ensureFile(path + '/index.ts', async (err) => {
+        if (err) return
         // content read
-        const indexContent = await fs.readFile(path + '/index.ts', 'utf8');
-        const fileName = file.split('.')[0]
-        const finFile = file.replace('.ts', '.js')
-        //
-        let content =
-            `import ${fileName} from "./${finFile}";
+        try {
+            const indexContent = await fs.readFile(path + '/index.ts', 'utf8');
+            const fileName = file.split('.')[0]
+            const finFile = file.replace('.ts', '.js')
+            //
+            let content =
+                `import ${fileName} from "./${finFile}";
 export * from "./${finFile}";
 export {${fileName}};
 `
-        if (!indexContent?.includes(finFile)) {
-            console.log('done index for ', finFile) 
-            await fs.appendFile(path + '/index.ts', content)
-        } else {
-            //  await fs.writeFile (tDir + '/index.ts','')
+            if (!indexContent?.includes(finFile)) {
+                console.log('done index for ', finFile)
+                await fs.appendFile(path + '/index.ts', content)
+            } else {
+                  // await fs.writeFile (path + '/index.ts','')
+            }
+
+        } catch (e) {
+            console.log(e)
         }
     })
 }

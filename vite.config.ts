@@ -27,8 +27,7 @@ const config = {
 	package: {
 		dir: 'package',
 		emitTypes: true,
-		exports: (filepath) => true,	
-		logLevel: 'info'	
+		//exports: (filepath) => true,	
 	},
 	external:['@sveltejs/kit/install-fetch'],
 };

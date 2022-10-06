@@ -3,7 +3,7 @@
 	import { get_current_component, get_slot_changes, null_to_empty } from 'svelte/internal';
 	import { popper, type UsePopperProps } from '$lib/ui/popper/usePopper.js';
 	import { crossfade, fade, scale } from 'svelte/transition';
-	import type { ElementProps } from '$typings/index.js';
+	import type { ElementProps } from '$lib/types/index.js';
 	import Divider from '$lib/base/divider/Divider.svelte';
 	import Menu from '$lib/ui/menu/Menu.svelte';
 	import Popper from '$lib/ui/popper/Popper.svelte';
@@ -222,7 +222,7 @@
 
 	.actionButton {
 		height: 100%;
-		background-color: rgba(255, 255, 255, 0.1);
+		//background-color: rgba(255, 255, 255, 0.1);
 		width: var(--w-tiny);
 		cursor: pointer;
 		&:hover {
@@ -392,7 +392,7 @@
 				align-items: center;
 				justify-content: center;
 				height: 100%;
-				background-color: rgba(255, 255, 255, 0.1);
+				// background-color: rgba(255, 255, 255, 0.1);
 				width: var(--w-tiny);
 				padding: 0 0.5rem;
 				cursor: pointer;

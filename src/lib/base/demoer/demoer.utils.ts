@@ -3,8 +3,7 @@
 
 export function defaultsArgs(parametersProps: Record<string,any>):any{
     const out: Record<string,any> = {};
-    for(const prop of Object.keys(parametersProps)){
-        console.log(prop,parametersProps[prop]?.values?.[0])
+    for(const prop of Object.keys(parametersProps)){ 
         out[prop]=parametersProps[prop]?.values?.[0];
     }
     

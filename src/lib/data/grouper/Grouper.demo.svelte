@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Grouper, { type GroupedDataType } from './Grouper.svelte';c
+	import Grouper, { type GroupedDataType } from './Grouper.svelte';
 	import Paper from '$lib/base/paper/Paper.svelte';
 	import ComponentExample from '$components/demo/ComponentExample.svelte';
 

@@ -1,11 +1,11 @@
-<svelte:options accessors={true} />
+<svelte:options accessors />
 
 <script lang="ts">
   import { custom_event } from "svelte/internal";
   import { onMount, setContext, getContext } from "svelte";
   import Button from "$lib/base/button/Button.svelte";
   import type { Writable } from "svelte/store";
-  import type { PanelContextType } from "./types";
+  import type { PanelContextType } from "./types.js";
 
   export let title = "not set";
 
@@ -21,13 +21,8 @@
 
   let ref: HTMLDivElement | undefined = undefined;
   let panelSlideId = getContext<string>("PanelSlide");
-  let panelerContext = getContext<Writable<PanelContextType>>("Paneler");
+  let panelerContext = getContext<PanelContextType>("Paneler");
 
-  /* onMount(() => {
-    if (panelerContext && ref) {
-      $panelerContext[id] = ref;
-    }
-  }); */
 
   let currentIdx, hasNext, hasPrev;
 
@@ -38,7 +33,6 @@
     hasPrev = Boolean(Object.keys($panelerContext.panelSlides)[currentIdx - 1]); 
   }
 
-  // $: console.log(($panelerContext.panelSlides))
 
   onMount(() => {
     // console.log(Object.keys($panelerContext.panelSlides), panelSlideId);

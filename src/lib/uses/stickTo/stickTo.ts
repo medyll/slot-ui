@@ -13,7 +13,7 @@ type StickToProps = {
 
 export function stickTo(node: HTMLElement, props: StickToProps) {
   const { parentNode, position,stickToHookWidth } = props;
-
+ 
   let intervaller: any;
 
   if (node && parentNode) {

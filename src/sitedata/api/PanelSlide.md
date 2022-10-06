@@ -1,8 +1,12 @@
 ```ts 
 __propDef: {
     props: {
+        class?: string | undefined;
+        element?: HTMLInputElement | null | undefined;
+        style?: string | undefined;
         open: boolean;
         component?: null | undefined;
+        flow?: ElementProps["flow"] | undefined;
         outer?: boolean | undefined;
         panelSlideId?: string | undefined;
         actions?: {

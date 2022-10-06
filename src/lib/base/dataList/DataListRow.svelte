@@ -1,5 +1,9 @@
 <svelte:options accessors={true} />
 
+<!-- 
+	@deprecated use data/DataListe.svelte
+ -->
+ 
 <script lang="ts">
 	import sanitizeHtml from 'sanitize-html';
 	import type { Data } from './$types';

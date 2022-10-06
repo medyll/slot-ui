@@ -1,7 +1,7 @@
 <script lang="ts">
 	import 'iconify-icon';
 
-	import type { ElementProps } from '$typings/index.js';
+	import type { ElementProps } from '$lib/types/index.js';
   import { uiPresets } from '$lib/engine/presets.js';
 	/*  common slotUi exports*/
 	let className = '';

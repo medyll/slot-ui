@@ -42,3 +42,24 @@
         width: auto
     } 
 }
+
+@mixin ui-density-presets {
+    &.density-none, &[data-density="none"] {
+        padding: 0;
+    } 
+    &.density-tight, &[data-density="tight"] {
+        padding: 0.5rem 0;
+    }
+    &.density-small, &[data-density="small"] {
+        padding: 0.75rem 0;
+    }
+    &.density-default, &[data-density="default"] {
+        padding: 1rem 0;
+    }
+    &.density-kind, &[data-density="kind"]{
+        padding: 1.5rem 0;
+    }
+    &.density-unset, &[data-density="unset"]{
+        padding: auto;
+    }
+}

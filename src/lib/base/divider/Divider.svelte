@@ -1,6 +1,6 @@
 <script lang="ts"> 
 	import { get_current_component } from 'svelte/internal';
-	import type { ElementProps } from '$typings/index.js';
+	import type { ElementProps } from '$lib/types/index.js';
 	import { uiPresets } from '$lib/engine/presets.js';
 
 	let className = '';

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { stickTo } from "../../uses/stickTo/stickTo";
-  import type { ElementProps } from "$typings/index.js";
+  import type { ElementProps } from "$lib/types/index.js";
   import { createEventForwarder } from "../../engine/engine";
   import Input from "$lib/base/input/Input.svelte";
   import Icon from "$lib/base/icon/Icon.svelte";
@@ -54,7 +54,7 @@
 </script>
 
 <input {value} bind:this={hiddenRef} type="hidden" {name} />
-<Popper {position} {stickToHookWidth} {autoClose} isOpen={isVisible}>
+<Popper {position} {stickToHookWidth} {autoClose} flow="fixed" isOpen={isVisible}>
   <Input
     slot="holderSlot"
     bind:this={element}
@@ -69,9 +69,9 @@
   </Input>
   <Menu
     {data}
+    style="width:100%;"
     on:menu:clicked={(event) => {
       const args = event.detail;
-
       hiddenRef.value =
         args?.[dataFieldId] ?? args?.["id"] ?? args?.[dataFieldName] ?? args;
       element.value =

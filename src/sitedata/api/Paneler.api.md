@@ -1,6 +1,10 @@
 ```import { SvelteComponentTyped } from "svelte";
 declare const __propDef: {
-    props: {};
+    props: {
+        class?: string | undefined;
+        element?: HTMLInputElement | null | undefined;
+        style?: string | undefined;
+    };
     events: {
         [evt: string]: CustomEvent<any>;
     };

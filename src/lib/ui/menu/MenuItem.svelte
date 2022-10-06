@@ -8,7 +8,7 @@
 	import Icon from '$lib/base/icon/Icon.svelte';
 	import { createEventForwarder } from '$lib/engine/engine.js';
 	import type { MenuItemProps } from './types.js';
-	import type { ElementProps } from '$typings/index.js';
+	import type { ElementProps } from '$lib/types/index.js';
 
 	/*  common slotUi exports*/
 	let className = '';

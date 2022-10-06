@@ -1,4 +1,5 @@
 <script lang="ts"> 
+  import Prism from "prismjs";
   // fabric default vars
   import cssfabricVars from "@medyll/cssfabric/src/lib/styles/vars.min.css";
   // fabric default
@@ -91,6 +92,7 @@
 
 <div class="flex-h h-full overflow-hidden">
   <Drawer
+  class="overflow-auto"
     bind:this={DrawerRef}
     flow={$uiContext.drawerFlow}
     isOpen={$uiContext.drawerOpen}

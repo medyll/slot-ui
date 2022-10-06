@@ -7,7 +7,7 @@ declare const __propDef: {
         style?: string | undefined;
         icon?: string | undefined;
         iconFamily?: string | undefined;
-        fontSize?: "small" | "default" | "tiny" | "medium" | "large" | "big" | "full" | "auto" | undefined;
+        fontSize?: "default" | "small" | "tiny" | "medium" | "large" | "big" | "full" | "auto" | undefined;
         rotate?: boolean | undefined;
         color?: string | undefined;
     };

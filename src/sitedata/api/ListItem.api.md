@@ -23,6 +23,7 @@ declare const __propDef: {
     };
     slots: {
         icon: {};
+        default: {};
         primary: {};
         secondary: {};
         action: {};

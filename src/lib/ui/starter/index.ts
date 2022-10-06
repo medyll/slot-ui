@@ -1,3 +1,4 @@
+/** slotui generated definition file */
 import Starter from "./Starter.svelte";
-                    export * from "./Starter.svelte";
-                    export {Starter};
+export * from "./Starter.svelte";
+export {Starter};

@@ -12,7 +12,7 @@
 	import ComponentExample from '$components/demo/ComponentExample.svelte';
 	import Demoer from '$lib/base/demoer/Demoer.svelte';
 	import DemoPage from '$lib/base/demoer/DemoPage.svelte';
-	import { defaultsArgsFromProps } from '../demoer/demoer.utils.js';
+	import { defaultsArgsFromProps } from '$lib/base/demoer/demoer.utils.js';
 	import Icon from '../icon/Icon.svelte';
 	/* demo */
 
@@ -22,7 +22,7 @@
 
 	const options = {
 		stickTo: ['left', 'right', 'top', 'bottom'],
-		flow: ['fixed', 'relative', 'abolute'],
+		flow: ['fixed', 'relative', 'absolute'],
 		showOpenerIcon: [false, true]
 	};
 
@@ -45,7 +45,7 @@
 		},
 		flow: {
 			type: 'flow-preset',
-			values: ['relative', 'fixed', 'abolute']
+			values:   ['relative', 'fixed', 'absolute']
 		},
 		showOpenerIcon: {
 			type: 'boolean',

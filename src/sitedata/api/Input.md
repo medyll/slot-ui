@@ -11,7 +11,7 @@ __propDef: {
         endIcon?: string | undefined;
         endIconColor?: string | undefined;
         usePopper?: UsePopperProps | undefined;
-        size?: "small" | "default" | "tiny" | "medium" | "large" | "big" | "full" | "auto" | undefined;
+        size?: "default" | "small" | "tiny" | "medium" | "large" | "big" | "full" | "auto" | undefined;
         height?: string | undefined;
         borderless?: boolean | undefined;
         transparent?: boolean | undefined;

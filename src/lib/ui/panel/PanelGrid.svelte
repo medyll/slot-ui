@@ -1,6 +1,6 @@
 <script lang="ts">
   import Button from "$lib/base/button/Button.svelte";
-import { transition } from "d3";
+  import { transition } from "d3";
 
   import { ceil } from "lodash";
   import { fade } from "svelte/transition";
@@ -19,7 +19,7 @@ import { transition } from "d3";
       {#if !isExpanded}
         <div
           on:click={() => {
-            isExpanded = true;
+            if($$slots.zoomSlot) isExpanded = true;
           }}
           class="panelGridThumb"
           in:fade>
@@ -27,26 +27,30 @@ import { transition } from "d3";
         </div>
       {/if}
     {/each}
-    {#if isExpanded}
-      <div class="panelGridPreview" in:fade>
-        <div
-          on:click={() => {
-            isExpanded = false;
-          }}>
-          <Button naked icon="chevron-left" />
-        </div>
+  </div>
+  {#if isExpanded}
+    <div class="panelGridPreview" in:fade>
+      <div
+        on:click={() => {
+         isExpanded = false;
+        }}>
+        <Button naked icon="chevron-left" class="theme-text-primary" />
+      </div>
+      <div class="zoomSlot">
         <slot name="zoomSlot" />
       </div>
-    {/if}
-  </div>
+    </div>
+  {/if}
 {/if}
 
 <style lang="scss">
-  .panelGrid {
-    .panelGridPreview {
-      display: flex;
+  .panelGridPreview {
+    display: flex;
+    .zoomSlot {
+      flex: 1;
     }
   }
+
   .slotUiGrid {
     display: grid;
     grid-gap: 0.2rem;

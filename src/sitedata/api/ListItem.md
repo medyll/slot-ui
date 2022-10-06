@@ -23,6 +23,7 @@ __propDef: {
     };
     slots: {
         icon: {};
+        default: {};
         primary: {};
         secondary: {};
         action: {};

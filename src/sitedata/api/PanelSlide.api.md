@@ -1,8 +1,12 @@
 ```import { SvelteComponentTyped } from "svelte";
 declare const __propDef: {
     props: {
+        class?: string | undefined;
+        element?: HTMLInputElement | null | undefined;
+        style?: string | undefined;
         open: boolean;
         component?: null | undefined;
+        flow?: ElementProps["flow"] | undefined;
         outer?: boolean | undefined;
         panelSlideId?: string | undefined;
         actions?: {
@@ -30,14 +34,26 @@ export default class PanelSlide extends SvelteComponentTyped<PanelSlideProps, Pa
         open: () => void;
         close: () => void;
         toggle: () => void;
-        hasNextPrev: (nextPrev: "next" | "prev") => void;
+        hasNextPrev: (nextPrev: "prev" | "next") => void;
     };
+    get class(): string | undefined;
+    /**accessor*/
+    set class(_: string | undefined);
+    get element(): HTMLInputElement | null | undefined;
+    /**accessor*/
+    set element(_: HTMLInputElement | null | undefined);
+    get style(): string | undefined;
+    /**accessor*/
+    set style(_: string | undefined);
     get open(): boolean;
     /**accessor*/
     set open(_: boolean);
     get component(): null | undefined;
     /**accessor*/
     set component(_: null | undefined);
+    get flow(): any;
+    /**accessor*/
+    set flow(_: any);
     get outer(): boolean | undefined;
     /**accessor*/
     set outer(_: boolean | undefined);

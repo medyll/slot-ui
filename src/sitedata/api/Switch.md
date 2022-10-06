@@ -5,7 +5,7 @@ __propDef: {
         checked?: boolean | undefined;
         disabled?: boolean | undefined;
         class?: string | undefined;
-        element?: HTMLDivElement | null | undefined;
+        element?: HTMLElement | null | undefined;
         style?: string | undefined;
     };
     events: {

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { setContext } from 'svelte';
 	import type { MenuItemProps } from './types.js';
-	import type { ElementProps } from '$typings/index.js';
+	import type { ElementProps } from '$lib/types/index.js';
 	import MenuItem from './MenuItem.svelte';
 	import { createMenuStore } from './store.js';
 	import { createEventForwarder } from '$lib/engine/engine.js';

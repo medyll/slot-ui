@@ -1,5 +1,7 @@
 <svelte:options accessors={true} />
-
+<!-- 
+	@deprecated use data/DataListe.svelte
+ -->
 <script lang="ts">
 	import { setContext, getContext, hasContext } from 'svelte/internal';
 	import { createEventForwarder } from '$lib/engine/engine.js';

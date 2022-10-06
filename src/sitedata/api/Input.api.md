@@ -12,7 +12,7 @@ declare const __propDef: {
         endIcon?: string | undefined;
         endIconColor?: string | undefined;
         usePopper?: UsePopperProps | undefined;
-        size?: "small" | "default" | "tiny" | "medium" | "large" | "big" | "full" | "auto" | undefined;
+        size?: "default" | "small" | "tiny" | "medium" | "large" | "big" | "full" | "auto" | undefined;
         height?: string | undefined;
         borderless?: boolean | undefined;
         transparent?: boolean | undefined;
@@ -57,9 +57,9 @@ export default class Input extends SvelteComponentTyped<InputProps, InputEvents,
     get usePopper(): UsePopperProps | undefined;
     /**accessor*/
     set usePopper(_: UsePopperProps | undefined);
-    get size(): "small" | "default" | "tiny" | "medium" | "large" | "big" | "full" | "auto" | undefined;
+    get size(): "default" | "small" | "tiny" | "medium" | "large" | "big" | "full" | "auto" | undefined;
     /**accessor*/
-    set size(_: "small" | "default" | "tiny" | "medium" | "large" | "big" | "full" | "auto" | undefined);
+    set size(_: "default" | "small" | "tiny" | "medium" | "large" | "big" | "full" | "auto" | undefined);
     get height(): string | undefined;
     /**accessor*/
     set height(_: string | undefined);

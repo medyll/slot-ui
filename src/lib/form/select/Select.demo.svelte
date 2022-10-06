@@ -33,7 +33,7 @@
   let componentArgsSlot = {
     ...defaultsArgs(parametersSlot),
     position: 'BC',
-    data: [{id:1,name:'name'},{id:2,name:'name'},{id:3,name:'name'},{id:4,name:'name'}],
+    data: [{id:1,name:'name'},{id:2,name:'name'},{id:3,name:'name'},{id:4,name:'name'},{id:5,name:'name'}],
   };
 
   let codeSlot = `<script>
@@ -78,10 +78,10 @@
   <div class="flex-v gap-large">
     <DemoPage code={codeSlot} component="Select" title="Using slots">
       <Demoer parameters={parametersSlot} componentArgs={componentArgsSlot} let:activeParams>
-        <div class="pad-2">
+        <div class="pad-2" >
           <Select
             {...activeParams}
-            let:optionsData
+            let:optionsData 
             value="2"
             name={"select"}
             dataFieldName={"name"} 

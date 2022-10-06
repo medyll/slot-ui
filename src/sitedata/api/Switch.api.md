@@ -5,7 +5,7 @@ declare const __propDef: {
         checked?: boolean | undefined;
         disabled?: boolean | undefined;
         class?: string | undefined;
-        element?: HTMLDivElement | null | undefined;
+        element?: HTMLElement | null | undefined;
         style?: string | undefined;
     };
     events: {
@@ -32,9 +32,9 @@ export default class Switch extends SvelteComponentTyped<SwitchProps, SwitchEven
     get class(): string | undefined;
     /**accessor*/
     set class(_: string | undefined);
-    get element(): HTMLDivElement | null | undefined;
+    get element(): HTMLElement | null | undefined;
     /**accessor*/
-    set element(_: HTMLDivElement | null | undefined);
+    set element(_: HTMLElement | null | undefined);
     get style(): string | undefined;
     /**accessor*/
     set style(_: string | undefined);

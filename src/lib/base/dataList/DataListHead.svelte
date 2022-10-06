@@ -1,4 +1,7 @@
-<script lang="ts">
+<!-- 
+	@deprecated use data/DataListe.svelte
+ -->
+ <script lang="ts">
 	import type { DataListStoreType } from './types.js';
 	import { getContext, setContext } from 'svelte';
 	import { writable, type Writable } from 'svelte/store';

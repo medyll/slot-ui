@@ -9,13 +9,7 @@
   export let subTitle: undefined = undefined;
   export let component: string | undefined = undefined;
 
-
-
-  const highlighted = Prism.highlight(code, Prism.languages.svelte, "svelte");
-</script>
-<svelte:head>
-<script>
-    Prism.plugins.NormalizeWhitespace.setDefaults({
+  Prism.plugins.NormalizeWhitespace.setDefaults({
     "remove-trailing": true,
     "remove-indent": true,
     "left-trim": false,
@@ -26,7 +20,20 @@
     // "tabs-to-spaces": 0,
     // "spaces-to-tabs": 20,
   });
+
+  const highlighted = Prism.highlight(code, Prism.languages.svelte, "svelte");
 </script>
+<svelte:head>
+<!-- <script>
+    Prism.plugins.NormalizeWhitespace.setDefaults({
+    "remove-trailing": true,
+    "remove-indent": true,
+    "left-trim": false,
+    "right-trim": false,
+    "break-lines": 80, 
+    "remove-initial-line-feed": true, 
+  });
+</script> -->
 </svelte:head>
 <div>
   {#if code || $$slots.code}

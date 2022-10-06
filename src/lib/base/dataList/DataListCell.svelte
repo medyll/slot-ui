@@ -1,4 +1,7 @@
-<script lang="ts">
+<!-- 
+	@deprecated use data/DataListe.svelte
+ -->
+ <script lang="ts">
   import type { DataCellType, DataListStoreType, RowType } from "./types.js";
   import { dataOp } from "$lib/engine/utils.js";
   import { getContext, onMount, tick } from "svelte/internal";

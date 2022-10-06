@@ -37,47 +37,52 @@
     ],
   };
 
-  let codeSlot = `import Paneler from "./Paneler.svelte"; 
-import PanelSlide from "./PanelSlide.svelte"; 
-import Panel from "./Panel.svelte"; 
-import PanelGrid from "./PanelGrid.svelte";
+  //
+  let codeSlot = 
+`
+<script>
+  import Paneler from "./Paneler.svelte"; 
+  import PanelSlide from "./PanelSlide.svelte"; 
+  import Panel from "./Panel.svelte"; 
+  import PanelGrid from "./PanelGrid.svelte";
+<\/script>
 
 <Paneler style="width:450px;height:450px;overflow:hidden;">
-    <PanelSlide
-        class="overflow-x-hidden overflow-y-auto"
-        open={true}>
-        <Panel data={{ some: "data" }} title="Some Items">
+  <PanelSlide
+    class="overflow-x-hidden overflow-y-auto"
+    open={true}>
+      <Panel data={{ some: "data" }} title="Some Items">
         <PanelGrid data={[...Array(9)]} let:data>
             <div class="pad border radius-tiny">Some</div>
             <div slot="zoomSlot" class="pad-4 text-center">
             Some large
             </div>
         </PanelGrid>
-        </Panel>
-        <Panel title="Recent Items">
+      </Panel>
+      <Panel title="Recent Items">
         <PanelGrid data={[...Array(12)]} columns={6}>
             <div class="pad border radius-tiny">Recent</div>
         </PanelGrid>
-        </Panel>
-        <Panel title="Other Items">
+      </Panel>
+      <Panel title="Other Items">
         <PanelGrid data={[...Array(7)]} columns={2}>
             <div class="pad border radius-tiny">Others</div>
         </PanelGrid>
-        </Panel>
-    </PanelSlide>
-    <PanelSlide
-        class="overflow-x-hidden overflow-y-auto"
-        let:panelSlideId
-        open={false}
-        let:data>
-        <Panel title="Zoom area">
+      </Panel>
+  </PanelSlide>
+  <PanelSlide
+    class="overflow-x-hidden overflow-y-auto"
+    let:panelSlideId
+    open={false}
+    let:data>
+      <Panel title="Zoom area">
         <PanelGrid data={[...Array(130)]} columns={1}>
             <div class="pad border radius-tiny">
             list item for {panelSlideId}
             </div>
         </PanelGrid>
-        </Panel>
-    </PanelSlide> 
+      </Panel>
+  </PanelSlide> 
 </Paneler>
 `;
 
@@ -121,7 +126,7 @@ import PanelGrid from "./PanelGrid.svelte";
               <Panel data={{ some: "data" }} title="Some Items">
                 <PanelGrid data={[...Array(9)]} let:data>
                   <div class="pad border radius-tiny">Some</div>
-                  <div slot="zoomSlot" class="pad-4 text-center">
+                  <div slot="zoomSlot" class="pad-4 text-center theme-bg-primary">
                     Some large
                   </div>
                 </PanelGrid>
@@ -150,11 +155,6 @@ import PanelGrid from "./PanelGrid.svelte";
                 </PanelGrid>
               </Panel>
             </PanelSlide>
-            <!-- <PanelSlide let:panelSlideId open={false}>
-                  <Panel title="Zoom area">
-                    on more
-                  </Panel>
-                </PanelSlide> -->
           </Paneler>
         </div>
       </Demoer>

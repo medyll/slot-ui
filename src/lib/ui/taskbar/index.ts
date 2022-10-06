@@ -1,3 +1,4 @@
+/** slotui generated definition file */
 import Taskbar from "./Taskbar.svelte";
 export * from "./Taskbar.svelte";
 export {Taskbar};
