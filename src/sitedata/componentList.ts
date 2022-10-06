@@ -9,7 +9,6 @@ import Columnerdemosvelte from "$lib/base/columner/Columner.demo.svelte";
 import Dividerdemosvelte from "$lib/base/divider/Divider.demo.svelte"; 
 import Drawerdemosvelte from "$lib/base/drawer/Drawer.demo.svelte"; 
 import Listdemosvelte from "$lib/base/list/List.demo.svelte"; 
-import Loaderdemosvelte from "$lib/base/loader/Loader.demo.svelte"; 
 import Progressdemosvelte from "$lib/base/progress/Progress.demo.svelte"; 
 import Ratingdemosvelte from "$lib/base/rating/Rating.demo.svelte"; 
 import Stepperdemosvelte from "$lib/base/stepper/Stepper.demo.svelte"; 
@@ -18,6 +17,7 @@ import Treedemosvelte from "$lib/base/tree/Tree.demo.svelte";
 import DataListdemosvelte from "$lib/data/dataList/DataList.demo.svelte"; 
 import Finderdemosvelte from "$lib/data/finder/Finder.demo.svelte"; 
 import Grouperdemosvelte from "$lib/data/grouper/Grouper.demo.svelte"; 
+import Loaderdemosvelte from "$lib/data/loader/Loader.demo.svelte"; 
 import Sorterdemosvelte from "$lib/data/sorter/Sorter.demo.svelte"; 
 import Confirmdemosvelte from "$lib/form/confirm/Confirm.demo.svelte"; 
 import Inputdemosvelte from "$lib/form/input/Input.demo.svelte"; 
@@ -40,7 +40,6 @@ import Windowdemosvelte from "$lib/ui/window/Window.demo.svelte";
 {name:"Divider",code:"divider",component:Dividerdemosvelte,group:"base"},
 {name:"Drawer",code:"drawer",component:Drawerdemosvelte,group:"base"},
 {name:"List",code:"list",component:Listdemosvelte,group:"base"},
-{name:"Loader",code:"loader",component:Loaderdemosvelte,group:"base"},
 {name:"Progress",code:"progress",component:Progressdemosvelte,group:"base"},
 {name:"Rating",code:"rating",component:Ratingdemosvelte,group:"base"},
 {name:"Stepper",code:"stepper",component:Stepperdemosvelte,group:"base"},
@@ -49,6 +48,7 @@ import Windowdemosvelte from "$lib/ui/window/Window.demo.svelte";
 {name:"DataList",code:"datalist",component:DataListdemosvelte,group:"data"},
 {name:"Finder",code:"finder",component:Finderdemosvelte,group:"data"},
 {name:"Grouper",code:"grouper",component:Grouperdemosvelte,group:"data"},
+{name:"Loader",code:"loader",component:Loaderdemosvelte,group:"data"},
 {name:"Sorter",code:"sorter",component:Sorterdemosvelte,group:"data"},
 {name:"Confirm",code:"confirm",component:Confirmdemosvelte,group:"form"},
 {name:"Input",code:"input",component:Inputdemosvelte,group:"form"},

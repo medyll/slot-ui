@@ -1,10 +1,6 @@
-
-<!-- 
-    @deprecated
- -->
 <script lang="ts">
   import {fade} from 'svelte/transition';
-  import Icon from '../icon/Icon.svelte';
+  import Icon from '$lib/base/icon/Icon.svelte';
 
   let className = '';
   export {className as class};
@@ -14,7 +10,9 @@
   export let status: 'loading' | 'success' | 'error' | 'empty';
   /** @deprecated */
   export let isLoading: boolean = false;
+  /** @deprecated */
   export let isError: boolean   = false;
+  /** @deprecated */
   export let isEmpty: boolean   = false;
 
   /** icon sources */
