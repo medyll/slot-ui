@@ -119,7 +119,7 @@
                   componentProps: { some: "props", someother: "deprops" },
                 });
               }}>
-              Window with component
+              Window with component 
             </Button>
           </div>
         </div>

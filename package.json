@@ -14,6 +14,8 @@
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "make-docs": "node build-docs & exit 0",
     "make-docs-watch": "nodemon -e demo.svelte,preview.svelte -x \"npm run make-docs\"",
+    "ensure-defs": "node ensureDefs & exit 0",
+    "ensure-defs-watch": "nodemon -e .svelte -x \"npm run ensure-defs\"",
     "css-build": "sass sass/cssfabric.scss static/cssfabric/cssfabric.vars.css",
     "css-watch": "npm run css-build -- --watch",
     "precommit": "npm unlink @medyll/cssfabric & npm i @medyll/cssfabric ",

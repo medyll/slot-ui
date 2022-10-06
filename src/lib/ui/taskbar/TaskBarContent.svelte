@@ -1,17 +1,14 @@
-<script lang="ts">
-  import {getContext} from 'svelte';
+<script lang="ts"> 
   import type {IChromeArgs, WindowStoreListType} from '$lib/ui/window/store.js';
-  import {windowsStore} from '$lib/ui/window/store.js';
-  import {toggleStartMenu} from './wactions.utils';
-  import IconButton from '../base/button/IconButton.svelte';
-  import {openPopper} from '$lib/ui/popper/actions';
-  import ServiceBox from '../ui/serviceBox/ServiceBox.svelte';  
+  import {windowsStore} from '$lib/ui/window/store.js'; 
+  import IconButton from '$lib/base/button/IconButton.svelte'; 
+  import ServiceBox from '$lib/ui/serviceBox/ServiceBox.svelte';  
 
 
   const popServiceProps = {
     component     : ServiceBox,
     componentProps: {
-      some: 'what'
+      some: 'what if'
     }
   };
 
@@ -27,6 +24,8 @@
     <IconButton on:click="{()=>{toggleWindow(value)}}" style="color:white;font-size: large" icon="home"/>
 {/each}
 <slot></slot>
+
+
 <!--
 <button on:click={(event)=>{
             event.stopPropagation();

@@ -17,4 +17,4 @@ export interface ElementProps {
   | { type: 'fa', name: TIcon };
 }
 
-export type Data = Record<string, any>
+export type Data = Record<string, any> 
