@@ -2,7 +2,7 @@
   import Menu from "./Menu.svelte";
   import MenuItem from "./MenuItem.svelte";
   /* demo */
-  import ComponentDemo from "$lib/_components/ComponentExample.svelte";
+  import ComponentExample from "$components/demo/ComponentExample.svelte";
   import Demoer from "$lib/base/demoer/Demoer.svelte";
   import DemoPage from "$lib/base/demoer/DemoPage.svelte";
   import Icon from "$lib/base/icon/Icon.svelte";
@@ -50,7 +50,7 @@
     successIcon="clarity:success-standard-line" />`;
 </script>
 
-<ComponentDemo
+<ComponentExample
   component="Menu"
   cite="A menu is not a list, it's just like a list but more and less">
   <div class="flex-v gap-large">
@@ -101,9 +101,9 @@
 		  
 		</Demoer>
 	  </DemoPage> 
-  </div></ComponentDemo>
+  </div></ComponentExample>
 <br />
 <br />
 <br />
 <br />
-<ComponentDemo component="MenuItem" cite="A MenuItem gets one place to stay" />
+<ComponentExample component="MenuItem" cite="A MenuItem gets one place to stay" />

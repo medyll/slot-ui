@@ -1,10 +1,10 @@
 <script lang="ts">
   import Card from './Card.svelte';
   import Icon from '../icon/Icon.svelte';
-import ComponentDemo from '$lib/_components/ComponentExample.svelte';
+import ComponentExample from '$components/demo/ComponentExample.svelte';
 </script>
 
-<ComponentDemo component='Box'
+<ComponentExample component='Box'
 cite="">
 <div class="gridDemo">
   <Card>
@@ -33,7 +33,7 @@ cite="">
   </Card>
 
 </div>
-</ComponentDemo>
+</ComponentExample>
 
 
 <style lang="scss">

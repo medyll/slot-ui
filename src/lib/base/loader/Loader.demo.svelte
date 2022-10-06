@@ -2,7 +2,7 @@
   import Loader from './Loader.svelte';
 
   /* demo */
-  import ComponentDemo from '$lib/_components/ComponentExample.svelte';
+  import ComponentExample from '$components/demo/ComponentExample.svelte';
   import Demoer from '$lib/base/demoer/Demoer.svelte';
   import DemoPage from '$lib/base/demoer/DemoPage.svelte';
   import {defaultsArgsFromProps} from '../demoer/demoer.utils.js';
@@ -44,7 +44,7 @@
     successIcon="clarity:success-standard-line" />`;
 </script>
 
-<ComponentDemo
+<ComponentExample
         cite="And suddenly, in this dark cabinet, i realized that the most pleasant
 	phase was that of waiting.<br /> D. Pentes, 824"
         component="Loader"
@@ -89,4 +89,4 @@
             </Demoer>
         </DemoPage>
     </div>
-</ComponentDemo>
+</ComponentExample>

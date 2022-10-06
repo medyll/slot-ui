@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Divider from '$lib/base/divider/Divider.svelte';
 	import List from '$lib/base/list/List.svelte';
-import ComponentDemo from '$lib/_components/ComponentExample.svelte';
+import ComponentExample from '$components/demo/ComponentExample.svelte';
 	import Sorter from './Sorter.svelte';
 	import Sorterer from './Sorterer.svelte';
 
@@ -19,7 +19,7 @@ import ComponentDemo from '$lib/_components/ComponentExample.svelte';
 	let sortedData: any[] = [];
 	let activeCommonSortField = '';
 </script>
-<ComponentDemo
+<ComponentExample
 	component="Sorter"
 	cite="Then, what was before became the after.<br /> R. Hakran, 824"
 >
@@ -58,4 +58,4 @@ import ComponentDemo from '$lib/_components/ComponentExample.svelte';
 		{data}
 	>With a title :</Sorterer>
 </div>
-</ComponentDemo>
+</ComponentExample>

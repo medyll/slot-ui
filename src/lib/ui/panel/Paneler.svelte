@@ -15,6 +15,13 @@
   import Input from "$lib/base/input/Input.svelte";
   import type { PanelContextType } from "./types.js";
 
+  /*  common slotUi exports*/
+  let className = "";
+  export { className as class };
+  export let element: HTMLInputElement | null = null;
+  export let style: string = "";
+  /*  end slotUi exports*/
+
   const panelerStore: PanelContextType = writable({
     activePanelId: undefined,
     activePanelSlideData: {},
@@ -30,7 +37,9 @@
 
 <div
   on:panel:button:clicked={toggleSlidePanels}
-  transition:fade={{ duration: 50 }}>
+  transition:fade={{ duration: 50 }}
+  class={className}
+  {style}>
   <slot />
 </div>
 

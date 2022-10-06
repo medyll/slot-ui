@@ -1,6 +1,4 @@
-<script lang="ts">
-  import github from "svelte-highlight/styles/github";
-  import { HighlightSvelte } from "svelte-highlight";
+<script lang="ts"> 
   // fabric default vars
   import cssfabricVars from "@medyll/cssfabric/src/lib/styles/vars.min.css";
   // fabric default
@@ -55,23 +53,7 @@
 
 <svelte:head>
   <title>SlotUi</title>
-  <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet" /> 
-  {@html github}
-  <!-- <style type="text/css">
-		 {
-			@html cssfabricVars;
-		}
-	</style>
-	<style>
-		 {
-			@html cssfabric;
-		}
-	</style>
-	<style type="text/css">
-		 {
-			@html cssfabricThemer;
-		}
-	</style> -->
+  <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet" />  
   <script>
     /* hack for legacy node app */
     var global = global || window;

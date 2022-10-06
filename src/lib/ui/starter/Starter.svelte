@@ -1,4 +1,3 @@
-<svelte:options immutable={true} />
 
 <script lang="ts">
   import { fade, slide } from "svelte/transition";
@@ -7,6 +6,7 @@
   import { clickAway } from "$lib/uses/clickAway/clickAway";
   import Paneler from "$lib/ui/panel/Paneler.svelte";
   import Panel from "$lib/ui/panel/Panel.svelte";
+  import PanelGrid from "$lib/ui/panel/PanelGrid.svelte";
   import PanelSlide from "$lib/ui/panel/PanelSlide.svelte";
   import Popper from "$lib/ui/popper/Popper.svelte";
   import { toggleStarter, starterStore } from "./actions.js";
@@ -15,15 +15,9 @@
   import { writable } from "svelte/store";
   import Debug from "$lib/base/debug/Debug.svelte";
   import Input from "$lib/base/input/Input.svelte";
-
-  const menuStore = writable<any>(null);
-
-  let slideLeft: any;
-  let slideRight: any;
-
-  function toggleSlidePanels(event) {
-    
-  }
+ 
+  
+ 
 </script>
 
 <div />
@@ -41,25 +35,20 @@
       <Paneler>
         <PanelSlide panelSlideId="source" open={true}>
           <Panel data={{some:'data'}} title="Pinned Items">
-            <div class="slotUiGrid"   style="--slotui-column-size:30%;gap:0.5rem">
-              {#each [...Array(9)] as key, val}
-                <div class="buttonPole">Pinned</div>
-              {/each}
-            </div>
+            <PanelGrid data={[...Array(9)]} let:data >
+              <div class="buttonPole">Pinned</div>
+              <div slot="zoomSlot" class="pad-4">Pinned large</div>
+            </PanelGrid>
           </Panel>
           <Panel title="Recent Items">
-            <div class="slotUiGrid"  style="--slotui-column-size:15%;gap:0.5rem">
-              {#each [...Array(12)] as key}
-                <div class="buttonPole">Recent</div>
-              {/each}
-            </div>
+            <PanelGrid data={[...Array(12)]} columns={6} >
+              <div class="buttonPole">Recent</div>
+            </PanelGrid> 
           </Panel>
           <Panel title="Other Items">
-            <div class="slotUiGrid"   style="--slotui-column-size:35%;gap:0.5rem"> 
-              {#each [...Array(7)] as key}
-                <div class="buttonPole">Others</div>
-              {/each}
-            </div>
+            <PanelGrid data={[...Array(7)]} columns={2} >
+              <div class="buttonPole">Others</div>
+            </PanelGrid> 
           </Panel>
         </PanelSlide>
         <PanelSlide  panelSlideId="target" let:panelSlideId open={false} let:data>

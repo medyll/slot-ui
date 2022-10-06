@@ -1,14 +1,14 @@
 <script lang="ts">
-	import { createEventForwarder } from '../../engine/engine';
+	import { createEventForwarder } from '$engine/engine.js';
 	import { get_current_component, get_slot_changes, null_to_empty } from 'svelte/internal';
 	import { popper, type UsePopperProps } from '$lib/ui/popper/usePopper.js';
 	import { crossfade, fade, scale } from 'svelte/transition';
 	import type { ElementProps } from '$typings/index.js';
-	import Divider from '../divider/Divider.svelte';
+	import Divider from '$lib/base/divider/Divider.svelte';
 	import Menu from '$lib/ui/menu/Menu.svelte';
 	import Popper from '$lib/ui/popper/Popper.svelte';
-	import Icon from '../icon/Icon.svelte';
-	import { autofocus } from '$lib/uses/autofocus/autofocus';
+	import Icon from '$lib/base/icon/Icon.svelte';
+	import { autofocus } from '$lib/uses/autofocus/autofocus.js';
 
 	export let presetDefault = 'bordered contained';
 

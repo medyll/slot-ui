@@ -3,7 +3,7 @@
   import Button from "$lib/base/button/Button.svelte";
   import { defaultsArgs, defaultsArgsFromProps } from "../../base/demoer/demoer.utils.js";
   /* demo */
-  import ComponentDemo from "$lib/_components/ComponentExample.svelte";
+  import ComponentExample from "$components/demo/ComponentExample.svelte";
   import Demoer from "$lib/base/demoer/Demoer.svelte";
   import DemoPage from "$lib/base/demoer/DemoPage.svelte";
   import Icon from "$lib/base/icon/Icon.svelte";
@@ -57,7 +57,7 @@
   let isOpen = false;
 </script>
 
-<ComponentDemo
+<ComponentExample
   component="Popper"
   cite="This Popper is the base of all the flyout stuff: it pops">
   <div class="flex-v gap-large">
@@ -87,4 +87,4 @@
       </Demoer>
     </DemoPage>
   </div>
-</ComponentDemo>
+</ComponentExample>

@@ -6,7 +6,7 @@
 	import Icon from '../icon/Icon.svelte';
 	import IconButton from '../button/IconButton.svelte';
 	/* demo */
-	import ComponentDemo from '$lib/_components/ComponentExample.svelte';
+	import ComponentExample from '$components/demo/ComponentExample.svelte';
 	import Demoer from '$lib/base/demoer/Demoer.svelte';
 	import DemoPage from '$lib/base/demoer/DemoPage.svelte';
 	import DemoerCode from '$lib/base/demoer/DemoerCode.svelte';
@@ -112,7 +112,7 @@
 	style="width:190px" />`;
 </script>
 
-<ComponentDemo
+<ComponentExample
 	component="List"
 	cite="List differs from menu essentially by the way you call it <br /> B. Franklin, 1854"
 >
@@ -176,4 +176,4 @@
 			</Demoer>
 		</DemoPage>		 -->
 	</div>
-</ComponentDemo>
+</ComponentExample>

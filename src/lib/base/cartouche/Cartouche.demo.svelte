@@ -4,7 +4,7 @@
 	import DemoPage from '$lib/base/demoer/DemoPage.svelte';
 	import Icon from '$lib/base/icon/Icon.svelte';
 	import Button from '../button/Button.svelte';
-	import ComponentDemo from '$lib/_components/ComponentExample.svelte';
+	import ComponentExample from '$components/demo/ComponentExample.svelte';
 
 	let parametersSlot: any = {
 		isOpen: {
@@ -60,7 +60,7 @@
 		class="marg-tb-1" />`;
 </script>
 
-<ComponentDemo
+<ComponentExample
 	component="Cartouche"
 	cite="'Open up', they said. So we stacked<br /> G. Brahms, 1964"
 >
@@ -131,4 +131,4 @@
 			</Demoer>
 		</DemoPage>
 	</div>
-</ComponentDemo>
+</ComponentExample>

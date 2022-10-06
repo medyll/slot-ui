@@ -9,7 +9,7 @@
     defaultsArgs,
     defaultsArgsFromProps,
   } from "$lib/base/demoer/demoer.utils.js";
-  import ComponentDemo from "$lib/_components/ComponentExample.svelte";
+  import ComponentExample from "$components/demo/ComponentExample.svelte";
   import Demoer from "$lib/base/demoer/Demoer.svelte";
   import DemoPage from "$lib/base/demoer/DemoPage.svelte";
   import Icon from "$lib/base/icon/Icon.svelte";
@@ -66,7 +66,7 @@
 
 <input type="button" on:click={toggleStarter} />
 <Starter />
-<!-- <ComponentDemo
+<!-- <ComponentExample
   component="Starter"
   cite="Claiming they were not doors, made what they are today : windows <br /> Ch XX, 1320">
   <div class="flex-v gap-large">
@@ -79,4 +79,4 @@
       </Demoer>
     </DemoPage>
   </div>
-</ComponentDemo> -->
+</ComponentExample> -->

@@ -1,8 +1,7 @@
 <script lang="ts">
-	import Grouper, { type GroupedDataType } from './Grouper.svelte';
-	import { HighlightSvelte } from 'svelte-highlight';
+	import Grouper, { type GroupedDataType } from './Grouper.svelte';c
 	import Paper from '$lib/base/paper/Paper.svelte';
-	import ComponentDemo from '$lib/_components/ComponentExample.svelte';
+	import ComponentExample from '$components/demo/ComponentExample.svelte';
 
 	const data = [...Array(89)].map((r, i) => {
 		return {
@@ -61,7 +60,7 @@
 </div>`;
 </script>
 
-<ComponentDemo component="Grouper">
+<ComponentExample component="Grouper">
 	<h5>Menu mode</h5>
 	<div class="flex-h gap-small w-full">
 		<div class="flex-v gap-small w-full">
@@ -92,9 +91,7 @@
 					<div />
 				</div>
 				<div class="flex-main">
-					<Paper>
-						<HighlightSvelte code={codePref} />
-					</Paper>
+					 
 				</div>
 			</div>
 		</div>
@@ -125,11 +122,11 @@
 				{activeGroupField}
 			</div>
 		</div>
-		<HighlightSvelte code={codeButtonMode} />
+		 
 	</div>
 	<div>
 		<pre>
 {JSON.stringify(groupedData, null, ' ')}
 </pre>
 	</div>
-</ComponentDemo>
+</ComponentExample>

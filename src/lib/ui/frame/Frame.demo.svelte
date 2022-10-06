@@ -1,9 +1,9 @@
 <script lang="ts">
-	import ComponentDemo from '$lib/_components/ComponentExample.svelte';
+	import ComponentExample from '$components/demo/ComponentExample.svelte';
 	import Frame from './Frame.svelte';
 </script>
 
-<ComponentDemo
+<ComponentExample
 	component="Frame"
 	cite="What happens in the Frame, stays in the Frame <br /> B. Franklin, 1854"
 >
@@ -28,4 +28,4 @@
 			</Frame>
 		</div>
 	</div>
-</ComponentDemo>
+</ComponentExample>

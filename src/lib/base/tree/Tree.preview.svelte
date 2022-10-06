@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ComponentDemo from '$lib/_components/ComponentExample.svelte';
+	import ComponentExample from '$components/demo/ComponentExample.svelte';
 	import Tree from './Tree.svelte';
 
 	let paths = [

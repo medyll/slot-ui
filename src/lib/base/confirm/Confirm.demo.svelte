@@ -3,7 +3,7 @@
 	import Confirm from './Confirm.svelte';
 
 	/* demo */
-	import ComponentDemo from '$lib/_components/ComponentExample.svelte';
+	import ComponentExample from '$components/demo/ComponentExample.svelte';
 	import Demoer from '$lib/base/demoer/Demoer.svelte';
 	import DemoPage from '$lib/base/demoer/DemoPage.svelte';
 	/* demo */
@@ -87,7 +87,7 @@
 		primary="confirm deletion" />`;
 </script>
 
-<ComponentDemo
+<ComponentExample
 	component="Confirm"
 	cite="Leaded by a proud walk, nothing can stop nobody to win the step ahead, should we confirm ?
 <br />
@@ -108,5 +108,5 @@ V.Hugo 1850"
 			</Demoer>
 		</DemoPage>
 	</div>
-</ComponentDemo>
+</ComponentExample>
 

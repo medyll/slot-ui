@@ -15,8 +15,16 @@
     slideOutNoName,
   } = transitions;
 
+  /*  common slotUi exports*/
+  let className = "";
+  export { className as class };
+  export let element: HTMLInputElement | null = null;
+  export let style: string = "";
+  /*  end slotUi exports*/
+
   export let open: boolean;
   export let component = null;
+  export let flow: ElementProps["flow"] | undefined = 'absolute';
   export let outer = true;
 
   export let panelSlideId = crypto.randomUUID();
@@ -46,9 +54,13 @@
   const panelerContext = getContext<PanelContextType>("Paneler");
   if (outer) setContext<string>("PanelSlide", panelSlideId);
 
-  $: if (!$panelerContext.panelSlides[panelSlideId] && outer &&  panelerContext) {
-    console.log('set : ',panelSlideId)
-    $panelerContext.panelSlides[panelSlideId] = {}
+  $: if (
+    !$panelerContext.panelSlides[panelSlideId] &&
+    outer &&
+    panelerContext
+  ) {
+    console.log("set : ", panelSlideId);
+    $panelerContext.panelSlides[panelSlideId] = {};
   }
 
   $: if (panelerContext && component && outer && get_current_component()) {
@@ -56,11 +68,9 @@
     $panelerContext.panelSlides[panelSlideId] = get_current_component();
   }
 
-
-
   onMount(() => {
     return () => {
-     delete $panelerContext.panelSlides?.[panelSlideId];
+      delete $panelerContext.panelSlides?.[panelSlideId];
     };
   });
 
@@ -78,12 +88,12 @@
     const slidePanelsKeys = Object.keys(registredPanelSlides);
     const activeIdx = slidePanelsKeys.indexOf(panelSlideId);
     let prevNext;
-    
-    if (page==='next' && slidePanelsKeys[activeIdx + 1]) {
+
+    if (page === "next" && slidePanelsKeys[activeIdx + 1]) {
       prevNext = slidePanelsKeys[activeIdx + 1];
       transitionTo = "next";
-    } 
-    if (page==='prev' && slidePanelsKeys[activeIdx - 1]) {
+    }
+    if (page === "prev" && slidePanelsKeys[activeIdx - 1]) {
       prevNext = slidePanelsKeys[activeIdx - 1];
       transitionTo = "prev";
     }
@@ -95,8 +105,6 @@
     $panelerContext.activePanelSlideData[activePanelSlideId] = data;
     registredPanelSlides[prevNext].actions.open();
   }
-
-
 </script>
 
 {#if open}
@@ -105,8 +113,11 @@
     on:panel:button:clicked={toggleSlidePanels}
     out:slideOutNoName={{ duration: 125, delay: 20, direction: transitionTo }}
     in:slideInNoName={{ duration: 150, delay: 150, direction: transitionTo }}
-    class="sidePanel">
-    <slot {panelSlideId}
+    class="sidePanel {className}"
+    style:position={flow ?? ''}
+    {style}>
+    <slot
+      {panelSlideId}
       data={$panelerContext.activePanelSlideData[panelSlideId]} />
   </div>
 {/if}

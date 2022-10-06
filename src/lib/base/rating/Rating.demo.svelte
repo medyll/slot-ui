@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ComponentDemo from '$lib/_components/ComponentExample.svelte';
+	import ComponentExample from '$components/demo/ComponentExample.svelte';
 	import Icon from '../icon/Icon.svelte';
 	import Rating from './Rating.svelte';
 	import Demoer from '../demoer/Demoer.svelte';
@@ -37,7 +37,7 @@
 	};
 </script>
 
-<ComponentDemo
+<ComponentExample
 	component="Rating"
 	cite="You'll never know that you've got a score, unless come the day when you see the other's ones.<br/> S. Roch, 1824"
 >
@@ -56,4 +56,4 @@
 			</Demoer>
 		</DemoPage>
 	</div>
-</ComponentDemo>
+</ComponentExample>

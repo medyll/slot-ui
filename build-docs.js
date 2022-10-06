@@ -7,7 +7,7 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const srcPackage = path.join(__dirname, 'package');
 const srcLibDir = path.join(__dirname, 'src', 'lib');
-const dirPath = path.join('src',  'lib','_sitedata');
+const dirPath = path.join('src', 'sitedata');
 // const dirPath = path.join('src','sitedata');
 const libShort = '$lib';
 

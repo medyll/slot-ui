@@ -8,20 +8,20 @@ function filterExport(filepath) {
 	// return mm.contains(filepath,'Backdrop.svelte')
 
 	return !mm.contains(filepath, [
-		'**/*.demo.svelte',
-		'**/*Demo.svelte',
-		'**/*preview.svelte',
-		'**/*sitedata*',
-		'**/*.md',
-		'**/*Example*',
-		'**/*indexApi*',
-		'**/*Readme*',
+		'*/**/*.demo.svelte',
+		'*/**/*Demo.svelte',
+		'*/**/*preview.svelte',
+		'*/**/*sitedata*',
+		'*/**/*.md',
+		'*/**/*Example.svelte',
+		'*/**/*indexApi*',
+		'*/**/*Readme*',
 	])
 }
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	package: {
-		exports: (filepath) => filterExport(filepath),
+		// exports: (filepath) => filterExport(filepath),
 		files: (filepath) => filterExport(filepath),
 	},
 	preprocess: [
