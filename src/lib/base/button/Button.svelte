@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { createEventForwarder } from '$engine/engine.js';
+	import { createEventForwarder } from '$lib/engine/engine.js';
 	import { get_current_component, get_slot_changes, null_to_empty } from 'svelte/internal';
 	import { popper, type UsePopperProps } from '$lib/ui/popper/usePopper.js';
 	import { crossfade, fade, scale } from 'svelte/transition';

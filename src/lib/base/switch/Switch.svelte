@@ -4,7 +4,7 @@
   @deprecated
  -->
 <script lang="ts">
-  import { createEventForwarder } from "$engine/engine.js";
+  import { createEventForwarder } from "$lib/engine/engine.js";
   import {
     get_current_component,
     get_slot_changes,
