@@ -66,7 +66,8 @@ export {${fileName}};
                 console.log('done index for ', finFile)
                 await fs.appendFile(path + '/index.ts', content)
             } else {
-                  // await fs.writeFile (path + '/index.ts','')
+                 await fs.writeFile (path + '/index.ts','')
+                  //  await fs.remove (path + '/index.ts')
             }
 
         } catch (e) {
