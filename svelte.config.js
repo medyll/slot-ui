@@ -21,7 +21,6 @@ function filterExport(filepath) {
 }
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-		logLevel: 'info'	,
 	package: {
 		exports: (filepath) => filterExport(filepath),
 		files: (filepath) => filterExport(filepath),
