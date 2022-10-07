@@ -39,8 +39,9 @@ for (const filePath of allFiles) {
     const file = filePath.split('\\').slice(-1).toString();
     const path = filePath.replace(file, '')
     
-    const indexContent = await fs.readFile(path + '/index.ts', 'utf8');
-    if (indexContent?.includes('generated') || !indexContent?.length) await fs.writeFile(path + '/index.ts', '/** slotui generated definition file */\r\n');
+    const exists = await fs.pathExists(path + '/index.ts')
+    const indexContent = exists ? await fs.readFile(path + '/index.ts', 'utf8') : '';
+    if (!exists || indexContent?.includes('generated') || !indexContent?.length) await fs.writeFile(path + '/index.ts', '/** slotui generated definition file */\r\n');
 
 }
 // forge new ones
@@ -49,6 +50,7 @@ for (const filePath of allFiles) {
     const path = filePath.replace(file, '')
 
     await fs.ensureFile(path + '/index.ts');
+    
     fs.ensureFile(path + '/index.ts', async (err) => {
         if (err) return
         // content read
@@ -63,15 +65,15 @@ export * from "./${finFile}";
 export {${fileName}};
 `
             if (!indexContent?.includes(finFile)) {
-                console.log('done index for ', finFile)
                 await fs.appendFile(path + '/index.ts', content)
+                console.log('done index for ', finFile)
             } else {
                  await fs.writeFile (path + '/index.ts','')
                   //  await fs.remove (path + '/index.ts')
             }
 
         } catch (e) {
-            console.log(e)
+            console.log('error !!! ',e)
         }
     })
 }

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ComponentExample from '$components/demo/ComponentExample.svelte';
+	import ComponentExample from '$lib/demo/ComponentExample.svelte';
 	import Jsoner from '../jsoner/Jsoner.svelte';
 	import AutoComplete from './AutoComplete.svelte';
 

@@ -2,7 +2,7 @@
   import type { MenuItemProps } from "$lib/ui/menu/types.js";
   import type { PopperPositionType } from "$lib/ui/popper/types.js";
   import { type UsePopperProps } from "$lib/ui/popper/usePopper.js";
-  import ComponentExample from "$components/demo/ComponentExample.svelte";
+  import ComponentExample from "$lib/demo/ComponentExample.svelte";
   import Demoer from "$lib/base/demoer/Demoer.svelte";
   import DemoPage from "$lib/base/demoer/DemoPage.svelte";
   import type { ElementProps } from "$lib/types/index.js";

@@ -4,7 +4,7 @@
 	import DemoPage from '$lib/base/demoer/DemoPage.svelte';
 	import Icon from '$lib/base/icon/Icon.svelte';
 	import Button from '../button/Button.svelte';
-	import ComponentExample from '$components/demo/ComponentExample.svelte';
+	import ComponentExample from '$lib/demo/ComponentExample.svelte';
 
 	let parametersSlot: any = {
 		isOpen: {

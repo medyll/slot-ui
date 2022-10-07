@@ -2,7 +2,7 @@
   import Menu from "./Menu.svelte";
   import MenuItem from "./MenuItem.svelte";
   /* demo */
-  import ComponentExample from "$components/demo/ComponentExample.svelte";
+  import ComponentExample from "$lib/demo/ComponentExample.svelte";
   import Demoer from "$lib/base/demoer/Demoer.svelte";
   import DemoPage from "$lib/base/demoer/DemoPage.svelte";
   import Icon from "$lib/base/icon/Icon.svelte";

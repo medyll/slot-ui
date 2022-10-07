@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Grouper, { type GroupedDataType } from './Grouper.svelte';
 	import Paper from '$lib/base/paper/Paper.svelte';
-	import ComponentExample from '$components/demo/ComponentExample.svelte';
+	import ComponentExample from '$lib/demo/ComponentExample.svelte';
 
 	const data = [...Array(89)].map((r, i) => {
 		return {

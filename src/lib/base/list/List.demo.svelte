@@ -6,7 +6,7 @@
 	import Icon from '../icon/Icon.svelte';
 	import IconButton from '../button/IconButton.svelte';
 	/* demo */
-	import ComponentExample from '$components/demo/ComponentExample.svelte';
+	import ComponentExample from '$lib/demo/ComponentExample.svelte';
 	import Demoer from '$lib/base/demoer/Demoer.svelte';
 	import DemoPage from '$lib/base/demoer/DemoPage.svelte';
 	import DemoerCode from '$lib/base/demoer/DemoerCode.svelte';

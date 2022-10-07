@@ -3,7 +3,7 @@
 	import DataListRow from '$lib/base/dataList/DataListRow.svelte';
 	import DataListCell from '$lib/base/dataList/DataListCell.svelte';
 	import DataListHead from '$lib/base/dataList/DataListHead.svelte';
-	import ComponentExample from '$components/demo/ComponentExample.svelte';
+	import ComponentExample from '$lib/demo/ComponentExample.svelte';
 	import appSchemeData from '../../../demoData/appscheme.json';
 	import type { DataCellType } from './types.js';
 	import Demoer from '$lib/base/demoer/Demoer.svelte';
