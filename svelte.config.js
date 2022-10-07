@@ -23,8 +23,8 @@ function filterExport(filepath) {
 const config = {
 		logLevel: 'info'	,
 	package: {
-		// exports: (filepath) => filterExport(filepath),
-		//files: (filepath) => filterExport(filepath),
+		exports: (filepath) => filterExport(filepath),
+		files: (filepath) => filterExport(filepath),
 	},
 	preprocess: [
 		preprocess(),
