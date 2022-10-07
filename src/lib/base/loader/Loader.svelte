@@ -1,3 +1,7 @@
+
+<!-- 
+    @deprecated
+ -->
 <script lang="ts">
   import {fade} from 'svelte/transition';
   import Icon from '../icon/Icon.svelte';

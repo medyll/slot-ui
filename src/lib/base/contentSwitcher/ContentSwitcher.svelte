@@ -1,6 +1,6 @@
 <script lang="ts">
-	import IconButton from '../button/IconButton.svelte';
-	import { createEventForwarder } from '../../engine/engine';
+	import IconButton from '$lib/base/button/IconButton.svelte';
+	import { createEventForwarder } from '$lib/engine/engine';
 	import { get_current_component } from 'svelte/internal';
 
 	/*  common slotUi exports*/

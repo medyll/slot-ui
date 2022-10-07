@@ -6,7 +6,7 @@
   import Divider from '../divider/Divider.svelte';
   import Button from '../button/Button.svelte';
   /* demo */
-  import ComponentDemo from '$components/ComponentExample.svelte';
+  import ComponentExample from '$lib/demo/ComponentExample.svelte';
   import DemoPage from '$lib/base/demoer/DemoPage.svelte';
   import Demoer from '../demoer/Demoer.svelte';
   import {defaultsArgsFromProps} from '../demoer/demoer.utils';
@@ -37,7 +37,7 @@
 
 </script>
 
-<ComponentDemo cite="" component="Tabs">
+<ComponentExample cite="" component="Tabs">
     <div class="flex-v gap-large w-full">
         <DemoPage code={codeSlot} component="Tabs" title="Using slots">
             <Demoer
@@ -61,5 +61,5 @@
     <!--<Tabs activeTabCode="tab1" {items}/>
     <Divider density="kind" expansion="centered"/>-->
 
-</ComponentDemo>
+</ComponentExample>
 

@@ -3,17 +3,16 @@ import path from 'path'
 // import preprocess from 'svelte-preprocess';
 
 /** @type {import('vite').UserConfig} */
-const config = {
+const config = { 
 	plugins: [sveltekit()],
 	resolve: {alias:{
-		'$_components': path.resolve('./src/lib/_components'),
-		'$components': path.resolve('./src/components'),
+		'$components': path.resolve('./src/components'),  
 		'$contexts': path.resolve('./src/contexts'),
 		'$scripts': path.resolve('./src/lib/scripts'),
 		'$engine': path.resolve('./src/lib/engine'),
 		'$uses': path.resolve('./src/lib/uses'),
 		'$typings': path.resolve('./src/lib/types'),
-		'$sitedata': path.resolve('./src/lib/_sitedata'),
+		'$sitedata': path.resolve('./src/sitedata'),
 	}},
 	server: {
 		fs: {
@@ -22,12 +21,13 @@ const config = {
 		}
 	},
 	optimizeDeps: {
-		include: ['highlight.js', 'highlight.js/lib/core']
+		include: [],
+		exclude: [],
 	},    
 	package: {
 		dir: 'package',
 		emitTypes: true,
-		exports: (filepath) => true
+		//exports: (filepath) => true,	
 	},
 	external:['@sveltejs/kit/install-fetch'],
 };

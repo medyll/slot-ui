@@ -12,7 +12,7 @@
 
 	import { createEventForwarder } from '../../engine/engine.js';
 	import Icon from '../icon/Icon.svelte';
-	import type { ElementProps } from '$typings/index.js';
+	import type { ElementProps } from '$lib/types/index.js';
 	import Divider from '../divider/Divider.svelte';
 
 	/*  common slotUi exports*/
@@ -22,6 +22,8 @@
 	export let style: string = '';
 	const forwardEvents = createEventForwarder(get_current_component());
 	/*  end slotUi exports*/
+	
+	let listStateContext = getContext<any>('listStateContext');
 
 	/** icon ti be displayed in the list's header */
 	export let icon: string | null = null;
@@ -42,9 +44,8 @@
 	// data to hold
 	export let data: Record<string, any> = {};
 
-	export let density: ElementProps['density'] = 'default';
+	export let density: ElementProps['density'] = $listStateContext.density ?? 'default';
 
-	let listStateContext = getContext<any>('listStateContext');
 
 	const handleClick = () => () => {
 		// send whole listItem
@@ -66,19 +67,19 @@
 		element?.dispatchEvent(event);
 	};
 
-	let isActive: boolean = false;
 	$: if ($listStateContext?.selectorField && Object.keys(data ?? {}).length) {	 
-		isActive = listStateContext.selector($listStateContext.selectorField, data);
+		selected = listStateContext.selector($listStateContext.selectorField, data);
 	}
 </script>
 
 <li
 	bind:this={element}
-	class="listItem density-{density} {className}"
-	class:isActive
 	on:click={handleClick()}
 	on:dblclick={handleDblClick()}
 	style="opacity:${disabled ? 0.6 : 1};${style}"
+	class="listItem {className}"
+	class:selected
+	data-density={density}
 >
 	<span class="listItemChip" />
 	{#if $$slots.icon || icon}
@@ -90,9 +91,9 @@
 	{/if}
 	<div class="listItemContent" title={secondary}>
 		<div>
-			<slot name="primary">
+			<slot><slot name="primary">
 				{null_to_empty(primary)}
-			</slot>
+			</slot></slot>
 		</div>
 		<div class="itemSecondary">
 			<slot name="secondary">
@@ -117,7 +118,7 @@
 		outline:1px solid #ccc;
 		outline-offset: -1px;
 	} */
-	.listItem.density-tight {
+	/* .listItem.density-tight {
 		padding: 0.5rem 0.25rem;
 		margin: 0.125rem 0;
 	}
@@ -130,5 +131,5 @@
 	.listItem.density-kind {
 		padding: 1.5rem 0.25rem;
 		margin: 0.5rem 0;
-	}
+	} */
 </style>

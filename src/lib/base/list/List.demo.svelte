@@ -6,11 +6,12 @@
 	import Icon from '../icon/Icon.svelte';
 	import IconButton from '../button/IconButton.svelte';
 	/* demo */
-	import ComponentDemo from '$_components/ComponentExample.svelte';
+	import ComponentExample from '$lib/demo/ComponentExample.svelte';
 	import Demoer from '$lib/base/demoer/Demoer.svelte';
 	import DemoPage from '$lib/base/demoer/DemoPage.svelte';
 	import DemoerCode from '$lib/base/demoer/DemoerCode.svelte';
 	import { defaultsArgsFromProps } from '../demoer/demoer.utils.js';
+  import { uiPresets } from '$lib/engine/presets.js';
 	/* demo */
 	let cc = 0;
 	let listItems = [];
@@ -44,13 +45,17 @@
 
 	let parametersSlot: any = {
 		density: {
-			type: 'boolean',
-			values: [true, false]
+			type: 'preset-density',
+			values: Object.keys(uiPresets.density)
+		},
+		group: {
+			type: 'string',
+			values: [undefined,'secondary']
 		}
 	};
 
 	let componentArgsSlot = { 
-		density: defaultsArgsFromProps('density', parametersSlot)
+		density: 'default'
 	};
 
 	let parametersProps: any = {
@@ -112,7 +117,7 @@
 	style="width:190px" />`;
 </script>
 
-<ComponentDemo
+<ComponentExample
 	component="List"
 	cite="List differs from menu essentially by the way you call it <br /> B. Franklin, 1854"
 >
@@ -132,7 +137,6 @@
 				<List
 					let:listItem
 					{data}
-					{...activeParams}
 					density="default"
 					height="350px"
 					on:listitem:click={(ce) => console.log(ce.detail)}
@@ -141,6 +145,7 @@
 					sorterer={[{ sortByField: 'name' }]}
 					style="width:240px"
 					class="shad-3 radius-small overflow-hidden"
+					{...activeParams}
 				>
 					<ListItem data={listItem.data}>
 						<Icon slot="icon" icon={listItem.data.icon} />
@@ -176,4 +181,4 @@
 			</Demoer>
 		</DemoPage>		 -->
 	</div>
-</ComponentDemo>
+</ComponentExample>

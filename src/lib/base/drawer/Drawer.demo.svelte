@@ -9,10 +9,10 @@
 	import Drawer from './Drawer.svelte';
 
 	/* demo */
-	import ComponentDemo from '$_components/ComponentExample.svelte';
+	import ComponentExample from '$lib/demo/ComponentExample.svelte';
 	import Demoer from '$lib/base/demoer/Demoer.svelte';
 	import DemoPage from '$lib/base/demoer/DemoPage.svelte';
-	import { defaultsArgsFromProps } from '../demoer/demoer.utils.js';
+	import { defaultsArgsFromProps } from '$lib/base/demoer/demoer.utils.js';
 	import Icon from '../icon/Icon.svelte';
 	/* demo */
 
@@ -22,7 +22,7 @@
 
 	const options = {
 		stickTo: ['left', 'right', 'top', 'bottom'],
-		flow: ['fixed', 'relative', 'abolute'],
+		flow: ['fixed', 'relative', 'absolute'],
 		showOpenerIcon: [false, true]
 	};
 
@@ -45,7 +45,7 @@
 		},
 		flow: {
 			type: 'flow-preset',
-			values: ['relative', 'fixed', 'abolute']
+			values:   ['relative', 'fixed', 'absolute']
 		},
 		showOpenerIcon: {
 			type: 'boolean',
@@ -82,7 +82,7 @@
 	</Drawer>`;
 </script>
 
-<ComponentDemo component="Drawer">
+<ComponentExample component="Drawer">
 	<div class="flex-v gap-medium w-full">
 		<DemoPage title="Using slots" component="Drawer" code={codeSlot}>
 			<Demoer parameters={parametersSlot} componentArgs={componentArgsSlot} let:activeParams>
@@ -106,7 +106,7 @@
 			</Demoer>
 		</DemoPage>
 	</div>
-</ComponentDemo>
+</ComponentExample>
 
 <!-- <div style="width:80%;height:500px;position:relative;" class="border">
 	<Drawer bind:this={drawerRef} isOpen={true} icon="edit" flow="fixed" {...attrs}>

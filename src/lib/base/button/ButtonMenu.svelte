@@ -10,7 +10,7 @@
 	import type { SvelteComponent } from 'svelte';
 	import type { PopperPositionType } from '$lib/ui/popper/types';
 	import type { MenuItemProps, MenuProps } from '$lib/ui/menu/types';
-	import type { ElementProps } from '$typings/index.js';
+	import type { ElementProps } from '$lib/types/index.js';
 	import type { UsePopperProps } from '$lib/ui/popper/usePopper';
 
 	export let icon: string = 'list';

@@ -1,5 +1,5 @@
 import * as effects from 'svelte/easing';
-type DurationDelayType = {duration: number, delay: number}
+type DurationDelayType = {duration: number, delay: number,direction?:'prev'|'next'}
 
 function slideOut(node: HTMLElement, {duration, delay}:DurationDelayType) {
   return {
@@ -49,4 +49,32 @@ function slideInRtl(node: HTMLElement, {duration, delay}:DurationDelayType) {
   };
 }
 
-export const transitions = {slideOut, slideOutRt, slideIn, slideInRtl};
+function slideInNoName(node: HTMLElement, {duration, delay,direction}:DurationDelayType) {
+
+  const getTranslate = (eased:any)=> direction==='next' ? -(250 - (eased * 250)) : (250 - (eased * 250))
+  return {
+    duration,
+    delay,
+    css: (t:number) => {
+      const eased = effects.quadOut(t);
+      return `transform: translate(${getTranslate(eased)}px,0);
+        opacity: ${t}`;
+    }
+  };
+}
+function slideOutNoName(node: HTMLElement, {duration, delay,direction}:DurationDelayType) {
+
+  const getTranslate = (eased:any)=> direction==='next' ? -(250 - (eased * 250)) : (250 - (eased * 250))
+  return {
+    duration,
+    delay,
+    css: (t:number) => {
+      const eased = effects.quadOut(t);
+      return `transform: translate(${getTranslate(eased)}px,0);
+        opacity: ${t}`;
+    }
+  };
+}
+
+
+export const transitions = {slideOut, slideOutRt, slideIn, slideInRtl,slideOutNoName,slideInNoName};

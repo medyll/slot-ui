@@ -3,9 +3,8 @@
 	import Demoer from '$lib/base/demoer/Demoer.svelte';
 	import DemoPage from '$lib/base/demoer/DemoPage.svelte';
 	import Icon from '$lib/base/icon/Icon.svelte';
-	import Divider from '$lib/base/divider/Divider.svelte';
 	import Button from '../button/Button.svelte';
-	import ComponentDemo from '$_components/ComponentExample.svelte';
+	import ComponentExample from '$lib/demo/ComponentExample.svelte';
 
 	let parametersSlot: any = {
 		isOpen: {
@@ -35,7 +34,7 @@
 			type: 'string',
 			values: ['Some subtitle', 'And some other subtitle', undefined]
 		},
-		...parametersSlot
+		...{...parametersSlot}
 	};
 
 	let componentArgs = {
@@ -61,7 +60,7 @@
 		class="marg-tb-1" />`;
 </script>
 
-<ComponentDemo
+<ComponentExample
 	component="Cartouche"
 	cite="'Open up', they said. So we stacked<br /> G. Brahms, 1964"
 >
@@ -84,8 +83,7 @@
 				title="Some stacked cartouches"
 				parameters={parametersSlot}
 				{componentArgs}
-				let:activeParams
-			>
+				let:activeParams >
 				<Cartouche {...activeParams} stacked={true}>
 					<span slot="primarySlot">This is a cartouche title</span>
 					<div class="pad-4 border-t">Cartouche content</div>
@@ -132,4 +130,4 @@
 			</Demoer>
 		</DemoPage>
 	</div>
-</ComponentDemo>
+</ComponentExample>

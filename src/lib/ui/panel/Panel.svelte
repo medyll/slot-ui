@@ -1,31 +1,75 @@
-<svelte:options accessors={true}
-                immutable={true}/>
+<svelte:options accessors />
+
 <script lang="ts">
-  import {custom_event} from 'svelte/internal';
-  import {onMount} from 'svelte';
+  import { custom_event } from "svelte/internal";
+  import { onMount, setContext, getContext } from "svelte";
+  import Button from "$lib/base/button/Button.svelte";
+  import type { Writable } from "svelte/store";
+  import type { PanelContextType } from "./types.js";
 
-  export let title = 'not set';
+  export let title = "not set";
 
-  let ref;
+  /** panelId will be bound to the targeted panelSlide */
+  export let panelId = crypto.randomUUID();
+  /** data will be bound to the targeted panelSlide */
+  export let data: any | undefined = undefined;
+  /** data will be bound to the targeted panelSlide */
+  export let showNavigation:boolean = true;
+  export const actions = {
+    load: (args: any) => {},
+  };
+
+  let ref: HTMLDivElement | undefined = undefined;
+  let panelSlideId = getContext<string>("PanelSlide");
+  let panelerContext = getContext<PanelContextType>("Paneler");
 
 
-  function sayHello() {
-    const event = custom_event('panel:button:clicked',
-      {title}, true);
-    ref.dispatchEvent(event);
+  let currentIdx, hasNext, hasPrev;
+
+  $: if ($panelerContext.panelSlides) {
+    // console.log(Object.values($panelerContext.panelSlides));
+    currentIdx = Object.keys($panelerContext.panelSlides).indexOf(panelSlideId);
+    hasNext = Boolean(Object.keys($panelerContext.panelSlides)[currentIdx + 1]);
+    hasPrev = Boolean(Object.keys($panelerContext.panelSlides)[currentIdx - 1]); 
   }
 
+
+  onMount(() => {
+    // console.log(Object.keys($panelerContext.panelSlides), panelSlideId);
+  });
+
+  function prevNextPanel(page: "next" | "prev") {
+    const event = custom_event(
+      "panel:button:clicked",
+      { panelId, page, data },
+      { bubbles: true }
+    );
+    ref?.dispatchEvent(event);
+  }
 </script>
 
-
 <div class="panel" bind:this={ref}>
-    <div class="panelBar">
-        <div style="flex:1">{title}</div>
-        <button on:click={sayHello}>go there or back ? ></button>
-    </div>
-    <div class="panelContent">
-        <slot></slot>
-    </div>
+  <div class="panelBar pos-sticky top-0 gap-small">
+    <div style="flex:1">{title}</div>
+    {#if hasPrev}
+      <Button
+        icon="chevron-left"
+        naked
+        on:click={() => {
+          prevNextPanel("prev");
+        }}></Button>
+    {/if}
+    {#if hasNext}
+      <Button
+        endIcon="chevron-right"
+        on:click={() => {
+          prevNextPanel("next");
+        }}>see all</Button>
+    {/if}
+  </div>
+  <div class="panelContent">
+    <slot {panelId} {actions} />
+  </div>
 </div>
 
 <style lang="scss">

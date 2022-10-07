@@ -7,7 +7,8 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const srcPackage = path.join(__dirname, 'package');
 const srcLibDir = path.join(__dirname, 'src', 'lib');
-const dirPath = path.join('src',  'lib','_sitedata');
+const dirPath = path.join('src', 'sitedata');
+// const dirPath = path.join('src','sitedata');
 const libShort = '$lib';
 
 let fileHead = '';
@@ -63,21 +64,44 @@ function createFile(fileList) {
 }
 
 /** convert object to text file content  export const = [{}] */
+/** @deprecated  */
 function createObject(fileList, exportName = 'slotUiComponentList') {
 	const start = `export const ${exportName} = [ `;
 	const middle = fileList
 		?.map((fl) => {
+			const group = fl.split('\\')[1]; 
 			const comp = fl.split('\\').slice(-1).toString()?.replace(/\./g, '');
 			const compName = fl.split('\\').slice(-1)[0].split('.')[0];
 			const code = compName.toLowerCase();
 
 			const src = fl.replace(/\\/g, '/');
 
-			return `{name:"${compName}",code:"${code}",component:${comp}}`;
+			return `{name:"${compName}",code:"${code}",component:${comp},group:"${group}"}`;
 		})
 		.join(',\r\n');
 
 	const end = ' ] ';
+
+	return start + middle + end;
+}
+
+/** convert object to text file content  export const = [{}] */
+function createComponentList(fileList, exportName = 'slotUiComponentList') {
+	const start = `export const ${exportName} = { `;
+	const middle = fileList
+		?.map((fl) => {
+			const group = fl.split('\\')[1]; 
+			const comp = fl.split('\\').slice(-1).toString()?.replace(/\./g, '');
+			const compName = fl.split('\\').slice(-1)[0].split('.')[0];
+			const code = compName.toLowerCase();
+
+			const src = fl.replace(/\\/g, '/');
+
+			return `${code}:{name:"${compName}",code:"${code}",group:"${group}"}`;
+		})
+		.join(',\r\n');
+
+	const end = ' } ';
 
 	return start + middle + end;
 }
@@ -182,11 +206,17 @@ createReadme(resultProps);
 console.log(dirPath, 'index files for component.api.md and component.md');
 
 const result = getAllFiles(srcLibDir,'demo.svelte');
+// console.log(result)
 const resultPreview = getAllFiles(srcLibDir, 'preview.svelte');
-// write component list
+// write old component list
 fs.writeFileSync(
 	dirPath + '/componentList.ts',
 	createFile(result) + ' \r\n ' + createObject(result, 'slotUiComponentList')
+);
+// write new component list
+fs.writeFileSync(
+	path.join('src',  'lib') + '/slotuiCatalog.ts',
+	createComponentList(result, 'slotuiCatalog')
 );
 console.log(dirPath, 'Documentation files created into /componentList.ts');
 

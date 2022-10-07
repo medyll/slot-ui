@@ -1,9 +1,7 @@
 <script lang="ts">
 	import Box from './Box.svelte';
 	import Icon from '../icon/Icon.svelte';
-	import Divider from '../divider/Divider.svelte';
-	import Button from '../button/Button.svelte';
-	import ComponentDemo from '$_components/ComponentExample.svelte';
+	import ComponentExample from '$lib/demo/ComponentExample.svelte';
 	import Demoer from '$lib/base/demoer/Demoer.svelte';
 	import DemoPage from '$lib/base/demoer/DemoPage.svelte';
 
@@ -62,7 +60,7 @@
 	</Box>`
 </script>
 
-<ComponentDemo
+<ComponentExample
 	component="Box"
 	cite="Boxes, essentially, contain other boxes. That's the meaning we'll found if open them<br /> B. Franklin,1854"
 	><div class="flex-v gap-medium">
@@ -86,4 +84,4 @@
 			</Demoer>
 		</DemoPage>
 	</div> 
-</ComponentDemo>
+</ComponentExample>

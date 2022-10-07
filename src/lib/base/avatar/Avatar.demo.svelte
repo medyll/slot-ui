@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ComponentDemo from '$_components/ComponentExample.svelte';
+	import ComponentExample from '$lib/demo/ComponentExample.svelte';
 	import Demoer from '$lib/base/demoer/Demoer.svelte';
 	import DemoPage from '$lib/base/demoer/DemoPage.svelte';
 	import Icon from '../icon/Icon.svelte';
@@ -44,7 +44,7 @@
 
 </script>
 
-<ComponentDemo component="Avatar" cite="If it's not you, then it's the other you, <br /> Emma Avatar you, 1652">
+<ComponentExample component="Avatar" cite="If it's not you, then it's the other you, <br /> Emma Avatar you, 1652">
 <div class="flex-v gap-large"  >
 	<DemoPage title="Using slots" component="Rating" code={code1}>
         <Demoer parameters={parametersSlot} {componentArgs} let:activeParams>
@@ -57,4 +57,4 @@
         </Demoer>		
 	</DemoPage>
 </div>
-</ComponentDemo>
+</ComponentExample>

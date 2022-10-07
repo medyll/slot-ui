@@ -1,5 +1,9 @@
 <svelte:options accessors={true} />
 
+<!-- 
+	@deprecated use data/DataListe.svelte
+ -->
+ 
 <script lang="ts">
 	import sanitizeHtml from 'sanitize-html';
 	import type { Data } from './$types';
@@ -25,7 +29,7 @@
 	const forwardEvents = createEventForwarder(get_current_component());
 
 	export let data: any;
-	export let style: string |undefined= undefined;
+	export let style: string = '';
 
 	const dataStore = writable<RowType>({ data });
 	setContext('dataListRow', dataStore);
@@ -48,14 +52,16 @@
 	}
 
 	function checkGetter(columns: Record<string, DataCellType>, field: string, data: Data) {
-		const ret = columns[field]?.getter ? columns[field]?.getter(data) : data[field];
+		const ret = columns[field]?.getter ? columns[field]?.getter(data) : dataOp.resolveDotPath(data, field);
+		// console.log(ret)
 		// console.log(ret, columns[field])
 		return sanitizeHtml(ret);
 		//  fieldOrFunction(data?.[field], field)
 	}
 
 	$: cssVars = Object.values($dataListContext.columns ?? []).reduce((previous,current,currentIndex)=>{
-		return `${previous} ${current?.width}`  
+		const witdh = current?.width ?? 'auto'
+		return `${previous} minmax(${witdh},${witdh})`  
 	},'--template-columns:')
 
 </script>
@@ -96,8 +102,8 @@
 
 <style lang="scss">
 	.dataListRow{
-		display:grid;
-		grid-template-columns: var(--template-columns);
-		grid-auto-columns: min-content;
+		display:flex;
+		/* grid-template-columns: var(--template-columns);
+		grid-auto-columns: min-content; */
 	}
 </style>

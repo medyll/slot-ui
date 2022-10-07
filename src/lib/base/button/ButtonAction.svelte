@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type { SvelteComponentDev } from 'svelte/internal';
 
-	import Icon from '../icon/Icon.svelte';
-	import { openPopper } from '../../ui/popper/actions';
-	import {createEventForwarder} from '../../engine/engine';
+	import Icon from '$lib/base/icon/Icon.svelte';
+	import { openPopper } from '$lib/ui/popper/actions.js';
+	import {createEventForwarder} from '$lib/engine/engine.js';
 	import {get_current_component} from 'svelte/internal';
 
 	/*  common slotUi exports*/

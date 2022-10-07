@@ -1,17 +1,19 @@
 <svelte:options accessors={true} />
-
+<!-- 
+	@deprecated use data/DataListe.svelte
+ -->
 <script lang="ts">
 	import { setContext, getContext, hasContext } from 'svelte/internal';
-	import { createEventForwarder } from '../../engine/engine.js';
+	import { createEventForwarder } from '$lib/engine/engine.js';
 	import { get_current_component } from 'svelte/internal';
-	import Virtualize from '../virtualizer/Virtualizer.svelte';
+	import Virtualize from '$lib/base/virtualizer/Virtualizer.svelte';
 	import { writable, type Writable } from 'svelte/store';
 	import DataListRow from './DataListRow.svelte';
 	import type { DataListStoreType, DataCellType, groupByOptions } from './types.js';
 	import { dataOp } from '$lib/engine/utils.js';
 	import DataListHead from './DataListHead.svelte';
-	import Icon from '../icon/Icon.svelte';
-	import Button from '../button/Button.svelte';
+	import Icon from '$lib/base/icon/Icon.svelte';
+	import Button from '$lib/base/button/Button.svelte';
 	import type { Data } from '$lib/types/index.js';
 	import { slide } from 'svelte/transition';
 
@@ -150,14 +152,14 @@
 			{@const groupProps = getGroupProps({ data: groups[red] })}
 			{@const item = groups[red]}
 			<div class="flex-v">
-				<div class="">
+				<div class=""  >
 					<slot name="groupTitleSlot" {item}>
-						<div class="flex-h flex-align-middle pad gap-medium groupHead">
+						<div class="flex-h flex-align-middle pad gap-medium groupHead"  on:click={() => {
+							hidedGroups[red] = !hidedGroups[red];
+						}}>
 							<div class="iconGroup"><Icon class="iconGroup"   icon="cil:object-group" /></div>
 							<div>{groupByField} : <span class="text-bold">{red}</span></div>
-							<div class="flex-main border-b divider"  on:click={() => {
-								hidedGroups[red] = !hidedGroups[red];
-							}} />
+							<div class="flex-main border-b divider" />
 							<div>{groups[red]?.length}</div>
 							<div class="pad-l border-l iconGroup">
 								<Button
@@ -228,6 +230,7 @@
 	@import './DataList.scss';
 
 	.groupHead {
+				cursor:pointer;
 		.iconGroup {
 				color: #999;
 			}

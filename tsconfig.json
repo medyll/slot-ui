@@ -14,15 +14,14 @@
 		"paths": {
 			"$lib": ["src/lib"],
 			"$lib/*": ["src/lib/*"],
-			"$sitedata": ["src/lib/_sitedata"],
-			"$sitedata/*": ["src/lib/_sitedata/*"],
+			"$sitedata": ["src/sitedata"],
+			"$sitedata/*": ["src/sitedata/*"],
 			"$engine": ["src/engine"],
 			"$engine/*": ["src/engine/*"],
 			"$scripts": ["src/scripts"],
 			"$scripts/*": ["src/scripts/*"],
 			"$typings": ["src/lib/types"],
 			"$typings/*": ["src/lib/types/*"],
-			"$_components": ["src/lib/_components"],
 			"$components": ["src/components"],
 			"$components/*": ["src/components/*"]
 		}

@@ -1,7 +1,11 @@
+<svelte:options accessors />
+<!-- 
+	@deprecated use form/Input.svelte
+ -->
 <script lang="ts">
 	import { createEventForwarder } from '$lib/engine/engine';
 	import { popper, type UsePopperProps } from '$lib/ui/popper/usePopper';
-	import type { ElementProps } from '$typings/index.js';
+	import type { ElementProps } from '$lib/types/index.js';
 	import { compute_slots, get_current_component, text } from 'svelte/internal';
 	import Button from '../button/Button.svelte';
 	import Icon from '../icon/Icon.svelte';
@@ -27,7 +31,7 @@
 	/** paramters for usePopper */
 	export let usePopper: UsePopperProps | undefined = undefined;
 	/** with of the input using  presets */
-	export let size: ElementProps['sizeType'] | 'full' = 'medium';
+	export let size: ElementProps['sizeType'] | 'full' = 'auto';
 	/** height of the input, using preset values */
 	export let height: string = 'default';
 	/** has no border */
@@ -51,7 +55,7 @@
 </script>
 
 {#if icon || endIcon  || inputType === 'search' || $$slots.startInputSlot || $$slots.endInputSlot}
-	<div style="position:relative;display:inline-block">
+	<div style="position:relative;display:block">
 		{#if icon || $$slots.startInputSlot}
 			<div class="inpuStart">
 				<slot name="startInputSlot">
@@ -77,7 +81,7 @@
 			use:forwardEvents
 			use:popper={usePopper}
 			type="text"
-			class={className + ' w-' + size}
+			class="w-{size} {className}"
 			data-height={height}
 			data-width={size}
 			{borderless}
@@ -92,7 +96,7 @@
 		use:forwardEvents
 		use:popper={usePopper}
 		type="text"
-		class={className + ' w-' + size}
+		class="w-{size} {className}"
 		data-height={height}
 		{borderless}
 		{style}

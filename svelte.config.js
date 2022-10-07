@@ -2,20 +2,21 @@ import adapter from '@sveltejs/adapter-vercel';
 import preprocess from 'svelte-preprocess';
 import { mdsvex } from 'mdsvex';
 import mm from 'micromatch'; 
+import path from 'path'
 
 function filterExport(filepath) { 
 	
 	// return mm.contains(filepath,'Backdrop.svelte')
 
 	return !mm.contains(filepath, [
-		'**/*.demo.svelte',
-		'**/*Demo.svelte',
-		'**/*preview.svelte',
-		'**/*sitedata*',
-		'**/*.md',
-		'**/*Example*',
-		'**/*indexApi*',
-		'**/*Readme*',
+		'*.demo.svelte',
+		'*Demo.svelte',
+		'*preview.svelte',
+		'*sitedata*',
+		'*.md',
+		'*Example.svelte',
+		'*indexApi*',
+		'*Readme*',
 	])
 }
 /** @type {import('@sveltejs/kit').Config} */

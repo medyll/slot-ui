@@ -1,4 +1,7 @@
-<script lang="ts">
+<!-- 
+	@deprecated use data/DataListe.svelte
+ -->
+ <script lang="ts">
 	import type { DataListStoreType } from './types.js';
 	import { getContext, setContext } from 'svelte';
 	import { writable, type Writable } from 'svelte/store';
@@ -41,13 +44,14 @@
 	function setCssGrid(columns:DataCellType[]){
 		if(Object.values(columns ?? []).every(e=> e.width)){
 			return  Object.values(columns ?? []).reduce((previous,current,currentIndex)=>{
-		return `${previous} ${current?.width}`  
+				const witdh = current?.width ?? 'auto'
+		return `${previous} minmax(${witdh},${witdh})`  
 	},'--template-columns:')
 		}
 	}
 
 	$: cssVars = setCssGrid($dataListContext.columns ?? []) 
- 
+   
 </script>
 
 <div
@@ -68,8 +72,8 @@
  
 <style lang="scss">
 	.dataListHead{
-		display:grid;
-		grid-template-columns: var(--template-columns) auto; grid-auto-columns: min-content;
-		transition: all  0.1s; 
+		display:flex;
+		/* grid-template-columns: var(--template-columns) auto; grid-auto-columns: min-content;
+		grid-auto-columns: min-content; */
 	}
 </style>
