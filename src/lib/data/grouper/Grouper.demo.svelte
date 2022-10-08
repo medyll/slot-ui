@@ -38,23 +38,23 @@
   let parametersSlot: any = {
     grouperMode: {
       type: "string",
-      values: ['menu','button'],
+      values: ["menu", "button"],
     },
     showUnGrouped: {
       type: "boolean",
       values: [true, false],
-    }, 
-    groupByField : {
+    },
+    groupByField: {
       type: "string",
-      values: [undefined,'subdirectory'],
-    }, 
+      values: [undefined, "subdirectory"],
+    },
     groupListItems: {
       type: "string",
-      values: [undefined, ['directory', 'subdirectory']],
-    }, 
+      values: [undefined, ["directory", "subdirectory"]],
+    },
   };
 
-  let componentArgsSlot = {...defaultsArgs(parametersSlot),data};
+  let componentArgsSlot = { ...defaultsArgs(parametersSlot), data };
 
   let codeAll = `<Grouper 
 	bind:groupedData
@@ -95,21 +95,28 @@
 
 <ComponentExample component="Grouper">
   <div class="flex-v gap-large">
-    <DemoPage code={codeAll} component="Popper" title="Using slots">
-	<DemoerCode />
+    <DemoPage code={codeAll} component="Popper" title="Using slots"> 
       <Demoer
         componentArgs={componentArgsSlot}
         let:activeParams
-        parameters={parametersSlot} >
-		<div class="flex-h flex-align-middle gap-tiny">
-              <Grouper
-                bind:groupedData
-                bind:activeGroupField={activeGroupFieldAll} 
-				{...activeParams}
-				>{activeGroupFieldAll}</Grouper>
-            </div>
-		</Demoer>
+        parameters={parametersSlot}>
+        <div class="flex-h flex-align-middle gap-tiny">
+          <Grouper
+            bind:groupedData
+            bind:activeGroupField={activeGroupFieldAll}
+            {...activeParams}>{activeGroupFieldAll}</Grouper>
+        </div>
+      </Demoer>
+	  <div class="flex-h flex-wrap">
+        <DemoerCode code={codePref} title="Choose fields" />
+        <DemoerCode code={codeButtonMode} title="Button mode" />
+	  </div>
     </DemoPage>
+    <div>
+      <pre>
+{JSON.stringify(groupedData, null, " ")}
+</pre>
+    </div>
     <!-- <h5>Menu mode</h5>
     <div class="flex-h gap-small w-full">
       <div class="flex-v gap-small w-full">
@@ -149,9 +156,4 @@
         </div>
       </div>
     </div> -->
-    <div>
-      <pre>
-{JSON.stringify(groupedData, null, " ")}
-</pre>
-    </div>
   </div></ComponentExample>
