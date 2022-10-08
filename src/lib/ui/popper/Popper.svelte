@@ -3,6 +3,7 @@
 <script lang="ts">
   import {
     custom_event,
+    get_current_component,
     onMount,
     type SvelteComponentDev,
   } from "svelte/internal";
@@ -14,11 +15,13 @@
   import { popperList } from "./actions.js";
   import type { PopperPositionType } from "./types.js";
   import { fade } from "svelte/transition";
+	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
 
   /** popper HTMLDivElement */
   export let element: Element | undefined = undefined;
   let className = "";
   export { className as class };
+  	const forwardEvents = createEventForwarder(get_current_component());
   let zIndex;
 
   export let code: string | undefined = undefined;
@@ -125,6 +128,7 @@
     on:click
     use:clickAway={{ action: clickedAway }}
     use:stickTo={{ parentNode, position , stickToHookWidth }}
+    use:forwardEvents
     {style}
     style:zIndex={makeOnTop()}>
     <slot>

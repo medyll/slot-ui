@@ -1,14 +1,15 @@
 <script lang="ts">
-   import { componentReadMe } from "$sitedata/api/indexApi.js";
+  import { componentReadMe } from "$sitedata/api/indexApi.js";
   import { slotuiCatalog } from "$lib/slotuiCatalog.js";
   export let component: string = "";
   export let cite: string = "";
 
-   $: finalCompReadMe = componentReadMe?.[component.toLowerCase()];
+  $: finalCompReadMe = componentReadMe?.[component.toLowerCase()];
 
-  const compDet = Object.values(slotuiCatalog).find((x) => x.name === component);
-
- </script>
+  const compDet = Object.values(slotuiCatalog).find(
+    (x) => x.name === component
+  );
+</script>
 
 <div class="flex-v gap-large w-full">
   <div class="flex-h gap-small flex-align-middle">

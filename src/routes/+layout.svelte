@@ -16,8 +16,10 @@
   import type { Writable } from "svelte/store";
   import type { UiContextType } from "$contexts/ui.context.js";
   import { onMount } from "svelte";
-  import AutoComplete from "$lib/data/autocomplete/AutoComplete.svelte";
-  import { slotuiCatalog } from "$lib/slotuiCatalog.js";
+  import AutoComplete from "$lib/data/autocomplete/AutoComplete.svelte"; 
+  // from +layout.server
+  export let data = {};
+ 
 
   let store = writable<UiContextType>({
     drawerFlow: "fixed",
@@ -111,7 +113,10 @@
       <h3>SlotUi</h3>
       <div class="flex-main" />
       <a href="svelte-components">Components</a>
-      <AutoComplete data={Object.values(slotuiCatalog ?? {})} />
+      <AutoComplete
+        dataFieldName="code"
+        on:select={()=>{alert('redddd')}}
+        data={Object.values(data.slotuiCatalog ?? {})} />
       <ThemeSwitcher
         iconFamily="mdi"
         icon="paint-outline"
