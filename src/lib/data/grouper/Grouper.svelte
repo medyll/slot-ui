@@ -134,6 +134,7 @@ import ButtonMenu from '$lib/base/button/ButtonMenu.svelte';
 
 	$: menuProps = {
 		menuList: menuData,
+		menuItemsList: menuData,
 		onMenuItemClick: (e: any) => {
 			if (Object.keys(e)?.[0]) {
 				console.log(Object.keys(e)?.[0]);

@@ -11,10 +11,17 @@
   import { onMount } from "svelte";
   import Icon from "$lib/base/icon/Icon.svelte";
   import { custom_event } from "svelte/internal";
+  import {
+    compute_slots,
+    get_current_component,
+    null_to_empty,
+  } from "svelte/internal";
+  import { createEventForwarder } from "$lib/engine/eventForwarder.js";
 
   let className = "";
   export { className as class };
   export let element: HTMLDivElement | null = null;
+  const forwardEvents = createEventForwarder(get_current_component());
 
   /** initial data to look in */
   export let data: any = [];
@@ -30,6 +37,8 @@
   export let filteredData: any[] = data;
   /** selectedIndex : index of the selected item in data */
   export let selectedIndex: number = -1;
+  /** selectedIndex : index of the selected item in data */
+  export let onPick: ((args: any) => void) | undefined = undefined;
 
   let searchString: string;
   let container: HTMLElement;
@@ -37,6 +46,8 @@
   let popperHTML: HTMLElement;
   let popperOpen: boolean;
   let popperOptionsOpen: boolean;
+
+  let menuRef;
 
   const doFind = <T = Record<string, any>>(
     list: T[],
@@ -59,52 +70,37 @@
   function preNavigate(
     e: KeyboardEvent,
     data: Record<string, any>,
-    element?: HTMLElement
   ) {
-    console.log(e.keyCode)
-	if(e.keyCode===13) {
-		e.preventDefault();;
-		onSelect(filteredData,selectedIndex)
-		return;
-	}
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      onSelect(filteredData, selectedIndex);
+      return;
+    }
     if (data.length === 0) return;
     if ([38, 40].includes(e.keyCode)) e.preventDefault();
 
-    navigateList(e.keyCode, selectedIndex).then((res) => {
-      if (res !== undefined && element) {
-        //
-        selectedIndex = res > data.length || res < 0 ? 0 : res;
-        const target = element.querySelector("[data-selected=true]");
-        if (target) {
-          const tD = target.getBoundingClientRect();
-          const sD = element.getBoundingClientRect();
-          if (tD.top - 10 <= sD.top || tD.bottom >= sD.bottom) {
-            target.scrollIntoView({ behavior: "smooth", block: "center" });
-            console.log("scroll");
-          }
-        }
-      }
-    });
+    navigateList(e.keyCode, selectedIndex).then((res) =>
+      menuRef.actions.navigate(res)
+    );
   }
 
   async function navigateList(
     keyCode: KeyboardEvent["keyCode"],
     actualIndex: number
   ) {
-	if (![38, 40].includes(keyCode)) return;
-
+    if (![38, 40].includes(keyCode)) return;
 
     const dir = keyCode === 38 ? -1 : +1;
 
     return actualIndex + dir;
   }
 
+  function onSelect(filteredData: any, index: number) {
+    const selectedDta = filteredData?.[index];
 
-  function onSelect(filteredData:any,index:number ) {
-	const selectedDta = filteredData?.[index]
-	 console.log(selectedDta)
+    if (onPick) onPick(selectedDta);
     // onMenuItemClick && onMenuItemClick(e.detail);
-    const event = custom_event("on:select",selectedDta, { bubbles: true });
+    let event = custom_event("on:pick", selectedDta, { bubbles: true });
     element.dispatchEvent(event);
     menuHTML.dispatchEvent(event);
     popperHTML.dispatchEvent(event);
@@ -120,13 +116,18 @@
     ? []
     : doFind(data, searchString, defaultField);
 
-  $: console.log({ filteredData });
+
   onMount(() => {
     return () => {};
   });
 </script>
 
-<Popper bind:isOpen={popperOpen} bind:element={popperHTML} on:select position="BC" autoClose class="w-large">
+<Popper
+  bind:isOpen={popperOpen}
+  bind:element={popperHTML}
+  position="BC"
+  autoClose
+  class="w-large">
   <Input
     bind:value={searchString}
     bind:element
@@ -136,7 +137,8 @@
     size="auto"
     class={className}
     slot="holderSlot"
-	on:select
+    on:select
+    on:pick
     on:click={() => (popperOpen = true)}
     on:focus={() => {
       setTimeout(() => (popperOpen = true), 250);
@@ -145,29 +147,39 @@
     {...$$restProps} />
   <slot {filteredData}>
     <Menu
+      bind:this={menuRef}
       style="max-height:350px;overflow:auto;width:100%;"
       data={filteredData}
-      let:itemIndex
       bind:element={menuHTML}
+      bind:selectedIndex
+      on:mouseover={()=>{element.focus()}}
+      let:itemIndex
       let:item>
       <MenuItem
-        text={item?.[dataFieldName]}
-        selected={itemIndex === selectedIndex}
-        on:click={() => {}} />
+        text={item?.[dataFieldName]}        
+        on:click={() => {
+          if (onPick) onPick(item);
+          // selectedIndex = itemIndex;
+          popperOpen=false
+          menuRef.actions.navigate(itemIndex) 
+        }} />
     </Menu>
   </slot>
   {#if !filteredData.length && !searchString}
     <slot name="emptySearchString">
       <div class="pad-2 flex-h flex-align-middle gap-small">
         <Icon fontSize="large" icon="fa-regular:keyboard" />
-	  perform search
+        perform search
       </div>
     </slot>
   {:else if !filteredData.length}
     <slot name="emptySearch">
       <div class="pad-2 flex-h flex-align-middle gap-small">
-        <Icon class="dsp-inline" fontSize="large" icon="material-symbols:no-sim-outline" />
-	  no results
+        <Icon
+          class="dsp-inline"
+          fontSize="large"
+          icon="material-symbols:no-sim-outline" />
+        no results
       </div>
     </slot>
   {/if}

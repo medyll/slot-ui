@@ -7,7 +7,7 @@
 	import { compute_slots, get_current_component, null_to_empty } from 'svelte/internal';
 	import Icon from '../icon/Icon.svelte';
 	import ListTitle from './ListTitle.svelte';
-	import { createEventForwarder } from '$lib/engine/engine.js';
+	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
 	import Virtualize from '../virtualize/Virtualize.svelte';
 	import type { Data } from '$lib/data/grouper/Grouper.svelte';
 	import { dataOp, propsProxy } from '$lib/engine/utils.js';

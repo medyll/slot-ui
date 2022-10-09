@@ -2,12 +2,15 @@ import type { ElementProps } from '$typings/index.js';
 
 
 export type MenuProps<T = any> = {
-    menuList: MenuItemProps[]
-    density?: ElementProps['density'],
-    hasIcon?: boolean
+    /** @deprecated */ menuList?: MenuItemProps[],
+    menuItemsList?: MenuItemProps[],
+    menuItemsInstances?: any[], // svelte instances of menu items
     data?: T
+    density?: ElementProps['density']
+    selectedIndex?: number
+    hasIcon?: boolean
     onMenuItemClick?: Function
-    action?: () => void /** @deprecated */
+    actions?: Record<string,(args?:any) => void>  
 }
 
 export type MenuItemProps<T = any> = {

@@ -77,9 +77,9 @@
 	on:click={handleClick()}
 	on:dblclick={handleDblClick()}
 	style="opacity:${disabled ? 0.6 : 1};${style}"
-	class="listItem {className}"
-	class:selected
+	class="listItem {className}" 
 	data-density={density}
+	data-selected={selected ?? null}
 >
 	<span class="listItemChip" />
 	{#if $$slots.icon || icon}

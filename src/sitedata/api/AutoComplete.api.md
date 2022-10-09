@@ -6,14 +6,25 @@ declare const __propDef: {
         element?: HTMLDivElement | null | undefined;
         data?: any;
         defaultField?: string | undefined;
+        dataFieldName?: string | string[] | undefined;
         showSortMenu?: boolean | undefined;
         mode?: "exact" | "partial" | undefined;
         filteredData?: any[] | undefined;
+        selectedIndex?: number | undefined;
+        onPick?: ((args: any) => void) | undefined;
     };
     events: {
+        select: CustomEvent<any>;
+        pick: CustomEvent<any>;
+    } & {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
+        default: {
+            filteredData: any[];
+        };
+        emptySearchString: {};
+        emptySearch: {};
         noResultsSlot: {};
         loadingSlot: {};
     };
@@ -34,6 +45,9 @@ export default class AutoComplete extends SvelteComponentTyped<AutoCompleteProps
     get defaultField(): string | undefined;
     /**accessor*/
     set defaultField(_: string | undefined);
+    get dataFieldName(): string | string[] | undefined;
+    /**accessor*/
+    set dataFieldName(_: string | string[] | undefined);
     get showSortMenu(): boolean | undefined;
     /**accessor*/
     set showSortMenu(_: boolean | undefined);
@@ -43,6 +57,12 @@ export default class AutoComplete extends SvelteComponentTyped<AutoCompleteProps
     get filteredData(): any[] | undefined;
     /**accessor*/
     set filteredData(_: any[] | undefined);
+    get selectedIndex(): number | undefined;
+    /**accessor*/
+    set selectedIndex(_: number | undefined);
+    get onPick(): ((args: any) => void) | undefined;
+    /**accessor*/
+    set onPick(_: ((args: any) => void) | undefined);
 }
 export {};
 
