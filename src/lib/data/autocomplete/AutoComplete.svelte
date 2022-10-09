@@ -26,11 +26,9 @@
   /** initial data to look in */
   export let data: any = [];
   /** default field to be used for searches, can be * */
-  export let defaultField = "*";
+  export let searchField = "*";
   /** defaults fields to be shown */
   export let dataFieldName: string | string[] | undefined = undefined;
-  /** show the opener button for the choice of fields */
-  export let showSortMenu: boolean = false;
   /** search mode : exact or partial match*/
   export let mode: "exact" | "partial" = "partial";
   /** external bind use, to read filtered data */
@@ -67,10 +65,7 @@
     return results;
   };
 
-  function preNavigate(
-    e: KeyboardEvent,
-    data: Record<string, any>,
-  ) {
+  function preNavigate(e: KeyboardEvent, data: Record<string, any>) {
     if (e.keyCode === 13) {
       e.preventDefault();
       onSelect(filteredData, selectedIndex);
@@ -114,8 +109,7 @@
 
   $: filteredData = !searchString
     ? []
-    : doFind(data, searchString, defaultField);
-
+    : doFind(data, searchString, searchField);
 
   onMount(() => {
     return () => {};
@@ -131,13 +125,11 @@
   <Input
     bind:value={searchString}
     bind:element
-    placeholder="Search component"
     type="search"
     inputType="search"
     size="auto"
     class={className}
     slot="holderSlot"
-    on:select
     on:pick
     on:click={() => (popperOpen = true)}
     on:focus={() => {
@@ -145,26 +137,28 @@
     }}
     on:keydown={(e) => preNavigate(e, filteredData, menuHTML)}
     {...$$restProps} />
-  <slot {filteredData}>
-    <Menu
-      bind:this={menuRef}
-      style="max-height:350px;overflow:auto;width:100%;"
-      data={filteredData}
-      bind:element={menuHTML}
-      bind:selectedIndex
-      on:mouseover={()=>{element.focus()}}
-      let:itemIndex
-      let:item>
+  <Menu
+    bind:this={menuRef}
+    style="max-height:350px;overflow:auto;width:100%;"
+    data={filteredData}
+    bind:element={menuHTML}
+    bind:selectedIndex
+    on:mouseover={() => {
+      element.focus();
+    }}
+    let:itemIndex
+    let:item>
+    <slot menuItemData={item} >
       <MenuItem
-        text={item?.[dataFieldName]}        
+        text={item?.[dataFieldName]}
         on:click={() => {
           if (onPick) onPick(item);
           // selectedIndex = itemIndex;
-          popperOpen=false
-          menuRef.actions.navigate(itemIndex) 
+          popperOpen = false;
+          menuRef.actions.navigate(itemIndex);
         }} />
-    </Menu>
-  </slot>
+    </slot>
+  </Menu>
   {#if !filteredData.length && !searchString}
     <slot name="emptySearchString">
       <div class="pad-2 flex-h flex-align-middle gap-small">
@@ -184,76 +178,3 @@
     </slot>
   {/if}
 </Popper>
-
-{#if popperOptionsOpen}
-  <Popper
-    code="ui"
-    parentNode={container}
-    position="BC"
-    flow="fixed"
-    class="marg-4"
-    stickToHookWidth={true}>
-    <Menu style="max-height:350px;overflow:auto;width:100%;" density="default">
-      <MenuItem
-        divider={true}
-        text="strict"
-        on:click={() => {
-          if (mode === "exact") {
-            mode = "partial";
-          } else {
-            mode = "exact";
-          }
-        }}>
-        <div slot="actionSlot" class="pad-r-1">
-          <input
-            type="checkbox"
-            checked={mode === "exact"}
-            style="display:block;margin:0" />
-        </div>
-        strict
-      </MenuItem>
-      <MenuItem
-        text="strict"
-        on:click={() => {
-          defaultField = "*";
-        }}>
-        <div slot="actionSlot" class="pad-r-1">
-          {#if defaultField === "*"}
-            <input
-              type="checkbox"
-              checked={defaultField === "*"}
-              style="display:block;margin:0" />
-          {/if}
-        </div>
-        {"*"}
-      </MenuItem>
-      {#each dataKeys as kk}
-        <MenuItem
-          text="strict"
-          on:click={() => {
-            defaultField = kk;
-          }}>
-          <div slot="actionSlot" class="pad-r-1">
-            {#if defaultField === kk}
-              <input
-                type="checkbox"
-                checked={defaultField === kk}
-                style="display:block;margin:0" />
-            {/if}
-          </div>
-          {kk}
-        </MenuItem>
-      {/each}
-    </Menu>
-  </Popper>
-{/if}
-
-<slot name="noResultsSlot" />
-<slot name="loadingSlot" />
-
-<style lang="scss">
-  container {
-    display: inline-flex;
-    gap: 0.25rem;
-  }
-</style>

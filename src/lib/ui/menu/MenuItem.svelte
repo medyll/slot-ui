@@ -46,11 +46,6 @@
     $menuStateContext.hasIcon = true;
   }
 
-  // add instance to store !
-  /* if (!mounted) {
-    $menuStateContext.menuItemsInstances?.push(get_current_component());
-  } */
-
   if (selected) {
     $menuStateContext.selectedIndex = itemIndex;
   }
@@ -66,10 +61,6 @@
     return (()=>{
     })
   });
-
-  const register = () => {
-    $menuStateContext.menuItemsInstances?.push(get_current_component());
-  };
 
   const handleClick = (data: any) => () => {
     const event = custom_event("menu:item:clicked", data, { bubbles: true });
