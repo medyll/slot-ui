@@ -4,6 +4,7 @@ html {
     font-family: "Rubik";
     line-height: 1.45;
     height: 100%;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
 body {
@@ -26,3 +27,4 @@ a {
         color: inherit;
     }
 }
+

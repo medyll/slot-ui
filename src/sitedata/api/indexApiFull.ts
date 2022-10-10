@@ -56,6 +56,7 @@ import ChromeFrameListApiReadMe from "$sitedata/api/ChromeFrameList.api.md";
 import FrameApiReadMe from "$sitedata/api/Frame.api.md";
 import LoginApiReadMe from "$sitedata/api/Login.api.md";
 import MenuApiReadMe from "$sitedata/api/Menu.api.md";
+import MenuContextAgentApiReadMe from "$sitedata/api/MenuContextAgent.api.md";
 import MenuItemApiReadMe from "$sitedata/api/MenuItem.api.md";
 import PanelApiReadMe from "$sitedata/api/Panel.api.md";
 import PanelerApiReadMe from "$sitedata/api/Paneler.api.md";
@@ -131,6 +132,7 @@ chromeframelistApi:ChromeFrameListApiReadMe,
 frameApi:FrameApiReadMe,
 loginApi:LoginApiReadMe,
 menuApi:MenuApiReadMe,
+menucontextagentApi:MenuContextAgentApiReadMe,
 menuitemApi:MenuItemApiReadMe,
 panelApi:PanelApiReadMe,
 panelerApi:PanelerApiReadMe,

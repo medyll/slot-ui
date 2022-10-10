@@ -7,12 +7,12 @@
 	import { compute_slots, get_current_component, null_to_empty } from 'svelte/internal';
 	import Icon from '../icon/Icon.svelte';
 	import ListTitle from './ListTitle.svelte';
-	import { createEventForwarder } from '../../engine/engine';
+	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
 	import Virtualize from '../virtualize/Virtualize.svelte';
 	import type { Data } from '$lib/data/grouper/Grouper.svelte';
-	import { dataOp, propsProxy } from '$lib/engine/utils';
+	import { dataOp, propsProxy } from '$lib/engine/utils.js';
 	import Divider from '../divider/Divider.svelte';
-	import type { SorterFieldType } from '$lib/data/sorter/types';
+	import type { SorterFieldType } from '$lib/data/sorter/types.js';
 	import Sorterer from '$lib/data/sorter/Sorterer.svelte';
 
 	// set store

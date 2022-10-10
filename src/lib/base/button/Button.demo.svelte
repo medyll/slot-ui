@@ -133,7 +133,6 @@
     ...parameters,
   };
 
-console.log(styleDefaultArgs);
 
   let componentArgs = {
     icon: "icon-park-outline:avatar",
@@ -162,8 +161,7 @@ let code = `
   <div class="flex-v gap-medium">
     <DemoPage title="Using slots" {code} component="Button">
       <Demoer {parameters} {componentArgs} let:activeParams>
-        <Button {...activeParams}
-          >Using slots
+        <Button {...activeParams} >Using slots
           <Icon icon="user" slot="startButtonSlot" />
           <span slot="loadingIconButtonSlot"
             ><Icon icon="loading" rotate /></span

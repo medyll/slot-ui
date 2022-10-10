@@ -63,7 +63,7 @@
 			<div class="pad-tiny">
 			  <Menu {...activeParams}>
 				  <MenuItem>menu item</MenuItem>
-				  <MenuItem selected={true}>menu item</MenuItem>
+				  <MenuItem>menu item</MenuItem>
 				  <MenuItem>menu item</MenuItem>
 				  <MenuItem>menu item</MenuItem>
 				  <MenuItem>menu item</MenuItem>

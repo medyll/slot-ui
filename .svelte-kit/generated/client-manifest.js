@@ -10,7 +10,7 @@ export { matchers } from './client-matchers.js';
 	() => import('./nodes/7'),
 	() => import('./nodes/8')];
 
-			export const server_loads = [];
+			export const server_loads = [0];
 
 			export const dictionary = {
 	"": [5],
@@ -20,5 +20,5 @@ export { matchers } from './client-matchers.js';
 };
 
 			export const hooks = {
-				handleError: (({ error }) => { console.error(error); return { message: 'Internal Error' }; }),
+				handleError: (({ error }) => { console.error(error) }),
 			};

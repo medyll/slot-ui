@@ -1,10 +1,8 @@
 import { writable, get } from 'svelte/store'; 
-import type { MenuProps } from './types';
+import type { MenuProps } from './types.js';
 
 
-function createStore<T = MenuProps>() {
-
-  const initialData: MenuProps = { density: 'default' };
+function createStore<T = MenuProps>(initialData: MenuProps = {}) { 
 
   const innerStore = writable<MenuProps>(initialData);
   const { subscribe, set, update } = innerStore;
@@ -16,4 +14,4 @@ function createStore<T = MenuProps>() {
   };
 }
 
-export const createMenuStore = <T = MenuProps>() => createStore<T>();
+export const createMenuStore = <T = MenuProps>(initialData?:MenuProps) => createStore<T>(initialData);

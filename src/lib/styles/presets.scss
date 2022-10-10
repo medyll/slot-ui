@@ -32,34 +32,55 @@
     &[data-width="medium"] {
         width: 8rem;
     }
-    &[data-width="default"]{
-        width: 12rem ;
+    &[data-width="default"] {
+        width: 12rem;
     }
     &[data-width="large"] {
-        width: 16rem
-    } 
+        width: 16rem;
+    }
     &[data-width="auto"] {
-        width: auto
-    } 
+        width: auto;
+    }
 }
 
 @mixin ui-density-presets {
-    &.density-none, &[data-density="none"] {
+    &.density-none,
+    &[data-density="none"] {
         padding: 0;
-    } 
-    &.density-tight, &[data-density="tight"] {
+    }
+    &.density-tight,
+    &[data-density="tight"] {
         padding: 0.5rem 0;
     }
-    &.density-small, &[data-density="small"] {
+    &.density-small,
+    &[data-density="small"] {
         padding: 0.75rem 0;
     }
-    &.density-default, &[data-density="default"] {
+    &.density-default,
+    &[data-density="default"] {
         padding: 1rem 0;
     }
-    &.density-kind, &[data-density="kind"]{
+    &.density-kind,
+    &[data-density="kind"] {
         padding: 1.5rem 0;
     }
-    &.density-unset, &[data-density="unset"]{
+    &.density-unset,
+    &[data-density="unset"] {
         padding: auto;
+    }
+}
+
+@mixin data-hover {
+    &:hover {
+        border-color:   var(--theme-color-foreground-alpha-high);
+        background-color: var(--theme-color-secondary-alpha);
+    }
+}
+
+@mixin data-selected {
+    &.selected, &[data-selected="true"] {
+        border-color:   var(--theme-color-primary);
+        background-color: var(--theme-color-primary-alpha-high);
+        box-shadow: var(--slotui-listitem-active-boxshadow, var(shad-3));
     }
 }

@@ -17,7 +17,7 @@
     "break-lines": 80,
     // indent: 1,
     "remove-initial-line-feed": true,
-    // "tabs-to-spaces": 0,
+    "tabs-to-spaces": 2,
     // "spaces-to-tabs": 20,
   });
 
@@ -43,7 +43,7 @@
     {#if title}<div class="text-bold pad pad-l-4">- {title}</div>{/if}
     <div class="marg-l-2 dsp-block-inline radius-small pad-ii-2">
       <slot name="code">
-        <pre><code lang="language-svelte">{@html highlighted}</code></pre>
+        <pre ><code  lang="language-svelte">{@html highlighted}</code></pre>
       </slot>
     </div>
   {/if}

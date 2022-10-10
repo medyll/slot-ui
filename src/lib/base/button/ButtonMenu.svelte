@@ -18,6 +18,7 @@
 	export let actionComponent: SvelteComponent | any = Menu;
 	export let menuProps: MenuProps = {
 		menuList: menuData,
+		menuItemsList: menuData,
 		onMenuItemClick: () => {
 			console.log('redfered');
 		}
@@ -35,6 +36,7 @@
 		? menuProps
 		: {
 				menuList: menuData,
+				menuItemsList: menuData,
 				onMenuItemClick: () => {}
 		  };
 

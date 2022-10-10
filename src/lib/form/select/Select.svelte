@@ -44,13 +44,6 @@
     }, 250);
   };
 
-  const handleClick = (visible: any) => (event: MouseEvent) => {
-    event.stopPropagation();
-    clearTimeout(timerClick);
-    setTimeout(() => {
-      element.focus();
-    }, 0);
-  };
 </script>
 
 <input {value} bind:this={hiddenRef} type="hidden" {name} />
@@ -60,6 +53,7 @@
     bind:this={element}
     on:blur={show(false)}
     on:focus={show(true)}
+    on:keydown={()=>{console.log('red')}}
     placeholder="Select"
     readonly
     value=""
@@ -67,10 +61,9 @@
     class={className}>
     <Icon slot="endInputSlot" icon="chevron-down" />
   </Input>
-  <Menu
-    {data}
+  <Menu 
     style="width:100%;"
-    on:menu:clicked={(event) => {
+    on:menu:click={(event) => {
       const args = event.detail;
       hiddenRef.value =
         args?.[dataFieldId] ?? args?.["id"] ?? args?.[dataFieldName] ?? args;
@@ -84,7 +77,7 @@
             >{dta?.[dataFieldName]}</MenuItem>
         </slot>
       {/each}
-    {:else if data}
+    {:else if options}
       {#each options as option}
         <slot optionsData={option}>
           <MenuItem icon={option.user} selected={value === 2} data={option}

@@ -16,8 +16,12 @@
   import type { Writable } from "svelte/store";
   import type { UiContextType } from "$contexts/ui.context.js";
   import { onMount } from "svelte";
-  import AutoComplete from "$lib/data/autocomplete/AutoComplete.svelte";
-  import { slotuiCatalog } from "$lib/slotuiCatalog.js";
+  import AutoComplete from "$lib/data/autocomplete/AutoComplete.svelte"; 
+  import { goto } from "$app/navigation";
+  import { sitePaths } from "../site.utils.js";
+  // from +layout.server
+  export let data = {};
+ 
 
   let store = writable<UiContextType>({
     drawerFlow: "fixed",
@@ -105,16 +109,18 @@
       class="nav flex-h pos-sticky pad flex-align-middle gap-small zI-10 w-full h-4 gap-medium">
       <Button
         on:click={onDrawerClick}
-        icon="menu"
-        bgTheme="primary"
-        iconFamily="mdi" />
+        icon="mdi:menu"
+        bgTheme="primary"  />
       <h3>SlotUi</h3>
       <div class="flex-main" />
       <a href="svelte-components">Components</a>
-      <AutoComplete data={Object.values(slotuiCatalog ?? {})} />
-      <ThemeSwitcher
-        iconFamily="mdi"
-        icon="paint-outline"
+      <AutoComplete
+        dataFieldName="code"
+        placeholder="Search component"
+        onPick={(args)=>goto(sitePaths.component(args))}
+        data={Object.values(data.slotuiCatalog ?? {})} />
+      <ThemeSwitcher 
+        icon="mdi:paint-outline"
         title="toggle theme" />
     </nav>
     <div id="innerSlide" bind:this={innerSlide} class="zI-0"><slot /></div>

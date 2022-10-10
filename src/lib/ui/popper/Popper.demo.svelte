@@ -1,8 +1,8 @@
 <script lang="ts">
   import Popper from "./Popper.svelte";
   import Button from "$lib/base/button/Button.svelte";
-  import { defaultsArgs, defaultsArgsFromProps } from "../../base/demoer/demoer.utils.js";
   /* demo */
+  import { defaultsArgs, defaultsArgsFromProps } from "$lib/base/demoer/demoer.utils.js";
   import ComponentExample from "$lib/demo/ComponentExample.svelte";
   import Demoer from "$lib/base/demoer/Demoer.svelte";
   import DemoPage from "$lib/base/demoer/DemoPage.svelte";

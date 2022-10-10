@@ -56,6 +56,7 @@ import ChromeFrameListReadMe from "$sitedata/api/ChromeFrameList.md";
 import FrameReadMe from "$sitedata/api/Frame.md";
 import LoginReadMe from "$sitedata/api/Login.md";
 import MenuReadMe from "$sitedata/api/Menu.md";
+import MenuContextAgentReadMe from "$sitedata/api/MenuContextAgent.md";
 import MenuItemReadMe from "$sitedata/api/MenuItem.md";
 import PanelReadMe from "$sitedata/api/Panel.md";
 import PanelerReadMe from "$sitedata/api/Paneler.md";
@@ -131,6 +132,7 @@ chromeframelist:ChromeFrameListReadMe,
 frame:FrameReadMe,
 login:LoginReadMe,
 menu:MenuReadMe,
+menucontextagent:MenuContextAgentReadMe,
 menuitem:MenuItemReadMe,
 panel:PanelReadMe,
 paneler:PanelerReadMe,

@@ -66,16 +66,11 @@ li.listItemTitle {
 }
 
 li.listItem {
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.3);
-  }
+    @include data-hover;
+  @include data-selected;
+border:1px solid transparent;
 
   &.selected {
-    background-color: var(
-      --slotui-listitem-active-background,
-      var(--theme-color-primary-alpha-high, black)
-    ); //rgba(255, 255, 255, 0.3);
-    box-shadow: var(--slotui-listitem-active-boxshadow, var(shad-3));
 
     .listItemChip {
       position: absolute;
