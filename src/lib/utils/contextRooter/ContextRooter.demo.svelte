@@ -18,20 +18,22 @@
     /** read and set svelte context from component root */
     import ContextRooter  from "./ContextRooter.svelte";
     let myContextRef;
-    setContext("myContext", {});
+    setContext("myContext", {some:"data"});
 
-    $: myContext = myContextRef?.menuAgent
+    $: myContext = myContextRef
+
+    $myContext.some = "other data"
 <\/script>
 
 <ContextRooter
-    contextKey="myContext"
+    contextKey="Read and set svelte context from component root"
     bind:this={myContextRef} />`;
 </script>
 
 <ComponentExample
         component="ContextRoot">
     <div class="flex-v gap-large">
-        <DemoerCode code={codeSlot} />
+        <DemoerCode title="myContext" code={codeSlot} />
     </div>
 
 </ComponentExample>
