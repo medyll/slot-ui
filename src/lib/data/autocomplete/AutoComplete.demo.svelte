@@ -15,9 +15,9 @@
   /* demo */
 
   let data = [
-    { id: 1, name: "i am groot", surname: "am", lastname: "groot" },
-    { id: 2, name: "he is groot", surname: "is", lastname: "groot" },
-    { id: 3, name: "you are groot", surname: "are", lastname: "groot" },
+    { id: 1, name: "Wanda", surname: "Zima", lastname: "Groot" },
+    { id: 2, name: "George", surname: "Bob", lastname: "Groot" },
+    { id: 3, name: "Malthus", surname: "Eren", lastname: "Groot" },
   ];
 
   let findData: any;
@@ -72,7 +72,7 @@
           placeholder="Search in list"
           style="width:200px" 
           {data}>
-          <MenuItem>{menuItemData.name}</MenuItem>
+          <MenuItem>{menuItemData.name} {menuItemData.lastname}</MenuItem>
         </AutoComplete>
       </Demoer>
     </DemoPage>

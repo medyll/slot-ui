@@ -116,6 +116,7 @@
       <a href="svelte-components">Components</a>
       <AutoComplete
         dataFieldName="code"
+        placeholder="Search component"
         onPick={(args)=>goto(sitePaths.component(args))}
         data={Object.values(data.slotuiCatalog ?? {})} />
       <ThemeSwitcher 

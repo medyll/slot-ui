@@ -146,6 +146,7 @@
     on:mouseover={() => {
       element.focus();
     }}
+    on:menu:click={(args)=>{alert(args)}}
     let:itemIndex
     let:item>
     <slot menuItemData={item} >

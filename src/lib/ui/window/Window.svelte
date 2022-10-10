@@ -266,9 +266,5 @@
   .iconZone {
     display: flex;
     // grid-gap: 0.5rem;
-
-    > {
-      color: red;
-    }
   }
 </style>

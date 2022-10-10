@@ -15,6 +15,7 @@ declare const __propDef: {
         data?: Record<string, any> | undefined;
         /** highlight menu item when selected*/ selected?: boolean | undefined;
         onMenuItemClick?: Function | undefined;
+        /** position in the list */ itemIndex: number;
     };
     events: {
         [evt: string]: CustomEvent<any>;
@@ -67,6 +68,9 @@ export default class MenuItem extends SvelteComponentTyped<MenuItemProps, MenuIt
     get onMenuItemClick(): Function | undefined;
     /**accessor*/
     set onMenuItemClick(_: Function | undefined);
+    get itemIndex(): number;
+    /**accessor*/
+    set itemIndex(_: number);
 }
 export {};
 

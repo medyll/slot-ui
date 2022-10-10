@@ -5,28 +5,24 @@ declare const __propDef: {
         class?: string | undefined;
         element?: HTMLDivElement | null | undefined;
         data?: any;
-        defaultField?: string | undefined;
+        searchField?: string | undefined;
         dataFieldName?: string | string[] | undefined;
-        showSortMenu?: boolean | undefined;
         mode?: "exact" | "partial" | undefined;
         filteredData?: any[] | undefined;
         selectedIndex?: number | undefined;
         onPick?: ((args: any) => void) | undefined;
     };
     events: {
-        select: CustomEvent<any>;
         pick: CustomEvent<any>;
     } & {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
         default: {
-            filteredData: any[];
+            menuItemData: any;
         };
         emptySearchString: {};
         emptySearch: {};
-        noResultsSlot: {};
-        loadingSlot: {};
     };
 };
 export declare type AutoCompleteProps = typeof __propDef.props;
@@ -42,15 +38,12 @@ export default class AutoComplete extends SvelteComponentTyped<AutoCompleteProps
     get data(): any;
     /**accessor*/
     set data(_: any);
-    get defaultField(): string | undefined;
+    get searchField(): string | undefined;
     /**accessor*/
-    set defaultField(_: string | undefined);
+    set searchField(_: string | undefined);
     get dataFieldName(): string | string[] | undefined;
     /**accessor*/
     set dataFieldName(_: string | string[] | undefined);
-    get showSortMenu(): boolean | undefined;
-    /**accessor*/
-    set showSortMenu(_: boolean | undefined);
     get mode(): "exact" | "partial" | undefined;
     /**accessor*/
     set mode(_: "exact" | "partial" | undefined);

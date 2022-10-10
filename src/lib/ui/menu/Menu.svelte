@@ -61,11 +61,12 @@
   setContext("menuStateContext", menuStore);
 
   function onMenuClick(e: CustomEvent<any>) {
-    const event = custom_event("menu:clicked", e.detail, { bubbles: true });
+    /** @deprecated */
+    let event = custom_event("menu:clicked", e.detail, { bubbles: true });
+    element.dispatchEvent(event);
+    event = custom_event("menu:click", e.detail, { bubbles: true });
     element.dispatchEvent(event);
   }
-
-
 </script>
 
 <MenuContextAgent bind:this={menuAgentRef} />
@@ -86,7 +87,7 @@
       </slot>
     {/each}
   {:else if data}
-    {#each data as dta, itemIndex}
+    {#each data as dta, itemIndex} 
       <slot item={dta} {itemIndex} menuItem={dta}>
         <MenuItem
           data={dta}

@@ -55,14 +55,16 @@
     $menuStateContext.menuItemsInstances?.push(instance);
     // if no data and no listItem, create index
     if (!itemIndex) {
-      itemIndex = $menuStateContext.menuItemsInstances?.length -1;
+      itemIndex = $menuStateContext.menuItemsInstances?.length - 1;
     }
 
-    return (()=>{
-    })
+    //element.addEventListener("click", handleClick);
+    return () => {
+      //element.removeEventListener("click", handleClick);
+    };
   });
 
-  const handleClick = (data: any) => () => {
+  const handleClick = () => () => {
     const event = custom_event("menu:item:clicked", data, { bubbles: true });
     if (element) element.dispatchEvent(event);
     // set selectedIndex if we have index
@@ -74,7 +76,6 @@
   const setSelected = () => {
     $menuStateContext.selectedIndex = itemIndex;
   };
-
 </script>
 
 {#if dividerBefore}
@@ -88,7 +89,7 @@
   role="menuitem"
   bind:this={element}
   use:forwardEvents
-  on:click={handleClick(data)}>
+  on:click={handleClick}>
   {#if $menuStateContext?.hasIcon}
     <div class="menuItemIcon">
       <slot name="iconSlot">
