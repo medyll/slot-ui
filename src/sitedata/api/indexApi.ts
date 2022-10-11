@@ -71,8 +71,10 @@ import TaskbarReadMe from "$sitedata/api/Taskbar.md";
 import TaskBarContentReadMe from "$sitedata/api/TaskBarContent.md";
 import ThemeSwitcherReadMe from "$sitedata/api/ThemeSwitcher.md";
 import ToastReadMe from "$sitedata/api/Toast.md";
+import ToasterReadMe from "$sitedata/api/Toaster.md";
 import TopBarReadMe from "$sitedata/api/TopBar.md";
 import WindowReadMe from "$sitedata/api/Window.md";
+import ContextRooterReadMe from "$sitedata/api/ContextRooter.md";
 
 export const componentReadMe = {alert:AlertReadMe,
 avatar:AvatarReadMe,
@@ -147,5 +149,7 @@ taskbar:TaskbarReadMe,
 taskbarcontent:TaskBarContentReadMe,
 themeswitcher:ThemeSwitcherReadMe,
 toast:ToastReadMe,
+toaster:ToasterReadMe,
 topbar:TopBarReadMe,
-window:WindowReadMe}
+window:WindowReadMe,
+contextrooter:ContextRooterReadMe}

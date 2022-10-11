@@ -1,18 +1,19 @@
 ```import { SvelteComponentTyped } from "svelte";
 declare const __propDef: {
     props: {
+        [x: string]: any;
         class?: string | undefined;
         element?: HTMLDivElement | null | undefined;
         style?: string | undefined;
-        /** is the content visible */ isOpen?: boolean | undefined;
-        /** show a working closer icon */ showCloseControl?: boolean | undefined;
-        /** used to activate the slotui.TitleBar component */ hasMenu?: boolean | undefined;
-        /** text to be shown in the title bar */ title?: string | undefined;
-        /** alternative to iconSlot, icon to be used with the internat iconify component */ icon?: string | undefined;
+        isOpen?: boolean | undefined;
+        showCloseControl?: boolean | undefined;
+        hasMenu?: boolean | undefined;
+        title?: string | undefined;
+        icon?: string | undefined;
         iconFamily?: string | undefined;
-        /** alternative to contentSlot,  content to be shown in the main area */ content?: string | undefined;
-        /** alternative to slot.bottomZone, content to be shown in the bottom button zone */ bottomZone?: string | undefined;
-        /** component actions */ actions?: any;
+        content?: string | undefined;
+        bottomZone?: string | undefined;
+        actions?: any;
     };
     events: {
         [evt: string]: CustomEvent<any>;
