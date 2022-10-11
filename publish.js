@@ -16,9 +16,8 @@ if (args.length < 1) {
 
 const command = args?.[0];
 
- console.log(colors.green("- slotui publish script "));
-console.log(args)
-console.log(command)
+console.log(colors.green("- slotui publish script "));
+
 var run = function (cmd) {
     return exec(cmd, function (error, stdout, stderr) {
       if (stderr !== null) {
@@ -35,15 +34,10 @@ var run = function (cmd) {
 
 switch (command) {
   case "--ver":
-    let ver = args?.[1] 
-    console.log('red')
+    let ver = args?.[1]
     if(!ver)console.error('Missing command, exiting');
-    console.log('red')
-    console.log(`npm version ${ver} && npm run package   && npm publish ./package && npm run make-docs && git commit -a -m "chore: ver ${ver}" && git push`)
-    if(ver) run(`npm version ${ver} && npm run package   && npm publish ./package && npm run make-docs && git commit -a -m "chore: ver ${ver}" && git push`);
+    console.log(`npm version ${ver} && npm run package   && npm publish ./package && npm run make-docs && git commit -a -m "chore: ver ${ver}" && git tag v${ver}  && git push && git push --tags`)
+      if(ver) run(`npm version ${ver} && npm run package   && npm publish ./package && npm run make-docs && git commit -a -m "chore: ver ${ver}" && git tag v${ver}  && git push && git push --tags`);
+
     break;
 }
- 
-
-
-// exec('npm version 0.1.88-dev && npm run package   && npm publish ./package && npm run make-docs && git commit -a -m "chore: ver 0.1.88-dev" && git push');

@@ -66,16 +66,15 @@ li.listItemTitle {
 }
 
 li.listItem {
-    @include data-hover;
+  @include data-hover;
   @include data-selected;
-border:1px solid transparent;
+  @include ui-density-presets;
 
   &.selected {
-
     .listItemChip {
       position: absolute;
       height: 50%;
-      width: 3px;
+      width: 2px;
       background-color: var(--theme-color-primary);
       border-radius: 8px;
       left: 3px;

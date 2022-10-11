@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="Tabs.scss">
 <script lang="ts">
   import {onMount} from 'svelte';
   import {elem} from '../../engine/elem';
