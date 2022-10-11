@@ -55,7 +55,7 @@
 </script>
 
 {#if isOpen}
-<div class="boxRoot shad-3 flex-v {className}" {style} use:forwardEvents>
+<div class="boxRoot shad-3 flex-v {className}" {style} {...$$restProps} use:forwardEvents>
 	<TitleBar {hasMenu} {...closer}>
 		<slot name="titleSlot" slot="titleSlot">{null_to_empty(title)}</slot>
 		<slot name="iconSlot" slot="iconSlot">

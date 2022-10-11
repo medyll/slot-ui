@@ -24,6 +24,7 @@ function createStore<T = ListStoreType>() {
     setActiveData: (data: Data) => { update(n => { return { ...n, activeData: data }; }); },
     setActiveItem: (item: LisItemProps) => { update(n => { return { ...n, activeItem: item }; }); },
     selector: (field: string, data: Record<string, any>) => {
+      if(!data?.[field] || !get(innerStore)?.activeData?.[field]) return false
       return get(innerStore).activeData[field] === data[field];
     },
   };
