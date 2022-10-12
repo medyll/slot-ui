@@ -29,4 +29,6 @@ menu:{name:"Menu",code:"menu",group:"ui"},
 panel:{name:"Panel",code:"panel",group:"ui"},
 popper:{name:"Popper",code:"popper",group:"ui"},
 starter:{name:"Starter",code:"starter",group:"ui"},
-window:{name:"Window",code:"window",group:"ui"} } 
+toast:{name:"Toast",code:"toast",group:"ui"},
+window:{name:"Window",code:"window",group:"ui"},
+contextrooter:{name:"ContextRooter",code:"contextrooter",group:"utils"} } 

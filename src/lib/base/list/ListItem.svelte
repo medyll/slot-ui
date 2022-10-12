@@ -44,7 +44,7 @@
 	// data to hold
 	export let data: Record<string, any> = {};
 
-	export let density: ElementProps['density'] = $listStateContext.density ?? 'default';
+	export let density: ElementProps['density'] = $listStateContext?.density ?? 'default';
 
 
 	const handleClick = () => () => {
@@ -113,23 +113,4 @@
 
 <style lang="scss" global>
 	@import 'List';
-
-	/* li:focus{
-		outline:1px solid #ccc;
-		outline-offset: -1px;
-	} */
-	/* .listItem.density-tight {
-		padding: 0.5rem 0.25rem;
-		margin: 0.125rem 0;
-	}
-
-	.listItem.density-default {
-		padding: 1rem 0.25rem;
-		margin: 0.25rem 0;
-	}
-
-	.listItem.density-kind {
-		padding: 1.5rem 0.25rem;
-		margin: 0.5rem 0;
-	} */
 </style>

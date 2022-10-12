@@ -7,6 +7,7 @@
   import ListItem from "$lib/base/list/ListItem.svelte";
   import ListTitle from "$lib/base/list/ListTitle.svelte";
   import { dataOp } from "$lib/engine/utils.js";
+  import {sitePaths} from "../site.utils.js";
 
   const groupedData = dataOp.groupBy(
     Object.values(slotuiCatalog).sort((a, b) => (a.name > b.name ? 1 : -1)),
@@ -21,7 +22,7 @@
     </ListTitle>
     {#each groupedData[group] as catalog}
       <ListItem selected={true} data={catalog} density="small" class="pad-l-4">
-        <a slot="primary" href="svelte-components/{catalog?.code}">
+        <a slot="primary" href="{sitePaths.component(catalog)}">
           {null_to_empty(catalog?.name)}
         </a>
       </ListItem>

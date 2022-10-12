@@ -44,17 +44,20 @@
                     componentArgs={componentArgsSlot}
                     let:activeParams
                     parameters={parametersSlot}>
-                <Tabs activeTabCode="tab1" {...activeParams}
-                      onTabClick={(e)=>{console.log(e); componentArgsSlot.activeTabCode=e.code}}
-                      style="height:100px;width:450px" {items} let:activeTabCode>
-                    <span slot="tabsTitleSlot">Some tabs title</span>
-                    <span slot="tabsButtonSlot"><Button bordered>button</Button></span>
-                    <div slot="innerTabSlot">
-                        <div class="pad-4">
-                            selected : {activeTabCode}
+                <div style="height:450px;">
+                    <Tabs activeTabCode="tab1" {...activeParams}
+                          onTabClick={(e)=>{console.log(e); componentArgsSlot.activeTabCode=e.code}}
+                          class="h-full"
+                          style="height:100%;width:350px" {items} let:activeTabCode>
+                        <span slot="tabsTitleSlot">Some tabs title</span>
+                        <span slot="tabsButtonSlot"><Button bordered>button</Button></span>
+                        <div class="h-full" slot="innerTabSlot">
+                            <div class="pad-4 h-full overflow-auto">
+                                selected : {activeTabCode}
+                            </div>
                         </div>
-                    </div>
-                </Tabs>
+                    </Tabs>
+                </div>
             </Demoer>
         </DemoPage>
     </div>

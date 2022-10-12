@@ -29,7 +29,9 @@ import Menudemosvelte from "$lib/ui/menu/Menu.demo.svelte";
 import Paneldemosvelte from "$lib/ui/panel/Panel.demo.svelte"; 
 import Popperdemosvelte from "$lib/ui/popper/Popper.demo.svelte"; 
 import Starterdemosvelte from "$lib/ui/starter/Starter.demo.svelte"; 
-import Windowdemosvelte from "$lib/ui/window/Window.demo.svelte";  
+import Toastdemosvelte from "$lib/ui/toast/Toast.demo.svelte"; 
+import Windowdemosvelte from "$lib/ui/window/Window.demo.svelte"; 
+import ContextRooterdemosvelte from "$lib/utils/contextRooter/ContextRooter.demo.svelte";  
  export const slotUiComponentList = [ {name:"Alert",code:"alert",component:Alertdemosvelte,group:"base"},
 {name:"Avatar",code:"avatar",component:Avatardemosvelte,group:"base"},
 {name:"Backdrop",code:"backdrop",component:Backdropdemosvelte,group:"base"},
@@ -61,4 +63,6 @@ import Windowdemosvelte from "$lib/ui/window/Window.demo.svelte";
 {name:"Panel",code:"panel",component:Paneldemosvelte,group:"ui"},
 {name:"Popper",code:"popper",component:Popperdemosvelte,group:"ui"},
 {name:"Starter",code:"starter",component:Starterdemosvelte,group:"ui"},
-{name:"Window",code:"window",component:Windowdemosvelte,group:"ui"} ] 
+{name:"Toast",code:"toast",component:Toastdemosvelte,group:"ui"},
+{name:"Window",code:"window",component:Windowdemosvelte,group:"ui"},
+{name:"ContextRooter",code:"contextrooter",component:ContextRooterdemosvelte,group:"utils"} ] 

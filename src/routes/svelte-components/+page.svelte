@@ -4,6 +4,7 @@
 	import Paper from '$lib/base/paper/Paper.svelte';
 	import { dataOp } from '$lib/engine/utils';
 	import Divider from '$lib/base/divider/Divider.svelte';
+	import {sitePaths} from "../../site.utils.js";
 
 	function spliceArray(arrayIn: any[], size: number) {
 		let out = [];
@@ -32,8 +33,8 @@
 							<svelte:component this={filterList(component.code).component} />
 						{/if}
 						<div class="flex-h flex-wrap gap-small">
-							<div class="flex-main"><a  rel="external" href="svelte-components/{component.code}">{component.name} examples</a></div>
-							<div class="flex-main"><a rel="external" href="svelte-components/{component.code}/api">{component.name} api</a></div>
+							<div class="flex-main"><a  rel="external" href="{sitePaths.component(component)}">{component.name} examples</a></div>
+							<div class="flex-main"><a rel="external" href="{sitePaths.api(component)}">{component.name} api</a></div>
 						</div>
 					</Paper>
 				{/each}

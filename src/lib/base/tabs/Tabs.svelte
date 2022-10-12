@@ -9,6 +9,7 @@
   /*  common slotUi exports*/
   let className = '';
   export {className as class};
+  export let style:string = '';
   export let element: HTMLDivElement | null = null;
   const forwardEvents                       = createEventForwarder(get_current_component());
   /*  end slotUi exports*/
@@ -59,11 +60,11 @@
 </script>
 
 <div
-        {...$$restProps}
         bind:this={element}
         class="tabsRoot flex-v {className}"
         data-orientation={orientation}
         use:forwardEvents
+        {style}
 >
     <div bind:this={tabsElementRef} class="tabsNav  flex-align-middle pos-rel">
         <div>
@@ -73,10 +74,10 @@
             {#each items as item}
                 <div
                         data-code={item?.code}
-                        on:click={()=>{activeTabCode=item.code;handleClick(item)}}
-                        class={activeTabCode === item.code ? 'active' : ''}
+                        on:click={()=>{activeTabCode=item?.code;handleClick(item)}}
+                        class={activeTabCode === item?.code ? 'active' : ''}
                 >
-                    <slot {item} name="tabLabelSlot">{item.label}</slot>
+                    <slot {item} name="tabLabelSlot">{item?.label}</slot>
                 </div>
             {/each}
         </nav>
@@ -106,7 +107,7 @@
                         {#if Boolean(item?.secondary)}
                             <div class=" flex-h pad-tb-2 gap-small">
                                 <div class="border-r pad-1 shad-3 radius-tiny ">
-                                    <Icon style="display:block" inline={false} icon="mdi:info-circle"/>
+                                    <Icon style="display:block" inline={false} icon="clarity:help-info-solid"/>
                                 </div>
                                 <div class="flex-main pad-t-1">{@html item?.secondary}</div>
                             </div>
@@ -130,7 +131,6 @@
         {/each}
     </div>
 </div>
-
 <style lang="scss">
   @import 'Tabs';
 </style>
