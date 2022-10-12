@@ -2,7 +2,7 @@
   import { openWindow } from "./window.actions.js";
   import Button from "$lib/base/button/Button.svelte";
   import Debug from "$lib/base/debug/Debug.svelte";
-  import Window from "./Window.svelte";
+  import Window  from './Window.svelte';
 
   /* demo */
   import {
@@ -25,6 +25,10 @@
       type: "preset-flow",
       values: uiPresets.flow,
     },
+    closeOnValidate: {
+      type: "boolean",
+      values: [true, false],
+    },
     hideAcceptButton: {
       type: "boolean",
       values: [false, true],
@@ -32,6 +36,10 @@
     hideCloseButton: {
       type: "boolean",
       values: [false, true],
+    },
+    hideCancelButton: {
+      type: "boolean",
+      values: [true, false],
     },
   };
 
