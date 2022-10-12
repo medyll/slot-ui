@@ -101,5 +101,7 @@
 		display:flex;
 		/* grid-template-columns: var(--template-columns);
 		grid-auto-columns: min-content; */
+		content-visibility: auto;
+		contain-intrinsic-size: 30px 500px;
 	}
 </style>

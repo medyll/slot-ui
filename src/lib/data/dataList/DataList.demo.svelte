@@ -1,14 +1,14 @@
 <script lang="ts">
-	import DataList from '$lib/base/dataList/DataList.svelte';
-	import DataListRow from '$lib/base/dataList/DataListRow.svelte';
-	import DataListCell from '$lib/base/dataList/DataListCell.svelte';
-	import DataListHead from '$lib/base/dataList/DataListHead.svelte';
+	import DataList from '$lib/data/dataList/DataList.svelte';
+	import DataListRow from '$lib/data/dataList/DataListRow.svelte';
+	import DataListCell from '$lib/data/dataList/DataListCell.svelte';
+	import DataListHead from '$lib/data/dataList/DataListHead.svelte';
 	import ComponentExample from '$lib/demo/ComponentExample.svelte';
 	import appSchemeData from '../../../demoData/appscheme.json';
 	import type { DataCellType } from './types.js';
 	import Demoer from '$lib/base/demoer/Demoer.svelte';
 
-	let data = [...Array(5)].map((caches, index: number) => {
+	let data = [...Array(1500)].map((caches, index: number) => {
 		return {
 			id: index,
 			index,
