@@ -1,6 +1,7 @@
 <script lang="ts">
   import { componentReadMe } from "$sitedata/api/indexApi.js";
   import { slotuiCatalog } from "$lib/slotuiCatalog.js";
+  import {sitePaths} from "../../site.utils.js";
   export let component: string = "";
   export let cite: string = "";
 
@@ -26,14 +27,13 @@
   <div class="flex-v gap-medium ">
     <h5>Api preview :</h5>
     <div class="marg-l-4">
-      <pre class="language-ts"><code
-          ><svelte:component this={finalCompReadMe} /></code></pre>
+      <pre class="language-ts"><code><svelte:component this={finalCompReadMe} /></code></pre>
     </div>
   </div>
   <div class="flex-v gap-medium ">
     <h5>Link to api :</h5>
     <div class="marg-l-4">
-      <a href="svelte-components/{component.toLowerCase()}/api"
+      <a href="{sitePaths.api({code:component.toLowerCase()})}"
         >Api for component "{component}"</a>
     </div>
   </div>

@@ -191,12 +191,12 @@
  
 <ul
 	bind:this={element}
-	class="density-{density} {className}"
+	class="listRoot density-{density} {className}"
 	on:listclicked={onListItemClick_Deprecated}
 	on:list:dblclicked={onListItemClick_Deprecated}
 	on:listitem:click={onListItemClick}
 	on:listitem:dblclick={onListItemClick}
-	style="position:relative;height:{height};margin:0;padding:0!important;{style};opacity:{disabled
+	style="position:relative;height:{height};{style};opacity:{disabled
 		? 0.6
 		: 1};overflow:{virtualize ? 'hidden' : 'auto'};"
 	use:forwardEvents

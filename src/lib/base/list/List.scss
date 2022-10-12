@@ -1,11 +1,12 @@
 @import "../../styles/presets.scss";
 
-ul {
+ul.listRoot {
   display: flex;
   flex-direction: column;
+  padding:0 0.25rem;
 }
 
-ul:focus {
+ul.listRoot:focus {
   outline: 0;
   outline-offset: -4px;
 }
@@ -60,9 +61,9 @@ li.listItemTitle {
   margin-top: 0px !important;
   top: 01px;
   background-color: var(--theme-color-background-alpha-low);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(20px);
   z-index: 1;
-  // box-shadow: var(--box-shad-3);
+  //box-shadow: var(--box-shad-3);
 }
 
 li.listItem {
@@ -70,14 +71,14 @@ li.listItem {
   @include data-selected;
   @include ui-density-presets;
 
-  &.selected {
+  &.selected,&[data-selected=true] {
     .listItemChip {
       position: absolute;
       height: 50%;
-      width: 2px;
+      width: 3px;
       background-color: var(--theme-color-primary);
       border-radius: 8px;
-      left: 3px;
+      left: 2px;
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
   }
