@@ -1,5 +1,5 @@
 ```import { SvelteComponentTyped } from "svelte";
-import type { ElementProps } from "../../../types/index.js";
+import type { ElementProps } from '../../../types/index.js';
 declare const __propDef: {
     props: {
         [x: string]: any;
@@ -16,21 +16,26 @@ declare const __propDef: {
         onValidate?: (() => void) | undefined;
         hideAcceptButton?: boolean | undefined;
         hideCloseButton?: boolean | undefined;
+        hideCancelButton?: boolean | undefined;
         component?: any;
         componentProps?: any;
         contentHTML?: any;
         parentNode?: HTMLElement | undefined;
         icon?: string | undefined;
-        flow?: ElementProps["flow"] | undefined;
+        flow?: ElementProps['flow'] | undefined;
+        closeOnValidate?: boolean | undefined;
         defaultPosition?: {
             x: number;
             y: number;
         } | undefined;
         self?: null | undefined;
+        actions?: {
+            close: () => void;
+        } | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;
-    };
+    }; /** Id of the component's instance */
     slots: {
         default: {};
     };
@@ -39,6 +44,9 @@ export declare type WindowProps = typeof __propDef.props;
 export declare type WindowEvents = typeof __propDef.events;
 export declare type WindowSlots = typeof __propDef.slots;
 export default class Window extends SvelteComponentTyped<WindowProps, WindowEvents, WindowSlots> {
+    get actions(): {
+        close: () => void;
+    };
     get frameId(): string | undefined;
     /**accessor*/
     set frameId(_: string | undefined);
@@ -78,6 +86,9 @@ export default class Window extends SvelteComponentTyped<WindowProps, WindowEven
     get hideCloseButton(): boolean | undefined;
     /**accessor*/
     set hideCloseButton(_: boolean | undefined);
+    get hideCancelButton(): boolean | undefined;
+    /**accessor*/
+    set hideCancelButton(_: boolean | undefined);
     get component(): any;
     /**accessor*/
     set component(_: any);
@@ -96,6 +107,9 @@ export default class Window extends SvelteComponentTyped<WindowProps, WindowEven
     get flow(): "relative" | "absolute" | "fixed" | undefined;
     /**accessor*/
     set flow(_: "relative" | "absolute" | "fixed" | undefined);
+    get closeOnValidate(): boolean | undefined;
+    /**accessor*/
+    set closeOnValidate(_: boolean | undefined);
     get defaultPosition(): {
         x: number;
         y: number;
