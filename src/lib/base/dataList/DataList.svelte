@@ -117,7 +117,6 @@
 	function doSelect(e: CustomEvent<Data>) {
 		const selectedItem = e.detail;
 		selectorFieldValue = selectedItem?.[selectorField];
-		console.log(selectorField, e.detail);
 	}
 
 	function getGroupProps(content: any) {
