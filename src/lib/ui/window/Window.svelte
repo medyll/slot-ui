@@ -131,7 +131,7 @@
       offsetX: number;
       offsetY: number;
       domRect: DOMRect;
-    }) => { 
+    }) => {
       appWindowStore.makeOnTop();
     },
     onDrag         : (args) => {},

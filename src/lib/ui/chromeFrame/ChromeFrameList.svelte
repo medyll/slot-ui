@@ -2,7 +2,7 @@
 <script lang="ts">
   import {chromeFrameListRef, chromeFrameStore} from './chromeFrame.store';
   import ChromeFrame from './ChromeFrame.svelte';
-  import {browser} from '$app/env';
+  import {browser} from '$app/environment';
   import type {IChromeFrameArgs, IChromeOptionsArgs} from './types';
   import {createEventForwarder} from '../../engine/engine';
   import {get_current_component} from 'svelte/internal';
