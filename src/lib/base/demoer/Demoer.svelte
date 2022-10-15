@@ -66,32 +66,36 @@
       <Icon icon="clarity:command-line" />
     </div>
     <div class=" pad flex-h flex-wrap flex-align-middle gap-small">
+      <table  style="width:100%;table-layout:auto;border-spacing: 0.5rem">
       {#each Object.keys(parameters) as parameter}
-        <div class="flex flex-align-middle gap-small w-mid-min">
-          <div class="border-b w-medium-min text-bold  ">{parameter}</div>
-          <div class="w-medium  ">{parameters?.[parameter]?.type}</div>
-          {#if parameters?.[parameter]?.type === "boolean"}
-            <div><Switch name={crypto.randomUUID()} checked={activeParams[parameter]} on:change={(args)=>{activeParams[parameter] = args.currentTarget.checked} } /></div>
-          {:else}
-            {#each parameters?.[parameter]?.values ?? [] as value}
-              {@const finalValue = value === undefined ? "unset" : value}
-              <Button
-                class="w-small-min"
-                naked
-                showChip={activeParams[parameter] === value}
-                on:click={() => {
+        <tr >
+          <td class="w-medium-min text-bold  ">{parameter}</td>
+          <td>{parameters?.[parameter]?.type}</td>
+          <td  >
+            <div class="flex flex-align-middle gap-small w-mid-min">
+            {#if parameters?.[parameter]?.type === "boolean"}
+              <div><Switch name={crypto.randomUUID()} checked={activeParams[parameter]} on:change={(args)=>{activeParams[parameter] = args.currentTarget.checked} } /></div>
+            {:else}
+              {#each parameters?.[parameter]?.values ?? [] as value}
+                {@const finalValue = value === undefined ? "unset" : value}
+                <Button
+                        class="w-small-min"
+                        naked
+                        showChip={activeParams[parameter] === value}
+                        on:click={() => {
                   activeParams[parameter] = value;
                 }}>
-                {finalValue}
-              </Button>
-              <div class="border-r pad-tb-1" />
-            {/each}
-          {/if}
-          {#if parameters?.[parameter]?.type === "object"}
-            <svelte:self parameters={parameters?.[parameter]} />
-          {/if}
-        </div>
+                  {finalValue}
+                </Button>
+                <div class="border-r pad-tb-1" />
+              {/each}
+            {/if}
+            </div>
+          </td>
+        </tr>
       {/each}
+      </table>
+
     </div>
   </div>
 </div>
