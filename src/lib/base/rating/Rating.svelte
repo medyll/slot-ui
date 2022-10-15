@@ -40,6 +40,8 @@
 </div>
 
 <style lang="scss">
+	@import "../../styles/slotui-vars.css";
+	@import "../../styles/presets.scss";
 	.rating {
 		display: flex;
 		flex-direction: var(--direction);

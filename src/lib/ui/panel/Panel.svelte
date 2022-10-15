@@ -73,6 +73,8 @@
 </div>
 
 <style lang="scss">
+  @import "../../styles/slotui-vars.css";
+  @import "../../styles/presets.scss";
   .panel {
     position: relative;
     margin-bottom: 2rem;

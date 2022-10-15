@@ -82,6 +82,8 @@
 
 
 <style lang="scss">
+	@import "../../styles/slotui-vars.css";
+	@import "../../styles/presets.scss";
 	.contentSlot{
 		display:flex;
 		align-items:center;

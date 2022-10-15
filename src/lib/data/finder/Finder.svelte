@@ -1,4 +1,4 @@
-<svelte:options accessors={true} immutable={true} /> 
+<svelte:options accessors={true}  />
 <script lang="ts">
 	import Debug from '$lib/base/debug/Debug.svelte';
 	import Button from '$lib/base/button/Button.svelte';
@@ -145,6 +145,8 @@ optiond -->
 <slot name="loadingSlot" />
 
 <style global lang="scss">
+	@import "../../styles/slotui-vars.css";
+	@import "../../styles/presets.scss";
 	container {
 		display: inline-flex;
 		gap: 0.25rem;

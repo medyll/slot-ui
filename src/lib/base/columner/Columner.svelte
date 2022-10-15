@@ -15,6 +15,8 @@
 </div>
 
 <style lang="scss">
+	@import "../../styles/slotui-vars.css";
+	@import "../../styles/presets.scss";
 	.columner {
 		display: flex;
 		height: 100%; 

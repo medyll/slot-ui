@@ -68,6 +68,8 @@
 </div>
 
 <style lang="scss">
+  @import "../../styles/slotui-vars.css";
+  @import "../../styles/presets.scss";
   .root {
     min-width: auto;
     max-width: 100%;

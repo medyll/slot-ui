@@ -176,6 +176,8 @@
 </div>
 
 <style lang="scss">
+  @import "../../styles/slotui-vars.css";
+  @import "../../styles/presets.scss";
   .window {
     display: block;
     border-radius: 6px;

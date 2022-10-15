@@ -75,6 +75,8 @@
 {/if}
 
 <style lang="scss">
+  @import "../../styles/slotui-vars.css";
+  @import "../../styles/presets.scss";
   .root {
     position: absolute;
     top: 0;

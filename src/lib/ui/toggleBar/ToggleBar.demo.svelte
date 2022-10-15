@@ -69,12 +69,11 @@
     ],
   };
 
-  let codeSlot = `<ToggleBar style="width:350px;"  title="Slotted window" frameId="slotted" {...activeParams}>
+  let codeSlot = `<ToggleBar style="width:350px;" >
   <Icon icon="carbon:progress-bar" slot="toggleBarIcon" />
   <div slot="toggleBarButtons">
     <Button>button</Button>
   </div>
-  <div slot="menuBarSwitcher">menuBarSwitcher</div>
   <Button icon="search" slot="contentSwitcherIcon" />
   <Input size="full" value="a slotted input" />
 </ToggleBar>

@@ -21,6 +21,8 @@
 </div>
 
 <style lang="scss">
+	@import "../../styles/slotui-vars.css";
+	@import "../../styles/presets.scss";
 	chip {
 		position: absolute;
 		z-index: 2;

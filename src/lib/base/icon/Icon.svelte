@@ -31,6 +31,8 @@
 />
 
 <style global lang="scss">
+	@import "../../styles/slotui-vars.css";
+	@import "../../styles/presets.scss";
 	.rotate {
 		animation: spinner-frames 3s infinite linear;
 	}

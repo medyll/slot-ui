@@ -102,7 +102,8 @@
 {/if}
 
 <style lang="scss">
-	@import '../../../lib/styles/presets.scss';
+	@import "../../styles/slotui-vars.css";
+	@import "../../styles/presets.scss";
 	input {
 		border: 1px solid var(--theme-color-foreground-alpha);
 		// border: 1px solid rgba(208, 191, 151, 0.5);

@@ -145,6 +145,8 @@
 {/if}
 
 <style lang="scss">
+  @import "../../styles/slotui-vars.css";
+  @import "../../styles/presets.scss";
   .popper {
     border-radius: var(--css-popper-radius, var(--radius-tiny));
     overflow: hidden;

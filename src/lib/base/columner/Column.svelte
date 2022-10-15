@@ -1,6 +1,5 @@
 <script lang="ts">
   import {createEventForwarder} from '$lib/engine/eventForwarder';
-  import TopBar from '$lib/ui/topBar/TopBar.svelte';
   import {getContext} from 'svelte';
   import {get_current_component, tick} from 'svelte/internal';
   import type {ColumnerStoreType} from './types';
@@ -57,6 +56,8 @@
 </div>
 
 <style lang="scss">
+  @import "../../styles/slotui-vars.css";
+  @import "../../styles/presets.scss";
   .column {
     height: 100%;
     width: 100%;

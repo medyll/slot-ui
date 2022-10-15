@@ -22,6 +22,8 @@
 </div>
 
 <style   lang="scss">
+  @import "../../styles/slotui-vars.css";
+  @import "../../styles/presets.scss";
   .paper {
     color: var(--theme-color-foreground);
     background-color: var(--theme-color-paper);

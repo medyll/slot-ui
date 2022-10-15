@@ -49,6 +49,8 @@
   {/if}
 </div>
 <style>
+  @import "../../styles/slotui-vars.css";
+  @import "../../styles/presets.scss";
   .code {
     white-space: pre-wrap;
   }

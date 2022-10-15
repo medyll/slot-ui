@@ -117,6 +117,8 @@
     <slot></slot>
 {/if}
 <style lang="scss">
+  @import "../../styles/slotui-vars.css";
+  @import "../../styles/presets.scss";
   form {
     z-index: 1000;
   }

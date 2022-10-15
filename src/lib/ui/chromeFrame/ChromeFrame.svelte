@@ -43,6 +43,8 @@
 </div>
 
 <style global lang="scss">
+	@import "../../styles/slotui-vars.css";
+	@import "../../styles/presets.scss";
 	.chromeFrame {
 		color: var(--theme-color-foreground);
 		background-color: var(--theme-color-background);

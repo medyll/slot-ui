@@ -15,6 +15,8 @@
     </div>
 </div>
 <style lang="scss">
+  @import "../../styles/slotui-vars.css";
+  @import "../../styles/presets.scss";
   .sliderRoot {
     background-color: var(--theme-color-background);
 

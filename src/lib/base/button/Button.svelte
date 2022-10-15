@@ -218,7 +218,7 @@
 {/if}
 
 <style lang="scss">
-	@import '../../styles/presets.scss';
+	@import '../../styles/presets.scss';@import "../../styles/slotui-vars.css";
 
 	.actionButton {
 		height: 100%;

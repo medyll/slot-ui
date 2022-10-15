@@ -44,6 +44,8 @@
 {/if}
 
 <style lang="scss">
+  @import "../../styles/slotui-vars.css";
+  @import "../../styles/presets.scss";
   .panelGridPreview {
     display: flex;
     .zoomSlot {

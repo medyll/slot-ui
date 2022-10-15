@@ -127,6 +127,8 @@
 {/if}
 
 <style lang="scss">
+  @import "../../styles/slotui-vars.css";
+  @import "../../styles/presets.scss";
   .sidePanel {
     position: absolute;
     top: 0;

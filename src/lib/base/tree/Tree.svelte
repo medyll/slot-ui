@@ -146,6 +146,7 @@
 </div>
 
 <style lang="scss">
+  @import "../../styles/slotui-vars.css";
   @import "../../styles/presets.scss";
   .cell {
     border: 1px solid transparent;

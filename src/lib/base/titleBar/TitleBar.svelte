@@ -1,3 +1,6 @@
+<!--
+@deprecated
+-->
 <script lang="ts">
   import Icon from '../icon/Icon.svelte';
   import IconButton from '../button/IconButton.svelte'; 

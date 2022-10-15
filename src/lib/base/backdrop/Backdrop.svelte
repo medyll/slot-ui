@@ -37,6 +37,8 @@
 {/if}
 
 <style lang="scss">
+	@import "../../styles/slotui-vars.css";
+	@import "../../styles/presets.scss";
 	.backdropRoot {
 		z-index: 10000;
 		height: 100%;

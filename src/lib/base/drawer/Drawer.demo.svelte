@@ -1,11 +1,4 @@
 <script lang="ts">
-	import Jsoner from '$lib/data/jsoner/Jsoner.svelte';
-	import TopBar from '$lib/ui/topBar/TopBar.svelte';
-	import { stickTo } from '$lib/uses/stickTo/stickTo';
-	import Button from '$lib/base/button/Button.svelte';
-	import Input from '$lib/base/input/Input.svelte';
-	import List from '$lib/base/list/List.svelte';
-	import ListItem from '$lib/base/list/ListItem.svelte';
 	import Drawer from './Drawer.svelte';
 
 	/* demo */

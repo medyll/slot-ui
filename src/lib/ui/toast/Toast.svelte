@@ -53,3 +53,8 @@
 <Box style="width:auto;" data-toastId="{toastId}" {isOpen} {...$$restProps}>
     <slot/>
 </Box>
+
+<style lang="scss">
+  @import "../../styles/slotui-vars.css";
+  @import "../../styles/presets.scss";
+</style>

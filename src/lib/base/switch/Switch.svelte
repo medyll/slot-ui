@@ -44,6 +44,8 @@
 </label>
 
 <style lang="scss">
+  @import "../../styles/slotui-vars.css";
+  @import "../../styles/presets.scss";
   label {
     background-color: transparent;
     border: none;

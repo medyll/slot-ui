@@ -55,6 +55,8 @@
     </div>
 </div>
 <style lang="scss">
+  @import "../../styles/slotui-vars.css";
+  @import "../../styles/presets.scss";
   .toggleBarRoot {
     padding: var(--slotui-commandbar-padding, var(--box-density-1));
     display: flex;

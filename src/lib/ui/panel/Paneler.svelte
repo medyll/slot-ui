@@ -44,4 +44,6 @@
 </div>
 
 <style lang="scss">
+  @import "../../styles/slotui-vars.css";
+  @import "../../styles/presets.scss";
 </style>

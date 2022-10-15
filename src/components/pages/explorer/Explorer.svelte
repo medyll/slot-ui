@@ -8,7 +8,7 @@
   import appscheme from '../../../demoData/appscheme.json';
   import Header from './Header.svelte';
   import Icon from '../../../lib/base/icon/Icon.svelte';
-  import MenuBar from '../../../lib/ui/topBar/TopBar.svelte';
+  import MenuBar from '../../../lib/ui/toggleBar/ToggleBar.svelte';
   import Elementor from '../../../lib/base/elementor/Elementor.svelte';
   import Frame from '$lib/ui/frame/Frame.svelte'; 
 
