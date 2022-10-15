@@ -58,7 +58,7 @@
             <Demoer {parametersSlot} {componentArgsSlot} let:activeParams>
                 <div class="pad-2">
                     <Slider {...activeParams} name={'switcher'} class="flex-h flex-align-middle w-small" >
-                        <span slot="label" />
+                        <span slot="dliderlabel" />
                     </Slider>
                 </div>
             </Demoer>
