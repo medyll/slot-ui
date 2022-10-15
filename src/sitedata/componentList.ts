@@ -11,6 +11,7 @@ import Drawerdemosvelte from "$lib/base/drawer/Drawer.demo.svelte";
 import Listdemosvelte from "$lib/base/list/List.demo.svelte"; 
 import Progressdemosvelte from "$lib/base/progress/Progress.demo.svelte"; 
 import Ratingdemosvelte from "$lib/base/rating/Rating.demo.svelte"; 
+import Sliderdemosvelte from "$lib/base/slider/Slider.demo.svelte"; 
 import Stepperdemosvelte from "$lib/base/stepper/Stepper.demo.svelte"; 
 import Tabsdemosvelte from "$lib/base/tabs/Tabs.demo.svelte"; 
 import Treedemosvelte from "$lib/base/tree/Tree.demo.svelte"; 
@@ -47,6 +48,7 @@ import ContextRooterdemosvelte from "$lib/utils/contextRooter/ContextRooter.demo
 {name:"List",code:"list",component:Listdemosvelte,group:"base"},
 {name:"Progress",code:"progress",component:Progressdemosvelte,group:"base"},
 {name:"Rating",code:"rating",component:Ratingdemosvelte,group:"base"},
+{name:"Slider",code:"slider",component:Sliderdemosvelte,group:"base"},
 {name:"Stepper",code:"stepper",component:Stepperdemosvelte,group:"base"},
 {name:"Tabs",code:"tabs",component:Tabsdemosvelte,group:"base"},
 {name:"Tree",code:"tree",component:Treedemosvelte,group:"base"},

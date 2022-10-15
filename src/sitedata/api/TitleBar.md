@@ -9,7 +9,7 @@ __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
-        iconSlot: {};
+        titleBarIcon: {};
         titleBarTitle: {};
     };
 };

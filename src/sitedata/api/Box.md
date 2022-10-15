@@ -22,7 +22,7 @@ __propDef: {
         titleBarTitle: {
             slot: string;
         };
-        iconSlot: {
+        titleBarIcon: {
             slot: string;
         };
         default: {};
