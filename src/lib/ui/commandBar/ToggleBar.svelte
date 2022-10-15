@@ -1,10 +1,8 @@
-<script context="module">
-
-</script>
 <script lang="ts">
   import {createEventForwarder} from '../../engine/engine';
   import ContentSwitcher from '../../base/contentSwitcher/ContentSwitcher.svelte';
   import {get_current_component} from 'svelte/internal';
+  import Icon from '../../base/icon/Icon.svelte';
 
   type MenuBarTitleType = string | undefined;
 
@@ -17,6 +15,7 @@
   /* end slotUi exports*/
 
   export let title: MenuBarTitleType;
+  export let icon: string | undefined      = undefined;
   export let orientation: 'right' | 'left' = 'right';
   export let contentSwitcherIcon: string   = 'search';
 
@@ -25,43 +24,48 @@
 </script>
 
 <div bind:this={element}
-     class="flex-h topBarRoot w-full  flex-align-middle {className} gap-2"
+     class="toggleBarRoot {className}"
      style={style} use:forwardEvents>
-    {#if $$slots.iconSlot}
-        <div class="pad-l-i">
-            <slot name="iconSlot"/>
+    {#if $$slots.toggleBarIcon || icon}
+        <div class="pad">
+            <slot name="toggleBarIcon">
+                <Icon icon={icon}/>
+            </slot>
         </div>
     {/if}
-    <div class="title flex-main text-500" style="order:{posTitle};min-width:auto">
-        {#if $$slots.menuBarTitle || Boolean(title)}
-            <slot name="menuBarTitle">
+    <div class="title flex-main text-500" style="order:{posTitle};min-width:auto;flex:1;">
+        {#if $$slots.toggleBarTitle || Boolean(title)}
+            <slot name="toggleBarTitle">
                 <div style="font-size:18px;min-width:auto;overflow:hidden;height:100%;" class="flex flex-align-middle overflow-hidden text-ellipsis">
                     <h5 class="text-ellipsis">{title}</h5>
                 </div>
             </slot>
         {/if}
     </div>
-    <div class="topBarContent" style="order:2;flex:1;">
-        <slot name="menuBarButtons"/>
+    <div class="toggleBarContent" style="order:2;">
+        <slot name="toggleBarButtons"/>
     </div>
-    {#if $$slots.menuBarSwitcher}
-        <div style="order:{posCloser}">
-            <ContentSwitcher parent={element} icon={contentSwitcherIcon}>
-                <slot name="menuBarSwitcher"/>
-            </ContentSwitcher>
-        </div>
-    {/if}
+    <div style="order:{posCloser}">
+        <ContentSwitcher parent={element} icon={contentSwitcherIcon}>
+            <svelte:fragment slot="contentSwitcherIcon">
+                <slot name="contentSwitcherIcon"/>
+            </svelte:fragment>
+            <slot></slot>
+        </ContentSwitcher>
+    </div>
 </div>
 <style lang="scss">
-  .topBarRoot {
-    padding: var(--slotui-topbar-padding, var(--box-density-1));
+  .toggleBarRoot {
+    padding: var(--slotui-commandbar-padding, var(--box-density-1));
     display: flex;
     border-bottom: 1px solid var(--slotui-topbar-border-bottom-color, var(--theme-color-border));
+    width: 100%;
     max-width: 100%;
     min-width: auto;
     position: relative;
+    gap: var(--slotui-commandbar-gap, 0.25rem);
 
-    .topBarContent {
+    .toggleBarContent {
       position: relative;
       min-width: auto;
       overflow: hidden;

@@ -4,8 +4,8 @@
 	import { popper, type UsePopperProps } from '$lib/ui/popper/usePopper';
 	import type { ElementProps } from '$lib/types/index.js';
 	import { compute_slots, get_current_component, text } from 'svelte/internal';
-	import Button from '../button/Button.svelte';
-	import Icon from '../icon/Icon.svelte';
+	import Button from '../../base/button/Button.svelte';
+	import Icon from '../../base/icon/Icon.svelte';
 
 	let inputType = 'text';
 	export { inputType as type };

@@ -1,4 +1,4 @@
 /** slotui generated definition file */
-import TopBar from "./TopBar.svelte";
-export * from "./TopBar.svelte";
-export {TopBar};
+import CommandBar from "./CommandBar.svelte";
+export * from "./CommandBar.svelte";
+export {CommandBar};

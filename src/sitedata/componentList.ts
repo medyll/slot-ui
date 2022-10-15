@@ -24,6 +24,7 @@ import Confirmdemosvelte from "$lib/form/confirm/Confirm.demo.svelte";
 import Inputdemosvelte from "$lib/form/input/Input.demo.svelte"; 
 import Selectdemosvelte from "$lib/form/select/Select.demo.svelte"; 
 import Switchdemosvelte from "$lib/form/switch/Switch.demo.svelte"; 
+import ToggleBardemosvelte from "$lib/ui/commandBar/ToggleBar.demo.svelte"; 
 import Framedemosvelte from "$lib/ui/frame/Frame.demo.svelte"; 
 import Logindemosvelte from "$lib/ui/login/Login.demo.svelte"; 
 import Menudemosvelte from "$lib/ui/menu/Menu.demo.svelte"; 
@@ -59,6 +60,7 @@ import ContextRooterdemosvelte from "$lib/utils/contextRooter/ContextRooter.demo
 {name:"Input",code:"input",component:Inputdemosvelte,group:"form"},
 {name:"Select",code:"select",component:Selectdemosvelte,group:"form"},
 {name:"Switch",code:"switch",component:Switchdemosvelte,group:"form"},
+{name:"ToggleBar",code:"togglebar",component:ToggleBardemosvelte,group:"ui"},
 {name:"Frame",code:"frame",component:Framedemosvelte,group:"ui"},
 {name:"Login",code:"login",component:Logindemosvelte,group:"ui"},
 {name:"Menu",code:"menu",component:Menudemosvelte,group:"ui"},
