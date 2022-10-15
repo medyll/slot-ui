@@ -7,7 +7,8 @@
   import Panel from '$lib/ui/panel/Panel.svelte';
   import PanelSlide from '$lib/ui/panel/PanelSlide.svelte';
 
-  import {openWindow, toggleStartMenu, startMenuStore} from '../../engine/wactions.utils';
+  import { toggleStartMenu, startMenuStore} from '../../engine/wactions.utils';
+  import {openWindow} from "$lib/ui/window/actions.js"
   import {afterUpdate, onMount, setContext, getContext} from 'svelte';
 
   import IconButton from '$lib/base/button/IconButton.svelte';

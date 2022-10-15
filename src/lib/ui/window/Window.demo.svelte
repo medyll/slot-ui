@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { openWindow } from "./window.actions.js";
+  import { openWindow } from "./actions.js";
   import Button from "$lib/base/button/Button.svelte";
   import Debug from "$lib/base/debug/Debug.svelte";
   import Window  from './Window.svelte';
