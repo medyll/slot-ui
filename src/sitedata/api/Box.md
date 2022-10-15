@@ -19,15 +19,14 @@ __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
-        titleSlot: {
+        titleBarTitle: {
             slot: string;
         };
         iconSlot: {
             slot: string;
         };
-        contentSlot: {};
         default: {};
-        bottomZone: {};
+        boxBottomZone: {};
     };
 };
 

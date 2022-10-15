@@ -1,26 +1,19 @@
 ```import { SvelteComponentTyped } from "svelte";
 import type { ElementProps } from '../../../types/index.js';
-import { type UsePopperProps } from '../../../ui/popper/usePopper';
 declare const __propDef: {
     props: {
+        [x: string]: any;
         class?: string | undefined;
         element?: HTMLElement | null | undefined;
         icon: ElementProps['icon'];
-        iconFamily?: string | undefined;
-        iconClassName?: string | undefined;
         iconFontSize?: "default" | "small" | "tiny" | "medium" | "large" | "big" | "full" | "auto" | undefined;
         style?: string | undefined;
-        showShip?: boolean | undefined;
-        usePopperOpt?: UsePopperProps | undefined;
+        ratio?: string | undefined;
     };
     events: {
-        click: MouseEvent;
-    } & {
         [evt: string]: CustomEvent<any>;
     };
-    slots: {
-        default: {};
-    };
+    slots: {};
 };
 export declare type IconButtonProps = typeof __propDef.props;
 export declare type IconButtonEvents = typeof __propDef.events;

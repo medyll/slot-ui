@@ -92,24 +92,27 @@
   on:click={handleClick}>
   {#if $menuStateContext?.hasIcon}
     <div class="menuItemIcon">
-      <slot name="iconSlot">
-        <Icon {icon} color={iconColor} fontSize={iconSize} /></slot>
+      <slot name="menuItemStart">
+        <slot name="iconSlot">
+          <Icon {icon} color={iconColor} fontSize={iconSize} />
+        </slot>
+      </slot>
     </div>
   {/if}
   <div class="menuItemText">
     <slot>
-      <slot name="textSlot">{null_to_empty(text)}</slot>
+      <slot name="menuItemText">{null_to_empty(text)} </slot>
     </slot>
   </div>
   {#if $$slots.actionSlot || action}
     <div class="menuItemActions">
-      <slot name="actionSlot">{action}</slot>
+      <slot name="menuItemEnd"><slot name="actionSlot">{action}</slot></slot>
     </div>
   {/if}
 </li>
 {#if divider}
   <li>
-    <slot name="divider"><Divider density="tight" expansion="padded" /></slot>
+    <slot name="menuItemDivider"><Divider density="tight" expansion="padded" /></slot>
   </li>
 {/if}
 

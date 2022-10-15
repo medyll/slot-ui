@@ -4,8 +4,6 @@ __propDef: {
         class?: string | undefined;
         element?: HTMLDivElement | null | undefined;
         actions?: {
-            show: () => void;
-            hide: () => void;
             toggle: (lo?: boolean) => void;
             toggleLoading: (lo?: boolean) => void;
         } | undefined;
@@ -19,13 +17,16 @@ __propDef: {
             password: string;
         } | undefined;
         loading?: boolean | undefined;
+        submitting?: boolean | undefined;
         onSubmit?: ((args: any) => Promise<unknown>) | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
-        slotAvatar: {};
+        loginAvatarRoot: {};
+        loginAvatar: {};
+        loginForm: {};
         slotRetrievePassword: {};
         default: {};
     };

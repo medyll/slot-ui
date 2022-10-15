@@ -25,7 +25,7 @@
 		<div class="backdropContent pos-abs  h-full w-full">
 			{#if isLoading}
 				<div class="flex-h flex-align-middle-center">
-					<slot name="loadingSlot">
+					<slot name="backdropLoading">
 						<Icon icon="mdi:loading" fontSize="large" rotate />
 					</slot>
 				</div>

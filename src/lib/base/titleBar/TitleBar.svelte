@@ -8,18 +8,18 @@ import Button from '../button/Button.svelte';
 
   export let onClose: () => void;
   export let hasMenu: any = false;
-
+  export let icon: string | undefined       = undefined;
 </script>
 
 <div class="titleBar flex-h marg-b-1 pad-1">
     <div class="title flex-main flex-h flex-align-middle">
         <div class="pad-ii-1 text-center">
-            <slot name="iconSlot">
-                <Icon fontSize="small" icon="world"/>
+            <slot name="titleBarIcon">
+                <Icon fontSize="small" icon={icon}/>
             </slot>
         </div>
         <div class="flex-main pad-l-1">
-            <slot name="titleSlot"></slot>
+            <slot name="titleBarTitle"></slot>
         </div>
     </div>
     {#if hasMenu}

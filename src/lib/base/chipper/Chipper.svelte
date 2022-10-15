@@ -13,7 +13,7 @@
 	<slot />
 	<chip data-position={position}>
 		{#if showChip}
-			<slot name="chipSlot">
+			<slot name="chipperSlot">
 				<div class="defaultChip" />
 			</slot>
 		{/if}

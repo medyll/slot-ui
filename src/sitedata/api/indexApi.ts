@@ -2,7 +2,6 @@ import AlertReadMe from "$sitedata/api/Alert.md";
 import AvatarReadMe from "$sitedata/api/Avatar.md";
 import BackdropReadMe from "$sitedata/api/Backdrop.md";
 import BadgeReadMe from "$sitedata/api/Badge.md";
-import BottomBarReadMe from "$sitedata/api/BottomBar.md";
 import BoxReadMe from "$sitedata/api/Box.md";
 import BreadCrumbReadMe from "$sitedata/api/BreadCrumb.md";
 import ButtonReadMe from "$sitedata/api/Button.md";
@@ -72,7 +71,7 @@ import TaskBarContentReadMe from "$sitedata/api/TaskBarContent.md";
 import ThemeSwitcherReadMe from "$sitedata/api/ThemeSwitcher.md";
 import ToastReadMe from "$sitedata/api/Toast.md";
 import ToasterReadMe from "$sitedata/api/Toaster.md";
-import TopBarReadMe from "$sitedata/api/TopBar.md";
+import ToggleBarReadMe from "$sitedata/api/ToggleBar.md";
 import WindowReadMe from "$sitedata/api/Window.md";
 import ContextRooterReadMe from "$sitedata/api/ContextRooter.md";
 
@@ -80,7 +79,6 @@ export const componentReadMe = {alert:AlertReadMe,
 avatar:AvatarReadMe,
 backdrop:BackdropReadMe,
 badge:BadgeReadMe,
-bottombar:BottomBarReadMe,
 box:BoxReadMe,
 breadcrumb:BreadCrumbReadMe,
 button:ButtonReadMe,
@@ -150,6 +148,6 @@ taskbarcontent:TaskBarContentReadMe,
 themeswitcher:ThemeSwitcherReadMe,
 toast:ToastReadMe,
 toaster:ToasterReadMe,
-topbar:TopBarReadMe,
+togglebar:ToggleBarReadMe,
 window:WindowReadMe,
 contextrooter:ContextRooterReadMe}

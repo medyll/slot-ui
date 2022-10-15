@@ -1,6 +1,7 @@
 <script lang="ts">
  
-  import Button from "$lib/base/button/Button.svelte";
+  import Button    from "$lib/base/button/Button.svelte";
+  import IconButton    from "$lib/base/button/IconButton.svelte";
   import Debug from "$lib/base/debug/Debug.svelte";
   import ToggleBar from './ToggleBar.svelte';
 
@@ -74,32 +75,12 @@
   <div slot="toggleBarButtons">
     <Button>button</Button>
   </div>
-  <Button icon="search" slot="contentSwitcherIcon" />
+  <IconButton icon="search" slot="contentSwitcherIcon" />
   <Input size="full" value="a slotted input" />
 </ToggleBar>
 `;
 
-  let codeProps = `
-<Button
-	on:click={() => {
-		openWindow("html", {
-		componentProps: { some: "props", someother: "deprops" },
-		contentHTML:
-			'<div class="pad-4 align-center">some html content</div>',
-		});
-	}}>
-	toggleBar with html content
-</Button>
-
-<Button
-	on:click={() => {
-		openWindow("component", {
-		component: Debug,
-		componentProps: { some: "props", someother: "deprops" },
-		});
-	}}>
-	toggleBar with component
-</Button>`;
+  let codeProps = ` `;
 </script>
 
 <ComponentExample
@@ -117,7 +98,7 @@
             <Icon icon="carbon:progress-bar" slot="toggleBarIcon" />
             <div slot="toggleBarButtons"><Button>button</Button></div>
             <div slot="menuBarSwitcher">menuBarSwitcher</div>
-            <Button style="aspect-ratio: 1/1" icon="search" slot="contentSwitcherIcon" />
+            <IconButton  icon="search" slot="contentSwitcherIcon" />
             <Input size="full" value="a slotted input" />
           </ToggleBar>
         </div>

@@ -21,8 +21,8 @@ __propDef: {
         default: {
             menuItemData: any;
         };
-        emptySearchString: {};
-        emptySearch: {};
+        autoCompleteEmpty: {};
+        autoCompleteNoResults: {};
     };
 };
 

@@ -23,12 +23,12 @@
 <div
 	bind:this={element}
 	class="rating {className}"
-	style="--direction={direction === 'horizontal' ? 'row' : 'column'};{style}"
+	style="--direction:{direction === 'horizontal' ? 'row' : 'column'};{style}"
 	{title}
 >
 	{#each [...Array(ratingBase)] as rate, idx}
 		{#if idx + 1 <= scored}
-			<slot name="scoredSlot">
+			<slot name="ratingScoredIcon">
 				<Icon icon={scoredIcon} />
 			</slot>
 		{:else}

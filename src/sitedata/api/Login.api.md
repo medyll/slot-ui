@@ -5,8 +5,6 @@ declare const __propDef: {
         class?: string | undefined;
         element?: HTMLDivElement | null | undefined;
         actions?: {
-            show: () => void;
-            hide: () => void;
             toggle: (lo?: boolean) => void;
             toggleLoading: (lo?: boolean) => void;
         } | undefined;
@@ -20,13 +18,16 @@ declare const __propDef: {
             password: string;
         } | undefined;
         loading?: boolean | undefined;
+        submitting?: boolean | undefined;
         onSubmit?: ((args: any) => Promise<unknown>) | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
-        slotAvatar: {};
+        loginAvatarRoot: {};
+        loginAvatar: {};
+        loginForm: {};
         slotRetrievePassword: {};
         default: {};
     };
@@ -36,8 +37,6 @@ export declare type LoginEvents = typeof __propDef.events;
 export declare type LoginSlots = typeof __propDef.slots;
 export default class Login extends SvelteComponentTyped<LoginProps, LoginEvents, LoginSlots> {
     get actions(): {
-        show: () => void;
-        hide: () => void;
         toggle: (lo?: boolean | undefined) => void;
         toggleLoading: (lo?: boolean | undefined) => void;
     };

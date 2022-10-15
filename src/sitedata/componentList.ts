@@ -24,7 +24,6 @@ import Confirmdemosvelte from "$lib/form/confirm/Confirm.demo.svelte";
 import Inputdemosvelte from "$lib/form/input/Input.demo.svelte"; 
 import Selectdemosvelte from "$lib/form/select/Select.demo.svelte"; 
 import Switchdemosvelte from "$lib/form/switch/Switch.demo.svelte"; 
-import ToggleBardemosvelte from "$lib/ui/commandBar/ToggleBar.demo.svelte"; 
 import Framedemosvelte from "$lib/ui/frame/Frame.demo.svelte"; 
 import Logindemosvelte from "$lib/ui/login/Login.demo.svelte"; 
 import Menudemosvelte from "$lib/ui/menu/Menu.demo.svelte"; 
@@ -32,6 +31,7 @@ import Paneldemosvelte from "$lib/ui/panel/Panel.demo.svelte";
 import Popperdemosvelte from "$lib/ui/popper/Popper.demo.svelte"; 
 import Starterdemosvelte from "$lib/ui/starter/Starter.demo.svelte"; 
 import Toastdemosvelte from "$lib/ui/toast/Toast.demo.svelte"; 
+import ToggleBardemosvelte from "$lib/ui/toggleBar/ToggleBar.demo.svelte"; 
 import Windowdemosvelte from "$lib/ui/window/Window.demo.svelte"; 
 import ContextRooterdemosvelte from "$lib/utils/contextRooter/ContextRooter.demo.svelte";  
  export const slotUiComponentList = [ {name:"Alert",code:"alert",component:Alertdemosvelte,group:"base"},
@@ -60,7 +60,6 @@ import ContextRooterdemosvelte from "$lib/utils/contextRooter/ContextRooter.demo
 {name:"Input",code:"input",component:Inputdemosvelte,group:"form"},
 {name:"Select",code:"select",component:Selectdemosvelte,group:"form"},
 {name:"Switch",code:"switch",component:Switchdemosvelte,group:"form"},
-{name:"ToggleBar",code:"togglebar",component:ToggleBardemosvelte,group:"ui"},
 {name:"Frame",code:"frame",component:Framedemosvelte,group:"ui"},
 {name:"Login",code:"login",component:Logindemosvelte,group:"ui"},
 {name:"Menu",code:"menu",component:Menudemosvelte,group:"ui"},
@@ -68,5 +67,6 @@ import ContextRooterdemosvelte from "$lib/utils/contextRooter/ContextRooter.demo
 {name:"Popper",code:"popper",component:Popperdemosvelte,group:"ui"},
 {name:"Starter",code:"starter",component:Starterdemosvelte,group:"ui"},
 {name:"Toast",code:"toast",component:Toastdemosvelte,group:"ui"},
+{name:"ToggleBar",code:"togglebar",component:ToggleBardemosvelte,group:"ui"},
 {name:"Window",code:"window",component:Windowdemosvelte,group:"ui"},
 {name:"ContextRooter",code:"contextrooter",component:ContextRooterdemosvelte,group:"utils"} ] 

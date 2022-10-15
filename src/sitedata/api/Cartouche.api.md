@@ -23,10 +23,10 @@ declare const __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
-        cartoucheIconSlot: {};
+        cartoucheIcon: {};
         primarySlot: {};
         secondarySlot: {};
-        cartoucheActionSlot: {};
+        cartoucheButtons: {};
         default: {};
     };
 };

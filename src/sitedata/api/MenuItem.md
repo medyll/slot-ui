@@ -20,10 +20,13 @@ __propDef: {
     };
     slots: {
         divider: {};
+        menuItemStart: {};
         iconSlot: {};
         default: {};
-        textSlot: {};
+        menuItemText: {};
+        menuItemEnd: {};
         actionSlot: {};
+        menuItemDivider: {};
     };
 };
 

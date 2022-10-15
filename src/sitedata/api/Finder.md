@@ -13,10 +13,7 @@ __propDef: {
     events: {
         [evt: string]: CustomEvent<any>;
     };
-    slots: {
-        noResultsSlot: {};
-        loadingSlot: {};
-    };
+    slots: {};
 };
 
  ```

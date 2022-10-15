@@ -19,15 +19,14 @@ declare const __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
-        titleSlot: {
+        titleBarTitle: {
             slot: string;
         };
         iconSlot: {
             slot: string;
         };
-        contentSlot: {};
         default: {};
-        bottomZone: {};
+        boxBottomZone: {};
     };
 };
 export declare type BoxProps = typeof __propDef.props;

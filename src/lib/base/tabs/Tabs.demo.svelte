@@ -31,8 +31,8 @@
 
   let codeSlot = `
 <Tabs activeTabCode="tab3" onTabClick={()=>{}} {items}>
-    <span slot="tabsTitleSlot">Some tabs title</span>
-    <span slot="tabsButtonSlot" ><Button bordered >button</Button></span>
+    <span slot="tabsTitle">Some tabs title</span>
+    <span slot="tabsButtons" ><Button bordered >button</Button></span>
 </Tabs>`;
 
 </script>
@@ -49,9 +49,9 @@
                           onTabClick={(e)=>{console.log(e); componentArgsSlot.activeTabCode=e.code}}
                           class="h-full"
                           style="height:100%;width:350px" {items} let:activeTabCode>
-                        <span slot="tabsTitleSlot">Some tabs title</span>
-                        <span slot="tabsButtonSlot"><Button bordered>button</Button></span>
-                        <div class="h-full" slot="innerTabSlot">
+                        <span slot="tabsTitle">Some tabs title</span>
+                        <span slot="tabsButtons"><Button bordered>button</Button></span>
+                        <div class="h-full" slot="tabsInner">
                             <div class="pad-4 h-full overflow-auto">
                                 selected : {activeTabCode}
                             </div>

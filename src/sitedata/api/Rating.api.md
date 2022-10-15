@@ -14,7 +14,7 @@ declare const __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
-        scoredSlot: {};
+        ratingScoredIcon: {};
         default: {};
     };
 };

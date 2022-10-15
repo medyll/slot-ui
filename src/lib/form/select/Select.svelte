@@ -49,7 +49,7 @@
 <input {value} bind:this={hiddenRef} type="hidden" {name} />
 <Popper {position} {stickToHookWidth} {autoClose} flow="fixed" isOpen={isVisible}>
   <Input
-    slot="holderSlot"
+    slot="popperHolder"
     bind:this={element}
     on:blur={show(false)}
     on:focus={show(true)}

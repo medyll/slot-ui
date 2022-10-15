@@ -2,7 +2,6 @@ import AlertApiReadMe from "$sitedata/api/Alert.api.md";
 import AvatarApiReadMe from "$sitedata/api/Avatar.api.md";
 import BackdropApiReadMe from "$sitedata/api/Backdrop.api.md";
 import BadgeApiReadMe from "$sitedata/api/Badge.api.md";
-import BottomBarApiReadMe from "$sitedata/api/BottomBar.api.md";
 import BoxApiReadMe from "$sitedata/api/Box.api.md";
 import BreadCrumbApiReadMe from "$sitedata/api/BreadCrumb.api.md";
 import ButtonApiReadMe from "$sitedata/api/Button.api.md";
@@ -72,7 +71,7 @@ import TaskBarContentApiReadMe from "$sitedata/api/TaskBarContent.api.md";
 import ThemeSwitcherApiReadMe from "$sitedata/api/ThemeSwitcher.api.md";
 import ToastApiReadMe from "$sitedata/api/Toast.api.md";
 import ToasterApiReadMe from "$sitedata/api/Toaster.api.md";
-import TopBarApiReadMe from "$sitedata/api/TopBar.api.md";
+import ToggleBarApiReadMe from "$sitedata/api/ToggleBar.api.md";
 import WindowApiReadMe from "$sitedata/api/Window.api.md";
 import ContextRooterApiReadMe from "$sitedata/api/ContextRooter.api.md";
 
@@ -80,7 +79,6 @@ export const componentApiReadMe = {alertApi:AlertApiReadMe,
 avatarApi:AvatarApiReadMe,
 backdropApi:BackdropApiReadMe,
 badgeApi:BadgeApiReadMe,
-bottombarApi:BottomBarApiReadMe,
 boxApi:BoxApiReadMe,
 breadcrumbApi:BreadCrumbApiReadMe,
 buttonApi:ButtonApiReadMe,
@@ -150,6 +148,6 @@ taskbarcontentApi:TaskBarContentApiReadMe,
 themeswitcherApi:ThemeSwitcherApiReadMe,
 toastApi:ToastApiReadMe,
 toasterApi:ToasterApiReadMe,
-topbarApi:TopBarApiReadMe,
+togglebarApi:ToggleBarApiReadMe,
 windowApi:WindowApiReadMe,
 contextrooterApi:ContextRooterApiReadMe}

@@ -2,42 +2,44 @@
 import type { ElementProps } from '../../../types/index.js';
 declare const __propDef: {
     props: {
-        [x: string]: any;
-        frameId?: string | undefined;
-        title?: string | undefined;
-        open?: boolean | undefined;
-        minimized?: boolean | undefined;
+        /** Id of the component's instance */ frameId?: string | undefined;
+        /** the title appears on the handle bar */ title?: string | undefined;
+        /** boolean to show the window */ open?: boolean | undefined;
+        /** state of the window */ minimized?: boolean | undefined;
         maximized?: boolean | undefined;
-        active?: boolean | undefined;
-        secondaryTitle?: string | undefined;
-        description?: string | undefined;
-        onClose?: (() => void) | undefined;
-        onCancel?: (() => void) | undefined;
-        onValidate?: (() => void) | undefined;
-        hideAcceptButton?: boolean | undefined;
+        /** is on top of others*/ active?: boolean | undefined;
+        /** the secondaryTitle appears below the title */ secondaryTitle?: string | undefined;
+        /** the description appears somewhere */ description?: string | undefined;
+        /** shows or hide the handle, if dismissed, then the whole window is draggable */ showHandle?: boolean | undefined;
+        /** actions triggered on click*/ onClose?: ((args?: any) => void) | undefined;
+        onCancel?: ((args?: any) => void) | undefined;
+        onValidate?: ((args?: any) => void) | undefined;
+        /** buttons visible in the bottom bar */ hideAcceptButton?: boolean | undefined;
         hideCloseButton?: boolean | undefined;
         hideCancelButton?: boolean | undefined;
-        component?: any;
-        componentProps?: any;
-        contentHTML?: any;
-        parentNode?: HTMLElement | undefined;
-        icon?: string | undefined;
+        /** can be opened with a component */ component?: any;
+        /** used when props.component is used */ componentProps?: any;
+        /** content can be set from a html string */ contentHTML?: any;
+        /** parent of the window */ parentNode?: HTMLElement | undefined;
+        /** icon used on the left side*/ icon?: string | undefined;
+        iconClose?: string | undefined;
+        iconValidate?: string | undefined;
         flow?: ElementProps['flow'] | undefined;
-        closeOnValidate?: boolean | undefined;
-        defaultPosition?: {
-            x: number;
-            y: number;
-        } | undefined;
-        self?: null | undefined;
+        /** close the window on accept */ closeOnValidate?: boolean | undefined;
+        /** destroy the component on close */ removeFromDomOnClose?: boolean | undefined;
+        /** used to destroy component when opened from function.openWindow */ self: any;
         actions?: {
             close: () => void;
+            setActive: () => void;
         } | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;
-    }; /** Id of the component's instance */
+    };
     slots: {
+        windowIcon: {};
         default: {};
+        windowButtonZone: {};
     };
 };
 export declare type WindowProps = typeof __propDef.props;
@@ -46,6 +48,7 @@ export declare type WindowSlots = typeof __propDef.slots;
 export default class Window extends SvelteComponentTyped<WindowProps, WindowEvents, WindowSlots> {
     get actions(): {
         close: () => void;
+        setActive: () => void;
     };
     get frameId(): string | undefined;
     /**accessor*/
@@ -71,15 +74,18 @@ export default class Window extends SvelteComponentTyped<WindowProps, WindowEven
     get description(): string | undefined;
     /**accessor*/
     set description(_: string | undefined);
-    get onClose(): (() => void) | undefined;
+    get showHandle(): boolean | undefined;
     /**accessor*/
-    set onClose(_: (() => void) | undefined);
-    get onCancel(): (() => void) | undefined;
+    set showHandle(_: boolean | undefined);
+    get onClose(): ((args?: any) => void) | undefined;
     /**accessor*/
-    set onCancel(_: (() => void) | undefined);
-    get onValidate(): (() => void) | undefined;
+    set onClose(_: ((args?: any) => void) | undefined);
+    get onCancel(): ((args?: any) => void) | undefined;
     /**accessor*/
-    set onValidate(_: (() => void) | undefined);
+    set onCancel(_: ((args?: any) => void) | undefined);
+    get onValidate(): ((args?: any) => void) | undefined;
+    /**accessor*/
+    set onValidate(_: ((args?: any) => void) | undefined);
     get hideAcceptButton(): boolean | undefined;
     /**accessor*/
     set hideAcceptButton(_: boolean | undefined);
@@ -104,24 +110,24 @@ export default class Window extends SvelteComponentTyped<WindowProps, WindowEven
     get icon(): string | undefined;
     /**accessor*/
     set icon(_: string | undefined);
+    get iconClose(): string | undefined;
+    /**accessor*/
+    set iconClose(_: string | undefined);
+    get iconValidate(): string | undefined;
+    /**accessor*/
+    set iconValidate(_: string | undefined);
     get flow(): "relative" | "absolute" | "fixed" | undefined;
     /**accessor*/
     set flow(_: "relative" | "absolute" | "fixed" | undefined);
     get closeOnValidate(): boolean | undefined;
     /**accessor*/
     set closeOnValidate(_: boolean | undefined);
-    get defaultPosition(): {
-        x: number;
-        y: number;
-    } | undefined;
+    get removeFromDomOnClose(): boolean | undefined;
     /**accessor*/
-    set defaultPosition(_: {
-        x: number;
-        y: number;
-    } | undefined);
-    get self(): null | undefined;
+    set removeFromDomOnClose(_: boolean | undefined);
+    get self(): any;
     /**accessor*/
-    set self(_: null | undefined);
+    set self(_: any);
 }
 export {};
 

@@ -144,7 +144,7 @@
 let code = `
 <Button on:click={()=>{}} >
 	My button
-	<Icon slot="startButtonSlot" icon="..." />
+	<Icon slot="buttonStart" icon="..." />
 	<Icon slot="endButtonSlot" icon="..." />
 </Button>`;
 
@@ -162,8 +162,8 @@ let code = `
     <DemoPage title="Using slots" {code} component="Button">
       <Demoer {parameters} {componentArgs} let:activeParams>
         <Button {...activeParams} >Using slots
-          <Icon icon="user" slot="startButtonSlot" />
-          <span slot="loadingIconButtonSlot"
+          <Icon icon="user" slot="buttonStart" />
+          <span slot="buttonLoadingIcon"
             ><Icon icon="loading" rotate /></span
           >
         </Button>
@@ -178,10 +178,8 @@ let code = `
       >
         <Button {...activeParams}
           >Using slots
-          <Icon icon="user" slot="startButtonSlot" />
-          <span slot="loadingIconButtonSlot"
-            ><Icon icon="loading" rotate /></span
-          >
+          <Icon icon="user" slot="buttonStart" />
+          <span slot="buttonLoadingIcon"><Icon icon="loading" rotate /></span>
         </Button>
       </Demoer>
     </DemoPage>
@@ -189,7 +187,7 @@ let code = `
       <Demoer parameters={parametersMenu} {componentArgs} let:activeParams>
         <Button>
           default action
-          <span slot="popper">
+          <span slot="buttonPopper">
             <Menu style="max-height:350px;overflow:auto" density="default">
               <MenuItem divider={true} text="strict">menu</MenuItem>
               <MenuItem data={{ some: "data" }} text="strict">item</MenuItem>

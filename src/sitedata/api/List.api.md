@@ -36,7 +36,7 @@ declare const __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
-        commandBarSlot: {};
+        listTopBar: {};
         title: {};
         default: {};
     };

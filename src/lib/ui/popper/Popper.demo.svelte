@@ -6,7 +6,6 @@
   import ComponentExample from "$lib/demo/ComponentExample.svelte";
   import Demoer from "$lib/base/demoer/Demoer.svelte";
   import DemoPage from "$lib/base/demoer/DemoPage.svelte";
-  import Icon from "$lib/base/icon/Icon.svelte";
   import { uiPresets } from "$lib/engine/presets.js";
   /* demo */
 
@@ -30,7 +29,7 @@
   let codeSlot = `
 <Popper bind:isOpen position="BC" autoClose class="w-large">
 	<Button
-		slot="holderSlot"
+		slot="popperHolder"
 		on:click={() => ()}
 		style="cursor:pointer">
 		Popper button
@@ -73,7 +72,7 @@
             {...activeParams}
             class="w-large marg-t-1">
             <Button
-              slot="holderSlot"
+              slot="popperHolder"
               on:click={() => (isOpen = !isOpen)}
               style="cursor:pointer"
               class="border text-center pointer {isOpen

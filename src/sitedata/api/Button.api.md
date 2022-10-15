@@ -33,6 +33,7 @@ declare const __propDef: {
         primary?: string | undefined;
         secondary?: string | undefined;
         reverse?: boolean | undefined;
+        ratio?: string | undefined;
     };
     events: {
         click: MouseEvent;
@@ -40,11 +41,11 @@ declare const __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
-        startButtonSlot: {};
+        buttonStart: {};
         default: {};
-        actionIcon: {};
-        loadingIconButtonSlot: {};
-        popper: {};
+        buttonEnd: {};
+        buttonLoadingIcon: {};
+        buttonPopper: {};
     };
 };
 export declare type ButtonProps = typeof __propDef.props;

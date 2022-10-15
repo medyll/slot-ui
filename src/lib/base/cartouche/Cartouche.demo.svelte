@@ -49,9 +49,9 @@
 
 	let code1 = `
 	<Cartouche isOpen={true} class="marg-tb-1">
-		<Icon slot="cartoucheIconSlot" fontSize="small" icon="circle" />
+		<Icon slot="cartoucheIcon" fontSize="small" icon="circle" />
 		<span slot="primarySlot">This is a cartouche</span> 
-		<Button size="medium" slot="cartoucheActionSlot">a button</Button>
+		<Button size="medium" slot="cartoucheButtons">a button</Button>
 		<div class="pad-2 border-t">Some <br />Cartouche <br />content</div>
 	</Cartouche> `;
 
@@ -73,9 +73,9 @@
 				let:activeParams
 			>
 				<Cartouche {...activeParams} class="marg-tb-1">
-					<Icon slot="cartoucheIconSlot" fontSize="small" icon="circle" />
+					<Icon slot="cartoucheIcon" fontSize="small" icon="circle" />
 					<span slot="primarySlot">This is a cartouche</span>
-					<Button size="medium" slot="cartoucheActionSlot">a button</Button>
+					<Button size="medium" slot="cartoucheButtons">a button</Button>
 					<div class="pad-2 border-t">Some <br />Cartouche <br />content</div>
 				</Cartouche>
 			</Demoer>
@@ -92,7 +92,7 @@
 					<div class="pad-2 border-t">Cartouche content</div>
 				</Cartouche>
 				<Cartouche primary="And another one" stacked={true}>
-					<Icon fontSize="small" slot="cartoucheIconSlot" icon="user" />
+					<Icon fontSize="small" slot="cartoucheIcon" icon="user" />
 				</Cartouche>
 			</Demoer>
 			<Demoer
@@ -107,7 +107,7 @@
 					primary="Can contain some others cartouches"
 					class="marg-tb-1"
 				>
-					<Icon fontSize="small" slot="cartoucheIconSlot" icon="info-circle" />
+					<Icon fontSize="small" slot="cartoucheIcon" icon="info-circle" />
 					<div class="marg-l-4">
 						<Cartouche {...activeParams} stacked={true} primary="Inner cartouche"
 							><div class="pad-2 border-t">Cartouche content</div></Cartouche

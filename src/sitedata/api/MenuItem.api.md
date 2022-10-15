@@ -22,10 +22,13 @@ declare const __propDef: {
     };
     slots: {
         divider: {};
+        menuItemStart: {};
         iconSlot: {};
         default: {};
-        textSlot: {};
+        menuItemText: {};
+        menuItemEnd: {};
         actionSlot: {};
+        menuItemDivider: {};
     };
 };
 export declare type MenuItemProps = typeof __propDef.props;

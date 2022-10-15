@@ -13,10 +13,7 @@ declare const __propDef: {
     events: {
         [evt: string]: CustomEvent<any>;
     };
-    slots: {
-        noResultsSlot: {};
-        loadingSlot: {};
-    };
+    slots: {};
 };
 export declare type FinderProps = typeof __propDef.props;
 export declare type FinderEvents = typeof __propDef.events;

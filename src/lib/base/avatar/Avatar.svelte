@@ -26,9 +26,8 @@
 	bind:this={element}
 	class="avatar {className}"
 	style="width:{sizes[size]};height:{sizes[size]}"
-	use:forwardEvents
->
-	<slot name="badge" />
+	use:forwardEvents>
+	<slot name="avatarBadge" />
 	<slot>
 		<Icon {icon} fontSize={iconSize}   />
 	</slot>

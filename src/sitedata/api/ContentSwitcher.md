@@ -11,6 +11,7 @@ __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
+        contentSwitcherIcon: {};
         switcherSlot: {};
         default: {};
     };

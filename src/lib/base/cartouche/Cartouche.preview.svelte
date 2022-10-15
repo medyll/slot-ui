@@ -14,10 +14,10 @@
 			secondary="with some secondary text">Cartouche content</Cartouche
 		>
 		<Cartouche stacked={true} primary="This is another cartouche">
-			<Button size="medium" slot="cartoucheActionSlot">With button</Button>
+			<Button size="medium" slot="cartoucheButtons">With button</Button>
 			cdcdsds
 		</Cartouche>
 		<Cartouche primary="with icon" stacked={true}>
-			<Icon fontSize="small" slot="cartoucheIconSlot" icon="user" />
+			<Icon fontSize="small" slot="cartoucheIcon" icon="user" />
 		</Cartouche>
 	</div>  

@@ -67,12 +67,12 @@
 		<DemoPage  {code} title="Using slots" component="Box">
 			<Demoer parameters={parametersSlot} {componentArgs} let:activeParams>
 				<Box {...activeParams} onClose="cdss" class="marg">
-					<span slot="titleSlot">Title of the box</span>
-					<Icon fontSize="small" icon="clock" slot="iconSlot" />
+					<span slot="titleBarTitle">Title of the box</span>
+					<Icon fontSize="small" icon="clock" slot="titlBarIcon" />
 					<div class="pad-2">
 						Content of the box
 					</div>
-					<div class="flex-h gap-small pad border-t marg-ii-1" slot="bottomZone">
+					<div class="flex-h gap-small pad border-t marg-ii-1" slot="boxBottomZone">
 						bottom zoone
 					</div>
 				</Box>

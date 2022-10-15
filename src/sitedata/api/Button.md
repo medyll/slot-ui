@@ -32,6 +32,7 @@ __propDef: {
         primary?: string | undefined;
         secondary?: string | undefined;
         reverse?: boolean | undefined;
+        ratio?: string | undefined;
     };
     events: {
         click: MouseEvent;
@@ -39,11 +40,11 @@ __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
-        startButtonSlot: {};
+        buttonStart: {};
         default: {};
-        actionIcon: {};
-        loadingIconButtonSlot: {};
-        popper: {};
+        buttonEnd: {};
+        buttonLoadingIcon: {};
+        buttonPopper: {};
     };
 };
 

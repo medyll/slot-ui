@@ -25,6 +25,7 @@ __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
+        popperHolder: {};
         holderSlot: {};
         default: {};
     };

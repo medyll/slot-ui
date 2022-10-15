@@ -11,7 +11,7 @@ declare const __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
-        badge: {};
+        avatarBadge: {};
         default: {};
     };
 };

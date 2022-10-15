@@ -49,7 +49,7 @@
 	let codeSlot = `
 	<Chipper>
 		<div class="pad-4">some content</div> 
-		<div slot="chipSlot"   class="pad-tiny theme-bg-primary radius-small"></div>
+		<div slot="chipperSlot"   class="pad-tiny theme-bg-primary radius-small"></div>
 	</Chipper>`;
 
 	let codeProps = `
@@ -67,7 +67,7 @@
 		>
 			<Chipper {...activeParams}>
 				<div class="pad-2">some content</div> 
-                <div slot="chipSlot"   class="pad-tiny theme-bg-primary radius-small"></div>
+                <div slot="chipperSlot"   class="pad-tiny theme-bg-primary radius-small"></div>
 			</Chipper>
 		</Demoer>
 	</DemoPage>

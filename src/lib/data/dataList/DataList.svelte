@@ -189,21 +189,8 @@
 		bind:this={element}
 		class="dataList  pos-rel {className}"
 		{style}
-		tabindex="0"
-	>
-		{#if element && virtualizer}
-			<Virtualize style="border:1px solid red;height:100%;"  data={sortedData} let:item>
-				<svelte:fragment slot="virtualizeHeaderSlot">
-					<slot name="head">
-						<DataListHead />
-					</slot>
-				</svelte:fragment>
-				<slot {item}>
-					<DataListRow data={item ?? {}} />
-				</slot>
-			</Virtualize>
-		{/if}
-		{#if !virtualizer && element}
+		tabindex="0">
+		{#if element}
 			{#if showHeader}
 				<slot name="head">
 					<DataListHead />
@@ -214,13 +201,12 @@
 					<slot {item}>
 						<DataListRow
 							class={item[selectorField] === selectorFieldValue ? 'theme-bg-paper' : ''}
-							data={item}
-						/>
+							data={item} />
 					</slot>
 				{/each}
 			{/if}
 		{/if}
-		<slot name="foot" />
+		<slot name="dataListFooter" />
 	</div>
 {/if}
 

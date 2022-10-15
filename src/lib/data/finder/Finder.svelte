@@ -136,13 +136,6 @@
 		</Menu>
 	</Popper>
 {/if}
-<!-- <Button {usePopper} primary="action button" /> -->
-<!-- <Button usePopper={} />
-usePopper
-use:stickTo={{ parentNode, position: position }}
-optiond -->
-<slot name="noResultsSlot" />
-<slot name="loadingSlot" />
 
 <style global lang="scss">
 	@import "../../styles/slotui-vars.css";

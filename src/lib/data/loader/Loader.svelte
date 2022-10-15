@@ -40,7 +40,7 @@
     <div bind:this={element} transition:fade class="root {className}" {style}>
         <div class="loaderBox">
             {#if status === 'loading' || isLoading}
-                <slot name="loadingSlot">
+                <slot name="loaderLoading">
                     <Icon
                             style="color:var(--theme-color-primary)"
                             icon={loadingIcon}
@@ -50,23 +50,23 @@
                 </slot>
             {/if}
             {#if status === 'error' || isError}
-                <slot name="errorSlot">
+                <slot name="loaderError">
                     <Icon style="color:orange;" icon={errorIcon} fontSize="big"/>
                 </slot>
             {/if}
             {#if status === 'success' }
-                <slot name="successSlot">
+                <slot name="loaderSuccess">
                     <Icon style="color:green;" icon={successIcon} fontSize="big"/>
                 </slot>
             {/if}
             {#if status === 'empty' || isEmpty}
-                <slot name="emptySlot">
+                <slot name="loaderEmpty">
                     <Icon icon={emptyIcon} fontSize="big"/>
                 </slot>
             {/if}
 
             {#if Boolean(finalMessage)}
-                <slot name="messageSlot">
+                <slot name="loaderMessage">
                     <div class="message">{finalMessage}</div>
                 </slot>
             {/if}

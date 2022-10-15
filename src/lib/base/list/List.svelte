@@ -203,8 +203,8 @@
 	tabindex="0"
 	on:keydown={navigateList}
 >
-	{#if $$slots.commandBarSlot}
-		<slot name="commandBarSlot" />
+	{#if $$slots.listTopBar}
+		<slot name="listTopBar" />
 	{/if}
 	{#if virtualize}
 		<Virtualize height="100%" items={listItems} let:item>

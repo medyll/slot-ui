@@ -9,7 +9,7 @@
   /*  common slotUi exports*/
   let className = '';
   export {className as class};
-  export let style:string = '';
+  export let style: string                  = '';
   export let element: HTMLDivElement | null = null;
   const forwardEvents                       = createEventForwarder(get_current_component());
   /*  end slotUi exports*/
@@ -28,7 +28,7 @@
   let boundingClientRect: DOMRect;
 
   const handleClick = (item: Items) => {
-    onTabClick(item)
+    onTabClick(item);
     const event = custom_event('on:tabs:click', item, {bubbles: true});
     element.dispatchEvent(event);
   };
@@ -68,31 +68,27 @@
 >
     <div bind:this={tabsElementRef} class="tabsNav  flex-align-middle pos-rel">
         <div>
-            <slot name="tabsFirstTitleSlot"/>
+            <slot name="tabsTitleMain"/>
         </div>
         <nav bind:this={navElementRef} class="tabsRail">
             {#each items as item}
                 <div
-                        data-code={item?.code}
-                        on:click={()=>{activeTabCode=item?.code;handleClick(item)}}
-                        class={activeTabCode === item?.code ? 'active' : ''}
-                >
+                    data-code={item?.code}
+                    on:click={()=>{activeTabCode=item?.code;handleClick(item)}}
+                    class={activeTabCode === item?.code ? 'active' : ''} >
                     <slot {item} name="tabLabelSlot">{item?.label}</slot>
                 </div>
             {/each}
         </nav>
-        <div data-coll='red'>
-            <slot name="tabsTitleSlot"/>
+        <div  >
+            <slot name="tabsTitle"/>
         </div>
         <div>
-            <slot name="tabsButtonSlot"/>
+            <slot name="tabsButtons"/>
         </div>
     </div>
     <div class="tabsActiveCellContainer">
         <div bind:this={activeCellElementRef} class="tabSlot"/>
-    </div>
-    <div>
-        <slot name="commandBarSlot"/>
     </div>
     <div class="tabsContent flex-main pos-rel">
         {#each items as item}
@@ -100,10 +96,9 @@
             {#if item && activeTabCode === item?.code}
                 <slot {item} {activeTabCode}>
                     <div
-                            data-code={item.code}
-                            data-activeTabCode={activeTabCode}
-                            style="display:{display};height:100%;position:relative;flex-direction:column"
-                    >
+                        data-code={item.code}
+                        data-activeTabCode={activeTabCode}
+                        style="display:{display};height:100%;position:relative;flex-direction:column">
                         {#if Boolean(item?.secondary)}
                             <div class=" flex-h pad-tb-2 gap-small">
                                 <div class="border-r pad-1 shad-3 radius-tiny ">
@@ -112,7 +107,7 @@
                                 <div class="flex-main pad-t-1">{@html item?.secondary}</div>
                             </div>
                         {/if}
-                        <slot name="innerTabSlot" {item} {activeTabCode}>
+                        <slot name="tabsInner" {item} {activeTabCode}>
                             <div data-code={item.code} style="flex:1;overflow:hidden;position:relative;">
                                 {#if activeTabCode === item.code}
                                     {#if Boolean(item?.withComponent)}

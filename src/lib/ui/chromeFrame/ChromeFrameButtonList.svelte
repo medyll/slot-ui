@@ -31,7 +31,7 @@
 					}}
 					class={value.active ? 'active' : ''} 	>
 					{value.title ?? value.frameId}
-					<div slot="actionIcon"><Icon class="theme-text-primary" icon="window-close" /></div>
+					<div slot="buttonEnd"><Icon class="theme-text-primary" icon="window-close" /></div>
 				</Button>
 			</slot>
 		</div>

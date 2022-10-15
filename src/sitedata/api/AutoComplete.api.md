@@ -21,8 +21,8 @@ declare const __propDef: {
         default: {
             menuItemData: any;
         };
-        emptySearchString: {};
-        emptySearch: {};
+        autoCompleteEmpty: {};
+        autoCompleteNoResults: {};
     };
 };
 export declare type AutoCompleteProps = typeof __propDef.props;

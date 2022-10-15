@@ -3,13 +3,14 @@ declare const __propDef: {
     props: {
         onClose: () => void;
         hasMenu?: any;
+        icon?: string | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
         iconSlot: {};
-        titleSlot: {};
+        titleBarTitle: {};
     };
 };
 export declare type TitleBarProps = typeof __propDef.props;

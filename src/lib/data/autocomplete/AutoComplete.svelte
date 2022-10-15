@@ -129,7 +129,7 @@
     inputType="search"
     size="auto"
     class={className}
-    slot="holderSlot"
+    slot="popperHolder"
     on:pick
     on:click={() => (popperOpen = true)}
     on:focus={() => {
@@ -161,14 +161,14 @@
     </slot>
   </Menu>
   {#if !filteredData.length && !searchString}
-    <slot name="emptySearchString">
+    <slot name="autoCompleteEmpty">
       <div class="pad-2 flex-h flex-align-middle gap-small">
         <Icon fontSize="large" icon="fa-regular:keyboard" />
         perform search
       </div>
     </slot>
   {:else if !filteredData.length}
-    <slot name="emptySearch">
+    <slot name="autoCompleteNoResults">
       <div class="pad-2 flex-h flex-align-middle gap-small">
         <Icon
           class="dsp-inline"

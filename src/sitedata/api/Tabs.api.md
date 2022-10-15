@@ -14,18 +14,17 @@ declare const __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
-        tabsFirstTitleSlot: {};
+        tabsTitleMain: {};
         tabLabelSlot: {
             item: Items;
         };
-        tabsTitleSlot: {};
-        tabsButtonSlot: {};
-        commandBarSlot: {};
+        tabsTitle: {};
+        tabsButtons: {};
         default: {
             item: Items;
             activeTabCode: string;
         };
-        innerTabSlot: {
+        tabsInner: {
             item: Items;
             activeTabCode: string;
         };

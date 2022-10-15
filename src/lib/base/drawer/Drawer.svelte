@@ -1,8 +1,6 @@
 <svelte:options accessors />
 
 <script lang="ts">
-	import { get_current_component } from 'svelte/internal';
-	import BottomBar from '$lib/base/bottomBar/BottomBar.svelte';
 	import IconButton from '$lib/base/button/IconButton.svelte'; 
 	import Button from '$lib/base/button/Button.svelte';
 	import Icon from '$lib/base/icon/Icon.svelte';
@@ -156,9 +154,7 @@
 			<slot />
 		</div>
 		{#if $$slots.bottomSlot}
-			<BottomBar density="tight">
 				<slot name="bottomSlot" />
-			</BottomBar>
 		{/if}
 	{/if}
 </div>
