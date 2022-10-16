@@ -1,4 +1,4 @@
-import type { PopperPositionType } from './types';
+import type { PopperPositionType } from './types.js';
 import Popper from './Popper.svelte';
 import type { SvelteComponentDev } from 'svelte/internal';
 

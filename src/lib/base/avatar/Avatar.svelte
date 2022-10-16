@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { get_current_component } from 'svelte/internal';
-	import { createEventForwarder } from '../../engine/engine';
+	import { createEventForwarder } from '$lib/engine/engine.js';
 	import Icon from '$lib/base/icon/Icon.svelte';
 	/*  common slotUi exports*/
 	let className = '';

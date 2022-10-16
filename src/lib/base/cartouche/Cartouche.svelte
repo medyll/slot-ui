@@ -1,11 +1,10 @@
 <script lang="ts">
 	import { slide } from 'svelte/transition';
 	import Icon from '$lib/base/icon/Icon.svelte';
-	import { createEventForwarder } from '$lib/engine/eventForwarder';
-	import { get_current_component } from 'svelte/internal';
-	import { elem } from '$lib/engine/elem.js';
+	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
+	import { get_current_component } from 'svelte/internal'; 
 	import type { SvelteComponent } from 'svelte';
-	import Button from '../button/Button.svelte';
+	import Button from '$lib/base/button/Button.svelte';
 
 	/** @restProps {button | a} */
 

@@ -1,6 +1,6 @@
 <script lang="ts">
   import Starter from "./Starter.svelte";
-  import {toggleStarter} from "./actions.js";
+  import {toggleStarter} from "./actions";
   import Button from "$lib/base/button/Button.svelte";
   import Debug from "$lib/base/debug/Debug.svelte";
 

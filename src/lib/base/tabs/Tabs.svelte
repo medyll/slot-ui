@@ -2,9 +2,9 @@
   import {onMount} from 'svelte';
   import {elem} from '../../engine/elem';
   import Icon from '../icon/Icon.svelte';
-  import type {Items, TabsItemsProps} from './types';
+  import type {Items, TabsItemsProps} from './types.js';
   import {custom_event, get_current_component} from 'svelte/internal';
-  import {createEventForwarder} from '../../engine/engine';
+  import {createEventForwarder} from '$lib/engine/engine.js';
 
   /*  common slotUi exports*/
   let className = '';

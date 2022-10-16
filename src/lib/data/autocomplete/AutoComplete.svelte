@@ -2,7 +2,7 @@
 
 <script lang="ts">
   import Button from "$lib/base/button/Button.svelte";
-  import Input from "$lib/base/input/Input.svelte";
+  import Input from "$lib/form/input/Input.svelte";
   import { dataOp } from "$lib/engine/utils.js";
   import type { UsePopperProps } from "$lib/ui/popper/usePopper.js";
   import Popper from "$lib/ui/popper/Popper.svelte";

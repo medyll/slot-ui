@@ -14,7 +14,7 @@
   import IconButton from "$lib/base/button/IconButton.svelte";
   import { writable } from "svelte/store";
   import Debug from "$lib/base/debug/Debug.svelte";
-  import Input from "$lib/base/input/Input.svelte";
+  import Input from "$lib/form/input/Input.svelte";
  
   
  

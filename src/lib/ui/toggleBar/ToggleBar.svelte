@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {createEventForwarder} from '../../engine/engine';
+  import {createEventForwarder} from '$lib/engine/engine.js';
   import ContentSwitcher from '../../base/contentSwitcher/ContentSwitcher.svelte';
   import {get_current_component} from 'svelte/internal';
   import Icon from '../../base/icon/Icon.svelte';

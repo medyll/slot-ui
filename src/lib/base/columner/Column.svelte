@@ -1,8 +1,8 @@
 <script lang="ts">
-  import {createEventForwarder} from '$lib/engine/eventForwarder';
+  import {createEventForwarder} from '$lib/engine/eventForwarder.js';
   import {getContext} from 'svelte';
   import {get_current_component, tick} from 'svelte/internal';
-  import type {ColumnerStoreType} from './types';
+  import type {ColumnerStoreType} from './types.js';
   import {resizer} from '$lib/uses/resizer/resizer.js';
 
   let columner = getContext<ColumnerStoreType>('columner');

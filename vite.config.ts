@@ -12,7 +12,7 @@ const config = {
 		'$engine': path.resolve('./src/lib/engine'),
 		'$uses': path.resolve('./src/lib/uses'),
 		'$typings': path.resolve('./src/lib/types'),
-		'$sitedata': path.resolve('./src/sitedata'),
+		'$sitedata': path.resolve('./src/lib/sitedata'),
 	}},
 	server: {
 		fs: {

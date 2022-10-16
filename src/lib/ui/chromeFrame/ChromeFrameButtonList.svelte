@@ -1,7 +1,7 @@
 <svelte:options accessors/>
 <script lang="ts">
 	import { chromeFrameStore } from './chromeFrame.store';
-	import { createEventForwarder } from '../../engine/engine';
+	import { createEventForwarder } from '$lib/engine/engine.js';
 	import { get_current_component } from 'svelte/internal';
 	import Icon from '../../base/icon/Icon.svelte';
 	import Button from '$lib/base/button/Button.svelte';

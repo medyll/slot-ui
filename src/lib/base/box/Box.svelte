@@ -1,8 +1,8 @@
 <script lang="ts">
-  import TitleBar from '../titleBar/TitleBar.svelte';
-  import {createEventForwarder} from '../../engine/engine.js';
+  import TitleBar from '$lib/base/titleBar/TitleBar.svelte';
+  import {createEventForwarder} from '$lib/engine/engine.js';
   import {createEventDispatcher, get_current_component, null_to_empty} from 'svelte/internal';
-  import Icon from '../icon/Icon.svelte';
+  import Icon from '$lib/base/icon/Icon.svelte';
 
   const dispatch = createEventDispatcher();
 

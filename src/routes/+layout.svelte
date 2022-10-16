@@ -18,7 +18,7 @@
   import { onMount } from "svelte";
   import AutoComplete from "$lib/data/autocomplete/AutoComplete.svelte"; 
   import { goto } from "$app/navigation";
-  import { sitePaths } from "../site.utils.js";
+  import { sitePaths } from "$lib/engine/site.utils.js";
   // from +layout.server
   export let data = {};
  

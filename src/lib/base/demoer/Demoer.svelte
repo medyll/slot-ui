@@ -1,9 +1,9 @@
 <svelte:options accessors={true} />
 
 <script lang="ts">
-  import Button from "../button/Button.svelte";
-  import Icon from "../icon/Icon.svelte";
-  import Switch from "../switch/Switch.svelte";
+  import Button from "$lib/base/button/Button.svelte";
+  import Icon from "$lib/base/icon/Icon.svelte";
+  import Switch from "$lib/base/switch/Switch.svelte";
 
   export let title: string | undefined = undefined;
   export let parameters: Record<

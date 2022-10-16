@@ -7,7 +7,7 @@
 	import Icon from '$lib/base/icon/Icon.svelte';
 	/* demo */
 
-	import Input from '$lib/base/input/Input.svelte';
+	import Input from '$lib/form/input/Input.svelte';
 	import type { ElementProps } from '$lib/types/index.js';
 
 	type ParameterType = {

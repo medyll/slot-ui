@@ -12,9 +12,9 @@ function filterExport(filepath) {
 		'*.demo.svelte',
 		'*Demo.svelte',
 		'*preview.svelte',
-		'*sitedata*',
+		// '*sitedata*',
 		'*.md',
-		'*Example.svelte',
+		//'*Example.svelte',
 		'*indexApi*',
 		'*Readme*',
 	])

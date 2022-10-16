@@ -1,7 +1,7 @@
 <svelte:options accessors />
 <script lang="ts">
 	import { componentApiReadMe } from '$sitedata/api/indexApiFull.js';
-	import {sitePaths} from "../../../../site.utils.js";
+	import {sitePaths} from "$lib/engine/site.utils.js";
 
 	export let data: any = {};
 

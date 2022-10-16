@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { createEventForwarder } from '../../engine/engine';
+	import { createEventForwarder } from '$lib/engine/engine.js';
 	import { get_current_component } from 'svelte/internal';
 	import type { ElementProps } from '$lib/types/index.js';
 	import Button from "./Button.svelte";

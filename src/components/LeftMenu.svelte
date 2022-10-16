@@ -7,7 +7,7 @@
   import ListItem from "$lib/base/list/ListItem.svelte";
   import ListTitle from "$lib/base/list/ListTitle.svelte";
   import { dataOp } from "$lib/engine/utils.js";
-  import {sitePaths} from "../site.utils.js";
+  import {sitePaths} from "$lib/engine/site.utils.js";
 
   const groupedData = dataOp.groupBy(
     Object.values(slotuiCatalog).sort((a, b) => (a.name > b.name ? 1 : -1)),

@@ -3,8 +3,8 @@
 -->
 <script lang="ts">
   import Icon from '../icon/Icon.svelte';
-  import IconButton from '../button/IconButton.svelte'; 
-import Button from '../button/Button.svelte';
+  import IconButton from '$lib/base/button/IconButton.svelte'; 
+import Button from '$lib/base/button/Button.svelte';
 
   export let onClose: () => void;
   export let hasMenu: any = false;

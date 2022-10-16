@@ -3,7 +3,7 @@
 	import Demoer from '$lib/base/demoer/Demoer.svelte';
 	import DemoPage from '$lib/base/demoer/DemoPage.svelte';
 	import Icon from '$lib/base/icon/Icon.svelte';
-	import Button from '../button/Button.svelte';
+	import Button from '$lib/base/button/Button.svelte';
 	import ComponentExample from '$lib/demo/ComponentExample.svelte';
 
 	let parametersSlot: any = {

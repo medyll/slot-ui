@@ -1,7 +1,7 @@
 <script lang="ts">
 	// from svelte-virtual-list ([demo](https://svelte.dev/repl/f78ddd84a1a540a9a40512df39ef751b))
 	import { onMount, tick } from 'svelte';
-	import { createEventForwarder } from '../../engine/engine';
+	import { createEventForwarder } from '$lib/engine/engine.js';
 	import { get_current_component } from 'svelte/internal';
 	import { browser } from '$app/environment';
 

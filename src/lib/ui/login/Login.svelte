@@ -4,7 +4,7 @@
 
   import {userStore} from './store';
   import Backdrop from '../../base/backdrop/Backdrop.svelte';
-  import {createEventForwarder} from '../../engine/engine';
+  import {createEventForwarder} from '$lib/engine/engine.js';
   import {get_current_component} from 'svelte/internal';
   import Button from '$lib/base/button/Button.svelte';
   import Icon from '../../base/icon/Icon.svelte';

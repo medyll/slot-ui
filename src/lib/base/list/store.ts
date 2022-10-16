@@ -1,6 +1,6 @@
 import { writable, get } from 'svelte/store';
 import type { ElementProps,Data } from '$typings/index.js';
-import type { LisItemProps } from './types';
+import type { LisItemProps } from './types.js';
 
 type ListStoreType = {
   activeData: Record<string, any>;

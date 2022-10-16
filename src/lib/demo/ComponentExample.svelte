@@ -1,7 +1,7 @@
 <script lang="ts">
   import { componentReadMe } from "$sitedata/api/indexApi.js";
   import { slotuiCatalog } from "$lib/slotuiCatalog.js";
-  import {sitePaths} from "../../site.utils.js";
+  import {sitePaths} from "$lib/engine/site.utils.js";
   export let component: string = "";
   export let cite: string = "";
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ColumnerStoreType } from './types';
+	import type { ColumnerStoreType } from './types.js';
 	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
 

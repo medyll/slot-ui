@@ -1,6 +1,6 @@
 <svelte:options accessors />
 <script lang="ts">
-	import { createEventForwarder } from '$lib/engine/engine';
+	import { createEventForwarder } from '$lib/engine/engine.js';
 	import { popper, type UsePopperProps } from '$lib/ui/popper/usePopper';
 	import type { ElementProps } from '$lib/types/index.js';
 	import { compute_slots, get_current_component, text } from 'svelte/internal';

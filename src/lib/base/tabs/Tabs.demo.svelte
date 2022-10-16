@@ -1,10 +1,10 @@
 <svelte:options accessors={true}/>
 <script lang="ts">
   import Tabs from './Tabs.svelte';
-  import type {TabsItemsProps} from './types';
+  import type {TabsItemsProps} from './types.js';
   import Cartouche from '../cartouche/Cartouche.svelte';
   import Divider from '../divider/Divider.svelte';
-  import Button from '../button/Button.svelte';
+  import Button from '$lib/base/button/Button.svelte';
   /* demo */
   import ComponentExample from '$lib/demo/ComponentExample.svelte';
   import DemoPage from '$lib/base/demoer/DemoPage.svelte';
