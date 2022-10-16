@@ -124,7 +124,7 @@ function createMethods(fileList) {
 			let newData = data.replace(/declare/g, '');
 			let frag = data.match(/__propDef:([^.]*)};([^.]*)export/gm);
 
-			const pathc = [...file.split('\\').slice(0, -1)].join('\\').split('\\package\\lib')[1]
+			const pathc = [...file.split('\\').slice(0, -1)].join('\\').split('\\package')[1]
 			const comp = file.split('\\').slice(-1)[0].split('.')[0];
 			const newContent = frag?.[0]?.replace(/export/gm, '');
 
@@ -137,7 +137,7 @@ function createMethods(fileList) {
 			const pathDoc = srcLibDir + pathc + '\\' + comp + '.md';
 			const srcDoc = ('$lib' + pathc + '\\' + comp + '.md').replace(/\\/g, '/');
 
-			console.log(srcApi, srcDoc)
+			console.log(pathc , srcApi, srcDoc)
 			if (!keyDone[comp.toLowerCase()] && !file.toLowerCase().includes('demo') && !file.toLowerCase().includes('preview')) {
 				objImport.push(`import ${comp}ReadMe from "${srcDoc}"`);
 				objObj.push(`${comp.toLowerCase()}:${comp}ReadMe`);
@@ -173,7 +173,7 @@ function createMethods(fileList) {
 				keyDone[comp.toLowerCase()] = true;
 			}
 		} catch (e) {
-			console.log(e)
+			// console.log(e)
 		}
 	});
 	// write catalog object

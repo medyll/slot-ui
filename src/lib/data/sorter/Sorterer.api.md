@@ -1,5 +1,5 @@
 ```import { SvelteComponentTyped } from "svelte";
-import type { SorterFieldType } from './types';
+import type { SorterFieldType } from './types.js';
 declare const __propDef: {
     props: {
         class?: string | undefined;

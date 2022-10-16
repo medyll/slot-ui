@@ -1,6 +1,6 @@
 ```import { SvelteComponentTyped } from "svelte";
 import type { MenuItemProps } from "./types.js";
-import type { ElementProps } from "../../../types/index.js";
+import type { ElementProps } from "../../types/index.js";
 declare const __propDef: {
     props: {
         class?: string | undefined;

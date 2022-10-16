@@ -1,5 +1,5 @@
 ```import { SvelteComponentTyped } from "svelte";
-import type { Items, TabsItemsProps } from './types';
+import type { Items, TabsItemsProps } from './types.js';
 declare const __propDef: {
     props: {
         class?: string | undefined;

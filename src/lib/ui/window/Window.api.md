@@ -1,5 +1,5 @@
 ```import { SvelteComponentTyped } from "svelte";
-import type { ElementProps } from '../../../types/index.js';
+import type { ElementProps } from '../../types/index.js';
 declare const __propDef: {
     props: {
         /** Id of the component's instance */ frameId?: string | undefined;

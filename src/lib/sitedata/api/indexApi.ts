@@ -1,90 +1,83 @@
-import AlertReadMe from "$libundefined/Alert.md";
-import AvatarReadMe from "$libundefined/Avatar.md";
-import BackdropReadMe from "$libundefined/Backdrop.md";
-import BadgeReadMe from "$libundefined/Badge.md";
-import BadgeReadMe from "$libundefined/Badge.md";
-import BoxReadMe from "$libundefined/Box.md";
-import BreadCrumbReadMe from "$libundefined/BreadCrumb.md";
-import ButtonReadMe from "$libundefined/Button.md";
-import ButtonActionReadMe from "$libundefined/ButtonAction.md";
-import ButtonMenuReadMe from "$libundefined/ButtonMenu.md";
-import IconButtonReadMe from "$libundefined/IconButton.md";
-import CartoucheReadMe from "$libundefined/Cartouche.md";
-import ChipperReadMe from "$libundefined/Chipper.md";
-import ColumnReadMe from "$libundefined/Column.md";
-import ColumnerReadMe from "$libundefined/Columner.md";
-import ConfirmReadMe from "$libundefined/Confirm.md";
-import ContentSwitcherReadMe from "$libundefined/ContentSwitcher.md";
-import DebugReadMe from "$libundefined/Debug.md";
-import DividerReadMe from "$libundefined/Divider.md";
-import DrawerReadMe from "$libundefined/Drawer.md";
-import ElementorReadMe from "$libundefined/Elementor.md";
-import IconReadMe from "$libundefined/Icon.md";
-import ListReadMe from "$libundefined/List.md";
-import ListItemReadMe from "$libundefined/ListItem.md";
-import ListTitleReadMe from "$libundefined/ListTitle.md";
-import LoaderReadMe from "$libundefined/Loader.md";
-import PaperReadMe from "$libundefined/Paper.md";
-import ProgressReadMe from "$libundefined/Progress.md";
-import RatingReadMe from "$libundefined/Rating.md";
-import SliderReadMe from "$libundefined/Slider.md";
-import StepperReadMe from "$libundefined/Stepper.md";
-import SwitchReadMe from "$libundefined/Switch.md";
-import TabsReadMe from "$libundefined/Tabs.md";
-import TitleBarReadMe from "$libundefined/TitleBar.md";
-import TreeReadMe from "$libundefined/Tree.md";
-import VirtualizeReadMe from "$libundefined/Virtualize.md";
-import VirtualizerReadMe from "$libundefined/Virtualizer.md";
-import AutoCompleteReadMe from "$libundefined/AutoComplete.md";
-import DataListReadMe from "$libundefined/DataList.md";
-import DataListCellReadMe from "$libundefined/DataListCell.md";
-import DataListeContextReadMe from "$libundefined/DataListeContext.md";
-import DataListHeadReadMe from "$libundefined/DataListHead.md";
-import DataListRowReadMe from "$libundefined/DataListRow.md";
-import FinderReadMe from "$libundefined/Finder.md";
-import GrouperReadMe from "$libundefined/Grouper.md";
-import JsonerReadMe from "$libundefined/Jsoner.md";
-import JsonerReadMe from "$libundefined/Jsoner.md";
-import LoaderReadMe from "$libundefined/Loader.md";
-import SorterReadMe from "$libundefined/Sorter.md";
-import SortererReadMe from "$libundefined/Sorterer.md";
-import ConfirmReadMe from "$libundefined/Confirm.md";
-import InputReadMe from "$libundefined/Input.md";
-import SelectReadMe from "$libundefined/Select.md";
-import SwitchReadMe from "$libundefined/Switch.md";
-import BootStrAppReadMe from "$libundefined/BootStrApp.md";
-import DynPageReadMe from "$libundefined/DynPage.md";
-import ChromeFrameReadMe from "$libundefined/ChromeFrame.md";
-import ChromeFrameButtonListReadMe from "$libundefined/ChromeFrameButtonList.md";
-import ChromeFrameListReadMe from "$libundefined/ChromeFrameList.md";
-import FrameReadMe from "$libundefined/Frame.md";
-import LoginReadMe from "$libundefined/Login.md";
-import MenuReadMe from "$libundefined/Menu.md";
-import MenuContextAgentReadMe from "$libundefined/MenuContextAgent.md";
-import MenuItemReadMe from "$libundefined/MenuItem.md";
-import PanelReadMe from "$libundefined/Panel.md";
-import PanelerReadMe from "$libundefined/Paneler.md";
-import PanelGridReadMe from "$libundefined/PanelGrid.md";
-import PanelSlideReadMe from "$libundefined/PanelSlide.md";
-import PopperReadMe from "$libundefined/Popper.md";
-import usePopperReadMe from "$libundefined/usePopper.md";
-import ServiceBoxReadMe from "$libundefined/ServiceBox.md";
-import StarterReadMe from "$libundefined/Starter.md";
-import StarterReadMe from "$libundefined/Starter.md";
-import StartMenuReadMe from "$libundefined/StartMenu.md";
-import TaskbarReadMe from "$libundefined/Taskbar.md";
-import TaskBarContentReadMe from "$libundefined/TaskBarContent.md";
-import ThemeSwitcherReadMe from "$libundefined/ThemeSwitcher.md";
-import ToastReadMe from "$libundefined/Toast.md";
-import ToasterReadMe from "$libundefined/Toaster.md";
-import ToggleBarReadMe from "$libundefined/ToggleBar.md";
-import WindowReadMe from "$libundefined/Window.md";
-import ContextRooterReadMe from "$libundefined/ContextRooter.md";
+import AlertReadMe from "$lib/base/alert/Alert.md";
+import AvatarReadMe from "$lib/base/avatar/Avatar.md";
+import BackdropReadMe from "$lib/base/backdrop/Backdrop.md";
+import BadgeReadMe from "$lib/base/badge/Badge.md";
+import BoxReadMe from "$lib/base/box/Box.md";
+import BreadCrumbReadMe from "$lib/base/breadCrumb/BreadCrumb.md";
+import ButtonReadMe from "$lib/base/button/Button.md";
+import ButtonActionReadMe from "$lib/base/button/ButtonAction.md";
+import ButtonMenuReadMe from "$lib/base/button/ButtonMenu.md";
+import IconButtonReadMe from "$lib/base/button/IconButton.md";
+import CartoucheReadMe from "$lib/base/cartouche/Cartouche.md";
+import ChipperReadMe from "$lib/base/chipper/Chipper.md";
+import ColumnReadMe from "$lib/base/columner/Column.md";
+import ColumnerReadMe from "$lib/base/columner/Columner.md";
+import ConfirmReadMe from "$lib/base/confirm/Confirm.md";
+import ContentSwitcherReadMe from "$lib/base/contentSwitcher/ContentSwitcher.md";
+import DebugReadMe from "$lib/base/debug/Debug.md";
+import DividerReadMe from "$lib/base/divider/Divider.md";
+import DrawerReadMe from "$lib/base/drawer/Drawer.md";
+import ElementorReadMe from "$lib/base/elementor/Elementor.md";
+import IconReadMe from "$lib/base/icon/Icon.md";
+import ListReadMe from "$lib/base/list/List.md";
+import ListItemReadMe from "$lib/base/list/ListItem.md";
+import ListTitleReadMe from "$lib/base/list/ListTitle.md";
+import LoaderReadMe from "$lib/base/loader/Loader.md";
+import PaperReadMe from "$lib/base/paper/Paper.md";
+import ProgressReadMe from "$lib/base/progress/Progress.md";
+import RatingReadMe from "$lib/base/rating/Rating.md";
+import SliderReadMe from "$lib/base/slider/Slider.md";
+import StepperReadMe from "$lib/base/stepper/Stepper.md";
+import SwitchReadMe from "$lib/base/switch/Switch.md";
+import TabsReadMe from "$lib/base/tabs/Tabs.md";
+import TitleBarReadMe from "$lib/base/titleBar/TitleBar.md";
+import TreeReadMe from "$lib/base/tree/Tree.md";
+import VirtualizeReadMe from "$lib/base/virtualize/Virtualize.md";
+import VirtualizerReadMe from "$lib/base/virtualizer/Virtualizer.md";
+import AutoCompleteReadMe from "$lib/data/autocomplete/AutoComplete.md";
+import DataListReadMe from "$lib/data/dataList/DataList.md";
+import DataListCellReadMe from "$lib/data/dataList/DataListCell.md";
+import DataListeContextReadMe from "$lib/data/dataList/DataListeContext.md";
+import DataListHeadReadMe from "$lib/data/dataList/DataListHead.md";
+import DataListRowReadMe from "$lib/data/dataList/DataListRow.md";
+import FinderReadMe from "$lib/data/finder/Finder.md";
+import GrouperReadMe from "$lib/data/grouper/Grouper.md";
+import JsonerReadMe from "$lib/data/jsoner/Jsoner.md";
+import SorterReadMe from "$lib/data/sorter/Sorter.md";
+import SortererReadMe from "$lib/data/sorter/Sorterer.md";
+import InputReadMe from "$lib/form/input/Input.md";
+import SelectReadMe from "$lib/form/select/Select.md";
+import BootStrAppReadMe from "$lib/ui/bootstrapp/BootStrApp.md";
+import DynPageReadMe from "$lib/ui/bootstrapp/DynPage.md";
+import ChromeFrameReadMe from "$lib/ui/chromeFrame/ChromeFrame.md";
+import ChromeFrameButtonListReadMe from "$lib/ui/chromeFrame/ChromeFrameButtonList.md";
+import ChromeFrameListReadMe from "$lib/ui/chromeFrame/ChromeFrameList.md";
+import FrameReadMe from "$lib/ui/frame/Frame.md";
+import LoginReadMe from "$lib/ui/login/Login.md";
+import MenuReadMe from "$lib/ui/menu/Menu.md";
+import MenuContextAgentReadMe from "$lib/ui/menu/MenuContextAgent.md";
+import MenuItemReadMe from "$lib/ui/menu/MenuItem.md";
+import PanelReadMe from "$lib/ui/panel/Panel.md";
+import PanelerReadMe from "$lib/ui/panel/Paneler.md";
+import PanelGridReadMe from "$lib/ui/panel/PanelGrid.md";
+import PanelSlideReadMe from "$lib/ui/panel/PanelSlide.md";
+import PopperReadMe from "$lib/ui/popper/Popper.md";
+import usePopperReadMe from "$lib/ui/popper/usePopper.md";
+import ServiceBoxReadMe from "$lib/ui/serviceBox/ServiceBox.md";
+import StarterReadMe from "$lib/ui/starter/Starter.md";
+import StartMenuReadMe from "$lib/ui/startMenu/StartMenu.md";
+import TaskbarReadMe from "$lib/ui/taskbar/Taskbar.md";
+import TaskBarContentReadMe from "$lib/ui/taskbar/TaskBarContent.md";
+import ThemeSwitcherReadMe from "$lib/ui/themeswitcher/ThemeSwitcher.md";
+import ToastReadMe from "$lib/ui/toast/Toast.md";
+import ToasterReadMe from "$lib/ui/toast/Toaster.md";
+import ToggleBarReadMe from "$lib/ui/toggleBar/ToggleBar.md";
+import WindowReadMe from "$lib/ui/window/Window.md";
+import ContextRooterReadMe from "$lib/utils/contextRooter/ContextRooter.md";
 
 export const componentReadMe = {alert:AlertReadMe,
 avatar:AvatarReadMe,
 backdrop:BackdropReadMe,
-badge:BadgeReadMe,
 badge:BadgeReadMe,
 box:BoxReadMe,
 breadcrumb:BreadCrumbReadMe,
@@ -127,14 +120,10 @@ datalistrow:DataListRowReadMe,
 finder:FinderReadMe,
 grouper:GrouperReadMe,
 jsoner:JsonerReadMe,
-jsoner:JsonerReadMe,
-loader:LoaderReadMe,
 sorter:SorterReadMe,
 sorterer:SortererReadMe,
-confirm:ConfirmReadMe,
 input:InputReadMe,
 select:SelectReadMe,
-switch:SwitchReadMe,
 bootstrapp:BootStrAppReadMe,
 dynpage:DynPageReadMe,
 chromeframe:ChromeFrameReadMe,
@@ -152,7 +141,6 @@ panelslide:PanelSlideReadMe,
 popper:PopperReadMe,
 usepopper:usePopperReadMe,
 servicebox:ServiceBoxReadMe,
-starter:StarterReadMe,
 starter:StarterReadMe,
 startmenu:StartMenuReadMe,
 taskbar:TaskbarReadMe,

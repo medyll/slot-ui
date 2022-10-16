@@ -1,5 +1,5 @@
 ```import { SvelteComponentTyped } from "svelte";
-import type { IChromeOptionsArgs } from './types';
+import type { IChromeOptionsArgs } from './types.js';
 declare const __propDef: {
     props: {
         class?: string | undefined;
