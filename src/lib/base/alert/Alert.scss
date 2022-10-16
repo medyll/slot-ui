@@ -1,9 +1,12 @@
+@import "../../styles/slotui-vars.css";
+@import "../../styles/presets.scss";
+
 .alert {
     position: relative;
     min-width: 350px;
     display: inline-block;
     border-radius: 6px;
-    border: 1px solid var(--theme-border_color);
+    border: 1px solid var(--slotui-border-color);
     background-color: var(--theme-color-background);
     overflow: hidden;
 

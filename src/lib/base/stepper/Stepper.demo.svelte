@@ -20,14 +20,7 @@
     status: defaultsArgsFromProps('status', parametersSlot),
   };
 
-  let codeSlot = `
-<Loader on:status:change={()=>{}} >
-    <Icon slot="loadingSlot" icon="mdi:loading" rotate/>
-    <Icon slot="errorSlot" icon="mdi:alert-circle-outline"/>
-    <Icon slot="emptySlot" icon="mdi:database-search-outline"/>
-    <Icon slot="successSlot" icon="clarity:success-standard-line"/>
-    <div slot="messageSlot" class="border-b pad radius-tiny border-color-palette-green">status message</div>
-</Loader>`;
+  let codeSlot = ` `;
 
   let codeProps = `
 <Loader

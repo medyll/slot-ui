@@ -6,7 +6,7 @@
 	import { openPopper } from '../../ui/popper/actions';
 	import IconButton from './IconButton.svelte';
 	import Menu from '../../ui/menu/Menu.svelte';
-	import { createEventForwarder } from '../../engine/engine';
+	import { createEventForwarder } from '$lib/engine/engine.js';
 	import type { SvelteComponent } from 'svelte';
 	import type { PopperPositionType } from '$lib/ui/popper/types';
 	import type { MenuItemProps, MenuProps } from '$lib/ui/menu/types';

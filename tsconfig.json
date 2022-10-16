@@ -14,8 +14,8 @@
 		"paths": {
 			"$lib": ["src/lib"],
 			"$lib/*": ["src/lib/*"],
-			"$sitedata": ["src/sitedata"],
-			"$sitedata/*": ["src/sitedata/*"],
+			"$sitedata": ["src/lib/sitedata"],
+			"$sitedata/*": ["src/lib/sitedata/*"],
 			"$engine": ["src/engine"],
 			"$engine/*": ["src/engine/*"],
 			"$scripts": ["src/scripts"],

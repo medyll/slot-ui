@@ -28,7 +28,7 @@
 
 <input bind:this={hiddenRef} {name} id={name} value={checked} type="hidden" />
 <label bind:this={element} for="_{name}" class="switch {className}" {style}>
-  <slot name="label" />
+  <slot name="switchLabel"><slot name="label" /></slot>
   <div class="switchGutter">
     <input
       use:forwardEvents
@@ -44,6 +44,8 @@
 </label>
 
 <style lang="scss">
+  @import "../../styles/slotui-vars.css";
+  @import "../../styles/presets.scss";
   label {
     background-color: transparent;
     border: none;

@@ -4,7 +4,7 @@
 	import ListItem from './ListItem.svelte';
 	import { null_to_empty } from 'svelte/internal';
 	import Icon from '../icon/Icon.svelte';
-	import IconButton from '../button/IconButton.svelte';
+	import IconButton from '$lib/base/button/IconButton.svelte';
 	/* demo */
 	import ComponentExample from '$lib/demo/ComponentExample.svelte';
 	import Demoer from '$lib/base/demoer/Demoer.svelte';

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { get_current_component } from 'svelte/internal';
-	import { createEventForwarder } from '../../engine/engine';
+	import { createEventForwarder } from '$lib/engine/engine.js';
 	import Icon from '$lib/base/icon/Icon.svelte';
 	/*  common slotUi exports*/
 	let className = '';
@@ -26,9 +26,8 @@
 	bind:this={element}
 	class="avatar {className}"
 	style="width:{sizes[size]};height:{sizes[size]}"
-	use:forwardEvents
->
-	<slot name="badge" />
+	use:forwardEvents>
+	<slot name="avatarBadge" />
 	<slot>
 		<Icon {icon} fontSize={iconSize}   />
 	</slot>

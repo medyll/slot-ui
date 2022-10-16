@@ -13,7 +13,7 @@
 	<slot />
 	<chip data-position={position}>
 		{#if showChip}
-			<slot name="chipSlot">
+			<slot name="chipperSlot">
 				<div class="defaultChip" />
 			</slot>
 		{/if}
@@ -21,6 +21,8 @@
 </div>
 
 <style lang="scss">
+	@import "../../styles/slotui-vars.css";
+	@import "../../styles/presets.scss";
 	chip {
 		position: absolute;
 		z-index: 2;

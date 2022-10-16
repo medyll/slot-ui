@@ -29,6 +29,8 @@
 </div>
 
 <style lang="scss">
+	@import "../../styles/slotui-vars.css";
+	@import "../../styles/presets.scss";
 	.stepper {
 		.step {
 			padding: 0.5rem;

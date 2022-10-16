@@ -1,8 +1,7 @@
 <!-- 
 	@deprecated
  -->
-<script lang="ts">
-	import { autofocus } from '$lib/uses/autofocus/autofocus.js';
+<script lang="ts"> 
 	import { fade, slide } from 'svelte/transition';
 	import Button from '$lib/base/button/Button.svelte';
 	import { onDestroy } from 'svelte';
@@ -82,6 +81,8 @@
 
 
 <style lang="scss">
+	@import "../../styles/slotui-vars.css";
+	@import "../../styles/presets.scss";
 	.contentSlot{
 		display:flex;
 		align-items:center;

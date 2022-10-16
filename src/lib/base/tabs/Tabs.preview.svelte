@@ -1,10 +1,10 @@
 <svelte:options accessors={true}/>
 <script lang="ts">
   import Tabs from './Tabs.svelte';
-  import type {TabsItemsProps} from './types';
+  import type {TabsItemsProps} from './types.js';
   import Cartouche from '../cartouche/Cartouche.svelte';
   import Divider from '../divider/Divider.svelte';
-  import Button from '../button/Button.svelte';
+  import Button from '$lib/base/button/Button.svelte';
 
   const items: TabsItemsProps = [
     {label: 'Tab 1', code: 'theTitle1', withContent:'ff',secondary:'some'},
@@ -14,7 +14,7 @@
 </script>
  
 <Tabs activeTabCode="theTitle3" {items}>
-    <!-- <span slot="tabsTitleSlot">some tabs title</span>
-    <span slot="tabsButtonSlot" ><Button bordered >button</Button></span> -->
+    <!-- <span slot="tabsTitle">some tabs title</span>
+    <span slot="tabsButtons" ><Button bordered >button</Button></span> -->
 </Tabs>
 

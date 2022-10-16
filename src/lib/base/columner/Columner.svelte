@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ColumnerStoreType } from './types';
+	import type { ColumnerStoreType } from './types.js';
 	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
 
@@ -15,6 +15,8 @@
 </div>
 
 <style lang="scss">
+	@import "../../styles/slotui-vars.css";
+	@import "../../styles/presets.scss";
 	.columner {
 		display: flex;
 		height: 100%; 

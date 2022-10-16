@@ -1,8 +1,7 @@
-<svelte:options accessors={true} immutable={true} /> 
-<script lang="ts">
-	import Debug from '$lib/base/debug/Debug.svelte';
+<svelte:options accessors={true}  />
+<script lang="ts"> 
 	import Button from '$lib/base/button/Button.svelte';
-	import Input from '$lib/base/input/Input.svelte';
+	import Input from '$lib/form/input/Input.svelte';
 	import { dataOp } from '$lib/engine/utils.js';
 	import type { UsePopperProps } from '$lib/ui/popper/usePopper.js';
 	import Popper from '$lib/ui/popper/Popper.svelte';
@@ -136,15 +135,10 @@
 		</Menu>
 	</Popper>
 {/if}
-<!-- <Button {usePopper} primary="action button" /> -->
-<!-- <Button usePopper={} />
-usePopper
-use:stickTo={{ parentNode, position: position }}
-optiond -->
-<slot name="noResultsSlot" />
-<slot name="loadingSlot" />
 
 <style global lang="scss">
+	@import "../../styles/slotui-vars.css";
+	@import "../../styles/presets.scss";
 	container {
 		display: inline-flex;
 		gap: 0.25rem;

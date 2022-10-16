@@ -7,7 +7,7 @@
 
 	const ww = `<Rating scored={2}>
 			<Icon icon="star" />
-			<Icon slot="scoredSlot" icon="minus" />
+			<Icon slot="ratingScoredIcon" icon="minus" />
 		</Rating>`;
 	const ww2 = `<Rating defaultIcon="minus" scoredIcon="plus" scored={3} />`;
 
@@ -46,7 +46,7 @@
 			<Demoer {parameters} {componentArgs} let:activeParams>
 				<Rating {...activeParams}>
 					<Icon icon={activeParams.defaultIcon} />
-					<Icon slot="scoredSlot" icon={activeParams.scoredIcon} />
+					<Icon slot="ratingScoredIcon" icon={activeParams.scoredIcon} />
 				</Rating>
 			</Demoer>
 		</DemoPage>

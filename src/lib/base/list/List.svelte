@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { LisItemProps } from './types';
+	import type { LisItemProps } from './types.js';
 	import ListItem from './ListItem.svelte';
 	import { setContext } from 'svelte';
-	import { createListStore } from './store';
+	import { createListStore } from './store.js';
 	import type { ElementProps } from '$lib/types/index.js';
 	import { compute_slots, get_current_component, null_to_empty } from 'svelte/internal';
 	import Icon from '../icon/Icon.svelte';
@@ -203,8 +203,8 @@
 	tabindex="0"
 	on:keydown={navigateList}
 >
-	{#if $$slots.commandBarSlot}
-		<slot name="commandBarSlot" />
+	{#if $$slots.listTopBar}
+		<slot name="listTopBar" />
 	{/if}
 	{#if virtualize}
 		<Virtualize height="100%" items={listItems} let:item>

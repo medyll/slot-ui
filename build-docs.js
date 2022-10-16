@@ -7,13 +7,13 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const srcPackage = path.join(__dirname, 'package');
 const srcLibDir = path.join(__dirname, 'src', 'lib');
-const dirPath = path.join('src', 'sitedata');
+const dirPath = path.join('src', 'lib','sitedata');
 // const dirPath = path.join('src','sitedata');
 const libShort = '$lib';
 
 let fileHead = '';
 
-mkdir(dirPath, { recursive: true }, () => {});
+mkdir(dirPath, { recursive: true }, () => { });
 
 const getAllFiles = function (dirPath, fragment = 'demo.svelte', arrayOfFiles = []) {
 	let files = fs.readdirSync(dirPath);
@@ -69,7 +69,7 @@ function createObject(fileList, exportName = 'slotUiComponentList') {
 	const start = `export const ${exportName} = [ `;
 	const middle = fileList
 		?.map((fl) => {
-			const group = fl.split('\\')[1]; 
+			const group = fl.split('\\')[1];
 			const comp = fl.split('\\').slice(-1).toString()?.replace(/\./g, '');
 			const compName = fl.split('\\').slice(-1)[0].split('.')[0];
 			const code = compName.toLowerCase();
@@ -90,7 +90,7 @@ function createComponentList(fileList, exportName = 'slotUiComponentList') {
 	const start = `export const ${exportName} = { `;
 	const middle = fileList
 		?.map((fl) => {
-			const group = fl.split('\\')[1]; 
+			const group = fl.split('\\')[1];
 			const comp = fl.split('\\').slice(-1).toString()?.replace(/\./g, '');
 			const compName = fl.split('\\').slice(-1)[0].split('.')[0];
 			const code = compName.toLowerCase();
@@ -108,14 +108,91 @@ function createComponentList(fileList, exportName = 'slotUiComponentList') {
 
 /** writes .md and api.md from packageDir  */
 function createMethods(fileList) {
-	mkdir(dirPath + '/api', { recursive: true }, () => {});
+
+	mkdir(dirPath + '/api', { recursive: true }, () => { });
 	let keyDone = {};
 
 	let objImport = [];
 	let objObj = [];
 	let objApiImport = [];
 	let objApiObj = [];
- 
+
+	fileList.forEach((file) => {
+
+		try {
+			const data = fs.readFileSync(file, 'utf8');
+			let newData = data.replace(/declare/g, '');
+			let frag = data.match(/__propDef:([^.]*)};([^.]*)export/gm);
+
+			const pathc = [...file.split('\\').slice(0, -1)].join('\\').split('\\package')[1]
+			const comp = file.split('\\').slice(-1)[0].split('.')[0];
+			const newContent = frag?.[0]?.replace(/export/gm, '');
+
+			const src = ('$sitedata/api/' + comp + '.md').replace(/\\/g, '/');
+			const srcApiFull = ('$sitedata/api/' + comp + '.api.md').replace(/\\/g, '/');
+
+
+			const pathApi = srcLibDir + pathc + '\\' + comp + '.api.md';
+			const srcApi = ('$lib' + pathc + '\\' + comp + '.api.md').replace(/\\/g, '/');
+			const pathDoc = srcLibDir + pathc + '\\' + comp + '.md';
+			const srcDoc = ('$lib' + pathc + '\\' + comp + '.md').replace(/\\/g, '/');
+
+			console.log(pathc , srcApi, srcDoc)
+			if (!keyDone[comp.toLowerCase()] && !file.toLowerCase().includes('demo') && !file.toLowerCase().includes('preview')) {
+				objImport.push(`import ${comp}ReadMe from "${srcDoc}"`);
+				objObj.push(`${comp.toLowerCase()}:${comp}ReadMe`);
+
+				/* objImport.push(`import ${comp}ReadMe from "${src}"`);
+				objObj.push(`${comp.toLowerCase()}:${comp}ReadMe`); */
+				// if (!newContent) newContent = data; // console.log({file, frag,data});; //newContent = data; //
+
+				/* fs.writeFileSync(
+					dirPath + '/api/' + comp + '.md',
+					newContent ? '```ts \r\n' + newContent + '\r\n ```' : 'missing'
+				); */
+
+				objApiImport.push(`import ${comp}ApiReadMe from "${srcApi}"`);
+				objApiObj.push(`${comp.toLowerCase()}Api:${comp}ApiReadMe`);
+
+				/* objApiImport.push(`import ${comp}ApiReadMe from "${srcApiFull}"`);
+				objApiObj.push(`${comp.toLowerCase()}Api:${comp}ApiReadMe`); */
+
+				fs.writeFileSync(
+					pathApi,
+					'```' + data + '\r\n ```'
+				);
+
+				fs.writeFileSync(
+					pathDoc,
+					newContent ? '```ts \r\n' + newContent + '\r\n ```' : 'missing'
+				);
+				/* fs.writeFileSync(
+					pathc + '\\' + comp + '.api.md',
+					'```' + data + '\r\n ```'
+				); */
+				keyDone[comp.toLowerCase()] = true;
+			}
+		} catch (e) {
+			// console.log(e)
+		}
+	});
+	// write catalog object
+	const finalObj = `export const componentReadMe = {${objObj.join(',\r\n')}}`;
+	const finalApiObj = `export const componentApiReadMe = {${objApiObj.join(',\r\n')}}`;
+
+	fs.writeFileSync(dirPath + '/api/indexApi.ts', objImport.join(';\r\n') + ';\r\n\r\n' + finalObj);
+	fs.writeFileSync(dirPath + '/api/indexApiFull.ts', objApiImport.join(';\r\n') + ';\r\n\r\n' + finalApiObj);
+}
+
+function createReadme(fileList) {
+	mkdir(dirPath + '/api', { recursive: true }, () => { });
+	let keyDone = {};
+
+	let objImport = [];
+	let objObj = [];
+	let objApiImport = [];
+	let objApiObj = [];
+
 	fileList.forEach((file) => {
 		try {
 			const data = fs.readFileSync(file, 'utf8');
@@ -128,65 +205,20 @@ function createMethods(fileList) {
 			const src = ('$sitedata/api/' + comp + '.md').replace(/\\/g, '/');
 			const srcApiFull = ('$sitedata/api/' + comp + '.api.md').replace(/\\/g, '/');
 
-			if (!keyDone[comp.toLowerCase()] &&  !file.toLowerCase().includes('demo') &&  !file.toLowerCase().includes('preview')) {
+			if (!keyDone[comp.toLowerCase()] && !file.toLowerCase().includes('demo') && !file.toLowerCase().includes('preview')) {
 				objImport.push(`import ${comp}ReadMe from "${src}"`);
 				objObj.push(`${comp.toLowerCase()}:${comp}ReadMe`);
-				// if (!newContent) newContent = data; // console.log({file, frag,data});; //newContent = data; //
 
-				fs.writeFileSync(
-					dirPath + '/api/' + comp + '.md',
-					newContent ? '```ts \r\n' + newContent + '\r\n ```' : 'missing'
-				);
+
 
 				objApiImport.push(`import ${comp}ApiReadMe from "${srcApiFull}"`);
 				objApiObj.push(`${comp.toLowerCase()}Api:${comp}ApiReadMe`);
 
-				fs.writeFileSync(
-					dirPath + '/api/' + comp + '.api.md',
-					'```'+data+ '\r\n ```'
-				);
 
 				keyDone[comp.toLowerCase()] = true;
 			}
-		} catch (e) {}
-	}); 
-}
-
-function createReadme(fileList) {
-	mkdir(dirPath + '/api', { recursive: true }, () => {});
-	let keyDone = {};
-
-	let objImport = [];
-	let objObj = [];
-	let objApiImport = [];
-	let objApiObj = [];
-
-	fileList.forEach((file) => { 
-		try {
-			const data = fs.readFileSync(file, 'utf8');
-			let newData = data.replace(/declare/g, '');
-			let frag = data.match(/__propDef:([^.]*)};([^.]*)export/gm);
-
-			const comp = file.split('\\').slice(-1)[0].split('.')[0];
-			const newContent = frag?.[0]?.replace(/export/gm, '');
-			
-			const src = ('$sitedata/api/' + comp + '.md').replace(/\\/g, '/');
-			const srcApiFull = ('$sitedata/api/' + comp + '.api.md').replace(/\\/g, '/');
-
-			if (!keyDone[comp.toLowerCase()] &&  !file.toLowerCase().includes('demo') &&  !file.toLowerCase().includes('preview')) {
-				objImport.push(`import ${comp}ReadMe from "${src}"`);
-				objObj.push(`${comp.toLowerCase()}:${comp}ReadMe`); 
-
-			 
-
-				objApiImport.push(`import ${comp}ApiReadMe from "${srcApiFull}"`);
-				objApiObj.push(`${comp.toLowerCase()}Api:${comp}ApiReadMe`);
-				 
-
-				keyDone[comp.toLowerCase()] = true;
-			}
-		} catch (e) {}
-	}); 
+		} catch (e) { }
+	});
 	// write catalog object
 	const finalObj = `export const componentReadMe = {${objObj.join(',\r\n')}}`;
 	const finalApiObj = `export const componentApiReadMe = {${objApiObj.join(',\r\n')}}`;
@@ -202,10 +234,10 @@ const resultProps = getAllFiles(srcPackage, 'svelte.d.ts');
 // write methods from packaged components 
 createMethods(resultProps);
 console.log(dirPath, 'component.api.md and component.md creation');
-createReadme(resultProps);
+// createReadme(resultProps);
 console.log(dirPath, 'index files for component.api.md and component.md');
 
-const result = getAllFiles(srcLibDir,'demo.svelte');
+const result = getAllFiles(srcLibDir, 'demo.svelte');
 // console.log(result)
 const resultPreview = getAllFiles(srcLibDir, 'preview.svelte');
 // write old component list
@@ -215,7 +247,7 @@ fs.writeFileSync(
 );
 // write new component list
 fs.writeFileSync(
-	path.join('src',  'lib') + '/slotuiCatalog.ts',
+	path.join('src', 'lib') + '/slotuiCatalog.ts',
 	createComponentList(result, 'slotuiCatalog')
 );
 console.log(dirPath, 'Documentation files created into /componentList.ts');

@@ -25,6 +25,8 @@
 </div>
 
 <style lang="scss">
+  @import "../../styles/slotui-vars.css";
+  @import "../../styles/presets.scss";
   .gridIconBis {
     width: 100%;
     display: grid;

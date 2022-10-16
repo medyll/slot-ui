@@ -1,11 +1,10 @@
 <script lang="ts">
 	import { slide } from 'svelte/transition';
 	import Icon from '$lib/base/icon/Icon.svelte';
-	import { createEventForwarder } from '$lib/engine/eventForwarder';
-	import { get_current_component } from 'svelte/internal';
-	import { elem } from '$lib/engine/elem.js';
+	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
+	import { get_current_component } from 'svelte/internal'; 
 	import type { SvelteComponent } from 'svelte';
-	import Button from '../button/Button.svelte';
+	import Button from '$lib/base/button/Button.svelte';
 
 	/** @restProps {button | a} */
 
@@ -42,7 +41,6 @@
 		}
 	};
 
-	let chevronIcon: 'chevron-down' | 'chevron-up';
 	$: chevronIcon = !isOpen ? 'chevron-down' : 'chevron-up';
 </script>
 
@@ -50,14 +48,14 @@
 	class:stacked
 	bind:this={element}
 	class="cartoucheHolder {className}"
-	{style}
 	data-bordered={bordered ?? false}
 	use:forwardEvents
+	{style}
 >
 	<div class="cartouche" on:click={actions.toggle}>
-		{#if icon || $$slots.cartoucheIconSlot}
+		{#if icon || $$slots.cartoucheIcon}
 			<div class="icon pad-l-1">
-				<slot name="cartoucheIconSlot">
+				<slot name="cartoucheIcon">
 					<Icon {icon} />
 				</slot>
 			</div>
@@ -69,22 +67,20 @@
 			{/if}
 		</div>
 		<div class={showTitleDivider ? 'divider' : ''} style="flex:1" />
-		{#if $$slots.cartoucheActionSlot}
+		{#if $$slots.cartoucheButtons}
 			<div
 				on:click={(event) => {
 					event.preventDefault();
 					event.stopPropagation();
 				}}
-				class="cartoucheAction"
-			>
-				<slot name="cartoucheActionSlot" />
+				class="cartoucheAction" >
+				<slot name="cartoucheButtons" />
 			</div>
 		{/if}
 		<div class="chevron">
 			<Button naked icon={chevronIcon} />
 		</div>
 	</div>
-
 	{#if isOpen}
 		<div class="cartoucheContent" transition:slide>
 			{#if component}

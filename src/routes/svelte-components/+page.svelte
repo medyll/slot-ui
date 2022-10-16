@@ -4,7 +4,7 @@
 	import Paper from '$lib/base/paper/Paper.svelte';
 	import { dataOp } from '$lib/engine/utils';
 	import Divider from '$lib/base/divider/Divider.svelte';
-	import {sitePaths} from "../../site.utils.js";
+	import {sitePaths} from "$lib/engine/site.utils.js";
 
 	function spliceArray(arrayIn: any[], size: number) {
 		let out = [];

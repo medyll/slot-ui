@@ -11,7 +11,7 @@
 
 	import DynPage from './DynPage.svelte';
 	import Drawer from '$lib/base/drawer/Drawer.svelte';
-	import TopBar from '../topBar/TopBar.svelte';
+	import TopBar from '../toggleBar/ToggleBar.svelte';
 	import List from '$lib/base/list/List.svelte';
 	import ListItem from '$lib/base/list/ListItem.svelte';
 	import { page } from '$app/stores';

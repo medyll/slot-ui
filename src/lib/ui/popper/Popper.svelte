@@ -77,7 +77,7 @@
   onMount(() => {
     // who is the parent for stickTo ??
     if (parentNode) {
-    } else if ($$slots.holderSlot) {
+    } else if ($$slots.holderSlot || $$slots.popperHolder) {
       // if holderSlot, then make it the stickTo parentNode
       parentNode = holderSlotRef ?? document.body;
     } else {
@@ -115,9 +115,9 @@
   }, 0);
 </script>
  
-{#if $$slots.holderSlot}
+{#if  $$slots.popperHolder || $$slots.holderSlot}
   <div bind:this={holderSlotRef} style="position:relative;display:inline-block">
-    <slot name="holderSlot" />
+    <slot name="popperHolder"><slot name="holderSlot" /></slot>
   </div>
 {/if}
 {#if parentNode && ((isOpen && autoClose) || !autoClose)}
@@ -145,6 +145,8 @@
 {/if}
 
 <style lang="scss">
+  @import "../../styles/slotui-vars.css";
+  @import "../../styles/presets.scss";
   .popper {
     border-radius: var(--css-popper-radius, var(--radius-tiny));
     overflow: hidden;

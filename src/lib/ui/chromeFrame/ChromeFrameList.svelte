@@ -2,9 +2,9 @@
 <script lang="ts">
   import {chromeFrameListRef, chromeFrameStore} from './chromeFrame.store';
   import ChromeFrame from './ChromeFrame.svelte';
-  import {browser} from '$app/env';
-  import type {IChromeFrameArgs, IChromeOptionsArgs} from './types';
-  import {createEventForwarder} from '../../engine/engine';
+  import {browser} from '$app/environment';
+  import type {IChromeFrameArgs, IChromeOptionsArgs} from './types.js';
+  import {createEventForwarder} from '$lib/engine/engine.js';
   import {get_current_component} from 'svelte/internal';
 
   /*  common slotUi exports*/

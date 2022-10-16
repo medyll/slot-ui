@@ -3,7 +3,7 @@
 <script lang="ts">
   import { trans2Tree } from "./tree.utils";
   import type { PathDataType, TreeItemType } from "./types";
-  import { createEventForwarder } from "../../engine/engine";
+  import { createEventForwarder } from "$lib/engine/engine.js";
   import { get_current_component } from "svelte/internal";
   import Icon from "../icon/Icon.svelte";
   import type { Data } from "$types";
@@ -146,6 +146,7 @@
 </div>
 
 <style lang="scss">
+  @import "../../styles/slotui-vars.css";
   @import "../../styles/presets.scss";
   .cell {
     border: 1px solid transparent;

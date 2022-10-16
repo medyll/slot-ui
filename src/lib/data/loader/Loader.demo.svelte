@@ -22,11 +22,11 @@
 
   let codeSlot = `
 <Loader on:status:change={()=>{}} >
-    <Icon slot="loadingSlot" icon="mdi:loading" rotate/>
-    <Icon slot="errorSlot" icon="mdi:alert-circle-outline"/>
-    <Icon slot="emptySlot" icon="mdi:database-search-outline"/>
-    <Icon slot="successSlot" icon="clarity:success-standard-line"/>
-    <div slot="messageSlot" class="border-b pad radius-tiny border-color-palette-green">status message</div>
+    <Icon slot="loaderLoading" icon="mdi:loading" rotate/>
+    <Icon slot="loaderError" icon="mdi:alert-circle-outline"/>
+    <Icon slot="loaderEmpty" icon="mdi:database-search-outline"/>
+    <Icon slot="loaderSuccess" icon="clarity:success-standard-line"/>
+    <div slot="loaderMessage" class="border-b pad radius-tiny border-color-palette-green">status message</div>
 </Loader>`;
 
   let codeProps = `
@@ -57,10 +57,10 @@
                     parameters={parametersSlot}>
                 <div class="pos-rel h-large w-large">
                     <Loader {...activeParams} on:status:change={()=>{}}>
-                        <Icon color="orange" fontSize="big" icon="mdi:loading" rotate slot="loadingSlot"/>
-                        <Icon color="red" fontSize="big" icon="mdi:alert-circle-outline" slot="errorSlot"/>
-                        <Icon color="gray" fontSize="big" icon="mdi:database-search-outline" slot="emptySlot"/>
-                        <Icon color="green" fontSize="big" icon="clarity:success-standard-line" slot="successSlot"/>
+                        <Icon color="orange" fontSize="big" icon="mdi:loading" rotate slot="loaderLoading"/>
+                        <Icon color="red" fontSize="big" icon="mdi:alert-circle-outline" slot="loaderError"/>
+                        <Icon color="gray" fontSize="big" icon="mdi:database-search-outline" slot="loaderEmpty"/>
+                        <Icon color="green" fontSize="big" icon="clarity:success-standard-line" slot="loaderSuccess"/>
                     </Loader>
                 </div>
             </Demoer>

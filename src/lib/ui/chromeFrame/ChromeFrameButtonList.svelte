@@ -1,7 +1,7 @@
 <svelte:options accessors/>
 <script lang="ts">
 	import { chromeFrameStore } from './chromeFrame.store';
-	import { createEventForwarder } from '../../engine/engine';
+	import { createEventForwarder } from '$lib/engine/engine.js';
 	import { get_current_component } from 'svelte/internal';
 	import Icon from '../../base/icon/Icon.svelte';
 	import Button from '$lib/base/button/Button.svelte';
@@ -31,7 +31,7 @@
 					}}
 					class={value.active ? 'active' : ''} 	>
 					{value.title ?? value.frameId}
-					<div slot="actionIcon"><Icon class="theme-text-primary" icon="window-close" /></div>
+					<div slot="buttonEnd"><Icon class="theme-text-primary" icon="window-close" /></div>
 				</Button>
 			</slot>
 		</div>
@@ -39,6 +39,8 @@
 </div>
 
 <style global lang="scss">
+	@import "../../styles/slotui-vars.css";
+	@import "../../styles/presets.scss";
 	.buttonRail {
 		button:not(.active) {
 			border: 1px solid transparent;

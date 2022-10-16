@@ -1,11 +1,11 @@
 <svelte:options accessors />
 <script lang="ts">
-	import { createEventForwarder } from '$lib/engine/engine';
+	import { createEventForwarder } from '$lib/engine/engine.js';
 	import { popper, type UsePopperProps } from '$lib/ui/popper/usePopper';
 	import type { ElementProps } from '$lib/types/index.js';
 	import { compute_slots, get_current_component, text } from 'svelte/internal';
-	import Button from '../button/Button.svelte';
-	import Icon from '../icon/Icon.svelte';
+	import Button from '../../base/button/Button.svelte';
+	import Icon from '../../base/icon/Icon.svelte';
 
 	let inputType = 'text';
 	export { inputType as type };
@@ -102,7 +102,8 @@
 {/if}
 
 <style lang="scss">
-	@import '../../../lib/styles/presets.scss';
+	@import "../../styles/slotui-vars.css";
+	@import "../../styles/presets.scss";
 	input {
 		border: 1px solid var(--theme-color-foreground-alpha);
 		// border: 1px solid rgba(208, 191, 151, 0.5);

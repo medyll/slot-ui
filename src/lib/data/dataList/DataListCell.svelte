@@ -194,13 +194,10 @@
               : "bottom"}>
             <Icon naked icon={sorticon} />
           </Chipper>
-          <!-- <Icon naked icon={sorticon} {showChip} /> -->
-          <!-- <Button naked icon={sorticon} {showChip} /> -->
         </div>
       {/if}
     </div>
   </div>
-  <!-- <div style="height:900px;margin-top:3rem" class="border-3" /> -->
 {:else}
   <div
     bind:this={element}

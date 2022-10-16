@@ -1,5 +1,5 @@
 import {writable} from 'svelte/store';
-import type {IChromeFrameArgs, IChromeOptionsFrameArgs} from './types';
+import type {IChromeFrameArgs, IChromeOptionsFrameArgs} from './types.js';
 import {tick} from 'svelte';
 
 

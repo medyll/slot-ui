@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Sorter from './Sorter.svelte';
-	import type { SorterFieldType } from './types';
+	import type { SorterFieldType } from './types.js';
 
 	let className = '';
 	export { className as class };

@@ -2,15 +2,23 @@
 	import type { UiContextType } from '$contexts/ui.context.js';
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
+	import {dataOp} from '$lib/engine/utils';
+	import {slotuiCatalog} from '$lib/slotuiCatalog.js';
+	import {null_to_empty} from "svelte/internal";
 
 	let uiContext = getContext<Writable<UiContextType>>('uiContext');
 
 	//
 	$uiContext.drawerFlow = 'fixed';
 	$uiContext.drawerOpen = false;
+
+	const groupedData = dataOp.groupBy(
+			Object.values(slotuiCatalog).sort((a, b) => (a.name > b.name ? 1 : -1)),
+			"group"
+	);
 </script>
 
-<div class="overflow-auto flex-v flex-align-middle-center">
+<div class="overflow-auto flex-v gap-large flex-align-middle-center">
 	<div class="block h-full flex-v gap-large pad-t-10">
 		<h1>slotUI</h1>
 		<div class="w-full">
@@ -37,16 +45,26 @@
 			</div>
 		</div>
 	</div>
-	<div class="block"></div>
-	<div class="block"></div>
-	<div class="block"></div>
-	<div class="block"></div>
+	{#each Object.keys(groupedData) as group}
+	<div class="block">
+		<h4 class="pad-4">Slotted {null_to_empty(group)}</h4>
+		<div class="flex-h flex-wrap flex-align-middle gap-large">
+			{#each groupedData[group] as catalog}
+				<div   class="w-large h-medium border">
+					{null_to_empty(catalog?.name)}
+				</div>
+			{/each}
+		</div>
+	</div>
+	{/each}
 </div>
 
 <style global lang="scss">
 	.block {
-		min-height: 80vh;
+		// min-height: 80vh;
 		border-bottom: 1px solid #ccc;
 		min-width: 80%;
+		max-width: 80%;
+		padding:2rem 0;
 	}
 </style>

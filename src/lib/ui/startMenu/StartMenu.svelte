@@ -7,7 +7,8 @@
   import Panel from '$lib/ui/panel/Panel.svelte';
   import PanelSlide from '$lib/ui/panel/PanelSlide.svelte';
 
-  import {openWindow, toggleStartMenu, startMenuStore} from '../../engine/wactions.utils';
+  import { toggleStartMenu, startMenuStore} from '../../engine/wactions.utils';
+  import {openWindow} from "$lib/ui/window/actions.js"
   import {afterUpdate, onMount, setContext, getContext} from 'svelte';
 
   import IconButton from '$lib/base/button/IconButton.svelte';
@@ -89,6 +90,8 @@
     </div>
 {/if}
 <style lang="scss">
+  @import "../../styles/slotui-vars.css";
+  @import "../../styles/presets.scss";
   .startMenu {
     background-color: rgba(90, 67, 52, 0.9);
     backdrop-filter: blur(10px);

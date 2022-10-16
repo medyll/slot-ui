@@ -1,15 +1,13 @@
 <script lang="ts">
-  import List from '../../../lib/base/list/List.svelte';
-  import ListItem from '../../../lib/base/list/ListItem.svelte';
-  import type {LisItemProps} from '../../../lib/base/list/types';
-  import type {PropsProxyProps} from '../../../lib/engine/utils';
-  import {propsProxy} from '../../../lib/engine/utils';
+  import List from '../../../lib/base/list/List.svelte'; 
+  import type {LisItemProps} from '$lib/base/list/types.js';
+  import type {PropsProxyProps} from '$lib/engine/utils.js';
+  import {propsProxy} from '$lib/engine/utils.js';
   import {null_to_empty} from 'svelte/internal';
   import appscheme from '../../../demoData/appscheme.json';
   import Header from './Header.svelte';
-  import Icon from '../../../lib/base/icon/Icon.svelte';
-  import MenuBar from '../../../lib/ui/topBar/TopBar.svelte';
-  import Elementor from '../../../lib/base/elementor/Elementor.svelte';
+  import MenuBar from '$lib/ui/toggleBar/ToggleBar.svelte';
+  import Elementor from '$lib/base/elementor/Elementor.svelte';
   import Frame from '$lib/ui/frame/Frame.svelte'; 
 
   let listItems = [];

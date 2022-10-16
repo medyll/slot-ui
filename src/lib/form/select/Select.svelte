@@ -1,8 +1,8 @@
 <script lang="ts">
   import { stickTo } from "../../uses/stickTo/stickTo";
   import type { ElementProps } from "$lib/types/index.js";
-  import { createEventForwarder } from "../../engine/engine";
-  import Input from "$lib/base/input/Input.svelte";
+  import { createEventForwarder } from "$lib/engine/engine.js";
+  import Input from "$lib/form/input/Input.svelte";
   import Icon from "$lib/base/icon/Icon.svelte";
   import Popper from "$lib/ui/popper/Popper.svelte";
   import Menu from "$lib/ui/menu/Menu.svelte";
@@ -49,7 +49,7 @@
 <input {value} bind:this={hiddenRef} type="hidden" {name} />
 <Popper {position} {stickToHookWidth} {autoClose} flow="fixed" isOpen={isVisible}>
   <Input
-    slot="holderSlot"
+    slot="popperHolder"
     bind:this={element}
     on:blur={show(false)}
     on:focus={show(true)}

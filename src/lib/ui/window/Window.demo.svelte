@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { openWindow } from "./window.actions.js";
+  import { openWindow } from "./actions.js";
   import Button from "$lib/base/button/Button.svelte";
   import Debug from "$lib/base/debug/Debug.svelte";
-  import Window from "./Window.svelte";
+  import Window from './Window.svelte';
 
   /* demo */
   import {
@@ -25,6 +25,14 @@
       type: "preset-flow",
       values: uiPresets.flow,
     },
+    showHandle: {
+      type: "boolean",
+      values: [true, false],
+    },
+    closeOnValidate: {
+      type: "boolean",
+      values: [true, false],
+    },
     hideAcceptButton: {
       type: "boolean",
       values: [false, true],
@@ -32,6 +40,17 @@
     hideCloseButton: {
       type: "boolean",
       values: [false, true],
+    },
+    hideCancelButton: {
+      type: "boolean",
+      values: [true, false],
+    },
+  };
+
+  let multiple = {
+    showHandle: {
+      true: { showHandle: true },
+      false: { showHandle: false },
     },
   };
 
@@ -49,7 +68,9 @@
   };
 
   let codeSlot = `<Window title="Slotted window" frameId="slotted" >
-	<div class="pad-4 align-center">some slotted content</div>
+  <div class="pad-4 align-center">
+  some slotted content
+  </div>
 </Window>
 `;
 
@@ -82,11 +103,12 @@
   <div class="flex-v gap-large">
     <DemoPage code={codeSlot} component="Select" title="Using slots">
       <Demoer
+              {multiple}
         parameters={parametersSlot}
         componentArgs={componentArgsSlot}
         let:activeParams>
         <div class="w-large h-large pos-rel">
-          <Window title="Slotted window" frameId="slotted" {...activeParams}>
+          <Window  title="Slotted window" frameId="slotted" {...activeParams}>
             <div class="pad-4 align-center">some slotted content</div>
           </Window>
         </div>

@@ -1,3 +1,5 @@
+@import "../../styles/slotui-vars.css";
+@import "../../styles/presets.scss";
 .drawer {
   color: var(--css-drawer-color, inherit);
   background-color: var(--slotui-drawer-bg-color, var(--theme-color-paper-alpha-low));

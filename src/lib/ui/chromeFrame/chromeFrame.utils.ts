@@ -1,7 +1,7 @@
 import {derived, get} from 'svelte/store';
 import ChromeFrame from './ChromeFrame.svelte';
 import {chromeFrameListRef, chromeFrameStore} from './chromeFrame.store';
-import type {IChromeFrameArgs} from './types';
+import type {IChromeFrameArgs} from './types.js';
 
 export function getChromeFrame(frameId: string | number) {
   
