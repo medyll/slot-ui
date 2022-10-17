@@ -20,8 +20,10 @@ export const openWindow = (frameId: string, args: any = {}) => {
     a.$set({
       self: a
     });
+    return a
   } else {
     w.actions.setActive();
+    return w
   }
   
 };

@@ -1,5 +1,5 @@
 ```import { SvelteComponentTyped } from "svelte";
-import type { ElementProps } from '../../types/index.js';
+import type { ElementProps } from "../../types/index.js";
 declare const __propDef: {
     props: {
         /** Id of the component's instance */ frameId?: string | undefined;
@@ -17,6 +17,7 @@ declare const __propDef: {
         /** buttons visible in the bottom bar */ hideAcceptButton?: boolean | undefined;
         hideCloseButton?: boolean | undefined;
         hideCancelButton?: boolean | undefined;
+        /** style of the component */ style?: string | undefined;
         /** can be opened with a component */ component?: any;
         /** used when props.component is used */ componentProps?: any;
         /** content can be set from a html string */ contentHTML?: any;
@@ -24,7 +25,7 @@ declare const __propDef: {
         /** icon used on the left side*/ icon?: string | undefined;
         iconClose?: string | undefined;
         iconValidate?: string | undefined;
-        flow?: ElementProps['flow'] | undefined;
+        flow?: ElementProps["flow"] | undefined;
         /** close the window on accept */ closeOnValidate?: boolean | undefined;
         /** destroy the component on close */ removeFromDomOnClose?: boolean | undefined;
         /** used to destroy component when opened from function.openWindow */ self: any;
@@ -95,6 +96,9 @@ export default class Window extends SvelteComponentTyped<WindowProps, WindowEven
     get hideCancelButton(): boolean | undefined;
     /**accessor*/
     set hideCancelButton(_: boolean | undefined);
+    get style(): string | undefined;
+    /**accessor*/
+    set style(_: string | undefined);
     get component(): any;
     /**accessor*/
     set component(_: any);

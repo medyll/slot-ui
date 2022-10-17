@@ -27,7 +27,9 @@ export function draggebler(node: HTMLElement, props: DraggableProps) {
     if (moving) {
       left += e.movementX;
       top += e.movementY;
-      node.style.transform= `translate(${left}px,${top + 'px'})`
+      node.style.top= `${top}px`
+      node.style.left= `${left}px`
+      // node.style.transform= `translate(${left}px,${top + 'px'})`
     }
   }
   
