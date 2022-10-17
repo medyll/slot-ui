@@ -1,4 +1,5 @@
 interface DraggableProps {
+  disabled?: true
 
 }
 
@@ -42,9 +43,9 @@ export function draggebler(node: HTMLElement, props: DraggableProps) {
   
   }
   
-  return () => {
+  return (() => {
     target.removeEventListener('mousedown', onMouseDown, true);
     window.removeEventListener('mouseup', onMouseUp, true);
     window.removeEventListener('mousemove', onMouseMove, true);
-  };
+  });
 };

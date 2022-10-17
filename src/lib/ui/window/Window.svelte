@@ -9,6 +9,7 @@
   import { draggebler } from "../../uses/draggabler.js";
   import { makeOnTop } from "../../uses/makeOnTop.js";
   import { get_current_component, null_to_empty } from "svelte/internal";
+  import { positioner } from "$lib/uses/positioner.js";
 
   /** Id of the component's instance */
   export let frameId = crypto.randomUUID();
@@ -50,6 +51,8 @@
   export let iconClose: string | undefined = "codicon:close";
   export let iconValidate: string | undefined = "el:ok-circle";
   export let flow: ElementProps["flow"] | undefined = "absolute";
+  /** start position */
+  export let startPosition: "center" | "cascade" | "overlap" | undefined = undefined
   /** close the window on accept */
   export let closeOnValidate: boolean = true;
   /** destroy the component on close */
@@ -97,13 +100,14 @@
     if (closeOnValidate) actions.close();
   }
 </script>
-
+{#key startPosition}
 <div
   bind:this={element}
   {style}
   style:position={flow}
   style:display={open ? "" : "none"}
-  use:draggebler
+  use:positioner={{position:startPosition}}
+  use:draggebler={{disabled:false}}
   use:makeOnTop
   on:mousedown={actions.setActive}
   class="window shad-3"
@@ -172,7 +176,7 @@
     </slot>
   {/if}
 </div>
-
+{/key}
 <style lang="scss">
   @import "../../styles/slotui-vars.css";
   @import "../../styles/presets.scss";

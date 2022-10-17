@@ -25,6 +25,10 @@
       type: "preset-flow",
       values: uiPresets.flow,
     },
+    startPosition: {
+      type: "string",
+      values: [ undefined,'center'],
+    },
     showHandle: {
       type: "boolean",
       values: [true, false],
@@ -68,6 +72,7 @@
   };
 
   let codeSlot = `<Window title="Slotted window" frameId="slotted" >
+  <Icon slot="windowIcon" icon="bx:window-alt" />
   <div class="pad-4 align-center">
   some slotted content
   </div>
@@ -107,8 +112,9 @@
         parameters={parametersSlot}
         componentArgs={componentArgsSlot}
         let:activeParams>
-        <div class="w-large h-large pos-rel">
+        <div class="pad-2 h-large pos-rel">
           <Window  title="Slotted window" frameId="slotted" {...activeParams}>
+            <Icon slot="windowIcon" icon="bx:window-alt" />
             <div class="pad-4 align-center">some slotted content</div>
           </Window>
         </div>
