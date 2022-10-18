@@ -40,8 +40,8 @@
 
 	let niceIconStyle = '';
 
-	niceIconStyle += icon || $$slots.startInputSlot ? 'padding-left:2.2rem;' : '';
-	niceIconStyle += endIcon || $$slots.endInputSlot ? 'padding-right:2.2rem;' : '';
+	niceIconStyle += icon || $$slots.inputStart ? 'padding-left:2.2rem;' : '';
+	niceIconStyle += endIcon || $$slots.inputEnd ? 'padding-right:2.2rem;' : '';
 
 	$: if (usePopper) {
 		usePopper.disabled = false;
@@ -51,19 +51,19 @@
 	}
 </script>
 
-{#if icon || endIcon  || inputType === 'search' || $$slots.startInputSlot || $$slots.endInputSlot}
+{#if icon || endIcon  || inputType === 'search' || $$slots.inputStart || $$slots.inputEnd}
 	<div style="position:relative;display:block">
-		{#if icon || $$slots.startInputSlot}
+		{#if icon || $$slots.inputStart}
 			<div class="inpuStart">
-				<slot name="startInputSlot">
+				<slot name="inputStart">
 					<Icon {icon} style="max-width:100%;max-height:100%;color:{iconColor}" />
 				</slot>
 			</div>
 		{/if}
-		{#if $$slots.endInputSlot || endIcon || inputType === 'search'}
+		{#if $$slots.inputEnd || endIcon || inputType === 'search'}
 			<div class="inpuEnd">
-				{#if $$slots.endInputSlot || endIcon}
-					<slot name="endInputSlot">
+				{#if $$slots.inputEnd || endIcon}
+					<slot name="inputEnd">
 						<Icon icon={endIcon} style="max-width:100%;max-height:100%;color:{endIconColor}" />
 					</slot>
 				{/if}
