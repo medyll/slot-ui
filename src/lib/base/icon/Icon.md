@@ -6,7 +6,7 @@ __propDef: {
         style?: string | undefined;
         icon?: string | undefined;
         iconFamily?: string | undefined;
-        fontSize?: "default" | "small" | "tiny" | "medium" | "large" | "big" | "full" | "auto" | undefined;
+        fontSize?: "tiny" | "small" | "medium" | "default" | "large" | "big" | "full" | "auto" | undefined;
         rotate?: boolean | undefined;
         color?: string | undefined;
     };

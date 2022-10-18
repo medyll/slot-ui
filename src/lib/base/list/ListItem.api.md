@@ -16,7 +16,7 @@ declare const __propDef: {
         transition?: __sveltets_2_SvelteTransitionReturnType | undefined;
         disabled?: boolean | undefined;
         data?: Record<string, any> | undefined;
-        density?: "default" | "medium" | "none" | "tight" | "kind" | undefined;
+        density?: "medium" | "default" | "none" | "tight" | "kind" | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;
@@ -75,9 +75,9 @@ export default class ListItem extends SvelteComponentTyped<ListItemProps, ListIt
     get data(): Record<string, any> | undefined;
     /**accessor*/
     set data(_: Record<string, any> | undefined);
-    get density(): "default" | "medium" | "none" | "tight" | "kind" | undefined;
+    get density(): "medium" | "default" | "none" | "tight" | "kind" | undefined;
     /**accessor*/
-    set density(_: "default" | "medium" | "none" | "tight" | "kind" | undefined);
+    set density(_: "medium" | "default" | "none" | "tight" | "kind" | undefined);
 }
 export {};
 

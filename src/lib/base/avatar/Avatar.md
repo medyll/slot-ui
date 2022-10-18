@@ -4,8 +4,8 @@ __propDef: {
         class?: string | undefined;
         element?: HTMLDivElement | null | undefined;
         icon?: string | undefined;
-        size?: "small" | "tiny" | "medium" | "large" | "full" | undefined;
-        iconSize?: "default" | "small" | "tiny" | "medium" | "large" | "big" | undefined;
+        size?: "tiny" | "small" | "medium" | "large" | "full" | undefined;
+        iconSize?: "tiny" | "small" | "medium" | "default" | "large" | "big" | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;

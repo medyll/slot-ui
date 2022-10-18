@@ -26,6 +26,7 @@ declare const __propDef: {
         iconClose?: string | undefined;
         iconValidate?: string | undefined;
         flow?: ElementProps["flow"] | undefined;
+        /** start position */ startPosition?: "center" | "cascade" | "overlap" | undefined;
         /** close the window on accept */ closeOnValidate?: boolean | undefined;
         /** destroy the component on close */ removeFromDomOnClose?: boolean | undefined;
         /** used to destroy component when opened from function.openWindow */ self: any;
@@ -123,6 +124,9 @@ export default class Window extends SvelteComponentTyped<WindowProps, WindowEven
     get flow(): "relative" | "absolute" | "fixed" | undefined;
     /**accessor*/
     set flow(_: "relative" | "absolute" | "fixed" | undefined);
+    get startPosition(): "center" | "cascade" | "overlap" | undefined;
+    /**accessor*/
+    set startPosition(_: "center" | "cascade" | "overlap" | undefined);
     get closeOnValidate(): boolean | undefined;
     /**accessor*/
     set closeOnValidate(_: boolean | undefined);

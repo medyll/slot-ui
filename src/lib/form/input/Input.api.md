@@ -12,7 +12,7 @@ declare const __propDef: {
         endIcon?: string | undefined;
         endIconColor?: string | undefined;
         usePopper?: UsePopperProps | undefined;
-        size?: "default" | "small" | "tiny" | "medium" | "large" | "big" | "full" | "auto" | undefined;
+        size?: "tiny" | "small" | "medium" | "default" | "large" | "big" | "full" | "auto" | undefined;
         height?: string | undefined;
         borderless?: boolean | undefined;
         transparent?: boolean | undefined;
@@ -22,8 +22,8 @@ declare const __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
-        startInputSlot: {};
-        endInputSlot: {};
+        inputStart: {};
+        inputEnd: {};
     };
 };
 export declare type InputProps = typeof __propDef.props;
@@ -57,9 +57,9 @@ export default class Input extends SvelteComponentTyped<InputProps, InputEvents,
     get usePopper(): UsePopperProps | undefined;
     /**accessor*/
     set usePopper(_: UsePopperProps | undefined);
-    get size(): "default" | "small" | "tiny" | "medium" | "large" | "big" | "full" | "auto" | undefined;
+    get size(): "tiny" | "small" | "medium" | "default" | "large" | "big" | "full" | "auto" | undefined;
     /**accessor*/
-    set size(_: "default" | "small" | "tiny" | "medium" | "large" | "big" | "full" | "auto" | undefined);
+    set size(_: "tiny" | "small" | "medium" | "default" | "large" | "big" | "full" | "auto" | undefined);
     get height(): string | undefined;
     /**accessor*/
     set height(_: string | undefined);
