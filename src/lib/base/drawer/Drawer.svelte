@@ -70,18 +70,24 @@
 	};
 
 	let sensSuffix = '';
+	let sens:number = 0;
+
 	$: switch (stickTo) {
 		case 'top':
 			sensSuffix = isOpen ? 'up' : 'down';
+			sens = isOpen ? 0 : 180;
 			break;
 		case 'right':
 			sensSuffix = isOpen ? 'right' : 'left';
+			sens = isOpen ? 0 : 180;
 			break;
 		case 'bottom':
 			sensSuffix = isOpen ? 'down' : 'up';
+			sens = isOpen ? 0 : 180;
 			break;
 		case 'left':
 			sensSuffix = isOpen ? 'left' : 'right';
+			sens = isOpen ? 0 : 180;
 			break;
 	}
 
@@ -89,9 +95,7 @@
 
 	$: dspStyle = isOpen ? 'flex' : 'flex';
 	$: widthStyle = isOpen ? defaultWidth : defaultVisibleArea;
-
-	$: sens = 'chevron-' + sensSuffix;
-
+ 
 	$: finalStyle = `display:${dspStyle};position:${flow};${stickToStyle[stickTo]};${dimKeyVary}:${widthStyle};${style};`;
 </script>
 
@@ -104,14 +108,10 @@
 		{#if showOpenerIcon}
 	<div class="opener" style={openerIconStyle[stickTo]}>
 			<IconButton
-				--css-button-radius="50%"
-				style="width:32px;height:32px"
-				icon={sens}
-				iconFamily="fa-solid"
-				iconFontSize="small"
-				on:click={() => {
-					toggle();
-				}}
+				--slotui-button-radius="50%"
+				icon={'chevron-right'}  
+				rotation={sens}
+				on:click={() => actions.toggle()}
 			/>
 	</div>
 		{/if}

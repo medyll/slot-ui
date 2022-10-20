@@ -6,7 +6,7 @@ __propDef: {
         /** @deprecated */ menuList?: MenuItemProps[] | undefined;
         menuItemsList?: MenuItemProps[] | undefined;
         data?: Record<string, any>[] | undefined;
-        density?: "default" | "medium" | "none" | "tight" | "kind" | undefined;
+        density?: "medium" | "default" | "none" | "tight" | "kind" | undefined;
         style?: string | undefined;
         /** menu can have no border */ bordered?: boolean | undefined;
         selectedIndex?: number | undefined;

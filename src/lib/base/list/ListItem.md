@@ -16,7 +16,7 @@ __propDef: {
         transition?: __sveltets_2_SvelteTransitionReturnType | undefined;
         disabled?: boolean | undefined;
         data?: Record<string, any> | undefined;
-        density?: "default" | "medium" | "none" | "tight" | "kind" | undefined;
+        density?: "medium" | "default" | "none" | "tight" | "kind" | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;

@@ -59,7 +59,7 @@
     value=""
     {style}
     class={className}>
-    <Icon slot="endInputSlot" icon="chevron-down" />
+    <Icon slot="inputEnd" icon="chevron-down" />
   </Input>
   <Menu 
     style="width:100%;"

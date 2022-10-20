@@ -7,7 +7,7 @@ declare const __propDef: {
         /** @deprecated */ menuList?: MenuItemProps[] | undefined;
         menuItemsList?: MenuItemProps[] | undefined;
         data?: Record<string, any>[] | undefined;
-        density?: "default" | "medium" | "none" | "tight" | "kind" | undefined;
+        density?: "medium" | "default" | "none" | "tight" | "kind" | undefined;
         style?: string | undefined;
         /** menu can have no border */ bordered?: boolean | undefined;
         selectedIndex?: number | undefined;
@@ -44,9 +44,9 @@ export default class Menu extends SvelteComponentTyped<MenuProps, MenuEvents, Me
     get data(): Record<string, any>[] | undefined;
     /**accessor*/
     set data(_: Record<string, any>[] | undefined);
-    get density(): "default" | "medium" | "none" | "tight" | "kind" | undefined;
+    get density(): "medium" | "default" | "none" | "tight" | "kind" | undefined;
     /**accessor*/
-    set density(_: "default" | "medium" | "none" | "tight" | "kind" | undefined);
+    set density(_: "medium" | "default" | "none" | "tight" | "kind" | undefined);
     get style(): string | undefined;
     /**accessor*/
     set style(_: string | undefined);

@@ -1,4 +1,5 @@
 interface DraggableProps {
+  disabled?: true
 
 }
 
@@ -27,7 +28,9 @@ export function draggebler(node: HTMLElement, props: DraggableProps) {
     if (moving) {
       left += e.movementX;
       top += e.movementY;
-      node.style.transform= `translate(${left}px,${top + 'px'})`
+      node.style.top= `${top}px`
+      node.style.left= `${left}px`
+      // node.style.transform= `translate(${left}px,${top + 'px'})`
     }
   }
   
@@ -40,9 +43,9 @@ export function draggebler(node: HTMLElement, props: DraggableProps) {
   
   }
   
-  return () => {
+  return (() => {
     target.removeEventListener('mousedown', onMouseDown, true);
     window.removeEventListener('mouseup', onMouseUp, true);
     window.removeEventListener('mousemove', onMouseMove, true);
-  };
+  });
 };

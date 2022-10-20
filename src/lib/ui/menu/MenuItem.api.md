@@ -53,9 +53,9 @@ export default class MenuItem extends SvelteComponentTyped<MenuItemProps, MenuIt
     get iconColor(): string | undefined;
     /**accessor*/
     set iconColor(_: string | undefined);
-    get iconSize(): "default" | "small" | "tiny" | "medium" | "large" | "big" | "full" | "auto" | undefined;
+    get iconSize(): "tiny" | "small" | "medium" | "default" | "large" | "big" | "full" | "auto" | undefined;
     /**accessor*/
-    set iconSize(_: "default" | "small" | "tiny" | "medium" | "large" | "big" | "full" | "auto" | undefined);
+    set iconSize(_: "tiny" | "small" | "medium" | "default" | "large" | "big" | "full" | "auto" | undefined);
     get divider(): boolean | undefined;
     /**accessor*/
     set divider(_: boolean | undefined);

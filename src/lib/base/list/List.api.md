@@ -29,7 +29,7 @@ declare const __propDef: {
         /** icon for the  title  zone*/ icon?: string | undefined;
         /** fieldName by wich we will group */ groupBy?: string | undefined;
         /** List will not be clickable and will gain opacity */ disabled?: boolean | undefined;
-        density?: "default" | "medium" | "none" | "tight" | "kind" | undefined;
+        density?: "medium" | "default" | "none" | "tight" | "kind" | undefined;
         /** binding for selectedData */ activeData?: Record<string, any> | undefined;
     };
     events: {

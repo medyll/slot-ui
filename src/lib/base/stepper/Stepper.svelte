@@ -29,7 +29,7 @@
 </div>
 
 <style lang="scss">
-	@import "../../styles/slotui-vars.css";
+	@import "../../styles/slotui-vars.scss";
 	@import "../../styles/presets.scss";
 	.stepper {
 		.step {

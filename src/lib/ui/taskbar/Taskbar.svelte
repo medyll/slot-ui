@@ -11,7 +11,7 @@
     <slot name="taskBarRight"></slot>
 </div>
 <style lang="scss">
-  @import "../../styles/slotui-vars.css";
+  @import "../../styles/slotui-vars.scss";
   @import "../../styles/presets.scss";
   .bar {
     grid-gap: var(--box-density-1,8px);

@@ -13,8 +13,7 @@ export interface ElementProps {
   flow: 'relative'|'absolute'|'fixed'
   data: Record<string, any>;
   action: (event:any, data: ElementProps['data']) => void;
-  icon: | TIcon
-  | { type: 'fa', name: TIcon };
+  icon: string;
 }
 
 export type Data = Record<string, any> 

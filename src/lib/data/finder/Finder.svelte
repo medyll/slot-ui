@@ -137,7 +137,7 @@
 {/if}
 
 <style global lang="scss">
-	@import "../../styles/slotui-vars.css";
+	@import "../../styles/slotui-vars.scss";
 	@import "../../styles/presets.scss";
 	container {
 		display: inline-flex;
