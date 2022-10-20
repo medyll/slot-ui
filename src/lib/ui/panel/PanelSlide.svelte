@@ -59,12 +59,10 @@
     outer &&
     panelerContext
   ) {
-    console.log("set : ", panelSlideId);
     $panelerContext.panelSlides[panelSlideId] = {};
   }
 
   $: if (panelerContext && component && outer && get_current_component()) {
-    console.log("register ", panelSlideId);
     $panelerContext.panelSlides[panelSlideId] = get_current_component();
   }
 
