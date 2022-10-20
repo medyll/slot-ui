@@ -1,5 +1,5 @@
 ```import { SvelteComponentTyped } from "svelte";
-import 'iconify-icon';
+import "iconify-icon";
 declare const __propDef: {
     props: {
         [x: string]: any;
@@ -10,6 +10,7 @@ declare const __propDef: {
         fontSize?: "tiny" | "small" | "medium" | "default" | "large" | "big" | "full" | "auto" | undefined;
         rotate?: boolean | undefined;
         color?: string | undefined;
+        rotation?: number | undefined;
     };
     events: {
         click: MouseEvent;

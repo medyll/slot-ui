@@ -9,6 +9,7 @@ __propDef: {
         fontSize?: "tiny" | "small" | "medium" | "default" | "large" | "big" | "full" | "auto" | undefined;
         rotate?: boolean | undefined;
         color?: string | undefined;
+        rotation?: number | undefined;
     };
     events: {
         click: MouseEvent;
