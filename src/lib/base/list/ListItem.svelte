@@ -84,9 +84,9 @@
 	<span class="listItemChip" />
 	{#if $$slots.icon || icon}
 		<div class="listItemIcon pad-ii ">
-			<slot name="icon">
+			<slot name="listItemIcon"><slot name="icon">
 				{#if icon}<Icon {icon} />{/if}
-			</slot>
+			</slot></slot>
 		</div>
 	{/if}
 	<div class="listItemContent" title={secondary}>
@@ -96,15 +96,15 @@
 			</slot></slot>
 		</div>
 		<div class="itemSecondary">
-			<slot name="secondary">
+			<slot name="listItemSecondary"><slot name="secondary">
 				{null_to_empty(secondary)}
-			</slot>
+			</slot></slot>
 		</div>
 	</div>
 	<div class="listItemAction">
-		<slot name="action">
+		<slot name="listItemAction"><slot name="action">
 			{null_to_empty(action)}
-		</slot>
+		</slot></slot>
 	</div>
 </li>
 {#if showDivider}

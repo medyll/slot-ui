@@ -210,11 +210,11 @@
 		<Virtualize height="100%" items={listItems} let:item>
 			<svelte:fragment slot="virtualizeHeaderSlot">
 				{#if showTitleZone}
-					<slot name="title">
+					<slot name="listTitle"><slot name="title">
 						<ListTitle primary={primary ?? title} {secondary} {icon}>
 							{#if sorterer}<Sorterer {sortedData} fields={sorterer} data={listItems} />{/if}
 						</ListTitle>
-					</slot>
+					</slot></slot>
 				{/if}
 			</svelte:fragment>
 			{#if item}
@@ -232,9 +232,9 @@
 		</Virtualize>
 	{:else}
 		{#if showTitleZone}
-			<slot name="title">
+			<slot name="listTitle"><slot name="title">
 				<ListTitle primary={primary ?? title} {secondary} {icon} />
-			</slot>
+			</slot></slot>
 		{/if}
 		{#if listItems}
 			{#each listItems as item}
