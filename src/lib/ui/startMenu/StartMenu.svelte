@@ -90,7 +90,7 @@
     </div>
 {/if}
 <style lang="scss">
-  @import "../../styles/slotui-vars.css";
+  @import "../../styles/slotui-vars.scss";
   @import "../../styles/presets.scss";
   .startMenu {
     background-color: rgba(90, 67, 52, 0.9);

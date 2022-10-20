@@ -145,7 +145,7 @@
 {/if}
 
 <style lang="scss">
-  @import "../../styles/slotui-vars.css";
+  @import "../../styles/slotui-vars.scss";
   @import "../../styles/presets.scss";
   .popper {
     border-radius: var(--css-popper-radius, var(--radius-tiny));

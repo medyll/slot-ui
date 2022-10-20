@@ -36,8 +36,8 @@ switch (command) {
   case "--ver":
     let ver = args?.[1]
     if(!ver)console.error('Missing command, exiting');
-    console.log(`npm version ${ver} && npm run package   && npm publish ./package && npm run make-docs && git commit -a -m "chore: ver ${ver}" && git tag v${ver}  && git push && git push --tags`)
-      if(ver) run(`npm version ${ver} && npm run package   && npm publish ./package && npm run make-docs && git commit -a -m "chore: ver ${ver}" && git tag v${ver}  && git push && git push --tags`);
+    console.log(`npm version ${ver} && npm run package   && npm publish ./package && npm run make-docs && git commit -a -m "chore: ver ${ver}" && git push && git push --tags`)
+      if(ver) run(`npm version ${ver} && npm run package   && npm publish ./package && npm run make-docs && git commit -a -m "chore: ver ${ver}" && git push && git push --tags`);
 
     break;
 }
