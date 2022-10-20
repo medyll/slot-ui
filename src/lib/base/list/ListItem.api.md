@@ -26,6 +26,7 @@ declare const __propDef: {
         icon: {};
         default: {};
         primary: {};
+        listItemPrimary: {};
         listItemSecondary: {};
         secondary: {};
         listItemAction: {};

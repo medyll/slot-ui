@@ -14,11 +14,11 @@ declare const __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
-        icon: {};
+        listTitleIcon: {};
         primary: {};
-        secondary: {};
+        listTitleSecondary: {};
         default: {};
-        action: {};
+        listTitleAction: {};
     };
 };
 export declare type ListTitleProps = typeof __propDef.props;
