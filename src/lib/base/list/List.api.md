@@ -37,6 +37,7 @@ declare const __propDef: {
     };
     slots: {
         listTopBar: {};
+        listTitle: {};
         title: {};
         default: {};
     };

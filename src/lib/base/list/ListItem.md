@@ -22,10 +22,13 @@ __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
+        listItemIcon: {};
         icon: {};
         default: {};
         primary: {};
+        listItemSecondary: {};
         secondary: {};
+        listItemAction: {};
         action: {};
     };
 };
