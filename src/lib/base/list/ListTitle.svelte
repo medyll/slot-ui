@@ -20,11 +20,9 @@
 </script>
 
 <li {style} class="listItemTitle density-{density} {className}">
-  {#if icon || $$slots.icon}
+  {#if icon || $$slots.listTitleIcon}
     <div class="listItemIcon">
-      <slot name="icon">
-        <Icon {icon} />
-      </slot>
+      <slot name="listTitleIcon"> <Icon {icon} /> </slot>
     </div>
   {/if}
   <div class="listItemContent">
@@ -33,16 +31,16 @@
         <slot name="primary">{primary}</slot>
       </h5>
     {/if}
-    {#if secondary || $$slots.secondary}
+    {#if secondary || $$slots.listTitleSecondary}
       <div>
-        <slot name="secondary">{secondary}</slot>
+        <slot name="listTitleSecondary">{secondary}</slot>
       </div>
     {/if}
     <slot />
   </div>
-  {#if action || $$slots.action}
-    <div class="listItemAction">
-      <slot name="action" />
+  {#if action || $$slots.listTitleAction}
+    <div class="listTitleAction">
+      <slot name="listTitleAction" />
     </div>
   {/if}
 </li>

@@ -92,7 +92,9 @@
 	<div class="listItemContent" title={secondary}>
 		<div>
 			<slot><slot name="primary">
+				<slot name="listItemPrimary">
 				{null_to_empty(primary)}
+			</slot>
 			</slot></slot>
 		</div>
 		<div class="itemSecondary">

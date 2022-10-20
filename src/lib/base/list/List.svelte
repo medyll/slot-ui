@@ -81,11 +81,7 @@
 
 	$: if (setSelectedData) {
 		listStore.setActiveData(setSelectedData);
-	}
-
-	$: if (setSelectedItem) {
-		// listStore.setActiveData(setSelectedData);
-	}
+	} 
 
 	if (groupBy) {
 		// if groupBy, we'll use  props.data or props.lisTitem.data
@@ -120,8 +116,7 @@
 			}
 		}
 	}
-
-	// $: console.log({ sortedData, data });
+ 
 
 	/** on listItem clicked, we set activeData to e.LisItemProps*/
 	function onListItemClick(e: CustomEvent<LisItemProps>) {
@@ -129,9 +124,7 @@
 			e.stopPropagation();
 			return;
 		}
-
-		//e?.currentTarget?.scrollIntoView();
-
+ 
 		listStore.setActiveData(e.detail?.data); // should be  e.detail.data
 		listStore.setActiveItem(e.detail);
 
@@ -220,12 +213,12 @@
 			{#if item}
 				<slot listItem={item}>
 					<ListItem {showIcon} {density} data={item.data}>
-						<span slot="icon">
+						<span slot="listItemIcon">
 							{#if item?.icon}<Icon fontSize="small" icon={item?.icon} />{/if}
 						</span>
-						<span slot="primary">{null_to_empty(item?.primary)}</span>
-						<span slot="secondary">{null_to_empty(item?.secondary)}</span>
-						<span slot="action">{null_to_empty(item?.action)}</span>
+						<span slot="listItemPrimary">{null_to_empty(item?.primary)}</span>
+						<span slot="listItemSecondary">{null_to_empty(item?.secondary)}</span>
+						<span slot="listItemAction">{null_to_empty(item?.action)}</span>
 					</ListItem>
 				</slot>
 			{/if}
@@ -248,12 +241,12 @@
 						data={item.data}
 						icon={item?.icon}
 					>
-						<span slot="icon">
+						<span slot="listItemIcon">
 							{#if item?.icon}<Icon fontSize="small" icon={item?.icon} />{/if}
 						</span>
-						<span slot="primary">{null_to_empty(item?.primary)}</span>
-						<span slot="secondary">{null_to_empty(item?.secondary)}</span>
-						<span slot="action">{null_to_empty(item?.action)}</span>
+						<span slot="listItemPrimary">{null_to_empty(item?.primary)}</span>
+						<span slot="listItemSecondary">{null_to_empty(item?.secondary)}</span>
+						<span slot="listItemAction">{null_to_empty(item?.action)}</span>
 					</ListItem>
 				</slot>
 			{/each}
