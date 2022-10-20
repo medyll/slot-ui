@@ -43,7 +43,7 @@
 
 <style>
   button {
-    padding: 8px;
+    padding: 4px;
     position: relative;
     background-color: transparent;
     border: 1px solid var(--theme-color-primary-alpha, transprent);

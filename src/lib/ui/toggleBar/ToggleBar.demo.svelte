@@ -84,8 +84,7 @@
 </script>
 
 <ComponentExample
-  component="ToggleBar"
-  cite="Claiming they were not doors, made what they are today : windows <br /> Ch XX, 1320">
+  component="ToggleBar">
   <div class="flex-v gap-large">
     <DemoPage code={codeSlot} component="ToggleBar" title="Using slots">
       <Demoer
@@ -97,9 +96,8 @@
           <ToggleBar style="width:350px;"  {...activeParams}>
             <Icon icon="carbon:progress-bar" slot="toggleBarIcon" />
             <div slot="toggleBarButtons"><Button>button</Button></div>
-            <div slot="menuBarSwitcher">menuBarSwitcher</div>
-            <IconButton  icon="search" slot="contentSwitcherIcon" />
-            <Input size="full" value="a slotted input" />
+            <Button ratio=1/1  icon="search" slot="contentSwitcherIcon" />
+            <Input slot="contentSwitcherReveal"  size="full" value="a slotted input" />
           </ToggleBar>
         </div>
       </Demoer>

@@ -8,9 +8,12 @@
 	import Menu from '$lib/ui/menu/Menu.svelte';
 	import MenuItem from '$lib/ui/menu/MenuItem.svelte';
 	import { onMount } from 'svelte';
+  import type { ElementProps } from '$lib/types/index.js';
 
 	let className = '';
 	export { className as class };
+	export let classRoot: string = ''
+	export let styleRoot: string = ''
 	export let element: HTMLDivElement | null = null;
 
 	/** initial data to look in */
@@ -23,7 +26,9 @@
 	export let mode: 'exact' | 'partial' = 'partial';
 	/** external bind use, to read filtered data */
 	export let filteredData: any[] = data;
-
+	/** with of the input using  presets */
+	export let size: ElementProps['sizeType'] | 'full' = 'auto';
+	
 	let searchString: string;
 	let container: HTMLDivElement;
 
@@ -33,8 +38,9 @@
 		if (!kw) {
 			results = data;
 		} else {
+			let kwEx = kw.replace('*','.*.');
 			results =
-				mode === 'exact' ? dataOp.filterList(list, kw, field) : dataOp.searchList(list, kw, field); // filterList(list, kw, field);
+				mode === 'exact' ? dataOp.filterList(list, kwEx, field) : dataOp.searchList(list, kwEx, field); // filterList(list, kw, field);
 		}
 		return results;
 	}; 
@@ -47,13 +53,6 @@
 
 	$: filteredData = (!searchString) ? data : doFind(data, searchString, defaultField);
 
-	onMount(()=>{
-
-		return ()=>{
-			 
-		} 
-	})
-
 </script>
 
 <container
@@ -61,14 +60,15 @@
 	on:clickAway={() => {
 		popperOpen = false;
 	}}
->
+	style={styleRoot}
+	class={classRoot}>
 	<Input
 		bind:value={searchString}
 		bind:element
 		placeholder="find by {defaultField} {mode}"
 		type="search"
 		inputType="search"
-		size="auto"
+		{size} 
 		class={className}
 		{...$$restProps}
 	/>
@@ -81,8 +81,7 @@
 			naked
 			size="tiny"
 			icon="chevron-{popperOpen ? 'up' : 'down'}"
-			iconSize="small"
-		/>
+			iconSize="small" />
 	{/if}
 </container>
 {#if popperOpen}
@@ -115,7 +114,7 @@
 						<input type="checkbox" checked={defaultField === '*'} style="display:block;margin:0" />
 					{/if}
 				</div>
-				{'*'}
+				{'* All fields'}
 			</MenuItem>
 			{#each dataKeys as kk}
 				<MenuItem

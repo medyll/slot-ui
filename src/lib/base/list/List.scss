@@ -19,8 +19,7 @@ li.listItem {
   align-items: center;
   position: relative;
   border-radius: 4px;
-  max-width: 100%;
-  // content-visibility: hidden;
+  max-width: 100%; 
 
   .listItemContent {
     flex: 1;
@@ -28,14 +27,14 @@ li.listItem {
     min-width: auto;
     overflow: hidden;
 
-    [slot="primary"] {
+    [slot="listItemPrimary"] {
       text-overflow: ellipsis;
       display: block;
       width: 100%;
       overflow: hidden;
     }
 
-    [slot="secondary"] {
+    [slot="listItemSecondary"] {
       opacity: 0.8;
       text-overflow: ellipsis;
       display: block;
