@@ -26,7 +26,7 @@
     </div>
   {/if}
   <div class="listItemContent">
-    {#if primary || $$slots.primary}     
+    {#if primary || $$slots.listItemPrimary || $$slots.primary}     
         <slot name="listItemPrimary"><slot name="primary"><h5>{primary}</h5></slot></slot>  
     {/if}
     {#if secondary || $$slots.listTitleSecondary}
