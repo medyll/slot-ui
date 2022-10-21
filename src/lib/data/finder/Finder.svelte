@@ -27,7 +27,7 @@
 	/** external bind use, to read filtered data */
 	export let filteredData: any[] = data;
 	/** with of the input using  presets */
-	export let size: ElementProps['sizeType'] | 'full' = 'auto';
+	export let size: ElementProps['sizeType'] | 'full' = 'full';
 	
 	let searchString: string;
 	let container: HTMLDivElement;
@@ -55,13 +55,13 @@
 
 </script>
 
-<container
+<div class="container {classRoot}"
 	bind:this={container}
 	on:clickAway={() => {
 		popperOpen = false;
 	}}
-	style={styleRoot}
-	class={classRoot}>
+	style={styleRoot} >
+	<div style:flex="1">
 	<Input
 		bind:value={searchString}
 		bind:element
@@ -69,9 +69,10 @@
 		type="search"
 		inputType="search"
 		{size} 
-		class={className}
+		class="{className}"
 		{...$$restProps}
 	/>
+	</div>
 	{#if showSortMenu}
 		<Button
 			on:click={(event) => {
@@ -83,7 +84,7 @@
 			icon="chevron-{popperOpen ? 'up' : 'down'}"
 			iconSize="small" />
 	{/if}
-</container>
+</div>
 {#if popperOpen}
 	<Popper code="ui" parentNode={container} position="BC" stickToHookWidth={true}>
 		<Menu style="max-height:350px;overflow:auto;width:100%;" density="default">
@@ -135,11 +136,11 @@
 	</Popper>
 {/if}
 
-<style global lang="scss">
+<style   lang="scss">
 	@import "../../styles/slotui-vars.scss";
 	@import "../../styles/presets.scss";
-	container {
-		display: inline-flex;
+	.container {
+		display: flex;
 		gap: 0.25rem;
 	}
 </style>

@@ -16,6 +16,7 @@
   import Icon from "$lib/base/icon/Icon.svelte";
   import { uiPresets } from "$lib/engine/presets.js";
   import Input from "../../form/input/Input.svelte";
+  import Finder from "$lib/data/finder/Finder.svelte";
   /* demo */
 
   let parametersSlot: any = {
@@ -97,7 +98,8 @@
             <Icon icon="carbon:progress-bar" slot="toggleBarIcon" />
             <div slot="toggleBarButtons"><Button>button</Button></div>
             <Button ratio=1/1  icon="search" slot="contentSwitcherIcon" />
-            <Input slot="contentSwitcherReveal"  size="full" value="a slotted input" />
+            <Finder styleRoot="width:100%;" size="full" showSortMenu={true} slot="contentSwitcherReveal" />
+            <!-- <Input  size="full" value="a slotted input" /> -->
           </ToggleBar>
         </div>
       </Demoer>
