@@ -75,10 +75,10 @@
 	on:listitem:dblclick={(ce)=>console.log(ce.detail)}
 	selectorField="name"
 	style="width:190px">
-		<ListItem>
-			<Icon slot="icon"  icon={listItem.icon} />
-			<span slot="primary">{listItem.data.name}</span>
-			<span slot="secondary">{listItem.data.secondary}</span>
+		<ListItem data={listItem.data}>
+			<Icon slot="listItemIcon" icon={listItem.data.icon} />
+			<span slot="listItemPrimary">{listItem.data.name}</span>
+			<span slot="listItemSecondary">{listItem.data.secondary}</span>
 		</ListItem>
 </List>`;
 	let codeSlot2 = `
@@ -148,10 +148,13 @@
 					{...activeParams}
 				>
 					<ListItem data={listItem.data}>
-						<Icon slot="icon" icon={listItem.data.icon} />
-						<span slot="primary">{listItem.data.name}</span>
-						<span slot="secondary">{listItem.data.secondary}</span>
+						<Icon slot="listItemIcon" icon={listItem.data.icon} />
+						<span slot="listItemPrimary">{listItem.data.name}</span>
+						<span slot="listItemSecondary">{listItem.data.secondary}</span>
 					</ListItem>
+					<div slot="listFooter">
+					footer
+					</div>
 				</List>
 			</Demoer>
 		</DemoPage>

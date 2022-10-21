@@ -179,7 +179,7 @@
 	}
 
 	// vars for display rules
-	let showTitleZone = $$slots.title || title || primary || secondary; // || sorterer;
+	let showTitleZone = $$slots.title || $$slots.listTitle || title || primary || secondary;
 </script>
  
 <ul
@@ -252,6 +252,11 @@
 			{/each}
 		{:else}
 			<slot />
+		{/if}
+		{#if showTitleZone}
+			<slot name="listFooter"> 
+				<ListTitle primary={primary ?? title} {secondary} {icon} />
+			</slot> 
 		{/if}
 	{/if}
 </ul>

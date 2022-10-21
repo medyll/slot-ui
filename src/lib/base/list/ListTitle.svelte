@@ -3,7 +3,7 @@
   let className = "";
   export { className as class };
   export let element: HTMLElement | null = null;
-  export let style: string = ""; 
+  export let style: string = "";
   /*  end slotUi exports*/
 
   import type { ElementProps } from "$lib/types/index.js";
@@ -22,20 +22,23 @@
 <li {style} class="listItemTitle density-{density} {className}">
   {#if icon || $$slots.listTitleIcon}
     <div class="listItemIcon">
-      <slot name="listTitleIcon"> <Icon {icon} /> </slot>
+      <slot name="listTitleIcon"><Icon {icon} /></slot>
     </div>
   {/if}
-  <div class="listItemContent">
-    {#if primary || $$slots.listItemPrimary || $$slots.primary}     
-        <slot name="listItemPrimary"><slot name="primary"><h5>{primary}</h5></slot></slot>  
-    {/if}
-    {#if secondary || $$slots.listTitleSecondary}
-      <div>
-        <slot name="listTitleSecondary">{secondary}</slot>
-      </div>
-    {/if}
+  <slot name="listItemContent">
+    <div class="listItemContent">
+      {#if primary || $$slots.listItemPrimary || $$slots.primary}
+        <slot name="listItemPrimary"
+          ><slot name="primary"><h5>{primary}</h5></slot></slot>
+      {/if}
+      {#if secondary || $$slots.listTitleSecondary}
+        <div>
+          <slot name="listTitleSecondary">{secondary}</slot>
+        </div>
+      {/if}
+    </div>
     <slot />
-  </div>
+  </slot>
   {#if action || $$slots.listTitleAction}
     <div class="listTitleAction">
       <slot name="listTitleAction" />
