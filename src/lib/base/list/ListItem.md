@@ -24,6 +24,7 @@ __propDef: {
     slots: {
         listItemIcon: {};
         icon: {};
+        listItemContent: {};
         default: {};
         primary: {};
         listItemPrimary: {};

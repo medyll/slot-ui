@@ -40,6 +40,7 @@ declare const __propDef: {
         listTitle: {};
         title: {};
         default: {};
+        listFooter: {};
     };
 };
 export declare type ListProps = typeof __propDef.props;

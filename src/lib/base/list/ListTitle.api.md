@@ -15,6 +15,7 @@ declare const __propDef: {
     };
     slots: {
         listTitleIcon: {};
+        listItemContent: {};
         listItemPrimary: {};
         primary: {};
         listTitleSecondary: {};
