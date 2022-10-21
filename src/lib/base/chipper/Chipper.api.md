@@ -12,7 +12,7 @@ declare const __propDef: {
     };
     slots: {
         default: {};
-        chipperSlot: {};
+        chipperChip: {};
     };
 };
 export declare type ChipperProps = typeof __propDef.props;

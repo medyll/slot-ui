@@ -5,7 +5,6 @@
   import { createListStore } from "./store.js";
   import type { ElementProps } from "$lib/types/index.js";
   import {
-    compute_slots,
     get_current_component,
     null_to_empty,
   } from "svelte/internal";
@@ -13,12 +12,11 @@
   import ListTitle from "./ListTitle.svelte";
   import { createEventForwarder } from "$lib/engine/eventForwarder.js";
   import Virtualize from "../virtualize/Virtualize.svelte";
-  import type { Data } from "$lib/data/grouper/Grouper.svelte";
   import { dataOp, propsProxy } from "$lib/engine/utils.js";
-  import Divider from "../divider/Divider.svelte";
   import type { SorterFieldType } from "$lib/data/sorter/types.js";
   import Sorterer from "$lib/data/sorter/Sorterer.svelte";
 
+  type Data = Record<string,any>
   // set store
   const listStore = createListStore();
   setContext("listStateContext", listStore);

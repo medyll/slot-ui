@@ -12,7 +12,7 @@ __propDef: {
     };
     slots: {
         default: {};
-        chipperSlot: {};
+        chipperChip: {};
     };
 };
 
