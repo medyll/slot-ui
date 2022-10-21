@@ -15,6 +15,7 @@ __propDef: {
     };
     slots: {
         listTitleIcon: {};
+        listItemPrimary: {};
         primary: {};
         listTitleSecondary: {};
         default: {};

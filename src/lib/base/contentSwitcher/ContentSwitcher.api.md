@@ -13,7 +13,7 @@ declare const __propDef: {
     slots: {
         contentSwitcherIcon: {};
         switcherSlot: {};
-        default: {};
+        contentSwitcherReveal: {};
     };
 };
 export declare type ContentSwitcherProps = typeof __propDef.props;

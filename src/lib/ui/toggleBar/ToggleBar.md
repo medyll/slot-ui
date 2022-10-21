@@ -16,8 +16,12 @@ __propDef: {
         toggleBarIcon: {};
         toggleBarTitle: {};
         toggleBarButtons: {};
-        contentSwitcherIcon: {};
-        default: {};
+        contentSwitcherIcon: {
+            slot: string;
+        };
+        contentSwitcherReveal: {
+            slot: string;
+        };
     };
 };
 

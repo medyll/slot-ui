@@ -13,7 +13,7 @@ __propDef: {
     slots: {
         contentSwitcherIcon: {};
         switcherSlot: {};
-        default: {};
+        contentSwitcherReveal: {};
     };
 };
 
