@@ -1,7 +1,7 @@
 ```import { SvelteComponentTyped } from "svelte";
-import type { LisItemProps } from './types.js';
-import type { Data } from '../../data/grouper/Grouper.svelte';
-import type { SorterFieldType } from '../../data/sorter/types.js';
+import type { LisItemProps } from "./types.js";
+import type { Data } from "../../data/grouper/Grouper.svelte";
+import type { SorterFieldType } from "../../data/sorter/types.js";
 declare const __propDef: {
     props: {
         class?: string | undefined;
@@ -36,10 +36,9 @@ declare const __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
-        listTopBar: {};
         listTitle: {};
-        title: {};
         default: {};
+        title: {};
         listFooter: {};
     };
 };
