@@ -11,6 +11,7 @@ declare const __propDef: {
         showSortMenu?: boolean | undefined;
         mode?: "exact" | "partial" | undefined;
         filteredData?: any[] | undefined;
+        sizeRoot?: "tiny" | "small" | "medium" | "default" | "large" | "big" | "full" | "auto" | undefined;
         size?: "tiny" | "small" | "medium" | "default" | "large" | "big" | "full" | "auto" | undefined;
     };
     events: {
@@ -49,6 +50,9 @@ export default class Finder extends SvelteComponentTyped<FinderProps, FinderEven
     get filteredData(): any[] | undefined;
     /**accessor*/
     set filteredData(_: any[] | undefined);
+    get sizeRoot(): "tiny" | "small" | "medium" | "default" | "large" | "big" | "full" | "auto" | undefined;
+    /**accessor*/
+    set sizeRoot(_: "tiny" | "small" | "medium" | "default" | "large" | "big" | "full" | "auto" | undefined);
     get size(): "tiny" | "small" | "medium" | "default" | "large" | "big" | "full" | "auto" | undefined;
     /**accessor*/
     set size(_: "tiny" | "small" | "medium" | "default" | "large" | "big" | "full" | "auto" | undefined);
