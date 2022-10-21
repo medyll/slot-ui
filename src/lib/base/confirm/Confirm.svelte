@@ -46,13 +46,13 @@
 	function handleAction(event: any) {
 		event.preventDefault();
 		event.stopPropagation(); 
+		step = 'initial';
 		if(action) action()
 	}
 
 	onDestroy(()=>{
 		step = 'initial'
 	})
-
 </script>
 
 {#if step === 'initial'}

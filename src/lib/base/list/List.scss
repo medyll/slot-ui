@@ -11,13 +11,8 @@ ul.listRoot:focus {
   outline: 0;
   outline-offset: -4px;
 }
-li.listItemTitle,
-li.listItem {
-[slot="listItemContent"]{
-  color:red!important;
-  border:1px solid red;
-}
-}
+
+
 li.listItemTitle,
 li.listItem {
   @include ui-density-presets;
@@ -31,17 +26,16 @@ li.listItem {
     flex: 1;
     min-width: auto;
     overflow: hidden;
-
-    [slot="listItemPrimary"] {
       padding: 0 0.5rem;
+
+    [slot="listItemPrimary"] { 
       text-overflow: ellipsis;
       display: block;
       width: 100%;
       overflow: hidden;
     }
 
-    [slot="listItemSecondary"] {
-      padding: 0 0.5rem;
+    [slot="listItemSecondary"] { 
       opacity: 0.8;
       text-overflow: ellipsis;
       display: block;
