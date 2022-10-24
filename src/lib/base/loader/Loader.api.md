@@ -4,10 +4,10 @@ declare const __propDef: {
         class?: string | undefined;
         element?: HTMLDivElement | null | undefined;
         style?: string | undefined;
-        status: 'loading' | 'success' | 'error' | 'empty';
+        status: "loading" | "success" | "error" | "empty" | undefined;
         /** @deprecated */ isLoading?: boolean | undefined;
-        isError?: boolean | undefined;
-        isEmpty?: boolean | undefined;
+        /** @deprecated */ isError?: boolean | undefined;
+        /** @deprecated */ isEmpty?: boolean | undefined;
         /** icon sources */ loadingIcon?: string | undefined;
         errorIcon?: string | undefined;
         emptyIcon?: string | undefined;
