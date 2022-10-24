@@ -7,7 +7,7 @@
   export let element: HTMLDivElement | null = null;
   export let style: string = "";
 
-  export let status: "loading" | "success" | "error" | "empty";
+  export let status: "loading" | "success" | "error" | "empty" | undefined;
   export let showSuccess: boolean = true;
   /** @deprecated */
   export let isLoading: boolean = false;
@@ -44,51 +44,61 @@
 
   let timer: any;
   $: if (status === "success") {
+    if (!showSuccess) status = undefined;
+    else {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        status = undefined;
+      }, 1250);
+    }
+  } else {
     clearTimeout(timer);
-    timer = setTimeout(() => {
-      status = undefined;
-    }, 1250);
   }
 </script>
 
 {#key status}
-    {#if status || isLoading || isError || isEmpty}
-    <div bind:this={element} transition:fade class="loaderRoot {className}" {style}>
-        <div class="loaderBox">
+  {#if status || isLoading || isError || isEmpty}
+    <div
+      bind:this={element}
+      transition:fade
+      class="loaderRoot {className}"
+      {style}>
+      <div class="loaderBox">
         {#if status === "loading" || isLoading}
-            <slot name="loaderLoading">
+          <slot name="loaderLoading">
             <Icon
-                style="color:var(--theme-color-primary)"
-                icon={loadingIcon}
-                fontSize="medium"
-                rotate />
-            </slot>
+              style="color:var(--theme-color-primary)"
+              icon={loadingIcon}
+              fontSize="medium"
+              rotate />
+          </slot>
         {/if}
         {#if status === "error" || isError}
-            <slot name="loaderError">
+          <slot name="loaderError">
             <Icon style="color:orange;" icon={errorIcon} fontSize="medium" />
-            </slot>
+          </slot>
         {/if}
         {#if showSuccess && status === "success"}
-            <slot name="loaderSuccess">
+          <slot name="loaderSuccess">
             <Icon style="color:green;" icon={successIcon} fontSize="medium" />
-            </slot>
+          </slot>
         {/if}
         {#if status === "empty" || isEmpty}
-            <slot name="loaderEmpty">
+          <slot name="loaderEmpty">
             <Icon icon={emptyIcon} fontSize="medium" />
-            </slot>
+          </slot>
         {/if}
 
         {#if Boolean(finalMessage)}
-            <slot name="loaderMessage">
+          <slot name="loaderMessage">
             <div class="message">{finalMessage}</div>
-            </slot>
+          </slot>
         {/if}
-        </div>
+      </div>
     </div>
-    {/if}
+  {/if}
 {/key}
+
 <style lang="scss">
   @import "../../styles/slotui-vars.scss";
   @import "../../styles/presets.scss";
