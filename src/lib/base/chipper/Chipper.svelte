@@ -21,8 +21,7 @@
 
 <div bind:this={element}
      style="{style};position:relative;"
-     class="chipperRoot gap-tiny {className} ">
-    {cssColor}
+     class="chipperRoot gap-tiny {className} "> 
     <slot>
         {#if content}
             <div class="chipperContent">{@html null_to_empty(content)}</div>
