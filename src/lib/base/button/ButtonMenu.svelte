@@ -3,27 +3,27 @@
 <script lang="ts">
 	import type { SvelteComponentDev } from 'svelte/internal';
 	import { get_current_component } from 'svelte/internal';
-	import { openPopper } from '../../ui/popper/actions';
+	import { openPopper } from '../../ui/popper/actions.js';
 	import IconButton from './IconButton.svelte';
 	import Menu from '../../ui/menu/Menu.svelte';
 	import { createEventForwarder } from '$lib/engine/engine.js';
 	import type { SvelteComponent } from 'svelte';
 	import type { PopperPositionType } from '$lib/ui/popper/types';
-	import type { MenuItemProps, MenuProps } from '$lib/ui/menu/types';
+	import type { IMenuItemProps, IMenuProps } from '$lib/ui/menu/types';
 	import type { ElementProps } from '$lib/types/index.js';
 	import type { UsePopperProps } from '$lib/ui/popper/usePopper';
 
-	export let icon: string = 'list';
-	export let menuData: MenuItemProps[] = [];
+	export let icon: string                           = 'list';
+	export let menuData: IMenuItemProps[]             = [];
 	export let actionComponent: SvelteComponent | any = Menu;
-	export let menuProps: MenuProps = {
+	export let menuProps: IMenuProps                  = {
 		menuList: menuData,
 		menuItemsList: menuData,
 		onMenuItemClick: () => {
 			console.log('redfered');
 		}
 	};
-	export let menuPosition: PopperPositionType = 'BC';
+	export let menuPosition: PopperPositionType       = 'BC';
 
 	/*  common slotUi exports*/
 	let className = '';
