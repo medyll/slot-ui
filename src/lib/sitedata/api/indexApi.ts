@@ -72,6 +72,7 @@ import ThemeSwitcherReadMe from "$lib/ui/themeswitcher/ThemeSwitcher.md";
 import ToastReadMe from "$lib/ui/toast/Toast.md";
 import ToasterReadMe from "$lib/ui/toast/Toaster.md";
 import ToggleBarReadMe from "$lib/ui/toggleBar/ToggleBar.md";
+import ToolBarReadMe from "$lib/ui/toolBar/ToolBar.md";
 import WindowReadMe from "$lib/ui/window/Window.md";
 import ContextRooterReadMe from "$lib/utils/contextRooter/ContextRooter.md";
 
@@ -149,5 +150,6 @@ themeswitcher:ThemeSwitcherReadMe,
 toast:ToastReadMe,
 toaster:ToasterReadMe,
 togglebar:ToggleBarReadMe,
+toolbar:ToolBarReadMe,
 window:WindowReadMe,
 contextrooter:ContextRooterReadMe}

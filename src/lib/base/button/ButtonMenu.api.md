@@ -1,13 +1,13 @@
 ```import { SvelteComponentTyped } from "svelte";
 import type { SvelteComponent } from 'svelte';
-import type { MenuItemProps, MenuProps } from '../../ui/menu/types';
+import type { IMenuItemProps, IMenuProps } from '../../ui/menu/types';
 declare const __propDef: {
     props: {
         icon?: string | undefined;
-        menuData?: MenuItemProps<any>[] | undefined;
+        menuData?: IMenuItemProps<any>[] | undefined;
         actionComponent?: SvelteComponent | any;
-        menuProps?: MenuProps<any> | undefined;
-        menuPosition?: import("../../uses/stickTo/stickTo").StickToPositionType | undefined;
+        menuProps?: IMenuProps<any> | undefined;
+        menuPosition?: import("../../uses/stickTo/stickTo.js").StickToPositionType | undefined;
         class?: string | undefined;
         element?: HTMLElement | null | undefined;
     };
@@ -25,18 +25,18 @@ export default class ButtonMenu extends SvelteComponentTyped<ButtonMenuProps, Bu
     get icon(): string | undefined;
     /**accessor*/
     set icon(_: string | undefined);
-    get menuData(): MenuItemProps<any>[] | undefined;
+    get menuData(): IMenuItemProps<any>[] | undefined;
     /**accessor*/
-    set menuData(_: MenuItemProps<any>[] | undefined);
+    set menuData(_: IMenuItemProps<any>[] | undefined);
     get actionComponent(): any;
     /**accessor*/
     set actionComponent(_: any);
-    get menuProps(): MenuProps<any> | undefined;
+    get menuProps(): IMenuProps<any> | undefined;
     /**accessor*/
-    set menuProps(_: MenuProps<any> | undefined);
-    get menuPosition(): import("../../uses/stickTo/stickTo").StickToPositionType | undefined;
+    set menuProps(_: IMenuProps<any> | undefined);
+    get menuPosition(): import("../../uses/stickTo/stickTo.js").StickToPositionType | undefined;
     /**accessor*/
-    set menuPosition(_: import("../../uses/stickTo/stickTo").StickToPositionType | undefined);
+    set menuPosition(_: import("../../uses/stickTo/stickTo.js").StickToPositionType | undefined);
     get class(): string | undefined;
     /**accessor*/
     set class(_: string | undefined);

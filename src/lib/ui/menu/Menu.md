@@ -3,8 +3,8 @@ __propDef: {
     props: {
         class?: string | undefined;
         element?: HTMLElement | null | undefined;
-        /** @deprecated */ menuList?: MenuItemProps[] | undefined;
-        menuItemsList?: MenuItemProps[] | undefined;
+        /** @deprecated */ menuList?: IMenuItemProps[] | undefined;
+        menuItemsList?: IMenuItemProps[] | undefined;
         data?: Record<string, any>[] | undefined;
         density?: "medium" | "default" | "none" | "tight" | "kind" | undefined;
         style?: string | undefined;

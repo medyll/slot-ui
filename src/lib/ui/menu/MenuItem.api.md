@@ -1,5 +1,5 @@
 ```import { SvelteComponentTyped } from "svelte";
-import type { MenuItemProps } from "./types.js";
+import type { IMenuItemProps } from "./types.js";
 import type { ElementProps } from "../../types/index.js";
 declare const __propDef: {
     props: {
@@ -7,11 +7,11 @@ declare const __propDef: {
         element?: HTMLElement | undefined;
         text?: string | undefined;
         /** text props, shown on the right side of the menuItem*/ action?: string | undefined;
-        icon?: MenuItemProps["icon"] | undefined;
+        icon?: IMenuItemProps["icon"] | undefined;
         iconColor?: string | undefined;
         iconSize?: ElementProps["sizeType"] | undefined;
-        divider?: MenuItemProps["divider"];
-        dividerBefore?: MenuItemProps["divider"];
+        divider?: IMenuItemProps["divider"];
+        dividerBefore?: IMenuItemProps["divider"];
         data?: Record<string, any> | undefined;
         /** highlight menu item when selected*/ selected?: boolean | undefined;
         onMenuItemClick?: Function | undefined;
