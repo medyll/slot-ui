@@ -194,7 +194,7 @@
     max-height: 100%;
 
     &.active {
-      border: 1px solid var(--theme-color-primary-alpha);
+      border: 1px solid var(--theme-color-primary);
     }
 
     .bar {
