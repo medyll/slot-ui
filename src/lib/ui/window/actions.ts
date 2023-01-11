@@ -2,6 +2,7 @@ import Window from './Window.svelte';
 import {wStore} from '$lib/ui/window/store.js';
 import {get} from 'svelte/store';
 import type {ElementProps} from '../../types/index.js';
+import type { ComponentConstructorOptions  } from 'svelte';
 
 type OpenWindow = {
   /** Id of the component's instance */ frameId?: string | undefined;
@@ -36,7 +37,7 @@ type OpenWindow = {
               setActive: () => void;
             } | undefined;
 }
-export const openWindow = (frameId: string, args: OpenWindow = {}) => {
+export const openWindow = <T = any>(frameId: string, args: OpenWindow = {},opts:Partial<ComponentConstructorOptions>= {}) => {
   
   const w = get(wStore).instances[frameId];
  
@@ -44,6 +45,7 @@ export const openWindow = (frameId: string, args: OpenWindow = {}) => {
   if (!w) {
     let a = new Window({
       target: target ?? document.body,
+      ...opts,
       props : {
         title: frameId,
         ...args,

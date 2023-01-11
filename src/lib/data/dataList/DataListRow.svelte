@@ -49,10 +49,7 @@
 
 	function checkGetter(columns: Record<string, DataCellType>, field: string, data: Data) {
 		const ret = columns[field]?.getter ? columns[field]?.getter(data) : dataOp.resolveDotPath(data, field);
-		// console.log(ret)
-		// console.log(ret, columns[field])
 		return sanitizeHtml(ret);
-		//  fieldOrFunction(data?.[field], field)
 	}
 
 	$: cssVars = Object.values($dataListContext.columns ?? []).reduce((previous,current,currentIndex)=>{
