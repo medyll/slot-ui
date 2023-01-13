@@ -1,9 +1,9 @@
 import type { ElementProps } from '$typings/index.js';
 
 
-export type MenuProps<T = any> = {
-    /** @deprecated */ menuList?: MenuItemProps[],
-    menuItemsList?: MenuItemProps[],
+export type IMenuProps<T = any> = {
+    /** @deprecated */ menuList?: IMenuItemProps[],
+    menuItemsList?: IMenuItemProps[],
     menuItemsInstances?: any[], // svelte instances of menu items
     data?: T
     density?: ElementProps['density']
@@ -13,12 +13,18 @@ export type MenuProps<T = any> = {
     actions?: Record<string,(args?:any) => void>  
 }
 
-export type MenuItemProps<T = any> = {
+export type IMenuItemProps<T = any> = {
+    class?: string | undefined
     text: string
+    action: string
     icon?: string
+    iconColor: string
+    iconSize: string
+    divider?:   boolean
+    dividerBefore?:   boolean
     data?: T
-    action?: () => void
-    divider?: | boolean
-    dividerBefore?: | boolean
+    selected?: boolean
+    onMenuItemClick:()=>void
+    itemIndex?: number
     | ElementProps['expansion'];
 }

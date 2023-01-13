@@ -54,13 +54,13 @@
     background-color: transparent;
     border: none;
     padding: 0;
-    min-width: 64px;
+    min-width: 38px;
   }
   .switch {
     display: inline-block;
 
     position: relative;
-    border-radius: var(--radius-small);
+    border-radius: var(--radius-tiny);
     overflow: hidden;
     cursor: pointer;
     &.disabled {
@@ -74,8 +74,8 @@
 
     .switchGutter {
       border: 1px solid var(--theme-color-primary-alpha);
-      border-radius: var(--radius-small);
-      padding: 0.25rem;
+      border-radius: var(--radius-tiny);
+      padding: 0.20rem;
       background-color: var(--theme-color-paper);
       input {
         position: absolute;

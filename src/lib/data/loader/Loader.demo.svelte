@@ -81,9 +81,8 @@
                                 error  : 'An error occurred',
                                 empty  : 'Empty results',
                                 success: 'Success !'
-                              }}
-                            messages:
-                            status="loading" successIcon="clarity:success-standard-line"
+                              }}  
+                              successIcon="clarity:success-standard-line"
                     />
                 </div>
             </Demoer>

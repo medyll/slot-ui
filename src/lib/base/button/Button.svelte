@@ -317,7 +317,7 @@
 
     &[bordered='true'] {
       color: var(--theme-color-foreground);
-      border: 0.5px solid var(--theme-color-border);
+      border: 0.5px solid var(--theme-color-primary-alpha-low);
       box-shadow: var(--box-shad-1);
 
       &:hover {

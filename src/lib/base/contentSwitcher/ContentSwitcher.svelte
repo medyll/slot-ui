@@ -2,6 +2,7 @@
   import IconButton from '$lib/base/button/IconButton.svelte';
   import {createEventForwarder} from '$lib/engine/engine.js';
   import {get_current_component} from 'svelte/internal';
+  import Button from '../button/Button.svelte';
 
   /*  common slotUi exports*/
   let className = '';
@@ -50,7 +51,7 @@
 <div  on:click={handleClick}>
     <slot name="contentSwitcherIcon">
         <slot name="switcherSlot">s
-            <IconButton style="aspect-ratio:1/1" {icon} iconFontSize="small"/>s
+            <IconButton style="aspect-ratio:1/1" {icon} iconFontSize="small"/>
         </slot>
     </slot>
 </div>
@@ -61,9 +62,9 @@
             style="width:100%;flex:1;position: relative"
     >
         <div on:click={handleClick}>
-            <IconButton icon={iconback} iconFontSize="small"/>
+            <Button ratio="1/1" icon={iconback} iconFontSize="small"/>
         </div>
-        <slot/>
+        <slot name="contentSwitcherReveal"/>
     </div>
 </div>
 

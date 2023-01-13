@@ -32,6 +32,7 @@ import Paneldemosvelte from "$lib/ui/panel/Panel.demo.svelte";
 import Popperdemosvelte from "$lib/ui/popper/Popper.demo.svelte"; 
 import Toastdemosvelte from "$lib/ui/toast/Toast.demo.svelte"; 
 import ToggleBardemosvelte from "$lib/ui/toggleBar/ToggleBar.demo.svelte"; 
+import ToolBardemosvelte from "$lib/ui/toolBar/ToolBar.demo.svelte"; 
 import Windowdemosvelte from "$lib/ui/window/Window.demo.svelte"; 
 import ContextRooterdemosvelte from "$lib/utils/contextRooter/ContextRooter.demo.svelte";  
  export const slotUiComponentList = [ {name:"Alert",code:"alert",component:Alertdemosvelte,group:"base"},
@@ -68,5 +69,6 @@ import ContextRooterdemosvelte from "$lib/utils/contextRooter/ContextRooter.demo
 {name:"Popper",code:"popper",component:Popperdemosvelte,group:"ui"},
 {name:"Toast",code:"toast",component:Toastdemosvelte,group:"ui"},
 {name:"ToggleBar",code:"togglebar",component:ToggleBardemosvelte,group:"ui"},
+{name:"ToolBar",code:"toolbar",component:ToolBardemosvelte,group:"ui"},
 {name:"Window",code:"window",component:Windowdemosvelte,group:"ui"},
 {name:"ContextRooter",code:"contextrooter",component:ContextRooterdemosvelte,group:"utils"} ] 

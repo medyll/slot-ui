@@ -59,7 +59,7 @@
                 </slot>
             </Drawer>
         </div>
-        <div class="h-full flex-main flex-v ">
+        <div class="h-full flex-main flex-v frameContent ">
             <div>
                 <slot name="contentHeader"></slot>
             </div>
@@ -74,7 +74,7 @@
 </div>
 
 
-<style lang="scss">
+<style global lang="scss">
   @import "../../styles/slotui-vars.scss";
   @import "../../styles/presets.scss";
   .frame {
@@ -95,6 +95,10 @@
         border-right: 1px solid var(--theme-color-primary);
         height: 100%;
         position:relative;
+      }
+
+      .frameContent{
+        overflow:hidden;
       }
     }
 

@@ -1,11 +1,11 @@
 ```import { SvelteComponentTyped } from "svelte";
-import type { MenuItemProps, MenuProps } from "./types.js";
+import type { IMenuItemProps } from "./types.js";
 declare const __propDef: {
     props: {
         class?: string | undefined;
         element?: HTMLElement | null | undefined;
-        /** @deprecated */ menuList?: MenuItemProps[] | undefined;
-        menuItemsList?: MenuItemProps[] | undefined;
+        /** @deprecated */ menuList?: IMenuItemProps[] | undefined;
+        menuItemsList?: IMenuItemProps[] | undefined;
         data?: Record<string, any>[] | undefined;
         density?: "medium" | "default" | "none" | "tight" | "kind" | undefined;
         style?: string | undefined;
@@ -35,12 +35,12 @@ export default class Menu extends SvelteComponentTyped<MenuProps, MenuEvents, Me
     get element(): HTMLElement | null | undefined;
     /**accessor*/
     set element(_: HTMLElement | null | undefined);
-    get menuList(): MenuItemProps<any>[] | undefined;
+    get menuList(): IMenuItemProps<any>[] | undefined;
     /**accessor*/
-    set menuList(_: MenuItemProps<any>[] | undefined);
-    get menuItemsList(): MenuItemProps<any>[] | undefined;
+    set menuList(_: IMenuItemProps<any>[] | undefined);
+    get menuItemsList(): IMenuItemProps<any>[] | undefined;
     /**accessor*/
-    set menuItemsList(_: MenuItemProps<any>[] | undefined);
+    set menuItemsList(_: IMenuItemProps<any>[] | undefined);
     get data(): Record<string, any>[] | undefined;
     /**accessor*/
     set data(_: Record<string, any>[] | undefined);

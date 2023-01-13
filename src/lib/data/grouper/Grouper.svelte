@@ -22,7 +22,7 @@
 import Button from '$lib/base/button/Button.svelte';
 import ButtonMenu from '$lib/base/button/ButtonMenu.svelte';
 
-	import type { MenuItemProps } from '$lib/ui/menu/types';
+	import type { IMenuItemProps } from '$lib/ui/menu/types';
 
 	import { custom_event } from 'svelte/internal';
 
@@ -105,8 +105,8 @@ import ButtonMenu from '$lib/base/button/ButtonMenu.svelte';
 
 	let innerInnerGB: GroupedDataType = [];
 
-	let menuData: MenuItemProps[] = [];
-	let menuProps = {};
+	let menuData: IMenuItemProps[] = [];
+	let menuProps                  = {};
 
 	let collectedKeys: any[] = [];
 

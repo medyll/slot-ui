@@ -75,19 +75,19 @@
 	$: switch (stickTo) {
 		case 'top':
 			sensSuffix = isOpen ? 'up' : 'down';
-			sens = isOpen ? 0 : 180;
+			sens = isOpen ? 180 : 0;
 			break;
 		case 'right':
 			sensSuffix = isOpen ? 'right' : 'left';
-			sens = isOpen ? 0 : 180;
+			sens = isOpen ? 180 : 0;
 			break;
 		case 'bottom':
 			sensSuffix = isOpen ? 'down' : 'up';
-			sens = isOpen ? 0 : 180;
+			sens = isOpen ? 180 : 0;
 			break;
 		case 'left':
 			sensSuffix = isOpen ? 'left' : 'right';
-			sens = isOpen ? 0 : 180;
+			sens = isOpen ? 180 : 0;
 			break;
 	}
 

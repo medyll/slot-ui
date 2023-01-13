@@ -52,7 +52,7 @@
 </script>
 
 {#if icon || endIcon  || inputType === 'search' || $$slots.inputStart || $$slots.inputEnd}
-	<div style="position:relative;display:block">
+	<div   style="position:relative;display:block">
 		{#if icon || $$slots.inputStart}
 			<div class="inpuStart">
 				<slot name="inputStart">

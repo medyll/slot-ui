@@ -1,3 +1,4 @@
+<svelte:options accessors={true} />
 <script lang="ts">
   import type { DataCellType, DataListStoreType, RowType } from "./types.js";
   import { dataOp } from "$lib/engine/utils.js";

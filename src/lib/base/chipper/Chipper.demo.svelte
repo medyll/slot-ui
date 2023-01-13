@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Chipper from './Chipper.svelte';
+	import Chipper  from './Chipper.svelte';
 	/* demo */
 	import ComponentExample from '$lib/demo/ComponentExample.svelte';
 	import Demoer from '$lib/base/demoer/Demoer.svelte';
@@ -11,10 +11,14 @@
 			type: 'position',
 			values: ['top', 'bottom', 'left', 'right']
 		},
+		bgTheme: {
+			type: 'preset-theme',
+			values: [undefined,'primary','secondary','tertiary']
+		},
 		showChip: {
 			type: 'boolean',
 			values: [true, false]
-		}
+		},
 	};
 
 	let parametersProps: any = {
@@ -43,19 +47,21 @@
 	};
 
 	let componentArgsProps = {
-		...componentArgsSlot
+		...componentArgsSlot,
+		content: "<div class='pad'>Some props html content<\/div>",
+		color: "orange"
 	};
 
 	let codeSlot = `
-	<Chipper>
-		<div class="pad-4">some content</div> 
-		<div slot="chipperSlot"   class="pad-tiny theme-bg-primary radius-small"></div>
-	</Chipper>`;
+<Chipper>
+	<div class="pad-2">some content</div>
+	<div slot="chipperChip"   class="theme-bg-primary radius-small w-full h-full"></div>
+</Chipper>`;
 
 	let codeProps = `
-	<Chipper >
-		<div class="pad-4">some content</div>
-	</Chipper>`;
+<Chipper
+	content="<div class='pad'>Some props html content<\/div>"
+	color="red" />`;
 </script>
 
 <ComponentExample component="Chipper">
@@ -67,7 +73,7 @@
 		>
 			<Chipper {...activeParams}>
 				<div class="pad-2">some content</div> 
-                <div slot="chipperSlot"   class="pad-tiny theme-bg-primary radius-small"></div>
+                <div slot="chipperChip"   class="theme-bg-primary radius-small w-full h-full"></div>
 			</Chipper>
 		</Demoer>
 	</DemoPage>
@@ -77,9 +83,7 @@
 			componentArgs={componentArgsProps}
 			let:activeParams
 		>
-			<Chipper {...activeParams}>
-				<div class="pad-2">some content</div>
-			</Chipper>
+			<Chipper {...activeParams} />
 		</Demoer>
 	</DemoPage>
 </ComponentExample>

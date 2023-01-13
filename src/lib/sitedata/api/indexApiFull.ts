@@ -28,7 +28,6 @@ import ProgressApiReadMe from "$lib/base/progress/Progress.api.md";
 import RatingApiReadMe from "$lib/base/rating/Rating.api.md";
 import SliderApiReadMe from "$lib/base/slider/Slider.api.md";
 import StepperApiReadMe from "$lib/base/stepper/Stepper.api.md";
-import SwitchApiReadMe from "$lib/base/switch/Switch.api.md";
 import TabsApiReadMe from "$lib/base/tabs/Tabs.api.md";
 import TitleBarApiReadMe from "$lib/base/titleBar/TitleBar.api.md";
 import TreeApiReadMe from "$lib/base/tree/Tree.api.md";
@@ -47,6 +46,7 @@ import SorterApiReadMe from "$lib/data/sorter/Sorter.api.md";
 import SortererApiReadMe from "$lib/data/sorter/Sorterer.api.md";
 import InputApiReadMe from "$lib/form/input/Input.api.md";
 import SelectApiReadMe from "$lib/form/select/Select.api.md";
+import SwitchApiReadMe from "$lib/form/switch/Switch.api.md";
 import BootStrAppApiReadMe from "$lib/ui/bootstrapp/BootStrApp.api.md";
 import DynPageApiReadMe from "$lib/ui/bootstrapp/DynPage.api.md";
 import ChromeFrameApiReadMe from "$lib/ui/chromeFrame/ChromeFrame.api.md";
@@ -72,6 +72,7 @@ import ThemeSwitcherApiReadMe from "$lib/ui/themeswitcher/ThemeSwitcher.api.md";
 import ToastApiReadMe from "$lib/ui/toast/Toast.api.md";
 import ToasterApiReadMe from "$lib/ui/toast/Toaster.api.md";
 import ToggleBarApiReadMe from "$lib/ui/toggleBar/ToggleBar.api.md";
+import ToolBarApiReadMe from "$lib/ui/toolBar/ToolBar.api.md";
 import WindowApiReadMe from "$lib/ui/window/Window.api.md";
 import ContextRooterApiReadMe from "$lib/utils/contextRooter/ContextRooter.api.md";
 
@@ -105,7 +106,6 @@ progressApi:ProgressApiReadMe,
 ratingApi:RatingApiReadMe,
 sliderApi:SliderApiReadMe,
 stepperApi:StepperApiReadMe,
-switchApi:SwitchApiReadMe,
 tabsApi:TabsApiReadMe,
 titlebarApi:TitleBarApiReadMe,
 treeApi:TreeApiReadMe,
@@ -124,6 +124,7 @@ sorterApi:SorterApiReadMe,
 sortererApi:SortererApiReadMe,
 inputApi:InputApiReadMe,
 selectApi:SelectApiReadMe,
+switchApi:SwitchApiReadMe,
 bootstrappApi:BootStrAppApiReadMe,
 dynpageApi:DynPageApiReadMe,
 chromeframeApi:ChromeFrameApiReadMe,
@@ -149,5 +150,6 @@ themeswitcherApi:ThemeSwitcherApiReadMe,
 toastApi:ToastApiReadMe,
 toasterApi:ToasterApiReadMe,
 togglebarApi:ToggleBarApiReadMe,
+toolbarApi:ToolBarApiReadMe,
 windowApi:WindowApiReadMe,
 contextrooterApi:ContextRooterApiReadMe}

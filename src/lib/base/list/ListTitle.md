@@ -14,11 +14,13 @@ __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
-        icon: {};
+        listTitleIcon: {};
+        listItemContent: {};
+        listItemPrimary: {};
         primary: {};
-        secondary: {};
+        listTitleSecondary: {};
         default: {};
-        action: {};
+        listTitleAction: {};
     };
 };
 

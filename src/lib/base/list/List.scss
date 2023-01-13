@@ -4,13 +4,14 @@
 ul.listRoot {
   display: flex;
   flex-direction: column;
-  padding:0 0.25rem;
+  padding: 0 0.25rem;
 }
 
 ul.listRoot:focus {
   outline: 0;
   outline-offset: -4px;
 }
+
 
 li.listItemTitle,
 li.listItem {
@@ -20,22 +21,21 @@ li.listItem {
   position: relative;
   border-radius: 4px;
   max-width: 100%;
-  // content-visibility: hidden;
 
   .listItemContent {
     flex: 1;
-    padding: 0 0.5rem;
     min-width: auto;
     overflow: hidden;
+      padding: 0 0.5rem;
 
-    [slot="primary"] {
+    [slot="listItemPrimary"] { 
       text-overflow: ellipsis;
       display: block;
       width: 100%;
       overflow: hidden;
     }
 
-    [slot="secondary"] {
+    [slot="listItemSecondary"] { 
       opacity: 0.8;
       text-overflow: ellipsis;
       display: block;
@@ -44,11 +44,11 @@ li.listItem {
     }
   }
 
-  .listItemAction {
+  [slot="listItemAction"] {
     padding: 0 0.5rem;
   }
 
-  .listItemIcon {
+  [slot="listItemIcon"] {
     text-align: center;
     width: 2rem;
     min-width: 2rem;
@@ -60,11 +60,21 @@ li.listItem {
 li.listItemTitle {
   position: sticky;
   margin-top: 0px !important;
-  top: 01px;
+  top: 0px;
   background-color: var(--theme-color-background-alpha-low);
+  -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   z-index: 1;
-  //box-shadow: var(--box-shad-3);
+}
+
+[slot="listFooter"] {
+  position: sticky;
+  margin-bottom: 0px !important;
+  bottom: 0px;
+  background-color: var(--theme-color-background-alpha-low);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  z-index: 1;
 }
 
 li.listItem {
@@ -72,7 +82,8 @@ li.listItem {
   @include data-selected;
   @include ui-density-presets;
 
-  &.selected,&[data-selected=true] {
+  &.selected,
+  &[data-selected="true"] {
     .listItemChip {
       position: absolute;
       height: 50%;

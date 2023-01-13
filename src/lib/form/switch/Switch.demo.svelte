@@ -54,8 +54,7 @@
     <DemoPage code={codeSlot} component="Switch" title="Using slots">
       <Demoer {parametersSlot} {componentArgsSlot} let:activeParams>
       <div class="pad-2">
-        <Switch {...activeParams} name={'switcher'} class="flex-h flex-align-middle w-small" >
-          <span slot="label" />
+        <Switch {...activeParams} name={'switcher'}  >
         </Switch>
       </div>
     </Demoer>

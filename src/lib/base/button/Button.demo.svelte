@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { MenuItemProps } from "$lib/ui/menu/types.js";
+  import type { IMenuItemProps } from "$lib/ui/menu/types.js";
   import type { PopperPositionType } from "$lib/ui/popper/types.js";
   import { type UsePopperProps } from "$lib/ui/popper/usePopper.js";
   import ComponentExample from "$lib/demo/ComponentExample.svelte";
@@ -24,7 +24,7 @@
     height: ["tiny", "small", "default", "large"],
   };
 
-  const menuData: MenuItemProps[] = [
+  const menuData: IMenuItemProps[] = [
     { text: "text 1" },
     { text: "text 2" },
     { text: "text 3" },
@@ -145,13 +145,29 @@ let code = `
 <Button on:click={()=>{}} >
 	My button
 	<Icon slot="buttonStart" icon="..." />
-	<Icon slot="endButtonSlot" icon="..." />
+	<Icon slot="buttonEnd" icon="..." />
 </Button>`;
 
   let code2 = `
 <Button on:click={()=>{}} >
 	My button
 </Button>`;
+
+  let code3 = `
+const usePopper: UsePopperProps = {
+  component: Debug,
+  componentProps: {
+    title: "title box",
+    content: "content",
+  },
+};
+
+<Button
+  size="medium"
+  usePopper={{ ...usePopper, position: activeParams?.position }}
+  primary="Menu {activeParams?.position ?? ''}"
+/>`;
+
 </script>
 
 <ComponentExample
@@ -203,7 +219,7 @@ let code = `
         <Button {...activeParams}>Using props</Button>
       </Demoer>
     </DemoPage>
-    <DemoPage subTitle="Menu buttons" component="Button">
+    <DemoPage subTitle="Menu buttons" code={code3} component="Button">
       <Demoer parameters={parametersMenu} {componentArgs} let:activeParams>
         <Button
           size="medium"

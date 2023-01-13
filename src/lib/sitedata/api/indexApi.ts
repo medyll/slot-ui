@@ -28,7 +28,6 @@ import ProgressReadMe from "$lib/base/progress/Progress.md";
 import RatingReadMe from "$lib/base/rating/Rating.md";
 import SliderReadMe from "$lib/base/slider/Slider.md";
 import StepperReadMe from "$lib/base/stepper/Stepper.md";
-import SwitchReadMe from "$lib/base/switch/Switch.md";
 import TabsReadMe from "$lib/base/tabs/Tabs.md";
 import TitleBarReadMe from "$lib/base/titleBar/TitleBar.md";
 import TreeReadMe from "$lib/base/tree/Tree.md";
@@ -47,6 +46,7 @@ import SorterReadMe from "$lib/data/sorter/Sorter.md";
 import SortererReadMe from "$lib/data/sorter/Sorterer.md";
 import InputReadMe from "$lib/form/input/Input.md";
 import SelectReadMe from "$lib/form/select/Select.md";
+import SwitchReadMe from "$lib/form/switch/Switch.md";
 import BootStrAppReadMe from "$lib/ui/bootstrapp/BootStrApp.md";
 import DynPageReadMe from "$lib/ui/bootstrapp/DynPage.md";
 import ChromeFrameReadMe from "$lib/ui/chromeFrame/ChromeFrame.md";
@@ -72,6 +72,7 @@ import ThemeSwitcherReadMe from "$lib/ui/themeswitcher/ThemeSwitcher.md";
 import ToastReadMe from "$lib/ui/toast/Toast.md";
 import ToasterReadMe from "$lib/ui/toast/Toaster.md";
 import ToggleBarReadMe from "$lib/ui/toggleBar/ToggleBar.md";
+import ToolBarReadMe from "$lib/ui/toolBar/ToolBar.md";
 import WindowReadMe from "$lib/ui/window/Window.md";
 import ContextRooterReadMe from "$lib/utils/contextRooter/ContextRooter.md";
 
@@ -105,7 +106,6 @@ progress:ProgressReadMe,
 rating:RatingReadMe,
 slider:SliderReadMe,
 stepper:StepperReadMe,
-switch:SwitchReadMe,
 tabs:TabsReadMe,
 titlebar:TitleBarReadMe,
 tree:TreeReadMe,
@@ -124,6 +124,7 @@ sorter:SorterReadMe,
 sorterer:SortererReadMe,
 input:InputReadMe,
 select:SelectReadMe,
+switch:SwitchReadMe,
 bootstrapp:BootStrAppReadMe,
 dynpage:DynPageReadMe,
 chromeframe:ChromeFrameReadMe,
@@ -149,5 +150,6 @@ themeswitcher:ThemeSwitcherReadMe,
 toast:ToastReadMe,
 toaster:ToasterReadMe,
 togglebar:ToggleBarReadMe,
+toolbar:ToolBarReadMe,
 window:WindowReadMe,
 contextrooter:ContextRooterReadMe}

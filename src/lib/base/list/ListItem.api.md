@@ -22,10 +22,15 @@ declare const __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
+        listItemIcon: {};
         icon: {};
+        listItemContent: {};
         default: {};
         primary: {};
+        listItemPrimary: {};
+        listItemSecondary: {};
         secondary: {};
+        listItemAction: {};
         action: {};
     };
 };

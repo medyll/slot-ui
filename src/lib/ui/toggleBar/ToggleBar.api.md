@@ -16,8 +16,12 @@ declare const __propDef: {
         toggleBarIcon: {};
         toggleBarTitle: {};
         toggleBarButtons: {};
-        contentSwitcherIcon: {};
-        default: {};
+        contentSwitcherIcon: {
+            slot: string;
+        };
+        contentSwitcherReveal: {
+            slot: string;
+        };
     };
 };
 export declare type ToggleBarProps = typeof __propDef.props;

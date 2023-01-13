@@ -3,7 +3,7 @@
 <script lang="ts">
   import Button from "$lib/base/button/Button.svelte";
   import Icon from "$lib/base/icon/Icon.svelte";
-  import Switch from "$lib/base/switch/Switch.svelte";
+  import Switch from "$lib/form/switch/Switch.svelte";
 
   export let title: string | undefined = undefined;
   export let parameters: Record<

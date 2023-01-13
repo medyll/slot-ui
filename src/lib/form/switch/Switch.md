@@ -12,7 +12,6 @@ __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
-        switchLabel: {};
         label: {};
         default: {};
     };

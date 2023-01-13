@@ -2,7 +2,7 @@
 
 <script lang="ts">
   import { setContext } from "svelte";
-  import type { MenuItemProps, MenuProps } from "./types.js";
+  import type { IMenuItemProps, IMenuProps } from "./types.js";
   import type { ElementProps } from "$lib/types/index.js";
   import MenuItem from "./MenuItem.svelte";
   import { createMenuStore } from "./store.js";
@@ -17,9 +17,9 @@
   const forwardEvents = createEventForwarder(get_current_component());
   /*  end slotUi exports*/
   /** @deprecated */
-  export let menuList: MenuItemProps[] | undefined = undefined;
-  export let menuItemsList: MenuItemProps[] | undefined = undefined;
-  export let data: Record<string, any>[] | undefined = undefined;
+  export let menuList: IMenuItemProps[] | undefined      = undefined;
+  export let menuItemsList: IMenuItemProps[] | undefined = undefined;
+  export let data: Record<string, any>[] | undefined     = undefined;
   export let density: "none" | "tight" | "default" | "medium" | "kind" =    "tight";
   export let style: string | undefined = undefined;
   /** menu can have no border */

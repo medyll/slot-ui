@@ -11,7 +11,7 @@
   import Divider from "$lib/base/divider/Divider.svelte";
   import Icon from "$lib/base/icon/Icon.svelte";
   import { createEventForwarder } from "$lib/engine/engine.js";
-  import type { MenuItemProps, MenuProps } from "./types.js";
+  import type { IMenuItemProps, IMenuProps } from "./types.js";
   import type { ElementProps } from "$lib/types/index.js";
   import type { Writable } from "svelte/store";
 
@@ -24,13 +24,13 @@
 
   export let text: string | undefined = undefined;
   /** text props, shown on the right side of the menuItem*/
-  export let action: string | undefined = undefined;
-  export let icon: MenuItemProps["icon"] | undefined = undefined;
-  export let iconColor: string | undefined = undefined;
+  export let action: string | undefined                     = undefined;
+  export let icon: IMenuItemProps["icon"] | undefined       = undefined;
+  export let iconColor: string | undefined                  = undefined;
   export let iconSize: ElementProps["sizeType"] | undefined = "small";
-  export let divider: MenuItemProps["divider"] = false;
-  export let dividerBefore: MenuItemProps["divider"] = false;
-  export let data: Record<string, any> = { empty: "menu item data" };
+  export let divider: IMenuItemProps["divider"]             = false;
+  export let dividerBefore: IMenuItemProps["divider"]       = false;
+  export let data: Record<string, any>                      = { empty: "menu item data" };
   /** highlight menu item when selected*/
   export let selected: boolean | undefined = undefined;
   export let onMenuItemClick: Function = () => {};
@@ -38,7 +38,7 @@
   export let itemIndex: number;
 
   let mounted: boolean = false;
-  const menuStateContext = getContext<Writable<MenuProps>>("menuStateContext");
+  const menuStateContext = getContext<Writable<IMenuProps>>("menuStateContext");
 
   let instance = get_current_component();
 
