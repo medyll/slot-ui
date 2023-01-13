@@ -18,6 +18,8 @@
   const rowContext = getContext<Writable<RowType>>("dataListRow");
 
   export let element: HTMLElement | undefined = undefined;
+  let className = "";
+  export { className as class };
 
   export let style: string | undefined = undefined;
   /** if data has been provided, then cell got a fieldName and coumnId is defined */
@@ -168,7 +170,7 @@
     data-sortable={true}
     data-column-id={columnId}
     data-noWrap={noWrap}
-    class="dataListCell cellDimensions"
+    class="dataListCell cellDimensions {className}"
     use:useResizer
     on:resizer:start={resizeStart}
     on:resizer:resize={resizeOn}
@@ -204,7 +206,7 @@
     bind:this={element}
     data-column-id={columnId}
     data-noWrap={noWrap}
-    class="dataListCell cellDimensions"
+    class="dataListCell cellDimensions {className}"
     {style}
     {...$$restProps}
     style:width={$dataListContext.columns[field]?.width ?? minWidth}
