@@ -14,7 +14,7 @@
   /** data will be bound to the targeted panelSlide */
   export let data: any | undefined = undefined;
   /** data will be bound to the targeted panelSlide */
-  export let showNavigation:boolean = true;
+  export let showNavigation: boolean = true;
   export const actions = {
     load: (args: any) => {},
   };
@@ -23,16 +23,14 @@
   let panelSlideId = getContext<string>("PanelSlide");
   let panelerContext = getContext<PanelContextType>("Paneler");
 
-
   let currentIdx, hasNext, hasPrev;
 
   $: if ($panelerContext.panelSlides) {
     // console.log(Object.values($panelerContext.panelSlides));
     currentIdx = Object.keys($panelerContext.panelSlides).indexOf(panelSlideId);
     hasNext = Boolean(Object.keys($panelerContext.panelSlides)[currentIdx + 1]);
-    hasPrev = Boolean(Object.keys($panelerContext.panelSlides)[currentIdx - 1]); 
+    hasPrev = Boolean(Object.keys($panelerContext.panelSlides)[currentIdx - 1]);
   }
-
 
   onMount(() => {
     // console.log(Object.keys($panelerContext.panelSlides), panelSlideId);
@@ -52,19 +50,37 @@
   <div class="panelBar pos-sticky top-0 gap-small">
     <div style="flex:1">{title}</div>
     {#if hasPrev}
-      <Button
-        icon="chevron-left"
-        naked
-        on:click={() => {
-          prevNextPanel("prev");
-        }}></Button>
+      {#if $$slots.panelButtonPrevious}
+        <div
+          on:click={() => {
+            prevNextPanel("prev");
+          }}>
+          <slot name="panelButtonPrevious" />
+        </div>
+      {:else}
+        <Button
+          icon="chevron-left"
+          naked
+          on:click={() => {
+            prevNextPanel("prev");
+          }} />
+      {/if}
     {/if}
     {#if hasNext}
-      <Button
-        endIcon="chevron-right"
-        on:click={() => {
-          prevNextPanel("next");
-        }}>see all</Button>
+      {#if $$slots.panelButtonNext}
+        <div
+          on:click={() => {
+            prevNextPanel("next");
+          }}>
+          <slot name="panelButtonNext" />
+        </div>
+      {:else}
+        <Button
+          endIcon="chevron-right"
+          on:click={() => {
+            prevNextPanel("next");
+          }}>see all</Button>
+      {/if}
     {/if}
   </div>
   <div class="panelContent">

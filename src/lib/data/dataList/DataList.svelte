@@ -217,7 +217,7 @@
                 {fieldName}
                 {fieldValue}
                 slot="dataListCell" />
-              <svelte:fragment slot="groupTitleSlot" />
+              <slot slot="groupTitleSlot" />
             </svelte:self>
           {/if}
         </div>
