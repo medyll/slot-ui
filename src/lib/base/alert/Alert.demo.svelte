@@ -38,7 +38,7 @@ let code2 = `
 
 <ComponentExample
 	component="Alert"
-	cite="Then they were informeed, then they were messaged, then they were alerted. Br Jhons, 1752"
+	cite="Then they were informed, then they were messaged, then they were alerted. Br Jhons, 1752"
 >
 	<DemoPage title="Using slots" component="Alert" code={code1}>
 		<Demoer {parameters} {componentArgs} let:activeParams>

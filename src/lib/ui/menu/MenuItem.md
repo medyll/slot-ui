@@ -13,7 +13,7 @@ __propDef: {
         data?: Record<string, any> | undefined;
         /** highlight menu item when selected*/ selected?: boolean | undefined;
         onMenuItemClick?: Function | undefined;
-        /** position in the list */ itemIndex: number;
+        /** position in the list */ itemIndex?: number | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;

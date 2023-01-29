@@ -163,7 +163,7 @@ is a datalist table <br /> B. Franklin, 1854">
         <DataListHead slot="head">
           <DataListCell field="index" style="width:50px;">index</DataListCell>
           <DataListCell field="name" style="width:50px;">name</DataListCell>
-          <DataListCell field="lastName" style="width:100px"
+          <DataListCell noWrap={true} field="lastName" style="width:100px;overflow:hidden"
             >lastName 50%</DataListCell>
         </DataListHead>
         <DataListRow data={item}>

@@ -109,11 +109,13 @@
       class="nav flex-h pos-sticky pad flex-align-middle gap-small zI-10 w-full h-4 gap-medium">
       <Button
         on:click={onDrawerClick}
+        ratio="1/1" 
         icon="mdi:menu"
         bgTheme="primary"  />
-      <h3>SlotUi</h3>
+      <h3><a href="/">slotui</a></h3>
       <div class="flex-main" />
-      <a href="svelte-components">Components</a>
+      <!-- <a href="svelte-components">Components</a> -->
+      <a target="_blank" href="https://github.com/medyll/slot-ui">Github</a>
       <AutoComplete
         dataFieldName="code"
         placeholder="Search component"

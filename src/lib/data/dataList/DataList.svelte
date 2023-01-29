@@ -56,6 +56,8 @@
   export let activeCommonSortField: string = "";
   /** set noWrap = true to have ellipsis on all cells content*/
   export let noWrap: boolean = true;
+  /** set noWrap = true to have ellipsis on all header cells content*/
+  export let noWrapHeader: boolean = true;
   /** represents your data types used to display values */
   export let dataTypes: Record<string, any> | undefined = undefined;
   /** data to loop  trought */
@@ -65,7 +67,7 @@
   /** columns declaration */
   export let columns: Record<string, DataCellType> = {};
 
-  export let virtualizer: boolean = false;
+  export let virtualizer: boolean = false; /** @deprecated */
   export let isLoading: boolean = false;
 
   let hidedGroups: Data = {};

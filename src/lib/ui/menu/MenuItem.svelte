@@ -35,7 +35,7 @@
   export let selected: boolean | undefined = undefined;
   export let onMenuItemClick: Function = () => {};
   /** position in the list */
-  export let itemIndex: number;
+  export let itemIndex: number | undefined = undefined;
 
   let mounted: boolean = false;
   const menuStateContext = getContext<Writable<IMenuProps>>("menuStateContext");

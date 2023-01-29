@@ -16,12 +16,13 @@ declare const __propDef: {
         /** field value used for selection*/ selectorFieldValue?: any | undefined;
         /** binding, used when multiple buttons*/ activeCommonSortField?: string | undefined;
         /** set noWrap = true to have ellipsis on all cells content*/ noWrap?: boolean | undefined;
+        /** set noWrap = true to have ellipsis on all header cells content*/ noWrapHeader?: boolean | undefined;
         /** represents your data types used to display values */ dataTypes?: Record<string, any> | undefined;
         /** data to loop  trought */ data?: any[] | undefined;
         /** used only if data is provided */ idField?: string | undefined;
         /** columns declaration */ columns?: Record<string, DataCellType> | undefined;
         virtualizer?: boolean | undefined;
-        isLoading?: boolean | undefined;
+        /** @deprecated */ isLoading?: boolean | undefined;
         sortingIcons?: {
             default: string[];
             numeric: string[];
@@ -94,6 +95,9 @@ export default class DataList extends SvelteComponentTyped<DataListProps, DataLi
     get noWrap(): boolean | undefined;
     /**accessor*/
     set noWrap(_: boolean | undefined);
+    get noWrapHeader(): boolean | undefined;
+    /**accessor*/
+    set noWrapHeader(_: boolean | undefined);
     get dataTypes(): Record<string, any> | undefined;
     /**accessor*/
     set dataTypes(_: Record<string, any> | undefined);

@@ -35,7 +35,7 @@
 
   let colIndex: number;
 
-  let minWidth = "114px";
+  let minWidth = "80px";
 
   onMount(async () => {
     // if inHeader take the width from
