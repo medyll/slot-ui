@@ -3,6 +3,7 @@ __propDef: {
     props: {
         [x: string]: any;
         element?: HTMLElement | undefined;
+        class?: string | undefined;
         style?: string | undefined;
         field?: string | undefined;
         fieldType?: string | undefined;

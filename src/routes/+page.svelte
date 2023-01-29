@@ -50,7 +50,7 @@
 		<h4 class="pad-4">Slotted {null_to_empty(group)}</h4>
 		<div class="flex-h flex-wrap flex-align-middle gap-large">
 			{#each groupedData[group] as catalog}
-				<div   class="w-large h-medium border">
+				<div   class="w-large h-medium shad-3 radius-small">
 					{null_to_empty(catalog?.name)}
 				</div>
 			{/each}

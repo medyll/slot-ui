@@ -1,5 +1,5 @@
 ```import { SvelteComponentTyped } from "svelte";
-import type { DataCellType, groupByOptions } from './types.js';
+import type { DataCellType, groupByOptions } from "./types.js";
 declare const __propDef: {
     props: {
         class?: string | undefined;
@@ -11,6 +11,7 @@ declare const __propDef: {
         /** order on which the sorted list is sorted */ sortByOrder?: string | undefined;
         /** group field on which data will be grouped, can use dot notation as dot path */ groupByField?: string | string[] | undefined;
         /** options used when props.groupByField is defined */ groupByOptions?: groupByOptions | undefined;
+        fieldValue: any;
         /** field used for selection*/ selectorField?: string | undefined;
         /** field value used for selection*/ selectorFieldValue?: any | undefined;
         /** binding, used when multiple buttons*/ activeCommonSortField?: string | undefined;
@@ -33,10 +34,17 @@ declare const __propDef: {
         groupTitleSlot: {
             item: any;
         };
-        head: {};
+        dataListCell: {
+            fieldName: string;
+            fieldType: string | undefined;
+            fieldRawValue: string;
+            fieldValue: string;
+        };
         default: {
+            rawData: any;
             item: any;
         };
+        head: {};
         dataListFooter: {};
     };
 };
@@ -71,6 +79,9 @@ export default class DataList extends SvelteComponentTyped<DataListProps, DataLi
     get groupByOptions(): groupByOptions | undefined;
     /**accessor*/
     set groupByOptions(_: groupByOptions | undefined);
+    get fieldValue(): any;
+    /**accessor*/
+    set fieldValue(_: any);
     get selectorField(): string | undefined;
     /**accessor*/
     set selectorField(_: string | undefined);

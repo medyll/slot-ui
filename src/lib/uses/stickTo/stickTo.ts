@@ -27,16 +27,16 @@ export function stickTo(node: HTMLElement, props: StickToProps) {
     const nodePos = node.getBoundingClientRect();
     const parentPos = parentNode.getBoundingClientRect();
     let newPos: string = position;
-
-    if (parentPos.top + nodePos.height > document.body.offsetHeight) {
+  
+    if (  nodePos.height > document.body.offsetHeight) {
       newPos = position.replace('B', 'T')
     } else if (parentPos.top + nodePos.height < document.body.offsetHeight) {
       newPos = position.replace('T', 'B')
     }
-    if (parentPos.right + nodePos.width > document.body.offsetWidth) {
-      newPos = position.replace('R', 'L')
-    } else if (parentPos.right + nodePos.width < document.body.offsetWidth) {
-      newPos = position.replace('L', 'R')
+    if (  nodePos.right > document.body.offsetWidth) {
+       newPos = position.replace('R', 'L')
+    } else if (  nodePos.left < 0) {
+       newPos = position.replace('L', 'R')
     }
 
     return newPos
@@ -61,8 +61,7 @@ export function stickTo(node: HTMLElement, props: StickToProps) {
     node.style.bottom = '';
     node.style.top = '';
 
-    if(stickToHookWidth) node.style.minWidth = String(parentPos.width)+'px'
-
+    if(stickToHookWidth) node.style.minWidth = String(parentPos.width)+'px' 
 
     if (newPosition.includes('B')) {
       node.style.bottom = '';
@@ -72,7 +71,7 @@ export function stickTo(node: HTMLElement, props: StickToProps) {
       node.style.bottom = '';
       node.style.top = String(parentPos.top - node.offsetHeight) + 'px';
     }
-    if (newPosition.includes('L')) {
+    if (newPosition.includes('L')) { 
       node.style.left = String(parentPos.left) + 'px';
     }
     if (newPosition.includes('R')) {

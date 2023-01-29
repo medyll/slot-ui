@@ -2,6 +2,6 @@
 import Popper from "./Popper.svelte";
 export * from "./Popper.svelte";
 export {Popper};
-import usePopper from "./usePopper.svelte";
-export * from "./usePopper.svelte";
-export {usePopper};
+import {popper} from "./usePopper.js";
+export * from "./usePopper.js";
+export {popper};
