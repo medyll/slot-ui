@@ -28,7 +28,7 @@
 
 <ComponentExample
 	component="Progress"
-	cite="You'll never know that you've got a score, unless come the day when you see the other's ones.<br/> S. Roch, 1824"
+	cite="You'll never know that you've got a score, unless comes the day when you see the other's ones.<br/> S. Roch, 1824"
 >
 	<div class="flex-v gap-large">
 		<DemoPage title="Using slots" component="Progress" code={ww}>

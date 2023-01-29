@@ -1,11 +1,15 @@
 <script lang="ts">
   import { componentReadMe } from "$sitedata/api/indexApi.js";
   import { slotuiCatalog } from "$lib/slotuiCatalog.js";
-  import {sitePaths} from "$lib/engine/site.utils.js";
+  import { sitePaths } from "$lib/engine/site.utils.js";
+  import { componentCite } from "$lib/componentCite.js";
   export let component: string = "";
-  export let cite: string = "";
+  export let cite: string = componentCite?.[component] ?? "";
 
   $: finalCompReadMe = componentReadMe?.[component.toLowerCase()];
+
+  $: citation = componentCite?.[component.toLowerCase()]?.cite ?? "";
+  $: author = componentCite?.[component.toLowerCase()]?.author ?? "";
 
   const compDet = Object.values(slotuiCatalog).find(
     (x) => x.name === component
@@ -17,7 +21,7 @@
     <h4>{`<${component} />`}</h4>
     <span>{compDet?.group}/{compDet?.code}.svelte</span>
   </div>
-  <cite><p>{@html cite}</p></cite>
+  <cite><p>"{@html citation}"<br />{@html author}</p></cite>
   {#if $$slots.default}
     <div class="flex-v gap-medium ">
       <h5>Component {component} examples :</h5>
@@ -27,13 +31,14 @@
   <div class="flex-v gap-medium ">
     <h5>Api preview :</h5>
     <div class="marg-l-4">
-      <pre class="language-ts"><code><svelte:component this={finalCompReadMe} /></code></pre>
+      <pre class="language-ts"><code
+          ><svelte:component this={finalCompReadMe} /></code></pre>
     </div>
   </div>
   <div class="flex-v gap-medium ">
     <h5>Link to api :</h5>
     <div class="marg-l-4">
-      <a href="{sitePaths.api({code:component.toLowerCase()})}"
+      <a href={sitePaths.api({ code: component.toLowerCase() })}
         >Api for component "{component}"</a>
     </div>
   </div>

@@ -39,7 +39,7 @@
 
 <ComponentExample
 	component="Rating"
-	cite="You'll never know that you've got a score, unless come the day when you see the other's ones.<br/> S. Roch, 1824"
+	cite="First they tell you that it's just about stars.<br/>And then you'll be starred<br/> Amal. Creed, 1824"
 >
 	<div class="flex-v gap-large">
 		<DemoPage title="Using slots" component="Rating" code={ww}>

@@ -40,6 +40,7 @@
 
 <ComponentExample 
 component="Stepper"
+cite="If a step was a leap it would soar over the next step.<br /> Clara Boxee 2010"
 >
 
 </ComponentExample>
