@@ -33,8 +33,8 @@
 							<svelte:component this={filterList(component.code).component} />
 						{/if}
 						<div class="flex-h flex-wrap gap-small">
-							<div class="flex-main"><a  rel="external" href="{sitePaths.component(component)}">{component.name} examples</a></div>
-							<div class="flex-main"><a rel="external" href="{sitePaths.api(component)}">{component.name} api</a></div>
+							<div class="flex-main"><a   href="{sitePaths.component(component)}">{component.name} examples</a></div>
+							<div class="flex-main"><a   href="{sitePaths.api(component)}">{component.name} api</a></div>
 						</div>
 					</Paper>
 				{/each}

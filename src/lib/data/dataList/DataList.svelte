@@ -208,7 +208,16 @@
         <div class="flex-main pos-rel" use:forwardEvents>
           {#if !hidedGroups[red]}
             <svelte:self {...groupProps}>
-              <svelte:fragment slot="groupTitleSlot" />
+              <slot
+                name="dataListCell"
+                let:fieldType
+                let:fieldName
+                let:fieldValue
+                {fieldType}
+                {fieldName}
+                {fieldValue}
+                slot="dataListCell" />
+              <slot slot="groupTitleSlot" />
             </svelte:self>
           {/if}
         </div>
@@ -242,22 +251,24 @@
                 {#each Object.keys($dataListContext.columns) as inItem}
                   <slot
                     name="dataListCell"
-                    fieldName={$dataListContext.columns[inItem].field}
+                    fieldName={$dataListContext.columns[inItem]?.field}
+                    fieldType={$dataListContext.columns[inItem]?.fieldType}
                     fieldRawValue={sanitizeHtml(
                       checkGetter({ ...$dataListContext.columns }, inItem, item)
-                    )} 
+                    )}
                     fieldValue={sanitizeHtml(
                       checkGetter({ ...$dataListContext.columns }, inItem, item)
                     )} />
                 {/each}
               {:else}
-                {#each Object.keys(item) as inItem}123
+                {#each Object.keys(item) as inItem}
                   <slot
                     name="dataListCell"
-                    fieldName="{$dataListContext.columns[inItem].field}}"
+                    fieldName="{$dataListContext.columns[inItem]?.field}}"
+                    fieldType={$dataListContext.columns[inItem]?.fieldType}
                     fieldRawValue={sanitizeHtml(
                       checkGetter({ ...$dataListContext.columns }, inItem, item)
-                    )} 
+                    )}
                     fieldValue={sanitizeHtml(
                       checkGetter({ ...$dataListContext.columns }, inItem, item)
                     )} />

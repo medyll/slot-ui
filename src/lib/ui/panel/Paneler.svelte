@@ -1,4 +1,3 @@
-
 <script lang="ts">
   import { fade, slide } from "svelte/transition";
 
@@ -11,19 +10,18 @@
   export { className as class };
   export let element: HTMLInputElement | null = null;
   export let style: string = "";
+  export let dd: string = "";
   /*  end slotUi exports*/
-
-  const panelerStore: PanelContextType = writable({
+  export const panelerStore: PanelContextType = writable({
     activePanelId: undefined,
     activePanelSlideData: {},
-    panelSlides: {},  
+    panelSlides: {},
     panels: {},
   });
+
   setContext<PanelContextType>("Paneler", panelerStore);
 
-
-  function toggleSlidePanels(event) {
-  }
+  function toggleSlidePanels(event) {}
 </script>
 
 <div

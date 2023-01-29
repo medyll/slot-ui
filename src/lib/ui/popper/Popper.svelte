@@ -150,11 +150,12 @@
   .popper {
     border-radius: var(--css-popper-radius, var(--radius-tiny));
     overflow: hidden;
-    position: absolute;
+    position: fixed;
     box-shadow: var(--box-shad-4);
     background-color: var(--theme-color-background-alpha);
     backdrop-filter: blur(30px);
     display: inline-block;
     top: 0;
+    z-index: 30000;
   }
 </style>

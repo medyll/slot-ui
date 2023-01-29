@@ -13,6 +13,8 @@ __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
+        panelButtonPrevious: {};
+        panelButtonNext: {};
         default: {
             panelId: string;
             actions: {
