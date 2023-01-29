@@ -5,6 +5,12 @@ export const componentCite:  Record<string,any> = {
     cite: "Then they were informed, then they were messaged, then they were alerted.",
     author: "Br Jhons, 1752",
   },
+  autocomplete: {
+    component: "AutoComplete",
+    componentCode: "autocomplete",
+    cite: "The art of guessing what you're going to say before you say it.",
+    author: "E. Guessed, 1690",
+  },
   avatar: {
     component: "Avatar",
     componentCode: "avatar",
@@ -82,16 +88,10 @@ export const componentCite:  Record<string,any> = {
     componentCode: "slider",
     cite: "Adjusting the flow, one step at a time",
     author: "L. Slider, 2010",
-  },
-  autoComplete: {
-    component: "AutoComplete",
-    componentCode: "autoComplete",
-    cite: "Completing the journey together, hand in hand with Autocomplete.",
-    author: "J. Keats, 1820",
-  },
-  dataList: {
+  }, 
+  datalist: {
     component: "DataList",
-    componentCode: "dataList",
+    componentCode: "datalist",
     cite: "Those who call them tables are the same who name stones as chairs. Reality is above : datalist is a datalist table .",
     author: "A. Einstein, 1879",
   },

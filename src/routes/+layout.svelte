@@ -114,8 +114,8 @@
         bgTheme="primary"  />
       <h3><a href="/">slotui</a></h3>
       <div class="flex-main" />
-      <a href="svelte-components">Components</a>
-      <a href="https://github.com/medyll/slot-ui">Github</a>
+      <!-- <a href="svelte-components">Components</a> -->
+      <a target="_blank" href="https://github.com/medyll/slot-ui">Github</a>
       <AutoComplete
         dataFieldName="code"
         placeholder="Search component"

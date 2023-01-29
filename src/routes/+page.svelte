@@ -8,6 +8,7 @@
   import { sitePaths } from "$lib/engine/site.utils.js";
   import Menu from "$lib/ui/menu/Menu.svelte";
   import MenuItem from "$lib/ui/menu/MenuItem.svelte";
+  import { componentCite } from "$lib/componentCite.js";
 
   let uiContext = getContext<Writable<UiContextType>>("uiContext");
 
@@ -23,23 +24,27 @@
 
 <div class="overflow-auto flex-v gap-large flex-align-middle-center">
   <div class="block h-full flex-v gap-large pad-t-10">
-    <div><h1 class="text-bold">slot.ui</h1><h5 class="text-bold">@medyll</h5></div>
+    <div>
+      <h1 class="text-bold">slot.ui</h1>
+      <h5 class="text-bold">@medyll</h5>
+    </div>
     <div class="w-full">
       <div class="text-full">
-		A simplistic library created just to learn some facts about svelte and svelteKit<br /><br />
-		- Very fast learning curve<br />
-		- Component generation and packaging for distribution<br />
-		- Site building and high routing capacities from SvelteKit<br />
-		<br />
-		And from what i've learned, yes, Svelte is great !<br /><br />
-		(Free to not be used)<br />
-		(Some components do work)<br />
+        A simplistic library created just to learn some facts about svelte and
+        svelteKit<br /><br />
+        - Very fast learning curve<br />
+        - Component generation and packaging for distribution<br />
+        - Site building and high routing capacities from SvelteKit<br />
+        <br />
+        And from what i've learned, yes, Svelte is great !<br /><br />
+        (Free to not be used)<br />
+        (Some components do work)<br />
       </div>
     </div>
     <div class="w-full">
       <div class="flex-h gap-large">
         <div class="w-large">
-          <br /> 
+          <br />
         </div>
         <!-- <div class="border radius-small">re</div> -->
       </div>
@@ -47,21 +52,26 @@
   </div>
   {#each Object.keys(groupedData) as group}
     <div class="block">
-      <h4 class="pad-4">
-	  Slotted {null_to_empty(group)}</h4>
+      <h4 class="pad-4 text-bold">
+        slotted {null_to_empty(group)}
+      </h4>
       <div class="flex-h flex-wrap flex-align-middle gap-large">
         {#each groupedData[group] as catalog}
           <div class="w-large   shad-3 radius-small">
-		  <div class="pad">		  
-		  <div class="pad border-b">			  
-            <h5>{null_to_empty(catalog?.code)}</h5>
-		  </div>
-
-		  </div>
-			<Menu style="width:100%;">
-				<MenuItem><a href={sitePaths.component(catalog)}>{catalog.name} examples</a></MenuItem>
-				<MenuItem><a href={sitePaths.api(catalog)}>{catalog.name} api</a></MenuItem>
-			</Menu>             
+            <div class="pad">
+              <div class="pad border-b">
+                <h5 title="{componentCite?.[catalog?.code]?.cite}">{null_to_empty(catalog?.code)}</h5>
+              </div>
+            </div>
+            <Menu style="width:100%;">
+              <MenuItem
+                ><a href={sitePaths.component(catalog)}
+                  >{catalog.name} examples</a
+                ></MenuItem>
+              <MenuItem
+                ><a href={sitePaths.api(catalog)}>{catalog.name} api</a
+                ></MenuItem>
+            </Menu>
           </div>
         {/each}
       </div>
