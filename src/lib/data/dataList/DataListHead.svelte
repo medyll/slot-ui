@@ -61,7 +61,10 @@
 	<slot>
 		{#if $dataListContext.hasColumnsProps}
 			{#each Object.values($dataListContext.columns) as column}
-				<DataListCell field={column.field}>{column.fieldTitle ?? column.field}</DataListCell>
+				<DataListCell noWrap={true}  
+				field={column.field}>
+				{column.fieldTitle ?? column.field}
+				</DataListCell>
 			{/each}
 		{/if}
 	</slot>
