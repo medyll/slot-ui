@@ -21,6 +21,8 @@
   import { sitePaths } from "$lib/engine/site.utils.js";
   // from +layout.server
   export let data = {};
+  // from +layout.ts
+  export let params = {};
  
 
   let store = writable<UiContextType>({
@@ -53,6 +55,7 @@
       }
     });
   });
+
 </script>
 
 <svelte:head>
@@ -101,7 +104,7 @@
     isOpen={$uiContext.drawerOpen}
     primary="Menu"
     hideCloseIcon={$uiContext.drawerFlow !== "fixed"}>
-    <LeftMenu />
+    <LeftMenu selected={data?.params?.component} />
   </Drawer>
   <div id="contentSlide" bind:this={contentSlide}>
     <nav
