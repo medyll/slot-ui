@@ -9,14 +9,7 @@
 	/* demo */
 
 	let parametersSlot: any = {
-		position: {
-			type: 'position-preset',
-			values: ['top', 'bottom', 'left', 'right']
-		},
-		showChip: {
-			type: 'boolean',
-			values: [true, false]
-		}
+		
 	};
 
 	let parametersProps: any = {
@@ -80,12 +73,14 @@ let codeSlot = `
 	size="large">
 		Would you please click once ?
 	</Button>
-	<Button focus type="submit" size="medium">confirm</Button>
+	<Button focus type="submit" size="medium">
+		Confirm
+	</Button>
 </Confirm>`;
 
 let codeProps = `
 <Confirm
-	primary="confirm deletion" />`;
+  primary="confirm deletion" />`;
 </script>
 
 <ComponentExample
