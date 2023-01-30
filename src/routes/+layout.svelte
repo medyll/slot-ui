@@ -59,7 +59,8 @@
 </script>
 
 <svelte:head>
-  <title>SlotUi</title>
+  <title>slotui svelte component library</title>
+  <meta name="description"  content="SlotUi is a svelte component library built around a slotted life style" />
   <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet" />
   <script>
     /* hack for legacy node app */
