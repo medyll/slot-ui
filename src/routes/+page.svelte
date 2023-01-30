@@ -21,7 +21,9 @@
     "group"
   );
 </script>
-
+<svelte:head>
+<meta name="description"  content="SlotUi is a svelte component library built around a slotted life style" />
+</svelte:head>
 <div class="overflow-auto flex-v gap-large flex-align-middle-center">
   <div class="block h-full flex-v gap-large pad-t-10">
     <div>

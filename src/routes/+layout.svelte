@@ -16,14 +16,13 @@
   import type { Writable } from "svelte/store";
   import type { UiContextType } from "$contexts/ui.context.js";
   import { onMount } from "svelte";
-  import AutoComplete from "$lib/data/autocomplete/AutoComplete.svelte"; 
+  import AutoComplete from "$lib/data/autocomplete/AutoComplete.svelte";
   import { goto } from "$app/navigation";
   import { sitePaths } from "$lib/engine/site.utils.js";
   // from +layout.server
   export let data = {};
   // from +layout.ts
   export let params = {};
- 
 
   let store = writable<UiContextType>({
     drawerFlow: "fixed",
@@ -55,11 +54,13 @@
       }
     });
   });
-
 </script>
 
 <svelte:head>
-  <title>SlotUi</title>
+  <title>slotui svelte component library</title>
+  <meta
+    name="description"
+    content="SlotUi is a svelte component library built around a slotted life style" />
   <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet" />
   <script>
     /* hack for legacy node app */
@@ -112,9 +113,9 @@
       class="nav flex-h pos-sticky pad flex-align-middle gap-small zI-10 w-full h-4 gap-medium">
       <Button
         on:click={onDrawerClick}
-        ratio="1/1" 
+        ratio="1/1"
         icon="mdi:menu"
-        bgTheme="primary"  />
+        bgTheme="primary" />
       <h3><a href="/">slotui</a></h3>
       <div class="flex-main" />
       <!-- <a href="svelte-components">Components</a> -->
@@ -122,11 +123,9 @@
       <AutoComplete
         dataFieldName="code"
         placeholder="Search component"
-        onPick={(args)=>goto(sitePaths.component(args))}
-        data={Object.values(data.slotuiCatalog ?? {})} />
-      <ThemeSwitcher 
-        icon="mdi:paint-outline"
-        title="toggle theme" />
+        onPick={(args) => goto(sitePaths.component(args))}
+        data={Object.values(data?.data?.slotuiCatalog ?? {})} />
+      <ThemeSwitcher icon="mdi:paint-outline" title="toggle theme" />
     </nav>
     <div id="innerSlide" bind:this={innerSlide} class="zI-0"><slot /></div>
   </div>

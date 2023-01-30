@@ -23,18 +23,7 @@
 
   const highlighted = Prism.highlight(code, Prism.languages.svelte, "svelte");
 </script>
-<svelte:head>
-<!-- <script>
-    Prism.plugins.NormalizeWhitespace.setDefaults({
-    "remove-trailing": true,
-    "remove-indent": true,
-    "left-trim": false,
-    "right-trim": false,
-    "break-lines": 80, 
-    "remove-initial-line-feed": true, 
-  });
-</script> -->
-</svelte:head>
+
 <div>
   {#if code || $$slots.code}
     <h6 class="border-b w-medium pad flex-h flex-align-middle gap-small">

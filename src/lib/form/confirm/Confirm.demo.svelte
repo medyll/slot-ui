@@ -9,14 +9,7 @@
 	/* demo */
 
 	let parametersSlot: any = {
-		position: {
-			type: 'position-preset',
-			values: ['top', 'bottom', 'left', 'right']
-		},
-		showChip: {
-			type: 'boolean',
-			values: [true, false]
-		}
+		
 	};
 
 	let parametersProps: any = {
@@ -72,19 +65,22 @@
 		iconSize: parametersProps.iconSize.values[0],
 	};
 
-	let codeSlot = `
-	<Confirm>
-		<Button  
-			slot="initial" 
-			icon="fa-solid:question" 
-			size="large">Would you please click once ?
-		</Button>
-		<Button focus type="submit" size="medium">confirm</Button>
-	</Confirm>`;
+let codeSlot = `
+<Confirm>
+	<Button  
+	slot="initial" 
+	icon="fa-solid:question" 
+	size="large">
+		Would you please click once ?
+	</Button>
+	<Button focus type="submit" size="medium">
+		Confirm
+	</Button>
+</Confirm>`;
 
-	let codeProps = `
-	<Confirm
-		primary="confirm deletion" />`;
+let codeProps = `
+<Confirm
+  primary="confirm deletion" />`;
 </script>
 
 <ComponentExample
