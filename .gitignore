@@ -85,5 +85,5 @@ dist/
 /.vitebook/
 
 # svelte
-.svelte-kit/
+.svelte-kit/ 
 package/
