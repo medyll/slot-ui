@@ -12,6 +12,7 @@
 
   let uiContext = getContext<Writable<UiContextType>>("uiContext");
 
+  let svelteLink = "";
   //
   $uiContext.drawerFlow = "fixed";
   $uiContext.drawerOpen = false;
@@ -21,8 +22,11 @@
     "group"
   );
 </script>
+
 <svelte:head>
-<meta name="description"  content="SlotUi is a svelte component library built around a slotted life style" />
+  <meta
+    name="description"
+    content="SlotUi is a svelte component library built around a slotted life style" />
 </svelte:head>
 <div class="overflow-auto flex-v gap-large flex-align-middle-center">
   <div class="block h-full flex-v gap-large pad-t-10">
@@ -62,7 +66,9 @@
           <div class="w-large   shad-3 radius-small">
             <div class="pad">
               <div class="pad border-b">
-                <h5 title="{componentCite?.[catalog?.code]?.cite}">{null_to_empty(catalog?.code)}</h5>
+                <h5 title={componentCite?.[catalog?.code]?.cite}>
+                  {null_to_empty(catalog?.code)}
+                </h5>
               </div>
             </div>
             <Menu style="width:100%;">
@@ -79,6 +85,33 @@
       </div>
     </div>
   {/each}
+  <div class="block">
+    <h5 class="pad-4 text-bold">The why</h5>
+    <p>
+      During a period where I had to focus on frontend technologies, I had the
+      opportunity to discover <a class="text-bold" target="_blank" href={svelteLink}>Svelte</a
+      >.<br />
+      If the primary goal was to finally find an alternative to React, the road was
+      long and dotted with notable encounters: NextJs, Vue, Solid, a reconsideration
+      of Angular ...
+      <br />If satisfaction was present at each visit, there remained a hurdle:
+      the constant departure from the root technologies of html and css, and the
+      exaggerated deviation of javascript, used as a proxy for everything.
+      <br />With <a class="text-bold" target="_blank" href={svelteLink}>Svelte</a>, my first
+      thought was: <strong>HTML is back!</strong>
+      <br />To see if I could carry out my next back-office type project using
+      <a  class="text-bold" target="_blank" href={svelteLink}>Svelte</a>, I therefore tested it
+      under all its seams, or at least those I knew were visible, and coded for
+      this a small library of components (one more) with its little site that
+      goes well.<br />From ssr, routes, a master component type storybook, a
+      theme, a self-made utility-css class.<br />Simple, This result of 3 weeks
+      of learning confirmed one thing: <br />Current technologies have altered
+      our productivity for the benefit of a certain form of tranquility, and if
+      normally iterations depart from the original model, here they return with
+      great strides!
+    </p>
+    <h5 class="pad-4"><a href="./about">@Medyll</a></h5>
+  </div>
 </div>
 
 <style global lang="scss">

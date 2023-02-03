@@ -127,7 +127,9 @@
         data={Object.values(data?.data?.slotuiCatalog ?? {})} />
       <ThemeSwitcher icon="mdi:paint-outline" title="toggle theme" />
     </nav>
-    <div id="innerSlide" bind:this={innerSlide} class="zI-0"><slot /></div>
+    <div id="innerSlide" bind:this={innerSlide} class="zI-0">
+      <slot />
+    </div>
   </div>
 </div>
 
