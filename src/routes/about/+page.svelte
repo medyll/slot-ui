@@ -1,6 +1,4 @@
-<script lang="ts">
-	import { javascript } from 'highlight.js/lib/languages/javascript';
-  import { defaultsArgs } from "$lib/base/demoer/demoer.utils.js";
+<script lang="ts">  
   import type { PageData } from "./$types";
 
   export let data: PageData;
