@@ -110,7 +110,7 @@
       normally iterations depart from the original model, here they return with
       great strides!
     </p>
-    <h5 class="pad-4">@Medyll</h5>
+    <h5 class="pad-4"><a href="./about">@Medyll</a></h5>
   </div>
 </div>
 
