@@ -10,16 +10,19 @@ export { matchers } from './client-matchers.js';
 	() => import('./nodes/7'),
 	() => import('./nodes/8'),
 	() => import('./nodes/9'),
-	() => import('./nodes/10')];
+	() => import('./nodes/10'),
+	() => import('./nodes/11'),
+	() => import('./nodes/12')];
 
 			export const server_loads = [0];
 
 			export const dictionary = {
-	"": [6],
-	"about": [7,[2]],
-	"svelte-components": [8,[3]],
-	"svelte-components/[component]": [9,[3,4]],
-	"svelte-components/[component]/api": [10,[3,4,5]]
+	"": [7],
+	"about": [8,[2]],
+	"svelte-components": [10,[4]],
+	"slots/[slot]": [9,[3]],
+	"svelte-components/[component]": [11,[4,5]],
+	"svelte-components/[component]/api": [12,[4,5,6]]
 };
 
 			export const hooks = {

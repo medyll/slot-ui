@@ -85,7 +85,7 @@
 {/if}
 <li
   class="menuItem {className}"
-  data-selected={$menuStateContext.selectedIndex === itemIndex || undefined}
+  data-selected={($menuStateContext.selectedIndex ? $menuStateContext.selectedIndex === itemIndex : undefined) ?? undefined}
   role="menuitem"
   bind:this={element}
   use:forwardEvents
