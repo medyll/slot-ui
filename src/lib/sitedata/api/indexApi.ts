@@ -62,7 +62,6 @@ import PanelerReadMe from "$lib/ui/panel/Paneler.md";
 import PanelGridReadMe from "$lib/ui/panel/PanelGrid.md";
 import PanelSlideReadMe from "$lib/ui/panel/PanelSlide.md";
 import PopperReadMe from "$lib/ui/popper/Popper.md";
-import usePopperReadMe from "$lib/ui/popper/usePopper.md";
 import ServiceBoxReadMe from "$lib/ui/serviceBox/ServiceBox.md";
 import StarterReadMe from "$lib/ui/starter/Starter.md";
 import StartMenuReadMe from "$lib/ui/startMenu/StartMenu.md";
@@ -140,7 +139,6 @@ paneler:PanelerReadMe,
 panelgrid:PanelGridReadMe,
 panelslide:PanelSlideReadMe,
 popper:PopperReadMe,
-usepopper:usePopperReadMe,
 servicebox:ServiceBoxReadMe,
 starter:StarterReadMe,
 startmenu:StartMenuReadMe,
