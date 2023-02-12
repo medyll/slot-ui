@@ -49,7 +49,13 @@
           </slot>
         </div>
       {:else}
-        <slot />
+        <div
+          class="backdropContentInner"
+          on:click={(event) => {
+            event.stopPropagation();
+          }}>
+          <slot />
+        </div>
       {/if}
     </div>
   </div>
@@ -74,6 +80,11 @@
         var(--theme-color-foreground-alpha-high)
       );
       backdrop-filter: blur(5px);
+      display: flex;
+	  align-items: center ;
+	  justify-content: center;
+      .backdropContentInner { 
+      }
     }
   }
 </style>

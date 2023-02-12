@@ -152,7 +152,7 @@
   flow="fixed"
   on:click={() => {}}>
   <div class="flex-h flex-align-middle-center h-full">
-    <div class="radius-tiny h-large">
+    <div class="radius-tiny">
       <PreviewComponent componentCode={backdropComponentCode} />
     </div>
   </div>
@@ -169,7 +169,7 @@
 
   .prevLink {
     cursor: pointer;
-    color: var(--theme-color-default);
+    color: var(--theme-color-primary-alpha-low);
     &:hover {
       color: var(--theme-color-primary);
     }
