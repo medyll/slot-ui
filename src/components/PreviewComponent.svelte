@@ -23,14 +23,15 @@
 </script>
 
 {#if componentCode && component}
-  <Paper density="kind" class="flex-v gap-small  shad-3"  style="min-width:350px;">
+  <Paper
+    density="kind"
+    class="flex-v gap-small  shad-3"
+    style="min-width:350px;">
     <div class="flex-h flex-align-middle gap-small">
       <h4 class="  text-bold">
         {component?.code}
       </h4>
-      <h5 class="  text-bold theme-color-foreground-alpha">
-        slotui
-      </h5>
+      <h5 class="  text-bold theme-color-foreground-alpha">slotui</h5>
     </div>
     <div class="flex-h   gap-small flex-align-middle">
       <div class="pad">
@@ -38,8 +39,12 @@
       </div>
       <div class="pad">
         <p>
-          "{componentCite?.[component?.code]?.cite}""<br />
-          <cite>{componentCite?.[component?.code]?.author}</cite>
+          {#if componentCite?.[component?.code]?.cite}
+            "{componentCite?.[component?.code]?.cite}"<br />
+          {/if}
+          {#if componentCite?.[component?.code]?.author}
+            <cite>{componentCite?.[component?.code]?.author}</cite>
+          {/if}
         </p>
       </div>
     </div>
