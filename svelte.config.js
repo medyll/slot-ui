@@ -14,17 +14,17 @@ function filterExport(filepath) {
 		'*preview.svelte',
 		// '*sitedata*',
 		'*.md',
-		//'*Example.svelte',
+		'*Example.svelte',
 		'*indexApi*',
 		'*Readme*',
 	])
 }
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	/* package: {
+	package: {
 		exports: (filepath) => filterExport(filepath),
 		files: (filepath) => filterExport(filepath),
-	}, */
+	},
 	preprocess: [
 		preprocess(),
 		mdsvex({
