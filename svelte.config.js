@@ -21,10 +21,10 @@ function filterExport(filepath) {
 }
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	package: {
+	/* package: {
 		exports: (filepath) => filterExport(filepath),
 		files: (filepath) => filterExport(filepath),
-	},
+	}, */
 	preprocess: [
 		preprocess(),
 		mdsvex({

@@ -32,26 +32,29 @@
     "@sveltejs/svelte-virtual-list": "^3.0.1",
     "@sveltestack/svelte-query": "^1.6.0",
     "d3": "^7.4.4",
+    "fs-extra": "^11.1.1",
     "iconify-icon": "^1.0.0",
     "lodash": "^4.17.21",
+    "micromatch": "^4.0.5",
     "postcss-load-config": "^4.0.1",
     "prismjs": "^1.29.0",
     "sanitize-html": "^2.7.2",
     "svelte-markdown": "^0.2.2",
     "svelte-spa-router": "^3.2.0",
     "svelte-use-form": "^2.4.3",
-    "svelte2tsx": "^0.5.11"
+    "svelte2tsx": "^0.5.11",
+    "ts-node": "^10.9.1"
   },
   "devDependencies": {
     "@babel/core": "^7.17.2",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-typescript": "^7.16.7",
-    "@sveltejs/kit": "^1.8.5",
-    "@sveltejs/package": "^2.0.2",
     "@sveltejs/adapter-auto": "next",
     "@sveltejs/adapter-node": "next",
     "@sveltejs/adapter-static": "next",
     "@sveltejs/adapter-vercel": "next",
+    "@sveltejs/kit": "next",
+    "@sveltejs/package": "next",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/svelte": "^3.1.0",
     "@testing-library/user-event": "^14.0.4",
@@ -78,5 +81,11 @@
     "tslib": "^2.3.1",
     "typescript": "^4.7.4",
     "vite": "^4.1.4"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "svelte": "./dist/index.js"
+    }
   }
 }

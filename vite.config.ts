@@ -27,7 +27,6 @@ const config = {
 	package: {
 		dir: 'package',
 		emitTypes: true,
-		//exports: (filepath) => true,	
 	},
 	external:['@sveltejs/kit/install-fetch'],
 };

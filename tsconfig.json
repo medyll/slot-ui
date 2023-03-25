@@ -12,18 +12,18 @@
 		"strict": true,
 		"moduleResolution": "NodeNext",
 		"paths": {
-			"$lib": ["src/lib"],
-			"$lib/*": ["src/lib/*"],
-			"$sitedata": ["src/lib/sitedata"],
-			"$sitedata/*": ["src/lib/sitedata/*"],
-			"$engine": ["src/engine"],
-			"$engine/*": ["src/engine/*"],
-			"$scripts": ["src/scripts"],
-			"$scripts/*": ["src/scripts/*"],
-			"$typings": ["src/lib/types"],
-			"$typings/*": ["src/lib/types/*"],
-			"$components": ["src/components"],
-			"$components/*": ["src/components/*"]
+			"$lib": ["./src/lib"],
+			"$lib/*": ["./src/lib/*"],
+			"$sitedata": ["./src/lib/sitedata"],
+			"$sitedata/*": ["./src/lib/sitedata/*"],
+			"$engine": ["./src/engine"],
+			"$engine/*": ["./src/engine/*"],
+			"$scripts": ["./src/scripts"],
+			"$scripts/*": ["./src/scripts/*"],
+			"$typings": ["./src/lib/types"],
+			"$typings/*": ["./src/lib/types/*"],
+			"$components": ["./src/components"],
+			"$components/*": ["./src/components/*"]
 		}
 	}
 }

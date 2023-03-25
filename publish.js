@@ -32,6 +32,9 @@ var run = function (cmd) {
     }); 
   };
 
+
+
+
 switch (command) {
   case "--ver":
     let ver = args?.[1]
