@@ -38,14 +38,14 @@ var run = function (cmd) {
 switch (command) {
   case "--patch":
     console.log(`npm version patch && npm run package   && npm publish ./package && npm run make-docs && git commit -a -m "chore: ver patch" && git push && git push --tags`)
-    run(`npm version patch && npm run package   && npm publish ./package && npm run make-docs && git commit -a -m "chore: ver patch" && git push && git push --tags`);
+    run(`npm version patch && npm run package   && rimraf ./package/__package_types_tmp__/ && npm publish ./package && npm run make-docs && git commit -a -m "chore: ver patch" && git push && git push --tags`);
 
     break;
   case "--ver":
     let ver = args?.[1]
     if (!ver) console.error('Missing command, exiting');
     console.log(`npm version ${ver} && npm run package   && npm publish ./package && npm run make-docs && git commit -a -m "chore: ver ${ver}" && git push && git push --tags`)
-    if (ver) run(`npm version ${ver} && npm run package   && npm publish ./package && npm run make-docs && git commit -a -m "chore: ver ${ver}" && git push && git push --tags`);
+    if (ver) run(`npm version ${ver} && npm run package  && rimraf ./package/__package_types_tmp__/ && npm publish ./package && npm run make-docs && git commit -a -m "chore: ver ${ver}" && git push && git push --tags`);
 
     break;
 }
