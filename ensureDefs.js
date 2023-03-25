@@ -41,11 +41,13 @@ for (const filePath of allFiles) {
     
     const exists = await fs.pathExists(path + '/index.ts')
     const indexContent = exists ? await fs.readFile(path + '/index.ts', 'utf8') : '';
-    if (!exists || indexContent?.includes('generated') || !indexContent?.length) await fs.writeFile(path + '/index.ts', '/** slotui generated definition file */\r\n');
+    // if (!exists || indexContent?.includes('generated') || !indexContent?.length) await fs.writeFile(path + '/index.ts', '/** slotui generated definition file */\r\n');
+    if (  indexContent?.includes('generated') ) await fs.removeSync(path + '/index.ts');
 
 }
 // forge new ones
 for (const filePath of allFiles) {
+    break;
     const file = filePath.split('\\').slice(-1).toString();
     const path = filePath.replace(file, '')
 
