@@ -7,7 +7,7 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const srcPackage = path.join(__dirname, 'package');
 const srcLibDir = path.join(__dirname, 'src', 'lib');
-const dirPath = path.join('src', 'lib','sitedata');
+const dirPath = path.join('src', 'lib', 'sitedata');
 // const dirPath = path.join('src','sitedata');
 const libShort = '$lib';
 
@@ -122,11 +122,17 @@ function createMethods(fileList) {
 		try {
 			const data = fs.readFileSync(file, 'utf8');
 			let newData = data.replace(/declare/g, '');
+// if (comp.includes("Tree")) 
+console.log(fromPropDefStringToJSON(data));
+
 			let frag = data.match(/__propDef:([^.]*)};([^.]*)export/gm);
+
 
 			const pathc = [...file.split('\\').slice(0, -1)].join('\\').split('\\package')[1]
 			const comp = file.split('\\').slice(-1)[0].split('.')[0];
 			const newContent = frag?.[0]?.replace(/export/gm, '');
+
+			
 
 			const src = ('$sitedata/api/' + comp + '.md').replace(/\\/g, '/');
 			const srcApiFull = ('$sitedata/api/' + comp + '.api.md').replace(/\\/g, '/');
@@ -137,7 +143,7 @@ function createMethods(fileList) {
 			const pathDoc = srcLibDir + pathc + '\\' + comp + '.md';
 			const srcDoc = ('$lib' + pathc + '\\' + comp + '.md').replace(/\\/g, '/');
 
-			console.log(pathc , srcApi, srcDoc)
+			//console.log(pathc, srcApi, srcDoc)
 			if (!keyDone[comp.toLowerCase()] && !file.toLowerCase().includes('demo') && !file.toLowerCase().includes('preview')) {
 				objImport.push(`import ${comp}ReadMe from "${srcDoc}"`);
 				objObj.push(`${comp.toLowerCase()}:${comp}ReadMe`);
@@ -182,6 +188,120 @@ function createMethods(fileList) {
 
 	fs.writeFileSync(dirPath + '/api/indexApi.ts', objImport.join(';\r\n') + ';\r\n\r\n' + finalObj);
 	fs.writeFileSync(dirPath + '/api/indexApiFull.ts', objApiImport.join(';\r\n') + ';\r\n\r\n' + finalApiObj);
+}
+
+function extractPropDefFromString(fileContent) {
+	const propDefRegex = /__propDef:\s*({[\s\S]+?});/g;
+	const propDefMatch = propDefRegex.exec(fileContent);
+
+	if (!propDefMatch) {
+		throw new Error("__propDef not found in string");
+	}
+
+	const propDefString = propDefMatch[1];
+
+	const propsRegex = /props:\s*({[\s\S]+?}),/g;
+	const propsMatch = propsRegex.exec(propDefString);
+
+	if (!propsMatch) {
+		throw new Error("props not found in __propDef");
+	}
+
+	const propsString = propsMatch[1];
+	const props = eval(`(${propsString})`);
+
+	const eventsRegex = /events:\s*({[\s\S]+?}),/g;
+	const eventsMatch = eventsRegex.exec(propDefString);
+
+	if (!eventsMatch) {
+		throw new Error("events not found in __propDef");
+	}
+
+	const eventsString = eventsMatch[1];
+	const events = eval(`(${eventsString})`);
+
+	const slotsRegex = /slots:\s*({[\s\S]+?})/g;
+	const slotsMatch = slotsRegex.exec(propDefString);
+
+	if (!slotsMatch) {
+		throw new Error("slots not found in __propDef");
+	}
+
+	const slotsString = slotsMatch[1];
+	const slots = eval(`(${slotsString})`);
+
+	const result = {
+		props,
+		events,
+		slots
+	};
+
+	return result;
+}
+
+function fromPropDefStringToJSON(str = '') {
+	const startIndex = str.indexOf("declare const __propDef: {");
+	const endIndex = str.lastIndexOf("};");
+	const relevantStr = str.substring(startIndex, endIndex + 3);
+	const lines = relevantStr.split("\n");
+
+	const props = {};
+	const events = {};
+	const slots = {};
+	let currentSection = "props"; // can be  "props" | "events" | "slots"
+	let currentComment = ""; // to store the comment of the current property 
+
+	for (const line of lines) {
+		if (line.includes("props: {")) {
+			currentSection = "props";
+		} else if (line.includes("events: {")) {
+			currentSection = "events";
+		} else if (line.includes("slots: {")) {
+			currentSection = "slots";
+		} else if (line.includes("};")) {
+			break;
+		} else if (line.trim().startsWith("/**")) {
+			currentComment = line.trim().replace(/\/\*\*\s*/, "").replace(/\s*\*\//, "");
+		} else {
+			let [key, value = ''] = line
+				.trim()
+				.replace(/;/, "")
+				.split(":")
+				.map((v) => v.trim());
+
+			const typeMatch = value.match(/\w+/);
+
+
+			let type = "any";
+			let defaultValue = "";
+			let optional = false;
+
+			if (key.includes('?')) {
+				optional = true;
+				key = key.replace('?', '')
+			}
+
+			if (typeMatch) {
+				type = typeMatch[0];
+				const defaultValueMatch = value.match(/=.*/);
+				if (defaultValueMatch) {
+					defaultValue = defaultValueMatch[0].replace(/=\s*/, "");
+				}
+			}
+			if (currentSection === "props") {
+				props[key] = { type, defaultValue, comments: currentComment, optional };
+				currentComment = "";
+			} else if (currentSection === "events") {
+				events[key] = { type, comments: currentComment };
+				currentComment = "";
+			} else if (currentSection === "slots") {
+				slots[key] = { type, comments: currentComment };
+				currentComment = "";
+			}
+		}
+	}
+
+	return { props, events, slots };
 }
 
 function createReadme(fileList) {

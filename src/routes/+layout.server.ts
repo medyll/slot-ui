@@ -1,6 +1,13 @@
-import type { LayoutServerLoad } from "./$types";
 import { slotuiCatalog } from "$lib/slotuiCatalog.js";
 
-export const load: LayoutServerLoad = async () => {
-  return {slotuiCatalog};
+
+const fetchIt = async ()=> new Promise((resolve,reject)=>{resolve(slotuiCatalog)})
+/** @type {import('./$types').LayoutServerLoad} */
+export const load = () => {
+  return {
+    slotuiCatalog,
+    streamed: {
+      slotuiCatalog: fetchIt()
+    },
+  };
 };

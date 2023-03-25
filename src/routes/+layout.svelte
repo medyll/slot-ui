@@ -19,8 +19,9 @@
   import AutoComplete from "$lib/data/autocomplete/AutoComplete.svelte";
   import { goto } from "$app/navigation";
   import { sitePaths } from "$lib/engine/site.utils.js";
+  import type { LayoutData } from "./$types";
   // from +layout.server
-  export let data = {};
+  export let data: LayoutData = {};
   // from +layout.ts
   export let params = {};
 
@@ -120,11 +121,15 @@
       <div class="flex-main" />
       <!-- <a href="svelte-components">Components</a> -->
       <a target="_blank" href="https://github.com/medyll/slot-ui">Github</a>
-      <AutoComplete
-        dataFieldName="code"
-        placeholder="Search component"
-        onPick={(args) => goto(sitePaths.component(args))}
-        data={Object.values(data?.data?.slotuiCatalog ?? {})} />
+      {#await data?.data?.streamed?.slotuiCatalog}
+        ...
+      {:then value}
+        <AutoComplete
+          dataFieldName="code"
+          placeholder="Search component"
+          onPick={(args) => goto(sitePaths.component(args))}
+          data={Object.values(data?.data?.slotuiCatalog ?? {})} />
+      {/await}
       <ThemeSwitcher icon="mdi:paint-outline" title="toggle theme" />
     </nav>
     <div id="innerSlide" bind:this={innerSlide} class="zI-0">

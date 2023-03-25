@@ -1,109 +1,114 @@
 <script lang="ts">
-	import Drawer from './Drawer.svelte';
+  import Drawer from "./Drawer.svelte";
 
-	/* demo */
-	import ComponentExample from '$lib/demo/ComponentExample.svelte';
-	import Demoer from '$lib/base/demoer/Demoer.svelte';
-	import DemoPage from '$lib/base/demoer/DemoPage.svelte';
-	import { defaultsArgsFromProps } from '$lib/base/demoer/demoer.utils.js';
-	import Icon from '../icon/Icon.svelte';
-	/* demo */
+  /* demo */
+  import ComponentExample from "$lib/demo/ComponentExample.svelte";
+  import Demoer from "$lib/base/demoer/Demoer.svelte";
+  import DemoPage from "$lib/base/demoer/DemoPage.svelte";
+  import { defaultsArgsFromProps } from "$lib/base/demoer/demoer.utils.js";
+  import Icon from "../icon/Icon.svelte";
+  /* demo */
 
-	let drawerRef: Drawer;
-	let withTopBar: boolean = false;
-	let attrs = { primary: 'A Drawer', secondary: 'drawer seconday text', stickTo: 'right' };
+  let drawerRef: Drawer;
+  let withTopBar: boolean = false;
+  let attrs = {
+    primary: "A Drawer",
+    secondary: "drawer seconday text",
+    stickTo: "right",
+  };
 
-	const options = {
-		stickTo: ['left', 'right', 'top', 'bottom'],
-		flow: ['fixed', 'relative', 'absolute'],
-		showOpenerIcon: [false, true]
-	};
+  const options = {
+    stickTo: ["left", "right", "top", "bottom"],
+    flow: ["fixed", "relative", "absolute"],
+    showOpenerIcon: [false, true],
+  };
 
-	const onButtonClick = function () {
-		drawerRef.toggle();
-	};
+  const onButtonClick = function () {
+    drawerRef.toggle();
+  };
 
-	function changeAttr(attr: any) {
-		attrs = { ...attrs, ...attr };
-	}
+  function changeAttr(attr: any) {
+    attrs = { ...attrs, ...attr };
+  }
 
-	let parametersSlot: any = {
-		isOpen: {
-			type: 'boolean',
-			values: [true, false]
-		},
-		stickTo: {
-			type: 'position-preset',
-			values: ['right', 'left', 'top', 'bottom']
-		},
-		flow: {
-			type: 'flow-preset',
-			values:   ['relative', 'fixed', 'absolute']
-		},
-		showOpenerIcon: {
-			type: 'boolean',
-			values: [true, false]
-		}
-	};
+  let parametersSlot: any = {
+    isOpen: {
+      type: "boolean",
+      values: [true, false],
+    },
+    stickTo: {
+      type: "position-preset",
+      values: ["right", "left", "top", "bottom"],
+    },
+    flow: {
+      type: "flow-preset",
+      values: ["relative", "fixed", "absolute"],
+    },
+    showOpenerIcon: {
+      type: "boolean",
+      values: [true, false],
+    },
+  };
 
-	let componentArgsSlot = {
-		isOpen: defaultsArgsFromProps('isOpen', parametersSlot),
-		stickTo: defaultsArgsFromProps('stickTo', parametersSlot),
-		flow: defaultsArgsFromProps('flow', parametersSlot),
-		showOpenerIcon: defaultsArgsFromProps('showOpenerIcon', parametersSlot)
-	};
+  let componentArgsSlot = {
+    isOpen: defaultsArgsFromProps("isOpen", parametersSlot),
+    stickTo: defaultsArgsFromProps("stickTo", parametersSlot),
+    flow: defaultsArgsFromProps("flow", parametersSlot),
+    showOpenerIcon: defaultsArgsFromProps("showOpenerIcon", parametersSlot),
+  };
 
-	let parametersProps: any = {
-		...parametersSlot
-	};
+  let parametersProps: any = {
+    ...parametersSlot,
+  };
 
-	let componentArgsProps = {
-		primary: 'A Drawer',
-		secondary: 'drawer seconday text',
-		...componentArgsSlot
-	};
+  let componentArgsProps = {
+    primary: "A Drawer",
+    secondary: "drawer seconday text",
+    ...componentArgsSlot,
+  };
 
-	let codeSlot = `
-	<Drawer>
-		<div slot="topSlot" class="pad-2" >								
-			Drawer's title				
-		</div>
-		<div class="pad-2">Drawer's content</div>
-		<div slot="bottomSlot" class="pad-2" >								
-			Drawer's bottom zone				
-		</div>
-	</Drawer>`;
+  let codeSlot = `
+<Drawer>
+	<div slot="drawerTop" class="pad-2" >								
+		Drawer's title				
+	</div>
+	<div class="pad-2">Drawer's content</div>
+	<div slot="drawerBottom" class="pad-2" >								
+		Drawer's bottom zone				
+	</div>
+</Drawer>`;
 </script>
 
 <ComponentExample component="Drawer">
-	<div class="flex-v gap-medium w-full">
-		<DemoPage title="Using slots" component="Drawer" code={codeSlot}>
-			<Demoer parameters={parametersSlot} componentArgs={componentArgsSlot} let:activeParams>
-				<div style="width:450px;height:500px;position:relative;" class="pad flex-h">
-					<div class="flex-main pad-4 text-right">
-						Side content Side content Side content Side content
-					</div>
-					<Drawer {...activeParams}>
-						<div slot="iconSlot" class="pad-2" >								
-							<Icon icon="window" />		
-						</div>
-						<div slot="topSlot" class="pad-2" >								
-							Drawer's title				
-						</div>
-						<div class="pad-2">Drawer's content</div> 
-						<div slot="bottomSlot" class="pad-2" >								
-							Drawer's bottom zone				
-						</div>
-					</Drawer>
-				</div>
-			</Demoer>
-		</DemoPage>
-	</div>
+  <div class="flex-v gap-medium w-full">
+    <DemoPage title="Using slots" component="Drawer" code={codeSlot}>
+      <Demoer
+        parameters={parametersSlot}
+        componentArgs={componentArgsSlot}
+        let:activeParams>
+        <div
+          style="width:450px;height:500px;position:relative;"
+          class="pad flex-h">
+          <div class="flex-main pad-4 text-right">
+            Side content Side content Side content Side content
+          </div>
+          <Drawer {...activeParams}>
+            <div slot="iconSlot" class="pad-2">
+              <Icon icon="window" />
+            </div>
+            <div slot="drawerTop" class="pad-2">Drawer's title</div>
+            <div class="pad-2">Drawer's content</div>
+            <div slot="drawerBottom" class="pad-2">Drawer's bottom zone</div>
+          </Drawer>
+        </div>
+      </Demoer>
+    </DemoPage>
+  </div>
 </ComponentExample>
 
 <!-- <div style="width:80%;height:500px;position:relative;" class="border">
 	<Drawer bind:this={drawerRef} isOpen={true} icon="edit" flow="fixed" {...attrs}>
-		<div slot="topSlot">
+		<div slot="drawerTop">
 			{#if withTopBar}
 				<TopBar title="Drawer with top bar ">
 					<svelte:fragment slot="menuBarSwitcher">
@@ -125,6 +130,6 @@
 				{/each}
 			</List>
 		</div>
-		<div slot="bottomSlot">Bottom bar</div>
+		<div slot="drawerBottom">Bottom bar</div>
 	</Drawer>
 </div> -->

@@ -31,14 +31,14 @@
 </script>
 
 <Frame>
-    <MenuBar orientation="left" slot="navLeftHeaderFrameSlot" title="Navigation bar ">
+    <MenuBar orientation="left" slot="drawerTop" title="Navigation bar ">
         <input slot="menuBarSwitcher" placeholder="Search in Bar" style="position:relative;width:100%;" type="text"/>
     </MenuBar>
     <List bind:listItems={listItems} density="default"
           let:listItem
           onItemClick={openIn}
           selectorField="idappscheme"
-          slot="frameDrawerSlot"
+          slot="drawerContent"
           style="height:100%;"
           title="Title List test">
         <!-- <ListItem  data="{listItem?.data}">
@@ -47,7 +47,7 @@
             <span slot="action">{null_to_empty(listItem?.action)}</span>
         </ListItem> -->
     </List>
-    <Header bind:debugValues slot="contentHeader" title={activeData?.[`nomAppscheme`]}>
+    <Header bind:debugValues slot="frameTop" title={activeData?.[`nomAppscheme`]}>
         {activeData?.[`nomAppscheme`]}
     </Header>
     <div class="flex-main overflow-auto pad-4" slot="content">

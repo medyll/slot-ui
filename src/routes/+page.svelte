@@ -5,7 +5,7 @@
   import { getContext } from "svelte";
   import type { Writable } from "svelte/store";
   import { dataOp } from "$lib/engine/utils";
-  import { slotuiCatalog } from "$lib/slotuiCatalog.js";
+  // import { slotuiCatalog } from "$lib/slotuiCatalog.js";
   import { null_to_empty } from "svelte/internal";
   import { sitePaths } from "$lib/engine/site.utils.js";
   import Menu from "$lib/ui/menu/Menu.svelte";
@@ -13,6 +13,7 @@
   import { componentCite } from "$lib/componentCite.js";
   import Backdrop from "$lib/base/backdrop/Backdrop.svelte";
   import { slotUiComponentPreviewList } from "$sitedata/componentPreviewList.js";
+  import type { LayoutData } from "./$types";
 
   let uiContext = getContext<Writable<UiContextType>>("uiContext");
   let BackdropRef;
@@ -23,10 +24,19 @@
   $uiContext.drawerFlow = "fixed";
   $uiContext.drawerOpen = false;
 
-  const groupedData = dataOp.groupBy(
+  export let data: LayoutData;
+
+  /* const groupedData = dataOp.groupBy(
     Object.values(slotuiCatalog).sort((a, b) => (a.name > b.name ? 1 : -1)),
     "group"
-  );
+  ); */
+
+  function groupCatalog(catalog: any) {
+    return dataOp.groupBy(
+      Object.values(catalog).sort((a, b) => (a.name > b.name ? 1 : -1)),
+      "group"
+    );
+  }
 
   function openBackdrop() {}
 
@@ -36,6 +46,8 @@
       undefined
     );
   }
+
+  $: console.log(data.data);
 </script>
 
 <svelte:head>
@@ -71,48 +83,53 @@
       </div>
     </div>
   </div>
-  {#each Object.keys(groupedData) as group}
-    <div class="block">
-      <h4 class="pad-4 text-bold">
-        slotted {null_to_empty(group)}
-      </h4>
-      <div class="flex-h flex-wrap flex-align-middle gap-large">
-        {#each groupedData[group] as catalog}
-          <div class="w-large   shad-3 radius-small">
-            <div class="pad">
-              <div class="pad border-b flex-h flex-align-middle">
-                <h5
-                  class="flex-main"
-                  title={componentCite?.[catalog?.code]?.cite}>
-                  {null_to_empty(catalog?.code)}
-                </h5>
-                {#if Boolean(searchPreview(catalog.code))}
-                  <div>
-                    <Icon
-                      on:click={() => {
-                        backdropVisible = true;
-                        backdropComponentCode = catalog.code;
-                      }}
-                      class="prevLink"
-                      icon="link" />
-                  </div>
-                {/if}
+  {#await data?.data?.streamed?.slotuiCatalog}
+    Loading
+  {:then value}
+   {@const groupedData = groupCatalog(value)}
+    {#each Object.keys(groupedData) as group}
+      <div class="block">
+        <h4 class="pad-4 text-bold">
+          slotted {null_to_empty(group)}
+        </h4>
+        <div class="flex-h flex-wrap flex-align-middle gap-large">
+          {#each groupedData[group] as catalog}
+            <div class="w-large   shad-3 radius-small">
+              <div class="pad">
+                <div class="pad border-b flex-h flex-align-middle">
+                  <h5
+                    class="flex-main"
+                    title={componentCite?.[catalog?.code]?.cite}>
+                    {null_to_empty(catalog?.code)}
+                  </h5>
+                  {#if Boolean(searchPreview(catalog.code))}
+                    <div>
+                      <Icon
+                        on:click={() => {
+                          backdropVisible = true;
+                          backdropComponentCode = catalog.code;
+                        }}
+                        class="prevLink"
+                        icon="link" />
+                    </div>
+                  {/if}
+                </div>
               </div>
+              <Menu style="width:100%;">
+                <MenuItem
+                  ><a href={sitePaths.component(catalog)}
+                    >{catalog.name} examples</a
+                  ></MenuItem>
+                <MenuItem
+                  ><a href={sitePaths.api(catalog)}>{catalog.name} api</a
+                  ></MenuItem>
+              </Menu>
             </div>
-            <Menu style="width:100%;">
-              <MenuItem
-                ><a href={sitePaths.component(catalog)}
-                  >{catalog.name} examples</a
-                ></MenuItem>
-              <MenuItem
-                ><a href={sitePaths.api(catalog)}>{catalog.name} api</a
-                ></MenuItem>
-            </Menu>
-          </div>
-        {/each}
+          {/each}
+        </div>
       </div>
-    </div>
-  {/each}
+    {/each}
+  {/await}
   <div class="block">
     <h5 class="pad-4 text-bold">The why</h5>
     <p>

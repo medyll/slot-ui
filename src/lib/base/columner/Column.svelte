@@ -47,7 +47,7 @@
      on:resizer:end={resizeEnd}
      style:width={width}
      {...$$restProps}>
-    <slot name="topSlot"/>
+    <slot name="drawerTop"/>
     <div class="content">
         {width}
         <slot/>

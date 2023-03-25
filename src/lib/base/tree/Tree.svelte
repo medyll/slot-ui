@@ -33,6 +33,8 @@
   export let selectedPathes: string[] = [];
   /** the split we use to build hierarchy */
   export let splitter: string = "/";
+  /** show checkbox to select */
+  export let showCheckBox: boolean = false;
 
   let visibleChildChild: Record<string, boolean> = {};
   export let selectedCategory: string = "";
@@ -94,9 +96,6 @@
 </script>
 
 <div bind:this={element} class="treeRoot {className}" use:forwardEvents>
-  <!-- {#if level === 0}
-		<Finder />
-	{/if} -->
   {#each pathes as pat, k}
     <div data-category={pat.path} class=" ">
       <div
@@ -107,7 +106,7 @@
           toggle(pat.path);
         }}
         title={pat.path}
-        style="--tree-level:{level * 2}rem"
+        style="--tree-level:{level * 1.5}rem"
         class="gap-tiny  cell">
         <div class="cellArrow">
           {#if pat?.children?.length}
@@ -116,16 +115,18 @@
           {/if}
         </div>
         <div class="cellTitleGutter">
-          <div>
-            <input
-              on:click={(event) => {
-                event.stopPropagation();
-                handleCheck(pat, event?.currentTarget?.checked);
-              }}
-              type="checkbox"
-              style="display:block;border:1px solid red;"
-              checked={Boolean(selectedDataKeys.includes(pat.path))} />
-          </div>
+          {#if showCheckBox}
+            <div>
+              <input
+                on:click={(event) => {
+                  event.stopPropagation();
+                  handleCheck(pat, event?.currentTarget?.checked);
+                }}
+                type="checkbox"
+                style="display:block;border:1px solid red;"
+                checked={Boolean(selectedDataKeys.includes(pat.path))} />
+            </div>
+          {/if}
           <slot item={pat}><div>{pat.name}</div></slot>
         </div>
       </div>
@@ -138,6 +139,7 @@
             bind:selectedDataKeys
             bind:data
             bind:selectedCategory
+            bind:showCheckBox
             pathes={pat.children} />
         {/if}
       </div>

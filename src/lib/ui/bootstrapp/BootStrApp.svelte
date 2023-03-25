@@ -70,7 +70,7 @@ red
 		<div id="layout" class="pos-rel flex-main overflow-hidden">
 			<!-- <Router {routes} /> -->
 			<Frame>
-				<div slot="frameDrawerSlot">nav left</div>
+				<div slot="drawerContent">nav left</div>
 				<div slot="content">
 					<slot />
 				</div>
@@ -88,7 +88,7 @@ red
 			/> -->
 		</div>
 		<Drawer isOpen={false}>
-			<svelte:fragment slot="topSlot">
+			<svelte:fragment slot="drawerTop">
 				<TopBar title="Drawer with menu bar ">
 					<svelte:fragment slot="menuBarSwitcher">
 						<div class="pad-1">

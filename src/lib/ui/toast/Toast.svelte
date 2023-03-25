@@ -8,12 +8,14 @@
   import Toaster from './Toaster.svelte';
 
   export let toastId: any                              = crypto.randomUUID();
+  /** Toast will safe close after delay */
   export let autoClose: boolean                        = false;
+  /** Default delay in milliseconds before auto closing  */
   export let autoCloseDelay: number                    = 5000;
   export let component: SvelteComponentDev | undefined = undefined;
   export let componentProps: any | undefined           = undefined;
   export let toasterId: any                            = 'defaultToasterRoot';
-  export let element;
+  export let element:HTMLDivElement;
 
   let isOpen: boolean = true;
   // ensure is in store, not to show twice
@@ -50,7 +52,7 @@
 
 </script>
 
-<Box style="width:auto;" data-toastId="{toastId}" {isOpen} {...$$restProps}>
+<Box bind:element style="width:auto;" data-toastId="{toastId}" {isOpen} {...$$restProps}>
     <slot/>
 </Box>
 

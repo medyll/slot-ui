@@ -1,11 +1,4 @@
 <svelte:options accessors/>
-<script lang="ts" context="module">
-  /* namespace __propDef {
-    vary : 'red'
-  } */
-	// import __propDef from
-	// declare const __propDef: { events: { 'chromeframe:close': CustomEvent<any>,'chromeframe:hide': CustomEvent<any> } };
-</script>
 
 <script lang="ts">
 	import { getChromeFrame } from './chromeFrame.utils';
