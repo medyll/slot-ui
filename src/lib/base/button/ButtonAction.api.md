@@ -1,5 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
-import type { SvelteComponentDev } from 'svelte/internal';
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         class?: string | undefined;
@@ -17,10 +16,10 @@ declare const __propDef: {
         default: {};
     };
 };
-export declare type ButtonActionProps = typeof __propDef.props;
-export declare type ButtonActionEvents = typeof __propDef.events;
-export declare type ButtonActionSlots = typeof __propDef.slots;
-export default class ButtonAction extends SvelteComponentTyped<ButtonActionProps, ButtonActionEvents, ButtonActionSlots> {
+export type ButtonActionProps = typeof __propDef.props;
+export type ButtonActionEvents = typeof __propDef.events;
+export type ButtonActionSlots = typeof __propDef.slots;
+export default class ButtonAction extends SvelteComponent<ButtonActionProps, ButtonActionEvents, ButtonActionSlots> {
 }
 export {};
 

@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         class?: string | undefined;
@@ -24,10 +24,10 @@ declare const __propDef: {
         };
     };
 };
-export declare type ToggleBarProps = typeof __propDef.props;
-export declare type ToggleBarEvents = typeof __propDef.events;
-export declare type ToggleBarSlots = typeof __propDef.slots;
-export default class ToggleBar extends SvelteComponentTyped<ToggleBarProps, ToggleBarEvents, ToggleBarSlots> {
+export type ToggleBarProps = typeof __propDef.props;
+export type ToggleBarEvents = typeof __propDef.events;
+export type ToggleBarSlots = typeof __propDef.slots;
+export default class ToggleBar extends SvelteComponent<ToggleBarProps, ToggleBarEvents, ToggleBarSlots> {
 }
 export {};
 

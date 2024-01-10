@@ -3,8 +3,7 @@ Wrapper for the toaster family
 called automatically
 -->
 <script lang="ts">
-  export let toasterId: any = "defaultToasterRoot";
-  import {toastStore} from './store.js';
+  export let toasterId: any = "defaultToasterRoot"; 
 
 
 </script>

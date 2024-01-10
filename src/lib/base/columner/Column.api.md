@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         [x: string]: any;
@@ -10,15 +10,15 @@ declare const __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
-        topSlot: {};
+        drawerTop: {};
         default: {};
         bottomSLot: {};
     };
 };
-export declare type ColumnProps = typeof __propDef.props;
-export declare type ColumnEvents = typeof __propDef.events;
-export declare type ColumnSlots = typeof __propDef.slots;
-export default class Column extends SvelteComponentTyped<ColumnProps, ColumnEvents, ColumnSlots> {
+export type ColumnProps = typeof __propDef.props;
+export type ColumnEvents = typeof __propDef.events;
+export type ColumnSlots = typeof __propDef.slots;
+export default class Column extends SvelteComponent<ColumnProps, ColumnEvents, ColumnSlots> {
 }
 export {};
 

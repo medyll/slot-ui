@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         class?: string | undefined;
@@ -11,10 +11,10 @@ declare const __propDef: {
     };
     slots: {};
 };
-export declare type JsonerProps = typeof __propDef.props;
-export declare type JsonerEvents = typeof __propDef.events;
-export declare type JsonerSlots = typeof __propDef.slots;
-export default class Jsoner extends SvelteComponentTyped<JsonerProps, JsonerEvents, JsonerSlots> {
+export type JsonerProps = typeof __propDef.props;
+export type JsonerEvents = typeof __propDef.events;
+export type JsonerSlots = typeof __propDef.slots;
+export default class Jsoner extends SvelteComponent<JsonerProps, JsonerEvents, JsonerSlots> {
 }
 export {};
 

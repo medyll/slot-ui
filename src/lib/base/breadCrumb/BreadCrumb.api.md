@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         class?: string | undefined;
@@ -20,10 +20,10 @@ declare const __propDef: {
         default: {};
     };
 };
-export declare type BreadCrumbProps = typeof __propDef.props;
-export declare type BreadCrumbEvents = typeof __propDef.events;
-export declare type BreadCrumbSlots = typeof __propDef.slots;
-export default class BreadCrumb extends SvelteComponentTyped<BreadCrumbProps, BreadCrumbEvents, BreadCrumbSlots> {
+export type BreadCrumbProps = typeof __propDef.props;
+export type BreadCrumbEvents = typeof __propDef.events;
+export type BreadCrumbSlots = typeof __propDef.slots;
+export default class BreadCrumb extends SvelteComponent<BreadCrumbProps, BreadCrumbEvents, BreadCrumbSlots> {
     get breadList(): {
         action?: (() => void) | undefined;
         breads?: {

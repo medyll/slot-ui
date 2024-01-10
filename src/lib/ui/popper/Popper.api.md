@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 import { type SvelteComponentDev } from "svelte/internal";
 import { type StickToPositionType } from "../../uses/stickTo/stickTo.js";
 declare const __propDef: {
@@ -32,10 +32,10 @@ declare const __propDef: {
         default: {};
     };
 };
-export declare type PopperProps = typeof __propDef.props;
-export declare type PopperEvents = typeof __propDef.events;
-export declare type PopperSlots = typeof __propDef.slots;
-export default class Popper extends SvelteComponentTyped<PopperProps, PopperEvents, PopperSlots> {
+export type PopperProps = typeof __propDef.props;
+export type PopperEvents = typeof __propDef.events;
+export type PopperSlots = typeof __propDef.slots;
+export default class Popper extends SvelteComponent<PopperProps, PopperEvents, PopperSlots> {
     get toggle(): () => void;
     get hide(): () => void;
     get show(): () => void;
@@ -56,9 +56,9 @@ export default class Popper extends SvelteComponentTyped<PopperProps, PopperEven
     get stickToHookWidth(): boolean | undefined;
     /**accessor*/
     set stickToHookWidth(_: boolean | undefined);
-    get component(): SvelteComponentDev | undefined;
+    get component(): any;
     /**accessor*/
-    set component(_: SvelteComponentDev | undefined);
+    set component(_: any);
     get componentProps(): {} | undefined;
     /**accessor*/
     set componentProps(_: {} | undefined);

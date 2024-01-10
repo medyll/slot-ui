@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         class?: string | undefined;
@@ -22,10 +22,10 @@ declare const __propDef: {
         buttonZoneSlot: {};
     };
 };
-export declare type AlertProps = typeof __propDef.props;
-export declare type AlertEvents = typeof __propDef.events;
-export declare type AlertSlots = typeof __propDef.slots;
-export default class Alert extends SvelteComponentTyped<AlertProps, AlertEvents, AlertSlots> {
+export type AlertProps = typeof __propDef.props;
+export type AlertEvents = typeof __propDef.events;
+export type AlertSlots = typeof __propDef.slots;
+export default class Alert extends SvelteComponent<AlertProps, AlertEvents, AlertSlots> {
     get actions(): any;
 }
 export {};

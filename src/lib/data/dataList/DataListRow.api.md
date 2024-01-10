@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         class?: string | undefined;
@@ -7,7 +7,7 @@ declare const __propDef: {
         style?: string | undefined;
     };
     events: {
-        'datalist:sort:clicked': Event | MouseEvent | UIEvent | PointerEvent | KeyboardEvent | ProgressEvent<EventTarget> | FocusEvent | ClipboardEvent | AnimationEvent | InputEvent | CompositionEvent | DragEvent | ErrorEvent | FormDataEvent | SecurityPolicyViolationEvent | SubmitEvent | TouchEvent | TransitionEvent | WheelEvent;
+        'datalist:sort:clicked': Event | MouseEvent | UIEvent | PointerEvent | KeyboardEvent | ProgressEvent<EventTarget> | FocusEvent | AnimationEvent | InputEvent | CompositionEvent | ClipboardEvent | DragEvent | ErrorEvent | FormDataEvent | SecurityPolicyViolationEvent | SubmitEvent | TouchEvent | TransitionEvent | WheelEvent;
     } & {
         [evt: string]: CustomEvent<any>;
     };
@@ -15,10 +15,10 @@ declare const __propDef: {
         default: {};
     };
 };
-export declare type DataListRowProps = typeof __propDef.props;
-export declare type DataListRowEvents = typeof __propDef.events;
-export declare type DataListRowSlots = typeof __propDef.slots;
-export default class DataListRow extends SvelteComponentTyped<DataListRowProps, DataListRowEvents, DataListRowSlots> {
+export type DataListRowProps = typeof __propDef.props;
+export type DataListRowEvents = typeof __propDef.events;
+export type DataListRowSlots = typeof __propDef.slots;
+export default class DataListRow extends SvelteComponent<DataListRowProps, DataListRowEvents, DataListRowSlots> {
     get class(): string | undefined;
     /**accessor*/
     set class(_: string | undefined);

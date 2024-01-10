@@ -22,7 +22,6 @@ import IconApiReadMe from "$lib/base/icon/Icon.api.md";
 import ListApiReadMe from "$lib/base/list/List.api.md";
 import ListItemApiReadMe from "$lib/base/list/ListItem.api.md";
 import ListTitleApiReadMe from "$lib/base/list/ListTitle.api.md";
-import LoaderApiReadMe from "$lib/base/loader/Loader.api.md";
 import PaperApiReadMe from "$lib/base/paper/Paper.api.md";
 import ProgressApiReadMe from "$lib/base/progress/Progress.api.md";
 import RatingApiReadMe from "$lib/base/rating/Rating.api.md";
@@ -42,6 +41,7 @@ import DataListRowApiReadMe from "$lib/data/dataList/DataListRow.api.md";
 import FinderApiReadMe from "$lib/data/finder/Finder.api.md";
 import GrouperApiReadMe from "$lib/data/grouper/Grouper.api.md";
 import JsonerApiReadMe from "$lib/data/jsoner/Jsoner.api.md";
+import LoaderApiReadMe from "$lib/data/loader/Loader.api.md";
 import SorterApiReadMe from "$lib/data/sorter/Sorter.api.md";
 import SortererApiReadMe from "$lib/data/sorter/Sorterer.api.md";
 import InputApiReadMe from "$lib/form/input/Input.api.md";
@@ -54,9 +54,7 @@ import ChromeFrameButtonListApiReadMe from "$lib/ui/chromeFrame/ChromeFrameButto
 import ChromeFrameListApiReadMe from "$lib/ui/chromeFrame/ChromeFrameList.api.md";
 import FrameApiReadMe from "$lib/ui/frame/Frame.api.md";
 import LoginApiReadMe from "$lib/ui/login/Login.api.md";
-import MenuApiReadMe from "$lib/ui/menu/Menu.api.md";
 import MenuContextAgentApiReadMe from "$lib/ui/menu/MenuContextAgent.api.md";
-import MenuItemApiReadMe from "$lib/ui/menu/MenuItem.api.md";
 import PanelApiReadMe from "$lib/ui/panel/Panel.api.md";
 import PanelerApiReadMe from "$lib/ui/panel/Paneler.api.md";
 import PanelGridApiReadMe from "$lib/ui/panel/PanelGrid.api.md";
@@ -99,7 +97,6 @@ iconApi:IconApiReadMe,
 listApi:ListApiReadMe,
 listitemApi:ListItemApiReadMe,
 listtitleApi:ListTitleApiReadMe,
-loaderApi:LoaderApiReadMe,
 paperApi:PaperApiReadMe,
 progressApi:ProgressApiReadMe,
 ratingApi:RatingApiReadMe,
@@ -119,6 +116,7 @@ datalistrowApi:DataListRowApiReadMe,
 finderApi:FinderApiReadMe,
 grouperApi:GrouperApiReadMe,
 jsonerApi:JsonerApiReadMe,
+loaderApi:LoaderApiReadMe,
 sorterApi:SorterApiReadMe,
 sortererApi:SortererApiReadMe,
 inputApi:InputApiReadMe,
@@ -131,9 +129,7 @@ chromeframebuttonlistApi:ChromeFrameButtonListApiReadMe,
 chromeframelistApi:ChromeFrameListApiReadMe,
 frameApi:FrameApiReadMe,
 loginApi:LoginApiReadMe,
-menuApi:MenuApiReadMe,
 menucontextagentApi:MenuContextAgentApiReadMe,
-menuitemApi:MenuItemApiReadMe,
 panelApi:PanelApiReadMe,
 panelerApi:PanelerApiReadMe,
 panelgridApi:PanelGridApiReadMe,

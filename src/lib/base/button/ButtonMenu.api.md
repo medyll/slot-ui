@@ -1,13 +1,12 @@
-```import { SvelteComponentTyped } from "svelte";
-import type { SvelteComponent } from 'svelte';
-import type { IMenuItemProps, IMenuProps } from '../../ui/menu/types';
+```import { SvelteComponent } from "svelte";
+import type { IMenuItemProps, IMenuProps } from '../../../../../../../src/lib/ui/menu/types';
 declare const __propDef: {
     props: {
         icon?: string | undefined;
-        menuData?: IMenuItemProps<any>[] | undefined;
+        menuData?: IMenuItemProps[] | undefined;
         actionComponent?: SvelteComponent | any;
-        menuProps?: IMenuProps<any> | undefined;
-        menuPosition?: import("../../uses/stickTo/stickTo.js").StickToPositionType | undefined;
+        menuProps?: IMenuProps | undefined;
+        menuPosition?: import("../../index.js").StickToPositionType | undefined;
         class?: string | undefined;
         element?: HTMLElement | null | undefined;
     };
@@ -18,25 +17,25 @@ declare const __propDef: {
         default: {};
     };
 };
-export declare type ButtonMenuProps = typeof __propDef.props;
-export declare type ButtonMenuEvents = typeof __propDef.events;
-export declare type ButtonMenuSlots = typeof __propDef.slots;
-export default class ButtonMenu extends SvelteComponentTyped<ButtonMenuProps, ButtonMenuEvents, ButtonMenuSlots> {
+export type ButtonMenuProps = typeof __propDef.props;
+export type ButtonMenuEvents = typeof __propDef.events;
+export type ButtonMenuSlots = typeof __propDef.slots;
+export default class ButtonMenu extends SvelteComponent<ButtonMenuProps, ButtonMenuEvents, ButtonMenuSlots> {
     get icon(): string | undefined;
     /**accessor*/
     set icon(_: string | undefined);
-    get menuData(): IMenuItemProps<any>[] | undefined;
+    get menuData(): IMenuItemProps[] | undefined;
     /**accessor*/
-    set menuData(_: IMenuItemProps<any>[] | undefined);
+    set menuData(_: IMenuItemProps[] | undefined);
     get actionComponent(): any;
     /**accessor*/
     set actionComponent(_: any);
-    get menuProps(): IMenuProps<any> | undefined;
+    get menuProps(): IMenuProps | undefined;
     /**accessor*/
-    set menuProps(_: IMenuProps<any> | undefined);
-    get menuPosition(): import("../../uses/stickTo/stickTo.js").StickToPositionType | undefined;
+    set menuProps(_: IMenuProps | undefined);
+    get menuPosition(): import("../../index.js").StickToPositionType | undefined;
     /**accessor*/
-    set menuPosition(_: import("../../uses/stickTo/stickTo.js").StickToPositionType | undefined);
+    set menuPosition(_: import("../../index.js").StickToPositionType | undefined);
     get class(): string | undefined;
     /**accessor*/
     set class(_: string | undefined);

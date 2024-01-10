@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 import type { SvelteComponentDev } from 'svelte/internal';
 declare const __propDef: {
     props: {
@@ -9,7 +9,7 @@ declare const __propDef: {
         component?: SvelteComponentDev | undefined;
         componentProps?: any | undefined;
         toasterId?: any;
-        element: any;
+        element: HTMLDivElement;
     };
     events: {
         [evt: string]: CustomEvent<any>;
@@ -18,10 +18,10 @@ declare const __propDef: {
         default: {};
     };
 };
-export declare type ToastProps = typeof __propDef.props;
-export declare type ToastEvents = typeof __propDef.events;
-export declare type ToastSlots = typeof __propDef.slots;
-export default class Toast extends SvelteComponentTyped<ToastProps, ToastEvents, ToastSlots> {
+export type ToastProps = typeof __propDef.props;
+export type ToastEvents = typeof __propDef.events;
+export type ToastSlots = typeof __propDef.slots;
+export default class Toast extends SvelteComponent<ToastProps, ToastEvents, ToastSlots> {
 }
 export {};
 

@@ -19,12 +19,14 @@ __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
-        frameHeaderSlot: {};
         navLeftHeaderFrameSlot: {};
-        frameDrawerSlot: {};
-        contentHeader: {};
+        drawerTop: {
+            slot: string;
+        };
+        drawerContent: {};
+        frameTop: {};
         content: {};
-        bottom: {};
+        frameBottom: {};
     };
 };
 

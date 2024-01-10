@@ -8,7 +8,7 @@ __propDef: {
         component?: SvelteComponentDev | undefined;
         componentProps?: any | undefined;
         toasterId?: any;
-        element: any;
+        element: HTMLDivElement;
     };
     events: {
         [evt: string]: CustomEvent<any>;

@@ -27,7 +27,7 @@
   export let flow: ElementProps["flow"] | undefined = 'absolute';
   export let outer = true;
 
-  export let panelSlideId = crypto.randomUUID();
+  export let panelSlideId = crypto.randomUUID()  as string;
   let transitionTo: "prev" | "next";
 
   let panelSlideRef: any;

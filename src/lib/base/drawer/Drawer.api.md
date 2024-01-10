@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         class?: string | undefined;
@@ -9,9 +9,9 @@ declare const __propDef: {
         /** Should the drawer be open */ isOpen?: boolean | undefined;
         /** Should the closer icon be hidden */ hideCloseIcon?: boolean | undefined;
         /**
-             * position
-             * @type 'wide' | 'inplace'
-             */ flow?: "relative" | "absolute" | "fixed" | undefined;
+           * position
+           * @type 'wide' | 'inplace'
+           */ flow?: "relative" | "absolute" | "fixed" | undefined;
         stickTo?: "left" | "right" | "top" | "bottom" | undefined;
         showOpenerIcon?: boolean | undefined;
         toggle?: ((visibleSate?: boolean) => void) | undefined;
@@ -28,15 +28,15 @@ declare const __propDef: {
     };
     slots: {
         iconSlot: {};
-        topSlot: {};
+        drawerTop: {};
         default: {};
-        bottomSlot: {};
+        drawerBottom: {};
     };
 };
-export declare type DrawerProps = typeof __propDef.props;
-export declare type DrawerEvents = typeof __propDef.events;
-export declare type DrawerSlots = typeof __propDef.slots;
-export default class Drawer extends SvelteComponentTyped<DrawerProps, DrawerEvents, DrawerSlots> {
+export type DrawerProps = typeof __propDef.props;
+export type DrawerEvents = typeof __propDef.events;
+export type DrawerSlots = typeof __propDef.slots;
+export default class Drawer extends SvelteComponent<DrawerProps, DrawerEvents, DrawerSlots> {
     get toggle(): (visibleSate?: boolean | undefined) => void;
     get actions(): {
         toggle: (visibleSate?: boolean | undefined) => void;

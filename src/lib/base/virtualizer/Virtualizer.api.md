@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         class?: string | undefined;
@@ -20,10 +20,10 @@ declare const __propDef: {
         };
     };
 };
-export declare type VirtualizerProps = typeof __propDef.props;
-export declare type VirtualizerEvents = typeof __propDef.events;
-export declare type VirtualizerSlots = typeof __propDef.slots;
-export default class Virtualizer extends SvelteComponentTyped<VirtualizerProps, VirtualizerEvents, VirtualizerSlots> {
+export type VirtualizerProps = typeof __propDef.props;
+export type VirtualizerEvents = typeof __propDef.events;
+export type VirtualizerSlots = typeof __propDef.slots;
+export default class Virtualizer extends SvelteComponent<VirtualizerProps, VirtualizerEvents, VirtualizerSlots> {
 }
 export {};
 

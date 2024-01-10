@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         params?: {
@@ -11,10 +11,10 @@ declare const __propDef: {
     };
     slots: {};
 };
-export declare type DynPageProps = typeof __propDef.props;
-export declare type DynPageEvents = typeof __propDef.events;
-export declare type DynPageSlots = typeof __propDef.slots;
-export default class DynPage extends SvelteComponentTyped<DynPageProps, DynPageEvents, DynPageSlots> {
+export type DynPageProps = typeof __propDef.props;
+export type DynPageEvents = typeof __propDef.events;
+export type DynPageSlots = typeof __propDef.slots;
+export default class DynPage extends SvelteComponent<DynPageProps, DynPageEvents, DynPageSlots> {
 }
 export {};
 

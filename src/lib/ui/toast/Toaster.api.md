@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         toasterId?: any;
@@ -10,10 +10,10 @@ declare const __propDef: {
         default: {};
     };
 };
-export declare type ToasterProps = typeof __propDef.props;
-export declare type ToasterEvents = typeof __propDef.events;
-export declare type ToasterSlots = typeof __propDef.slots;
-export default class Toaster extends SvelteComponentTyped<ToasterProps, ToasterEvents, ToasterSlots> {
+export type ToasterProps = typeof __propDef.props;
+export type ToasterEvents = typeof __propDef.events;
+export type ToasterSlots = typeof __propDef.slots;
+export default class Toaster extends SvelteComponent<ToasterProps, ToasterEvents, ToasterSlots> {
 }
 export {};
 

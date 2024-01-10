@@ -10,7 +10,7 @@
   export let title = "not set";
 
   /** panelId will be bound to the targeted panelSlide */
-  export let panelId = crypto.randomUUID();
+  export let panelId = crypto.randomUUID() as string;
   /** data will be bound to the targeted panelSlide */
   export let data: any | undefined = undefined;
   /** data will be bound to the targeted panelSlide */

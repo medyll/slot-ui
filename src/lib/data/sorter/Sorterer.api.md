@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 import type { SorterFieldType } from './types.js';
 declare const __propDef: {
     props: {
@@ -16,10 +16,10 @@ declare const __propDef: {
         default: {};
     };
 };
-export declare type SortererProps = typeof __propDef.props;
-export declare type SortererEvents = typeof __propDef.events;
-export declare type SortererSlots = typeof __propDef.slots;
-export default class Sorterer extends SvelteComponentTyped<SortererProps, SortererEvents, SortererSlots> {
+export type SortererProps = typeof __propDef.props;
+export type SortererEvents = typeof __propDef.events;
+export type SortererSlots = typeof __propDef.slots;
+export default class Sorterer extends SvelteComponent<SortererProps, SortererEvents, SortererSlots> {
 }
 export {};
 

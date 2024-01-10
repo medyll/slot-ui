@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         class?: string | undefined;
@@ -23,10 +23,10 @@ declare const __propDef: {
         listTitleAction: {};
     };
 };
-export declare type ListTitleProps = typeof __propDef.props;
-export declare type ListTitleEvents = typeof __propDef.events;
-export declare type ListTitleSlots = typeof __propDef.slots;
-export default class ListTitle extends SvelteComponentTyped<ListTitleProps, ListTitleEvents, ListTitleSlots> {
+export type ListTitleProps = typeof __propDef.props;
+export type ListTitleEvents = typeof __propDef.events;
+export type ListTitleSlots = typeof __propDef.slots;
+export default class ListTitle extends SvelteComponent<ListTitleProps, ListTitleEvents, ListTitleSlots> {
 }
 export {};
 

@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         data: any | undefined;
@@ -15,10 +15,10 @@ declare const __propDef: {
         zoomSlot: {};
     };
 };
-export declare type PanelGridProps = typeof __propDef.props;
-export declare type PanelGridEvents = typeof __propDef.events;
-export declare type PanelGridSlots = typeof __propDef.slots;
-export default class PanelGrid extends SvelteComponentTyped<PanelGridProps, PanelGridEvents, PanelGridSlots> {
+export type PanelGridProps = typeof __propDef.props;
+export type PanelGridEvents = typeof __propDef.events;
+export type PanelGridSlots = typeof __propDef.slots;
+export default class PanelGrid extends SvelteComponent<PanelGridProps, PanelGridEvents, PanelGridSlots> {
 }
 export {};
 

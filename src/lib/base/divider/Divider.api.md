@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         class?: string | undefined;
@@ -14,10 +14,10 @@ declare const __propDef: {
     };
     slots: {};
 };
-export declare type DividerProps = typeof __propDef.props;
-export declare type DividerEvents = typeof __propDef.events;
-export declare type DividerSlots = typeof __propDef.slots;
-export default class Divider extends SvelteComponentTyped<DividerProps, DividerEvents, DividerSlots> {
+export type DividerProps = typeof __propDef.props;
+export type DividerEvents = typeof __propDef.events;
+export type DividerSlots = typeof __propDef.slots;
+export default class Divider extends SvelteComponent<DividerProps, DividerEvents, DividerSlots> {
 }
 export {};
 

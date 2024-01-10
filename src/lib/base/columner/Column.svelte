@@ -7,7 +7,7 @@
 
   let columner = getContext<ColumnerStoreType>('columner');
 
-  export let columnId = crypto.randomUUID();
+  export let columnId = crypto.randomUUID() as string;
 
   if (!$columner[columnId]) {
     $columner[columnId] = {

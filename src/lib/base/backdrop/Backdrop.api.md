@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         class?: string | undefined;
@@ -7,6 +7,11 @@ declare const __propDef: {
         /** show or hide the backdrop */ isOpen?: boolean | undefined;
         /** if in loading state, it will show a loading icon or $$slots.loadingSlot */ isLoading?: boolean | undefined;
         /** css position mode of the backdrop */ flow?: "relative" | "absolute" | "fixed" | undefined;
+        /** auto-close backdrop on click */ autoClose?: boolean | undefined;
+        /** Backdrop controller */ actions?: {
+            close: () => void;
+            open: () => void;
+        } | undefined;
     };
     events: {
         click: MouseEvent;
@@ -18,10 +23,14 @@ declare const __propDef: {
         default: {};
     };
 };
-export declare type BackdropProps = typeof __propDef.props;
-export declare type BackdropEvents = typeof __propDef.events;
-export declare type BackdropSlots = typeof __propDef.slots;
-export default class Backdrop extends SvelteComponentTyped<BackdropProps, BackdropEvents, BackdropSlots> {
+export type BackdropProps = typeof __propDef.props;
+export type BackdropEvents = typeof __propDef.events;
+export type BackdropSlots = typeof __propDef.slots;
+export default class Backdrop extends SvelteComponent<BackdropProps, BackdropEvents, BackdropSlots> {
+    get actions(): {
+        close: () => void;
+        open: () => void;
+    };
     get class(): string | undefined;
     /**accessor*/
     set class(_: string | undefined);
@@ -40,6 +49,9 @@ export default class Backdrop extends SvelteComponentTyped<BackdropProps, Backdr
     get flow(): "relative" | "absolute" | "fixed" | undefined;
     /**accessor*/
     set flow(_: "relative" | "absolute" | "fixed" | undefined);
+    get autoClose(): boolean | undefined;
+    /**accessor*/
+    set autoClose(_: boolean | undefined);
 }
 export {};
 

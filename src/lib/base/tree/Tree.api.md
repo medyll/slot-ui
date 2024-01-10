@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 import type { TreeItemType } from "./types";
 declare const __propDef: {
     props: {
@@ -13,6 +13,7 @@ declare const __propDef: {
         /** exported data */ selectedData?: Data[] | undefined;
         /** exported selected paths */ selectedPathes?: string[] | undefined;
         /** the split we use to build hierarchy */ splitter?: string | undefined;
+        /** show checkbox to select */ showCheckBox?: boolean | undefined;
         selectedCategory?: string | undefined;
     };
     events: {
@@ -24,10 +25,10 @@ declare const __propDef: {
         };
     };
 };
-export declare type TreeProps = typeof __propDef.props;
-export declare type TreeEvents = typeof __propDef.events;
-export declare type TreeSlots = typeof __propDef.slots;
-export default class Tree extends SvelteComponentTyped<TreeProps, TreeEvents, TreeSlots> {
+export type TreeProps = typeof __propDef.props;
+export type TreeEvents = typeof __propDef.events;
+export type TreeSlots = typeof __propDef.slots;
+export default class Tree extends SvelteComponent<TreeProps, TreeEvents, TreeSlots> {
     get class(): string | undefined;
     /**accessor*/
     set class(_: string | undefined);
@@ -61,6 +62,9 @@ export default class Tree extends SvelteComponentTyped<TreeProps, TreeEvents, Tr
     get splitter(): string | undefined;
     /**accessor*/
     set splitter(_: string | undefined);
+    get showCheckBox(): boolean | undefined;
+    /**accessor*/
+    set showCheckBox(_: boolean | undefined);
     get selectedCategory(): string | undefined;
     /**accessor*/
     set selectedCategory(_: string | undefined);

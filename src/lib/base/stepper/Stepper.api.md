@@ -1,6 +1,6 @@
-```import { SvelteComponentTyped } from "svelte";
-export declare type StepperOrientation = 'horizontal' | 'vertical';
-export declare type StepType = {
+```import { SvelteComponent } from "svelte";
+export type StepperOrientation = 'horizontal' | 'vertical';
+export type StepType = {
     index: number;
     text: string;
     action: () => void;
@@ -19,10 +19,10 @@ declare const __propDef: {
     };
     slots: {};
 };
-export declare type StepperProps = typeof __propDef.props;
-export declare type StepperEvents = typeof __propDef.events;
-export declare type StepperSlots = typeof __propDef.slots;
-export default class Stepper extends SvelteComponentTyped<StepperProps, StepperEvents, StepperSlots> {
+export type StepperProps = typeof __propDef.props;
+export type StepperEvents = typeof __propDef.events;
+export type StepperSlots = typeof __propDef.slots;
+export default class Stepper extends SvelteComponent<StepperProps, StepperEvents, StepperSlots> {
     get actions(): {
         setActiveStep: (step: number) => void;
     };

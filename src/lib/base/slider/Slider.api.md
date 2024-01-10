@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         class?: string | undefined;
@@ -16,10 +16,10 @@ declare const __propDef: {
     };
     slots: {};
 };
-export declare type SliderProps = typeof __propDef.props;
-export declare type SliderEvents = typeof __propDef.events;
-export declare type SliderSlots = typeof __propDef.slots;
-export default class Slider extends SvelteComponentTyped<SliderProps, SliderEvents, SliderSlots> {
+export type SliderProps = typeof __propDef.props;
+export type SliderEvents = typeof __propDef.events;
+export type SliderSlots = typeof __propDef.slots;
+export default class Slider extends SvelteComponent<SliderProps, SliderEvents, SliderSlots> {
 }
 export {};
 

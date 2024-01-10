@@ -4,7 +4,7 @@ __propDef: {
         class?: string | undefined;
         style?: string | undefined;
         element?: HTMLDivElement | null | undefined;
-        chromeListConfig?: IChromeOptionsArgs<Record<string, any>> | undefined;
+        chromeListConfig?: IChromeOptionsArgs | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;

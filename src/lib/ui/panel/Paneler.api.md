@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 import type { PanelContextType } from "./types.js";
 declare const __propDef: {
     props: {
@@ -15,10 +15,10 @@ declare const __propDef: {
         default: {};
     };
 };
-export declare type PanelerProps = typeof __propDef.props;
-export declare type PanelerEvents = typeof __propDef.events;
-export declare type PanelerSlots = typeof __propDef.slots;
-export default class Paneler extends SvelteComponentTyped<PanelerProps, PanelerEvents, PanelerSlots> {
+export type PanelerProps = typeof __propDef.props;
+export type PanelerEvents = typeof __propDef.events;
+export type PanelerSlots = typeof __propDef.slots;
+export default class Paneler extends SvelteComponent<PanelerProps, PanelerEvents, PanelerSlots> {
     get panelerStore(): PanelContextType;
 }
 export {};

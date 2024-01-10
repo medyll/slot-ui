@@ -23,7 +23,7 @@
 	export let field: string | undefined = undefined;
 	/** typeof the field. Used when exists Datalist.$$props.dataTypes */
 	export let fieldType: string | undefined = undefined;
-	export let columnId: string | number | undefined = field ?? crypto.randomUUID();
+	export let columnId: string | number | undefined = field ?? crypto.randomUUID() as string;
 	/** set noWrap = true to have ellipsis on this cell content*/
 	export let noWrap: boolean = true;
 	/** title */

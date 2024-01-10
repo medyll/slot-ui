@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         [x: string]: any;
@@ -29,10 +29,10 @@ declare const __propDef: {
         boxBottomZone: {};
     };
 };
-export declare type BoxProps = typeof __propDef.props;
-export declare type BoxEvents = typeof __propDef.events;
-export declare type BoxSlots = typeof __propDef.slots;
-export default class Box extends SvelteComponentTyped<BoxProps, BoxEvents, BoxSlots> {
+export type BoxProps = typeof __propDef.props;
+export type BoxEvents = typeof __propDef.events;
+export type BoxSlots = typeof __propDef.slots;
+export default class Box extends SvelteComponent<BoxProps, BoxEvents, BoxSlots> {
     get actions(): any;
 }
 export {};

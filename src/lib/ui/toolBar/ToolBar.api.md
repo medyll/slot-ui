@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         class?: string | undefined;
@@ -15,10 +15,10 @@ declare const __propDef: {
         separator: {};
     };
 };
-export declare type ToolBarProps = typeof __propDef.props;
-export declare type ToolBarEvents = typeof __propDef.events;
-export declare type ToolBarSlots = typeof __propDef.slots;
-export default class ToolBar extends SvelteComponentTyped<ToolBarProps, ToolBarEvents, ToolBarSlots> {
+export type ToolBarProps = typeof __propDef.props;
+export type ToolBarEvents = typeof __propDef.events;
+export type ToolBarSlots = typeof __propDef.slots;
+export default class ToolBar extends SvelteComponent<ToolBarProps, ToolBarEvents, ToolBarSlots> {
     get class(): string | undefined;
     /**accessor*/
     set class(_: string | undefined);

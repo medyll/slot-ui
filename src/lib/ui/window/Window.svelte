@@ -12,7 +12,7 @@
   import { positioner } from "$lib/uses/positioner.js";
 
   /** Id of the component's instance */
-  export let frameId = crypto.randomUUID();
+  export let frameId = crypto.randomUUID()  as string;
   /** the title appears on the handle bar */
   export let title: string = "";
   /** boolean to show the window */

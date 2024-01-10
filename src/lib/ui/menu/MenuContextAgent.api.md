@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         menuAgent?: unknown;
@@ -8,11 +8,11 @@ declare const __propDef: {
     };
     slots: {};
 };
-export declare type MenuContextAgentProps = typeof __propDef.props;
-export declare type MenuContextAgentEvents = typeof __propDef.events;
-export declare type MenuContextAgentSlots = typeof __propDef.slots;
-export default class MenuContextAgent extends SvelteComponentTyped<MenuContextAgentProps, MenuContextAgentEvents, MenuContextAgentSlots> {
-    get menuAgent(): unknown;
+export type MenuContextAgentProps = typeof __propDef.props;
+export type MenuContextAgentEvents = typeof __propDef.events;
+export type MenuContextAgentSlots = typeof __propDef.slots;
+export default class MenuContextAgent extends SvelteComponent<MenuContextAgentProps, MenuContextAgentEvents, MenuContextAgentSlots> {
+    get menuAgent(): {};
 }
 export {};
 

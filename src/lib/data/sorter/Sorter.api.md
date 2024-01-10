@@ -1,6 +1,6 @@
-```import { SvelteComponentTyped } from "svelte";
-export declare type SortItem = {};
-export declare type Data = Record<string, any>;
+```import { SvelteComponent } from "svelte";
+export type SortItem = {};
+export type Data = Record<string, any>;
 declare const __propDef: {
     props: {
         /** Sorter mode */ sorterMode?: "button" | "menu" | "free" | undefined;
@@ -26,10 +26,10 @@ declare const __propDef: {
         };
     };
 };
-export declare type SorterProps = typeof __propDef.props;
-export declare type SorterEvents = typeof __propDef.events;
-export declare type SorterSlots = typeof __propDef.slots;
-export default class Sorter extends SvelteComponentTyped<SorterProps, SorterEvents, SorterSlots> {
+export type SorterProps = typeof __propDef.props;
+export type SorterEvents = typeof __propDef.events;
+export type SorterSlots = typeof __propDef.slots;
+export default class Sorter extends SvelteComponent<SorterProps, SorterEvents, SorterSlots> {
 }
 export {};
 

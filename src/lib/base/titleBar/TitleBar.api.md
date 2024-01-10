@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         onClose: () => void;
@@ -13,10 +13,10 @@ declare const __propDef: {
         titleBarTitle: {};
     };
 };
-export declare type TitleBarProps = typeof __propDef.props;
-export declare type TitleBarEvents = typeof __propDef.events;
-export declare type TitleBarSlots = typeof __propDef.slots;
-export default class TitleBar extends SvelteComponentTyped<TitleBarProps, TitleBarEvents, TitleBarSlots> {
+export type TitleBarProps = typeof __propDef.props;
+export type TitleBarEvents = typeof __propDef.events;
+export type TitleBarSlots = typeof __propDef.slots;
+export default class TitleBar extends SvelteComponent<TitleBarProps, TitleBarEvents, TitleBarSlots> {
 }
 export {};
 
