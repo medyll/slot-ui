@@ -26,7 +26,7 @@
 
 <div
   on:panel:button:clicked={toggleSlidePanels}
-  transition:fade={{ duration: 50 }}
+  transition:fade|global={{ duration: 50 }}
   class={className}
   {style}>
   <slot />

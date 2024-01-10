@@ -51,7 +51,7 @@
 {#if isOpen}
 	<div 
 		bind:this={element}
-		transition:fade
+		transition:fade|global
 		class="alert shad-4 {className}"
 		on:click={handleClick}
 	>

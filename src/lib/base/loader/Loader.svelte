@@ -55,7 +55,7 @@
 
 {#key status}
   {#if status || isLoading || isError || isEmpty}
-    <div bind:this={element} transition:fade class="root {className}" {style}>
+    <div bind:this={element} transition:fade|global class="root {className}" {style}>
       <div class="loaderBox">
         {#if status === "loading" || isLoading}
           <slot name="loadingSlot">

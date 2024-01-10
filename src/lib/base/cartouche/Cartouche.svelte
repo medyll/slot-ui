@@ -82,7 +82,7 @@
 		</div>
 	</div>
 	{#if isOpen}
-		<div class="cartoucheContent" transition:slide>
+		<div class="cartoucheContent" transition:slide|global>
 			{#if component}
 				<svelte:component this={component} {...componentProps} />
 			{/if}

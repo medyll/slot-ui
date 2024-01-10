@@ -109,8 +109,8 @@
   <div
     bind:this={panelSlideRef}
     on:panel:button:clicked={toggleSlidePanels}
-    out:slideOutNoName={{ duration: 125, delay: 20, direction: transitionTo }}
-    in:slideInNoName={{ duration: 150, delay: 150, direction: transitionTo }}
+    out:slideOutNoName|global={{ duration: 125, delay: 20, direction: transitionTo }}
+    in:slideInNoName|global={{ duration: 150, delay: 150, direction: transitionTo }}
     class="sidePanel {className}"
     style:position={flow ?? ''}
     {style}>

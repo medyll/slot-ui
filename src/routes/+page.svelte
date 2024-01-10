@@ -25,7 +25,7 @@
   $uiContext.drawerOpen = false;
 
   export let data: LayoutData;
-
+ 
   /* const groupedData = dataOp.groupBy(
     Object.values(slotuiCatalog).sort((a, b) => (a.name > b.name ? 1 : -1)),
     "group"
@@ -47,7 +47,7 @@
     );
   }
 
-  $: console.log(data.data);
+  $: console.log(data.streamed);
 </script>
 
 <svelte:head>
@@ -83,7 +83,7 @@
       </div>
     </div>
   </div>
-  {#await data?.data?.streamed?.slotuiCatalog}
+  {#await data?.streamed?.slotuiCatalog}
     Loading
   {:then value}
    {@const groupedData = groupCatalog(value)}
