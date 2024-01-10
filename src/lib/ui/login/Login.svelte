@@ -69,7 +69,7 @@
 {#if showLogin}
     <Backdrop isOpen={showLogin} style="height:100%;" loading={loading}>
         <form bind:this={element} class="pos-abs top-0 h-full w-full {className}" method="post" on:submit|preventDefault={validate} use:form>
-            <div transition:fade class="pos-rel h-full w-full flex-h flex-align-middle-center">
+            <div transition:fade|global class="pos-rel h-full w-full flex-h flex-align-middle-center">
                 <div class="form flex-v flex-align-middle-center">
                     <slot name="loginAvatarRoot">
                         <div class="avatarHolder marg-b-2">

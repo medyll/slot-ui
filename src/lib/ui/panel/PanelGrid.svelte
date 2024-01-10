@@ -22,14 +22,14 @@
             if($$slots.zoomSlot) isExpanded = true;
           }}
           class="panelGridThumb"
-          in:fade>
+          in:fade|global>
           <slot data={dta} />
         </div>
       {/if}
     {/each}
   </div>
   {#if isExpanded}
-    <div class="panelGridPreview" in:fade>
+    <div class="panelGridPreview" in:fade|global>
       <div
         on:click={() => {
          isExpanded = false;

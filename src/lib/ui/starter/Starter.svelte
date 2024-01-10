@@ -22,7 +22,7 @@
 
 <div />
 <Popper autoClose position={"BC"} isOpen={$starterStore}>
-  <div class="startMenu" transition:fade={{ duration: 50 }}>
+  <div class="startMenu" transition:fade|global={{ duration: 50 }}>
     <div style="margin-bottom:2rem" class="pad-2">
       <Input
         style="width: 100%;"

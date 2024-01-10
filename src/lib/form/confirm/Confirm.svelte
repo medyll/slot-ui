@@ -54,7 +54,7 @@
 </script>
 
 {#if step === 'initial'}
-	<span in:fade on:click={handleClickInitial} bind:this={initialRef} title={tooltipInitial}>
+	<span in:fade|global on:click={handleClickInitial} bind:this={initialRef} title={tooltipInitial}>
 		<slot name="initial"
 			><Button
 				naked
@@ -67,7 +67,7 @@
 	</span>
 {/if}
 {#if step === 'confirm'}
-	<span in:fade bind:this={contentRef} class="contentSlot">
+	<span in:fade|global bind:this={contentRef} class="contentSlot">
 		<span on:click={handleClickCancel}>
 			<Button naked icon={cancelIcon}  title="cancel" />
 		</span>

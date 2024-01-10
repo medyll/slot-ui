@@ -9,6 +9,6 @@
   $: tt = dataOp.filterListFirst(slotUiComponentList, data?.component, 'code');
 </script>
 
-<div out:fade={{duration: 200 }} in:fade={{duration: 200 }}>
+<div out:fade|global={{duration: 200 }} in:fade|global={{duration: 200 }}>
     <svelte:component this={tt?.component}/>
 </div>

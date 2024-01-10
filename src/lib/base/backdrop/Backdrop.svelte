@@ -33,8 +33,8 @@
 
 {#if isOpen}
   <div
-    in:fade
-    out:fade
+    in:fade|global
+    out:fade|global
     on:click
     bind:this={element}
     class="backdropRoot    {className}"

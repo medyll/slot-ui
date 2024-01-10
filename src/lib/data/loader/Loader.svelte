@@ -60,7 +60,7 @@
   {#if status || isLoading || isError || isEmpty}
     <div
       bind:this={element}
-      transition:fade
+      transition:fade|global
       class="loaderRoot {className}"
       {style}>
       <div class="loaderBox">
