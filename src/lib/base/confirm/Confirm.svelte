@@ -1,7 +1,5 @@
-<!-- 
-	@deprecated
- -->
-<script lang="ts"> 
+<script lang="ts">
+	import { autofocus } from '$lib/uses/autofocus/autofocus.js';
 	import { fade, slide } from 'svelte/transition';
 	import Button from '$lib/base/button/Button.svelte';
 	import { onDestroy } from 'svelte';
@@ -46,13 +44,13 @@
 	function handleAction(event: any) {
 		event.preventDefault();
 		event.stopPropagation(); 
-		step = 'initial';
 		if(action) action()
 	}
 
 	onDestroy(()=>{
 		step = 'initial'
 	})
+
 </script>
 
 {#if step === 'initial'}
