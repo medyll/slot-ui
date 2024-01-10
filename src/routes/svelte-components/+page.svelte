@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { slotUiComponentList } from '$sitedata/componentList';
-	import { slotUiComponentPreviewList } from '$sitedata/componentPreviewList';
+	import { slotUiComponentList } from '$lib/sitedata/componentList.js';
+	import { slotUiComponentPreviewList } from '$lib/sitedata/componentPreviewList.js';
 	import Paper from '$lib/base/paper/Paper.svelte';
 	import { dataOp } from '$lib/engine/utils';
 	import Divider from '$lib/base/divider/Divider.svelte';
-	import {sitePaths} from "$lib/engine/site.utils.js";
+	import { sitePaths } from '$lib/engine/site.utils.js';
 
 	function spliceArray(arrayIn: any[], size: number) {
 		let out = [];
@@ -21,7 +21,7 @@
 	}
 </script>
 
-<div class="flex-main pad-4 overflow-auto ">
+<div class="flex-main pad-4 overflow-auto">
 	<div class="gridDemo">
 		{#each spliceArray(slotUiComponentList, 3) as spliced}
 			<div>
@@ -33,8 +33,12 @@
 							<svelte:component this={filterList(component.code).component} />
 						{/if}
 						<div class="flex-h flex-wrap gap-small">
-							<div class="flex-main"><a   href="{sitePaths.component(component)}">{component.name} examples</a></div>
-							<div class="flex-main"><a   href="{sitePaths.api(component)}">{component.name} api</a></div>
+							<div class="flex-main">
+								<a href={sitePaths.component(component)}>{component.name} examples</a>
+							</div>
+							<div class="flex-main">
+								<a href={sitePaths.api(component)}>{component.name} api</a>
+							</div>
 						</div>
 					</Paper>
 				{/each}

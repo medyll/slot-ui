@@ -1,6 +1,6 @@
 <script lang="ts">
   import {fade} from 'svelte/transition';
-  import {slotUiComponentList} from '$sitedata/componentList';
+  import {slotUiComponentList} from '$lib/sitedata/componentList';
   import {dataOp} from '$lib/engine/utils';
 
   export let data: any = {};
