@@ -36,7 +36,7 @@
 	"devDependencies": {
 		"@commitlint/cli": "^18.4.4",
 		"@commitlint/config-conventional": "^18.4.4",
-		"@medyll/cssfabric": "^0.4.2",
+		"@medyll/cssfabric": "^0.4.1",
 		"@playwright/test": "^1.28.1",
 		"@sveltejs/adapter-auto": "^3.1.0",
 		"@sveltejs/kit": "^2.2.1",
@@ -72,7 +72,10 @@
 	"dependencies": {
 		"d3": "^7.8.5",
 		"iconify-icon": "^1.0.8",
+		"postcss-load-config": "^5.0.2",
 		"sanitize-html": "^2.11.0",
+		"sass": "^1.69.7",
+		"svelte-spa-router": "^4.0.1",
 		"svelte-use-form": "^2.10.0"
 	}
 }

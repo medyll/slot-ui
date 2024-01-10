@@ -1,11 +1,12 @@
 <script lang="ts">
-	import Prism from 'prismjs';
+	/* import Prism from 'prismjs'; */
 	// fabric default vars
-	import cssfabricVars from '@medyll/cssfabric/src/lib/styles/vars.min.css';
+	import '@medyll/cssfabric/src/lib/styles/vars.min.css';
 	// fabric default
-	import cssfabric from '@medyll/cssfabric/src/lib/styles/cssfabric.min.css';
+	import '@medyll/cssfabric/src/lib/styles/cssfabric.min.css';
 	// import cssfabric themer
-	import cssfabricThemer from '../styles/cssfabric-theme.scss';
+	import '../styles/cssfabric-theme.scss';
+	import '../styles/main.css';
 
 	import Drawer from '$lib/base/drawer/Drawer.svelte';
 	import ThemeSwitcher from '$lib/ui/themeswitcher/ThemeSwitcher.svelte';
@@ -19,7 +20,7 @@
 	import AutoComplete from '$lib/data/autocomplete/AutoComplete.svelte';
 	import { goto } from '$app/navigation';
 	import { sitePaths } from '$lib/engine/site.utils.js';
-	import type { LayoutData } from './$types';
+	import type { LayoutData } from '$app/navigation';
 	// from +layout.server
 	export let data: LayoutData = {};
 	// from +layout.ts
@@ -131,9 +132,7 @@
 	</div>
 </div>
 
-<style global lang="scss">
-	@import '../styles/main.scss';
-
+<style global>
 	#contentSlide {
 		height: 100%;
 		overflow: auto;
