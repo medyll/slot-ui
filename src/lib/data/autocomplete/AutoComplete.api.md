@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         [x: string]: any;
@@ -25,10 +25,10 @@ declare const __propDef: {
         autoCompleteNoResults: {};
     };
 };
-export declare type AutoCompleteProps = typeof __propDef.props;
-export declare type AutoCompleteEvents = typeof __propDef.events;
-export declare type AutoCompleteSlots = typeof __propDef.slots;
-export default class AutoComplete extends SvelteComponentTyped<AutoCompleteProps, AutoCompleteEvents, AutoCompleteSlots> {
+export type AutoCompleteProps = typeof __propDef.props;
+export type AutoCompleteEvents = typeof __propDef.events;
+export type AutoCompleteSlots = typeof __propDef.slots;
+export default class AutoComplete extends SvelteComponent<AutoCompleteProps, AutoCompleteEvents, AutoCompleteSlots> {
     get class(): string | undefined;
     /**accessor*/
     set class(_: string | undefined);

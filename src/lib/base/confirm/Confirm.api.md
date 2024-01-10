@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         /** text displayed on confirm button */ tooltipInitial?: string | undefined;
@@ -19,10 +19,10 @@ declare const __propDef: {
         default: {};
     };
 };
-export declare type ConfirmProps = typeof __propDef.props;
-export declare type ConfirmEvents = typeof __propDef.events;
-export declare type ConfirmSlots = typeof __propDef.slots;
-export default class Confirm extends SvelteComponentTyped<ConfirmProps, ConfirmEvents, ConfirmSlots> {
+export type ConfirmProps = typeof __propDef.props;
+export type ConfirmEvents = typeof __propDef.events;
+export type ConfirmSlots = typeof __propDef.slots;
+export default class Confirm extends SvelteComponent<ConfirmProps, ConfirmEvents, ConfirmSlots> {
 }
 export {};
 

@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         [x: string]: any;
@@ -19,10 +19,10 @@ declare const __propDef: {
     };
     slots: {};
 };
-export declare type FinderProps = typeof __propDef.props;
-export declare type FinderEvents = typeof __propDef.events;
-export declare type FinderSlots = typeof __propDef.slots;
-export default class Finder extends SvelteComponentTyped<FinderProps, FinderEvents, FinderSlots> {
+export type FinderProps = typeof __propDef.props;
+export type FinderEvents = typeof __propDef.events;
+export type FinderSlots = typeof __propDef.slots;
+export default class Finder extends SvelteComponent<FinderProps, FinderEvents, FinderSlots> {
     get class(): string | undefined;
     /**accessor*/
     set class(_: string | undefined);

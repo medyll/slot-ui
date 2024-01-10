@@ -22,7 +22,6 @@ import IconReadMe from "$lib/base/icon/Icon.md";
 import ListReadMe from "$lib/base/list/List.md";
 import ListItemReadMe from "$lib/base/list/ListItem.md";
 import ListTitleReadMe from "$lib/base/list/ListTitle.md";
-import LoaderReadMe from "$lib/base/loader/Loader.md";
 import PaperReadMe from "$lib/base/paper/Paper.md";
 import ProgressReadMe from "$lib/base/progress/Progress.md";
 import RatingReadMe from "$lib/base/rating/Rating.md";
@@ -42,6 +41,7 @@ import DataListRowReadMe from "$lib/data/dataList/DataListRow.md";
 import FinderReadMe from "$lib/data/finder/Finder.md";
 import GrouperReadMe from "$lib/data/grouper/Grouper.md";
 import JsonerReadMe from "$lib/data/jsoner/Jsoner.md";
+import LoaderReadMe from "$lib/data/loader/Loader.md";
 import SorterReadMe from "$lib/data/sorter/Sorter.md";
 import SortererReadMe from "$lib/data/sorter/Sorterer.md";
 import InputReadMe from "$lib/form/input/Input.md";
@@ -54,9 +54,7 @@ import ChromeFrameButtonListReadMe from "$lib/ui/chromeFrame/ChromeFrameButtonLi
 import ChromeFrameListReadMe from "$lib/ui/chromeFrame/ChromeFrameList.md";
 import FrameReadMe from "$lib/ui/frame/Frame.md";
 import LoginReadMe from "$lib/ui/login/Login.md";
-import MenuReadMe from "$lib/ui/menu/Menu.md";
 import MenuContextAgentReadMe from "$lib/ui/menu/MenuContextAgent.md";
-import MenuItemReadMe from "$lib/ui/menu/MenuItem.md";
 import PanelReadMe from "$lib/ui/panel/Panel.md";
 import PanelerReadMe from "$lib/ui/panel/Paneler.md";
 import PanelGridReadMe from "$lib/ui/panel/PanelGrid.md";
@@ -99,7 +97,6 @@ icon:IconReadMe,
 list:ListReadMe,
 listitem:ListItemReadMe,
 listtitle:ListTitleReadMe,
-loader:LoaderReadMe,
 paper:PaperReadMe,
 progress:ProgressReadMe,
 rating:RatingReadMe,
@@ -119,6 +116,7 @@ datalistrow:DataListRowReadMe,
 finder:FinderReadMe,
 grouper:GrouperReadMe,
 jsoner:JsonerReadMe,
+loader:LoaderReadMe,
 sorter:SorterReadMe,
 sorterer:SortererReadMe,
 input:InputReadMe,
@@ -131,9 +129,7 @@ chromeframebuttonlist:ChromeFrameButtonListReadMe,
 chromeframelist:ChromeFrameListReadMe,
 frame:FrameReadMe,
 login:LoginReadMe,
-menu:MenuReadMe,
 menucontextagent:MenuContextAgentReadMe,
-menuitem:MenuItemReadMe,
 panel:PanelReadMe,
 paneler:PanelerReadMe,
 panelgrid:PanelGridReadMe,

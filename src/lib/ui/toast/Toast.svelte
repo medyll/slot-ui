@@ -7,7 +7,7 @@
   import {onMount} from 'svelte';
   import Toaster from './Toaster.svelte';
 
-  export let toastId: any                              = crypto.randomUUID();
+  export let toastId: any                              = crypto.randomUUID()  as string;
   /** Toast will safe close after delay */
   export let autoClose: boolean                        = false;
   /** Default delay in milliseconds before auto closing  */

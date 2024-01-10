@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         [x: string]: any;
@@ -10,10 +10,10 @@ declare const __propDef: {
         default: {};
     };
 };
-export declare type ThemeSwitcherProps = typeof __propDef.props;
-export declare type ThemeSwitcherEvents = typeof __propDef.events;
-export declare type ThemeSwitcherSlots = typeof __propDef.slots;
-export default class ThemeSwitcher extends SvelteComponentTyped<ThemeSwitcherProps, ThemeSwitcherEvents, ThemeSwitcherSlots> {
+export type ThemeSwitcherProps = typeof __propDef.props;
+export type ThemeSwitcherEvents = typeof __propDef.events;
+export type ThemeSwitcherSlots = typeof __propDef.slots;
+export default class ThemeSwitcher extends SvelteComponent<ThemeSwitcherProps, ThemeSwitcherEvents, ThemeSwitcherSlots> {
 }
 export {};
 

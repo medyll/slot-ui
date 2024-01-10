@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         class?: string | undefined;
@@ -18,10 +18,10 @@ declare const __propDef: {
         default: {};
     };
 };
-export declare type RatingProps = typeof __propDef.props;
-export declare type RatingEvents = typeof __propDef.events;
-export declare type RatingSlots = typeof __propDef.slots;
-export default class Rating extends SvelteComponentTyped<RatingProps, RatingEvents, RatingSlots> {
+export type RatingProps = typeof __propDef.props;
+export type RatingEvents = typeof __propDef.events;
+export type RatingSlots = typeof __propDef.slots;
+export default class Rating extends SvelteComponent<RatingProps, RatingEvents, RatingSlots> {
 }
 export {};
 

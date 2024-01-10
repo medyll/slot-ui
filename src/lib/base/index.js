@@ -1,4 +1,4 @@
-export * from "./alert/index.js"
+export * from "./alert/"
 export * from "./avatar/index.js"
 export * from "./backdrop/index.js"
 export * from "./badge/index.js"

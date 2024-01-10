@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         [x: string]: any;
@@ -34,10 +34,10 @@ declare const __propDef: {
         action: {};
     };
 };
-export declare type ListItemProps = typeof __propDef.props;
-export declare type ListItemEvents = typeof __propDef.events;
-export declare type ListItemSlots = typeof __propDef.slots;
-export default class ListItem extends SvelteComponentTyped<ListItemProps, ListItemEvents, ListItemSlots> {
+export type ListItemProps = typeof __propDef.props;
+export type ListItemEvents = typeof __propDef.events;
+export type ListItemSlots = typeof __propDef.slots;
+export default class ListItem extends SvelteComponent<ListItemProps, ListItemEvents, ListItemSlots> {
     get class(): string | undefined;
     /**accessor*/
     set class(_: string | undefined);

@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         class?: string | undefined;
@@ -16,10 +16,10 @@ declare const __propDef: {
         contentSwitcherReveal: {};
     };
 };
-export declare type ContentSwitcherProps = typeof __propDef.props;
-export declare type ContentSwitcherEvents = typeof __propDef.events;
-export declare type ContentSwitcherSlots = typeof __propDef.slots;
-export default class ContentSwitcher extends SvelteComponentTyped<ContentSwitcherProps, ContentSwitcherEvents, ContentSwitcherSlots> {
+export type ContentSwitcherProps = typeof __propDef.props;
+export type ContentSwitcherEvents = typeof __propDef.events;
+export type ContentSwitcherSlots = typeof __propDef.slots;
+export default class ContentSwitcher extends SvelteComponent<ContentSwitcherProps, ContentSwitcherEvents, ContentSwitcherSlots> {
 }
 export {};
 

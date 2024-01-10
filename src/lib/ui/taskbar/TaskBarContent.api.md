@@ -1,6 +1,6 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
-    props: {};
+    props: Record<string, never>;
     events: {
         [evt: string]: CustomEvent<any>;
     };
@@ -8,10 +8,10 @@ declare const __propDef: {
         default: {};
     };
 };
-export declare type TaskBarContentProps = typeof __propDef.props;
-export declare type TaskBarContentEvents = typeof __propDef.events;
-export declare type TaskBarContentSlots = typeof __propDef.slots;
-export default class TaskBarContent extends SvelteComponentTyped<TaskBarContentProps, TaskBarContentEvents, TaskBarContentSlots> {
+export type TaskBarContentProps = typeof __propDef.props;
+export type TaskBarContentEvents = typeof __propDef.events;
+export type TaskBarContentSlots = typeof __propDef.slots;
+export default class TaskBarContent extends SvelteComponent<TaskBarContentProps, TaskBarContentEvents, TaskBarContentSlots> {
 }
 export {};
 

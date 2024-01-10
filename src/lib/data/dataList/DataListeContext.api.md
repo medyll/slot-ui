@@ -1,6 +1,6 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
-    props: {};
+    props: Record<string, never>;
     events: {
         [evt: string]: CustomEvent<any>;
     };
@@ -8,10 +8,10 @@ declare const __propDef: {
         default: {};
     };
 };
-export declare type DataListeContextProps = typeof __propDef.props;
-export declare type DataListeContextEvents = typeof __propDef.events;
-export declare type DataListeContextSlots = typeof __propDef.slots;
-export default class DataListeContext extends SvelteComponentTyped<DataListeContextProps, DataListeContextEvents, DataListeContextSlots> {
+export type DataListeContextProps = typeof __propDef.props;
+export type DataListeContextEvents = typeof __propDef.events;
+export type DataListeContextSlots = typeof __propDef.slots;
+export default class DataListeContext extends SvelteComponent<DataListeContextProps, DataListeContextEvents, DataListeContextSlots> {
 }
 export {};
 

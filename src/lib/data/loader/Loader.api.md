@@ -1,10 +1,11 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         class?: string | undefined;
         element?: HTMLDivElement | null | undefined;
         style?: string | undefined;
         status: "loading" | "success" | "error" | "empty" | undefined;
+        showSuccess?: boolean | undefined;
         /** @deprecated */ isLoading?: boolean | undefined;
         /** @deprecated */ isError?: boolean | undefined;
         /** @deprecated */ isEmpty?: boolean | undefined;
@@ -19,17 +20,17 @@ declare const __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
-        loadingSlot: {};
-        errorSlot: {};
-        successSlot: {};
-        emptySlot: {};
-        messageSlot: {};
+        loaderLoading: {};
+        loaderError: {};
+        loaderSuccess: {};
+        loaderEmpty: {};
+        loaderMessage: {};
     };
 };
-export declare type LoaderProps = typeof __propDef.props;
-export declare type LoaderEvents = typeof __propDef.events;
-export declare type LoaderSlots = typeof __propDef.slots;
-export default class Loader extends SvelteComponentTyped<LoaderProps, LoaderEvents, LoaderSlots> {
+export type LoaderProps = typeof __propDef.props;
+export type LoaderEvents = typeof __propDef.events;
+export type LoaderSlots = typeof __propDef.slots;
+export default class Loader extends SvelteComponent<LoaderProps, LoaderEvents, LoaderSlots> {
 }
 export {};
 

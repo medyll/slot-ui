@@ -1,6 +1,6 @@
 ```ts 
 __propDef: {
-    props: {};
+    props: Record<string, never>;
     events: {
         [evt: string]: CustomEvent<any>;
     };

@@ -1,6 +1,6 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
-    props: {};
+    props: Record<string, never>;
     events: {
         [evt: string]: CustomEvent<any>;
     };
@@ -8,10 +8,10 @@ declare const __propDef: {
         default: {};
     };
 };
-export declare type BootStrAppProps = typeof __propDef.props;
-export declare type BootStrAppEvents = typeof __propDef.events;
-export declare type BootStrAppSlots = typeof __propDef.slots;
-export default class BootStrApp extends SvelteComponentTyped<BootStrAppProps, BootStrAppEvents, BootStrAppSlots> {
+export type BootStrAppProps = typeof __propDef.props;
+export type BootStrAppEvents = typeof __propDef.events;
+export type BootStrAppSlots = typeof __propDef.slots;
+export default class BootStrApp extends SvelteComponent<BootStrAppProps, BootStrAppEvents, BootStrAppSlots> {
 }
 export {};
 

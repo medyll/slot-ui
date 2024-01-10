@@ -1,6 +1,6 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 import type { LisItemProps } from "./types.js";
-import type { SorterFieldType } from "../../data/sorter/types.js";
+import type { SorterFieldType } from "../../../../../../../src/lib/data/sorter/types.js";
 declare const __propDef: {
     props: {
         class?: string | undefined;
@@ -41,10 +41,10 @@ declare const __propDef: {
         listFooter: {};
     };
 };
-export declare type ListProps = typeof __propDef.props;
-export declare type ListEvents = typeof __propDef.events;
-export declare type ListSlots = typeof __propDef.slots;
-export default class List extends SvelteComponentTyped<ListProps, ListEvents, ListSlots> {
+export type ListProps = typeof __propDef.props;
+export type ListEvents = typeof __propDef.events;
+export type ListSlots = typeof __propDef.slots;
+export default class List extends SvelteComponent<ListProps, ListEvents, ListSlots> {
 }
 export {};
 

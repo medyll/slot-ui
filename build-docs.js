@@ -5,7 +5,7 @@ import * as url from 'url';
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
-const srcPackage = path.join(__dirname, 'package');
+const srcPackage = path.join(__dirname, 'dist');
 const srcLibDir = path.join(__dirname, 'src', 'lib');
 const dirPath = path.join('src', 'lib', 'sitedata');
 // const dirPath = path.join('src','sitedata');
@@ -13,7 +13,7 @@ const libShort = '$lib';
 
 let fileHead = '';
 
-mkdir(dirPath, { recursive: true }, () => { });
+mkdir(dirPath, { recursive: true }, () => {});
 
 const getAllFiles = function (dirPath, fragment = 'demo.svelte', arrayOfFiles = []) {
 	let files = fs.readdirSync(dirPath);
@@ -108,8 +108,7 @@ function createComponentList(fileList, exportName = 'slotUiComponentList') {
 
 /** writes .md and api.md from packageDir  */
 function createMethods(fileList) {
-
-	mkdir(dirPath + '/api', { recursive: true }, () => { });
+	mkdir(dirPath + '/api', { recursive: true }, () => {});
 	let keyDone = {};
 
 	let objImport = [];
@@ -118,35 +117,33 @@ function createMethods(fileList) {
 	let objApiObj = [];
 
 	fileList.forEach((file) => {
-
 		try {
 			const data = fs.readFileSync(file, 'utf8');
 			let newData = data.replace(/declare/g, '');
-// if (comp.includes("Tree")) 
-console.log(fromPropDefStringToJSON(data));
+			// if (comp.includes("Tree")) 
 
 			let frag = data.match(/__propDef:([^.]*)};([^.]*)export/gm);
 
-
-			const pathc = [...file.split('\\').slice(0, -1)].join('\\').split('\\package')[1]
+			const pathc = [...file.split('\\').slice(0, -1)].join('\\').split('\\dist')[1];
 			const comp = file.split('\\').slice(-1)[0].split('.')[0];
 			const newContent = frag?.[0]?.replace(/export/gm, '');
-
-			
-
-			const src = ('$sitedata/api/' + comp + '.md').replace(/\\/g, '/');
-			const srcApiFull = ('$sitedata/api/' + comp + '.api.md').replace(/\\/g, '/');
-
 
 			const pathApi = srcLibDir + pathc + '\\' + comp + '.api.md';
 			const srcApi = ('$lib' + pathc + '\\' + comp + '.api.md').replace(/\\/g, '/');
 			const pathDoc = srcLibDir + pathc + '\\' + comp + '.md';
 			const srcDoc = ('$lib' + pathc + '\\' + comp + '.md').replace(/\\/g, '/');
 
+			const collectedComps = [];
 			//console.log(pathc, srcApi, srcDoc)
-			if (!keyDone[comp.toLowerCase()] && !file.toLowerCase().includes('demo') && !file.toLowerCase().includes('preview')) {
+			if (
+				!keyDone[comp.toLowerCase()] &&
+				!file.toLowerCase().includes('demo') &&
+				!file.toLowerCase().includes('preview')
+			) {
 				objImport.push(`import ${comp}ReadMe from "${srcDoc}"`);
 				objObj.push(`${comp.toLowerCase()}:${comp}ReadMe`);
+
+				collectedComps.push(`${comp}ReadMe`);
 
 				/* objImport.push(`import ${comp}ReadMe from "${src}"`);
 				objObj.push(`${comp.toLowerCase()}:${comp}ReadMe`); */
@@ -163,15 +160,15 @@ console.log(fromPropDefStringToJSON(data));
 				/* objApiImport.push(`import ${comp}ApiReadMe from "${srcApiFull}"`);
 				objApiObj.push(`${comp.toLowerCase()}Api:${comp}ApiReadMe`); */
 
-				fs.writeFileSync(
-					pathApi,
-					'```' + data + '\r\n ```'
-				);
+				// array uniques
+				objObj.filter((v, i, a) => a.indexOf(v) === i);
+				objImport.filter((v, i, a) => a.indexOf(v) === i);
+				objApiImport.filter((v, i, a) => a.indexOf(v) === i);
+				objApiObj.filter((v, i, a) => a.indexOf(v) === i);
 
-				fs.writeFileSync(
-					pathDoc,
-					newContent ? '```ts \r\n' + newContent + '\r\n ```' : 'missing'
-				);
+				fs.writeFileSync(pathApi, '```' + data + '\r\n ```');
+
+				fs.writeFileSync(pathDoc, newContent ? '```ts \r\n' + newContent + '\r\n ```' : 'missing');
 				/* fs.writeFileSync(
 					pathc + '\\' + comp + '.api.md',
 					'```' + data + '\r\n ```'
@@ -186,8 +183,13 @@ console.log(fromPropDefStringToJSON(data));
 	const finalObj = `export const componentReadMe = {${objObj.join(',\r\n')}}`;
 	const finalApiObj = `export const componentApiReadMe = {${objApiObj.join(',\r\n')}}`;
 
+	objApiImport = objApiImport.filter((v, i, a) => a.indexOf(v) === i);
+
 	fs.writeFileSync(dirPath + '/api/indexApi.ts', objImport.join(';\r\n') + ';\r\n\r\n' + finalObj);
-	fs.writeFileSync(dirPath + '/api/indexApiFull.ts', objApiImport.join(';\r\n') + ';\r\n\r\n' + finalApiObj);
+	fs.writeFileSync(
+		dirPath + '/api/indexApiFull.ts',
+		objApiImport.join(';\r\n') + ';\r\n\r\n' + finalApiObj
+	);
 }
 
 function extractPropDefFromString(fileContent) {
@@ -195,7 +197,7 @@ function extractPropDefFromString(fileContent) {
 	const propDefMatch = propDefRegex.exec(fileContent);
 
 	if (!propDefMatch) {
-		throw new Error("__propDef not found in string");
+		throw new Error('__propDef not found in string');
 	}
 
 	const propDefString = propDefMatch[1];
@@ -204,7 +206,7 @@ function extractPropDefFromString(fileContent) {
 	const propsMatch = propsRegex.exec(propDefString);
 
 	if (!propsMatch) {
-		throw new Error("props not found in __propDef");
+		throw new Error('props not found in __propDef');
 	}
 
 	const propsString = propsMatch[1];
@@ -214,7 +216,7 @@ function extractPropDefFromString(fileContent) {
 	const eventsMatch = eventsRegex.exec(propDefString);
 
 	if (!eventsMatch) {
-		throw new Error("events not found in __propDef");
+		throw new Error('events not found in __propDef');
 	}
 
 	const eventsString = eventsMatch[1];
@@ -224,7 +226,7 @@ function extractPropDefFromString(fileContent) {
 	const slotsMatch = slotsRegex.exec(propDefString);
 
 	if (!slotsMatch) {
-		throw new Error("slots not found in __propDef");
+		throw new Error('slots not found in __propDef');
 	}
 
 	const slotsString = slotsMatch[1];
@@ -240,63 +242,65 @@ function extractPropDefFromString(fileContent) {
 }
 
 function fromPropDefStringToJSON(str = '') {
-	const startIndex = str.indexOf("declare const __propDef: {");
-	const endIndex = str.lastIndexOf("};");
+	const startIndex = str.indexOf('declare const __propDef: {');
+	const endIndex = str.lastIndexOf('};');
 	const relevantStr = str.substring(startIndex, endIndex + 3);
-	const lines = relevantStr.split("\n");
+	const lines = relevantStr.split('\n');
 
 	const props = {};
 	const events = {};
 	const slots = {};
-	let currentSection = "props"; // can be  "props" | "events" | "slots"
-	let currentComment = ""; // to store the comment of the current property 
+	let currentSection = 'props'; // can be  "props" | "events" | "slots"
+	let currentComment = ''; // to store the comment of the current property
 
 	for (const line of lines) {
-		if (line.includes("props: {")) {
-			currentSection = "props";
-		} else if (line.includes("events: {")) {
-			currentSection = "events";
-		} else if (line.includes("slots: {")) {
-			currentSection = "slots";
-		} else if (line.includes("};")) {
+		if (line.includes('props: {')) {
+			currentSection = 'props';
+		} else if (line.includes('events: {')) {
+			currentSection = 'events';
+		} else if (line.includes('slots: {')) {
+			currentSection = 'slots';
+		} else if (line.includes('};')) {
 			break;
-		} else if (line.trim().startsWith("/**")) {
-			currentComment = line.trim().replace(/\/\*\*\s*/, "").replace(/\s*\*\//, "");
+		} else if (line.trim().startsWith('/**')) {
+			currentComment = line
+				.trim()
+				.replace(/\/\*\*\s*/, '')
+				.replace(/\s*\*\//, '');
 		} else {
 			let [key, value = ''] = line
 				.trim()
-				.replace(/;/, "")
-				.split(":")
+				.replace(/;/, '')
+				.split(':')
 				.map((v) => v.trim());
 
 			const typeMatch = value.match(/\w+/);
 
-
-			let type = "any";
-			let defaultValue = "";
+			let type = 'any';
+			let defaultValue = '';
 			let optional = false;
 
 			if (key.includes('?')) {
 				optional = true;
-				key = key.replace('?', '')
+				key = key.replace('?', '');
 			}
 
 			if (typeMatch) {
 				type = typeMatch[0];
 				const defaultValueMatch = value.match(/=.*/);
 				if (defaultValueMatch) {
-					defaultValue = defaultValueMatch[0].replace(/=\s*/, "");
+					defaultValue = defaultValueMatch[0].replace(/=\s*/, '');
 				}
 			}
-			if (currentSection === "props") {
+			if (currentSection === 'props') {
 				props[key] = { type, defaultValue, comments: currentComment, optional };
-				currentComment = "";
-			} else if (currentSection === "events") {
+				currentComment = '';
+			} else if (currentSection === 'events') {
 				events[key] = { type, comments: currentComment };
-				currentComment = "";
-			} else if (currentSection === "slots") {
+				currentComment = '';
+			} else if (currentSection === 'slots') {
 				slots[key] = { type, comments: currentComment };
-				currentComment = "";
+				currentComment = '';
 			}
 		}
 	}
@@ -305,7 +309,7 @@ function fromPropDefStringToJSON(str = '') {
 }
 
 function createReadme(fileList) {
-	mkdir(dirPath + '/api', { recursive: true }, () => { });
+	mkdir(dirPath + '/api', { recursive: true }, () => {});
 	let keyDone = {};
 
 	let objImport = [];
@@ -325,33 +329,36 @@ function createReadme(fileList) {
 			const src = ('$sitedata/api/' + comp + '.md').replace(/\\/g, '/');
 			const srcApiFull = ('$sitedata/api/' + comp + '.api.md').replace(/\\/g, '/');
 
-			if (!keyDone[comp.toLowerCase()] && !file.toLowerCase().includes('demo') && !file.toLowerCase().includes('preview')) {
+			if (
+				!keyDone[comp.toLowerCase()] &&
+				!file.toLowerCase().includes('demo') &&
+				!file.toLowerCase().includes('preview')
+			) {
 				objImport.push(`import ${comp}ReadMe from "${src}"`);
 				objObj.push(`${comp.toLowerCase()}:${comp}ReadMe`);
-
-
 
 				objApiImport.push(`import ${comp}ApiReadMe from "${srcApiFull}"`);
 				objApiObj.push(`${comp.toLowerCase()}Api:${comp}ApiReadMe`);
 
-
 				keyDone[comp.toLowerCase()] = true;
 			}
-		} catch (e) { }
+		} catch (e) {}
 	});
 	// write catalog object
 	const finalObj = `export const componentReadMe = {${objObj.join(',\r\n')}}`;
 	const finalApiObj = `export const componentApiReadMe = {${objApiObj.join(',\r\n')}}`;
 
 	fs.writeFileSync(dirPath + '/api/indexApi.ts', objImport.join(';\r\n') + ';\r\n\r\n' + finalObj);
-	fs.writeFileSync(dirPath + '/api/indexApiFull.ts', objApiImport.join(';\r\n') + ';\r\n\r\n' + finalApiObj);
+	fs.writeFileSync(
+		dirPath + '/api/indexApiFull.ts',
+		objApiImport.join(';\r\n') + ';\r\n\r\n' + finalApiObj
+	);
 }
 
 // create a file
 
-
 const resultProps = getAllFiles(srcPackage, 'svelte.d.ts');
-// write methods from packaged components 
+// write methods from packaged components
 createMethods(resultProps);
 console.log(dirPath, 'component.api.md and component.md creation');
 // createReadme(resultProps);

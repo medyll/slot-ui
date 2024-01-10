@@ -1,34 +1,19 @@
 import { sveltekit } from '@sveltejs/kit/vite';
-import path from 'path'
-// import preprocess from 'svelte-preprocess';
+import { defineConfig } from 'vitest/config';
 
-/** @type {import('vite').UserConfig} */
-const config = { 
+export default defineConfig({
 	plugins: [sveltekit()],
-	resolve: {alias:{
-		'$components': path.resolve('./src/components'),  
-		'$contexts': path.resolve('./src/contexts'),
-		'$scripts': path.resolve('./src/lib/scripts'),
-		'$engine': path.resolve('./src/lib/engine'),
-		'$uses': path.resolve('./src/lib/uses'),
-		'$typings': path.resolve('./src/lib/types'),
-		'$sitedata': path.resolve('./src/lib/sitedata'),
-	}},
-	server: {
-		fs: {
-			// Allow serving files from one level up to the project root
-			// allow: ['..']
+	assetsInclude: ['**/*.md'],
+	test: {
+		include: ['src/**/*.{test,spec}.{js,ts}']
+	},
+	resolve: {
+		alias: {
+			$components: '/src/components',
+			$stores: '/src/stores',
+			$utils: '/src/utils',
+			$styles: '/src/styles',
+			$lib: '/src/lib'
 		}
-	},
-	optimizeDeps: {
-		include: [],
-		exclude: [],
-	},    
-	package: {
-		dir: 'package',
-		emitTypes: true,
-	},
-	external:['@sveltejs/kit/install-fetch'],
-};
-
-export default config;
+	}
+});

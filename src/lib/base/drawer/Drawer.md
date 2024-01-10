@@ -9,9 +9,9 @@ __propDef: {
         /** Should the drawer be open */ isOpen?: boolean | undefined;
         /** Should the closer icon be hidden */ hideCloseIcon?: boolean | undefined;
         /**
-             * position
-             * @type 'wide' | 'inplace'
-             */ flow?: "relative" | "absolute" | "fixed" | undefined;
+           * position
+           * @type 'wide' | 'inplace'
+           */ flow?: "relative" | "absolute" | "fixed" | undefined;
         stickTo?: "left" | "right" | "top" | "bottom" | undefined;
         showOpenerIcon?: boolean | undefined;
         toggle?: ((visibleSate?: boolean) => void) | undefined;
@@ -28,9 +28,9 @@ __propDef: {
     };
     slots: {
         iconSlot: {};
-        topSlot: {};
+        drawerTop: {};
         default: {};
-        bottomSlot: {};
+        drawerBottom: {};
     };
 };
 

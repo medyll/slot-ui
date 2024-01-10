@@ -1,5 +1,5 @@
-```import { SvelteComponentTyped } from "svelte";
-import { type UsePopperProps } from '../../ui/popper/usePopper';
+```import { SvelteComponent } from "svelte";
+import { type UsePopperProps } from '../../../../../../../src/lib/ui/popper/usePopper';
 declare const __propDef: {
     props: {
         [x: string]: any;
@@ -26,10 +26,10 @@ declare const __propDef: {
         inputEnd: {};
     };
 };
-export declare type InputProps = typeof __propDef.props;
-export declare type InputEvents = typeof __propDef.events;
-export declare type InputSlots = typeof __propDef.slots;
-export default class Input extends SvelteComponentTyped<InputProps, InputEvents, InputSlots> {
+export type InputProps = typeof __propDef.props;
+export type InputEvents = typeof __propDef.events;
+export type InputSlots = typeof __propDef.slots;
+export default class Input extends SvelteComponent<InputProps, InputEvents, InputSlots> {
     get type(): string | undefined;
     /**accessor*/
     set type(_: string | undefined);

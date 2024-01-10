@@ -1,5 +1,5 @@
-```import { SvelteComponentTyped } from "svelte";
-import type { ElementProps } from "../../types/index.js";
+```import { SvelteComponent } from "svelte";
+import type { ElementProps } from "../../../../../../../src/lib/types/index.js";
 declare const __propDef: {
     props: {
         /** Id of the component's instance */ frameId?: string | undefined;
@@ -44,10 +44,10 @@ declare const __propDef: {
         windowButtonZone: {};
     };
 };
-export declare type WindowProps = typeof __propDef.props;
-export declare type WindowEvents = typeof __propDef.events;
-export declare type WindowSlots = typeof __propDef.slots;
-export default class Window extends SvelteComponentTyped<WindowProps, WindowEvents, WindowSlots> {
+export type WindowProps = typeof __propDef.props;
+export type WindowEvents = typeof __propDef.events;
+export type WindowSlots = typeof __propDef.slots;
+export default class Window extends SvelteComponent<WindowProps, WindowEvents, WindowSlots> {
     get actions(): {
         close: () => void;
         setActive: () => void;

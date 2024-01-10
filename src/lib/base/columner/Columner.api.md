@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         [x: string]: any;
@@ -10,10 +10,10 @@ declare const __propDef: {
         default: {};
     };
 };
-export declare type ColumnerProps = typeof __propDef.props;
-export declare type ColumnerEvents = typeof __propDef.events;
-export declare type ColumnerSlots = typeof __propDef.slots;
-export default class Columner extends SvelteComponentTyped<ColumnerProps, ColumnerEvents, ColumnerSlots> {
+export type ColumnerProps = typeof __propDef.props;
+export type ColumnerEvents = typeof __propDef.events;
+export type ColumnerSlots = typeof __propDef.slots;
+export default class Columner extends SvelteComponent<ColumnerProps, ColumnerEvents, ColumnerSlots> {
 }
 export {};
 

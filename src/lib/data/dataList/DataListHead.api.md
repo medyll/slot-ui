@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         style?: string | undefined;
@@ -13,10 +13,10 @@ declare const __propDef: {
         default: {};
     };
 };
-export declare type DataListHeadProps = typeof __propDef.props;
-export declare type DataListHeadEvents = typeof __propDef.events;
-export declare type DataListHeadSlots = typeof __propDef.slots;
-export default class DataListHead extends SvelteComponentTyped<DataListHeadProps, DataListHeadEvents, DataListHeadSlots> {
+export type DataListHeadProps = typeof __propDef.props;
+export type DataListHeadEvents = typeof __propDef.events;
+export type DataListHeadSlots = typeof __propDef.slots;
+export default class DataListHead extends SvelteComponent<DataListHeadProps, DataListHeadEvents, DataListHeadSlots> {
 }
 export {};
 

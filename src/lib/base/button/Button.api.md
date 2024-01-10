@@ -1,5 +1,5 @@
-```import { SvelteComponentTyped } from "svelte";
-import { type UsePopperProps } from '../../ui/popper/usePopper.js';
+```import { SvelteComponent } from "svelte";
+import { type UsePopperProps } from '../../../../../../../src/lib/ui/popper/usePopper.js';
 declare const __propDef: {
     props: {
         [x: string]: any;
@@ -48,10 +48,10 @@ declare const __propDef: {
         buttonPopper: {};
     };
 };
-export declare type ButtonProps = typeof __propDef.props;
-export declare type ButtonEvents = typeof __propDef.events;
-export declare type ButtonSlots = typeof __propDef.slots;
-export default class Button extends SvelteComponentTyped<ButtonProps, ButtonEvents, ButtonSlots> {
+export type ButtonProps = typeof __propDef.props;
+export type ButtonEvents = typeof __propDef.events;
+export type ButtonSlots = typeof __propDef.slots;
+export default class Button extends SvelteComponent<ButtonProps, ButtonEvents, ButtonSlots> {
 }
 export {};
 

@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         contextKey?: any;
@@ -9,11 +9,11 @@ declare const __propDef: {
     };
     slots: {};
 };
-export declare type ContextRooterProps = typeof __propDef.props;
-export declare type ContextRooterEvents = typeof __propDef.events;
-export declare type ContextRooterSlots = typeof __propDef.slots;
-export default class ContextRooter extends SvelteComponentTyped<ContextRooterProps, ContextRooterEvents, ContextRooterSlots> {
-    get contextRoot(): unknown;
+export type ContextRooterProps = typeof __propDef.props;
+export type ContextRooterEvents = typeof __propDef.events;
+export type ContextRooterSlots = typeof __propDef.slots;
+export default class ContextRooter extends SvelteComponent<ContextRooterProps, ContextRooterEvents, ContextRooterSlots> {
+    get contextRoot(): {};
     get contextKey(): any;
     /**accessor*/
     set contextKey(_: any);

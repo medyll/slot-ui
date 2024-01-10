@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         name: string;
@@ -16,10 +16,10 @@ declare const __propDef: {
         default: {};
     };
 };
-export declare type SwitchProps = typeof __propDef.props;
-export declare type SwitchEvents = typeof __propDef.events;
-export declare type SwitchSlots = typeof __propDef.slots;
-export default class Switch extends SvelteComponentTyped<SwitchProps, SwitchEvents, SwitchSlots> {
+export type SwitchProps = typeof __propDef.props;
+export type SwitchEvents = typeof __propDef.events;
+export type SwitchSlots = typeof __propDef.slots;
+export default class Switch extends SvelteComponent<SwitchProps, SwitchEvents, SwitchSlots> {
     get name(): string;
     /**accessor*/
     set name(_: string);

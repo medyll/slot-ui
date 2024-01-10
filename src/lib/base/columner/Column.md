@@ -10,7 +10,7 @@ __propDef: {
         [evt: string]: CustomEvent<any>;
     };
     slots: {
-        topSlot: {};
+        drawerTop: {};
         default: {};
         bottomSLot: {};
     };

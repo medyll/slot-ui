@@ -1,5 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
-import type { SvelteComponent } from 'svelte';
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         /** @restProps {button | a} */ class?: string | undefined;
@@ -30,10 +29,10 @@ declare const __propDef: {
         default: {};
     };
 };
-export declare type CartoucheProps = typeof __propDef.props;
-export declare type CartoucheEvents = typeof __propDef.events;
-export declare type CartoucheSlots = typeof __propDef.slots;
-export default class Cartouche extends SvelteComponentTyped<CartoucheProps, CartoucheEvents, CartoucheSlots> {
+export type CartoucheProps = typeof __propDef.props;
+export type CartoucheEvents = typeof __propDef.events;
+export type CartoucheSlots = typeof __propDef.slots;
+export default class Cartouche extends SvelteComponent<CartoucheProps, CartoucheEvents, CartoucheSlots> {
     get actions(): {
         open: () => void;
         toggle: () => void;

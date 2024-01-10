@@ -1,45 +1,23 @@
-import adapter from '@sveltejs/adapter-vercel'; 
-import preprocess from 'svelte-preprocess';
-import { mdsvex } from 'mdsvex';
-import mm from 'micromatch'; 
-import path from 'path'
+import adapter from '@sveltejs/adapter-auto';
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
-function filterExport(filepath) { 
-	
-	// return mm.contains(filepath,'Backdrop.svelte')
-
-	return !mm.contains(filepath, [
-		'*.demo.svelte',
-		'*Demo.svelte',
-		'*preview.svelte',
-		// '*sitedata*',
-		'*.md',
-		'*Example.svelte',
-		'*indexApi*',
-		'*Readme*',
-	])
-}
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	package: {
-		exports: (filepath) => filterExport(filepath),
-		files: (filepath) => filterExport(filepath),
-	},
-	preprocess: [
-		preprocess(),
-		mdsvex({
-			extensions: ['.md']
-		})
-	],
-	extensions: ['.svelte', '.md'],
+	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
+	// for more information about preprocessors
+	preprocess: vitePreprocess(),
+
 	kit: {
-		adapter: adapter({
-			edge: false,
-			external: ['@sveltejs/kit/install-fetch'],
-			split: true
-		}),
-		paths: { 
-			base: ''
+		// adapter-auto only supports some environments, see https://kit.svelte.dev/docs/adapter-auto for a list.
+		// If your environment is not supported or you settled on a specific environment, switch out the adapter.
+		// See https://kit.svelte.dev/docs/adapters for more information about adapters.
+		adapter: adapter(),
+		alias: {
+			$components: '/src/components',
+			$stores: '/src/stores',
+			$utils: '/src/utils',
+			$styles: '/src/styles',
+			$lib: '/src/lib'
 		}
 	}
 };

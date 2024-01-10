@@ -47,7 +47,7 @@ for (const filePath of allFiles) {
 }
 // forge new ones
 for (const filePath of allFiles) {
-    break;
+    //break;
     const file = filePath.split('\\').slice(-1).toString();
     const path = filePath.replace(file, '')
 

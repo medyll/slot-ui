@@ -12,6 +12,7 @@ __propDef: {
         /** ed data */ selectedData?: Data[] | undefined;
         /** ed selected paths */ selectedPathes?: string[] | undefined;
         /** the split we use to build hierarchy */ splitter?: string | undefined;
+        /** show checkbox to select */ showCheckBox?: boolean | undefined;
         selectedCategory?: string | undefined;
     };
     events: {

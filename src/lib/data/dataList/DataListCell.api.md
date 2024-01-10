@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         [x: string]: any;
@@ -20,10 +20,10 @@ declare const __propDef: {
         };
     };
 };
-export declare type DataListCellProps = typeof __propDef.props;
-export declare type DataListCellEvents = typeof __propDef.events;
-export declare type DataListCellSlots = typeof __propDef.slots;
-export default class DataListCell extends SvelteComponentTyped<DataListCellProps, DataListCellEvents, DataListCellSlots> {
+export type DataListCellProps = typeof __propDef.props;
+export type DataListCellEvents = typeof __propDef.events;
+export type DataListCellSlots = typeof __propDef.slots;
+export default class DataListCell extends SvelteComponent<DataListCellProps, DataListCellEvents, DataListCellSlots> {
     get element(): HTMLElement | undefined;
     /**accessor*/
     set element(_: HTMLElement | undefined);

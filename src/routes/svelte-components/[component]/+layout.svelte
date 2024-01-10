@@ -1,13 +1,8 @@
 <script lang="ts">
-	import Paper from '$lib/base/paper/Paper.svelte';
-	import { slotUiComponentList } from '$sitedata/componentList';
-
-	export let component: string = '';
 	/** @type {import('./$types').LayoutData} */
-	export let data:any = {} 
+	export let data: any = {};
 
-	$: title= data?.component + ' component details' 
- 
+	$: title = data?.component + ' component details';
 </script>
 
 <svelte:head>

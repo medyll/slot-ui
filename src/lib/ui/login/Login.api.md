@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 import { fade } from 'svelte/transition';
 declare const __propDef: {
     props: {
@@ -32,10 +32,10 @@ declare const __propDef: {
         default: {};
     };
 };
-export declare type LoginProps = typeof __propDef.props;
-export declare type LoginEvents = typeof __propDef.events;
-export declare type LoginSlots = typeof __propDef.slots;
-export default class Login extends SvelteComponentTyped<LoginProps, LoginEvents, LoginSlots> {
+export type LoginProps = typeof __propDef.props;
+export type LoginEvents = typeof __propDef.events;
+export type LoginSlots = typeof __propDef.slots;
+export default class Login extends SvelteComponent<LoginProps, LoginEvents, LoginSlots> {
     get actions(): {
         toggle: (lo?: boolean | undefined) => void;
         toggleLoading: (lo?: boolean | undefined) => void;

@@ -1,18 +1,18 @@
-```import { SvelteComponentTyped } from "svelte";
-export declare type GroupItemType = {
+```import { SvelteComponent } from "svelte";
+export type GroupItemType = {
     primary: string;
     secondary: string;
     icon?: string;
     data?: Record<string, any>;
 };
-export declare type GroupTitleType = {
+export type GroupTitleType = {
     isGroup: boolean;
     code: string;
     primary: string;
     data?: Record<string, any>;
 };
-export declare type GroupedDataType = [GroupTitleType, Data[]][];
-export declare type Data = Record<string, any>;
+export type GroupedDataType = [GroupTitleType, Data[]][];
+export type Data = Record<string, any>;
 declare const __propDef: {
     props: {
         class?: string | undefined;
@@ -40,10 +40,10 @@ declare const __propDef: {
         default: {};
     };
 };
-export declare type GrouperProps = typeof __propDef.props;
-export declare type GrouperEvents = typeof __propDef.events;
-export declare type GrouperSlots = typeof __propDef.slots;
-export default class Grouper extends SvelteComponentTyped<GrouperProps, GrouperEvents, GrouperSlots> {
+export type GrouperProps = typeof __propDef.props;
+export type GrouperEvents = typeof __propDef.events;
+export type GrouperSlots = typeof __propDef.slots;
+export default class Grouper extends SvelteComponent<GrouperProps, GrouperEvents, GrouperSlots> {
     get groupBy(): (dataList: any[], groupField: string, opt?: {
         keepUngroupedData: boolean;
         fieldTitle?: string | undefined;

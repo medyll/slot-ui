@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         class?: string | undefined;
@@ -13,10 +13,10 @@ declare const __propDef: {
     };
     slots: {};
 };
-export declare type ProgressProps = typeof __propDef.props;
-export declare type ProgressEvents = typeof __propDef.events;
-export declare type ProgressSlots = typeof __propDef.slots;
-export default class Progress extends SvelteComponentTyped<ProgressProps, ProgressEvents, ProgressSlots> {
+export type ProgressProps = typeof __propDef.props;
+export type ProgressEvents = typeof __propDef.events;
+export type ProgressSlots = typeof __propDef.slots;
+export default class Progress extends SvelteComponent<ProgressProps, ProgressEvents, ProgressSlots> {
 }
 export {};
 

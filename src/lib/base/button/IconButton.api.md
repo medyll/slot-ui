@@ -1,5 +1,5 @@
-```import { SvelteComponentTyped } from "svelte";
-import type { ElementProps } from "../../types/index.js";
+```import { SvelteComponent } from "svelte";
+import type { ElementProps } from "../../../../../../../src/lib/types/index.js";
 declare const __propDef: {
     props: {
         class?: string | undefined;
@@ -20,10 +20,10 @@ declare const __propDef: {
         default: {};
     };
 };
-export declare type IconButtonProps = typeof __propDef.props;
-export declare type IconButtonEvents = typeof __propDef.events;
-export declare type IconButtonSlots = typeof __propDef.slots;
-export default class IconButton extends SvelteComponentTyped<IconButtonProps, IconButtonEvents, IconButtonSlots> {
+export type IconButtonProps = typeof __propDef.props;
+export type IconButtonEvents = typeof __propDef.events;
+export type IconButtonSlots = typeof __propDef.slots;
+export default class IconButton extends SvelteComponent<IconButtonProps, IconButtonEvents, IconButtonSlots> {
 }
 export {};
 

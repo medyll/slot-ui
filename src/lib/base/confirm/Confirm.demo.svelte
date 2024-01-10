@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Button from '$lib/base/button/Button.svelte';
-	import Confirm from './Confirm.svelte';
+	import Confirm from '$lib/base/confirm/Confirm.svelte';
 
 	/* demo */
 	import ComponentExample from '$lib/demo/ComponentExample.svelte';
@@ -8,9 +8,7 @@
 	import DemoPage from '$lib/base/demoer/DemoPage.svelte';
 	/* demo */
 
-	let parametersSlot: any = {
-		
-	};
+	let parametersSlot: any = {};
 
 	let parametersProps: any = {
 		primaryInitial: {
@@ -35,7 +33,7 @@
 		},
 		icon: {
 			type: 'icon',
-			values: ['mdi:close',  undefined]
+			values: ['mdi:close', undefined]
 		},
 		iconColor: {
 			type: 'icon',
@@ -43,7 +41,7 @@
 		},
 		iconSize: {
 			type: 'icon-size',
-			values: ['default','small']
+			values: ['default', 'small']
 		},
 		...parametersSlot
 	};
@@ -62,10 +60,10 @@
 		primary: parametersProps.primary.values[0],
 		icon: parametersProps.icon.values[0],
 		iconColor: parametersProps.iconColor.values[0],
-		iconSize: parametersProps.iconSize.values[0],
+		iconSize: parametersProps.iconSize.values[0]
 	};
 
-let codeSlot = `
+	let codeSlot = `
 <Confirm>
 	<Button  
 	slot="initial" 
@@ -78,7 +76,7 @@ let codeSlot = `
 	</Button>
 </Confirm>`;
 
-let codeProps = `
+	let codeProps = `
 <Confirm
   primary="confirm deletion" />`;
 </script>
@@ -92,8 +90,10 @@ V.Hugo 1850"
 	<div class="flex-v gap-large">
 		<DemoPage title="Using slots" component="Chipper" code={codeSlot}>
 			<Demoer parameters={parametersSlot} componentArgs={componentArgsSlot} let:activeParams>
-				<Confirm {...activeParams} >
-					<Button  slot="initial" icon="fa-solid:question" size="large">Would you please click once ?</Button>
+				<Confirm {...activeParams}>
+					<Button slot="initial" icon="fa-solid:question" size="large"
+						>Would you please click once ?</Button
+					>
 					<Button focus type="submit" size="medium">confirm</Button>
 				</Confirm>
 			</Demoer>
@@ -105,4 +105,3 @@ V.Hugo 1850"
 		</DemoPage>
 	</div>
 </ComponentExample>
-

@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         class?: string | undefined;
@@ -17,10 +17,10 @@ declare const __propDef: {
         default: {};
     };
 };
-export declare type BadgeProps = typeof __propDef.props;
-export declare type BadgeEvents = typeof __propDef.events;
-export declare type BadgeSlots = typeof __propDef.slots;
-export default class Badge extends SvelteComponentTyped<BadgeProps, BadgeEvents, BadgeSlots> {
+export type BadgeProps = typeof __propDef.props;
+export type BadgeEvents = typeof __propDef.events;
+export type BadgeSlots = typeof __propDef.slots;
+export default class Badge extends SvelteComponent<BadgeProps, BadgeEvents, BadgeSlots> {
 }
 export {};
 

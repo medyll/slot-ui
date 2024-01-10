@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 import type { DataCellType, groupByOptions } from "./types.js";
 declare const __propDef: {
     props: {
@@ -38,8 +38,8 @@ declare const __propDef: {
         dataListCell: {
             fieldName: string;
             fieldType: string | undefined;
-            fieldRawValue: string;
-            fieldValue: string;
+            fieldRawValue: any;
+            fieldValue: any;
         };
         default: {
             rawData: any;
@@ -49,10 +49,10 @@ declare const __propDef: {
         dataListFooter: {};
     };
 };
-export declare type DataListProps = typeof __propDef.props;
-export declare type DataListEvents = typeof __propDef.events;
-export declare type DataListSlots = typeof __propDef.slots;
-export default class DataList extends SvelteComponentTyped<DataListProps, DataListEvents, DataListSlots> {
+export type DataListProps = typeof __propDef.props;
+export type DataListEvents = typeof __propDef.events;
+export type DataListSlots = typeof __propDef.slots;
+export default class DataList extends SvelteComponent<DataListProps, DataListEvents, DataListSlots> {
     get class(): string | undefined;
     /**accessor*/
     set class(_: string | undefined);

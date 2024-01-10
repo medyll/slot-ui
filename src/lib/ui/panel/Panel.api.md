@@ -1,4 +1,4 @@
-```import { SvelteComponentTyped } from "svelte";
+```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
         title?: string | undefined;
@@ -23,10 +23,10 @@ declare const __propDef: {
         };
     };
 };
-export declare type PanelProps = typeof __propDef.props;
-export declare type PanelEvents = typeof __propDef.events;
-export declare type PanelSlots = typeof __propDef.slots;
-export default class Panel extends SvelteComponentTyped<PanelProps, PanelEvents, PanelSlots> {
+export type PanelProps = typeof __propDef.props;
+export type PanelEvents = typeof __propDef.events;
+export type PanelSlots = typeof __propDef.slots;
+export default class Panel extends SvelteComponent<PanelProps, PanelEvents, PanelSlots> {
     get actions(): {
         load: (args: any) => void;
     };

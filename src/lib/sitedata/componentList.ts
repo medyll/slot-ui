@@ -6,6 +6,7 @@ import Buttondemosvelte from "$lib/base/button/Button.demo.svelte";
 import Cartouchedemosvelte from "$lib/base/cartouche/Cartouche.demo.svelte"; 
 import Chipperdemosvelte from "$lib/base/chipper/Chipper.demo.svelte"; 
 import Columnerdemosvelte from "$lib/base/columner/Columner.demo.svelte"; 
+import Confirmdemosvelte from "$lib/base/confirm/Confirm.demo.svelte"; 
 import Dividerdemosvelte from "$lib/base/divider/Divider.demo.svelte"; 
 import Drawerdemosvelte from "$lib/base/drawer/Drawer.demo.svelte"; 
 import Listdemosvelte from "$lib/base/list/List.demo.svelte"; 
@@ -21,7 +22,6 @@ import Finderdemosvelte from "$lib/data/finder/Finder.demo.svelte";
 import Grouperdemosvelte from "$lib/data/grouper/Grouper.demo.svelte"; 
 import Loaderdemosvelte from "$lib/data/loader/Loader.demo.svelte"; 
 import Sorterdemosvelte from "$lib/data/sorter/Sorter.demo.svelte"; 
-import Confirmdemosvelte from "$lib/form/confirm/Confirm.demo.svelte"; 
 import Inputdemosvelte from "$lib/form/input/Input.demo.svelte"; 
 import Selectdemosvelte from "$lib/form/select/Select.demo.svelte"; 
 import Switchdemosvelte from "$lib/form/switch/Switch.demo.svelte"; 
@@ -43,6 +43,7 @@ import ContextRooterdemosvelte from "$lib/utils/contextRooter/ContextRooter.demo
 {name:"Cartouche",code:"cartouche",component:Cartouchedemosvelte,group:"base"},
 {name:"Chipper",code:"chipper",component:Chipperdemosvelte,group:"base"},
 {name:"Columner",code:"columner",component:Columnerdemosvelte,group:"base"},
+{name:"Confirm",code:"confirm",component:Confirmdemosvelte,group:"base"},
 {name:"Divider",code:"divider",component:Dividerdemosvelte,group:"base"},
 {name:"Drawer",code:"drawer",component:Drawerdemosvelte,group:"base"},
 {name:"List",code:"list",component:Listdemosvelte,group:"base"},
@@ -58,7 +59,6 @@ import ContextRooterdemosvelte from "$lib/utils/contextRooter/ContextRooter.demo
 {name:"Grouper",code:"grouper",component:Grouperdemosvelte,group:"data"},
 {name:"Loader",code:"loader",component:Loaderdemosvelte,group:"data"},
 {name:"Sorter",code:"sorter",component:Sorterdemosvelte,group:"data"},
-{name:"Confirm",code:"confirm",component:Confirmdemosvelte,group:"form"},
 {name:"Input",code:"input",component:Inputdemosvelte,group:"form"},
 {name:"Select",code:"select",component:Selectdemosvelte,group:"form"},
 {name:"Switch",code:"switch",component:Switchdemosvelte,group:"form"},
