@@ -1,5 +1,5 @@
 import fsx from 'fs-extra';
-import path from 'path';
+// import path from 'path';
 import micromatch from 'micromatch';
 
 /**
@@ -44,7 +44,7 @@ function recursiveListSvelteFile(directory, target) {
                     moduleName: file.replace(/\.[^/.]+$/, "")
                 });
 
-                console.log(file)
+               // console.log(file)
             }
         }
     });
@@ -77,4 +77,4 @@ let fileInfoList = recursiveListSvelteFile('./src/lib', path.join('src', 'lib'))
 writeExportFromFileInfoList(fileInfoList);
 
 
-// console.log(fileInfoList)
+console.log(fileInfoList)
