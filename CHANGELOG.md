@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://github.com/medyll/slot-ui/compare/v0.0.4...v0.0.5) (2024-01-16)
+
+
+### Bug Fixes
+
+* Add mdsvex package and update dependencies ([4327915](https://github.com/medyll/slot-ui/commit/432791534833646cc55783d74ef54336ee4ca1bc))
+* data binding issue in layout.svelte ([79c5c98](https://github.com/medyll/slot-ui/commit/79c5c9820ca0043af8a62f0801f7523b7cff4666))
+
 ### [0.0.4](https://github.com/medyll/slot-ui/compare/v0.4.8...v0.0.4) (2024-01-10)
 
 
