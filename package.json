@@ -1,6 +1,6 @@
 {
 	"name": "slot-ui",
-	"version": "0.0.6-alpha.0",
+	"version": "0.1.0",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",
@@ -17,7 +17,8 @@
 		"build-docs": "node build-docs.js",
 		"prepare": "husky install",
 		"release": "standard-version",
-		"release:alpha": "standard-version --prerelease alpha"
+		"release:alpha": "standard-version --prerelease alpha",
+		"release:minor": "standard-version --release-as minor"
 	},
 	"exports": {
 		".": {
