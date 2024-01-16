@@ -56,8 +56,6 @@
 			}
 		});
 	});
-
-	$: console.log(data.slotuiCatalog);
 </script>
 
 <svelte:head>
