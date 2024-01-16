@@ -56,6 +56,8 @@
 			}
 		});
 	});
+
+	$: console.log(data.slotuiCatalog);
 </script>
 
 <svelte:head>
@@ -121,7 +123,7 @@
 					dataFieldName="code"
 					placeholder="Search component"
 					onPick={(args) => goto(sitePaths.component(args))}
-					data={Object.values(data?.data?.slotuiCatalog ?? {})}
+					data={Object.values(data?.slotuiCatalog ?? {})}
 				/>
 			{/await}
 			<ThemeSwitcher icon="mdi:paint-outline" title="toggle theme" />
