@@ -3,7 +3,7 @@
 	import Paper from '$lib/base/paper/Paper.svelte';
 	import { dataOp } from '$lib/engine/utils';
 	import { sitePaths } from '$lib/engine/site.utils.js';
-	import { componentCite } from '$lib/componentCite.js';
+	import { componentCite } from '$lib/sitedata/componentCite.js';
 	import Icon from '$lib/base/icon/Icon.svelte';
 
 	export let componentCode: string;

@@ -1,14 +1,10 @@
 <script lang="ts">
 	import * as indexApi from '$lib/sitedata/api/indexApi.js';
-	import { componentReadMe } from '$lib/sitedata/api/indexApi.js';
-	import { slotuiCatalog } from '$lib/slotuiCatalog.js';
+	import { slotuiCatalog } from '$lib/sitedata/slotuiCatalog.js';
 	import { sitePaths } from '$lib/engine/site.utils.js';
-	import { componentCite } from '$lib/componentCite.js';
-	import { browser } from '$app/environment';
+	import { componentCite } from '$lib/sitedata/componentCite.js';
 	export let component: string = '';
 	export let cite: string = componentCite?.[component] ?? '';
-
-	$: finalCompReadMe = componentReadMe?.[component];
 
 	$: citation = componentCite?.[component.toLowerCase()]?.cite ?? '';
 	$: author = componentCite?.[component.toLowerCase()]?.author ?? '';
@@ -16,7 +12,6 @@
 	const compDet = Object.values(slotuiCatalog).find((x) => x.name === component);
 
 	$: CompReadMe = indexApi['AlertReadMe'];
-	$: console.log(indexApi['AlertReadMe']);
 </script>
 
 <div class="flex-v gap-large w-full">
@@ -35,11 +30,7 @@
 		<h5>Api preview :</h5>
 		<div class="marg-l-4">
 			readme
-			{#if browser}
-				{finalCompReadMe}
-				<CompReadMe />
-				<!-- <pre class="language-ts"><code><svelte:component this={finalCompReadMe} /></code></pre> -->
-			{/if}
+			<CompReadMe />
 		</div>
 	</div>
 	<div class="flex-v gap-medium">

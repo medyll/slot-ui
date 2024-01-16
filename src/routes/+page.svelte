@@ -10,7 +10,7 @@
 	import { sitePaths } from '$lib/engine/site.utils.js';
 	import Menu from '$lib/ui/menu/Menu.svelte';
 	import MenuItem from '$lib/ui/menu/MenuItem.svelte';
-	import { componentCite } from '$lib/componentCite.js';
+	import { componentCite } from '$lib/sitedata/componentCite.js';
 	import Backdrop from '$lib/base/backdrop/Backdrop.svelte';
 	import { slotUiComponentPreviewList } from '$lib/sitedata/componentPreviewList.js';
 	import type { LayoutData } from './$types';
