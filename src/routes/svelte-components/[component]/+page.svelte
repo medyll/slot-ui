@@ -1,17 +1,22 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import { slotUiComponentList } from '$lib/sitedata/componentList.js';
+	import * as ComponentList from '$lib/sitedata/componentList.js';
 	import { dataOp } from '$lib/engine/utils.js';
-	import { browser } from '$app/environment';
 
 	export let data: any = {};
 
-	let tt: any;
+	/* let tt: any;
 	$: tt = dataOp.filterListFirst(slotUiComponentList, data?.component, 'code');
 
-	$: console.log(tt);
+	$: console.log(tt); */
+	$: comp = (data?.component).charAt(0).toUpperCase() + (data?.component).slice(1) + 'DemoSvelte';
+
+	$: Comp = ComponentList[comp];
+	$: console.log(comp);
 </script>
 
 <div out:fade|global={{ duration: 200 }} in:fade|global={{ duration: 200 }}>
-	{#if browser && tt?.component}<svelte:component this={tt?.component} />{/if}
+	{#key comp}
+		<Comp />
+	{/key}
 </div>

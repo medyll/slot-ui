@@ -52,6 +52,11 @@ function recursiveListSvelteFile(directory, target) {
 	return svelteFiles;
 }
 
+function dotToCamelCase(str) {
+	return str.replace(/\.(\w)/g, function (match, letter) {
+		return letter.toUpperCase();
+	});
+}
 /**
  *
  * @param {Array.<FileInfo>} fileInfoList
@@ -60,12 +65,12 @@ function writeExportFromFileInfoList(fileInfoList) {
 	let exportString = '// Reexport of entry components\n';
 	fileInfoList.forEach((fileInfo) => {
 		let file = fileInfo.file;
-		let moduleName = fileInfo.moduleName;
+		let moduleName = dotToCamelCase(fileInfo.moduleName);
 		let path = fileInfo.path.replace(/\\/g, '/').replace('.ts', '.js');
 		let isSvelteFile = file.endsWith('.svelte');
 
 		if (!isSvelteFile) {
-			exportString += `export * from '.${path}';\n`;
+			exportString += `export *    from '.${path}';\n`;
 		} else {
 			exportString += `export { default as ${moduleName} } from '.${path}';\n`;
 		}
@@ -75,9 +80,9 @@ function writeExportFromFileInfoList(fileInfoList) {
 
 function slotUiPackageList() {
 	let fileInfoList = recursiveListSvelteFile('./src/lib', path.join('src', 'lib'));
-	writeExportFromFileInfoList(fileInfoList); 
+	writeExportFromFileInfoList(fileInfoList);
 }
 
 export { slotUiPackageList };
 
- slotUiPackageList();
+slotUiPackageList();

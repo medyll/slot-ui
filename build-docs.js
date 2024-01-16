@@ -56,9 +56,9 @@ const dirTree = (filename) => {
 function createFile(fileList) {
 	return fileList
 		?.map((fl) => {
-			const comp = fl.split('\\').slice(-1).toString()?.replace(/\./g, '');
+			const comp = dotToCamelCase(fl).split('\\').slice(-1).toString()?.replace(/\./g, '');
 			const src = libShort + fl.replace(/\\/g, '/');
-			return `import ${comp} from "${src}"; `;
+			return `import ${dotToCamelCase(comp)} from "${src}";\rexport {${dotToCamelCase(comp)}} ; `;
 		})
 		.join('\r\n');
 }
@@ -70,8 +70,8 @@ function createObject(fileList, exportName = 'slotUiComponentList') {
 	const middle = fileList
 		?.map((fl) => {
 			const group = fl.split('\\')[1];
-			const comp = fl.split('\\').slice(-1).toString()?.replace(/\./g, '');
-			const compName = fl.split('\\').slice(-1)[0].split('.')[0];
+			const comp = dotToCamelCase(fl).split('\\').slice(-1).toString()?.replace(/\./g, '');
+			const compName = dotToCamelCase(fl).split('\\').slice(-1)[0].split('.')[0];
 			const code = compName.toLowerCase();
 
 			const src = fl.replace(/\\/g, '/');
@@ -105,7 +105,11 @@ function createComponentList(fileList, exportName = 'slotUiComponentList') {
 
 	return start + middle + end;
 }
-
+function dotToCamelCase(str) {
+	return str.replace(/\.(\w)/g, function (match, letter) {
+		return letter.toUpperCase();
+	});
+}
 /** writes .md and api.md from packageDir  */
 function createMethods(fileList) {
 	mkdir(dirPath + '/api', { recursive: true }, () => {});
@@ -140,25 +144,15 @@ function createMethods(fileList) {
 				!file.toLowerCase().includes('demo') &&
 				!file.toLowerCase().includes('preview')
 			) {
-				objImport.push(`import ${comp}ReadMe from "${srcDoc}"`);
+				objImport.push(`import ${comp}ReadMe from "${srcDoc}";\r export {${comp}ReadMe};`);
 				objObj.push(`${comp.toLowerCase()}:${comp}ReadMe`);
 
-				collectedComps.push(`${comp}ReadMe`);
-
-				/* objImport.push(`import ${comp}ReadMe from "${src}"`);
-				objObj.push(`${comp.toLowerCase()}:${comp}ReadMe`); */
-				// if (!newContent) newContent = data; // console.log({file, frag,data});; //newContent = data; //
-
-				/* fs.writeFileSync(
-					dirPath + '/api/' + comp + '.md',
-					newContent ? '```ts \r\n' + newContent + '\r\n ```' : 'missing'
-				); */
+				collectedComps.push(`${comp}ReadMe`); 
+ 
 
 				objApiImport.push(`import ${comp}ApiReadMe from "${srcApi}"`);
 				objApiObj.push(`${comp.toLowerCase()}Api:${comp}ApiReadMe`);
-
-				/* objApiImport.push(`import ${comp}ApiReadMe from "${srcApiFull}"`);
-				objApiObj.push(`${comp.toLowerCase()}Api:${comp}ApiReadMe`); */
+ 
 
 				// array uniques
 				objObj.filter((v, i, a) => a.indexOf(v) === i);

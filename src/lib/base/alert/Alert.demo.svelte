@@ -23,17 +23,16 @@
 	let componentArgs2 = {
 		...componentArgs,
 		text: 'Some informational message',
-		message: 'Some informational message',
+		message: 'Some informational message'
 	};
 
-
-let code1 = `
+	let code1 = `
 <Alert >
 	Simple alert with a button
 	<Button slot="topButtonSlot">button</Button>
-</Alert>`
-let code2 = `
-<Alert />	`
+</Alert>`;
+	let code2 = `
+<Alert />	`;
 </script>
 
 <ComponentExample
@@ -64,7 +63,7 @@ let code2 = `
 	<DemoPage title="Using props" component="Alert" code={code2}>
 		<Demoer {parameters} {componentArgs2} let:activeParams>
 			<div class="flex-h flex-wrap gap-medium">
-				<Alert {...activeParams} />				 
+				<Alert {...activeParams} />
 			</div>
 		</Demoer>
 	</DemoPage>
