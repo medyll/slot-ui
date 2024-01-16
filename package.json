@@ -18,7 +18,9 @@
 		"prepare": "husky install",
 		"release": "standard-version",
 		"release:alpha": "standard-version --prerelease alpha",
-		"release:minor": "standard-version --release-as minor"
+		"release:beta": "standard-version --prerelease beta",
+		"release:minor": "standard-version --release-as minor",
+		"publish": "npm run package"
 	},
 	"exports": {
 		".": {
@@ -32,8 +34,8 @@
 		"!dist/**/*.spec.*"
 	],
 	"peerDependencies": {
-		"svelte": "^4.0.0",
-		"svelte-kit": "latest"
+		"svelte": "4.2.8",
+		"@sveltejs/kit": "2.2.1"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^18.4.4",

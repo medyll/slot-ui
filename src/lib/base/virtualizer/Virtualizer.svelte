@@ -4,14 +4,13 @@
 	import { createEventForwarder } from '../../engine/engine.js';
 	import { get_current_component, onDestroy, query_selector_all } from 'svelte/internal';
 	import { browser } from '$app/environment';
-	import type { number } from 'svelte-use-form';
 
 	/*  common slotUi exports*/
 	let className = '';
 	export { className as class };
 	export let element: HTMLDivElement | null = null;
 	const forwardEvents = createEventForwarder(get_current_component());
-	export let style:string='';
+	export let style: string = '';
 	/*  end slotUi exports*/
 
 	// props
@@ -164,7 +163,6 @@
 		data = [];
 		handle_scroll = undefined;
 	});
- 
 </script>
 
 <viewport
