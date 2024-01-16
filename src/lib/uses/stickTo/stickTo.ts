@@ -1,4 +1,6 @@
-export type StickToPositionType = 'TL' | 'TR' | 'TC' | 'T' | 'BR' | 'B' | 'BL' | 'BC';
+import { Position } from '$lib/engine/presets.js';
+
+export type StickToPositionType = keyof typeof Position;
 
 type StickToProps = {
 	parentNode: HTMLElement | undefined;
@@ -24,7 +26,7 @@ export function stickTo(node: HTMLElement, props: StickToProps) {
 		const parentPos = parentNode.getBoundingClientRect();
 		let newPos: string = position;
 
-		if (nodePos.height > document.body.offsetHeight) {
+		/* if (nodePos.height > document.body.offsetHeight) {
 			newPos = position.replace('B', 'T');
 		} else if (parentPos.top + nodePos.height < document.body.offsetHeight) {
 			newPos = position.replace('T', 'B');
@@ -33,19 +35,19 @@ export function stickTo(node: HTMLElement, props: StickToProps) {
 			newPos = position.replace('R', 'L');
 		} else if (nodePos.left < 0) {
 			newPos = position.replace('L', 'R');
-		}
+		} */
 
 		return newPos;
 	}
 
 	function checkBoundaries(node: HTMLElement) {
-		const nodePos = parentNode.getBoundingClientRect();
+		/* const nodePos = parentNode.getBoundingClientRect();
 		if (nodePos.left < 0) node.style.left = '0px';
 		if (nodePos.top < 0) node.style.top = '0px';
 		if (nodePos.top > document.body.offsetHeight)
 			node.style.top = `${document.body.offsetHeight - nodePos.height}px`;
 		if (nodePos.right > document.body.offsetWidth)
-			node.style.left = `${document.body.offsetWidth - nodePos.width}px`;
+			node.style.left = `${document.body.offsetWidth - nodePos.width}px`; */
 	}
 
 	function setPosition(node: HTMLElement, position: any, parentNode: HTMLElement) {
@@ -53,29 +55,27 @@ export function stickTo(node: HTMLElement, props: StickToProps) {
 
 		const newPosition = checkPos(node, parentNode, position);
 
-		node.style.right = '';
+		/* node.style.right = '';
 		node.style.left = '';
 		node.style.bottom = '';
-		node.style.top = '';
+		node.style.top = ''; */
 
 		if (stickToHookWidth) node.style.minWidth = String(parentPos.width) + 'px';
 
-		if (newPosition.includes('B')) {
-			node.style.bottom = '';
-			node.style.top = String(parentPos.bottom) + 'px';
-		}
-		if (newPosition.includes('T')) {
-			node.style.bottom = '';
+		if (newPosition.includes(Position.T)) {
 			node.style.top = String(parentPos.top - node.offsetHeight) + 'px';
 		}
-		if (newPosition.includes('L')) {
+		if (newPosition.includes(Position.R)) {
+			node.style.left = String(parentPos.right - node.offsetWidth) + 'px';
+		}
+		if (newPosition.includes(Position.B)) {
+			node.style.top = String(parentPos.bottom) + 'px';
+		}
+		if (newPosition.includes(Position.L)) {
 			node.style.left = String(parentPos.left) + 'px';
 		}
-		if (newPosition.includes('R')) {
-			node.style.left = String(parentPos.left - node.offsetWidth + parentPos.width) + 'px';
-		}
 
-		if (newPosition.includes('C')) {
+		if (newPosition.includes(Position.C)) {
 			node.style.left = String(parentPos.left + parentPos.width / 2 - node.offsetWidth / 2) + 'px';
 		}
 
