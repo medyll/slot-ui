@@ -139,7 +139,7 @@
 	</div>
 {/if}
 
-<style lang="scss">
+<style global lang="scss">
 	@import '../../styles/slotui-vars.scss';
 	@import '../../styles/presets.scss';
 	.popper {
@@ -152,5 +152,16 @@
 		display: inline-block;
 		top: 0;
 		z-index: 30000;
+		&::popover-open {
+			border: 1px color red;
+			margin: none !important;
+			padding: none !important;
+		}
+	}
+
+	.popper:popover-open {
+		border: 1px color red;
+		margin: none !important;
+		padding: none !important;
 	}
 </style>
