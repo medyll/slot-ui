@@ -1,5 +1,5 @@
 <script lang="ts">
-	//import * as indexApi from '$lib/sitedata/api/indexApi.js';
+	import * as indexApi from '$lib/sitedata/api/indexApi.js';
 	import { componentReadMe } from '$lib/sitedata/api/indexApi.js';
 	import { slotuiCatalog } from '$lib/slotuiCatalog.js';
 	import { sitePaths } from '$lib/engine/site.utils.js';
@@ -15,8 +15,8 @@
 
 	const compDet = Object.values(slotuiCatalog).find((x) => x.name === component);
 
-	/* $: CompReadMe = indexApi['AlertReadMe'];
-	$: console.log(indexApi['AlertReadMe']); */
+	$: CompReadMe = indexApi['AlertReadMe'];
+	$: console.log(indexApi['AlertReadMe']);
 </script>
 
 <div class="flex-v gap-large w-full">
@@ -34,10 +34,10 @@
 	<div class="flex-v gap-medium">
 		<h5>Api preview :</h5>
 		<div class="marg-l-4">
-			{#if browser && finalCompReadMe}
-				readme
+			readme
+			{#if browser}
 				{finalCompReadMe}
-				<!-- <CompReadMe /> -->
+				<CompReadMe />
 				<!-- <pre class="language-ts"><code><svelte:component this={finalCompReadMe} /></code></pre> -->
 			{/if}
 		</div>
