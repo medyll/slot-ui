@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { createEventForwarder } from '$lib/engine/engine.js';
-	import { get_current_component, get_slot_changes, null_to_empty } from 'svelte/internal';
 	import { popper, type UsePopperProps } from '$lib/ui/popper/usePopper.js';
 	import type { ElementProps } from '$lib/types/index.js';
 	import Divider from '$lib/base/divider/Divider.svelte';
@@ -15,7 +13,6 @@
 	let className = '';
 	export { className as class };
 	export let element: HTMLButtonElement | null = null;
-	const forwardEvents = createEventForwarder(get_current_component());
 	/*  end slotUi exports*/
 
 	let buttonType = 'button';
@@ -128,7 +125,6 @@
 		class:loading
 		bind:this={element}
 		use:popper={usePopper}
-		use:forwardEvents
 		use:useAutoFocus
 		on:click
 		on:clickAway={() => {
@@ -162,7 +158,7 @@
 			{/if}
 			{#if $$slots.default ?? primary}
 				<div class="central">
-					<slot>{null_to_empty(primary)}</slot>
+					<slot>{primary ?? ''}</slot>
 				</div>
 			{/if}
 			{#if $$slots.buttonEnd || endIcon}

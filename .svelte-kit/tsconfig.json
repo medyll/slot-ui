@@ -2,28 +2,28 @@
 	"compilerOptions": {
 		"paths": {
 			"$components": [
-				"../../../../src/components"
+				"../src/components"
 			],
 			"$components/*": [
-				"../../../../src/components/*"
+				"../src/components/*"
 			],
 			"$stores": [
-				"../../../../src/stores"
+				"../src/stores"
 			],
 			"$stores/*": [
-				"../../../../src/stores/*"
+				"../src/stores/*"
 			],
 			"$utils": [
-				"../../../../src/utils"
+				"../src/utils"
 			],
 			"$utils/*": [
-				"../../../../src/utils/*"
+				"../src/utils/*"
 			],
 			"$styles": [
-				"../../../../src/styles"
+				"../src/styles"
 			],
 			"$styles/*": [
-				"../../../../src/styles/*"
+				"../src/styles/*"
 			],
 			"$lib": [
 				"../src/lib"

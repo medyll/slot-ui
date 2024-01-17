@@ -1,5 +1,5 @@
 ```import { SvelteComponent } from "svelte";
-import type { ElementProps } from "../../../../../../../src/lib/types/index.js";
+import type { ElementProps } from '../../types/index.js';
 declare const __propDef: {
     props: {
         /** Id of the component's instance */ frameId?: string | undefined;
@@ -25,8 +25,8 @@ declare const __propDef: {
         /** icon used on the left side*/ icon?: string | undefined;
         iconClose?: string | undefined;
         iconValidate?: string | undefined;
-        flow?: ElementProps["flow"] | undefined;
-        /** start position */ startPosition?: "center" | "cascade" | "overlap" | undefined;
+        flow?: ElementProps['flow'] | undefined;
+        /** start position */ startPosition?: 'center' | 'cascade' | 'overlap' | undefined;
         /** close the window on accept */ closeOnValidate?: boolean | undefined;
         /** destroy the component on close */ removeFromDomOnClose?: boolean | undefined;
         /** used to destroy component when opened from function.openWindow */ self: any;

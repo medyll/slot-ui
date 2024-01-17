@@ -1,6 +1,6 @@
 ```import { SvelteComponent } from "svelte";
-import { type SvelteComponentDev } from "svelte/internal";
-import { type StickToPositionType } from "../../uses/stickTo/stickTo.js";
+import { type SvelteComponentDev } from 'svelte/internal';
+import { type StickToPositionType } from '../../uses/stickTo/stickTo.js';
 declare const __propDef: {
     props: {
         /** popper HTMLDivElement */ element?: Element | undefined;
@@ -62,9 +62,9 @@ export default class Popper extends SvelteComponent<PopperProps, PopperEvents, P
     get componentProps(): {} | undefined;
     /**accessor*/
     set componentProps(_: {} | undefined);
-    get position(): StickToPositionType | undefined;
+    get position(): "TC" | "TL" | "TR" | "BC" | "BL" | "BR" | "T" | "R" | "B" | "L" | "C" | undefined;
     /**accessor*/
-    set position(_: StickToPositionType | undefined);
+    set position(_: "TC" | "TL" | "TR" | "BC" | "BL" | "BR" | "T" | "R" | "B" | "L" | "C" | undefined);
     get content(): any;
     /**accessor*/
     set content(_: any);

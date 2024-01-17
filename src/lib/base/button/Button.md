@@ -33,6 +33,7 @@ __propDef: {
         secondary?: string | undefined;
         reverse?: boolean | undefined;
         ratio?: string | undefined;
+        buttonStart: string;
     };
     events: {
         click: MouseEvent;

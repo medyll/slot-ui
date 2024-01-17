@@ -1,6 +1,6 @@
 ```import { SvelteComponent } from "svelte";
 import type { LisItemProps } from "./types.js";
-import type { SorterFieldType } from "../../../../../../../src/lib/data/sorter/types.js";
+import type { SorterFieldType } from "../../data/sorter/types.js";
 declare const __propDef: {
     props: {
         class?: string | undefined;

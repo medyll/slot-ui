@@ -1,12 +1,12 @@
 ```import { SvelteComponent } from "svelte";
-import type { IMenuItemProps, IMenuProps } from '../../../../../../../src/lib/ui/menu/types';
+import type { IMenuItemProps, IMenuProps } from '../../ui/menu/types';
 declare const __propDef: {
     props: {
         icon?: string | undefined;
         menuData?: IMenuItemProps[] | undefined;
         actionComponent?: SvelteComponent | any;
         menuProps?: IMenuProps | undefined;
-        menuPosition?: import("../../index.js").StickToPositionType | undefined;
+        menuPosition?: "TC" | "TL" | "TR" | "BC" | "BL" | "BR" | "T" | "R" | "B" | "L" | "C" | undefined;
         class?: string | undefined;
         element?: HTMLElement | null | undefined;
     };
@@ -33,9 +33,9 @@ export default class ButtonMenu extends SvelteComponent<ButtonMenuProps, ButtonM
     get menuProps(): IMenuProps | undefined;
     /**accessor*/
     set menuProps(_: IMenuProps | undefined);
-    get menuPosition(): import("../../index.js").StickToPositionType | undefined;
+    get menuPosition(): "TC" | "TL" | "TR" | "BC" | "BL" | "BR" | "T" | "R" | "B" | "L" | "C" | undefined;
     /**accessor*/
-    set menuPosition(_: import("../../index.js").StickToPositionType | undefined);
+    set menuPosition(_: "TC" | "TL" | "TR" | "BC" | "BL" | "BR" | "T" | "R" | "B" | "L" | "C" | undefined);
     get class(): string | undefined;
     /**accessor*/
     set class(_: string | undefined);

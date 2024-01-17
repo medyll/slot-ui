@@ -1,5 +1,5 @@
 ```import { SvelteComponent } from "svelte";
-import { type UsePopperProps } from '../../../../../../../src/lib/ui/popper/usePopper.js';
+import { type UsePopperProps } from '../../ui/popper/usePopper.js';
 declare const __propDef: {
     props: {
         [x: string]: any;
@@ -34,6 +34,7 @@ declare const __propDef: {
         secondary?: string | undefined;
         reverse?: boolean | undefined;
         ratio?: string | undefined;
+        buttonStart: string;
     };
     events: {
         click: MouseEvent;

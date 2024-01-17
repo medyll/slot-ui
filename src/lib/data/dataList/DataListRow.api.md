@@ -7,7 +7,7 @@ declare const __propDef: {
         style?: string | undefined;
     };
     events: {
-        'datalist:sort:clicked': Event | MouseEvent | UIEvent | PointerEvent | KeyboardEvent | ProgressEvent<EventTarget> | AnimationEvent | InputEvent | FocusEvent | CompositionEvent | ClipboardEvent | DragEvent | ErrorEvent | FormDataEvent | SecurityPolicyViolationEvent | SubmitEvent | TouchEvent | TransitionEvent | WheelEvent;
+        'datalist:sort:clicked': Event | MouseEvent | UIEvent | PointerEvent | KeyboardEvent | AnimationEvent | InputEvent | FocusEvent | CompositionEvent | ClipboardEvent | DragEvent | ErrorEvent | FormDataEvent | ProgressEvent<EventTarget> | SecurityPolicyViolationEvent | SubmitEvent | TouchEvent | TransitionEvent | WheelEvent;
     } & {
         [evt: string]: CustomEvent<any>;
     };

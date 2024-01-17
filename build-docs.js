@@ -2,7 +2,6 @@ import fs, { mkdir } from 'fs';
 import path from 'path';
 
 import * as url from 'url';
-const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const srcPackage = path.join(__dirname, 'dist');
@@ -320,8 +319,8 @@ function createReadme(fileList) {
 			const comp = file.split('\\').slice(-1)[0].split('.')[0];
 			const newContent = frag?.[0]?.replace(/export/gm, '');
 
-			const src = ('$sitedata/api/' + comp + '.md').replace(/\\/g, '/');
-			const srcApiFull = ('$sitedata/api/' + comp + '.api.md').replace(/\\/g, '/');
+			const src = ('$lib/sitedata/api/' + comp + '.md').replace(/\\/g, '/');
+			const srcApiFull = ('$lib/sitedata/api/' + comp + '.api.md').replace(/\\/g, '/');
 
 			if (
 				!keyDone[comp.toLowerCase()] &&

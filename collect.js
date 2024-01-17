@@ -31,6 +31,7 @@ function recursiveListSvelteFile(directory, target) {
 					'*preview.svelte',
 					'*sitedata*',
 					'*.md',
+					'*.scss*',
 					'*wip*',
 					'*Example.svelte',
 					'*indexApi*',
@@ -70,9 +71,9 @@ function writeExportFromFileInfoList(fileInfoList) {
 		let isSvelteFile = file.endsWith('.svelte');
 
 		if (!isSvelteFile) {
-			exportString += `export *    from '.${path}';\n`;
+			exportString += `export * from '$lib${path}';\n`;
 		} else {
-			exportString += `export { default as ${moduleName} } from '.${path}';\n`;
+			exportString += `export { default as ${moduleName} } from '$lib${path}';\n`;
 		}
 	});
 	fsx.writeFileSync('./src/lib/index.ts', exportString);

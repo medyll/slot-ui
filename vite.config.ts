@@ -7,14 +7,5 @@ export default defineConfig({
 	assetsInclude: ['**/*.md'],
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
-	},
-	resolve: {
-		alias: {
-			$components: '/src/components',
-			$stores: '/src/stores',
-			$utils: '/src/utils',
-			$styles: '/src/styles',
-			$lib: '/src/lib'
-		}
 	}
 });
