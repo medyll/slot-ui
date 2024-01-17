@@ -3,14 +3,14 @@
 
 	import Icon from '$lib/base/icon/Icon.svelte';
 	import { openPopper } from '$lib/ui/popper/actions.js';
-	import {createEventForwarder} from '$lib/engine/engine.js';
-	import {get_current_component} from 'svelte/internal';
+	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
+	import { get_current_component } from 'svelte/internal';
 
 	/*  common slotUi exports*/
 	let className = '';
-	export {className as class};
+	export { className as class };
 	export let element: HTMLButtonElement | null = null;
-	const forwardEvents                          = createEventForwarder(get_current_component());
+	const forwardEvents = createEventForwarder(get_current_component());
 	/*  end slotUi exports*/
 
 	export let icon: string = 'faList';
@@ -29,7 +29,7 @@
 	};
 </script>
 
-<div bind:this={element}  use:forwardEvents class="buttonWrapper" on:click>
+<div bind:this={element} use:forwardEvents class="buttonWrapper" on:click>
 	<button bind:this={buttonRef}>
 		<Icon fontSize="small" icon="faList" />
 		{#if actionComponent}

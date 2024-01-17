@@ -2,7 +2,7 @@
 
 <script lang="ts">
 	/* common slotUi exports*/
-	import { createEventForwarder } from '$lib/engine/engine.js';
+	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
 	import { get_current_component } from 'svelte/internal';
 	let className = '';
 	export { className as class };

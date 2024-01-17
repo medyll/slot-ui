@@ -1,6 +1,7 @@
 <svelte:options accessors />
+
 <script lang="ts">
-	import { createEventForwarder } from '$lib/engine/engine.js';
+	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
 	import { popper, type UsePopperProps } from '$lib/ui/popper/usePopper';
 	import type { ElementProps } from '$lib/types/index.js';
 	import { compute_slots, get_current_component, text } from 'svelte/internal';
@@ -51,8 +52,8 @@
 	}
 </script>
 
-{#if icon || endIcon  || inputType === 'search' || $$slots.inputStart || $$slots.inputEnd}
-	<div   style="position:relative;display:block">
+{#if icon || endIcon || inputType === 'search' || $$slots.inputStart || $$slots.inputEnd}
+	<div style="position:relative;display:block">
 		{#if icon || $$slots.inputStart}
 			<div class="inpuStart">
 				<slot name="inputStart">
@@ -68,7 +69,15 @@
 					</slot>
 				{/if}
 				{#if inputType === 'search'}
-					<Button on:click={()=>{value=null}} disabled={!value?.length} naked icon="close-circle-outline" iconFamily="mdi" />
+					<Button
+						on:click={() => {
+							value = null;
+						}}
+						disabled={!value?.length}
+						naked
+						icon="close-circle-outline"
+						iconFamily="mdi"
+					/>
 				{/if}
 			</div>
 		{/if}
@@ -102,8 +111,8 @@
 {/if}
 
 <style lang="scss">
-	@import "../../styles/slotui-vars.scss";
-	@import "../../styles/presets.scss";
+	@import '../../styles/slotui-vars.scss';
+	@import '../../styles/presets.scss';
 	input {
 		border: 1px solid var(--theme-color-foreground-alpha);
 		// border: 1px solid rgba(208, 191, 151, 0.5);
@@ -140,7 +149,7 @@
 		justify-content: center;
 		padding: 0.5rem;
 		background-color: rgba(255, 255, 255, 0.1);
-		border-radius: var(--slotui-input-radius, 4px); 
+		border-radius: var(--slotui-input-radius, 4px);
 	}
 	.inpuEnd {
 		position: absolute;

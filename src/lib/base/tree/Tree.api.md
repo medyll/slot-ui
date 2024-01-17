@@ -1,5 +1,5 @@
 ```import { SvelteComponent } from "svelte";
-import type { TreeItemType } from "./types";
+import type { TreeItemType } from './types.js';
 declare const __propDef: {
     props: {
         class?: string | undefined;

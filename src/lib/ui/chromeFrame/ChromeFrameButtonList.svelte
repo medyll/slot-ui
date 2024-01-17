@@ -1,9 +1,10 @@
-<svelte:options accessors/>
+<svelte:options accessors />
+
 <script lang="ts">
-	import { chromeFrameStore } from './chromeFrame.store';
-	import { createEventForwarder } from '$lib/engine/engine.js';
+	import { chromeFrameStore } from './chromeFrame.store.js';
+	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
 	import { get_current_component } from 'svelte/internal';
-	import Icon from '../../base/icon/Icon.svelte';
+	import Icon from '$lib/base/icon/Icon.svelte';
 	import Button from '$lib/base/button/Button.svelte';
 
 	/** common slotUi exports*/
@@ -29,7 +30,8 @@
 					on:dblclick={() => {
 						chromeFrameStore.remove(value.frameId);
 					}}
-					class={value.active ? 'active' : ''} 	>
+					class={value.active ? 'active' : ''}
+				>
 					{value.title ?? value.frameId}
 					<div slot="buttonEnd"><Icon class="theme-text-primary" icon="window-close" /></div>
 				</Button>
@@ -39,8 +41,8 @@
 </div>
 
 <style global lang="scss">
-	@import "../../styles/slotui-vars.scss";
-	@import "../../styles/presets.scss";
+	@import '../../styles/slotui-vars.scss';
+	@import '../../styles/presets.scss';
 	.buttonRail {
 		button:not(.active) {
 			border: 1px solid transparent;

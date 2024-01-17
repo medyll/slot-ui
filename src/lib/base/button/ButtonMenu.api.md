@@ -1,5 +1,5 @@
 ```import { SvelteComponent } from "svelte";
-import type { IMenuItemProps, IMenuProps } from '../../ui/menu/types';
+import type { IMenuItemProps, IMenuProps } from '../../ui/menu/types.js';
 declare const __propDef: {
     props: {
         icon?: string | undefined;

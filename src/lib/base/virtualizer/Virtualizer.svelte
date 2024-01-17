@@ -1,8 +1,8 @@
 <script lang="ts">
 	// from svelte-virtual-list ([demo](https://svelte.dev/repl/f78ddd84a1a540a9a40512df39ef751b))
 	import { onMount, tick } from 'svelte';
-	import { createEventForwarder } from '../../engine/engine.js';
-	import { get_current_component, onDestroy, query_selector_all } from 'svelte/internal';
+	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
+	import { get_current_component, onDestroy } from 'svelte/internal';
 	import { browser } from '$app/environment';
 
 	/*  common slotUi exports*/

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { createEventForwarder } from '$lib/engine/engine.js';
+	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
 	import { get_current_component } from 'svelte/internal';
 
 	/*  common slotUi exports*/
@@ -10,7 +10,7 @@
 	/*  end slotUi exports*/
 	export let data: any = [];
 
-	export let mode: 'array' | 'object' | 'string' | 'number' | undefined = undefined
+	export let mode: 'array' | 'object' | 'string' | 'number' | undefined = undefined;
 
 	if (Array.isArray(data)) {
 		mode = 'array';
@@ -18,14 +18,14 @@
 		mode = 'object';
 	} else if (typeof data === 'string') {
 		mode = 'string';
-	}else if (typeof data === 'number') {
+	} else if (typeof data === 'number') {
 		mode = 'number';
 	}
 </script>
 
 {#if data}
 	{#if mode === 'array'}
-		<div class="flex-h  w-large flex-wrap gap-small "> 
+		<div class="flex-h w-large flex-wrap gap-small">
 			{#each data as kdta, index}
 				<div class="border-l"><svelte:self data={kdta} /></div>
 			{/each}
@@ -33,9 +33,9 @@
 	{/if}
 
 	{#if mode === 'object'}
-		<div class="flex-v   gap-small ">  
+		<div class="flex-v gap-small">
 			{#each Object.keys(data) as kdta}
-				<div class="flex-h gap-small  flex-align-top marg-l">
+				<div class="flex-h gap-small flex-align-top marg-l">
 					<div class="w-medium pad-1 border-b">- {kdta}</div>
 					<div style="margin-left:4rem;"><svelte:self data={data[kdta]} /></div>
 				</div>
@@ -43,7 +43,7 @@
 		</div>
 	{/if}
 
-	{#if ['string','number'].includes(mode)}
-		<div class="pad-1 ">{data}</div>
+	{#if ['string', 'number'].includes(mode)}
+		<div class="pad-1">{data}</div>
 	{/if}
 {/if}

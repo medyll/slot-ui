@@ -1,15 +1,12 @@
 <script lang="ts">
 	// from svelte-virtual-list ([demo](https://svelte.dev/repl/f78ddd84a1a540a9a40512df39ef751b))
 	import { onMount, tick } from 'svelte';
-	import { createEventForwarder } from '$lib/engine/engine.js';
-	import { get_current_component } from 'svelte/internal';
 	import { browser } from '$app/environment';
 
 	/*  common slotUi exports*/
 	let className = '';
 	export { className as class };
 	export let element: HTMLDivElement | null = null;
-	const forwardEvents = createEventForwarder(get_current_component());
 	/*  end slotUi exports*/
 
 	// props
@@ -150,7 +147,7 @@
 	});
 
 	$: if (mounted) {
-		rows = contents.children; 
+		rows = contents.children;
 	}
 </script>
 
@@ -169,7 +166,7 @@
 				<slot item={row?.data ?? {}}>Missing content</slot>
 			{/each}
 		{/if}
-	</div> 
+	</div>
 </virtualize-viewport>
 
 <style>

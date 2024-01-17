@@ -1,5 +1,5 @@
 ```import { SvelteComponent } from "svelte";
-import type { DataCellType, groupByOptions } from "./types.js";
+import type { DataCellType, groupByOptions } from './types.js';
 declare const __propDef: {
     props: {
         class?: string | undefined;

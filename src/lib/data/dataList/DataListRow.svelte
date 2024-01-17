@@ -2,9 +2,8 @@
 
 <script lang="ts">
 	import sanitizeHtml from 'sanitize-html';
-	import type { Data } from './$types';
+	import type { Data } from './$types.js';
 	import {
-	current_component,
 		custom_event,
 		getContext,
 		get_current_component,
@@ -17,7 +16,7 @@
 	import type { DataCellType, DataListStoreType } from './types.js';
 	import type { RowType } from './types.js';
 	import { dataOp } from '$lib/engine/utils.js';
-	import { createEventForwarder } from '$lib/engine/engine.js';
+	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
 
 	let className = '';
 	export { className as class };
@@ -48,15 +47,19 @@
 	}
 
 	function checkGetter(columns: Record<string, DataCellType>, field: string, data: Data) {
-		const ret = columns[field]?.getter ? columns[field]?.getter(data) : dataOp.resolveDotPath(data, field);
+		const ret = columns[field]?.getter
+			? columns[field]?.getter(data)
+			: dataOp.resolveDotPath(data, field);
 		return sanitizeHtml(ret);
 	}
 
-	$: cssVars = Object.values($dataListContext.columns ?? []).reduce((previous,current,currentIndex)=>{
-		const witdh = current?.width ?? 'auto'
-		return `${previous} minmax(${witdh},${witdh})`  
-	},'--template-columns:')
-
+	$: cssVars = Object.values($dataListContext.columns ?? []).reduce(
+		(previous, current, currentIndex) => {
+			const witdh = current?.width ?? 'auto';
+			return `${previous} minmax(${witdh},${witdh})`;
+		},
+		'--template-columns:'
+	);
 </script>
 
 <div
@@ -92,10 +95,9 @@
 	{/if}
 </div>
 
-
 <style lang="scss">
-	.dataListRow{
-		display:flex;
+	.dataListRow {
+		display: flex;
 		/* grid-template-columns: var(--template-columns);
 		grid-auto-columns: min-content; */
 		content-visibility: auto;

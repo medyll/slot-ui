@@ -1,29 +1,28 @@
 <svelte:options accessors={true} />
 
 <script lang="ts">
-	import type { SvelteComponentDev } from 'svelte/internal';
 	import { get_current_component } from 'svelte/internal';
 	import { openPopper } from '../../ui/popper/actions.js';
 	import IconButton from './IconButton.svelte';
 	import Menu from '../../ui/menu/Menu.svelte';
-	import { createEventForwarder } from '$lib/engine/engine.js';
+	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
 	import type { SvelteComponent } from 'svelte';
-	import type { PopperPositionType } from '$lib/ui/popper/types';
-	import type { IMenuItemProps, IMenuProps } from '$lib/ui/menu/types';
+	import type { PopperPositionType } from '$lib/ui/popper/types.js';
+	import type { IMenuItemProps, IMenuProps } from '$lib/ui/menu/types.js';
 	import type { ElementProps } from '$lib/types/index.js';
-	import type { UsePopperProps } from '$lib/ui/popper/usePopper';
+	import type { UsePopperProps } from '$lib/ui/popper/usePopper.js';
 
-	export let icon: string                           = 'list';
-	export let menuData: IMenuItemProps[]             = [];
+	export let icon: string = 'list';
+	export let menuData: IMenuItemProps[] = [];
 	export let actionComponent: SvelteComponent | any = Menu;
-	export let menuProps: IMenuProps                  = {
+	export let menuProps: IMenuProps = {
 		menuList: menuData,
 		menuItemsList: menuData,
 		onMenuItemClick: () => {
 			console.log('redfered');
 		}
 	};
-	export let menuPosition: PopperPositionType       = 'BC';
+	export let menuPosition: PopperPositionType = 'BC';
 
 	/*  common slotUi exports*/
 	let className = '';
@@ -38,7 +37,7 @@
 				menuList: menuData,
 				menuItemsList: menuData,
 				onMenuItemClick: () => {}
-		  };
+			};
 
 	const onActionClick = (event: MouseEvent) => {
 		event.stopPropagation();
@@ -72,9 +71,9 @@
 	bind:element
 	icon="faEllipsisH"
 	iconFontSize="small"
-	on:click={onActionClick} 
+	on:click={onActionClick}
 >
-<slot />
+	<slot />
 </IconButton>
 
 <style lang="scss">
