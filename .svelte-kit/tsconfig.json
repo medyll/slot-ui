@@ -30,6 +30,12 @@
 			],
 			"$lib/*": [
 				"../src/lib/*"
+			],
+			"$sitedata": [
+				"../src/sitedata"
+			],
+			"$sitedata/*": [
+				"../src/sitedata/*"
 			]
 		},
 		"rootDirs": [

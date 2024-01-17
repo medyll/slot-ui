@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import * as ComponentList from '$lib/sitedata/componentList.js';
-	import { slotuiCatalog } from '$lib/sitedata/slotuiCatalog.js';
+	import * as ComponentList from '$sitedata/componentList.js';
+	import { slotuiCatalog } from '$lib/slotuiCatalog.js';
 
 	export let data: any = {};
 

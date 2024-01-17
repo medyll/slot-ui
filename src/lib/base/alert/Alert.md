@@ -3,7 +3,7 @@ __propDef: {
     props: {
         class?: string | undefined;
         element?: HTMLDivElement | null | undefined;
-        /** type of levels */ level?: ("error" | "success" | "info" | "warning" | "alert" | "discrete") | undefined;
+        /** type of levels */ level?: ("alert" | "error" | "success" | "info" | "warning" | "discrete") | undefined;
         action?: (() => void) | undefined;
         data?: {} | undefined;
         text?: string | undefined;

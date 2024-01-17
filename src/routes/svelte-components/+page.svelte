@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { slotUiComponentList } from '$lib/sitedata/componentList.js';
-	import { slotUiComponentPreviewList } from '$lib/sitedata/componentPreviewList.js';
+	import { slotUiComponentList } from '$sitedata/componentList.js';
+	import { slotUiComponentPreviewList } from '$sitedata/componentPreviewList.js';
 	import Paper from '$lib/base/paper/Paper.svelte';
 	import { dataOp } from '$lib/engine/utils';
 	import Divider from '$lib/base/divider/Divider.svelte';

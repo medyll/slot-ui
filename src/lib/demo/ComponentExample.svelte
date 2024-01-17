@@ -1,8 +1,8 @@
 <script lang="ts">
-	import * as indexApi from '$lib/sitedata/api/indexApi.js';
-	import { slotuiCatalog } from '$lib/sitedata/slotuiCatalog.js';
+	import * as indexApi from '$sitedata/api/indexApi.js';
+	import { slotuiCatalog } from '$lib/slotuiCatalog.js';
 	import { sitePaths } from '$lib/engine/site.utils.js';
-	import { componentCite } from '$lib/sitedata/componentCite.js';
+	import { componentCite } from '$lib/componentCite.js';
 	export let component: string = '';
 	export let cite: string = componentCite?.[component] ?? '';
 

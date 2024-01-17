@@ -1,5 +1,5 @@
 import type { LayoutLoad } from './$types.js';
-import { slotuiCatalog } from '$lib/sitedata/slotuiCatalog.js';
+import { slotuiCatalog } from '$lib/slotuiCatalog.js';
 
 const fetchIt = async () =>
 	new Promise((resolve, reject) => {

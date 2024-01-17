@@ -2,10 +2,8 @@
 	import { email, Hint, HintGroup, required, useForm } from 'svelte-use-form';
 	import { fade } from 'svelte/transition';
 
-	import { userStore } from './store.ls';
+	import { userStore } from './store.js';
 	import Backdrop from '$lib/base/backdrop/Backdrop.svelte';
-	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
-	import { get_current_component } from 'svelte/internal';
 	import Button from '$lib/base/button/Button.svelte';
 	import Icon from '$lib/base/icon/Icon.svelte';
 
@@ -13,7 +11,6 @@
 	let className = '';
 	export { className as class };
 	export let element: HTMLDivElement | null = null;
-	const forwardEvents = createEventForwarder(get_current_component());
 
 	export const actions = {
 		toggle: (lo?: boolean) => {

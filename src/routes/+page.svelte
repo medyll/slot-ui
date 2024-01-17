@@ -1,19 +1,17 @@
 <script lang="ts">
 	import PreviewComponent from './../components/PreviewComponent.svelte';
-	import Icon from './../lib/base/icon/Icon.svelte';
-	import type { UiContextType } from '$contexts/ui.context.js';
+	import Icon from '$lib/base/icon/Icon.svelte';
+	import type { UiContextType } from '../contexts/ui.context.js';
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
 	import { dataOp } from '$lib/engine/utils.js';
-	// import { slotuiCatalog } from "$lib/slotuiCatalog.js";
-	import { null_to_empty } from 'svelte/internal';
 	import { sitePaths } from '$lib/engine/site.utils.js';
 	import Menu from '$lib/ui/menu/Menu.svelte';
 	import MenuItem from '$lib/ui/menu/MenuItem.svelte';
-	import { componentCite } from '$lib/sitedata/componentCite.js';
+	import { componentCite } from '$lib/componentCite.js';
 	import Backdrop from '$lib/base/backdrop/Backdrop.svelte';
-	import { slotUiComponentPreviewList } from '$lib/sitedata/componentPreviewList.js';
-	import type { LayoutData } from './$types';
+	import { slotUiComponentPreviewList } from '$sitedata/componentPreviewList.js';
+	import type { LayoutData } from './$types.js';
 
 	let uiContext = getContext<Writable<UiContextType>>('uiContext');
 	let BackdropRef;
@@ -87,7 +85,7 @@
 		{#each Object.keys(groupedData) as group}
 			<div class="block">
 				<h4 class="pad-4 text-bold">
-					slotted {null_to_empty(group)}
+					slotted {group ?? ''}
 				</h4>
 				<div class="flex-h flex-wrap flex-align-middle gap-large">
 					{#each groupedData[group] as catalog}
@@ -95,7 +93,7 @@
 							<div class="pad">
 								<div class="pad border-b flex-h flex-align-middle">
 									<h5 class="flex-main" title={componentCite?.[catalog?.code]?.cite}>
-										{null_to_empty(catalog?.code)}
+										{catalog?.code ?? ''}
 									</h5>
 									{#if Boolean(searchPreview(catalog.code))}
 										<div>

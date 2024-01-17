@@ -6,7 +6,8 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const srcPackage = path.join(__dirname, 'dist');
 const srcLibDir = path.join(__dirname, 'src', 'lib');
-const dirPath = path.join('src', 'lib', 'sitedata');
+
+const dirPath = path.join('src',  'sitedata');
 // const dirPath = path.join('src','sitedata');
 const libShort = '$lib';
 
@@ -123,7 +124,7 @@ function createMethods(fileList) {
 		try {
 			const data = fs.readFileSync(file, 'utf8');
 			let newData = data.replace(/declare/g, '');
-			// if (comp.includes("Tree")) 
+			// if (comp.includes("Tree"))
 
 			let frag = data.match(/__propDef:([^.]*)};([^.]*)export/gm);
 
@@ -146,12 +147,10 @@ function createMethods(fileList) {
 				objImport.push(`import ${comp}ReadMe from "${srcDoc}";\r export {${comp}ReadMe};`);
 				objObj.push(`${comp.toLowerCase()}:${comp}ReadMe`);
 
-				collectedComps.push(`${comp}ReadMe`); 
- 
+				collectedComps.push(`${comp}ReadMe`);
 
 				objApiImport.push(`import ${comp}ApiReadMe from "${srcApi}"`);
 				objApiObj.push(`${comp.toLowerCase()}Api:${comp}ApiReadMe`);
- 
 
 				// array uniques
 				objObj.filter((v, i, a) => a.indexOf(v) === i);
@@ -319,8 +318,8 @@ function createReadme(fileList) {
 			const comp = file.split('\\').slice(-1)[0].split('.')[0];
 			const newContent = frag?.[0]?.replace(/export/gm, '');
 
-			const src = ('$lib/sitedata/api/' + comp + '.md').replace(/\\/g, '/');
-			const srcApiFull = ('$lib/sitedata/api/' + comp + '.api.md').replace(/\\/g, '/');
+			const src = ('$sitedata/api/' + comp + '.md').replace(/\\/g, '/');
+			const srcApiFull = ('$sitedata/api/' + comp + '.api.md').replace(/\\/g, '/');
 
 			if (
 				!keyDone[comp.toLowerCase()] &&
@@ -367,8 +366,8 @@ fs.writeFileSync(
 );
 // write new component list
 fs.writeFileSync(
-	// path.join('src', 'lib') + '/slotuiCatalog.ts',
-	dirPath + '/slotuiCatalog.ts',
+	path.join('src', 'lib') + '/slotuiCatalog.ts',
+	//dirPath + '/slotuiCatalog.ts',
 	createComponentList(result, 'slotuiCatalog')
 );
 console.log(dirPath, 'Documentation files created into /componentList.ts');
