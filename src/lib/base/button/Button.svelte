@@ -79,7 +79,7 @@
 	export let ratio: string = 'auto';
 
 	// slots
-	export let buttonStart: string;
+	export let buttonStart: string | undefined = undefined;
 	if (contained || bordered || link || naked) presetDefault = '';
 
 	let containerRef;

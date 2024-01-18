@@ -2,7 +2,7 @@
 	import { slotUiComponentList } from '$sitedata/componentList.js';
 	import { slotUiComponentPreviewList } from '$sitedata/componentPreviewList.js';
 	import Paper from '$lib/base/paper/Paper.svelte';
-	import { dataOp } from '$lib/engine/utils';
+	import { dataOp } from '$lib/engine/utils.js';
 	import Divider from '$lib/base/divider/Divider.svelte';
 	import { sitePaths } from '$lib/engine/site.utils.js';
 

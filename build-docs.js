@@ -101,7 +101,7 @@ function createComponentList(fileList, exportName = 'slotUiComponentList') {
 		})
 		.join(',\r\n');
 
-	const end = ' } ';
+	const end = ' } as const';
 
 	return start + middle + end;
 }

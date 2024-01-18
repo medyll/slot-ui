@@ -4,34 +4,10 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import mdsvexConfig from './mdsvex.config.js';
 import path from 'path';
 
-function filterExport(filepath) { 
-	
-	// return mm.contains(filepath,'Backdrop.svelte')
-
-	return !mm.contains(filepath, [
-		'*.demo.svelte',
-		'*Demo.svelte',
-		'*preview.svelte',
-		// '*sitedata*',
-		'*.md',
-		//'*Example.svelte',
-		'*indexApi*',
-		'*Readme*',
-	])
-} 
-
-/** @type {import('@sveltejs/kit').Config} */
 const config = {
 	extensions: ['.svelte', ...mdsvexConfig.extensions],
-	/* package: {
-		exports: (filepath) => filterExport(filepath),
-		files: (filepath) => filterExport(filepath),
-	}, */
-	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
 	// for more information about preprocessors
 	preprocess: [vitePreprocess(), mdsvex(mdsvexConfig)],
-
-	// extensions: ['.svelte', '.md'],
 	extensions: ['.svelte', '.md'],
 
 	kit: {

@@ -5,9 +5,9 @@
 
 	export let data: any = {};
 
-	$: comp = slotuiCatalog?.[data?.component]?.name + 'DemoSvelte';
+	$: comp = (slotuiCatalog as any)?.[data?.component]?.name + 'DemoSvelte';
 
-	$: Comp = ComponentList[comp];
+	$: Comp = (ComponentList as any)[comp];
 </script>
 
 <div out:fade|global={{ duration: 200 }} in:fade|global={{ duration: 200 }}>

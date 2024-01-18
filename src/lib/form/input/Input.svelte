@@ -2,11 +2,11 @@
 
 <script lang="ts">
 	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
-	import { popper, type UsePopperProps } from '$lib/ui/popper/usePopper';
+	import { popper, type UsePopperProps } from '$lib/ui/popper/usePopper.js';
 	import type { ElementProps } from '$lib/types/index.js';
-	import { compute_slots, get_current_component, text } from 'svelte/internal';
-	import Button from '../../base/button/Button.svelte';
-	import Icon from '../../base/icon/Icon.svelte';
+	import { get_current_component } from 'svelte/internal';
+	import Button from '$lib/base/button/Button.svelte';
+	import Icon from '$lib/base/icon/Icon.svelte';
 
 	let inputType = 'text';
 	export { inputType as type };
@@ -37,7 +37,7 @@
 	/** has no border */
 	export let transparent: boolean = false;
 
-	export let value: any;
+	export let value: any | undefined = undefined;
 
 	let niceIconStyle = '';
 

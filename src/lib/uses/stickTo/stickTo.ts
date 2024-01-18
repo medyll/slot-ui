@@ -32,8 +32,6 @@ export function stickTo(node: HTMLElement, props: StickToProps) {
 		return false;
 	}
 
-	/* node.setAttribute('popover', 'auto');
-	node.showPopover(); */
 	window.addEventListener('scroll', () => {
 		setPosition(node, position, parentNode);
 	});
@@ -57,7 +55,7 @@ export function stickTo(node: HTMLElement, props: StickToProps) {
 		//node.style.transition = 'all 0.05s ease-in-out';
 		if (nodePos.bottom >= window.innerHeight - threshold) {
 			newPos = newPos.replace('B', 'T');
-		} /*  else if (nodePos.top - threshold <= 0) {
+		} /* else if (nodePos.top - threshold <= 0) {
 			newPos = newPos.replace('T', 'B');
 		} */
 		if (nodePos.right > window.innerWidth - threshold) {
@@ -65,7 +63,7 @@ export function stickTo(node: HTMLElement, props: StickToProps) {
 		} /* else if (nodePos.left - threshold <= 0) {
 			newPos = newPos.replace('L', 'R');
 		} */
-		//node.style.transition = '';
+
 		return newPos;
 	}
 

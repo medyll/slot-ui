@@ -34,4 +34,4 @@ toast:{name:"Toast",code:"toast",group:"ui"},
 togglebar:{name:"ToggleBar",code:"togglebar",group:"ui"},
 toolbar:{name:"ToolBar",code:"toolbar",group:"ui"},
 window:{name:"Window",code:"window",group:"ui"},
-contextrooter:{name:"ContextRooter",code:"contextrooter",group:"utils"} } 
+contextrooter:{name:"ContextRooter",code:"contextrooter",group:"utils"} } as const

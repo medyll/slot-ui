@@ -5,7 +5,7 @@
 
 <script lang="ts">
 	import Button from '$lib/base/button/Button.svelte';
-	import { dataOp } from '$lib/engine/utils';
+	import { dataOp } from '$lib/engine/utils.js';
 
 	/** Sorter mode */
 	export let sorterMode: 'button' | 'menu' | 'free' = 'button';

@@ -1,5 +1,5 @@
 <script lang="ts">
-	/** @type {import('./$types').LayoutData} */
+	/** @type {import('./$types.js').LayoutData} */
 	export let data: any = {};
 
 	$: title = data?.component + ' component details';
