@@ -2,7 +2,7 @@
 	import { slide } from 'svelte/transition';
 	import Icon from '$lib/base/icon/Icon.svelte';
 	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
-	import { get_current_component } from 'svelte/internal'; 
+	import { get_current_component } from 'svelte/internal';
 	import type { SvelteComponent } from 'svelte';
 	import Button from '$lib/base/button/Button.svelte';
 
@@ -15,7 +15,7 @@
 	const forwardEvents = createEventForwarder(get_current_component());
 
 	/** displayed title of the cartouche */
-	export let primary: string | undefined = undefined;
+	export let primary: string = '';
 	/** displayed sub title of the cartouche */
 	export let secondary: string | undefined = undefined;
 
@@ -60,7 +60,7 @@
 				</slot>
 			</div>
 		{/if}
-		<div class="cartoucheLabel  pad-l-1">
+		<div class="cartoucheLabel pad-l-1">
 			{#if primary || $$slots.primarySlot}
 				<slot name="primarySlot">{primary}</slot>
 				<div><slot name="secondarySlot">{secondary ?? ''}</slot></div>
@@ -73,7 +73,8 @@
 					event.preventDefault();
 					event.stopPropagation();
 				}}
-				class="cartoucheAction" >
+				class="cartoucheAction"
+			>
 				<slot name="cartoucheButtons" />
 			</div>
 		{/if}
@@ -94,7 +95,7 @@
 <style lang="scss">
 	@import 'Cartouche';
 
-	.cartoucheHolder { 
+	.cartoucheHolder {
 		&.stacked {
 			border-radius: 0;
 			&:first-child {

@@ -21,7 +21,8 @@
 		"release:alpha": "standard-version --prerelease alpha",
 		"release:beta": "standard-version --prerelease beta",
 		"release:minor": "standard-version --release-as minor",
-		"publish": "npm run package"
+		"publish": "npm run package",
+		"book": "nodemon --watch src/lib --ignore '**/docs/**' --ignore 'lib/svelte.index.js' --delay 20 extract-types.js"
 	},
 	"exports": {
 		".": {
@@ -59,6 +60,8 @@
 		"husky": "^8.0.0",
 		"mdsvex": "^0.11.0",
 		"micromatch": "^4.0.5",
+		"nodemon": "^3.0.3",
+		"pm2": "^5.3.0",
 		"prettier": "^3.1.1",
 		"prettier-plugin-svelte": "^3.1.2",
 		"prism": "^4.1.2",

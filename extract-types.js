@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import sveld  from 'sveld';
+import sveld from 'sveld';
 // const { ComponentParser } = sveld
 import glob from 'glob';
 // import * as pkg from './package.json';
@@ -34,7 +34,7 @@ async function generateTypeDefinitions() {
 
 	fs.writeFileSync(path.join(__dirname, 'src/lib/svelte-index.js'), indexContent);
 
-    //console.log(ComponentParser)
+	//console.log(ComponentParser)
 
 	try {
 		sveld.sveld({
@@ -52,6 +52,15 @@ async function generateTypeDefinitions() {
 				write: true
 			}
 		});
+
+		const jsonFiles = glob.sync(`${config.outDir}/*.json`);
+		const jsonDir = jsonFiles
+			.map((file) => {
+				return `export { default as ${dotToCamelCase(path.basename(file, '.json'))} } from './${path.basename(file, '.json')}.json';`;
+			})
+			.filter((f) => f)
+			.join('\n');
+		fs.writeFileSync(path.join(__dirname, `${config.outDir}/index.js`), jsonDir);
 	} catch (err) {
 		console.error(err);
 		// try running with svelte2tsx, descriptions will be missing
@@ -63,7 +72,6 @@ const config = {
 };
 
 function main() {
-
 	fs.mkdirSync(config.outDir, { recursive: true });
 	/* fs.mkdirSync(dtsDir, { recursive: true });
 	fs.readdirSync(svelteFilesDir)

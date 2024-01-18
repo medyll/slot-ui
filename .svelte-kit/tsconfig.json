@@ -38,10 +38,10 @@
 				"../src/sitedata/*"
 			],
 			"$generated": [
-				"../src/generated"
+				"../src/docs/generated"
 			],
 			"$generated/*": [
-				"../src/generated/*"
+				"../src/docs/generated/*"
 			]
 		},
 		"rootDirs": [

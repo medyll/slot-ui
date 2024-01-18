@@ -5,6 +5,7 @@
     {
       "name": "class",
       "kind": "let",
+      "description": "className off the root component",
       "type": "string",
       "value": "''",
       "isFunction": false,
@@ -16,6 +17,7 @@
     {
       "name": "element",
       "kind": "let",
+      "description": "element root HTMLDivElement props",
       "type": "null | HTMLDivElement",
       "value": "null",
       "isFunction": false,
@@ -30,26 +32,6 @@
       "description": "type of levels",
       "type": "'success' | 'info' | 'error' | 'warning' | 'alert' | 'discrete'",
       "value": "'info'",
-      "isFunction": false,
-      "isFunctionDeclaration": false,
-      "isRequired": false,
-      "constant": false,
-      "reactive": false
-    },
-    {
-      "name": "data",
-      "kind": "let",
-      "type": "{}",
-      "value": "{}",
-      "isFunction": false,
-      "isFunctionDeclaration": false,
-      "isRequired": false,
-      "constant": false,
-      "reactive": false
-    },
-    {
-      "name": "text",
-      "kind": "let",
       "isFunction": false,
       "isFunctionDeclaration": false,
       "isRequired": false,
@@ -118,5 +100,6 @@
   "events": [
     { "type": "dispatched", "name": "alert:closed", "detail": "null" }
   ],
-  "typedefs": []
+  "typedefs": [],
+  "rest_props": { "type": "Element", "name": "button" }
 }

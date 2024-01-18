@@ -39,6 +39,8 @@
       "name": "primary",
       "kind": "let",
       "description": "displayed title of the cartouche",
+      "type": "string",
+      "value": "''",
       "isFunction": false,
       "isFunctionDeclaration": false,
       "isRequired": false,

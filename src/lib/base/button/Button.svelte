@@ -1,4 +1,5 @@
 <script lang="ts">
+	/** @restProps { button} */
 	import { popper, type UsePopperProps } from '$lib/ui/popper/usePopper.js';
 	import type { ElementProps } from '$lib/types/index.js';
 	import Divider from '$lib/base/divider/Divider.svelte';
@@ -9,10 +10,10 @@
 
 	export let presetDefault = 'bordered contained';
 
-	/*  common slotUi exports*/
+	/*  common slotUi exports  */
 	let className = '';
 	export { className as class };
-	export let element: HTMLButtonElement | null = null;
+	export let element: HTMLButtonElement;
 	/*  end slotUi exports*/
 
 	let buttonType = 'button';
@@ -66,7 +67,10 @@
 	export let density: ElementProps['density'] = 'default';
 	/** add ellipsis on overflowed text */
 	export let nowrap: boolean = false;
-	/** height of the button, using preset values */
+	/**
+	 * height of the button, using preset values
+	 * @type {'auto' | 'tiny' | 'small' | 'medium' | 'large' | 'full'}
+	 */
 	export let height: string = 'default';
 	/**  button selected */
 	export let selected: boolean = false;

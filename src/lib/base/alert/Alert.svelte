@@ -1,15 +1,20 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import { createEventDispatcher, get_current_component } from 'svelte/internal';
-	import type { ElementProps } from '$lib/types/index.js';
+	import { createEventDispatcher } from 'svelte/internal';
 	import Divider from '$lib/base/divider/Divider.svelte';
 	import Button from '$lib/base/button/Button.svelte';
-
+	/** @restProps {button} */
 	const dispatch = createEventDispatcher();
 	/*  common slotUi exports*/
 
 	let className = '';
+	/**
+	 *  className off the root component
+	 */
 	export { className as class };
+	/**
+	 *  element root HTMLDivElement props
+	 */
 	export let element: HTMLDivElement | null = null;
 	/*  end slotUi exports*/
 
@@ -19,8 +24,6 @@
 		@type {'success' | 'info' | 'error' | 'warning' | 'alert' | 'discrete'}
 	*/
 	export let level: LevelType = 'info';
-	export let data = {};
-	export let text: string | undefined = undefined;
 	/** message to be shown */
 	export let message: string | undefined = undefined;
 	/** make the alert draggable */
