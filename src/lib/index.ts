@@ -2,7 +2,6 @@
 export { default as Alert } from '$lib/base/alert/Alert.svelte';
 export { default as Avatar } from '$lib/base/avatar/Avatar.svelte';
 export { default as Backdrop } from '$lib/base/backdrop/Backdrop.svelte';
-export * from '$lib/base/backdrop/useBackDrop.js';
 export { default as Badge } from '$lib/base/badge/Badge.svelte';
 export { default as Box } from '$lib/base/box/Box.svelte';
 export { default as BreadCrumb } from '$lib/base/breadCrumb/BreadCrumb.svelte';
@@ -14,7 +13,6 @@ export { default as Cartouche } from '$lib/base/cartouche/Cartouche.svelte';
 export { default as Chipper } from '$lib/base/chipper/Chipper.svelte';
 export { default as Column } from '$lib/base/columner/Column.svelte';
 export { default as Columner } from '$lib/base/columner/Columner.svelte';
-export * from '$lib/base/columner/types.js';
 export { default as Confirm } from '$lib/base/confirm/Confirm.svelte';
 export { default as ContentSwitcher } from '$lib/base/contentSwitcher/ContentSwitcher.svelte';
 export * from '$lib/base/contentSwitcher/useContentSwitcher.js';

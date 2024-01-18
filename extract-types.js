@@ -1,48 +1,77 @@
 import fs from 'fs';
 import path from 'path';
-import svelte2tsx from 'svelte2tsx';
-import ts from 'typescript';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+import sveld  from 'sveld';
+// const { ComponentParser } = sveld
+import glob from 'glob';
+// import * as pkg from './package.json';
 
-function extractTypes(svelteFilePath, tsxDirPath) {
-	const svelteCode = fs.readFileSync(svelteFilePath, 'utf-8');
-	const tsxCode = svelte2tsx(svelteCode);
-	const tsxFilePath = path.join(tsxDirPath, path.basename(svelteFilePath, '.svelte') + '.tsx');
-	fs.writeFileSync(tsxFilePath, tsxCode);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+function dotToCamelCase(str) {
+	return str.replace(/\.(\w)/g, function (match, letter) {
+		return letter.toUpperCase();
+	});
 }
 
-function generateTypeDefinitions(tsxDirPath, dtsDirPath) {
-    const tsConfig = ts.findConfigFile('./', ts.sys.fileExists, 'tsconfig.json');
-    const tsConfigContent = ts.readConfigFile(tsConfig, ts.sys.readFile).config;
-    const tsCompilerOptions = ts.parseJsonConfigFileContent(tsConfigContent, ts.sys, './').options;
-    tsCompilerOptions.declaration = true; // Enable generation of .d.ts files
-    tsCompilerOptions.emitDeclarationOnly = true; // Only emit .d.ts files and no .js files
-    const program = ts.createProgram(
-        fs.readdirSync(tsxDirPath).map((f) => path.join(tsxDirPath, f)),
-        tsCompilerOptions
-    );
-    program.emit(); // Emit the .d.ts files
+async function generateTypeDefinitions() {
+	const svelteFiles = glob.sync('./src/lib/**/*.svelte');
 
-    // Move the generated .d.ts files to the desired directory
-    fs.readdirSync(tsxDirPath)
-        .filter((f) => f.endsWith('.d.ts'))
-        .forEach((f) => {
-            const sourcePath = path.join(tsxDirPath, f);
-            const destPath = path.join(dtsDirPath, f);
-            fs.renameSync(sourcePath, destPath);
-        });
+	const indexContent = svelteFiles
+		.map((file) => {
+			file = file.replace('./src/lib/', '$lib/');
+			if (!file) return;
+			if (file.includes('.preview')) return;
+			if (file.includes('.demo')) return;
+			if (file.includes('.wip')) return;
+			if (file.includes('.js')) return;
+			return `export { default as ${path.basename(file, '.svelte')} } from '${file}';`;
+		})
+		.filter((f) => f)
+		.join('\n');
+
+	fs.writeFileSync(path.join(__dirname, 'src/lib/svelte-index.js'), indexContent);
+
+    //console.log(ComponentParser)
+
+	try {
+		sveld.sveld({
+			input: './src/lib/svelte-index.js',
+			verbose: true,
+			glob: true,
+			types: false,
+			json: true,
+			jsonOptions: {
+				outDir: `${config.outDir}`
+			},
+			markdown: false,
+			markdownOptions: {
+				outDir: './src/md',
+				write: true
+			}
+		});
+	} catch (err) {
+		console.error(err);
+		// try running with svelte2tsx, descriptions will be missing
+	}
 }
+
+const config = {
+	outDir: './src/docs/generated'
+};
 
 function main() {
-	const svelteFilesDir = './src/lib';
-	const tsxDir = './.tmp-tsx';
-	const dtsDir = './types-nope';
-	fs.mkdirSync(tsxDir, { recursive: true });
-	fs.mkdirSync(dtsDir, { recursive: true });
+
+	fs.mkdirSync(config.outDir, { recursive: true });
+	/* fs.mkdirSync(dtsDir, { recursive: true });
 	fs.readdirSync(svelteFilesDir)
 		.filter((f) => f.endsWith('.svelte'))
-		.forEach((f) => extractTypes(path.join(svelteFilesDir, f), tsxDir));
-	generateTypeDefinitions(tsxDir, dtsDir);
-	fs.rmdirSync(tsxDir, { recursive: true });
+		.forEach((f) => { 
+		}); */
+
+	generateTypeDefinitions();
 }
 
 main();

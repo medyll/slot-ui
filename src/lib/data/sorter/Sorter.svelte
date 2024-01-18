@@ -1,11 +1,7 @@
-<script lang="ts" context="module">
-	export type SortItem = {};
-	export type Data = Record<string, any>;
-</script>
-
 <script lang="ts">
 	import Button from '$lib/base/button/Button.svelte';
 	import { dataOp } from '$lib/engine/utils.js';
+	import type { SortItem, Data } from './types.js';
 
 	/** Sorter mode */
 	export let sorterMode: 'button' | 'menu' | 'free' = 'button';

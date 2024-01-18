@@ -9,8 +9,17 @@
 	const forwardEvents = createEventForwarder(get_current_component());
 	/*  end slotUi exports*/
 
+	/** icon name 	*/
 	export let icon: string = 'icon-park-outline:avatar';
+	/**
+	 * size of the avatar
+	 * @type {'tiny' | 'small' | 'medium' | 'large' | 'full'}
+	 */
 	export let size: 'tiny' | 'small' | 'medium' | 'large' | 'full' = 'large';
+	/**
+	 * size of the icon
+	 * @type {'tiny' | 'small' | 'medium' | 'large' | 'full'}
+	 */
 	export let iconSize: 'tiny' | 'small' | 'medium' | 'default' | 'large' | 'big' = 'large';
 
 	const sizes = {

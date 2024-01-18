@@ -1,30 +1,9 @@
-<script lang="ts" context="module">
-	export type GroupItemType = {
-		primary: string;
-		secondary: string;
-		icon?: string;
-		data?: Record<string, any>;
-	};
-
-	export type GroupTitleType = {
-		isGroup: boolean;
-		code: string;
-		primary: string;
-		data?: Record<string, any>;
-	};
-
-	export type GroupedDataType = [GroupTitleType, Data[]][];
-
-	export type Data = Record<string, any>;
-</script>
-
 <script lang="ts">
-import Button from '$lib/base/button/Button.svelte';
-import ButtonMenu from '$lib/base/button/ButtonMenu.svelte';
+	import Button from '$lib/base/button/Button.svelte';
+	import ButtonMenu from '$lib/base/button/ButtonMenu.svelte';
+	import type { IMenuItemProps } from '$lib/ui/menu/types.ts';
 
-	import type { IMenuItemProps } from '$lib/ui/menu/types';
-
-	import { custom_event } from 'svelte/internal';
+	import type { GroupedDataType, Data } from './types.js';
 
 	let className = '';
 	export { className as class };
@@ -106,7 +85,7 @@ import ButtonMenu from '$lib/base/button/ButtonMenu.svelte';
 	let innerInnerGB: GroupedDataType = [];
 
 	let menuData: IMenuItemProps[] = [];
-	let menuProps                  = {};
+	let menuProps = {};
 
 	let collectedKeys: any[] = [];
 
@@ -122,7 +101,6 @@ import ButtonMenu from '$lib/base/button/ButtonMenu.svelte';
 
 		return red;
 	});
-
 
 	$: data.forEach((dta) => {
 		menuData = (groupListItems || Object.keys(dta))
@@ -148,7 +126,7 @@ import ButtonMenu from '$lib/base/button/ButtonMenu.svelte';
 <div bind:this={element}>
 	{#if grouperMode === 'menu'}
 		<ButtonMenu
-			on:click={(e) => { 
+			on:click={(e) => {
 				console.log(e);
 			}}
 			{menuProps}>menu group by</ButtonMenu

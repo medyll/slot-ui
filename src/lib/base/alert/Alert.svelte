@@ -6,36 +6,34 @@
 	import Button from '$lib/base/button/Button.svelte';
 
 	const dispatch = createEventDispatcher();
-
 	/*  common slotUi exports*/
+
 	let className = '';
 	export { className as class };
-	export let element: HTMLDivElement | null = null; 
+	export let element: HTMLDivElement | null = null;
 	/*  end slotUi exports*/
 
 	type LevelType = 'success' | 'info' | 'error' | 'warning' | 'alert' | 'discrete';
-	type action = ElementProps['action'];
 
-	/** type of levels */
+	/** type of levels 
+		@type {'success' | 'info' | 'error' | 'warning' | 'alert' | 'discrete'}
+	*/
 	export let level: LevelType = 'info';
-	export let action = () => {};
 	export let data = {};
 	export let text: string | undefined = undefined;
+	/** message to be shown */
 	export let message: string | undefined = undefined;
-	export let isDragable: boolean = false;
-
+	/** make the alert draggable */
+	export let isDraggable: boolean = false;
+	/** show or hide the alert */
 	export let isOpen: boolean = true;
-
-	export const actions: any = {
-		open: () => {
-			isOpen = true;
-		},
-		toggle: () => {
-			isOpen = !isOpen;
-		},
-		close: () => {
-			isOpen = !isOpen;
-		}
+	/** component actions
+	 * @type {Record<'open'|'toggle' | 'close', Function>}
+	 */
+	export const actions: Record<'open' | 'toggle' | 'close', Function> = {
+		open,
+		toggle,
+		close
 	};
 
 	const handleClick = (event: PointerEvent) => {
@@ -45,18 +43,28 @@
 			dispatch('alert:closed');
 		}
 	};
-	// try
+
+	function open() {
+		isOpen = true;
+	}
+	function toggle() {
+		isOpen = !isOpen;
+	}
+	function close() {
+		isOpen = false;
+	}
 </script>
 
 {#if isOpen}
-	<div 
+	<div
 		bind:this={element}
 		transition:fade|global
 		class="alert shad-4 {className}"
 		on:click={handleClick}
+		role="button"
 	>
-		<div class="pad-1 ftdr  border-b-2 border-color-scheme-{level}">
-			<div class="flex-h flex-align-middle ">
+		<div class="pad-1 ftdr border-b-2 border-color-scheme-{level}">
+			<div class="flex-h flex-align-middle">
 				<div class="pad-1">
 					<div class="dot bg-themed-scheme-{level}" />
 				</div>

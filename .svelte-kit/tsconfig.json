@@ -36,6 +36,12 @@
 			],
 			"$sitedata/*": [
 				"../src/sitedata/*"
+			],
+			"$generated": [
+				"../src/generated"
+			],
+			"$generated/*": [
+				"../src/generated/*"
 			]
 		},
 		"rootDirs": [

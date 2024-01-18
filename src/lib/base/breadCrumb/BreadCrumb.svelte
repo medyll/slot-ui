@@ -1,7 +1,4 @@
 <script lang="ts">
-	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
-	import { get_current_component } from 'svelte/internal';
-
 	interface BreadListType {
 		action?: () => void;
 		breads?: BreadListItemType[];
@@ -15,16 +12,18 @@
 	}
 
 	/*  common slotUi exports*/
-	let className = '';
+	let className: string | undefined = undefined;
+	/**
+	 * css className to apply
+	 */
 	export { className as class };
 	export let element: HTMLElement | null = null;
-	const forwardEvents = createEventForwarder(get_current_component());
 	/*  end slotUi exports*/
 
 	export const breadList: BreadListType[] = [];
 </script>
 
-<nav use:forwardEvents bind:this={element} class="breadCrumb {className}">
+<nav bind:this={element} class="breadCrumb {className ?? ''}">
 	<ul>
 		<li class="bread">
 			<slot />

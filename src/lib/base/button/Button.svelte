@@ -29,7 +29,10 @@
 	export let endIcon: string | undefined = undefined;
 	/** endIcon color as a parameter*/
 	export let endIconColor: string = '#666';
-	/** endIcon color as a parameter*/
+	/**
+	 * endIcon
+	 * @type {'auto' | 'tiny' | 'small' | 'medium' | 'large' | 'full'}
+	 */
 	export let endIconSize: string = 'small';
 
 	/** background color theme */
@@ -51,9 +54,15 @@
 	/** button style link */
 	export let naked: boolean | undefined = undefined;
 
-	/** with of the button using  presets */
+	/**
+	 * with of the button using  presets
+	 * @type {'auto' | 'tiny' | 'small' | 'medium' | 'large' | 'full'}
+	 */
 	export let size: ElementProps['sizeType'] | 'full' = 'auto';
-	/** density of the button, using preset values */
+	/**
+	 * density of the button, using preset values
+	 * @type {'default' | 'dense' | 'extra-dense'}
+	 */
 	export let density: ElementProps['density'] = 'default';
 	/** add ellipsis on overflowed text */
 	export let nowrap: boolean = false;

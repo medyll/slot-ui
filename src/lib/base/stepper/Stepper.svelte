@@ -1,20 +1,13 @@
-<script lang="ts" context="module">
-	export type StepperOrientation = 'horizontal' | 'vertical';
-	export type StepType = {
-		index: number;
-		text: string;
-		action: () => void;
-	};
-</script>
-
 <script lang="ts">
+	import type { StepType, StepperOrientation } from './types.js';
+
 	/** Number of steps */
 	export let steps: StepType[] = [];
 	/** orientation of the stepper */
 	export let stepperOrientation: StepperOrientation = 'horizontal';
-  /** Actual active step */
+	/** Actual active step */
 	export let activeStep: number = 0;
-  /** exported actions for component */
+	/** exported actions for component */
 	export const actions = {
 		setActiveStep: function (step: number) {
 			activeStep = step ?? 0;
@@ -29,8 +22,8 @@
 </div>
 
 <style lang="scss">
-	@import "../../styles/slotui-vars.scss";
-	@import "../../styles/presets.scss";
+	@import '../../styles/slotui-vars.scss';
+	@import '../../styles/presets.scss';
 	.stepper {
 		.step {
 			padding: 0.5rem;

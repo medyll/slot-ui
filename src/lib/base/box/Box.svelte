@@ -28,17 +28,13 @@
 	/** alternative to slot.bottomZone, content to be shown in the bottom button zone */
 	export let bottomZone: string | undefined = undefined;
 
-	/** component actions */
-	export const actions: any = {
-		open: () => {
-			isOpen = true;
-		},
-		toggle: () => {
-			isOpen = !isOpen;
-		},
-		close: () => {
-			isOpen = !isOpen;
-		}
+	/** component actions
+	 * @type {Record<'open'|'toggle' | 'close', Function>}
+	 */
+	export const actions: Record<'open' | 'toggle' | 'close', Function> = {
+		open,
+		toggle,
+		close
 	};
 
 	const handleClick = (event: PointerEvent) => {
@@ -49,6 +45,15 @@
 		}
 	};
 
+	function open() {
+		isOpen = true;
+	}
+	function toggle() {
+		isOpen = !isOpen;
+	}
+	function close() {
+		isOpen = false;
+	}
 	$: closer = !showCloseControl ? {} : { onClose: () => actions.close() };
 </script>
 

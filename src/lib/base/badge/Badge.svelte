@@ -1,14 +1,18 @@
-<script lang="ts"> 
-	import {get_current_component} from 'svelte/internal';
+<script lang="ts">
+	import { get_current_component } from 'svelte/internal';
 
 	/*  common slotUi exports*/
 	let className = '';
-	export {className as class};
-	export let element: HTMLDivElement | null = null; 
+	export { className as class };
+	export let element: HTMLDivElement | null = null;
 	/*  end slotUi exports*/
 
 	export let value: number;
 	export let ceiling: number;
+	/**
+	 * position of the badge
+	 * @type {{ x: 'left' | 'right' | 'center'; y: 'top' | 'bottom' | 'center' }}
+	 */
 	export let position: { x: 'left' | 'right' | 'center'; y: 'top' | 'bottom' | 'center' } = {
 		x: 'right',
 		y: 'top'
@@ -27,7 +31,7 @@
 </script>
 
 {#if value > ceiling}
-	<div   bind:this={element} class="badge" style="{xM[position.x]};{yM[position.y]}">
+	<div bind:this={element} class="badge" style="{xM[position.x]};{yM[position.y]}">
 		<slot>{value}</slot>
 	</div>
 {/if}
