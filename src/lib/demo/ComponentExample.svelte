@@ -29,8 +29,7 @@
 	<div class="flex-v gap-medium">
 		<h5>Api preview :</h5>
 		<div class="marg-l-4">
-			readme
-			<CompReadMe />
+			<!-- <CompReadMe /> -->
 		</div>
 	</div>
 	<div class="flex-v gap-medium">

@@ -1,17 +1,17 @@
 ```import { SvelteComponent } from "svelte";
-import type { LisItemProps } from "./types.js";
-import type { SorterFieldType } from "../../data/sorter/types.js";
+import type { LisItemProps } from './types.js';
+import type { SorterFieldType } from '../../data/sorter/types.js';
 declare const __propDef: {
     props: {
-        class?: string | undefined;
-        element?: HTMLElement | null | undefined;
+        /**  className off the root component  */ class?: string | undefined;
+        /**  css style off the root component  */ style?: string | undefined;
+        /** element root HTMLDivElement props  */ element?: HTMLDivElement | null | undefined;
         /** formated listItems list  */ listItems?: LisItemProps[] | undefined;
         /** provided raw data, used if no listItems list is provided  */ data?: Record<string, any>[] | undefined;
         /** Row from data for primary, used if props.data is provided  */ dataFieldPrimary?: string | ((data: Record<string, any>) => void) | undefined;
         /** Row from data for secondary, used if props.data is provided  */ dataFieldSecondary?: string | ((data: Record<string, any>) => void) | undefined;
         /** Row from data for secondary, used if props.data is provided  */ dataFieldIcon?: string | ((data: Record<string, any>) => void) | undefined;
         height?: string | undefined;
-        style?: string | undefined;
         showIcon?: boolean | undefined;
         virtualize?: boolean | undefined;
         selectorField: any;
@@ -28,7 +28,9 @@ declare const __propDef: {
         /** icon for the  title  zone*/ icon?: string | undefined;
         /** fieldName by wich we will group */ groupBy?: string | undefined;
         /** List will not be clickable and will gain opacity */ disabled?: boolean | undefined;
-        density?: "medium" | "default" | "none" | "tight" | "kind" | undefined;
+        /** density of the list
+             * @type {'none' | 'tight' | 'default' | 'medium' | 'kind'}
+             */ density?: "medium" | "default" | "none" | "tight" | "kind" | undefined;
         /** binding for selectedData */ activeData?: Record<string, any> | undefined;
     };
     events: {

@@ -1,12 +1,21 @@
 {
   "moduleName": "List",
-  "filePath": "src/lib/base/list/List.svelte",
+  "filePath": "src/lib/data/list/List.svelte",
   "props": [
     {
       "name": "class",
       "kind": "let",
-      "type": "string",
-      "value": "\"\"",
+      "description": "className off the root component",
+      "isFunction": false,
+      "isFunctionDeclaration": false,
+      "isRequired": false,
+      "constant": false,
+      "reactive": false
+    },
+    {
+      "name": "style",
+      "kind": "let",
+      "description": "css style off the root component",
       "isFunction": false,
       "isFunctionDeclaration": false,
       "isRequired": false,
@@ -16,6 +25,7 @@
     {
       "name": "element",
       "kind": "let",
+      "description": "element root HTMLDivElement props",
       "type": "null | HTMLUListElement",
       "value": "null",
       "isFunction": false,
@@ -78,18 +88,7 @@
       "name": "height",
       "kind": "let",
       "type": "string",
-      "value": "\"100%\"",
-      "isFunction": false,
-      "isFunctionDeclaration": false,
-      "isRequired": false,
-      "constant": false,
-      "reactive": false
-    },
-    {
-      "name": "style",
-      "kind": "let",
-      "type": "string",
-      "value": "\"\"",
+      "value": "'100%'",
       "isFunction": false,
       "isFunctionDeclaration": false,
       "isRequired": false,
@@ -211,7 +210,7 @@
       "kind": "let",
       "description": "@deprecated use primary title  ",
       "type": "string",
-      "value": "\"\"",
+      "value": "''",
       "isFunction": false,
       "isFunctionDeclaration": false,
       "isRequired": false,
@@ -273,8 +272,9 @@
     {
       "name": "density",
       "kind": "let",
-      "type": "string",
-      "value": "\"default\"",
+      "description": "density of the list",
+      "type": "'none' | 'tight' | 'default' | 'medium' | 'kind'",
+      "value": "'default'",
       "isFunction": false,
       "isFunctionDeclaration": false,
       "isRequired": false,
@@ -303,7 +303,7 @@
     {
       "name": "listTitle",
       "default": false,
-      "fallback": "<slot name=\"title\">\r\n          <ListTitle primary={primary ?? title} {secondary} {icon} />\r\n        </slot>",
+      "fallback": "<slot name=\"title\">\r\n\t\t\t\t\t<ListTitle primary={primary ?? title} {secondary} {icon} />\r\n\t\t\t\t</slot>",
       "slot_props": "{}"
     },
     {

@@ -1,9 +1,9 @@
 ```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
-        /** @restProps {button | a} */ class?: string | undefined;
-        style?: string | undefined;
-        element?: HTMLDivElement | null | undefined;
+        /**  className off the root component  */ class?: string | undefined;
+        /**  css style off the root component  */ style?: string | undefined;
+        /** element root HTMLDivElement props  */ element?: HTMLDivElement | null | undefined;
         /** displayed title of the cartouche */ primary?: string | undefined;
         /** displayed sub title of the cartouche */ secondary?: string | undefined;
         icon?: string | undefined;
@@ -13,10 +13,9 @@ declare const __propDef: {
         /** show the title divider line */ showTitleDivider?: boolean | undefined;
         /** show the default border style */ bordered?: boolean | undefined;
         isOpen?: boolean | undefined;
-        /** use to control cartouche */ actions?: {
-            open: () => void;
-            toggle: () => void;
-        } | undefined;
+        /** component actions
+             * @type {Record<'open'|'toggle' | 'close', Function>}
+             */ actions?: Record<"close" | "toggle" | "open", Function> | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;
@@ -33,10 +32,8 @@ export type CartoucheProps = typeof __propDef.props;
 export type CartoucheEvents = typeof __propDef.events;
 export type CartoucheSlots = typeof __propDef.slots;
 export default class Cartouche extends SvelteComponent<CartoucheProps, CartoucheEvents, CartoucheSlots> {
-    get actions(): {
-        open: () => void;
-        toggle: () => void;
-    };
+    get component(): SvelteComponent<any, any, any>;
+    get actions(): Record<"close" | "toggle" | "open", Function>;
 }
 export {};
 

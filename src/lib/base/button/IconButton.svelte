@@ -3,7 +3,7 @@
 	import { get_current_component } from 'svelte/internal';
 	import type { ElementProps } from '$lib/types/index.js';
 	import Button from './Button.svelte';
-	import Icon from '../icon/Icon.svelte';
+	import Icon from '$lib/base/icon/Icon.svelte';
 	/** @restProps {Button} */
 	/*  common slotUi exports*/
 	let className = '';

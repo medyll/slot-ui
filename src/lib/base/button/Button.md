@@ -2,9 +2,9 @@
 __propDef: {
     props: {
         [x: string]: any;
-        presetDefault?: string | undefined;
         class?: string | undefined;
         element?: HTMLButtonElement | null | undefined;
+        style?: string | null | undefined;
         type?: string | undefined;
         icon?: string | undefined;
         iconFamily?: string | undefined;
@@ -33,7 +33,7 @@ __propDef: {
         secondary?: string | undefined;
         reverse?: boolean | undefined;
         ratio?: string | undefined;
-        buttonStart: string;
+        buttonStart?: string | undefined;
     };
     events: {
         click: MouseEvent;

@@ -2,19 +2,17 @@
 
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import { custom_event, get_current_component, null_to_empty } from 'svelte/internal';
+	import { custom_event, null_to_empty } from 'svelte/internal';
 
-	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
-	import Icon from '../icon/Icon.svelte';
+	import Icon from '$lib/base/icon/Icon.svelte';
 	import type { ElementProps } from '$lib/types/index.js';
-	import Divider from '../divider/Divider.svelte';
+	import Divider from '$lib/base/divider/Divider.svelte';
 
 	/*  common slotUi exports*/
 	let className = '';
 	export { className as class };
 	export let element: HTMLElement | null = null;
 	export let style: string = '';
-	const forwardEvents = createEventForwarder(get_current_component());
 	/*  end slotUi exports*/
 
 	let listStateContext = getContext<any>('listStateContext');

@@ -1,6 +1,6 @@
 {
   "moduleName": "Tabs",
-  "filePath": "src/lib/base/tabs/Tabs.svelte",
+  "filePath": "src/lib/navigation/tabs/Tabs.svelte",
   "props": [
     {
       "name": "class",

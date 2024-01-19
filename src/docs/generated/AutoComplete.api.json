@@ -1,6 +1,6 @@
 {
   "moduleName": "AutoComplete",
-  "filePath": "src/lib/data/autocomplete/AutoComplete.svelte",
+  "filePath": "src/lib/form/autocomplete/AutoComplete.svelte",
   "props": [
     {
       "name": "class",
@@ -51,6 +51,7 @@
       "name": "dataFieldName",
       "kind": "let",
       "description": "defaults fields to be shown",
+      "type": "string | string[] | undefined",
       "isFunction": false,
       "isFunctionDeclaration": false,
       "isRequired": false,

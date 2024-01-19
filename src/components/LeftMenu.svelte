@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { slotuiCatalog } from '$lib/slotuiCatalog.js';
-	import List from '$lib/base/list/List.svelte';
-	import ListItem from '$lib/base/list/ListItem.svelte';
-	import ListTitle from '$lib/base/list/ListTitle.svelte';
+	import List from '$lib/data/list/List.svelte';
+	import ListItem from '$lib/data/list/ListItem.svelte';
+	import ListTitle from '$lib/data/list/ListTitle.svelte';
 	import { dataOp } from '$lib/engine/utils.js';
 	import { sitePaths } from '$lib/engine/site.utils.js';
 
@@ -14,7 +14,7 @@
 	);
 </script>
 
-<List density="default" selectorField="code" height="100%">
+<List density="tight" selectorField="code" height="100%">
 	{#each Object.keys(groupedData) as group}
 		<ListTitle density="default" class="text-bold">
 			Slot-ui {group ?? ''}

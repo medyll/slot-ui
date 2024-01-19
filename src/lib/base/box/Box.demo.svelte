@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Box from './Box.svelte';
-	import Icon from '../icon/Icon.svelte';
+	import Icon from '$lib/base/icon/Icon.svelte';
 	import ComponentExample from '$lib/demo/ComponentExample.svelte';
 	import Demoer from '$lib/base/demoer/Demoer.svelte';
 	import DemoPage from '$lib/base/demoer/DemoPage.svelte';
@@ -13,27 +13,27 @@
 		showCloseControl: {
 			type: 'boolean',
 			values: [true, false]
-		},
+		}
 	};
 
 	let parametersProps: any = {
-		title:{
+		title: {
 			type: 'string',
 			values: ['A smart title on a smart box', 'second title']
 		},
-		content:{
+		content: {
 			type: 'string',
 			values: ['Some content as text / html', 'second content']
 		},
-		bottomZone:{
+		bottomZone: {
 			type: 'string',
 			values: ['bottomZone as text / html', 'second bottomZone']
 		},
-		icon:{
+		icon: {
 			type: 'icon',
-			values: ['mdi:window', 'mdi:user',undefined]
+			values: ['mdi:window', 'mdi:user', undefined]
 		},
-		...parametersSlot,
+		...parametersSlot
 	};
 
 	let componentArgs = {
@@ -44,8 +44,7 @@
 		...componentArgs,
 		title: 'A smart title on a smart box',
 		content: 'Some content as text / html',
-		bottomZone: 'bottomZone as text / html',
-
+		bottomZone: 'bottomZone as text / html'
 	};
 	let code = `
 	<Box class="marg">
@@ -57,21 +56,19 @@
 		<div  slot="bottomZone" class="flex-h gap-small pad border-t marg-ii-1">
 			bottom zoone
 		</div>
-	</Box>`
+	</Box>`;
 </script>
 
 <ComponentExample
 	component="Box"
 	cite="Boxes, essentially, contain other boxes. That's the meaning we'll found if open them<br /> B. Franklin,1854"
 	><div class="flex-v gap-medium">
-		<DemoPage  {code} title="Using slots" component="Box">
+		<DemoPage {code} title="Using slots" component="Box">
 			<Demoer parameters={parametersSlot} {componentArgs} let:activeParams>
 				<Box {...activeParams} onClose="cdss" class="marg">
 					<span slot="titleBarTitle">Title of the box</span>
 					<Icon fontSize="small" icon="clock" slot="titlBarIcon" />
-					<div class="pad-2">
-						Content of the box
-					</div>
+					<div class="pad-2">Content of the box</div>
 					<div class="flex-h gap-small pad border-t marg-ii-1" slot="boxBottomZone">
 						bottom zoone
 					</div>
@@ -80,8 +77,8 @@
 		</DemoPage>
 		<DemoPage title="Using props" component="Box">
 			<Demoer parameters={parametersProps} componentArgs={componentArgsProps} let:activeParams>
-				<Box {...activeParams}   class="marg" />
+				<Box {...activeParams} class="marg" />
 			</Demoer>
 		</DemoPage>
-	</div> 
+	</div>
 </ComponentExample>

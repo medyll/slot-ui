@@ -1,10 +1,11 @@
 ```import { SvelteComponent } from "svelte";
-import "iconify-icon";
+import 'iconify-icon';
 declare const __propDef: {
     props: {
         [x: string]: any;
         class?: string | undefined;
         style?: string | undefined;
+        element?: HTMLDivElement | null | any;
         icon?: string | undefined;
         iconFamily?: string | undefined;
         fontSize?: "tiny" | "small" | "medium" | "default" | "large" | "big" | "full" | "auto" | undefined;

@@ -37,7 +37,7 @@
     {
       "name": "titleBarIcon",
       "default": false,
-      "fallback": "<Icon fontSize=\"small\" icon={icon}/>",
+      "fallback": "<Icon fontSize=\"small\" {icon} />",
       "slot_props": "{}"
     },
     { "name": "titleBarTitle", "default": false, "slot_props": "{}" }

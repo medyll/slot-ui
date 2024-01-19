@@ -10,7 +10,7 @@
 	import cssfabric from '@medyll/cssfabric/src/lib/styles/vars.min.css';
 
 	import DynPage from './DynPage.svelte';
-	import Drawer from '$lib/base/drawer/Drawer.svelte';
+	import Drawer from '$lib/navigation/drawer/Drawer.svelte';
 	import TopBar from '../toggleBar/ToggleBar.svelte';
 	import List from '$lib/base/list/List.svelte';
 	import ListItem from '$lib/base/list/ListItem.svelte';
@@ -52,7 +52,7 @@
 	{/key}
 </svelte:head>
 red
-<Login showLogin={false}> 
+<Login showLogin={false}>
 	<div class="h-full overflow-hidden flex-v">
 		<Taskbar>
 			<svelte:fragment slot="taskBarLeft">
@@ -111,9 +111,9 @@ red
 		</Drawer>
 	</div>
 </Login>
- 
-<!-- <StartMenu /> --> 
-	<!-- <Taskbar>
+
+<!-- <StartMenu /> -->
+<!-- <Taskbar>
 		<svelte:fragment slot="taskBarLeft">
 			<Button
 				size="auto"

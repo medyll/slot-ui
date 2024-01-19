@@ -1,11 +1,9 @@
 <svelte:options accessors={true} />
 
 <script lang="ts">
-	import { get_current_component } from 'svelte/internal';
 	import { openPopper } from '../../ui/popper/actions.js';
 	import IconButton from './IconButton.svelte';
 	import Menu from '../../ui/menu/Menu.svelte';
-	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
 	import type { SvelteComponent } from 'svelte';
 	import type { PopperPositionType } from '$lib/ui/popper/types.js';
 	import type { IMenuItemProps, IMenuProps } from '$lib/ui/menu/types.js';
@@ -22,13 +20,14 @@
 			console.log('redfered');
 		}
 	};
+	/*  menuPosition
+	 * @type {"TC" | "TL" | "TR" | "BC" | "BL" | "BR"}
+	 */
 	export let menuPosition: PopperPositionType = 'BC';
 
-	/*  common slotUi exports*/
 	let className = '';
 	export { className as class };
 	export let element: HTMLElement | null = null as HTMLElement;
-	const forwardEvents = createEventForwarder(get_current_component());
 	/*  end slotUi exports*/
 
 	let componentProps = menuProps

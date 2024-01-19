@@ -1,5 +1,5 @@
 ```import { SvelteComponent } from "svelte";
-import { type UsePopperProps } from '../../ui/popper/usePopper';
+import { type UsePopperProps } from '../../ui/popper/usePopper.js';
 declare const __propDef: {
     props: {
         [x: string]: any;
@@ -16,7 +16,7 @@ declare const __propDef: {
         height?: string | undefined;
         borderless?: boolean | undefined;
         transparent?: boolean | undefined;
-        value: any;
+        value?: any | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;

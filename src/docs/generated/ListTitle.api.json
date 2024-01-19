@@ -1,12 +1,12 @@
 {
   "moduleName": "ListTitle",
-  "filePath": "src/lib/base/list/ListTitle.svelte",
+  "filePath": "src/lib/data/list/ListTitle.svelte",
   "props": [
     {
       "name": "class",
       "kind": "let",
       "type": "string",
-      "value": "\"\"",
+      "value": "''",
       "isFunction": false,
       "isFunctionDeclaration": false,
       "isRequired": false,
@@ -27,7 +27,7 @@
       "name": "style",
       "kind": "let",
       "type": "string",
-      "value": "\"\"",
+      "value": "''",
       "isFunction": false,
       "isFunctionDeclaration": false,
       "isRequired": false,
@@ -76,7 +76,7 @@
       "name": "density",
       "kind": "let",
       "type": "string",
-      "value": "\"default\"",
+      "value": "'default'",
       "isFunction": false,
       "isFunctionDeclaration": false,
       "isRequired": false,
@@ -90,7 +90,7 @@
     {
       "name": "listItemContent",
       "default": false,
-      "fallback": "<div class=\"listItemContent\">\r\n      {#if primary || $$slots.listItemPrimary || $$slots.primary}\r\n        <slot name=\"listItemPrimary\"\r\n          ><slot name=\"primary\"><h5>{primary}</h5></slot></slot>\r\n      {/if}\r\n      {#if secondary || $$slots.listTitleSecondary}\r\n        <div>\r\n          <slot name=\"listTitleSecondary\">{secondary}</slot>\r\n        </div>\r\n      {/if}\r\n    </div>\r\n    <slot />",
+      "fallback": "<div class=\"listItemContent\">\r\n\t\t\t{#if primary || $$slots.listItemPrimary || $$slots.primary}\r\n\t\t\t\t<slot name=\"listItemPrimary\"><slot name=\"primary\"><h5>{primary}</h5></slot></slot>\r\n\t\t\t{/if}\r\n\t\t\t{#if secondary || $$slots.listTitleSecondary}\r\n\t\t\t\t<div>\r\n\t\t\t\t\t<slot name=\"listTitleSecondary\">{secondary}</slot>\r\n\t\t\t\t</div>\r\n\t\t\t{/if}\r\n\t\t</div>\r\n\t\t<slot />",
       "slot_props": "{}"
     },
     {

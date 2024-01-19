@@ -1,14 +1,12 @@
 <script lang="ts">
 	import IconButton from '$lib/base/button/IconButton.svelte';
-	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
-	import { get_current_component } from 'svelte/internal';
 	import Button from '$lib/base/button/Button.svelte';
 
 	/*  common slotUi exports*/
 	let className = '';
 	export { className as class };
-	export let element: HTMLDivElement | undefined = undefined;
-	const forwardEvents = createEventForwarder(get_current_component());
+	export let element: HTMLDivElement | null = null; //
+	export let style: string | null = null;
 	/*  end slotUi exports*/
 
 	export let icon: string = 'toggle';
@@ -47,10 +45,9 @@
 	}
 </script>
 
-<div on:click={handleClick}>
+<div class={className} {style} on:click={handleClick}>
 	<slot name="contentSwitcherIcon">
-		<slot name="switcherSlot"
-			>s
+		<slot name="switcherSlot">
 			<IconButton style="aspect-ratio:1/1" {icon} iconFontSize="small" />
 		</slot>
 	</slot>

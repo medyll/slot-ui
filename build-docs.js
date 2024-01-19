@@ -26,7 +26,7 @@ const getAllFiles = function (dirPath, fragment = 'demo.svelte', arrayOfFiles = 
 			arrayOfFiles = getAllFiles(path.join(dirPath, file), fragment, arrayOfFiles);
 		} else {
 			if (file.includes(fragment)) {
-				// console.log(fragment,path.join(cleanPath, file))
+				 console.log(fragment,path.join(cleanPath, file))
 				arrayOfFiles.push(path.join(cleanPath, file));
 			}
 		}
@@ -351,7 +351,7 @@ function createReadme(fileList) {
 
 const resultProps = getAllFiles(srcPackage, 'svelte.d.ts');
 // write methods from packaged components
-createMethods(resultProps);
+// createMethods(resultProps);
 console.log(dirPath, 'component.api.md and component.md creation');
 // createReadme(resultProps);
 console.log(dirPath, 'index files for component.api.md and component.md');

@@ -1,7 +1,9 @@
 ```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
-        class?: string | undefined;
+        /**
+             * css className to apply
+             */ class?: string | undefined;
         element?: HTMLElement | null | undefined;
         breadList?: {
             action?: (() => void) | undefined;

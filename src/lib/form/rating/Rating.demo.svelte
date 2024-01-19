@@ -1,9 +1,9 @@
 <script lang="ts">
 	import ComponentExample from '$lib/demo/ComponentExample.svelte';
-	import Icon from '../icon/Icon.svelte';
+	import Icon from '$lib/base/icon/Icon.svelte';
 	import Rating from './Rating.svelte';
-	import Demoer from '../demoer/Demoer.svelte';
-	import DemoPage from '../demoer/DemoPage.svelte';
+	import Demoer from '../../base/demoer/Demoer.svelte';
+	import DemoPage from '../../base/demoer/DemoPage.svelte';
 
 	const ww = `<Rating scored={2}>
 			<Icon icon="star" />

@@ -1,6 +1,5 @@
 ```import { SvelteComponent } from "svelte";
-export type SortItem = {};
-export type Data = Record<string, any>;
+import type { SortItem, Data } from './types.js';
 declare const __propDef: {
     props: {
         /** Sorter mode */ sorterMode?: "button" | "menu" | "free" | undefined;

@@ -1,6 +1,6 @@
 {
   "moduleName": "Tree",
-  "filePath": "src/lib/base/tree/Tree.svelte",
+  "filePath": "src/lib/ui/tree/Tree.svelte",
   "props": [
     {
       "name": "class",

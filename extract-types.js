@@ -16,6 +16,44 @@ function dotToCamelCase(str) {
 	});
 }
 
+async function createMethods() {
+	const svelteFiles = glob.sync('./src/lib/**/*.md');
+	const excludePatterns = ['.preview', '.demo', '.wip', '.js'];
+
+	const indexContent = svelteFiles
+		.map((file) => {
+			if (excludePatterns.some((pattern) => file.includes(pattern))) return;
+			file = file.replace('./src/lib/', '$lib/');
+			return `export { default as ${dotToCamelCase(path.basename(file, '.md'))} } from '${file}';`;
+		})
+		.filter((f) => f)
+		.join('\n');
+
+	fs.writeFileSync(path.join(__dirname, 'src/sitedata/api/indexApi.ts'), indexContent);
+	//fs.writeFileSync(path.join(__dirname, 'src/lib/slotuiCatalog.ts'), `export const slotuiCatalog = {${indexContent}} as const`);
+}
+
+async function slotUiCatalogB() {
+	const svelteFiles = glob.sync('./src/lib/**/*.svelte');
+	const excludePatterns = ['.preview', '.demo', '.wip', '.js'];
+
+	const indexContent = svelteFiles
+		.map((file) => {
+			if (excludePatterns.some((pattern) => file.includes(pattern))) return;
+			const group = file.split('/')[3];
+			const comp = file.split('\\').slice(-1).toString()?.replace(/\./g, '');
+			const compName = file.split('/').slice(-1)[0].split('.')[0];
+			const code = compName.toLowerCase();
+			return `${code}:{name:"${compName}",code:"${code}",group:"${group}"},`;
+		})
+		.filter((f) => f)
+		.join('\n');
+	fs.writeFileSync(
+		path.join(__dirname, 'src/lib/slotuiCatalog.ts'),
+		`export const slotuiCatalog = {${indexContent}} as const`
+	);
+}
+
 async function generateTypeDefinitions() {
 	const svelteFiles = glob.sync('./src/lib/**/*.svelte');
 
@@ -39,7 +77,7 @@ async function generateTypeDefinitions() {
 	try {
 		sveld.sveld({
 			input: './src/lib/svelte-index.js',
-			verbose: true,
+			verbose: false,
 			glob: true,
 			types: false,
 			json: true,
@@ -56,7 +94,9 @@ async function generateTypeDefinitions() {
 		const jsonFiles = glob.sync(`${config.outDir}/*.json`);
 		const jsonDir = jsonFiles
 			.map((file) => {
-				return `export { default as ${dotToCamelCase(path.basename(file, '.json'))} } from './${path.basename(file, '.json')}.json';`;
+				return `export { default as ${dotToCamelCase(
+					path.basename(file, '.json')
+				)} } from './${path.basename(file, '.json')}.json';`;
 			})
 			.filter((f) => f)
 			.join('\n');
@@ -78,7 +118,8 @@ function main() {
 		.filter((f) => f.endsWith('.svelte'))
 		.forEach((f) => { 
 		}); */
-
+		createMethods();
+	slotUiCatalogB();
 	generateTypeDefinitions();
 }
 

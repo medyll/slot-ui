@@ -15,7 +15,7 @@ __propDef: {
         height?: string | undefined;
         borderless?: boolean | undefined;
         transparent?: boolean | undefined;
-        value: any;
+        value?: any | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;

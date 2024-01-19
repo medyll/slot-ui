@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Icon from '../icon/Icon.svelte';
+	import Icon from '$lib/base/icon/Icon.svelte';
 
 	let className = '';
 	export { className as class };
@@ -40,8 +40,8 @@
 </div>
 
 <style lang="scss">
-	@import "../../styles/slotui-vars.scss";
-	@import "../../styles/presets.scss";
+	@import '../../styles/slotui-vars.scss';
+	@import '../../styles/presets.scss';
 	.rating {
 		display: flex;
 		flex-direction: var(--direction);

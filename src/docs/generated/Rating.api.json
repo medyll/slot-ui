@@ -1,6 +1,6 @@
 {
   "moduleName": "Rating",
-  "filePath": "src/lib/base/rating/Rating.svelte",
+  "filePath": "src/lib/form/rating/Rating.svelte",
   "props": [
     {
       "name": "class",

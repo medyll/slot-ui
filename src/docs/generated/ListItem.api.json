@@ -1,6 +1,6 @@
 {
   "moduleName": "ListItem",
-  "filePath": "src/lib/base/list/ListItem.svelte",
+  "filePath": "src/lib/data/list/ListItem.svelte",
   "props": [
     {
       "name": "class",

@@ -17,8 +17,10 @@
 	/** initial data to look in */
 	export let data: any = [];
 	/** default field to be used for searches, can be * */
-	export let searchField = '*';
-	/** defaults fields to be shown */
+	export let searchField: string | '*' = '*';
+	/** defaults fields to be shown
+	@type {string | string[] | undefined}
+	 */
 	export let dataFieldName: string | string[] | undefined = undefined;
 	/** search mode : exact or partial match*/
 	export let mode: 'exact' | 'partial' = 'partial';

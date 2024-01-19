@@ -6,11 +6,12 @@
 	import type { SvelteComponent } from 'svelte';
 	import Button from '$lib/base/button/Button.svelte';
 
-	/** @restProps {button | a} */
-
-	let className = '';
+	let className: string | undefined = undefined;
+	/**  className off the root component  */
 	export { className as class };
-	export let style: string = '';
+	/**  css style off the root component  */
+	export let style: string | undefined = undefined;
+	/** element root HTMLDivElement props  */
 	export let element: HTMLDivElement | null = null;
 	const forwardEvents = createEventForwarder(get_current_component());
 
@@ -22,7 +23,7 @@
 	export let icon: string | undefined = undefined;
 	/** can be set as a prop or as a className */
 	export let stacked: boolean = false;
-	export let component: SvelteComponent | undefined = undefined;
+	export const component: SvelteComponent | undefined = undefined;
 	export let componentProps: Record<string, any> = {};
 
 	/** show the title divider line */
@@ -31,15 +32,24 @@
 	export let bordered: boolean = true;
 
 	export let isOpen: boolean = false;
-	/** use to control cartouche */
-	export const actions = {
-		open: () => {
-			isOpen = true;
-		},
-		toggle: () => {
-			isOpen = !isOpen;
-		}
+	/** component actions
+	 * @type {Record<'open'|'toggle' | 'close', Function>}
+	 */
+	export const actions: Record<'open' | 'toggle' | 'close', Function> = {
+		open,
+		toggle,
+		close
 	};
+
+	function open() {
+		isOpen = true;
+	}
+	function toggle() {
+		isOpen = !isOpen;
+	}
+	function close() {
+		isOpen = false;
+	}
 
 	$: chevronIcon = !isOpen ? 'chevron-down' : 'chevron-up';
 </script>

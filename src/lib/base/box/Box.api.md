@@ -13,7 +13,7 @@ declare const __propDef: {
         iconFamily?: string | undefined;
         content?: string | undefined;
         bottomZone?: string | undefined;
-        actions?: any;
+        actions?: Record<"close" | "toggle" | "open", Function> | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;
@@ -33,7 +33,7 @@ export type BoxProps = typeof __propDef.props;
 export type BoxEvents = typeof __propDef.events;
 export type BoxSlots = typeof __propDef.slots;
 export default class Box extends SvelteComponent<BoxProps, BoxEvents, BoxSlots> {
-    get actions(): any;
+    get actions(): Record<"close" | "toggle" | "open", Function>;
 }
 export {};
 

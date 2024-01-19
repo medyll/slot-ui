@@ -2,11 +2,10 @@
 
 <script lang="ts">
 	import { trans2Tree } from './tree.utils.js';
-	import type { PathDataType, TreeItemType } from './types.js';
+	import type { Data, TreeItemType } from './types.js';
 	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
 	import { get_current_component } from 'svelte/internal';
-	import Icon from '../icon/Icon.svelte';
-	import type { Data } from '$types.js';
+	import Icon from '$lib/base/icon/Icon.svelte';
 	import { dataOp } from '$lib/engine/utils.js';
 	import Finder from '$lib/data/finder/Finder.svelte';
 

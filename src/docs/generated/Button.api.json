@@ -3,17 +3,6 @@
   "filePath": "src/lib/base/button/Button.svelte",
   "props": [
     {
-      "name": "presetDefault",
-      "kind": "let",
-      "type": "string",
-      "value": "'bordered contained'",
-      "isFunction": false,
-      "isFunctionDeclaration": false,
-      "isRequired": false,
-      "constant": false,
-      "reactive": true
-    },
-    {
       "name": "class",
       "kind": "let",
       "type": "string",
@@ -28,11 +17,22 @@
       "name": "element",
       "kind": "let",
       "type": "null | HTMLButtonElement",
+      "value": "null",
       "isFunction": false,
       "isFunctionDeclaration": false,
-      "isRequired": true,
+      "isRequired": false,
       "constant": false,
       "reactive": true
+    },
+    {
+      "name": "style",
+      "kind": "let",
+      "value": "null",
+      "isFunction": false,
+      "isFunctionDeclaration": false,
+      "isRequired": false,
+      "constant": false,
+      "reactive": false
     },
     {
       "name": "type",

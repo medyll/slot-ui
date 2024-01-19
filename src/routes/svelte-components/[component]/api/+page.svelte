@@ -1,12 +1,12 @@
 <svelte:options accessors />
 
 <script lang="ts">
-	import { componentApiReadMe } from '$sitedata/api/indexApiFull.js';
+	// import { componentApiReadMe } from '$sitedata/api/indexApiFull.js';
 	import { sitePaths } from '$lib/engine/site.utils.js';
 
 	export let data: any = {};
 
-	$: tt = componentApiReadMe?.[data.component + 'Api'];
+	// $: tt = componentApiReadMe?.[data.component + 'Api'];
 </script>
 
 <div>
@@ -15,7 +15,7 @@
 	</h4>
 </div>
 <div>
-	<svelte:component this={tt} />
+	<!-- <svelte:component this={tt} /> -->
 </div>
 <div class="flex-v gap-medium">
 	<h5>Link to examples :</h5>

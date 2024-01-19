@@ -5,8 +5,17 @@
     {
       "name": "class",
       "kind": "let",
-      "type": "string",
-      "value": "''",
+      "description": "className off the root component",
+      "isFunction": false,
+      "isFunctionDeclaration": false,
+      "isRequired": false,
+      "constant": false,
+      "reactive": false
+    },
+    {
+      "name": "style",
+      "kind": "let",
+      "description": "css style off the root component",
       "isFunction": false,
       "isFunctionDeclaration": false,
       "isRequired": false,
@@ -16,6 +25,7 @@
     {
       "name": "element",
       "kind": "let",
+      "description": "element root HTMLDivElement props",
       "type": "null | HTMLDivElement",
       "value": "null",
       "isFunction": false,

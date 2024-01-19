@@ -1,13 +1,19 @@
 ```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
-        class?: string | undefined;
-        element?: HTMLDivElement | null | undefined;
-        /** margins applied to divider */ density?: "medium" | "default" | "none" | "tight" | "kind" | undefined;
-        /** default direction of the divider */ direction?: "vertical" | "horizontal" | undefined;
-        /** expansion of the divider */ expansion?: "full" | "padded" | "centered" | undefined;
+        /**  className off the root component  */ class?: string | undefined;
+        /**  css style off the root component  */ style?: string | undefined;
+        /** element root HTMLDivElement props  */ element?: HTMLDivElement | null | undefined;
+        /** margins applied to divider
+             @type {'none' | 'tight' | 'default' | 'medium' | 'kind'}
+            */ density?: "medium" | "default" | "none" | "tight" | "kind" | undefined;
+        /** default direction of the divider
+            @type {'vertical' | 'horizontal'} */ direction?: "vertical" | "horizontal" | undefined;
+        /** expansion of the divider
+            @type {'full' | 'padded' | 'centered'}
+             */ expansion?: "full" | "padded" | "centered" | undefined;
         /** give shadow to divider */ shadow?: boolean | undefined;
-        /** give color to divider */ color?: string | undefined;
+        /** give color to divider */ color?: string | null | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;

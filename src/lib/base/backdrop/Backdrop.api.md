@@ -6,7 +6,10 @@ declare const __propDef: {
         style?: string | undefined;
         /** show or hide the backdrop */ isOpen?: boolean | undefined;
         /** if in loading state, it will show a loading icon or $$slots.loadingSlot */ isLoading?: boolean | undefined;
-        /** css position mode of the backdrop */ flow?: "relative" | "absolute" | "fixed" | undefined;
+        /**
+            css position mode of the backdrop
+            @type {'absolute' | 'fixed' | 'relative'}
+          */ flow?: "relative" | "absolute" | "fixed" | undefined;
         /** auto-close backdrop on click */ autoClose?: boolean | undefined;
         /** Backdrop controller */ actions?: {
             close: () => void;

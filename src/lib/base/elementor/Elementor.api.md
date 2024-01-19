@@ -1,8 +1,9 @@
 ```import { SvelteComponent } from "svelte";
 declare const __propDef: {
     props: {
-        class?: string | undefined;
-        element?: HTMLDivElement | null | undefined;
+        /**  className off the root component  */ class?: string | undefined;
+        /**  css style off the root component  */ style?: string | undefined;
+        /** element root HTMLDivElement props  */ element?: HTMLDivElement | null | undefined;
         item?: {} | undefined;
     };
     events: {

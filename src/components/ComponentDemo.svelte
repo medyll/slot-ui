@@ -48,7 +48,7 @@
 			<div class="w-16">
 				<h6 class="">{prop.name}</h6>
 			</div>
-			<!-- <div></div>
+			<div></div>
 			<div class="flex-v" style="gap:0.5rem;">
 				{#if prop.description}<div class=" ">{prop.description ?? ''}</div>{/if}
 				<div class="  d">
@@ -57,7 +57,7 @@
 				<div class=" ">
 					<span>default value: {prop.value}</span>
 				</div>
-			</div> -->
+			</div>
 		</div>
 	{/each}
 	<br />
@@ -65,6 +65,14 @@
 	{#each slots as slot}
 		<div class="flex" style="gap:0.5rem">
 			<h6>{slot.name}</h6>
+		</div>
+	{/each}
+	<br />
+	<h5>events</h5>
+	{#each events as event}
+		<div class="flex" style="gap:0.5rem">
+			<h6>{event.name}</h6>
+			<span>{@html event.fallback}</span>
 		</div>
 	{/each}
 </div>

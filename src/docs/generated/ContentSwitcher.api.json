@@ -17,11 +17,22 @@
       "name": "element",
       "kind": "let",
       "type": "null | HTMLDivElement",
+      "value": "null",
       "isFunction": false,
       "isFunctionDeclaration": false,
       "isRequired": false,
       "constant": false,
       "reactive": true
+    },
+    {
+      "name": "style",
+      "kind": "let",
+      "value": "null",
+      "isFunction": false,
+      "isFunctionDeclaration": false,
+      "isRequired": false,
+      "constant": false,
+      "reactive": false
     },
     {
       "name": "icon",
@@ -60,14 +71,14 @@
     {
       "name": "contentSwitcherIcon",
       "default": false,
-      "fallback": "<slot name=\"switcherSlot\"\r\n\t\t\t>s\r\n\t\t\t<IconButton style=\"aspect-ratio:1/1\" {icon} iconFontSize=\"small\" />\r\n\t\t</slot>",
+      "fallback": "<slot name=\"switcherSlot\">\r\n\t\t\t<IconButton style=\"aspect-ratio:1/1\" {icon} iconFontSize=\"small\" />\r\n\t\t</slot>",
       "slot_props": "{}"
     },
     { "name": "contentSwitcherReveal", "default": false, "slot_props": "{}" },
     {
       "name": "switcherSlot",
       "default": false,
-      "fallback": "s\r\n\t\t\t<IconButton style=\"aspect-ratio:1/1\" {icon} iconFontSize=\"small\" />",
+      "fallback": "<IconButton style=\"aspect-ratio:1/1\" {icon} iconFontSize=\"small\" />",
       "slot_props": "{}"
     }
   ],

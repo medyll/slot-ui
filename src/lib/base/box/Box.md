@@ -13,7 +13,7 @@ __propDef: {
         iconFamily?: string | undefined;
         content?: string | undefined;
         bottomZone?: string | undefined;
-        actions?: any;
+        actions?: Record<"close" | "toggle" | "open", Function> | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;

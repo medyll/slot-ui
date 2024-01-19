@@ -3,9 +3,54 @@
   "filePath": "src/lib/base/confirm/Confirm.svelte",
   "props": [
     {
+      "name": "class",
+      "kind": "let",
+      "description": "className off the root component",
+      "isFunction": false,
+      "isFunctionDeclaration": false,
+      "isRequired": false,
+      "constant": false,
+      "reactive": false
+    },
+    {
+      "name": "style",
+      "kind": "let",
+      "description": "css style off the root component",
+      "isFunction": false,
+      "isFunctionDeclaration": false,
+      "isRequired": false,
+      "constant": false,
+      "reactive": false
+    },
+    {
+      "name": "initialRef",
+      "kind": "let",
+      "description": "element initial HTMLDivElement props",
+      "type": "null | HTMLSpanElement",
+      "value": "null",
+      "isFunction": false,
+      "isFunctionDeclaration": false,
+      "isRequired": false,
+      "constant": false,
+      "reactive": true
+    },
+    {
+      "name": "contentRef",
+      "kind": "let",
+      "description": "element onfirm HTMLDivElement props",
+      "type": "null | HTMLSpanElement",
+      "value": "null",
+      "isFunction": false,
+      "isFunctionDeclaration": false,
+      "isRequired": false,
+      "constant": false,
+      "reactive": true
+    },
+    {
       "name": "tooltipInitial",
       "kind": "let",
       "description": "text displayed on confirm button",
+      "value": "null",
       "isFunction": false,
       "isFunctionDeclaration": false,
       "isRequired": false,
@@ -76,7 +121,7 @@
       "name": "iconColor",
       "kind": "let",
       "description": "color of the icon displayed on the confirm button",
-      "type": "string",
+      "type": "",
       "value": "'green'",
       "isFunction": false,
       "isFunctionDeclaration": false,
@@ -97,7 +142,7 @@
       "reactive": false
     },
     {
-      "name": "cancelIcon",
+      "name": "iconCancel",
       "kind": "let",
       "description": "icon to display for back action",
       "type": "string",
@@ -114,7 +159,7 @@
     {
       "name": "__default__",
       "default": true,
-      "fallback": "<Button on:click={handleAction} {iconColor} {icon}  size=\"auto\" {primary} focus />",
+      "fallback": "<Button on:click={handleAction} {iconColor} {icon} size=\"auto\" {primary} focus />",
       "slot_props": "{}"
     },
     {

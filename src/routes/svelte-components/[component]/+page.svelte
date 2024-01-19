@@ -13,11 +13,11 @@
 
 <div out:fade|global={{ duration: 200 }} in:fade|global={{ duration: 200 }}>
 	{#key comp}
-		<ComponentDemo component={data.component} />
-		<!-- {comp} -->
-		<!-- {data?.component} -->
 		{#if Comp}
 			<Comp />
 		{/if}
+		<ComponentDemo component={data.component} />
+		<!-- {comp} -->
+		<!-- {data?.component} -->
 	{/key}
 </div>

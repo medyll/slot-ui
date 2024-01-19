@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { elem } from '../../engine/elem';
-	import Icon from '../icon/Icon.svelte';
+	import { elem } from '$lib/engine/elem.js';
+	import Icon from '$lib/base/icon/Icon.svelte';
 	import type { Items, TabsItemsProps } from './types.js';
 	import { custom_event, get_current_component } from 'svelte/internal';
 	import { createEventForwarder } from '$lib/engine/eventForwarder.js';

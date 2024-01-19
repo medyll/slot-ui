@@ -1,10 +1,5 @@
 ```import { SvelteComponent } from "svelte";
-export type StepperOrientation = 'horizontal' | 'vertical';
-export type StepType = {
-    index: number;
-    text: string;
-    action: () => void;
-};
+import type { StepType, StepperOrientation } from './types.js';
 declare const __propDef: {
     props: {
         /** Number of steps */ steps?: StepType[] | undefined;

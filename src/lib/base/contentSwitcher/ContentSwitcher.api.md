@@ -2,7 +2,8 @@
 declare const __propDef: {
     props: {
         class?: string | undefined;
-        element?: HTMLDivElement | undefined;
+        element?: HTMLDivElement | null | undefined;
+        style?: string | null | undefined;
         icon?: string | undefined;
         iconback?: string | undefined;
         parent?: HTMLElement | undefined;

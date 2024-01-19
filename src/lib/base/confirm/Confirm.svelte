@@ -1,11 +1,20 @@
 <script lang="ts">
-	import { autofocus } from '$lib/uses/autofocus/autofocus.js';
-	import { fade, slide } from 'svelte/transition';
+	import { fade } from 'svelte/transition';
 	import Button from '$lib/base/button/Button.svelte';
 	import { onDestroy } from 'svelte';
 
+	let className: string | undefined = undefined;
+	/**  className off the root component  */
+	export { className as class };
+	/**  css style off the root component  */
+	export let style: string | undefined = undefined;
+	/** element initial HTMLDivElement props  */
+	export let initialRef: HTMLElement | null = null; //
+	/** element onfirm HTMLDivElement props  */
+	export let contentRef: HTMLElement | null = null; //
+
 	/** text displayed on confirm button */
-	export let tooltipInitial: string | undefined =undefined;
+	export let tooltipInitial: string | null = null;
 	/** text displayed on confirm button */
 	export let primaryInitial: string = '';
 	/** icon displayed on the confirm button */
@@ -17,17 +26,16 @@
 	export let primary: string = 'confirm';
 	/** icon displayed on the confirm button */
 	export let icon: string = 'check-circle-outline';
-	/** color of the icon displayed on the confirm button */
+	/** color of the icon displayed on the confirm button
+	@type string
+	 */
 	export let iconColor: string = 'green';
 
 	/** action initiated on confirmation*/
 	export let action: () => void = () => {};
-	let initialRef: HTMLElement;
-	let contentRef: HTMLElement;
-
 	let step: string = 'initial';
 	/** icon to display for back action */
-	export let cancelIcon: string = 'chevron-left';
+	export let iconCancel: string = 'chevron-left';
 
 	function handleClickInitial(event: any) {
 		event.preventDefault();
@@ -43,18 +51,25 @@
 
 	function handleAction(event: any) {
 		event.preventDefault();
-		event.stopPropagation(); 
-		if(action) action()
+		event.stopPropagation();
+		if (action) action();
 	}
 
-	onDestroy(()=>{
-		step = 'initial'
-	})
-
+	onDestroy(() => {
+		step = 'initial';
+	});
 </script>
 
 {#if step === 'initial'}
-	<span in:fade|global on:click={handleClickInitial} bind:this={initialRef} title={tooltipInitial}>
+	<span
+		class={className}
+		{style}
+		in:fade|global
+		on:click={handleClickInitial}
+		bind:this={initialRef}
+		title={tooltipInitial}
+		role="button"
+	>
 		<slot name="initial"
 			><Button
 				naked
@@ -67,22 +82,21 @@
 	</span>
 {/if}
 {#if step === 'confirm'}
-	<span in:fade|global bind:this={contentRef} class="contentSlot">
+	<span class={className + ' contentSlot'} {style} in:fade|global bind:this={contentRef}>
 		<span on:click={handleClickCancel}>
-			<Button naked icon={cancelIcon}  title="cancel" />
+			<Button naked icon={iconCancel} title="cancel" />
 		</span>
 		<slot>
-			<Button on:click={handleAction} {iconColor} {icon}  size="auto" {primary} focus />
+			<Button on:click={handleAction} {iconColor} {icon} size="auto" {primary} focus />
 		</slot>
 	</span>
 {/if}
 
-
 <style lang="scss">
-	@import "../../styles/slotui-vars.scss";
-	@import "../../styles/presets.scss";
-	.contentSlot{
-		display:flex;
-		align-items:center;
+	@import '../../styles/slotui-vars.scss';
+	@import '../../styles/presets.scss';
+	.contentSlot {
+		display: flex;
+		align-items: center;
 	}
 </style>

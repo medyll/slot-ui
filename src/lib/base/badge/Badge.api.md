@@ -5,7 +5,10 @@ declare const __propDef: {
         element?: HTMLDivElement | null | undefined;
         value: number;
         ceiling: number;
-        position?: {
+        /**
+             * position of the badge
+             * @type {{ x: 'left' | 'right' | 'center'; y: 'top' | 'bottom' | 'center' }}
+             */ position?: {
             x: 'left' | 'right' | 'center';
             y: 'top' | 'bottom' | 'center';
         } | undefined;

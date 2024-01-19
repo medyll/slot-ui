@@ -8,7 +8,7 @@
 	import '../styles/cssfabric-theme.scss';
 	import '../styles/main.css';
 
-	import Drawer from '$lib/base/drawer/Drawer.svelte';
+	import Drawer from '$lib/navigation/drawer/Drawer.svelte';
 	import ThemeSwitcher from '$lib/ui/themeswitcher/ThemeSwitcher.svelte';
 	import Button from '$lib/base/button/Button.svelte';
 	import LeftMenu from '../components/LeftMenu.svelte';
@@ -17,7 +17,7 @@
 	import type { Writable } from 'svelte/store';
 	import type { UiContextType } from '../contexts/ui.context.js';
 	import { onMount } from 'svelte';
-	import AutoComplete from '$lib/data/autocomplete/AutoComplete.svelte';
+	import AutoComplete from '$lib/form/autocomplete/AutoComplete.svelte';
 	import { goto } from '$app/navigation';
 	import { sitePaths } from '$lib/engine/site.utils.js';
 	import type { LayoutData } from '$app/navigation';
@@ -93,9 +93,9 @@
 	</script>
 </svelte:head>
 
-<div class="flex-h h-full overflow-hidden">
+<div class="flex-h h-full overflow-hidden" style="background-color:rgba(255,255,255,0.1)">
 	<Drawer
-		class="overflow-auto"
+		class="overflow-auto h-full"
 		bind:this={DrawerRef}
 		flow={$uiContext.drawerFlow}
 		isOpen={$uiContext.drawerOpen}
@@ -104,7 +104,7 @@
 	>
 		<LeftMenu selected={data?.params?.component} />
 	</Drawer>
-	<div id="contentSlide" bind:this={contentSlide}>
+	<div id="contentSlide" class="flex-v" bind:this={contentSlide}>
 		<nav
 			bind:this={navElement}
 			class="nav flex-h pos-sticky pad flex-align-middle gap-small zI-10 w-full h-4 gap-medium"
@@ -112,7 +112,6 @@
 			<Button on:click={onDrawerClick} ratio="1/1" icon="mdi:menu" bgTheme="primary" />
 			<h3><a href="/">slotui</a></h3>
 			<div class="flex-main" />
-			<!-- <a href="svelte-components">Components</a> -->
 			<a target="_blank" href="https://github.com/medyll/slot-ui">Github</a>
 			{#await data?.data?.streamed?.slotuiCatalog}
 				...
@@ -126,7 +125,7 @@
 			{/await}
 			<ThemeSwitcher icon="mdi:paint-outline" title="toggle theme" />
 		</nav>
-		<div id="innerSlide" bind:this={innerSlide} class="zI-0">
+		<div id="innerSlide" class="flex-1 overflow-auto zI-0" bind:this={innerSlide}>
 			<slot />
 		</div>
 	</div>
@@ -134,8 +133,7 @@
 
 <style global>
 	#contentSlide {
-		height: 100%;
-		overflow: auto;
+		overflow: hidden;
 		flex: 1;
 		scroll-behavior: smooth;
 		scroll-padding-top: 25rem;

@@ -29,7 +29,6 @@ import SliderApiReadMe from "$lib/base/slider/Slider.api.md";
 import StepperApiReadMe from "$lib/base/stepper/Stepper.api.md";
 import TabsApiReadMe from "$lib/base/tabs/Tabs.api.md";
 import TitleBarApiReadMe from "$lib/base/titleBar/TitleBar.api.md";
-import TreeApiReadMe from "$lib/base/tree/Tree.api.md";
 import VirtualizeApiReadMe from "$lib/base/virtualize/Virtualize.api.md";
 import VirtualizerApiReadMe from "$lib/base/virtualizer/Virtualizer.api.md";
 import AutoCompleteApiReadMe from "$lib/data/autocomplete/AutoComplete.api.md";
@@ -70,6 +69,7 @@ import ToastApiReadMe from "$lib/ui/toast/Toast.api.md";
 import ToasterApiReadMe from "$lib/ui/toast/Toaster.api.md";
 import ToggleBarApiReadMe from "$lib/ui/toggleBar/ToggleBar.api.md";
 import ToolBarApiReadMe from "$lib/ui/toolBar/ToolBar.api.md";
+import TreeApiReadMe from "$lib/ui/tree/Tree.api.md";
 import WindowApiReadMe from "$lib/ui/window/Window.api.md";
 import ContextRooterApiReadMe from "$lib/utils/contextRooter/ContextRooter.api.md";
 
@@ -104,7 +104,6 @@ sliderApi:SliderApiReadMe,
 stepperApi:StepperApiReadMe,
 tabsApi:TabsApiReadMe,
 titlebarApi:TitleBarApiReadMe,
-treeApi:TreeApiReadMe,
 virtualizeApi:VirtualizeApiReadMe,
 virtualizerApi:VirtualizerApiReadMe,
 autocompleteApi:AutoCompleteApiReadMe,
@@ -145,5 +144,6 @@ toastApi:ToastApiReadMe,
 toasterApi:ToasterApiReadMe,
 togglebarApi:ToggleBarApiReadMe,
 toolbarApi:ToolBarApiReadMe,
+treeApi:TreeApiReadMe,
 windowApi:WindowApiReadMe,
 contextrooterApi:ContextRooterApiReadMe}

@@ -1,11 +1,12 @@
 ```import { SvelteComponent } from "svelte";
+/** @restProps { button} */
 import { type UsePopperProps } from '../../ui/popper/usePopper.js';
 declare const __propDef: {
     props: {
         [x: string]: any;
-        presetDefault?: string | undefined;
         class?: string | undefined;
         element?: HTMLButtonElement | null | undefined;
+        style?: string | null | undefined;
         type?: string | undefined;
         icon?: string | undefined;
         iconFamily?: string | undefined;
@@ -34,7 +35,7 @@ declare const __propDef: {
         secondary?: string | undefined;
         reverse?: boolean | undefined;
         ratio?: string | undefined;
-        buttonStart: string;
+        buttonStart?: string | undefined;
     };
     events: {
         click: MouseEvent;

@@ -1,17 +1,13 @@
 <script lang="ts">
 	import List from './List.svelte';
-	import { onMount } from 'svelte';
 	import ListItem from './ListItem.svelte';
-	import { null_to_empty } from 'svelte/internal';
-	import Icon from '../icon/Icon.svelte';
-	import IconButton from '$lib/base/button/IconButton.svelte';
+	import Icon from '$lib/base/icon/Icon.svelte';
 	/* demo */
 	import ComponentExample from '$lib/demo/ComponentExample.svelte';
 	import Demoer from '$lib/base/demoer/Demoer.svelte';
 	import DemoPage from '$lib/base/demoer/DemoPage.svelte';
 	import DemoerCode from '$lib/base/demoer/DemoerCode.svelte';
-	import { defaultsArgsFromProps } from '../demoer/demoer.utils.js';
-  import { uiPresets } from '$lib/engine/presets.js';
+	import { uiPresets } from '$lib/engine/presets.js';
 	/* demo */
 	let cc = 0;
 	let listItems = [];
@@ -39,7 +35,7 @@
 	let multiple = {
 		primary: {
 			'no title': {},
-			title: {primary:'primary text',secondary:'secondary text'},
+			title: { primary: 'primary text', secondary: 'secondary text' }
 		}
 	};
 
@@ -50,11 +46,11 @@
 		},
 		group: {
 			type: 'string',
-			values: [undefined,'secondary']
+			values: [undefined, 'secondary']
 		}
 	};
 
-	let componentArgsSlot = { 
+	let componentArgsSlot = {
 		density: 'default'
 	};
 
@@ -141,7 +137,7 @@
 					height="350px"
 					on:listitem:click={(ce) => console.log(ce.detail)}
 					on:listitem:dblclick={(ce) => console.log(ce.detail)}
-					selectorField="name" 
+					selectorField="name"
 					sorterer={[{ sortByField: 'name' }]}
 					style="width:240px"
 					class="shad-3 radius-small overflow-hidden"
@@ -152,9 +148,7 @@
 						<span slot="listItemPrimary">{listItem.data.name}</span>
 						<span slot="listItemSecondary">{listItem.data.secondary}</span>
 					</ListItem>
-					<div slot="listFooter">
-					footer
-					</div>
+					<div slot="listFooter">footer</div>
 				</List>
 			</Demoer>
 		</DemoPage>

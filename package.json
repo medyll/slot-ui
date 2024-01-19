@@ -22,7 +22,7 @@
 		"release:beta": "standard-version --prerelease beta",
 		"release:minor": "standard-version --release-as minor",
 		"publish": "npm run package",
-		"book": "nodemon --watch src/lib --ignore '**/docs/**' --ignore 'lib/svelte.index.js' --delay 20 extract-types.js"
+		"slotui-book": "nodemon --watch ./src/lib --ignore **/docs/** --ignore ./src/lib/svelte.index.js --ext svelte --delay 2.5 extract-types.js"
 	},
 	"exports": {
 		".": {

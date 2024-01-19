@@ -8,24 +8,22 @@
 	import Icon from '$lib/base/icon/Icon.svelte';
 	import { autofocus } from '$lib/uses/autofocus/autofocus.js';
 
-	export let presetDefault = 'bordered contained';
-
+	let presetDefault = 'bordered contained';
 	/*  common slotUi exports  */
 	let className = '';
 	export { className as class };
-	export let element: HTMLButtonElement;
+	export let element: HTMLButtonElement | null = null; //
+	export let style: string | null = null;
 	/*  end slotUi exports*/
-
 	let buttonType = 'button';
 	export { buttonType as type };
-
 	/** icon as a parameter */
 	export let icon: string | undefined = undefined;
 	/** icon as a parameter*/
 	export let iconFamily: string | undefined = 'mdi';
 	/** icon color as a parameter*/
 	export let iconColor: string = '#666';
-
+	let red;
 	/** endIcon as a parameter */
 	export let endIcon: string | undefined = undefined;
 	/** endIcon color as a parameter*/
@@ -67,6 +65,7 @@
 	export let density: ElementProps['density'] = 'default';
 	/** add ellipsis on overflowed text */
 	export let nowrap: boolean = false;
+
 	/**
 	 * height of the button, using preset values
 	 * @type {'auto' | 'tiny' | 'small' | 'medium' | 'large' | 'full'}

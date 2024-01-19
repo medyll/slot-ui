@@ -5,8 +5,7 @@
     {
       "name": "class",
       "kind": "let",
-      "type": "string",
-      "value": "''",
+      "description": "className off the root component",
       "isFunction": false,
       "isFunctionDeclaration": false,
       "isRequired": false,
@@ -16,8 +15,7 @@
     {
       "name": "style",
       "kind": "let",
-      "type": "string",
-      "value": "''",
+      "description": "css style off the root component",
       "isFunction": false,
       "isFunctionDeclaration": false,
       "isRequired": false,
@@ -27,6 +25,7 @@
     {
       "name": "element",
       "kind": "let",
+      "description": "element root HTMLDivElement props",
       "type": "null | HTMLDivElement",
       "value": "null",
       "isFunction": false,
@@ -80,11 +79,11 @@
     },
     {
       "name": "component",
-      "kind": "let",
+      "kind": "const",
       "isFunction": false,
       "isFunctionDeclaration": false,
       "isRequired": false,
-      "constant": false,
+      "constant": true,
       "reactive": false
     },
     {
@@ -136,9 +135,9 @@
     {
       "name": "actions",
       "kind": "const",
-      "description": "use to control cartouche",
-      "type": "{     open: () => {         isOpen = true;     },     toggle: () => {         isOpen = !isOpen;     } }",
-      "value": "{     open: () => {         isOpen = true;     },     toggle: () => {         isOpen = !isOpen;     } }",
+      "description": "component actions",
+      "type": "Record<'open'|'toggle' | 'close', Function>",
+      "value": "{     open,     toggle,     close }",
       "isFunction": false,
       "isFunctionDeclaration": false,
       "isRequired": false,
@@ -170,6 +169,5 @@
     }
   ],
   "events": [],
-  "typedefs": [],
-  "rest_props": { "type": "Element", "name": "button | a" }
+  "typedefs": []
 }

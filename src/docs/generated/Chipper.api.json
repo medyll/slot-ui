@@ -5,8 +5,17 @@
     {
       "name": "class",
       "kind": "let",
-      "type": "string",
-      "value": "''",
+      "description": "className off the root component",
+      "isFunction": false,
+      "isFunctionDeclaration": false,
+      "isRequired": false,
+      "constant": false,
+      "reactive": false
+    },
+    {
+      "name": "style",
+      "kind": "let",
+      "description": "css style off the root component",
       "isFunction": false,
       "isFunctionDeclaration": false,
       "isRequired": false,
@@ -16,7 +25,9 @@
     {
       "name": "element",
       "kind": "let",
+      "description": "element root HTMLDivElement props",
       "type": "null | HTMLDivElement",
+      "value": "null",
       "isFunction": false,
       "isFunctionDeclaration": false,
       "isRequired": false,
@@ -24,19 +35,10 @@
       "reactive": true
     },
     {
-      "name": "style",
-      "kind": "let",
-      "isFunction": false,
-      "isFunctionDeclaration": false,
-      "isRequired": false,
-      "constant": false,
-      "reactive": false
-    },
-    {
       "name": "position",
       "kind": "let",
       "description": "position of the chipper",
-      "type": "string",
+      "type": "'top' | 'bottom' | 'left' | 'right'",
       "value": "'bottom'",
       "isFunction": false,
       "isFunctionDeclaration": false,
@@ -47,7 +49,8 @@
     {
       "name": "bgTheme",
       "kind": "let",
-      "type": "string",
+      "description": "theme color of the chip",
+      "type": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger' | 'light' | 'medium' | 'dark'",
       "value": "'primary'",
       "isFunction": false,
       "isFunctionDeclaration": false,
@@ -59,6 +62,8 @@
       "name": "color",
       "kind": "let",
       "description": "css color code for the chip",
+      "type": "string",
+      "value": "''",
       "isFunction": false,
       "isFunctionDeclaration": false,
       "isRequired": false,
@@ -69,6 +74,8 @@
       "name": "content",
       "kind": "let",
       "description": "text or html is slot is not used",
+      "type": "string",
+      "value": "''",
       "isFunction": false,
       "isFunctionDeclaration": false,
       "isRequired": false,
@@ -93,13 +100,13 @@
     {
       "name": "__default__",
       "default": true,
-      "fallback": "{#if content}\r\n            <div class=\"chipperContent\">{@html null_to_empty(content)}</div>\r\n        {/if}",
+      "fallback": "{#if content}\r\n\t\t\t<div class=\"chipperContent\">{@html null_to_empty(content)}</div>\r\n\t\t{/if}",
       "slot_props": "{}"
     },
     {
       "name": "chipperChip",
       "default": false,
-      "fallback": "<div class=\"defaultChip\"/>",
+      "fallback": "<div class=\"defaultChip\" />",
       "slot_props": "{}"
     }
   ],

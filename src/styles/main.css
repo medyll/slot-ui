@@ -4,6 +4,7 @@ html {
   font-family: "Rubik";
   line-height: 1.45;
   height: 100%;
+  max-height: 100%;
   -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
@@ -15,6 +16,7 @@ body {
   /* background-color: var(--theme-color-background); */
   background: var(--theme-color-background);
   background: linear-gradient(180deg, var(--theme-color-background) 0%, var(--theme-color-paper) 100%);
+  overflow: hidden;
 }
 
 * {

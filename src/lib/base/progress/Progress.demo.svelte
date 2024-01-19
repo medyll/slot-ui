@@ -1,12 +1,12 @@
-<script lang="ts"> 
-	import Progress from './Progress.svelte'; 
+<script lang="ts">
+	import Progress from './Progress.svelte';
 
-		/* demo */
-		import ComponentExample from '$lib/demo/ComponentExample.svelte';
+	/* demo */
+	import ComponentExample from '$lib/demo/ComponentExample.svelte';
 	import Demoer from '$lib/base/demoer/Demoer.svelte';
 	import DemoPage from '$lib/base/demoer/DemoPage.svelte';
 	import { defaultsArgs, defaultsArgsFromProps } from '$lib/base/demoer/demoer.utils.js';
-	import Icon from '../icon/Icon.svelte';
+	import Icon from '$lib/base/icon/Icon.svelte';
 	/* demo */
 
 	const ww = `<Progress value="50" />`;
@@ -15,12 +15,12 @@
 	let parameters: any = {
 		value: {
 			type: 'number',
-			values: [20,3,9]
-		}, 
+			values: [20, 3, 9]
+		},
 		percentBase: {
 			type: 'number',
 			values: [100, 5, 10]
-		},
+		}
 	};
 
 	let componentArgs = defaultsArgs(parameters);
