@@ -19,7 +19,7 @@ const config = {
 			$styles: path.resolve('./src/styles'),
 			$lib: path.resolve('./src/lib'),
 			$sitedata: path.resolve('./src/sitedata'),
-			$generated: path.resolve('./src/docs/generated'),
+			$slotuiDefs: path.resolve('./src/sitedata/slotuiDefs'),
 		}
 	}
 };

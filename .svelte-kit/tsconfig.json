@@ -37,11 +37,11 @@
 			"$sitedata/*": [
 				"../src/sitedata/*"
 			],
-			"$generated": [
-				"../src/docs/generated"
+			"$slotuiDefs": [
+				"../src/sitedata/slotuiDefs"
 			],
-			"$generated/*": [
-				"../src/docs/generated/*"
+			"$slotuiDefs/*": [
+				"../src/sitedata/slotuiDefs/*"
 			]
 		},
 		"rootDirs": [

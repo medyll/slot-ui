@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { slotuiCatalog } from '$lib/slotuiCatalog.js';
+	import { slotuiCatalog } from '$sitedata/slotuiCatalog.js';
 	import List from '$lib/data/list/List.svelte';
 	import ListItem from '$lib/data/list/ListItem.svelte';
 	import ListTitle from '$lib/data/list/ListTitle.svelte';

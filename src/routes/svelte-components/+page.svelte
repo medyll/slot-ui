@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { slotUiComponentList } from '$sitedata/componentList.js';
+	import { slotuiCatalog } from '$sitedata/slotuiCatalog.js';
 	import { slotUiComponentPreviewList } from '$sitedata/componentPreviewList.js';
 	import Paper from '$lib/base/paper/Paper.svelte';
 	import { dataOp } from '$lib/engine/utils.js';
@@ -23,15 +23,15 @@
 
 <div class="flex-main pad-4 overflow-auto">
 	<div class="gridDemo">
-		{#each spliceArray(slotUiComponentList, 3) as spliced}
+		{#each spliceArray(Object.values(slotuiCatalog), 3) as spliced}
 			<div>
 				{#each spliced as component}
 					<Paper density="kind">
 						{component.name}
 						<Divider />
-						{#if Boolean(filterList(component.code))}
+						<!-- {#if Boolean(filterList(component.code))}
 							<svelte:component this={filterList(component.code).component} />
-						{/if}
+						{/if} -->
 						<div class="flex-h flex-wrap gap-small">
 							<div class="flex-main">
 								<a href={sitePaths.component(component)}>{component.name} examples</a>

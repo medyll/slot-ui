@@ -76,5 +76,4 @@ export { default as ToggleBarApi } from './ToggleBar.api.json';
 export { default as ToolBarApi } from './ToolBar.api.json';
 export { default as TreeApi } from './Tree.api.json';
 export { default as VirtualizeApi } from './Virtualize.api.json';
-export { default as VirtualizerApi } from './Virtualizer.api.json';
 export { default as WindowApi } from './Window.api.json';

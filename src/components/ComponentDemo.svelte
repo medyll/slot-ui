@@ -19,22 +19,22 @@
 	};
 
 	// { name: string; code: string; group: string } = {};
-	import * as jsonList from '$generated/index.js';
-	import { slotuiCatalog } from '$lib/slotuiCatalog.js';
+	import * as jsonList from '$slotuiDefs/index.js';
+	import { slotuiCatalog } from '$sitedata/slotuiCatalog.js';
 	import { dataOp } from '$lib/engine/utils.js';
 
 	export let component: string = '{}';
 	const componentName = (slotuiCatalog as any)?.[component].name;
 	const comp = componentName + 'Api';
 
-	const props: Props[] = jsonList[comp].props;
-	const slots: Slots[] = jsonList[comp].slots;
-	const events: Slots[] = jsonList[comp].events;
+	const props: Props[] = jsonList?.[comp]?.props ?? [];
+	const slots: Slots[] = jsonList?.[comp]?.slots ?? [];
+	const events: Slots[] = jsonList?.[comp]?.events ?? [];
 
-	let propsReq = dataOp.filterList(props, true, 'isRequired') ?? [];
-	let propsOpt = dataOp.filterList(props, false, 'isRequired');
+	let propsReq = dataOp.filterList(props ?? [], true, 'isRequired') ?? [];
+	let propsOpt = dataOp.filterList(props ?? [], false, 'isRequired');
 
-	console.log(propsOpt);
+	console.log(Object.keys(jsonList));
 </script>
 
 <!-- <pre>{JSON.stringify(props, null, ' ')}</pre> -->
@@ -65,6 +65,9 @@
 	{#each slots as slot}
 		<div class="flex" style="gap:0.5rem">
 			<h6>{slot.name}</h6>
+			<span>{@html slot.default}</span>
+			<span>{@html slot.slot_props}</span>
+			<span>{@html slot.fallback}</span>
 		</div>
 	{/each}
 	<br />
@@ -72,7 +75,6 @@
 	{#each events as event}
 		<div class="flex" style="gap:0.5rem">
 			<h6>{event.name}</h6>
-			<span>{@html event.fallback}</span>
 		</div>
 	{/each}
 </div>

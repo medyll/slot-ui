@@ -167,7 +167,7 @@
       "name": "__default__",
       "default": true,
       "fallback": "group by {groupByField}",
-      "slot_props": "{}"
+      "slot_props": "{ item: red }"
     }
   ],
   "events": [],

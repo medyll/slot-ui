@@ -16,6 +16,10 @@ function dotToCamelCase(str) {
 	});
 }
 
+/**
+ * generate the indexApi.ts file
+ * @deprecated
+ */
 async function createMethods() {
 	const svelteFiles = glob.sync('./src/lib/**/*.md');
 	const excludePatterns = ['.preview', '.demo', '.wip', '.js'];
@@ -33,6 +37,9 @@ async function createMethods() {
 	//fs.writeFileSync(path.join(__dirname, 'src/lib/slotuiCatalog.ts'), `export const slotuiCatalog = {${indexContent}} as const`);
 }
 
+/**
+ * generate the slotuiCatalog.ts file
+ */
 async function slotUiCatalogB() {
 	const svelteFiles = glob.sync('./src/lib/**/*.svelte');
 	const excludePatterns = ['.preview', '.demo', '.wip', '.js'];
@@ -44,17 +51,21 @@ async function slotUiCatalogB() {
 			const comp = file.split('\\').slice(-1).toString()?.replace(/\./g, '');
 			const compName = file.split('/').slice(-1)[0].split('.')[0];
 			const code = compName.toLowerCase();
-			return `${code}:{name:"${compName}",code:"${code}",group:"${group}"},`;
+			return `${code}:{name:"${compName}",code:"${code}",group:"${group}",dir:"${group}"},`;
 		})
 		.filter((f) => f)
 		.join('\n');
+
+	// write file
 	fs.writeFileSync(
-		path.join(__dirname, 'src/lib/slotuiCatalog.ts'),
+		path.join(__dirname, 'src/sitedata/slotuiCatalog.ts'),
 		`export const slotuiCatalog = {${indexContent}} as const`
 	);
 }
 
-async function generateTypeDefinitions() {
+ 
+
+async function generateSvelteIndex() {
 	const svelteFiles = glob.sync('./src/lib/**/*.svelte');
 
 	const indexContent = svelteFiles
@@ -71,6 +82,7 @@ async function generateTypeDefinitions() {
 		.join('\n');
 
 	fs.writeFileSync(path.join(__dirname, 'src/lib/svelte-index.js'), indexContent);
+	fs.writeFileSync(path.join(__dirname, `${config.sitedata}/slotuiComponents.ts`), indexContent);
 
 	//console.log(ComponentParser)
 
@@ -82,25 +94,26 @@ async function generateTypeDefinitions() {
 			types: false,
 			json: true,
 			jsonOptions: {
-				outDir: `${config.outDir}`
+				outDir: `${config.slotuiDefs}`
 			},
 			markdown: false,
 			markdownOptions: {
-				outDir: './src/md',
+				outDir: './src/sitedata',
 				write: true
 			}
 		});
 
-		const jsonFiles = glob.sync(`${config.outDir}/*.json`);
+		const jsonFiles = glob.sync(`${config.slotuiDefs}/*.json`);
 		const jsonDir = jsonFiles
 			.map((file) => {
-				return `export { default as ${dotToCamelCase(
+				return `export { default as ${dotToCamelCase( 
 					path.basename(file, '.json')
 				)} } from './${path.basename(file, '.json')}.json';`;
 			})
 			.filter((f) => f)
 			.join('\n');
-		fs.writeFileSync(path.join(__dirname, `${config.outDir}/index.js`), jsonDir);
+
+		fs.writeFileSync(path.join(__dirname, `${config.slotuiDefs}/index.js`), jsonDir);
 	} catch (err) {
 		console.error(err);
 		// try running with svelte2tsx, descriptions will be missing
@@ -108,19 +121,20 @@ async function generateTypeDefinitions() {
 }
 
 const config = {
-	outDir: './src/docs/generated'
+	sitedata: './src/sitedata',
+	slotuiDefs: './src/sitedata/slotuiDefs',
 };
 
 function main() {
-	fs.mkdirSync(config.outDir, { recursive: true });
+	fs.mkdirSync(config.slotuiDefs, { recursive: true });
 	/* fs.mkdirSync(dtsDir, { recursive: true });
 	fs.readdirSync(svelteFilesDir)
 		.filter((f) => f.endsWith('.svelte'))
 		.forEach((f) => { 
 		}); */
-		createMethods();
+	createMethods();
 	slotUiCatalogB();
-	generateTypeDefinitions();
+	generateSvelteIndex();
 }
 
 main();

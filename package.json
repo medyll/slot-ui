@@ -22,7 +22,7 @@
 		"release:beta": "standard-version --prerelease beta",
 		"release:minor": "standard-version --release-as minor",
 		"publish": "npm run package",
-		"slotui-book": "nodemon --watch ./src/lib --ignore **/docs/** --ignore ./src/lib/svelte.index.js --ext svelte --delay 2.5 extract-types.js"
+		"slotui-book": "nodemon --watch ./src/lib --watch ./extract-types.js --ignore **/docs/** --ignore ./src/lib/svelte.index.js --ext svelte --delay 2.5 extract-types.js"
 	},
 	"exports": {
 		".": {
@@ -50,6 +50,7 @@
 		"@sveltejs/package": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
 		"@types/eslint": "8.56.0",
+		"@types/prismjs": "^1.26.3",
 		"@typescript-eslint/eslint-plugin": "^6.0.0",
 		"@typescript-eslint/parser": "^6.0.0",
 		"commitizen": "^4.3.0",

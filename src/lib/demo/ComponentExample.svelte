@@ -1,6 +1,5 @@
 <script lang="ts">
-	import * as indexApi from '$sitedata/api/indexApi.js';
-	import { slotuiCatalog } from '$lib/slotuiCatalog.js';
+	import { slotuiCatalog } from '$sitedata/slotuiCatalog.js';
 	import { sitePaths } from '$lib/engine/site.utils.js';
 	import { componentCite } from '$lib/componentCite.js';
 	export let component: string = '';
@@ -10,8 +9,6 @@
 	$: author = componentCite?.[component.toLowerCase()]?.author ?? '';
 
 	const compDet = Object.values(slotuiCatalog).find((x) => x.name === component);
-
-	$: CompReadMe = indexApi['AlertReadMe'];
 </script>
 
 <div class="flex-v gap-large w-full">

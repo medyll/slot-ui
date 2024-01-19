@@ -365,11 +365,10 @@ fs.writeFileSync(
 	createFile(result) + ' \r\n ' + createObject(result, 'slotUiComponentList')
 );
 // write new component list
-fs.writeFileSync(
+/* fs.writeFileSync(
 	path.join('src', 'lib') + '/slotuiCatalog.ts',
-	//dirPath + '/slotuiCatalog.ts',
 	createComponentList(result, 'slotuiCatalog')
-);
+); */
 console.log(dirPath, 'Documentation files created into /componentList.ts');
 
 fs.writeFileSync(

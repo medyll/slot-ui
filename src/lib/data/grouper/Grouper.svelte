@@ -139,7 +139,7 @@
 				fieldTitle: groupByTitleField
 			})}
 		>
-			<slot>group by {groupByField}</slot>
+			<slot item="red">group by {groupByField}</slot>
 		</Button>
 	{/if}
 </div>
