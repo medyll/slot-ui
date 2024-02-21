@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.1-beta.0](https://github.com/medyll/slot-ui/compare/v0.0.5...v0.1.1-beta.0) (2024-02-21)
+
+
+### Bug Fixes
+
+* exports ([5e35351](https://github.com/medyll/slot-ui/commit/5e35351fbc822e34fc8addcf6edae9a410fe6b56))
+* positioning and styling issues in Popper component ([759ebb1](https://github.com/medyll/slot-ui/commit/759ebb17bac2e06a23944ba8941d7c24cc90744e))
+* Refactor component names in +page.svelte and usePopper.ts ([d2821f1](https://github.com/medyll/slot-ui/commit/d2821f167339eec454698c9a1a6e5d6cca7c7ad7))
+* TypeScript import paths and add missing type annotations ([b4b99b4](https://github.com/medyll/slot-ui/commit/b4b99b4af0be619c89f95a90abcdde598a903141))
+* Update dependencies and fix Virtualizer style ([c466769](https://github.com/medyll/slot-ui/commit/c4667692ee8cc2a144b8d92bf5292e489b4088c4))
+
 ### [0.1.1-alpha.0](https://github.com/medyll/slot-ui/compare/v0.1.0...v0.1.1-alpha.0) (2024-01-16)
 
 ## [0.1.0](https://github.com/medyll/slot-ui/compare/v0.0.5...v0.1.0) (2024-01-16)
