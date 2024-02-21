@@ -1,32 +1,32 @@
 <script lang="ts">
-  import Popper from "./Popper.svelte";
-  import Button from "$lib/base/button/Button.svelte";
-  /* demo */
-  import { defaultsArgs, defaultsArgsFromProps } from "$lib/base/demoer/demoer.utils.js";
-  import ComponentExample from "$lib/demo/ComponentExample.svelte";
-  import Demoer from "$lib/base/demoer/Demoer.svelte";
-  import DemoPage from "$lib/base/demoer/DemoPage.svelte";
-  import { uiPresets } from "$lib/engine/presets.js";
-  /* demo */
+	import Popper from './Popper.svelte';
+	import Button from '$lib/base/button/Button.svelte';
+	/* demo */
+	import { defaultsArgs, defaultsArgsFromProps } from '$lib/base/demoer/demoer.utils.js';
+	import ComponentExample from '$components/Example.svelte';
+	import Demoer from '$lib/base/demoer/Demoer.svelte';
+	import DemoPage from '$lib/base/demoer/DemoPage.svelte';
+	import { uiPresets } from '$lib/engine/presets.js';
+	/* demo */
 
-  let parametersSlot: any = {
-    autoClose: { 
-      type: "boolean",
-      values: [true,false],
-    },
-    stickToHookWidth: {
-      type: "boolean",
-      values: [true,false],
-    },
-    position: {
-      type: "string",
-      values: uiPresets.position,
-    },
-  };
+	let parametersSlot: any = {
+		autoClose: {
+			type: 'boolean',
+			values: [true, false]
+		},
+		stickToHookWidth: {
+			type: 'boolean',
+			values: [true, false]
+		},
+		position: {
+			type: 'string',
+			values: uiPresets.position
+		}
+	};
 
-  let componentArgsSlot = defaultsArgs(parametersSlot);
+	let componentArgsSlot = defaultsArgs(parametersSlot);
 
-  let codeSlot = `
+	let codeSlot = `
 <Popper bind:isOpen position="BC" autoClose class="w-large">
 	<Button
 		slot="popperHolder"
@@ -39,7 +39,7 @@
 	</div>
 </Popper>`;
 
-  let codeProps = `
+	let codeProps = `
 <Loader
     status={"loading"}
     messages={{
@@ -53,37 +53,30 @@
     loadingIcon="mdi:loading"
     successIcon="clarity:success-standard-line" />`;
 
-  let isOpen = false;
+	let isOpen = false;
 </script>
 
 <ComponentExample
-  component="Popper"
-  cite="This Popper is the base of all the flyout stuff: it pops">
-  <div class="flex-v gap-large">
-    <DemoPage code={codeSlot} component="Popper" title="Using slots">
-      <Demoer
-        componentArgs={componentArgsSlot}
-        let:activeParams
-        parameters={parametersSlot}>
-        <div class="pos-rel">
-          <Popper
-            bind:isOpen
-            position="BC"
-            {...activeParams}
-            class="w-large marg-t-1">
-            <Button
-              slot="popperHolder"
-              on:click={() => (isOpen = !isOpen)}
-              style="cursor:pointer"
-              class="border text-center pointer {isOpen
-                ? 'theme-bg-paper shad-3'
-                : ''}">
-              popper
-            </Button>
-            <div class="pad-4">Popper content</div>
-          </Popper>
-        </div>
-      </Demoer>
-    </DemoPage>
-  </div>
+	component="Popper"
+	cite="This Popper is the base of all the flyout stuff: it pops"
+>
+	<div class="flex-v gap-large">
+		<DemoPage code={codeSlot} component="Popper" title="Using slots">
+			<Demoer componentArgs={componentArgsSlot} let:activeParams parameters={parametersSlot}>
+				<div class="pos-rel">
+					<Popper bind:isOpen position="BC" {...activeParams} class="w-large marg-t-1">
+						<Button
+							slot="popperHolder"
+							on:click={() => (isOpen = !isOpen)}
+							style="cursor:pointer"
+							class="border text-center pointer {isOpen ? 'theme-bg-paper shad-3' : ''}"
+						>
+							popper
+						</Button>
+						<div class="pad-4">Popper content</div>
+					</Popper>
+				</div>
+			</Demoer>
+		</DemoPage>
+	</div>
 </ComponentExample>

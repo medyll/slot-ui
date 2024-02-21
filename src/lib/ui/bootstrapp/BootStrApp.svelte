@@ -1,19 +1,15 @@
 <script lang="ts">
-	import ChromeFrameButtonList from '../chromeFrame/ChromeFrameButtonList.svelte';
-	import ChromeFrameList from '../chromeFrame/ChromeFrameList.svelte';
-	import Frame from '../frame/Frame.svelte';
-	import Login from '../login/Login.svelte';
-	import Taskbar from '../taskbar/Taskbar.svelte';
+	import ChromeFrameButtonList from '$lib/ui/chromeFrame/ChromeFrameButtonList.svelte';
+	import Frame from '$lib/ui/frame/Frame.svelte';
+	import Login from '$lib/ui/login/Login.svelte';
+	import Taskbar from '$lib/ui/taskbar/Taskbar.svelte';
 
-	import { onMount } from 'svelte';
-	import Router, { link, push } from 'svelte-spa-router';
-	import cssfabric from '@medyll/cssfabric/src/lib/styles/vars.min.css';
+	import { link, push } from 'svelte-spa-router';
 
-	import DynPage from './DynPage.svelte';
 	import Drawer from '$lib/navigation/drawer/Drawer.svelte';
-	import TopBar from '../toggleBar/ToggleBar.svelte';
-	import List from '$lib/base/list/List.svelte';
-	import ListItem from '$lib/base/list/ListItem.svelte';
+	import TopBar from '$lib/ui//toggleBar/ToggleBar.svelte';
+	import List from '$lib/data/list/List.svelte';
+	import ListItem from '$lib/data/list/ListItem.svelte';
 	import { page } from '$app/stores';
 
 	// import wula from "src/theme/cssfabric.scss";

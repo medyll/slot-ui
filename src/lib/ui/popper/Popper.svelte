@@ -7,9 +7,9 @@
 		onMount,
 		type SvelteComponentDev
 	} from 'svelte/internal';
-	import { stickTo, type StickToPositionType } from '../../uses/stickTo/stickTo.js';
-	import { clickAway } from '../../uses/clickAway/clickAway.js';
-	import { popperList } from './actions.js';
+	import { stickTo, type StickToPositionType } from '$lib/uses/stickTo/stickTo.js';
+	import { clickAway } from '$lib/uses/clickAway/clickAway.js';
+	import { popperList } from '$lib/ui/popper/actions.js';
 	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
 
 	/** popper HTMLDivElement */

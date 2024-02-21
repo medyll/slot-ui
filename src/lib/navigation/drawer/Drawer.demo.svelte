@@ -2,7 +2,7 @@
 	import Drawer from '$lib/navigation/drawer/Drawer.svelte';
 
 	/* demo */
-	import ComponentExample from '$lib/demo/ComponentExample.svelte';
+	import ComponentExample from '$components/Example.svelte';
 	import Demoer from '$lib/base/demoer/Demoer.svelte';
 	import DemoPage from '$lib/base/demoer/DemoPage.svelte';
 	import { defaultsArgsFromProps } from '$lib/base/demoer/demoer.utils.js';

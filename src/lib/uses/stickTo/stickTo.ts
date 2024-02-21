@@ -32,9 +32,12 @@ export function stickTo(node: HTMLElement, props: StickToProps) {
 		return false;
 	}
 
-	window.addEventListener('scroll', () => {
+	scrollObserver();
+
+	/* window.addEventListener('scroll', () => {
+		console.log('scroll', node, position, parentNode);
 		setPosition(node, position, parentNode);
-	});
+	}); */
 
 	const nodeObserver = new ResizeObserver(() => {
 		setPosition(node, position, parentNode);
@@ -46,6 +49,30 @@ export function stickTo(node: HTMLElement, props: StickToProps) {
 	});
 	parentObserver.observe(parentNode);
 
+	function scrollObserver() {
+		const scrollableContainers = getScrollParent(node);
+		scrollableContainers.forEach((el) => {
+			el.addEventListener('scroll', () => {
+				setPosition(node, position, parentNode);
+			});
+		});
+	}
+	function getScrollParent(node: HTMLElement) {
+		let scrollableContainers: HTMLElement[] = [];
+		let el: HTMLElement = parentNode;
+
+		while (el && el !== document.body) {
+			let computedStyle = getComputedStyle(el);
+			if (computedStyle.overflowY === 'auto' || computedStyle.overflowY === 'scroll') {
+				console.log(el);
+				if (!scrollableContainers.includes(el)) scrollableContainers.push(el);
+			}
+			el = el.parentElement ?? window.document.body; // Passez au parent
+		}
+		console.log(scrollableContainers);
+		return scrollableContainers;
+	}
+
 	function checkBoundaries(node: HTMLElement, parentNode: HTMLElement, position: string) {
 		const nodePos = node.getBoundingClientRect();
 		let newPos: string = position;
@@ -55,14 +82,14 @@ export function stickTo(node: HTMLElement, props: StickToProps) {
 		//node.style.transition = 'all 0.05s ease-in-out';
 		if (nodePos.bottom >= window.innerHeight - threshold) {
 			newPos = newPos.replace('B', 'T');
-		} /* else if (nodePos.top - threshold <= 0) {
+		} else if (nodePos.top - threshold <= 0) {
 			newPos = newPos.replace('T', 'B');
-		} */
+		}
 		if (nodePos.right > window.innerWidth - threshold) {
 			newPos = newPos.replace('R', 'L');
-		} /* else if (nodePos.left - threshold <= 0) {
+		} else if (nodePos.left - threshold <= 0) {
 			newPos = newPos.replace('L', 'R');
-		} */
+		}
 
 		return newPos;
 	}
@@ -81,32 +108,32 @@ export function stickTo(node: HTMLElement, props: StickToProps) {
 
 	function setPosition(node: HTMLElement, position: any, parentNode: HTMLElement) {
 		setMaxDimensions(node, parentNode);
+		console.log('setPosition', node, position, parentNode);
 
 		const parentPos = parentNode.getBoundingClientRect();
 
 		const newPosition = checkBoundaries(node, parentNode, position);
 
-		window.requestAnimationFrame(() => {
-			if (stickToHookWidth) node.style.minWidth = String(parentPos.width) + 'px';
+		//window.requestAnimationFrame(() => {
+		if (stickToHookWidth) node.style.minWidth = String(parentPos.width) + 'px';
 
-			if (newPosition.includes(Position.T)) {
-				node.style.top = String(parentPos.top - node.offsetHeight) + 'px';
-			}
-			if (newPosition.includes(Position.R)) {
-				node.style.left = String(parentPos.right - node.offsetWidth) + 'px';
-			}
-			if (newPosition.includes(Position.B)) {
-				node.style.top = String(parentPos.bottom) + 'px';
-			}
-			if (newPosition.includes(Position.L)) {
-				node.style.left = String(parentPos.left) + 'px';
-			}
+		if (newPosition.includes(Position.T)) {
+			node.style.top = String(parentPos.top - node.offsetHeight) + 'px';
+		}
+		if (newPosition.includes(Position.R)) {
+			node.style.left = String(parentPos.right - node.offsetWidth) + 'px';
+		}
+		if (newPosition.includes(Position.B)) {
+			node.style.top = String(parentPos.bottom) + 'px';
+		}
+		if (newPosition.includes(Position.L)) {
+			node.style.left = String(parentPos.left) + 'px';
+		}
 
-			if (newPosition.includes(Position.C)) {
-				node.style.left =
-					String(parentPos.left + parentPos.width / 2 - node.offsetWidth / 2) + 'px';
-			}
-		});
+		if (newPosition.includes(Position.C)) {
+			node.style.left = String(parentPos.left + parentPos.width / 2 - node.offsetWidth / 2) + 'px';
+		}
+		//});
 	}
 
 	return {

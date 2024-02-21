@@ -6,8 +6,8 @@
 	import Button from '$lib/base/button/Button.svelte';
 	import Icon from '$lib/base/icon/Icon.svelte';
 	import type { ElementProps } from '$lib/types/index.js';
-	import { draggebler } from '../../uses/draggabler.js';
-	import { makeOnTop } from '../../uses/makeOnTop.js';
+	import { draggebler } from '$lib/uses/draggabler.js';
+	import { makeOnTop } from '$lib/uses/makeOnTop.js';
 	import { get_current_component, null_to_empty } from 'svelte/internal';
 	import { positioner } from '$lib/uses/positioner.js';
 

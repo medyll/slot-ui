@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ComponentExample from '$lib/demo/ComponentExample.svelte';
+	import ComponentExample from '$components/Example.svelte';
 	import Demoer from '$lib/base/demoer/Demoer.svelte';
 	import DemoPage from '$lib/base/demoer/DemoPage.svelte';
 	import Backdrop from './Backdrop.svelte';
@@ -21,7 +21,7 @@
 		}
 	};
 
-	let codeSlot =  `
+	let codeSlot = `
 	<Backdrop
 		flow="relative"
 		on:click={()=>{}}>
@@ -30,10 +30,10 @@
 				some content
 			</div>
 		</div>
-	</Backdrop>`
+	</Backdrop>`;
 
 	$: componentArgs = {
-        isOpen: true,
+		isOpen: true,
 		isLoading: false,
 		flow: 'relative'
 	};
@@ -45,14 +45,17 @@
 			<Demoer {parameters} {componentArgs} let:activeParams>
 				<div style="width:350px;height:350px;position:realive;">
 					<Backdrop
-					bind:this={BackdropRef}
-                    on:click={()=>{componentArgs.flow='relative';BackdropRef.flow='relative'}}
-                    {...componentArgs} {...activeParams}>
+						bind:this={BackdropRef}
+						on:click={() => {
+							componentArgs.flow = 'relative';
+							BackdropRef.flow = 'relative';
+						}}
+						{...componentArgs}
+						{...activeParams}
+					>
 						<div class="flex-h flex-align-middle-center h-full">
-                            <div class="pad-4 border radius-small theme-bg">
-                                some content
-                            </div>
-                        </div>
+							<div class="pad-4 border radius-small theme-bg">some content</div>
+						</div>
 					</Backdrop>
 				</div>
 			</Demoer>

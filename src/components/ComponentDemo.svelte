@@ -33,8 +33,6 @@
 
 	let propsReq = dataOp.filterList(props ?? [], true, 'isRequired') ?? [];
 	let propsOpt = dataOp.filterList(props ?? [], false, 'isRequired');
-
-	console.log(Object.keys(jsonList));
 </script>
 
 <!-- <pre>{JSON.stringify(props, null, ' ')}</pre> -->

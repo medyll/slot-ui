@@ -6,7 +6,7 @@
 
 	/* demo */
 	import { defaultsArgs } from '$lib/base/demoer/demoer.utils.js';
-	import ComponentExample from '$lib/demo/ComponentExample.svelte';
+	import ComponentExample from '$components/Example.svelte';
 	import Demoer from '$lib/base/demoer/Demoer.svelte';
 	import DemoPage from '$lib/base/demoer/DemoPage.svelte';
 	/* demo */

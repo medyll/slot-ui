@@ -1,4 +1,5 @@
 export { default as AlertApi } from './Alert.api.json';
+export { default as AlourtApi } from './Alourt.api.json';
 export { default as AutoCompleteApi } from './AutoComplete.api.json';
 export { default as AvatarApi } from './Avatar.api.json';
 export { default as BackdropApi } from './Backdrop.api.json';
@@ -16,7 +17,6 @@ export { default as ChromeFrameButtonListApi } from './ChromeFrameButtonList.api
 export { default as ChromeFrameListApi } from './ChromeFrameList.api.json';
 export { default as ColumnApi } from './Column.api.json';
 export { default as ColumnerApi } from './Columner.api.json';
-export { default as ComponentExampleApi } from './ComponentExample.api.json';
 export { default as ConfirmApi } from './Confirm.api.json';
 export { default as ContentSwitcherApi } from './ContentSwitcher.api.json';
 export { default as ContextRooterApi } from './ContextRooter.api.json';

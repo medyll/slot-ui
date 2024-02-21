@@ -70,8 +70,6 @@ export { default as Switch } from '$lib/form/switch/Switch.svelte';
 export { default as Drawer } from '$lib/navigation/drawer/Drawer.svelte';
 export { default as Tabs } from '$lib/navigation/tabs/Tabs.svelte';
 export * from '$lib/navigation/tabs/types.js';
-export * from '$sitedata/slotuiCatalog.js';
-export * from '$lib/svelte-index.js';
 export { default as BootStrApp } from '$lib/ui/bootstrapp/BootStrApp.svelte';
 export { default as DynPage } from '$lib/ui/bootstrapp/DynPage.svelte';
 export * from '$lib/ui/chromeFrame/chromeFrame.store.js';

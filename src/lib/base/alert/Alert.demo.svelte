@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ComponentExample from '$lib/demo/ComponentExample.svelte';
+	import ComponentExample from '$components/Example.svelte';
 	import Button from '$lib/base/button/Button.svelte';
 	import Alert from './Alert.svelte';
 	import Demoer from '$lib/base/demoer/Demoer.svelte';

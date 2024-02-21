@@ -25,12 +25,6 @@
 			"$styles/*": [
 				"../src/styles/*"
 			],
-			"$lib": [
-				"../src/lib"
-			],
-			"$lib/*": [
-				"../src/lib/*"
-			],
 			"$sitedata": [
 				"../src/sitedata"
 			],
@@ -42,6 +36,12 @@
 			],
 			"$slotuiDefs/*": [
 				"../src/sitedata/slotuiDefs/*"
+			],
+			"$lib": [
+				"../src/lib"
+			],
+			"$lib/*": [
+				"../src/lib/*"
 			]
 		},
 		"rootDirs": [

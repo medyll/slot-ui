@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ComponentExample from '$lib/demo/ComponentExample.svelte';
+	import ComponentExample from '$components/Example.svelte';
 	import Jsoner from '../jsoner/Jsoner.svelte';
 	import Finder from './Finder.svelte';
 
@@ -35,7 +35,6 @@ Maifield, 1996"
 				/>
 			</div>
 		</div>
-		
 	</div>
 	<br />
 	<div class="flex-v gap-medium">

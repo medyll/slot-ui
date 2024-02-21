@@ -1,38 +1,38 @@
 <script lang="ts">
-  import Switch from "./Switch.svelte";
-  import Button from "$lib/base/button/Button.svelte";
-  import { defaultsArgs, defaultsArgsFromProps } from "$lib/base/demoer/demoer.utils";
-  /* demo */
-  import ComponentExample from "$lib/demo/ComponentExample.svelte";
-  import Demoer from "$lib/base/demoer/Demoer.svelte";
-  import DemoPage from "$lib/base/demoer/DemoPage.svelte";
-  import Icon from "$lib/base/icon/Icon.svelte";
-  import { uiPresets } from "$lib/engine/presets.js";
-  /* demo */
+	import Switch from './Switch.svelte';
+	import Button from '$lib/base/button/Button.svelte';
+	import { defaultsArgs, defaultsArgsFromProps } from '$lib/base/demoer/demoer.utils';
+	/* demo */
+	import ComponentExample from '$components/Example.svelte';
+	import Demoer from '$lib/base/demoer/Demoer.svelte';
+	import DemoPage from '$lib/base/demoer/DemoPage.svelte';
+	import Icon from '$lib/base/icon/Icon.svelte';
+	import { uiPresets } from '$lib/engine/presets.js';
+	/* demo */
 
-  let parametersSlot: any = {
-    autoClose: {
-      type: "boolean",
-      values: [true, false],
-    },
-    stickToHookWidth: {
-      type: "boolean",
-      values: [true, false],
-    },
-    position: {
-      type: "string",
-      values: uiPresets.position,
-    },
-  };
+	let parametersSlot: any = {
+		autoClose: {
+			type: 'boolean',
+			values: [true, false]
+		},
+		stickToHookWidth: {
+			type: 'boolean',
+			values: [true, false]
+		},
+		position: {
+			type: 'string',
+			values: uiPresets.position
+		}
+	};
 
-  let componentArgsSlot = defaultsArgs(parametersSlot);
+	let componentArgsSlot = defaultsArgs(parametersSlot);
 
-  let codeSlot = `
+	let codeSlot = `
 <Switch  name={'switcher'} class="w-small" >
   <span slot="label" />
 </Switch>`;
 
-  let codeProps = `
+	let codeProps = `
 <Loader
     status={"loading"}
     messages={{
@@ -46,18 +46,17 @@
     loadingIcon="mdi:loading"
     successIcon="clarity:success-standard-line" />`;
 
-  let isOpen = false;
+	let isOpen = false;
 </script>
 
 <ComponentExample component="Switch">
-  <div class="flex-v gap-large">
-    <DemoPage code={codeSlot} component="Switch" title="Using slots">
-      <Demoer {parametersSlot} {componentArgsSlot} let:activeParams>
-      <div class="pad-2">
-        <Switch {...activeParams} name={'switcher'}  >
-        </Switch>
-      </div>
-    </Demoer>
-    </DemoPage>
-  </div>
+	<div class="flex-v gap-large">
+		<DemoPage code={codeSlot} component="Switch" title="Using slots">
+			<Demoer {parametersSlot} {componentArgsSlot} let:activeParams>
+				<div class="pad-2">
+					<Switch {...activeParams} name={'switcher'}></Switch>
+				</div>
+			</Demoer>
+		</DemoPage>
+	</div>
 </ComponentExample>

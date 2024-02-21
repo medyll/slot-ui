@@ -38,7 +38,8 @@
 	],
 	"peerDependencies": {
 		"@sveltejs/kit": "2.2.1",
-		"svelte": "4.2.8"
+		"svelte": "4.2.8",
+		"svelte-use-form": "2.10.0"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^18.4.4",
@@ -50,6 +51,7 @@
 		"@sveltejs/package": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
 		"@types/eslint": "8.56.0",
+		"@types/fs-extra": "^11.0.4",
 		"@types/prismjs": "^1.26.3",
 		"@typescript-eslint/eslint-plugin": "^6.0.0",
 		"@typescript-eslint/parser": "^6.0.0",
@@ -70,11 +72,13 @@
 		"prismjs": "^1.29.0",
 		"publint": "^0.1.9",
 		"query-string": "^8.1.0",
+		"rimraf": "^5.0.5",
 		"sass": "^1.69.7",
 		"standard-version": "^9.5.0",
 		"sveld": "^0.19.1",
 		"svelte": "^4.2.7",
 		"svelte-check": "^3.6.0",
+		"svelte-use-form": "^2.10.0",
 		"svelte2tsx": "^0.7.0",
 		"tslib": "^2.4.1",
 		"typescript": "^5.0.0",
@@ -89,7 +93,6 @@
 		"iconify-icon": "^1.0.8",
 		"postcss-load-config": "^5.0.2",
 		"sanitize-html": "^2.11.0",
-		"svelte-spa-router": "^4.0.1",
-		"svelte-use-form": "^2.10.0"
+		"svelte-spa-router": "^4.0.1"
 	}
 }

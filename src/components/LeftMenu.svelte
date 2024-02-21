@@ -20,16 +20,18 @@
 			Slot-ui {group ?? ''}
 		</ListTitle>
 		{#each groupedData[group] as catalog}
-			<ListItem
-				selected={catalog?.code === selected}
-				data={catalog}
-				density="tight"
-				class="pad-l-4"
-			>
-				<a slot="primary" href=".{sitePaths.component(catalog)}">
-					{catalog?.name ?? ''}
-				</a>
-			</ListItem>
+			{#if Boolean(catalog?.code === catalog?.code)}
+				<ListItem
+					selected={catalog?.code === selected}
+					data={catalog}
+					density="tight"
+					class="pad-l-4"
+				>
+					<a slot="primary" href=".{sitePaths.component(catalog)}">
+						{catalog?.name ?? ''}
+					</a>
+				</ListItem>
+			{/if}
 		{/each}
 	{/each}
 </List>

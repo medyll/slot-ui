@@ -1,5 +1,5 @@
-import type { PopperPositionType } from './types.js';
-import Popper from '../../../../src/lib/ui/popper/Popper.svelte';
+import type { PopperPositionType } from '$lib/ui/popper/types.js';
+import Popper from '$lib/ui/popper/Popper.svelte';
 import type { SvelteComponentDev } from 'svelte/internal';
 
 export let popperList: Record<string, Popper> = {};

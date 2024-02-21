@@ -16,12 +16,19 @@ const config = {
 			$components: path.resolve('./src/components'),
 			$stores: path.resolve('./src/stores'),
 			$utils: path.resolve('./src/utils'),
-			$styles: path.resolve('./src/styles'),
-			$lib: path.resolve('./src/lib'),
+			$styles: path.resolve('./src/styles'), 
 			$sitedata: path.resolve('./src/sitedata'),
 			$slotuiDefs: path.resolve('./src/sitedata/slotuiDefs'),
 		}
-	}
+	},
+	vitePlugin: {
+    // set to true for defaults or customize with object
+    inspector: {
+      toggleKeyCombo: 'meta-shift',
+      showToggleButton: 'always',
+      toggleButtonPos: 'bottom-right'
+    }
+  }
 };
 
 export default config; 

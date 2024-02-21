@@ -1,12 +1,12 @@
 {
-  "moduleName": "ComponentExample",
-  "filePath": "src/lib/demo/ComponentExample.svelte",
+  "moduleName": "Alourt",
+  "filePath": "src/lib/base/alert/Alourt.svelte",
   "props": [
     {
-      "name": "component",
+      "name": "isOpen",
       "kind": "let",
       "type": "string",
-      "value": "''",
+      "value": "'red'",
       "isFunction": false,
       "isFunctionDeclaration": false,
       "isRequired": false,
@@ -14,8 +14,10 @@
       "reactive": false
     },
     {
-      "name": "cite",
+      "name": "title",
       "kind": "let",
+      "type": "string",
+      "value": "'提示'",
       "isFunction": false,
       "isFunctionDeclaration": false,
       "isRequired": false,
@@ -24,7 +26,7 @@
     }
   ],
   "moduleExports": [],
-  "slots": [{ "name": "__default__", "default": true, "slot_props": "{}" }],
+  "slots": [],
   "events": [],
   "typedefs": []
 }

@@ -1,4 +1,5 @@
 export { default as Alert } from '$lib/base/alert/Alert.svelte';
+export { default as Alourt } from '$lib/base/alert/Alourt.svelte';
 export { default as Avatar } from '$lib/base/avatar/Avatar.svelte';
 export { default as Backdrop } from '$lib/base/backdrop/Backdrop.svelte';
 export { default as Badge } from '$lib/base/badge/Badge.svelte';
@@ -41,7 +42,6 @@ export { default as ListTitle } from '$lib/data/list/ListTitle.svelte';
 export { default as Loader } from '$lib/data/loader/Loader.svelte';
 export { default as Sorter } from '$lib/data/sorter/Sorter.svelte';
 export { default as Sorterer } from '$lib/data/sorter/Sorterer.svelte';
-export { default as ComponentExample } from '$lib/demo/ComponentExample.svelte';
 export { default as AutoComplete } from '$lib/form/autocomplete/AutoComplete.svelte';
 export { default as Input } from '$lib/form/input/Input.svelte';
 export { default as Rating } from '$lib/form/rating/Rating.svelte';

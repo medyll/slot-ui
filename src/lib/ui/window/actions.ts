@@ -1,7 +1,7 @@
-import Window from '../../../../src/lib/ui/window/Window.svelte';
+import Window from '$lib/ui/window/Window.svelte';
 import { wStore } from '$lib/ui/window/store.js';
 import { get } from 'svelte/store';
-import type { ElementProps } from '../../types/index.js';
+import type { ElementProps } from '$lib/types/index.js';
 import type { ComponentConstructorOptions } from 'svelte';
 
 type OpenWindow = {
