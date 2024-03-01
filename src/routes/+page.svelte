@@ -54,7 +54,7 @@
 <div class="overflow-auto flex-v gap-large flex-align-middle-center">
 	<div class="block h-full flex-v gap-large pad-t-10">
 		<div>
-			<h1 class="text-bold">slot.ui</h1>
+			<h1 class="text-bold">svelte.slotted</h1>
 			<h5 class="text-bold">@medyll</h5>
 		</div>
 		<div class="w-full">

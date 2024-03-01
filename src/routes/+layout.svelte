@@ -59,10 +59,10 @@
 </script>
 
 <svelte:head>
-	<title>slotui svelte component library</title>
+	<title>svelte-slotted css components</title>
 	<meta
 		name="description"
-		content="SlotUi is a svelte component library built around a slotted life style"
+		content="svelte-slotted  is a svelte css component library built around a slotted life style"
 	/>
 	<link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet" />
 	<script>
@@ -107,10 +107,10 @@
 	<div id="contentSlide" class="flex-v" bind:this={contentSlide}>
 		<nav
 			bind:this={navElement}
-			class="nav flex-h pos-sticky pad flex-align-middle gap-small zI-10 w-full h-4 gap-medium"
+			class="nav flex-h pos-sticky pad flex-align-middle gap-small zI-10 w-full gap-medium"
 		>
 			<Button on:click={onDrawerClick} ratio="1/1" icon="mdi:menu" bgTheme="primary" />
-			<h3><a href="/">slotui</a></h3>
+			<h3><a href="/">svelte-slotted</a></h3>
 			<div class="flex-main" />
 			<a target="_blank" href="https://github.com/medyll/slot-ui">Github</a>
 			{#await data?.data?.streamed?.slotuiCatalog}
