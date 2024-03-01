@@ -35,7 +35,7 @@
 		flex-direction: row;
 		align-items: center;
 		background-color: attr(--color);
-		padding: var(--slotui-toolbar-padding, var(--box-density-1, 0.5rem));
+		padding: var(--sld-toolbar-padding, var(--box-density-1, 0.5rem));
 		gap: 0.5rem;
 		divider {
 			border: 1px solid red;

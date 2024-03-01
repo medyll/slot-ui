@@ -114,7 +114,7 @@
 	{#if showOpenerIcon}
 		<div class="opener" style={openerIconStyle[stickTo]}>
 			<IconButton
-				--slotui-button-radius="50%"
+				--sld-button-radius="50%"
 				icon={'chevron-right'}
 				rotation={sens}
 				style="cursor:pointer;"

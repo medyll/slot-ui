@@ -57,7 +57,7 @@
 				{#if status === 'loading' || isLoading}
 					<slot name="loaderLoading">
 						<Icon
-							style="color:var(--slotui-color-primary)"
+							style="color:var(--sld-color-primary)"
 							icon={loadingIcon}
 							fontSize="medium"
 							rotate
@@ -96,7 +96,7 @@
 	.loaderRoot {
 		position: absolute;
 		top: 0;
-		background-color: var(--slotui-color-background-alpha-mid);
+		background-color: var(--sld-color-background-alpha-mid);
 		height: 100%;
 		min-width: 128px;
 		max-width: 100%;
@@ -110,13 +110,13 @@
 		.loaderBox {
 			box-shadow: var(--box-shad-1);
 			border-radius: var(--radius-tiny);
-			border: 1px solid var(--slotui-color-foreground-alpha-high);
+			border: 1px solid var(--sld-color-foreground-alpha-high);
 			padding: 1rem 0;
 			min-width: 128px;
 			width: 100%;
 			margin: 1rem;
 			text-align: center;
-			background-color: var(--slotui-color-background-alpha-mid);
+			background-color: var(--sld-color-background-alpha-mid);
 			display: flex;
 			flex-direction: column;
 			align-items: center;
@@ -124,7 +124,7 @@
 			.message {
 				border-radius: var(--radius-small);
 				border-bottom: 1px solid;
-				border-color: var(--slotui-color-primary);
+				border-color: var(--sld-color-primary);
 				padding: var(--box-density-1) var(--box-density-2);
 				display: inline-block;
 				box-shadow: var(--box-shad-1);

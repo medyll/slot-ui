@@ -23,7 +23,7 @@
 	/** show or hide the chip */
 	export let showChip: boolean = true;
 
-	$: cssColor = color ?? (bgTheme ? `var(--slotui-color-${bgTheme})` : '');
+	$: cssColor = color ?? (bgTheme ? `var(--sld-color-${bgTheme})` : '');
 </script>
 
 <div
@@ -63,7 +63,7 @@
 			border-radius: 16px;
 			transition: all 0.25s;
 			max-height: 100%;
-			background-color: var(--css-button-chip-color, var(--slotui-color-primary));
+			background-color: var(--css-button-chip-color, var(--sld-color-primary));
 
 			&[data-position='left'] {
 				top: 2px;
@@ -101,7 +101,7 @@
 				height: 100%;
 				width: 100%;
 				min-height: 3px;
-				background-color: var(--css-button-chip-color, var(--slotui-color-primary));
+				background-color: var(--css-button-chip-color, var(--sld-color-primary));
 			}
 		}
 	}

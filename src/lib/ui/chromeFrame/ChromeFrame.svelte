@@ -39,7 +39,7 @@
 	@import '../../styles/slotui-vars.scss';
 	@import '../../styles/presets.scss';
 	.chromeFrame {
-		color: var(--slotui-color-foreground);
-		background-color: var(--slotui-color-background);
+		color: var(--sld-color-foreground);
+		background-color: var(--sld-color-background);
 	}
 </style>

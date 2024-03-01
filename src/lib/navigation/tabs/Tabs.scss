@@ -16,7 +16,7 @@
 
 .tabsNav {
   padding: 0.25rem 0;
-  border-bottom: 1px solid var(--slotui-tabs-nav-border-color, var(--slotui-color-primary-alpha-high));
+  border-bottom: 1px solid var(--sld-tabs-nav-border-color, var(--sld-color-primary-alpha-high));
   position: relative;
   display: flex;
   align-items: center;
@@ -42,7 +42,7 @@
   }
 
   .tabsContent {
-    background-color: var(--slotui-color-background);
+    background-color: var(--sld-color-background);
     position: relative;
     width: 100%;
   }
@@ -58,7 +58,7 @@
 .tabSlot {
   border-radius: 6px;
   min-height: 4px;
-  background-color: var(--slotui-color-primary);
+  background-color: var(--sld-color-primary);
   width: 100%;
   position: absolute;
   transition: all 0.25s;

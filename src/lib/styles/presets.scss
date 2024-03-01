@@ -4,17 +4,17 @@
 
 @mixin input-sizes-presets {
     &[data-height="tiny"] {
-        height: calc(1rem - var(--slotui-border-bottom-size, 2px));
+        height: calc(1rem - var(--sld-border-bottom-size, 2px));
         padding: 0;
     }
     &[data-height="small"] {
-        height: calc(1.9rem - var(--slotui-border-bottom-size, 2px));
+        height: calc(1.9rem - var(--sld-border-bottom-size, 2px));
     }
     &[data-height="default"] {
-        height: calc(2.5rem - var(--slotui-border-bottom-size, 2px));
+        height: calc(2.5rem - var(--sld-border-bottom-size, 2px));
     }
     &[data-height="large"] {
-        height: calc(4rem - var(--slotui-border-bottom-size, 2px));
+        height: calc(4rem - var(--sld-border-bottom-size, 2px));
     }
 
     &[borderless="true"] {
@@ -75,16 +75,16 @@
 
 @mixin data-hover {
     &:hover {
-        border-color: var(--slotui-color-foreground-alpha-high);
-        background-color: var(--slotui-color-secondary-alpha-mid);
+        border-color: var(--sld-hover-border-color);
+        background-color: var(--sld-color-secondary-alpha-mid);
     }
 }
 
 @mixin data-selected {
     &.selected,
     &[data-selected="true"] {
-        border-color: var(--slotui-color-primary);
-        background-color: var(--slotui-color-primary-alpha-high);
-        box-shadow: var(--slotui-listitem-active-boxshadow, var(shad-3));
+        border-color: var(--sld-selected-border-color);
+        background-color: var(--sld-selected-background-color);
+        box-shadow: var(--sld-selected-shadow);
     }
 }

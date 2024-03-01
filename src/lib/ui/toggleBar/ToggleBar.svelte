@@ -58,14 +58,14 @@
 	@import '../../styles/slotui-vars.scss';
 	@import '../../styles/presets.scss';
 	.toggleBarRoot {
-		padding: var(--slotui-commandbar-padding, var(--box-density-1));
+		padding: var(--sld-commandbar-padding, var(--box-density-1));
 		display: flex;
-		border-bottom: 1px solid var(--slotui-topbar-border-bottom-color, var(--slotui-color-border));
+		border-bottom: 1px solid var(--sld-topbar-border-bottom-color, var(--sld-color-border));
 		width: 100%;
 		max-width: 100%;
 		min-width: auto;
 		position: relative;
-		gap: var(--slotui-commandbar-gap, 0.25rem);
+		gap: var(--sld-commandbar-gap, 0.25rem);
 
 		.toggleBarContent {
 			position: relative;

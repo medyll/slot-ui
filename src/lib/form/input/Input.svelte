@@ -111,58 +111,5 @@
 {/if}
 
 <style lang="scss">
-	@import '../../styles/slotui-vars.scss';
-	@import '../../styles/presets.scss';
-	input {
-		border: 1px solid var(--slotui-color-foreground-alpha-mid);
-		// border: 1px solid rgba(208, 191, 151, 0.5);
-		border-bottom: var(--slotui-border-bottom-size, 2px) solid
-			var(--slotui-color-primary-darker, rgb(208, 191, 151));
-		border-radius: var(--slotui-input-radius, 4px);
-		padding: var(--slotui-input-padding, 0.5rem);
-		box-shadow: inset 0px 0px 3px 1px rgba(51, 51, 51, 0.1);
-		background-color: var(--slotui-color-background-alpha-low);
-		color: var(--slotui-color-foreground);
-		/* background-color: rgba(59, 59, 59, 0.99);
-		color: white; 
-		height: 2.5rem;*/
-		padding: var(--slotui-input-padding, 0 0.5rem);
-		box-sizing: border-box;
-		&:hover {
-			border-color: var(--slotui-color-foreground-alpha-mid);
-		}
-		[error] {
-			border-bottom: red;
-		}
-		@include input-sizes-presets;
-		@include ui-width-presets;
-	}
-
-	.inpuStart {
-		position: absolute;
-		height: 100%;
-		max-height: 100%;
-		width: 24px;
-		overflow: hidden;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		padding: 0.5rem;
-		background-color: rgba(255, 255, 255, 0.1);
-		border-radius: var(--slotui-input-radius, 4px);
-	}
-	.inpuEnd {
-		position: absolute;
-		right: 0;
-		height: 100%;
-		max-height: 100%;
-		width: 24px;
-		overflow: hidden;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		padding: 0.25rem;
-		// background-color: rgba(255, 255, 255, 0.1);
-		border-radius: var(--slotui-input-radius, 4px);
-	}
+	@import './Input.scss';
 </style>

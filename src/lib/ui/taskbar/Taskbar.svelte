@@ -20,7 +20,7 @@
 		background-color: var(--css-taskbar-bg-color, rgba(255, 255, 255, 0.5));
 		backdrop-filter: var(--css-taskbar-backdrop-blur, blur(20px));
 		min-height: var(--css-taskbar-height, 48px);
-		border-bottom: 1px solid var(--slotui-color-foreground-alpha-high, rgba(255, 255, 255, 0.2));
+		border-bottom: 1px solid var(--sld-color-foreground-alpha-high, rgba(255, 255, 255, 0.2));
 		box-shadow: var(--css-taskbar-shadow, var(--box-shad-3));
 		box-sizing: border-box;
 	}

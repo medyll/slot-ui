@@ -176,7 +176,7 @@
     {
       "name": "loaderLoading",
       "default": false,
-      "fallback": "<Icon\r\n              style=\"color:var(--slotui-color-primary)\"\r\n              icon={loadingIcon}\r\n              fontSize=\"medium\"\r\n              rotate />",
+      "fallback": "<Icon\r\n              style=\"color:var(--sld-color-primary)\"\r\n              icon={loadingIcon}\r\n              fontSize=\"medium\"\r\n              rotate />",
       "slot_props": "{}"
     },
     {

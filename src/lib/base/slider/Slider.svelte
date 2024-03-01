@@ -30,7 +30,7 @@
 	@import '../../styles/presets.scss';
 
 	.sliderRoot {
-		background-color: var(--slotui-color-background);
+		background-color: var(--sld-color-background);
 
 		.sliderGouge {
 			position: relative;

@@ -28,13 +28,13 @@
 	@import '../../styles/slotui-vars.scss';
 	@import '../../styles/presets.scss';
 	.progressRoot {
-		border: 1px solid var(--slotui-color-secondary-alpha-mid);
+		border: 1px solid var(--sld-color-secondary-alpha-mid);
 		border-radius: var(--radius-tiny);
 		padding: 1px;
 		.progressRail {
-			background: var(--slotui-color-primary);
+			background: var(--sld-color-primary);
 			border-radius: var(--radius-tiny);
-			border: 1px solid var(--slotui-color-primary-alpha);
+			border: 1px solid var(--sld-color-primary-alpha);
 			transition-delay: 250ms;
 			transition: all 0.25s;
 			max-width: 100%;

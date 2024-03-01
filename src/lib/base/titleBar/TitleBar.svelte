@@ -40,6 +40,6 @@
 			min-height: 34px;
 		}
 
-		border-bottom: 1px solid var(--slotui-color-border);
+		border-bottom: 1px solid var(--sld-color-border);
 	}
 </style>

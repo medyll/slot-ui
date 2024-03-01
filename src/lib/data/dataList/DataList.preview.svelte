@@ -20,7 +20,7 @@
 
 <style lang="scss">
 	.what {
-		background-color: var(--slotui-color-background);
-		color: var(--slotui-color-foreground);
+		background-color: var(--sld-color-background);
+		color: var(--sld-color-foreground);
 	}
 </style>

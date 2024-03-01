@@ -50,10 +50,10 @@
 		}
 		button {
 			&.active {
-				border: 1px solid var(--slotui-color-border);
+				border: 1px solid var(--sld-color-border);
 			}
 			&:hover {
-				border: 1px solid var(--slotui-color-primary);
+				border: 1px solid var(--sld-color-primary);
 			}
 		}
 	}

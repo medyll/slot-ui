@@ -279,11 +279,11 @@
 
 		&:hover {
 			.iconGroup {
-				color: var(--slotui-color-primary);
+				color: var(--sld-color-primary);
 			}
 
 			.divider {
-				border-color: var(--slotui-color-primary, red);
+				border-color: var(--sld-color-primary, red);
 				cursor: pointer;
 			}
 		}

@@ -47,8 +47,8 @@
 		padding: 4px;
 		position: relative;
 		background-color: transparent;
-		border: 1px solid var(--slotui-color-primary-alpha, transprent);
-		border-radius: var(--slotui-button-radius, 0);
+		border: 1px solid var(--sld-color-primary-alpha, transprent);
+		border-radius: var(--sld-button-radius, 0);
 	}
 	button:hover {
 		border: 1px solid rgba(255, 255, 255, 0.1);

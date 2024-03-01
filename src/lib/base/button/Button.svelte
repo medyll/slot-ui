@@ -131,7 +131,7 @@
 	};
 </script>
 
-<container bind:this={containerRef} style="position:relative;display:flex;{htmlRootStyle}">
+<div bind:this={containerRef} style="position:relative;display:flex;{htmlRootStyle}">
 	<button
 		class={className}
 		class:loading
@@ -154,7 +154,7 @@
 		{presetDefault}
 		{...$$restProps}
 		data-width={size}
-		style:background="var(--slotui-color-{bgTheme})"
+		style:background="var(--sld-color-{bgTheme})"
 		style:color={bgTheme ? 'white' : ''}
 		style:aspect-ratio={ratio}
 	>
@@ -222,7 +222,7 @@
 			</Popper>
 		{/if}
 	{/if}
-</container>
+</div>
 {#if secondary}
 	<div style={`display:block;width:${element?.style?.width}px`}>
 		<Divider />
@@ -231,226 +231,5 @@
 {/if}
 
 <style lang="scss">
-	@import '../../styles/presets.scss';
-	@import '../../styles/slotui-vars.scss';
-
-	.actionButton {
-		height: 100%;
-		//background-color: rgba(255, 255, 255, 0.1);
-		width: var(--w-tiny);
-		cursor: pointer;
-
-		&:hover {
-			background-color: rgba(255, 255, 255, 0.5);
-		}
-	}
-
-	/* button *, .button *, input[type='button'] * {
-      pointer-events: none;
-  } */
-	.button,
-	button,
-	button[contained='true'],
-	input[type='button'],
-	input[type='submit'] {
-		@include input-sizes-presets;
-		@include ui-width-presets;
-		vertical-align: middle;
-		font-size: var(--slotui-button-font-size, 11px);
-		// padding: var(--box-density-small, 0.5rem) 0.75rem;
-		border-radius: var(---slotui-button-radius, var(--box-radius-tiny, 4px));
-		border: 0.5px solid transparent;
-		// padding: auto var(--box-density-preset-tiny);
-		color: var(--slotui-color-foreground);
-		padding: 0;
-		transition: all 0.1s;
-
-		&::before,
-		&::after {
-			content: '';
-			position: absolute;
-			transition: all 0.3s;
-			bottom: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			z-index: 1;
-		}
-
-		&[disabled] {
-			color: var(--color-gray-800);
-			border-color: none;
-			opacity: 0.4;
-		}
-
-		&:hover {
-			transform: scale(1.05);
-			box-shadow: var(--box-shad-3);
-		}
-
-		&:active,
-		&:focus {
-			outline: 0;
-		}
-
-		&:active {
-			transform: scale(0.97);
-			border: 0.5px solid var(--slotui-color-primary) !important;
-			box-shadow: var(--box-shad-4);
-		}
-
-		&:focus {
-			border: 0.5px solid var(--slotui-color-primary);
-			box-shadow: var(--box-shad-3);
-		}
-
-		@include input-sizes-presets;
-	}
-
-	.button,
-	button {
-		position: relative;
-		overflow: hidden;
-
-		&[nowrap] {
-			color: ' ';
-		}
-
-		/** variant presets */
-		&[selected='true'] {
-			box-shadow: var(--box-shad-3);
-			border: 0.5px solid var(--slotui-color-paper-alpha-low);
-			background-color: transparent;
-			font-weight: bold;
-		}
-
-		&[bordered='true'] {
-			color: var(--slotui-color-foreground);
-			border: 0.5px solid var(--slotui-color-primary-alpha-low);
-			box-shadow: var(--box-shad-1);
-
-			&:hover {
-				border: 0.5px solid var(--slotui-color-primary);
-			}
-		}
-
-		&[contained='true'] {
-			color: var(--slotui-color-foreground);
-			background-color: var(--slotui-color-paper-alpha-low, rgba(255, 255, 255, 0.1));
-			// background-color: var(--slotui-color-primary-alpha, rgba(255, 255, 255, 0.1)) !important;
-			&:hover {
-				// background-color: var(--slotui-color-paper) !important;
-				background-color: var(--slotui-color-primary, rgba(255, 255, 255, 0.1)) !important;
-				color: white;
-			}
-
-			&:focus {
-				outline: 0;
-				background-color: var(--slotui-color-background-alpha-mid);
-			}
-		}
-
-		&[link='true'] {
-			color: var(--slotui-color-primary);
-			text-decoration: underline;
-			text-underline-offset: 0.35rem;
-			cursor: pointer;
-
-			&:hover {
-				text-decoration: underline;
-			}
-		}
-
-		&[naked='true'] {
-			color: inherit;
-			background-color: transparent !important;
-			border: 0.5px solid transparent;
-			cursor: pointer;
-
-			&:hover,
-			&:active,
-			&:focus {
-				background-color: transparent !important;
-				border: 0.5px solid transparent;
-				color: inherit;
-			}
-		}
-
-		&.loading {
-			& .loadingButtonZone {
-				z-index: 010;
-				position: absolute;
-				top: 0;
-				bottom: 0;
-				right: 0;
-				left: 0;
-				max-height: 100%;
-				overflow: hidden;
-				display: flex;
-				align-items: center;
-				justify-content: space-around;
-				background-color: var(--css-background-color, var(--slotui-color-paper));
-				color: var(--css-background-color, var(--slotui-color-secondary));
-				backdrop-filter: blur(3px);
-			}
-		}
-
-		.innerButton {
-			width: 100%;
-			overflow: hidden;
-			position: relative;
-			z-index: 1;
-			display: flex;
-			min-width: auto;
-			align-items: center;
-			justify-content: center;
-			height: 100%;
-
-			.buttonStart {
-				padding: 0 var(--box-density-preset-tiny, 0.25rem);
-				display: flex;
-				justify-content: center;
-				align-items: center;
-			}
-
-			.central {
-				flex: 1;
-				min-width: auto;
-				width: auto;
-				display: inline;
-				vertical-align: bottom;
-				padding: 0 0.5rem;
-
-				&[nowrap] {
-				}
-			}
-
-			.action {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				height: 100%;
-				// background-color: rgba(255, 255, 255, 0.1);
-				width: var(--w-tiny);
-				padding: 0 0.5rem;
-				cursor: pointer;
-
-				&:hover {
-					background-color: rgba(255, 255, 255, 0.5);
-				}
-			}
-		}
-
-		.chip {
-			position: absolute;
-			z-index: 2;
-			height: 3px;
-			left: 50%;
-			transform: translate(-50%, 0);
-			width: 50%;
-			background-color: var(--css-button-chip-color, var(--slotui-color-primary));
-			border-radius: 16px;
-			bottom: 2px;
-		}
-	}
+	@import './Button.scss';
 </style>

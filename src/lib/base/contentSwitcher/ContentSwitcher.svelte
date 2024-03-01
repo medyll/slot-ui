@@ -73,12 +73,12 @@
 		max-width: 100%;
 		gap: 0.5rem;
 		max-width: 100%;
-		overflow: var(--slotui-contentswitcher-overflow, hidden);
+		overflow: var(--sld-contentswitcher-overflow, hidden);
 		position: relative;
 
 		.content {
 			position: relative;
-			overflow: var(--slotui-contentswitcher-overflow, hidden);
+			overflow: var(--sld-contentswitcher-overflow, hidden);
 			min-width: auto;
 			flex: 1 1 auto;
 		}

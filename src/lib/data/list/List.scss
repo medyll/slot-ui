@@ -4,7 +4,7 @@
 ul.listRoot {
   display: flex;
   flex-direction: column;
-  padding: 0;
+  padding: var(--sld-list-padding);
 }
 
 ul.listRoot:focus {
@@ -18,7 +18,7 @@ li.listItem {
   display: flex;
   align-items: center;
   position: relative;
-  border-radius: 4px;
+  border-radius: var(--sld-list-item-radius);
   max-width: 100%;
 
   .listItemContent {
@@ -61,7 +61,7 @@ li.listItemTitle {
   position: sticky;
   margin-top: 0px !important;
   top: 0px;
-  background-color: var(--slotui-color-background-alpha-low);
+  background-color: var(--sld-color-background-alpha-low);
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   z-index: 1;
@@ -71,7 +71,7 @@ li.listItemTitle {
   position: sticky;
   margin-bottom: 0px !important;
   bottom: 0px;
-  background-color: var(--slotui-color-background-alpha-low);
+  background-color: var(--sld-color-background-alpha-low);
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   z-index: 1;
@@ -84,15 +84,14 @@ li.listItem {
 
   &.selected,
   &[data-selected="true"] {
-    background-color: var(--theme-listitem-bg-selected);
     .listItemChip {
       position: absolute;
       height: 50%;
       width: 4px;
-      background-color: var(--slotui-color-primary);
+      background-color: var(--sld-color-primary);
       border-radius: 8px;
       left: 1px;
-      border: 1px solid var(--slotui-color-primary-alpha-mid);
+      border: 1px solid var(--sld-color-primary-alpha-mid);
     }
   }
 }

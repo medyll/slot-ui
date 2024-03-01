@@ -140,7 +140,7 @@
 	}
 
 	.nav {
-		background-color: var(--slotui-color-background-alpha-mid);
+		background-color: var(--sld-color-background-alpha-mid);
 		backdrop-filter: blur(30px);
 	}
 </style>

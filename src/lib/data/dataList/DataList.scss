@@ -1,10 +1,10 @@
 @import "../../styles/slotui-vars.scss";
 @import "../../styles/presets.scss";
 [data-theme="dark"] {
-	--slotui-color-border: rgba(255, 255, 255, 0.1);
+	--sld-color-border: rgba(255, 255, 255, 0.1);
 }
 [data-theme="light"] {
-	--slotui-color-border: rgba(0, 0, 0, 0.1);
+	--sld-color-border: rgba(0, 0, 0, 0.1);
 }
 .dataList {
 	height: 100%;
@@ -16,16 +16,16 @@
 	align-items: stretch;
 	height: 32px;
 	z-index: 100;
-	background-color: var(--slotui-color-paper-alpha-low);
+	background-color: var(--sld-color-paper-alpha-low);
 	backdrop-filter: blur(20px);
 	border-radius: var(--radius-tiny);
 	box-shadow: var(--box-shad-1);
-	border: 1px solid var(--slotui-color-border);
+	border: 1px solid var(--sld-color-border);
 	.dataListCell {
 		display: flex;
 		align-items: stretch;
 		overflow: hidden;
-		border-right: 1px solid var(--slotui-color-border);
+		border-right: 1px solid var(--sld-color-border);
 		position: relative;
 		-webkit-user-select: none;
 		-moz-user-select: none;
@@ -38,7 +38,7 @@
 		&[data-sortable="true"] {
 			cursor: pointer;
 			&:hover {
-				background-color: var(--slotui-color-primary-alpha);
+				background-color: var(--sld-color-primary-alpha);
 			}
 		}
 
@@ -61,7 +61,7 @@
 
 .dataListRow {
 	// display: flex;
-	border-bottom: 1px solid var(--slotui-color-border);
+	border-bottom: 1px solid var(--sld-color-border);
 	// margin: 0 0.5rem;
 	/* border-radius: 6px;
 			margin: 0.25rem 0; */
@@ -72,12 +72,12 @@
 	}
 
 	&:hover {
-		background-color: var(--slotui-color-paper);
+		background-color: var(--sld-color-paper);
 		.dataListCell {
 		}
 	}
 	&[data-selected="true"] {
-		background-color: var(--slotui-color-primary);
+		background-color: var(--sld-color-primary);
 		.dataListCell {
 			color: white;
 		}
@@ -85,8 +85,8 @@
 
 	.dataListCell {
 		padding: 0.5rem 0.5rem;
-		color: var(--slotui-color-foreground);
-		border-right: 1px solid var(--slotui-color-border);
+		color: var(--sld-color-foreground);
+		border-right: 1px solid var(--sld-color-border);
 		&:last-of-type {
 			border-right: 1px solid transparent;
 		}

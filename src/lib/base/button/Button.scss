@@ -1,0 +1,191 @@
+@import "../../styles/presets.scss";
+@import "../../styles/slotui-vars.scss";
+
+.actionButton {
+    height: 100%;
+    width: var(--w-tiny);
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.5);
+    }
+}
+
+.button,
+button,
+button[contained="true"],
+input[type="button"],
+input[type="submit"] {
+    @include input-sizes-presets;
+    @include ui-width-presets;
+    @include input-sizes-presets;
+
+    text-align: var(--sld-button-text-align);
+    font-size: var(--sld-button-font-size);
+    border-radius: var(--sld-button-radius);
+    border: 0.5px solid var(--sld-button-border-color);
+    background: var(--sld-button-background);
+    color: var(--sld-color-foreground);
+    padding: var(--sld-button-padding);
+    outline: var(--sld-button-border-width) solid var(--sld-button-border-color);
+
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.1s;
+    position: relative;
+    overflow: hidden;
+
+    &[disabled] {
+        color: var(--color-gray-800);
+        border-color: none;
+        opacity: 0.4;
+    }
+
+    &:hover {
+        outline: var(--sld-button-border-width) solid var(--sld-button-hover-border-color);
+        box-shadow: var(--sld-button-hover-shadow);
+    }
+
+    &:active {
+        outline: 0.5px solid var(--sld-button-active-border-color, var(--sld-color-primary)) !important;
+        box-shadow: var(--sld-button-active-shadow);
+    }
+
+    &:focus {
+        outline: 0.5px solid var(--sld-button-active-border-color, var(--sld-color-primary)) !important;
+        box-shadow: var(--sld-button-focus-shadow);
+    }
+
+    &[nowrap] {
+        color: " ";
+    }
+
+    &[selected="true"] {
+        box-shadow: var(--box-shad-3);
+        border: 0.5px solid var(--sld-color-paper-alpha-low);
+        background-color: transparent;
+        font-weight: bold;
+    }
+
+    &[bordered="true"] {
+        color: var(--sld-color-foreground);
+        border: 0.5px solid var(--sld-color-primary-alpha-low);
+        box-shadow: var(--box-shad-1);
+
+        &:hover {
+            border: 0.5px solid var(--sld-color-primary);
+        }
+    }
+
+    &[contained="true"] {
+        color: var(--sld-color-foreground);
+        background-color: var(--sld-color-paper-alpha-low);
+        &:hover {
+            background-color: var(--sld-color-primary) !important;
+            color: white;
+        }
+
+        &:focus {
+            outline: 0;
+            background-color: var(--sld-color-background-alpha-mid);
+        }
+    }
+
+    &[link="true"] {
+        color: var(--sld-color-primary);
+        text-decoration: underline;
+        text-underline-offset: 0.35rem;
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &[naked="true"] {
+        color: inherit;
+        background-color: transparent !important;
+        border: 0.5px solid transparent;
+        cursor: pointer;
+
+        &:hover,
+        &:active,
+        &:focus {
+            background-color: transparent !important;
+            border: 0.5px solid transparent;
+            color: inherit;
+        }
+    }
+
+    &.loading {
+        & .loadingButtonZone {
+            z-index: 010;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            max-height: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            background-color: var(--css-background-color, var(--sld-color-paper));
+            color: var(--css-background-color, var(--sld-color-secondary));
+            backdrop-filter: blur(3px);
+        }
+    }
+
+    .innerButton {
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+        display: flex;
+        min-width: auto;
+        align-items: center;
+        justify-content: center;
+
+        .buttonStart {
+            padding: 0 var(--box-density-preset-tiny, 0.25rem);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .central {
+            flex: 1;
+            min-width: 0;
+            padding: 0 0.5rem;
+            text-align: var(--sld-button-text-align);
+            &[nowrap] {
+            }
+        }
+
+        .action {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            // background-color: rgba(255, 255, 255, 0.1);
+            width: var(--w-tiny);
+            padding: 0 0.5rem;
+            cursor: pointer;
+
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.5);
+            }
+        }
+    }
+    .chip {
+        position: absolute;
+        z-index: 2;
+        height: 3px;
+        left: 50%;
+        transform: translate(-50%, 0);
+        width: 50%;
+        background-color: var(--css-button-chip-color, var(--sld-color-primary));
+        border-radius: 16px;
+        bottom: 2px;
+    }
+}

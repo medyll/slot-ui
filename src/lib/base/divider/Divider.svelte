@@ -44,7 +44,7 @@
 
 	$: shadowClass = shadow ? 'shad-3' : '';
 
-	$: if (color) addStyle += `--slotui-color-border:${color};`;
+	$: if (color) addStyle += `--sld-color-border:${color};`;
 
 	// set height od divider when direction === vertical in a flex env
 	$: if (

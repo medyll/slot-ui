@@ -148,9 +148,9 @@
 				width: 100%;
 				height: 100%;
 				border-radius: 50%;
-				border: 1px solid var(--slotui-color-foreground-alpha-mid);
+				border: 1px solid var(--sld-color-foreground-alpha-mid);
 				box-shadow: 0 0 5px 1px rgba(32, 123, 21, 0.3);
-				background-color: var(--slotui-color-background-alpha-mid);
+				background-color: var(--sld-color-background-alpha-mid);
 			}
 		}
 

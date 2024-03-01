@@ -13,7 +13,7 @@
 {#if data}
 	<div
 		class="slotUiGrid panelGrid"
-		style="--slotui-column-size:{Math.floor(100 / columns)}%;gap:0.5rem"
+		style="--sld-column-size:{Math.floor(100 / columns)}%;gap:0.5rem"
 	>
 		{#each data as dta}
 			{#if !isExpanded}
@@ -58,6 +58,6 @@
 	.slotUiGrid {
 		display: grid;
 		grid-gap: 0.2rem;
-		grid-template-columns: repeat(auto-fit, minmax(calc(var(--slotui-column-size) - 0.5rem), 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(calc(var(--sld-column-size) - 0.5rem), 1fr));
 	}
 </style>

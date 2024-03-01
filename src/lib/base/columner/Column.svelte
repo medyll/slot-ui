@@ -82,8 +82,7 @@
 			top: 0;
 		}
 
-		border-right: 1px solid
-			var(--slotui-column-bordercolor, var(--slotui-color-foreground-alpha-high));
+		border-right: 1px solid var(--sld-column-bordercolor, var(--sld-color-foreground-alpha-high));
 		box-shadow: var(--box-shad-1);
 	}
 </style>

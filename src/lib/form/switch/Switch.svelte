@@ -64,15 +64,15 @@
 
 		:hover {
 			.switchHandle {
-				background-color: var(--slotui-color-secondary) !important;
+				background-color: var(--sld-color-secondary) !important;
 			}
 		}
 
 		.switchGutter {
-			border: 1px solid var(--slotui-color-primary-alpha);
+			border: 1px solid var(--sld-color-primary-alpha);
 			border-radius: var(--radius-tiny);
 			padding: 0.2rem;
-			background-color: var(--slotui-color-paper);
+			background-color: var(--sld-color-paper);
 			input {
 				position: absolute;
 				width: 0;
@@ -82,8 +82,8 @@
 			}
 			input:checked + .switchHandle {
 				left: calc(100% - 16px);
-				background-color: var(--slotui-color-primary);
-				// background-color: var(--slotui-color-primary);
+				background-color: var(--sld-color-primary);
+				// background-color: var(--sld-color-primary);
 				// transform: translateX(100%);
 			}
 			input + .switchHandle {
@@ -97,8 +97,8 @@
 				// transform: translateX(0%);
 				left: 0;
 				transition: all 0.25s;
-				background-color: var(--slotui-color-background);
-				border: 1px solid var(--slotui-color-secondary-alpha-mid);
+				background-color: var(--sld-color-background);
+				border: 1px solid var(--sld-color-secondary-alpha-mid);
 				box-shadow: var(--box-shad-1);
 			}
 		}

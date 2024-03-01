@@ -1,33 +1,76 @@
 :root {
-    --slotui-color-primary: #98b148;
-    --slotui-color-secondary: #55492b;
-    --slotui-color-tertiary: #9999cc;
+    --sld-color-primary: #98b148;
+    --sld-color-secondary: #55492b;
+    --sld-color-tertiary: #9999cc;
 
-    --slotui-color-foreground: #333333;
-    --slotui-color-background: #f1f1f1;
-    --slotui-color-paper: #ededed;
+    --sld-color-foreground: #333333;
+    --sld-color-background: #ffffff;
+    --sld-color-paper: #f1f1f1;
 
-    --slotui-color-primary-alpha-low: color-mix(in srgb, var(--slotui-color-primary), transparent 50%);
-    --slotui-color-secondary-alpha-mid: color-mix(in srgb, var(--slotui-color-secondary), transparent 50%);
-    --slotui-color-tertiary-alpha-mid: color-mix(in srgb, var(--slotui-color-tertiary), transparent 50%);
+    --sld-color-primary-alpha-low: color-mix(in srgb, var(--sld-color-primary), transparent 50%);
+    --sld-color-secondary-alpha-mid: color-mix(in srgb, var(--sld-color-secondary), transparent 50%);
+    --sld-color-tertiary-alpha-mid: color-mix(in srgb, var(--sld-color-tertiary), transparent 50%);
 
-    --slotui-color-background-alpha-low: color-mix(in srgb, var(--slotui-color-background), transparent 10%);
-    --slotui-color-background-alpha-mid: color-mix(in srgb, var(--slotui-color-background), transparent 50%);
-    --slotui-color-background-alpha-high: color-mix(in srgb, var(--slotui-color-background), transparent 90%);
+    --sld-color-background-alpha-low: color-mix(in srgb, var(--sld-color-background), transparent 10%);
+    --sld-color-background-alpha-mid: color-mix(in srgb, var(--sld-color-background), transparent 50%);
+    --sld-color-background-alpha-high: color-mix(in srgb, var(--sld-color-background), transparent 90%);
 
-    --slotui-color-foreground-alpha-low: color-mix(in srgb, var(--slotui-color-foreground), transparent 10%);
-    --slotui-color-foreground-alpha-mid: color-mix(in srgb, var(--slotui-color-foreground), transparent 50%);
-    --slotui-color-foreground-alpha-high: color-mix(in srgb, var(--slotui-color-foreground), transparent 90%);
+    --sld-color-foreground-alpha-low: color-mix(in srgb, var(--sld-color-foreground), transparent 10%);
+    --sld-color-foreground-alpha-mid: color-mix(in srgb, var(--sld-color-foreground), transparent 50%);
+    --sld-color-foreground-alpha-high: color-mix(in srgb, var(--sld-color-foreground), transparent 90%);
 
-    --slotui-color-border: color-mix(in srgb, var(--slotui-color-foreground), transparent 70%);
+    --sld-color-border: color-mix(in srgb, var(--sld-color-foreground), transparent 70%);
 
     [data-theme="dark"] {
-        --slotui-color-foreground: #f1f1f1;
-        --slotui-color-background: #27323a;
-        --slotui-color-paper: #3a3b3b;
+        --sld-color-foreground: #ffffff;
+        --sld-color-background: #27323a;
+        --sld-color-paper: #3a3b3b;
 
-        --slotui-color-border: color-mix(in srgb, var(--slotui-color-foreground), transparent 60%);
+        --sld-color-border: color-mix(in srgb, var(--sld-color-foreground), transparent 60%);
     }
 
-    --slotui-theme-gap-tiny: 1.5rem;
+    --sld-theme-gap-tiny: 1.5rem;
+
+    --sld-hover-background-color: var(--sld-color-secondary-alpha-mid);
+    --sld-hover-border-color: var(--sld-color-foreground-alpha-high);
+    --sld-hover-shadow: var(--box-shad-3);
+
+    --sld-selected-background-color: var(--sld-color-primary-alpha-high);
+    --sld-selected-border-color: var(--sld-color-primary);
+    --sld-selected-shadow: var(--box-shad-4);
+}
+
+button {
+    --sld-button-font-size: 11px;
+    --sld-button-radius: 4px;
+    --sld-button-border-color: transparent;
+    --sld-button-border-width: 1px;
+    --sld-button-text-align: center;
+    --sld-button-padding: 0;
+    --sld-button-background: var(--sld-color-primary);
+    --sld-button-hover-border-color: var(--sld-color-primary);
+    --sld-button-active-border-color: var(--sld-color-primary);
+    --sld-button-focus-border-color: var(--sld-color-primary);
+    --sld-button-hover-shadow: var(--box-shad-3);
+    --sld-button-active-shadow: var(--box-shad-4);
+    --sld-button-focus-shadow: var(--box-shad-4);
+}
+
+input {
+    --sld-input-background: var(--sld-color-background-alpha-high);
+    --sld-input-border-width: 1px;
+    --sld-input-border-color: var(--sld-color-foreground-alpha-mid);
+    --sld-input-border-bottom-width: 2px;
+    --sld-input-border-bottom-color: var(--sld-color-primary-darker, rgb(208, 191, 151));
+    --sld-input-radius: 4px;
+    --sld-input-padding: 0 0.5rem;
+    --sld-input-shadow: inset 0px 0px 3px 1px rgba(51, 51, 51, 0.1);
+}
+
+ul.listRoot {
+    --sld-list-padding: 0;
+
+    --sld-list-item-padding: 0;
+    --sld-list-item-radius: 4px;
+    --sld-list-item-selected-background: var(--sld-selected-background-color);
 }
