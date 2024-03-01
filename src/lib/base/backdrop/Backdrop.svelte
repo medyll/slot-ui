@@ -78,7 +78,7 @@
 			position: absolute;
 			height: 100%;
 			width: 100%;
-			background-color: var(--backdrop-background-color, var(--theme-color-foreground-alpha-high));
+			background-color: var(--backdrop-background-color, var(--slotui-color-foreground-alpha-high));
 			backdrop-filter: blur(5px);
 			display: flex;
 			align-items: center;

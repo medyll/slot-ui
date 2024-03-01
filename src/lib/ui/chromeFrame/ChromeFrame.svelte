@@ -1,4 +1,4 @@
-<svelte:options accessors/>
+<svelte:options accessors />
 
 <script lang="ts">
 	import { getChromeFrame } from './chromeFrame.utils';
@@ -19,7 +19,7 @@
 <div
 	on:chromeframe:hide
 	on:chromeframe:close
-	class="chromeFrame flex-v pos-abs top-0 h-full overflow-hidden w-full "
+	class="chromeFrame flex-v pos-abs top-0 h-full overflow-hidden w-full"
 	style="z-index:{$frameStore?.zIndex};display:{$frameStore?.minimized ? 'none' : ''}"
 >
 	{#if $frameStore?.showCommandBar}
@@ -36,10 +36,10 @@
 </div>
 
 <style global lang="scss">
-	@import "../../styles/slotui-vars.scss";
-	@import "../../styles/presets.scss";
+	@import '../../styles/slotui-vars.scss';
+	@import '../../styles/presets.scss';
 	.chromeFrame {
-		color: var(--theme-color-foreground);
-		background-color: var(--theme-color-background);
+		color: var(--slotui-color-foreground);
+		background-color: var(--slotui-color-background);
 	}
 </style>

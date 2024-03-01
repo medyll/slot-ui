@@ -2,22 +2,22 @@
 @import "../../styles/presets.scss";
 .drawer {
   color: var(--css-drawer-color, inherit);
-  background-color: var(--slotui-drawer-bg-color, var(--theme-color-paper-alpha-low));
+  background-color: var(--slotui-drawer-bg-color, var(--slotui-color-paper-alpha-low));
   backdrop-filter: var(--slotui-drawer-backdrop-blur, blur(0px));
   z-index: 3000;
   box-shadow: var(--box-shad-3);
-  border-left: 1px solid var(--slotui-drawer-border-color, var(--theme-color-primary-alpha));
+  border-left: 1px solid var(--slotui-drawer-border-color, var(--slotui-color-primary-alpha));
   overflow: visible;
   display: flex;
   flex-direction: column;
-  transition: all 0.1s; 
+  transition: all 0.1s;
   .opener {
-    //background-color: var(--slotui-drawer-bg-color, var(--theme-color-paper-alpha-low));
+    //background-color: var(--slotui-drawer-bg-color, var(--slotui-color-paper-alpha-low));
     position: absolute;
     z-index: 8600;
   }
   .header {
-    // border-bottom: 1px solid var(--theme-color-foreground-alpha-high); 
+    // border-bottom: 1px solid var(--slotui-color-foreground-alpha-high);
 
     min-height: 48px;
     display: flex;
@@ -28,7 +28,7 @@
     }
   }
   .content {
-    flex: 1; 
-    position: relative; 
+    flex: 1;
+    position: relative;
   }
 }

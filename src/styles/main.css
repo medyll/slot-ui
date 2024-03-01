@@ -11,11 +11,11 @@ html {
 body {
   height: 100%;
   max-height: 100%;
-  color: var(--theme-color-foreground);
+  color: var(--slotui-color-foreground);
   box-sizing: border-box;
-  /* background-color: var(--theme-color-background); */
-  background: var(--theme-color-background);
-  background: linear-gradient(180deg, var(--theme-color-background) 0%, var(--theme-color-paper) 100%);
+  /* background-color: var(--slotui-color-background); */
+  background: var(--slotui-color-background);
+  background: linear-gradient(180deg, var(--slotui-color-background) 0%, var(--slotui-color-paper) 100%);
   overflow: hidden;
 }
 
@@ -34,7 +34,7 @@ a {
 /* Firefox */
 * {
   scrollbar-width: auto;
-  scrollbar-color: var(--theme-color-primary) var(--theme-color-background);
+  scrollbar-color: var(--slotui-color-primary) var(--slotui-color-background);
 }
 
 /* Chrome, Edge, and Safari */
@@ -48,8 +48,8 @@ a {
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: var(--theme-color-primary);
+  background-color: var(--slotui-color-primary);
   border-radius: 8px;
-  border: 1px solid var(--theme-color-background);
-  box-shadow: 0 0 1px var(--theme-color-secondary);
+  border: 1px solid var(--slotui-color-background);
+  box-shadow: 0 0 1px var(--slotui-color-secondary);
 }

@@ -61,7 +61,7 @@ li.listItemTitle {
   position: sticky;
   margin-top: 0px !important;
   top: 0px;
-  background-color: var(--theme-color-background-alpha-low);
+  background-color: var(--slotui-color-background-alpha-low);
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   z-index: 1;
@@ -71,7 +71,7 @@ li.listItemTitle {
   position: sticky;
   margin-bottom: 0px !important;
   bottom: 0px;
-  background-color: var(--theme-color-background-alpha-low);
+  background-color: var(--slotui-color-background-alpha-low);
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   z-index: 1;
@@ -89,10 +89,10 @@ li.listItem {
       position: absolute;
       height: 50%;
       width: 4px;
-      background-color: var(--theme-color-primary);
+      background-color: var(--slotui-color-primary);
       border-radius: 8px;
       left: 1px;
-      border: 1px solid rgba(255, 255, 255, 0.4);
+      border: 1px solid var(--slotui-color-primary-alpha-mid);
     }
   }
 }

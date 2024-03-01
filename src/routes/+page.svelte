@@ -171,9 +171,9 @@
 
 	.prevLink {
 		cursor: pointer;
-		color: var(--theme-color-primary-alpha-low);
+		color: var(--slotui-color-primary-alpha-low);
 		&:hover {
-			color: var(--theme-color-primary);
+			color: var(--slotui-color-primary);
 		}
 	}
 </style>

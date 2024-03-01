@@ -6,17 +6,17 @@
     min-width: 350px;
     display: inline-block;
     border-radius: 6px;
-    border: 1px solid var(--slotui-border-color);
-    background-color: var(--theme-color-background);
+    border: 1px solid var(--slotui-color-border);
+    background-color: var(--slotui-color-background);
     overflow: hidden;
 
     .dot {
         display: inline-block;
         padding: 0.25rem;
-        border: 1px solid var(--theme-border_color);
+        border: 1px solid var(--slotui-color-border);
         border-radius: 6px;
         margin-right: 1rem;
-        transform: translate(-50%,0)
+        transform: translate(-50%, 0);
     }
     .close {
         position: absolute;

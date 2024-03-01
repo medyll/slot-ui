@@ -114,22 +114,22 @@
 	@import '../../styles/slotui-vars.scss';
 	@import '../../styles/presets.scss';
 	input {
-		border: 1px solid var(--theme-color-foreground-alpha);
+		border: 1px solid var(--slotui-color-foreground-alpha-mid);
 		// border: 1px solid rgba(208, 191, 151, 0.5);
 		border-bottom: var(--slotui-border-bottom-size, 2px) solid
-			var(--theme-color-primary-darker, rgb(208, 191, 151));
+			var(--slotui-color-primary-darker, rgb(208, 191, 151));
 		border-radius: var(--slotui-input-radius, 4px);
 		padding: var(--slotui-input-padding, 0.5rem);
 		box-shadow: inset 0px 0px 3px 1px rgba(51, 51, 51, 0.1);
-		background-color: var(--theme-color-background-alpha-low);
-		color: var(--theme-color-text);
+		background-color: var(--slotui-color-background-alpha-low);
+		color: var(--slotui-color-foreground);
 		/* background-color: rgba(59, 59, 59, 0.99);
 		color: white; 
 		height: 2.5rem;*/
 		padding: var(--slotui-input-padding, 0 0.5rem);
 		box-sizing: border-box;
 		&:hover {
-			border-color: var(--theme-color-foreground);
+			border-color: var(--slotui-color-foreground-alpha-mid);
 		}
 		[error] {
 			border-bottom: red;

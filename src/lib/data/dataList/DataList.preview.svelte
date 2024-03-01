@@ -4,25 +4,23 @@
 	import DataListHead from '$lib/data/dataList/DataListHead.svelte';
 
 	let data = [...Array(200)].map((caches, index: number) => {
-		return { index, name: 'name '+index, otherName: 'otherName '+index };
+		return { index, name: 'name ' + index, otherName: 'otherName ' + index };
 	});
 </script>
 
-<div style="height:350px;width:450px;" class="what   pos-rel overflow-hidden pad-1">
-	<DataList {data} >
+<div style="height:350px;width:450px;" class="what pos-rel overflow-hidden pad-1">
+	<DataList {data}>
 		<DataListHead slot="head">
-			<DataListCell  field="index">index</DataListCell>
-			<DataListCell  field="name">name</DataListCell>
-			<DataListCell  field="otherName"style="flex:1">otherName</DataListCell>
+			<DataListCell field="index">index</DataListCell>
+			<DataListCell field="name">name</DataListCell>
+			<DataListCell field="otherName" style="flex:1">otherName</DataListCell>
 		</DataListHead>
 	</DataList>
 </div>
 
- 
-
 <style lang="scss">
 	.what {
-		background-color: var(--theme-color-background);
-		color: var(--theme-color-text);
+		background-color: var(--slotui-color-background);
+		color: var(--slotui-color-foreground);
 	}
 </style>

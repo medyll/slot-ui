@@ -147,7 +147,7 @@
 		overflow: hidden;
 		position: fixed;
 		box-shadow: var(--box-shad-4);
-		background-color: var(--theme-color-background-alpha);
+		background-color: var(--slotui-color-background-alpha-mid);
 		backdrop-filter: blur(30px);
 		display: inline-block;
 		top: 0;

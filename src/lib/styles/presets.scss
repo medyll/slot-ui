@@ -75,15 +75,16 @@
 
 @mixin data-hover {
     &:hover {
-        border-color:   var(--theme-color-foreground-alpha-high);
-        background-color: var(--theme-color-secondary-alpha);
+        border-color: var(--slotui-color-foreground-alpha-high);
+        background-color: var(--slotui-color-secondary-alpha-mid);
     }
 }
 
 @mixin data-selected {
-    &.selected, &[data-selected="true"] {
-        border-color:   var(--theme-color-primary);
-        background-color: var(--theme-color-primary-alpha-high);
+    &.selected,
+    &[data-selected="true"] {
+        border-color: var(--slotui-color-primary);
+        background-color: var(--slotui-color-primary-alpha-high);
         box-shadow: var(--slotui-listitem-active-boxshadow, var(shad-3));
     }
 }

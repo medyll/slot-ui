@@ -154,7 +154,7 @@
 		{presetDefault}
 		{...$$restProps}
 		data-width={size}
-		style:background="var(--theme-color-{bgTheme})"
+		style:background="var(--slotui-color-{bgTheme})"
 		style:color={bgTheme ? 'white' : ''}
 		style:aspect-ratio={ratio}
 	>
@@ -261,7 +261,7 @@
 		border-radius: var(---slotui-button-radius, var(--box-radius-tiny, 4px));
 		border: 0.5px solid transparent;
 		// padding: auto var(--box-density-preset-tiny);
-		color: var(--theme-color-foreground);
+		color: var(--slotui-color-foreground);
 		padding: 0;
 		transition: all 0.1s;
 
@@ -295,12 +295,12 @@
 
 		&:active {
 			transform: scale(0.97);
-			border: 0.5px solid var(--theme-color-primary) !important;
+			border: 0.5px solid var(--slotui-color-primary) !important;
 			box-shadow: var(--box-shad-4);
 		}
 
 		&:focus {
-			border: 0.5px solid var(--theme-color-primary);
+			border: 0.5px solid var(--slotui-color-primary);
 			box-shadow: var(--box-shad-3);
 		}
 
@@ -319,39 +319,39 @@
 		/** variant presets */
 		&[selected='true'] {
 			box-shadow: var(--box-shad-3);
-			border: 0.5px solid var(--theme-color-paper-alpha-low);
+			border: 0.5px solid var(--slotui-color-paper-alpha-low);
 			background-color: transparent;
 			font-weight: bold;
 		}
 
 		&[bordered='true'] {
-			color: var(--theme-color-foreground);
-			border: 0.5px solid var(--theme-color-primary-alpha-low);
+			color: var(--slotui-color-foreground);
+			border: 0.5px solid var(--slotui-color-primary-alpha-low);
 			box-shadow: var(--box-shad-1);
 
 			&:hover {
-				border: 0.5px solid var(--theme-color-primary);
+				border: 0.5px solid var(--slotui-color-primary);
 			}
 		}
 
 		&[contained='true'] {
-			color: var(--theme-color-foreground);
-			background-color: var(--theme-color-paper-alpha-low, rgba(255, 255, 255, 0.1));
-			// background-color: var(--theme-color-primary-alpha, rgba(255, 255, 255, 0.1)) !important;
+			color: var(--slotui-color-foreground);
+			background-color: var(--slotui-color-paper-alpha-low, rgba(255, 255, 255, 0.1));
+			// background-color: var(--slotui-color-primary-alpha, rgba(255, 255, 255, 0.1)) !important;
 			&:hover {
-				// background-color: var(--theme-color-paper) !important;
-				background-color: var(--theme-color-primary, rgba(255, 255, 255, 0.1)) !important;
+				// background-color: var(--slotui-color-paper) !important;
+				background-color: var(--slotui-color-primary, rgba(255, 255, 255, 0.1)) !important;
 				color: white;
 			}
 
 			&:focus {
 				outline: 0;
-				background-color: var(--theme-color-background-alpha);
+				background-color: var(--slotui-color-background-alpha-mid);
 			}
 		}
 
 		&[link='true'] {
-			color: var(--theme-color-primary);
+			color: var(--slotui-color-primary);
 			text-decoration: underline;
 			text-underline-offset: 0.35rem;
 			cursor: pointer;
@@ -389,8 +389,8 @@
 				display: flex;
 				align-items: center;
 				justify-content: space-around;
-				background-color: var(--css-background-color, var(--theme-color-paper));
-				color: var(--css-background-color, var(--theme-color-secondary));
+				background-color: var(--css-background-color, var(--slotui-color-paper));
+				color: var(--css-background-color, var(--slotui-color-secondary));
 				backdrop-filter: blur(3px);
 			}
 		}
@@ -448,7 +448,7 @@
 			left: 50%;
 			transform: translate(-50%, 0);
 			width: 50%;
-			background-color: var(--css-button-chip-color, var(--theme-color-primary));
+			background-color: var(--css-button-chip-color, var(--slotui-color-primary));
 			border-radius: 16px;
 			bottom: 2px;
 		}

@@ -60,7 +60,7 @@
 	.toggleBarRoot {
 		padding: var(--slotui-commandbar-padding, var(--box-density-1));
 		display: flex;
-		border-bottom: 1px solid var(--slotui-topbar-border-bottom-color, var(--theme-color-border));
+		border-bottom: 1px solid var(--slotui-topbar-border-bottom-color, var(--slotui-color-border));
 		width: 100%;
 		max-width: 100%;
 		min-width: auto;

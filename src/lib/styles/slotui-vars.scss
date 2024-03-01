@@ -1,15 +1,33 @@
 :root {
-    --slotui-theme-primary: #98B148;
-    --slotui-theme-secondary:  #55492B;
-    --slotui-theme-tertiary: #9999CC;
+    --slotui-color-primary: #98b148;
+    --slotui-color-secondary: #55492b;
+    --slotui-color-tertiary: #9999cc;
 
-    --slotui-theme-color-foreground: #333333;
-    --slotui-theme-color-background: #f1f1f1;
-    --slotui-theme-color-paper: #ededed;
+    --slotui-color-foreground: #333333;
+    --slotui-color-background: #f1f1f1;
+    --slotui-color-paper: #ededed;
+
+    --slotui-color-primary-alpha-low: color-mix(in srgb, var(--slotui-color-primary), transparent 50%);
+    --slotui-color-secondary-alpha-mid: color-mix(in srgb, var(--slotui-color-secondary), transparent 50%);
+    --slotui-color-tertiary-alpha-mid: color-mix(in srgb, var(--slotui-color-tertiary), transparent 50%);
+
+    --slotui-color-background-alpha-low: color-mix(in srgb, var(--slotui-color-background), transparent 10%);
+    --slotui-color-background-alpha-mid: color-mix(in srgb, var(--slotui-color-background), transparent 50%);
+    --slotui-color-background-alpha-high: color-mix(in srgb, var(--slotui-color-background), transparent 90%);
+
+    --slotui-color-foreground-alpha-low: color-mix(in srgb, var(--slotui-color-foreground), transparent 10%);
+    --slotui-color-foreground-alpha-mid: color-mix(in srgb, var(--slotui-color-foreground), transparent 50%);
+    --slotui-color-foreground-alpha-high: color-mix(in srgb, var(--slotui-color-foreground), transparent 90%);
+
+    --slotui-color-border: color-mix(in srgb, var(--slotui-color-foreground), transparent 70%);
 
     [data-theme="dark"] {
-        --slotui-theme-color-foreground: #f1f1f1;
-        --slotui-theme-color-background: #27323a;
-        --slotui-theme-color-paper: #3a3b3b;
+        --slotui-color-foreground: #f1f1f1;
+        --slotui-color-background: #27323a;
+        --slotui-color-paper: #3a3b3b;
+
+        --slotui-color-border: color-mix(in srgb, var(--slotui-color-foreground), transparent 60%);
     }
+
+    --slotui-theme-gap-tiny: 1.5rem;
 }

@@ -188,8 +188,8 @@
 	.window {
 		display: block;
 		border-radius: 6px;
-		background-color: var(--theme-color-background);
-		color: var(--theme-color-text);
+		background-color: var(--slotui-color-background);
+		color: var(--slotui-color-foreground);
 		border: 1px solid rgba(255, 255, 255, 0.1);
 		min-width: 250px;
 		top: 0;
@@ -199,15 +199,15 @@
 		max-height: 100%;
 
 		&.active {
-			border: 1px solid var(--theme-color-primary);
+			border: 1px solid var(--slotui-color-primary);
 		}
 
 		.bar {
 			display: flex;
 			align-items: center;
 			text-align: center;
-			background-color: var(--theme-color-paper);
-			color: var(--theme-color-foreground);
+			background-color: var(--slotui-color-paper);
+			color: var(--slotui-color-foreground);
 			padding: 0.5rem 0;
 
 			.handle {

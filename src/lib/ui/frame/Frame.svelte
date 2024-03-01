@@ -79,7 +79,7 @@
 		flex-direction: column;
 		overflow: hidden;
 		position: relative;
-		background-color: var(--css-frame-bg-color, var(--theme-bg-paper));
+		background-color: var(--css-frame-bg-color, var(--slotui-color-paper));
 		backdrop-filter: var(--css-frame-backdrop-blur, blur(30px));
 		overflow: hidden;
 
@@ -90,7 +90,7 @@
 			overflow: hidden;
 			.navLeft {
 				z-index: 1;
-				border-right: 1px solid var(--theme-color-primary);
+				border-right: 1px solid var(--slotui-color-primary);
 				height: 100%;
 				position: relative;
 			}

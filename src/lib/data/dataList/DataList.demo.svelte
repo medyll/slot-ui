@@ -164,7 +164,7 @@ is a datalist table <br /> B. Franklin, 1854"
 
 <style lang="scss">
 	.what {
-		background-color: var(--theme-color-background);
-		color: var(--theme-color-text);
+		background-color: var(--slotui-color-background);
+		color: var(--slotui-color-foreground);
 	}
 </style>
