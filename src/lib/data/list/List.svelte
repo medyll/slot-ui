@@ -8,10 +8,8 @@
 	import Icon from '$lib/base/icon/Icon.svelte';
 	import ListTitle from './ListTitle.svelte';
 	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
-	import Virtualize from '$lib/base/virtualize/Virtualize.svelte';
 	import { dataOp, propsProxy } from '$lib/engine/utils.js';
 	import type { SorterFieldType } from '$lib/data/sorter/types.js';
-	import Sorterer from '$lib/data/sorter/Sorterer.svelte';
 
 	type Data = Record<string, any>;
 	// set store
@@ -19,26 +17,50 @@
 	setContext('listStateContext', listStore);
 
 	let className: string | undefined = undefined;
-	/**  className off the root component  */
+	/**
+	 * className off the root component
+	 * @type {string | undefined}
+	 */
 	export { className as class };
-	/**  css style off the root component  */
+	/**
+	 * css style off the root component
+	 * @type {string | undefined}
+	 */
 	export let style: string | undefined = undefined;
-	/** element root HTMLDivElement props  */
+	/**
+	 * element root HTMLDivElement props
+	 * @type {HTMLDivElement | null}
+	 */
 	export let element: HTMLDivElement | null = null;
 	const forwardEvents = createEventForwarder(get_current_component());
 
-	/** formated listItems list  */
+	/**
+	 * pre-formatted listItems list
+	 * @type {LisItemProps[] | undefined}
+	 */
 	export let listItems: LisItemProps[] | undefined = undefined;
-	/** provided raw data, used if no listItems list is provided  */
+	/**
+	 * provided raw data, used if no listItems list is provided
+	 * @type {Data[] | undefined}
+	 */
 	export let data: Data[] | undefined = undefined;
-	/** Row from data for primary, used if props.data is provided  */
+	/**
+	 * Row from data for primary, used if props.data is provided
+	 * @type {string | ((data: Data) => void) | undefined}
+	 */
 	export let dataFieldPrimary: string | ((data: Data) => void) | undefined = undefined;
-	/** Row from data for secondary, used if props.data is provided  */
+	/**
+	 * Row from data for secondary, used if props.data is provided
+	 * @type {string | ((data: Data) => void) | undefined}
+	 */
 	export let dataFieldSecondary: string | ((data: Data) => void) | undefined = undefined;
-	/** Row from data for secondary, used if props.data is provided  */
+	/**
+	 * Row from data for secondary, used if props.data is provided
+	 * @type {string | ((data: Data) => void) | undefined}
+	 */
 	export let dataFieldIcon: string | ((data: Data) => void) | undefined = undefined;
 
-	export let height: string = '100%';
+	export let height: string = 'auto';
 	export let showIcon: boolean = true;
 	export let virtualize: boolean = false;
 	export let selectorField: any;
@@ -149,9 +171,6 @@
 
 		let tt = 0;
 		if (listItems) {
-			// if selectorField
-			// if listItem.primary
-			// seek listItem with same primary as activeData
 			if ($listStore.activeItem?.['primary']) {
 				tt = dataOp.findObjectIndex(listItems, $listStore.activeItem['primary'], 'primary');
 			}
@@ -197,66 +216,42 @@
 	use:forwardEvents
 	tabindex="0"
 	on:keydown={navigateList}
+	role="navigation"
+	aria-label="Menu"
 >
-	{#if virtualize}
-		<Virtualize height="100%" items={listItems} let:item>
-			<svelte:fragment slot="virtualizeHeaderSlot">
-				{#if showTitleZone}
-					<slot name="listTitle">
-						<ListTitle primary={primary ?? title} {secondary} {icon}>
-							{#if sorterer}<Sorterer {sortedData} fields={sorterer} data={listItems} />{/if}
-						</ListTitle>
-					</slot>
-				{/if}
-			</svelte:fragment>
-			{#if item}
-				<slot listItem={item}>
-					<ListItem {showIcon} {density} data={item.data}>
-						<span slot="listItemIcon">
-							{#if item?.icon}<Icon fontSize="small" icon={item?.icon} />{/if}
-						</span>
-						<span slot="listItemPrimary">{null_to_empty(item?.primary)}</span>
-						<span slot="listItemSecondary">{null_to_empty(item?.secondary)}</span>
-						<span slot="listItemAction">{null_to_empty(item?.action)}</span>
-					</ListItem>
-				</slot>
-			{/if}
-		</Virtualize>
+	{#if showTitleZone}
+		<slot name="listTitle"
+			><slot name="title">
+				<ListTitle primary={primary ?? title} {secondary} {icon} />
+			</slot></slot
+		>
+	{/if}
+	{#if listItems}
+		{#each listItems as item}
+			<slot {item}>
+				<ListItem
+					style="content-visibility:hidden;"
+					{showIcon}
+					{density}
+					{showDivider}
+					{dividerProps}
+					data={item.data}
+					icon={item?.icon}
+				>
+					<span slot="listItemIcon">
+						{#if item?.icon}<Icon fontSize="small" icon={item?.icon} />{/if}
+					</span>
+					<span slot="listItemPrimary">{null_to_empty(item?.primary)}</span>
+					<span slot="listItemSecondary">{null_to_empty(item?.secondary)}</span>
+					<span slot="listItemAction">{null_to_empty(item?.action)}</span>
+				</ListItem>
+			</slot>
+		{/each}
 	{:else}
-		{#if showTitleZone}
-			<slot name="listTitle"
-				><slot name="title">
-					<ListTitle primary={primary ?? title} {secondary} {icon} />
-				</slot></slot
-			>
-		{/if}
-		{#if listItems}
-			{#each listItems as item}
-				<slot listItem={item}>
-					<ListItem
-						style="content-visibility:hidden;"
-						{showIcon}
-						{density}
-						{showDivider}
-						{dividerProps}
-						data={item.data}
-						icon={item?.icon}
-					>
-						<span slot="listItemIcon">
-							{#if item?.icon}<Icon fontSize="small" icon={item?.icon} />{/if}
-						</span>
-						<span slot="listItemPrimary">{null_to_empty(item?.primary)}</span>
-						<span slot="listItemSecondary">{null_to_empty(item?.secondary)}</span>
-						<span slot="listItemAction">{null_to_empty(item?.action)}</span>
-					</ListItem>
-				</slot>
-			{/each}
-		{:else}
-			<slot />
-		{/if}
-		{#if showTitleZone}
-			<slot name="listFooter" />
-		{/if}
+		<slot />
+	{/if}
+	{#if showTitleZone}
+		<slot name="listFooter" />
 	{/if}
 </ul>
 

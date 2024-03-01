@@ -64,12 +64,11 @@ export function stickTo(node: HTMLElement, props: StickToProps) {
 		while (el && el !== document.body) {
 			let computedStyle = getComputedStyle(el);
 			if (computedStyle.overflowY === 'auto' || computedStyle.overflowY === 'scroll') {
-				console.log(el);
 				if (!scrollableContainers.includes(el)) scrollableContainers.push(el);
 			}
 			el = el.parentElement ?? window.document.body; // Passez au parent
 		}
-		console.log(scrollableContainers);
+
 		return scrollableContainers;
 	}
 
@@ -108,7 +107,6 @@ export function stickTo(node: HTMLElement, props: StickToProps) {
 
 	function setPosition(node: HTMLElement, position: any, parentNode: HTMLElement) {
 		setMaxDimensions(node, parentNode);
-		console.log('setPosition', node, position, parentNode);
 
 		const parentPos = parentNode.getBoundingClientRect();
 

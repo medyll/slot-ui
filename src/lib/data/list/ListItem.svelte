@@ -3,7 +3,7 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import { custom_event, null_to_empty } from 'svelte/internal';
-
+	import { createEventDispatcher } from 'svelte';
 	import Icon from '$lib/base/icon/Icon.svelte';
 	import type { ElementProps } from '$lib/types/index.js';
 	import Divider from '$lib/base/divider/Divider.svelte';
@@ -39,23 +39,11 @@
 	export let density: ElementProps['density'] = $listStateContext?.density ?? 'default';
 
 	const handleClick = () => () => {
-		// send whole listItem
-		/** @deprecated */
-		const eventDeprecated = custom_event('listclick', data, { bubbles: true });
-		element?.dispatchEvent(eventDeprecated);
-
 		const event = custom_event('listitem:click', { ...$$props }, { bubbles: true });
 		element?.dispatchEvent(event);
 	};
 
 	const handleDblClick = () => () => {
-		// send whole listItem
-		/** @deprecated */
-		const eventDeprecated = custom_event('list:dblclick', data, {
-			bubbles: true
-		});
-		element?.dispatchEvent(eventDeprecated);
-
 		const event = custom_event('listitem:dblclick', { ...$$props }, { bubbles: true });
 		element?.dispatchEvent(event);
 	};

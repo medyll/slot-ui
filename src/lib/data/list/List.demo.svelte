@@ -64,7 +64,7 @@
 
 	let codeSlot = `
 <List
-	let:listItem
+	let:item
 	{data}
 	density="default"
 	on:listitem:click={(ce)=>console.log(ce.detail)}
@@ -79,7 +79,7 @@
 </List>`;
 	let codeSlot2 = `
 <List
-	let:listItem
+	let:item
 	{listItems}
 	selectorField="primary"
 	primary="Primary title"
@@ -131,7 +131,7 @@
 				let:activeParams
 			>
 				<List
-					let:listItem
+					let:item
 					{data}
 					density="default"
 					height="350px"
@@ -143,10 +143,10 @@
 					class="shad-3 radius-small overflow-hidden"
 					{...activeParams}
 				>
-					<ListItem data={listItem.data}>
-						<Icon slot="listItemIcon" icon={listItem.data.icon} />
-						<span slot="listItemPrimary">{listItem.data.name}</span>
-						<span slot="listItemSecondary">{listItem.data.secondary}</span>
+					<ListItem data={item.data}>
+						<Icon slot="listItemIcon" icon={item.data.icon} />
+						<span slot="listItemPrimary">{item.data.name}</span>
+						<span slot="listItemSecondary">{item.data.secondary}</span>
 					</ListItem>
 					<div slot="listFooter">footer</div>
 				</List>

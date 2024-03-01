@@ -8,7 +8,6 @@ const config = {
 	extensions: ['.svelte', ...mdsvexConfig.extensions],
 	// for more information about preprocessors
 	preprocess: [vitePreprocess(), mdsvex(mdsvexConfig)],
-	extensions: ['.svelte', '.md'],
 
 	kit: {
 		adapter: adapter(),

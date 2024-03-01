@@ -4,14 +4,13 @@
 ul.listRoot {
   display: flex;
   flex-direction: column;
-  padding: 0 0.25rem;
+  padding: 0;
 }
 
 ul.listRoot:focus {
   outline: 0;
   outline-offset: -4px;
 }
-
 
 li.listItemTitle,
 li.listItem {
@@ -26,16 +25,17 @@ li.listItem {
     flex: 1;
     min-width: auto;
     overflow: hidden;
-      padding: 0 0.5rem;
+    padding: 0;
+    padding-left: 0.5rem;
 
-    [slot="listItemPrimary"] { 
+    [slot="listItemPrimary"] {
       text-overflow: ellipsis;
       display: block;
       width: 100%;
       overflow: hidden;
     }
 
-    [slot="listItemSecondary"] { 
+    [slot="listItemSecondary"] {
       opacity: 0.8;
       text-overflow: ellipsis;
       display: block;
@@ -84,14 +84,15 @@ li.listItem {
 
   &.selected,
   &[data-selected="true"] {
+    background-color: var(--theme-listitem-bg-selected);
     .listItemChip {
       position: absolute;
       height: 50%;
-      width: 3px;
+      width: 4px;
       background-color: var(--theme-color-primary);
       border-radius: 8px;
-      left: 2px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      left: 1px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
     }
   }
 }
