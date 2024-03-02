@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.1](https://github.com/medyll/slot-ui/compare/v0.1.1-beta.2...v0.1.1) (2024-03-02)
+
+
+### Features
+
+* migrated css properties to slotui from cssfabric ([558775f](https://github.com/medyll/slot-ui/commit/558775f43cddf603f9d14d5c4eca9c7b29a63f52))
+* renamed title to svelte-slotted ([865c0f7](https://github.com/medyll/slot-ui/commit/865c0f7fc8bca3a5bfc188c409694dedd77d033d))
+* svelte 5 optin ([2bcd1de](https://github.com/medyll/slot-ui/commit/2bcd1de6ea9734f953a57c59e3c50e36d6be63f0))
+
+
+### Bug Fixes
+
+* list styling ([1f86d20](https://github.com/medyll/slot-ui/commit/1f86d20a75a92d1135192097f2883583890ec571))
+
 ### [0.1.1-beta.2](https://github.com/medyll/slot-ui/compare/v0.1.1-beta.1...v0.1.1-beta.2) (2024-02-21)
 
 ### [0.1.1-beta.1](https://github.com/medyll/slot-ui/compare/v0.1.1-beta.0...v0.1.1-beta.1) (2024-02-21)
