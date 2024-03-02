@@ -1,10 +1,9 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import { createEventDispatcher } from 'svelte/internal';
 	import Divider from '$lib/base/divider/Divider.svelte';
 	import Button from '$lib/base/button/Button.svelte';
 	/** @restProps {button} */
-	const dispatch = createEventDispatcher();
+
 	/*  common slotUi exports*/
 
 	let className = '';
@@ -43,7 +42,7 @@
 		if (event?.target?.attributes['data-close']) {
 			event.stopPropagation();
 			actions.close();
-			dispatch('alert:closed');
+			new CustomEvent('alert:closed');
 		}
 	};
 

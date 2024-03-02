@@ -1,19 +1,16 @@
 <svelte:options accessors />
 
 <script lang="ts">
-	import { chromeFrameListRef, chromeFrameStore } from './chromeFrame.store';
+	import { chromeFrameListRef, chromeFrameStore } from './chromeFrame.store.js';
 	import ChromeFrame from './ChromeFrame.svelte';
 	import { browser } from '$app/environment';
 	import type { IChromeFrameArgs, IChromeOptionsArgs } from './types.js';
-	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
-	import { get_current_component } from 'svelte/internal';
 
 	/*  common slotUi exports*/
 	let className = '';
 	export { className as class };
 	export let style: string = '';
 	export let element: HTMLDivElement | null = null;
-	const forwardEvents = createEventForwarder(get_current_component());
 	/*  end slotUi exports*/
 
 	// global parameters for each chromeFrame
@@ -83,5 +80,4 @@
 	bind:this={element}
 	class="pos-abs h-full w-full top-0 {className}"
 	style="z-index:9000;display:none;{style}"
-	use:forwardEvents
 ></div>

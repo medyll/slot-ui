@@ -1,14 +1,7 @@
 <script lang="ts">
 	import List from './List.svelte';
-	import { onMount } from 'svelte';
-	import ListItem from './ListItem.svelte';
-	import { null_to_empty } from 'svelte/internal';
-	import Icon from '$lib/base/icon/Icon.svelte';
-	import IconButton from '$lib/base/button/IconButton.svelte';
 
-	let cc = 0;
 	let listItems = [];
-	let sorterer = { sortByField: 'data.name' };
 
 	$: listItems = [...Array(1000)].map((val, index) => {
 		return {

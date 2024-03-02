@@ -4,7 +4,6 @@
 	import { writable, type Writable } from 'svelte/store';
 	import type { DataCellType } from './types.js';
 	import DataListCell from './DataListCell.svelte';
-	import { custom_event } from 'svelte/internal';
 
 	export let style: string | undefined = undefined;
 	export let element: HTMLDivElement | undefined = undefined;
@@ -29,26 +28,24 @@
 		$dataListContext.sortBy.activeSortByOrder = sortByOrder;
 
 		// fire event
-		const event = custom_event(
-			'datalist:sorted',
-			{ field: e.detail.field, order: sortByOrder },
-			{ bubbles: true }
-		);
+		const event = new CustomEvent('datalist:sorted', {
+			detail: { field: e.detail.field, order: sortByOrder },
+			bubbles: true
+		});
 
 		if (element) element.dispatchEvent(event);
 	}
 
-	function setCssGrid(columns:DataCellType[]){
-		if(Object.values(columns ?? []).every(e=> e.width)){
-			return  Object.values(columns ?? []).reduce((previous,current,currentIndex)=>{
-				const witdh = current?.width ?? 'auto'
-		return `${previous} minmax(${witdh},${witdh})`  
-	},'--template-columns:')
+	function setCssGrid(columns: DataCellType[]) {
+		if (Object.values(columns ?? []).every((e) => e.width)) {
+			return Object.values(columns ?? []).reduce((previous, current, currentIndex) => {
+				const witdh = current?.width ?? 'auto';
+				return `${previous} minmax(${witdh},${witdh})`;
+			}, '--template-columns:');
 		}
 	}
 
-	$: cssVars = setCssGrid($dataListContext.columns ?? []) 
-   
+	$: cssVars = setCssGrid($dataListContext.columns ?? []);
 </script>
 
 <div
@@ -61,18 +58,17 @@
 	<slot>
 		{#if $dataListContext.hasColumnsProps}
 			{#each Object.values($dataListContext.columns) as column}
-				<DataListCell noWrap={true}  
-				field={column.field}>
-				{column.fieldTitle ?? column.field}
+				<DataListCell noWrap={true} field={column.field}>
+					{column.fieldTitle ?? column.field}
 				</DataListCell>
 			{/each}
 		{/if}
 	</slot>
 </div>
- 
+
 <style lang="scss">
-	.dataListHead{
-		display:flex;
+	.dataListHead {
+		display: flex;
 		/* grid-template-columns: var(--template-columns) auto; grid-auto-columns: min-content;
 		grid-auto-columns: min-content; */
 	}

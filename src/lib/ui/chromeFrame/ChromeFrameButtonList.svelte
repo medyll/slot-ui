@@ -2,8 +2,6 @@
 
 <script lang="ts">
 	import { chromeFrameStore } from './chromeFrame.store.js';
-	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
-	import { get_current_component } from 'svelte/internal';
 	import Icon from '$lib/base/icon/Icon.svelte';
 	import Button from '$lib/base/button/Button.svelte';
 
@@ -11,11 +9,7 @@
 	let className = '';
 	export { className as class };
 	export let element: HTMLDivElement | null = null;
-	const forwardEvents = createEventForwarder(get_current_component());
 	/** end slotUi exports*/
-
-	/* $: console.log('from chromFrameButtonList',chromeFrameStore);
-	$: console.log('from chromFrameButtonList $store',$chromeFrameStore); */
 </script>
 
 <div bind:this={element} class="flex-h gap-small {className}">

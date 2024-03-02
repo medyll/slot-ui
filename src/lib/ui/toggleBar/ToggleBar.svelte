@@ -1,7 +1,5 @@
 <script lang="ts">
-	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
 	import ContentSwitcher from '../../base/contentSwitcher/ContentSwitcher.svelte';
-	import { get_current_component } from 'svelte/internal';
 	import Icon from '../../base/icon/Icon.svelte';
 
 	type MenuBarTitleType = string | undefined;
@@ -11,7 +9,6 @@
 	export { className as class };
 	export let element: HTMLDivElement | null = null;
 	export let style: string | null = null;
-	const forwardEvents = createEventForwarder(get_current_component());
 	/* end slotUi exports*/
 
 	export let title: MenuBarTitleType;
@@ -23,7 +20,7 @@
 	const posCloser = orientation === 'right' ? 3 : 1;
 </script>
 
-<div bind:this={element} class="toggleBarRoot {className}" {style} use:forwardEvents>
+<div bind:this={element} class="toggleBarRoot {className}" {style}>
 	{#if $$slots.toggleBarIcon || icon}
 		<div class="pad">
 			<slot name="toggleBarIcon">

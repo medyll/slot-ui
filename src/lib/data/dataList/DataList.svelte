@@ -1,8 +1,7 @@
 <svelte:options accessors={true} />
 
 <script lang="ts">
-	import { get_current_component, getContext, hasContext, setContext } from 'svelte/internal';
-	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
+	import { getContext, hasContext, setContext } from 'svelte';
 	import { writable, type Writable } from 'svelte/store';
 	import DataListRow from './DataListRow.svelte';
 	import type { DataCellType, DataListStoreType, groupByOptions } from './types.js';
@@ -18,7 +17,6 @@
 	let className = '';
 	export { className as class };
 	export let element: HTMLDivElement | null = null;
-	const forwardEvents = createEventForwarder(get_current_component());
 
 	export let style: string | undefined = undefined;
 	/** show or hide the dataList body */
@@ -186,7 +184,7 @@
 						</div>
 					</slot>
 				</div>
-				<div class="flex-main pos-rel" use:forwardEvents>
+				<div class="flex-main pos-rel">
 					{#if !hidedGroups[red]}
 						<svelte:self {...groupProps}>
 							<slot
@@ -208,7 +206,6 @@
 	</div>
 {:else}
 	<div
-		use:forwardEvents
 		on:datalist:sorted={doSort}
 		on:datalist:select={doSelect}
 		bind:this={element}

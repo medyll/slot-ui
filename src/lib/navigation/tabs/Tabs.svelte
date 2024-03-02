@@ -3,15 +3,12 @@
 	import { elem } from '$lib/engine/elem.js';
 	import Icon from '$lib/base/icon/Icon.svelte';
 	import type { Items, TabsItemsProps } from './types.js';
-	import { custom_event, get_current_component } from 'svelte/internal';
-	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
 
 	/*  common slotUi exports*/
 	let className = '';
 	export { className as class };
 	export let style: string = '';
-	export let element: HTMLDivElement | null = null;
-	const forwardEvents = createEventForwarder(get_current_component());
+	export let element: HTMLDivElement;
 	/*  end slotUi exports*/
 
 	export let items: TabsItemsProps = [];
@@ -29,8 +26,8 @@
 
 	const handleClick = (item: Items) => {
 		onTabClick(item);
-		const event = custom_event('on:tabs:click', item, { bubbles: true });
-		element.dispatchEvent(event);
+		const event = new CustomEvent('on:tabs:click', { detail: item, bubbles: true });
+		element?.dispatchEvent(event);
 	};
 
 	const setChipPos = (code: any) => {
@@ -59,13 +56,7 @@
 	});
 </script>
 
-<div
-	bind:this={element}
-	class="tabsRoot flex-v {className}"
-	data-orientation={orientation}
-	use:forwardEvents
-	{style}
->
+<div bind:this={element} class="tabsRoot flex-v {className}" data-orientation={orientation} {style}>
 	<div bind:this={tabsElementRef} class="tabsNav flex-align-middle pos-rel">
 		<div>
 			<slot name="tabsTitleMain" />

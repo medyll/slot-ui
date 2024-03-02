@@ -1,12 +1,9 @@
 <script lang="ts">
-	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
-	import { get_current_component } from 'svelte/internal';
 	/* common slotUi exports*/
 	let className = '';
 	export { className as class };
 	export let style: string = '';
 	export let element: HTMLDivElement | null = null;
-	const forwardEvents = createEventForwarder(get_current_component());
 	/* end slotUi exports */
 
 	export let value;

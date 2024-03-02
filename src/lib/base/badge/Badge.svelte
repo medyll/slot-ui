@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { get_current_component } from 'svelte/internal';
-
 	/*  common slotUi exports*/
 	let className = '';
 	export { className as class };

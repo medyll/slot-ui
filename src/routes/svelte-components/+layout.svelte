@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Writable } from 'svelte/store';
-	import { getContext } from 'svelte/internal';
+	import { getContext } from 'svelte';
 	import type { UiContextType } from '../../../src/contexts/ui.context.js';
 
 	let uiContext = getContext<Writable<UiContextType>>('uiContext');

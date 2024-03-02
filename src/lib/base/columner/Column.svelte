@@ -1,7 +1,5 @@
 <script lang="ts">
-	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
-	import { getContext } from 'svelte';
-	import { get_current_component, tick } from 'svelte/internal';
+	import { getContext, tick } from 'svelte';
 	import type { ColumnerStoreType } from './types.js';
 	import { resizer } from '$lib/uses/resizer/resizer.js';
 
@@ -20,7 +18,6 @@
 	let className = '';
 	export { className as class };
 	export let element: HTMLDivElement | null = null;
-	const forwardEvents = createEventForwarder(get_current_component());
 
 	let width;
 
@@ -37,7 +34,6 @@
 
 <div
 	bind:this={element}
-	use:forwardEvents
 	id={columnId}
 	class="column {className}"
 	use:resizer

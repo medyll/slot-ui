@@ -1,10 +1,10 @@
-import { custom_event, type SvelteComponent, type SvelteComponentDev } from 'svelte/internal';
+import { custom_event, type SvelteComponent } from 'svelte';
 import { openPopper } from './actions.js';
 import type { PopperPositionType } from './types.js';
 
 export type UsePopperProps = {
 	code?: string;
-	component?: SvelteComponentDev | any;
+	component?: SvelteComponent | any;
 	componentProps?: {};
 	content?: any;
 	parentNode?: HTMLElement | any;
@@ -36,7 +36,7 @@ export function popper(node: HTMLElement, props?: UsePopperProps) {
 		},
 		update(useDefault: any) {
 			// fire event to parentNode
-			const event = custom_event('popper:closed', {}, { bubbles: true });
+			const event = new CustomEvent('popper:closed', { bubbles: true });
 			if (parentNode) parentNode.dispatchEvent(event);
 		}
 	};

@@ -2,9 +2,8 @@
 
 <script lang="ts">
 	import type { DataCellType, DataListStoreType, RowType } from './types.js';
-	import { getContext, onMount, tick } from 'svelte/internal';
+	import { getContext, onMount, tick } from 'svelte';
 	import type { Writable } from 'svelte/store';
-	import { custom_event } from 'svelte/internal';
 	import { resizer } from '$lib/uses/resizer/resizer.js';
 	import type { Data } from '$lib/types/index.js';
 	import Icon from '$lib/base/icon/Icon.svelte';
@@ -23,7 +22,7 @@
 	export let field: string | undefined = undefined;
 	/** typeof the field. Used when exists Datalist.$$props.dataTypes */
 	export let fieldType: string | undefined = undefined;
-	export let columnId: string | number | undefined = field ?? crypto.randomUUID() as string;
+	export let columnId: string | number | undefined = field ?? (crypto.randomUUID() as string);
 	/** set noWrap = true to have ellipsis on this cell content*/
 	export let noWrap: boolean = true;
 	/** title */
@@ -110,7 +109,7 @@
 	};
 
 	const onSort = (field: string) => {
-		const event = custom_event('datalist:sort:clicked', { field }, { bubbles: true });
+		const event = new CustomEvent('datalist:sort:clicked', { detail: { field }, bubbles: true });
 		if (element) element.dispatchEvent(event);
 	};
 

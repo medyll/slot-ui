@@ -3,16 +3,12 @@
 <script lang="ts">
 	import { trans2Tree } from './tree.utils.js';
 	import type { Data, TreeItemType } from './types.js';
-	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
-	import { get_current_component } from 'svelte/internal';
 	import Icon from '$lib/base/icon/Icon.svelte';
 	import { dataOp } from '$lib/engine/utils.js';
-	import Finder from '$lib/data/finder/Finder.svelte';
 
 	let className = '';
 	export { className as class };
 	export let element: HTMLDivElement | null = null;
-	const forwardEvents = createEventForwarder(get_current_component());
 
 	export let data: Data[] = [];
 	export let paths: Record<string, any>[] = [];
@@ -92,7 +88,7 @@
 	}
 </script>
 
-<div bind:this={element} class="treeRoot {className}" use:forwardEvents>
+<div bind:this={element} class="treeRoot {className}">
 	{#each pathes as pat, k}
 		<div data-category={pat.path} class=" ">
 			<div

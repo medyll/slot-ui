@@ -1,43 +1,38 @@
-import { custom_event } from "svelte/internal"
-
 type ClickAwayProps = {
-  parent?: HTMLElement | string
-  action?: () => void
-  disabled?: boolean
-}
-
-const clickAwayParams = {
-  listenerSet: false
-}
+	parent?: HTMLElement | string;
+	action?: () => void;
+	disabled?: boolean;
+};
 
 export function clickAway(node: HTMLElement, props: ClickAwayProps) {
-  const { action, disabled } = props
+	const { action, disabled } = props;
 
-  // treat outside click
-  document.addEventListener('click', doEvent,true);
- 
-  function doEvent  (event: any) {
+	// treat outside click
+	document.addEventListener('click', doEvent, true);
 
-    const bounds = node.getBoundingClientRect();
+	function doEvent(event: any) {
+		const bounds = node.getBoundingClientRect();
 
+		let inner =
+			event.pageX > bounds.left &&
+			event.pageX < bounds.right &&
+			event.pageY > bounds.top &&
+			event.pageY < bounds.bottom;
 
-    let inner = (event.pageX > bounds.left && event.pageX < bounds.right) && (event.pageY > bounds.top && event.pageY < bounds.bottom)
+		// console.log(inner)
+		if (!disabled) {
+			if (action && !inner) {
+				action();
+				const event = new CustomEvent('clickAway', { bubbles: true });
+				node?.dispatchEvent(event);
+				document.removeEventListener('click', doEvent, true);
+			}
+		}
+	}
 
-    // console.log(inner)
-    if (!disabled) {
-      if (action && !inner) {
-        action();
-        const event = custom_event('clickAway', {}, { bubbles: true });
-        node?.dispatchEvent(event);
-        document.removeEventListener('click', doEvent,true);
-      }
-    }
-  };
- 
-
-  return {
-    destroy() {
-      document.removeEventListener('click', doEvent,true);
-    }
-  };
+	return {
+		destroy() {
+			document.removeEventListener('click', doEvent, true);
+		}
+	};
 }

@@ -2,8 +2,6 @@
 
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import { custom_event, null_to_empty } from 'svelte/internal';
-	import { createEventDispatcher } from 'svelte';
 	import Icon from '$lib/base/icon/Icon.svelte';
 	import type { ElementProps } from '$lib/types/index.js';
 	import Divider from '$lib/base/divider/Divider.svelte';
@@ -39,12 +37,12 @@
 	export let density: ElementProps['density'] = $listStateContext?.density ?? 'default';
 
 	const handleClick = () => () => {
-		const event = custom_event('listitem:click', { ...$$props }, { bubbles: true });
+		const event = new CustomEvent('listitem:click', { detail: $$props, bubbles: true });
 		element?.dispatchEvent(event);
 	};
 
 	const handleDblClick = () => () => {
-		const event = custom_event('listitem:dblclick', { ...$$props }, { bubbles: true });
+		const event = new CustomEvent('listitem:dblclick', { detail: $$props, bubbles: true });
 		element?.dispatchEvent(event);
 	};
 
@@ -78,7 +76,7 @@
 				<slot
 					><slot name="primary">
 						<slot name="listItemPrimary">
-							{null_to_empty(primary)}
+							{primary ?? ''}
 						</slot>
 					</slot></slot
 				>
@@ -86,7 +84,7 @@
 			<div class="itemSecondary">
 				<slot name="listItemSecondary"
 					><slot name="secondary">
-						{null_to_empty(secondary)}
+						{secondary ?? ''}
 					</slot></slot
 				>
 			</div>
@@ -95,7 +93,7 @@
 	<div class="listItemAction">
 		<slot name="listItemAction"
 			><slot name="action">
-				{null_to_empty(action)}
+				{action ?? ''}
 			</slot></slot
 		>
 	</div>

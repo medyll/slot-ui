@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { null_to_empty } from 'svelte/internal';
-
 	let className: string | undefined = undefined;
 	/**  className off the root component  */
 	export { className as class };
@@ -33,7 +31,7 @@
 >
 	<slot>
 		{#if content}
-			<div class="chipperContent">{@html null_to_empty(content)}</div>
+			<div class="chipperContent">{@html content ?? ''}</div>
 		{/if}
 	</slot>
 	<chip class="chipperChip" data-position={position} style:--css-button-chip-color={cssColor}>

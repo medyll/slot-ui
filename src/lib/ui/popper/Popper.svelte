@@ -1,28 +1,21 @@
 <svelte:options accessors={true} />
 
 <script lang="ts">
-	import {
-		custom_event,
-		get_current_component,
-		onMount,
-		type SvelteComponentDev
-	} from 'svelte/internal';
+	import { onMount, SvelteComponent } from 'svelte';
 	import { stickTo, type StickToPositionType } from '$lib/uses/stickTo/stickTo.js';
 	import { clickAway } from '$lib/uses/clickAway/clickAway.js';
 	import { popperList } from '$lib/ui/popper/actions.js';
-	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
 
 	/** popper HTMLDivElement */
 	export let element: Element | undefined = undefined;
 	let className = '';
 	export { className as class };
-	const forwardEvents = createEventForwarder(get_current_component());
 	let zIndex;
 
 	export let code: string | undefined = undefined;
 	export let parentNode: HTMLElement | undefined = undefined;
 	export let stickToHookWidth: boolean = false;
-	export let component: SvelteComponentDev | undefined = undefined;
+	export let component: SvelteComponent | undefined = undefined;
 	export let componentProps: {} | undefined = {};
 	export let position: StickToPositionType | undefined = 'BC';
 	export let content: any | undefined = undefined;
@@ -62,7 +55,7 @@
 	};
 
 	export const clickedAway = function () {
-		const event = custom_event('clickAway', {}, { bubbles: true });
+		const event = new CustomEvent('clickAway', { bubbles: true });
 		parentNode?.dispatchEvent(event);
 		popperList[code]?.$destroy();
 		if (autoClose) isOpen = false;
@@ -122,7 +115,6 @@
 		on:click
 		use:clickAway={{ action: clickedAway }}
 		use:stickTo={{ parentNode, position, stickToHookWidth }}
-		use:forwardEvents
 		{style}
 		style:zIndex={makeOnTop()}
 	>

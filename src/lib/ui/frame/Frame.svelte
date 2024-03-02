@@ -1,14 +1,11 @@
 <svelte:options accessors />
 
 <script lang="ts">
-	import { createEventForwarder } from '../../engine/eventForwarder';
-	import { get_current_component } from 'svelte/internal';
-	import Drawer from '../../navigation/drawer/Drawer.svelte';
+	import Drawer from '$lib/navigation/drawer/Drawer.svelte';
 
 	let className = '';
 	export { className as class };
 	export let element: HTMLDivElement | null = null;
-	const forwardEvents = createEventForwarder(get_current_component());
 
 	export let style: string = '';
 	export let elementNav: HTMLDivElement | null = null;
@@ -34,12 +31,7 @@
 	};
 </script>
 
-<div
-	bind:this={element}
-	class="pos-rel flex-v h-full overflow-hidden frame {className}"
-	{style}
-	use:forwardEvents
->
+<div bind:this={element} class="pos-rel flex-v h-full overflow-hidden frame {className}" {style}>
 	<div class="frameContainer">
 		<div bind:this={elementNav} class="navLeft pos-rel flex-v h-full">
 			{#if frameDrawerRef?.isOpen}

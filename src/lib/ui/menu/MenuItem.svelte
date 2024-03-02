@@ -2,11 +2,9 @@
 
 <script lang="ts">
 	import { getContext, onMount } from 'svelte';
-	import { custom_event, get_current_component, null_to_empty } from 'svelte/internal';
 
 	import Divider from '$lib/base/divider/Divider.svelte';
 	import Icon from '$lib/base/icon/Icon.svelte';
-	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
 	import type { IMenuItemProps, IMenuProps } from './types.js';
 	import type { ElementProps } from '$lib/types/index.js';
 	import type { Writable } from 'svelte/store';
@@ -15,7 +13,6 @@
 	let className = '';
 	export { className as class };
 	export let element: HTMLElement | undefined = undefined;
-	const forwardEvents = createEventForwarder(get_current_component());
 	/*  end slotUi exports*/
 
 	export let text: string | undefined = undefined;
@@ -36,7 +33,9 @@
 	let mounted: boolean = false;
 	const menuStateContext = getContext<Writable<IMenuProps>>('menuStateContext');
 
-	let instance = get_current_component();
+	/** internal use component instance*/
+	export let component: any = null;
+	export let outer = true;
 
 	if (icon || $$slots.iconSlot) {
 		$menuStateContext.hasIcon = true;
@@ -48,7 +47,7 @@
 
 	onMount(() => {
 		mounted = true;
-		$menuStateContext.menuItemsInstances?.push(instance);
+		$menuStateContext.menuItemsInstances?.push(component);
 		// if no data and no listItem, create index
 		if (!itemIndex) {
 			itemIndex = $menuStateContext.menuItemsInstances?.length - 1;
@@ -61,7 +60,7 @@
 	});
 
 	const handleClick = () => () => {
-		const event = custom_event('menu:item:clicked', data, { bubbles: true });
+		const event = new CustomEvent('menu:item:clicked', { detail: data, bubbles: true });
 		if (element) element.dispatchEvent(event);
 		// set selectedIndex if we have index
 		// set selected style
@@ -74,45 +73,48 @@
 	};
 </script>
 
-{#if dividerBefore}
-	<li>
-		<slot name="divider"><Divider density="tight" expansion="centered" /></slot>
-	</li>
-{/if}
-<li
-	class="menuItem {className}"
-	data-selected={($menuStateContext.selectedIndex
-		? $menuStateContext.selectedIndex === itemIndex
-		: undefined) ?? undefined}
-	role="menuitem"
-	bind:this={element}
-	use:forwardEvents
-	on:click={handleClick}
->
-	{#if $menuStateContext?.hasIcon}
-		<div class="menuItemIcon">
-			<slot name="menuItemStart">
-				<slot name="iconSlot">
-					<Icon {icon} color={iconColor} fontSize={iconSize} />
+{#if outer}
+	<svelte:self bind:this={component} outer={false} />
+{:else}
+	{#if dividerBefore}
+		<li>
+			<slot name="divider"><Divider density="tight" expansion="centered" /></slot>
+		</li>
+	{/if}
+	<li
+		class="menuItem {className}"
+		data-selected={($menuStateContext.selectedIndex
+			? $menuStateContext.selectedIndex === itemIndex
+			: undefined) ?? undefined}
+		role="menuitem"
+		bind:this={element}
+		on:click={handleClick}
+	>
+		{#if $menuStateContext?.hasIcon}
+			<div class="menuItemIcon">
+				<slot name="menuItemStart">
+					<slot name="iconSlot">
+						<Icon {icon} color={iconColor} fontSize={iconSize} />
+					</slot>
 				</slot>
+			</div>
+		{/if}
+		<div class="menuItemText">
+			<slot>
+				<slot name="menuItemText">{text ?? ''}</slot>
 			</slot>
 		</div>
-	{/if}
-	<div class="menuItemText">
-		<slot>
-			<slot name="menuItemText">{null_to_empty(text)}</slot>
-		</slot>
-	</div>
-	{#if $$slots.actionSlot || action}
-		<div class="menuItemActions">
-			<slot name="menuItemEnd"><slot name="actionSlot">{action}</slot></slot>
-		</div>
-	{/if}
-</li>
-{#if divider}
-	<li>
-		<slot name="menuItemDivider"><Divider density="tight" expansion="padded" /></slot>
+		{#if $$slots.actionSlot || action}
+			<div class="menuItemActions">
+				<slot name="menuItemEnd"><slot name="actionSlot">{action}</slot></slot>
+			</div>
+		{/if}
 	</li>
+	{#if divider}
+		<li>
+			<slot name="menuItemDivider"><Divider density="tight" expansion="padded" /></slot>
+		</li>
+	{/if}
 {/if}
 
 <style global lang="scss">

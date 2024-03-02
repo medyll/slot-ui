@@ -2,19 +2,15 @@
 
 <script lang="ts">
 	import { setContext } from 'svelte';
-	import type { IMenuItemProps, IMenuProps } from './types.js';
-	import type { ElementProps } from '$lib/types/index.js';
+	import type { IMenuItemProps } from './types.js';
 	import MenuItem from './MenuItem.svelte';
 	import { createMenuStore } from './store.js';
-	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
-	import { custom_event, get_current_component } from 'svelte/internal';
 	import MenuContextAgent from './MenuContextAgent.svelte';
 
 	/*  common slotUi exports*/
 	let className = '';
 	export { className as class };
-	export let element: HTMLElement | null = null;
-	const forwardEvents = createEventForwarder(get_current_component());
+	export let element: HTMLElement;
 	/*  end slotUi exports*/
 	/** @deprecated */
 	export let menuList: IMenuItemProps[] | undefined = undefined;
@@ -62,16 +58,15 @@
 
 	function onMenuClick(e: CustomEvent<any>) {
 		/** @deprecated */
-		let event = custom_event('menu:clicked', e.detail, { bubbles: true });
+		let event = new CustomEvent('menu:clicked', { detail: e.detail, bubbles: true });
 		element.dispatchEvent(event);
-		event = custom_event('menu:click', e.detail, { bubbles: true });
+		event = new CustomEvent('menu:click', { detail: e.detail, bubbles: true });
 		element.dispatchEvent(event);
 	}
 </script>
 
 <MenuContextAgent bind:this={menuAgentRef} />
 <ul
-	use:forwardEvents
 	bind:this={element}
 	role="menu"
 	class="density-{density} menu {className}"

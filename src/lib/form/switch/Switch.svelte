@@ -1,9 +1,6 @@
 <svelte:options accessors />
 
 <script lang="ts">
-	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
-	import { get_current_component, get_slot_changes, null_to_empty } from 'svelte/internal';
-
 	export let name: string;
 	export let checked: boolean = false;
 	export let disabled: boolean = false;
@@ -14,8 +11,6 @@
 	export let style: string = '';
 
 	let hiddenRef;
-
-	const forwardEvents = createEventForwarder(get_current_component());
 
 	/* const event = custom_event(
       "datalist:sort:clicked",
@@ -30,7 +25,6 @@
 	<slot name="label" />
 	<div class="switchGutter">
 		<input
-			use:forwardEvents
 			on:change={(event) => {
 				hiddenRef.value = event.currentTarget.checked;
 			}}

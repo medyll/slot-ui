@@ -1,6 +1,6 @@
 import type { PopperPositionType } from '$lib/ui/popper/types.js';
 import Popper from '$lib/ui/popper/Popper.svelte';
-import type { SvelteComponentDev } from 'svelte/internal';
+import type { SvelteComponent } from 'svelte';
 
 export let popperList: Record<string, Popper> = {};
 
@@ -9,7 +9,7 @@ const openPopper = (
 	args: {
 		position?: PopperPositionType;
 		parentNode?: HTMLElement;
-		component?: SvelteComponentDev;
+		component?: SvelteComponent;
 		componentProps?: any;
 	} = {}
 ) => {

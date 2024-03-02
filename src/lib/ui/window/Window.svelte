@@ -2,14 +2,15 @@
 
 <script lang="ts">
 	import { wStore } from '$lib/ui/window/store.js';
-	import { onDestroy } from 'svelte';
+	import { SvelteComponent, onDestroy } from 'svelte';
 	import Button from '$lib/base/button/Button.svelte';
 	import Icon from '$lib/base/icon/Icon.svelte';
 	import type { ElementProps } from '$lib/types/index.js';
 	import { draggebler } from '$lib/uses/draggabler.js';
 	import { makeOnTop } from '$lib/uses/makeOnTop.js';
-	import { get_current_component, null_to_empty } from 'svelte/internal';
 	import { positioner } from '$lib/uses/positioner.js';
+
+	export let outer = true;
 
 	/** Id of the component's instance */
 	export let frameId = crypto.randomUUID() as string;
@@ -58,7 +59,9 @@
 	/** destroy the component on close */
 	export let removeFromDomOnClose: boolean = false;
 	/** used to destroy component when opened from function.openWindow */
-	export let self;
+	export let self: SvelteComponent;
+	/** private */
+	export let componentInstance;
 	// used to link to form present in svelte:component
 	let formRef: any;
 
@@ -78,7 +81,7 @@
 	};
 
 	if (!$wStore?.instances?.[frameId]) {
-		$wStore.instances[frameId] = get_current_component();
+		$wStore.instances[frameId] = componentInstance;
 		if (active) $wStore.activeFrame = frameId;
 	}
 
@@ -107,80 +110,78 @@
 	}
 </script>
 
-{#key startPosition}
-	<div
-		bind:this={element}
-		{style}
-		style:position={flow}
-		style:display={open ? '' : 'none'}
-		use:positioner={{ position: startPosition }}
-		use:draggebler={{ disabled: false }}
-		use:makeOnTop
-		on:mousedown={actions.setActive}
-		class="window shad-3"
-		class:active={$wStore.activeFrame === frameId}
-	>
-		{#if showHandle}
-			<div class="bar">
-				{#if icon || $$slots.windowIcon}
-					<div class="pad-ii-2">
-						<slot name="windowIcon">
-							<Icon fontSize="small" {icon} />
-						</slot>
-					</div>
-				{/if}
-				<div class="handle">{null_to_empty(title)}</div>
-				<div class="ctrlZone">
-					<!--<div>
-                 <Button naked icon="window-minimize" iconFontSize="small" />
-               </div>
-               <div>
-                 <Button naked icon="fa-solid:window-maximize" iconFontSize="small" />
-               </div>-->
-					<div>
-						<Button
-							naked
-							icon={iconClose}
-							iconFontSize="small"
-							iconColor="red"
-							style="aspect-ratio:1/1"
-							on:click={actions.close}
-						/>
+{#if outer}
+	<svelte:self bind:this={componentInstance} outer={false} />
+{:else}
+	{#key startPosition}
+		<div
+			bind:this={element}
+			{style}
+			style:position={flow}
+			style:display={open ? '' : 'none'}
+			use:positioner={{ position: startPosition }}
+			use:draggebler={{ disabled: false }}
+			use:makeOnTop
+			on:mousedown={actions.setActive}
+			class="window shad-3"
+			class:active={$wStore.activeFrame === frameId}
+		>
+			{#if showHandle}
+				<div class="bar">
+					{#if icon || $$slots.windowIcon}
+						<div class="pad-ii-2">
+							<slot name="windowIcon">
+								<Icon fontSize="small" {icon} />
+							</slot>
+						</div>
+					{/if}
+					<div class="handle">{title ?? ''}</div>
+					<div class="ctrlZone">
+						<div>
+							<Button
+								naked
+								icon={iconClose}
+								iconFontSize="small"
+								iconColor="red"
+								style="aspect-ratio:1/1"
+								on:click={actions.close}
+							/>
+						</div>
 					</div>
 				</div>
+			{/if}
+			<div>
+				<slot>
+					{#key component}
+						{#if component}
+							<svelte:component this={component} {...componentProps} bind:formRef />
+						{/if}
+					{/key}
+					{#if contentHTML}
+						{@html contentHTML}
+					{/if}
+				</slot>
 			</div>
-		{/if}
-		<div>
-			<slot>
-				{#key component}
-					{#if component}
-						<svelte:component this={component} {...componentProps} bind:formRef />
-					{/if}
-				{/key}
-				{#if contentHTML}
-					{@html contentHTML}
-				{/if}
-			</slot>
+			{#if !hideCloseButton || !hideAcceptButton}
+				<slot name="windowButtonZone">
+					<div class="buttonZone">
+						{#if !hideCloseButton}
+							<Button naked icon={iconClose} on:click={actions.close}>Close</Button>
+						{/if}
+						{#if !hideCancelButton}
+							<Button naked icon="ant-design:ellipsis-outlined" on:click={handleCancel}
+								>Cancel
+							</Button>
+						{/if}
+						{#if !hideAcceptButton}
+							<Button icon={iconValidate} on:click={handleValidate}>Validate</Button>
+						{/if}
+					</div>
+				</slot>
+			{/if}
 		</div>
-		{#if !hideCloseButton || !hideAcceptButton}
-			<slot name="windowButtonZone">
-				<div class="buttonZone">
-					{#if !hideCloseButton}
-						<Button naked icon={iconClose} on:click={actions.close}>Close</Button>
-					{/if}
-					{#if !hideCancelButton}
-						<Button naked icon="ant-design:ellipsis-outlined" on:click={handleCancel}
-							>Cancel
-						</Button>
-					{/if}
-					{#if !hideAcceptButton}
-						<Button icon={iconValidate} on:click={handleValidate}>Validate</Button>
-					{/if}
-				</div>
-			</slot>
-		{/if}
-	</div>
-{/key}
+	{/key}
+{/if}
 
 <style lang="scss">
 	@import '../../styles/slotui-vars.scss';

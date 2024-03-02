@@ -4,10 +4,8 @@
 	import { setContext } from 'svelte';
 	import { createListStore } from './store.js';
 	import type { ElementProps } from '$lib/types/index.js';
-	import { get_current_component, null_to_empty } from 'svelte/internal';
 	import Icon from '$lib/base/icon/Icon.svelte';
 	import ListTitle from './ListTitle.svelte';
-	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
 	import { dataOp, propsProxy } from '$lib/engine/utils.js';
 	import type { SorterFieldType } from '$lib/data/sorter/types.js';
 
@@ -32,7 +30,6 @@
 	 * @type {HTMLDivElement | null}
 	 */
 	export let element: HTMLDivElement | null = null;
-	const forwardEvents = createEventForwarder(get_current_component());
 
 	/**
 	 * pre-formatted listItems list
@@ -213,7 +210,6 @@
 	style="position:relative;height:{height};{style};opacity:{disabled ? 0.6 : 1};overflow:{virtualize
 		? 'hidden'
 		: 'auto'};"
-	use:forwardEvents
 	tabindex="0"
 	on:keydown={navigateList}
 	role="navigation"
@@ -241,9 +237,9 @@
 					<span slot="listItemIcon">
 						{#if item?.icon}<Icon fontSize="small" icon={item?.icon} />{/if}
 					</span>
-					<span slot="listItemPrimary">{null_to_empty(item?.primary)}</span>
-					<span slot="listItemSecondary">{null_to_empty(item?.secondary)}</span>
-					<span slot="listItemAction">{null_to_empty(item?.action)}</span>
+					<span slot="listItemPrimary">{item?.primary ?? ''}</span>
+					<span slot="listItemSecondary">{item?.secondary ?? ''}</span>
+					<span slot="listItemAction">{item?.action ?? ''}</span>
 				</ListItem>
 			</slot>
 		{/each}

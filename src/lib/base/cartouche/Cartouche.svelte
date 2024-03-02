@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { slide } from 'svelte/transition';
 	import Icon from '$lib/base/icon/Icon.svelte';
-	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
-	import { get_current_component } from 'svelte/internal';
 	import type { SvelteComponent } from 'svelte';
 	import Button from '$lib/base/button/Button.svelte';
 
@@ -13,7 +11,6 @@
 	export let style: string | undefined = undefined;
 	/** element root HTMLDivElement props  */
 	export let element: HTMLDivElement | null = null;
-	const forwardEvents = createEventForwarder(get_current_component());
 
 	/** displayed title of the cartouche */
 	export let primary: string = '';
@@ -59,7 +56,6 @@
 	bind:this={element}
 	class="cartoucheHolder {className}"
 	data-bordered={bordered ?? false}
-	use:forwardEvents
 	{style}
 >
 	<div class="cartouche" on:click={actions.toggle}>

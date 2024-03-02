@@ -8,7 +8,6 @@
 	import MenuItem from '$lib/ui/menu/MenuItem.svelte';
 	import { onMount } from 'svelte';
 	import Icon from '$lib/base/icon/Icon.svelte';
-	import { custom_event } from 'svelte/internal';
 
 	let className = '';
 	export { className as class };
@@ -32,11 +31,9 @@
 	export let onPick: ((args: any) => void) | undefined = undefined;
 
 	let searchString: string;
-	let container: HTMLElement;
 	let menuHTML: HTMLElement;
 	let popperHTML: HTMLElement;
 	let popperOpen: boolean;
-	let popperOptionsOpen: boolean;
 
 	let menuRef;
 
@@ -77,17 +74,11 @@
 
 		if (onPick) onPick(selectedDta);
 		// onMenuItemClick && onMenuItemClick(e.detail);
-		let event = custom_event('on:pick', selectedDta, { bubbles: true });
+		let event = new CustomEvent('on:pick', { detail: selectedDta, bubbles: true });
 		element.dispatchEvent(event);
 		menuHTML.dispatchEvent(event);
 		popperHTML.dispatchEvent(event);
 	}
-
-	$: dataKeys = Object.keys(data[0] || {})
-		.filter((r) => ['string', 'number'].includes(typeof data?.[0]?.[r]))
-		.sort((a: string, b: string) => {
-			return a > b ? 1 : a < b ? -1 : 0;
-		});
 
 	$: filteredData = !searchString ? [] : doFind(data, searchString, searchField);
 

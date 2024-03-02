@@ -1,10 +1,8 @@
 <svelte:options accessors />
 
 <script lang="ts">
-	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
 	import { popper, type UsePopperProps } from '$lib/ui/popper/usePopper.js';
 	import type { ElementProps } from '$lib/types/index.js';
-	import { get_current_component } from 'svelte/internal';
 	import Button from '$lib/base/button/Button.svelte';
 	import Icon from '$lib/base/icon/Icon.svelte';
 
@@ -14,7 +12,6 @@
 	let className = '';
 	export { className as class };
 	export let element: HTMLDivElement | null = null;
-	const forwardEvents = createEventForwarder(get_current_component());
 
 	export let style = '';
 
@@ -84,7 +81,6 @@
 		<input
 			bind:value
 			bind:this={element}
-			use:forwardEvents
 			use:popper={usePopper}
 			type="text"
 			class="w-{size} {className}"
@@ -99,7 +95,6 @@
 	<input
 		bind:value
 		bind:this={element}
-		use:forwardEvents
 		use:popper={usePopper}
 		type="text"
 		class="w-{size} {className}"

@@ -2,13 +2,10 @@
 
 <script lang="ts">
 	/* common slotUi exports*/
-	import { createEventForwarder } from '$lib/engine/eventForwarder.js';
-	import { get_current_component } from 'svelte/internal';
 	let className = '';
 	export { className as class };
 	export let element: HTMLDivElement | null = null;
 	export let style: string | null = null;
-	const forwardEvents = createEventForwarder(get_current_component());
 	/* end slotUi exports*/
 
 	export let color = '#fff';
@@ -17,7 +14,6 @@
 
 <div
 	bind:this={element}
-	use:forwardEvents
 	class:vertical
 	class="toolbar {className}"
 	style="{style};--color: {color}"
