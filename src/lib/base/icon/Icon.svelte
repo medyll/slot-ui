@@ -1,6 +1,5 @@
 <script lang="ts">
-	import 'iconify-icon';
-
+	import Icon from '@iconify/svelte';
 	import type { ElementProps } from '$lib/types/index.js';
 	import { uiPresets } from '$lib/engine/presets.js';
 	/*  common slotUi exports*/
@@ -34,12 +33,12 @@
 </script>
 
 {#key rotation}
-	<iconify-icon
+	<Icon
 		bind:this={element}
-		class="icon {className}"
-		style="display:block;font-size:{sizes[fontSize]};color:{color};{style};"
-		style:transform="rotate({rotation}deg)"
-		class:rotate
+		class="icon {className} {rotate}"
+		style="display:block;font-size:{sizes[
+			fontSize
+		]};color:{color};{style};transform:({rotation}deg)"
 		on:click
 		icon={iconName}
 		{...$$restProps}

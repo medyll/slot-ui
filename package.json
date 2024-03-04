@@ -101,8 +101,8 @@
 	"types": "./dist/index.d.ts",
 	"type": "module",
 	"dependencies": {
+		"@iconify/svelte": "^3.1.6",
 		"d3": "^7.8.5",
-		"iconify-icon": "^1.0.8",
 		"postcss-load-config": "^5.0.2",
 		"sanitize-html": "^2.11.0",
 		"svelte-spa-router": "^4.0.1"

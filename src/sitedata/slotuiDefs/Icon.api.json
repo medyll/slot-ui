@@ -26,7 +26,6 @@
       "name": "element",
       "kind": "let",
       "description": "element root HTMLDivElement props",
-      "type": "null | HTMLElement",
       "value": "null",
       "isFunction": false,
       "isFunctionDeclaration": false,
@@ -103,9 +102,7 @@
   ],
   "moduleExports": [],
   "slots": [],
-  "events": [
-    { "type": "forwarded", "name": "click", "element": "iconify-icon" }
-  ],
+  "events": [{ "type": "forwarded", "name": "click", "element": "Icon" }],
   "typedefs": [],
-  "rest_props": { "type": "Element", "name": "iconify-icon" }
+  "rest_props": { "type": "InlineComponent", "name": "Icon" }
 }
