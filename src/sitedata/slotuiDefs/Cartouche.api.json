@@ -98,6 +98,18 @@
       "reactive": false
     },
     {
+      "name": "keepCartoucheContent",
+      "kind": "let",
+      "description": "State of content is preserved while visibility is toggled",
+      "type": "boolean",
+      "value": "false",
+      "isFunction": false,
+      "isFunctionDeclaration": false,
+      "isRequired": false,
+      "constant": false,
+      "reactive": false
+    },
+    {
       "name": "showTitleDivider",
       "kind": "let",
       "description": "show the title divider line",

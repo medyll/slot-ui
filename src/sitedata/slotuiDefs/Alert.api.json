@@ -97,9 +97,7 @@
     { "name": "messageSlot", "default": false, "slot_props": "{}" },
     { "name": "topButtonSlot", "default": false, "slot_props": "{}" }
   ],
-  "events": [
-    { "type": "dispatched", "name": "alert:closed", "detail": "null" }
-  ],
+  "events": [],
   "typedefs": [],
   "rest_props": { "type": "Element", "name": "button" }
 }

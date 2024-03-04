@@ -134,6 +134,28 @@
       "isRequired": false,
       "constant": false,
       "reactive": true
+    },
+    {
+      "name": "component",
+      "kind": "let",
+      "description": "internal use component instance",
+      "value": "null",
+      "isFunction": false,
+      "isFunctionDeclaration": false,
+      "isRequired": false,
+      "constant": false,
+      "reactive": true
+    },
+    {
+      "name": "outer",
+      "kind": "let",
+      "type": "boolean",
+      "value": "true",
+      "isFunction": false,
+      "isFunctionDeclaration": false,
+      "isRequired": false,
+      "constant": false,
+      "reactive": false
     }
   ],
   "moduleExports": [],
@@ -141,7 +163,7 @@
     {
       "name": "__default__",
       "default": true,
-      "fallback": "<slot name=\"menuItemText\">{null_to_empty(text)}</slot>",
+      "fallback": "<slot name=\"menuItemText\">{text ?? ''}</slot>",
       "slot_props": "{}"
     },
     {
@@ -177,13 +199,13 @@
     {
       "name": "menuItemStart",
       "default": false,
-      "fallback": "<slot name=\"iconSlot\">\r\n\t\t\t\t\t<Icon {icon} color={iconColor} fontSize={iconSize} />\r\n\t\t\t\t</slot>",
+      "fallback": "<slot name=\"iconSlot\">\r\n\t\t\t\t\t\t<Icon {icon} color={iconColor} fontSize={iconSize} />\r\n\t\t\t\t\t</slot>",
       "slot_props": "{}"
     },
     {
       "name": "menuItemText",
       "default": false,
-      "fallback": "{null_to_empty(text)}",
+      "fallback": "{text ?? ''}",
       "slot_props": "{}"
     }
   ],

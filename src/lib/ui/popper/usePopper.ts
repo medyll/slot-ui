@@ -1,4 +1,4 @@
-import { custom_event, type SvelteComponent } from 'svelte';
+import type { SvelteComponent } from 'svelte';
 import { openPopper } from './actions.js';
 import type { PopperPositionType } from './types.js';
 

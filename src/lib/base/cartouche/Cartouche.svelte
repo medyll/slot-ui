@@ -23,6 +23,8 @@
 	export const component: SvelteComponent | undefined = undefined;
 	export let componentProps: Record<string, any> = {};
 
+	/** State of content is preserved while visibility is toggled */
+	export let keepCartoucheContent: boolean = false;
 	/** show the title divider line */
 	export let showTitleDivider: boolean = false;
 	/** show the default border style */
@@ -54,11 +56,11 @@
 <div
 	class:stacked
 	bind:this={element}
-	class="cartoucheHolder {className}"
+	class="cartouche {className}"
 	data-bordered={bordered ?? false}
 	{style}
 >
-	<div class="cartouche" on:click={actions.toggle}>
+	<div class="cartoucheControl" on:click={actions.toggle}>
 		{#if icon || $$slots.cartoucheIcon}
 			<div class="icon pad-l-1">
 				<slot name="cartoucheIcon">
@@ -88,8 +90,8 @@
 			<Button naked icon={chevronIcon} />
 		</div>
 	</div>
-	{#if isOpen}
-		<div class="cartoucheContent" transition:slide|global>
+	{#if isOpen || keepCartoucheContent}
+		<div aria-expanded={isOpen} class="cartoucheContent" transition:slide|global>
 			{#if component}
 				<svelte:component this={component} {...componentProps} />
 			{/if}
@@ -100,18 +102,4 @@
 
 <style lang="scss">
 	@import 'Cartouche';
-
-	.cartoucheHolder {
-		&.stacked {
-			border-radius: 0;
-			&:first-child {
-				border-top-left-radius: 6px;
-				border-top-right-radius: 6px;
-			}
-			&:last-child {
-				border-bottom-left-radius: 6px;
-				border-bottom-right-radius: 6px;
-			}
-		}
-	}
 </style>

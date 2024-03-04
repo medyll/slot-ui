@@ -17,10 +17,9 @@
       "name": "element",
       "kind": "let",
       "type": "null | HTMLUListElement",
-      "value": "null",
       "isFunction": false,
       "isFunctionDeclaration": false,
-      "isRequired": false,
+      "isRequired": true,
       "constant": false,
       "reactive": true
     },

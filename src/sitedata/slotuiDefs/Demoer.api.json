@@ -25,9 +25,11 @@
     {
       "name": "componentArgs",
       "kind": "let",
+      "type": "{}",
+      "value": "{}",
       "isFunction": false,
       "isFunctionDeclaration": false,
-      "isRequired": true,
+      "isRequired": false,
       "constant": false,
       "reactive": false
     },
@@ -36,16 +38,18 @@
       "kind": "let",
       "isFunction": false,
       "isFunctionDeclaration": false,
-      "isRequired": true,
+      "isRequired": false,
       "constant": false,
       "reactive": false
     },
     {
       "name": "multiple",
       "kind": "let",
+      "type": "{}",
+      "value": "{}",
       "isFunction": false,
       "isFunctionDeclaration": false,
-      "isRequired": true,
+      "isRequired": false,
       "constant": false,
       "reactive": false
     }
@@ -56,7 +60,7 @@
       "name": "__default__",
       "default": true,
       "fallback": "<svelte:component this={component} {componentArgs} />",
-      "slot_props": "{ activeParams: {\r\n                    ...activeParams,\r\n                    ...multiple[tiple][params],\r\n                  } }"
+      "slot_props": "{ activeParams: {\r\n\t\t\t\t\t\t\t\t\t\t...activeParams,\r\n\t\t\t\t\t\t\t\t\t\t...multiple[tiple][params]\r\n\t\t\t\t\t\t\t\t\t} }"
     }
   ],
   "events": [],

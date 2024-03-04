@@ -5,12 +5,6 @@ export declare const slotuiCatalog: {
         readonly group: "base";
         readonly root: "alert";
     };
-    readonly alourt: {
-        readonly name: "Alourt";
-        readonly code: "alourt";
-        readonly group: "base";
-        readonly root: "alert";
-    };
     readonly avatar: {
         readonly name: "Avatar";
         readonly code: "avatar";

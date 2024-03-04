@@ -1,10 +1,12 @@
 {
-  "moduleName": "DataListHead",
-  "filePath": "src/lib/data/dataList/DataListHead.svelte",
+  "moduleName": "Looper",
+  "filePath": "src/lib/utils/looper/Looper.svelte",
   "props": [
     {
-      "name": "style",
+      "name": "class",
       "kind": "let",
+      "type": "string",
+      "value": "''",
       "isFunction": false,
       "isFunctionDeclaration": false,
       "isRequired": false,
@@ -12,17 +14,18 @@
       "reactive": false
     },
     {
-      "name": "element",
+      "name": "data",
       "kind": "let",
-      "type": "null | HTMLDivElement",
+      "type": "[]",
+      "value": "[]",
       "isFunction": false,
       "isFunctionDeclaration": false,
       "isRequired": false,
       "constant": false,
-      "reactive": true
+      "reactive": false
     },
     {
-      "name": "stickyHeader",
+      "name": "naked",
       "kind": "let",
       "type": "boolean",
       "value": "true",
@@ -33,11 +36,11 @@
       "reactive": false
     },
     {
-      "name": "onSort",
+      "name": "title",
       "kind": "let",
-      "type": "() => { }",
-      "value": "() => { }",
-      "isFunction": true,
+      "type": "string",
+      "value": "''",
+      "isFunction": false,
       "isFunctionDeclaration": false,
       "isRequired": false,
       "constant": false,
@@ -49,7 +52,12 @@
     {
       "name": "__default__",
       "default": true,
-      "fallback": "{#if $dataListContext.hasColumnsProps}\r\n\t\t\t{#each Object.values($dataListContext.columns) as column}\r\n\t\t\t\t<DataListCell noWrap={true} field={column.field}>\r\n\t\t\t\t\t{column.fieldTitle ?? column.field}\r\n\t\t\t\t</DataListCell>\r\n\t\t\t{/each}\r\n\t\t{/if}",
+      "slot_props": "{ item: {castValue(item)}, idx: any }"
+    },
+    {
+      "name": "title",
+      "default": false,
+      "fallback": "{title}",
       "slot_props": "{}"
     }
   ],

@@ -1,5 +1,4 @@
 export const slotuiCatalog = {alert:{name:"Alert",code:"alert",group:"base",root:"alert"},
-alourt:{name:"Alourt",code:"alourt",group:"base",root:"alert"},
 avatar:{name:"Avatar",code:"avatar",group:"base",root:"avatar"},
 backdrop:{name:"Backdrop",code:"backdrop",group:"base",root:"backdrop"},
 badge:{name:"Badge",code:"badge",group:"base",root:"badge"},
@@ -76,4 +75,5 @@ togglebar:{name:"ToggleBar",code:"togglebar",group:"ui",root:"toggleBar"},
 toolbar:{name:"ToolBar",code:"toolbar",group:"ui",root:"toolBar"},
 tree:{name:"Tree",code:"tree",group:"ui",root:"tree"},
 window:{name:"Window",code:"window",group:"ui",root:"window"},
-contextrooter:{name:"ContextRooter",code:"contextrooter",group:"utils",root:"contextRooter"},} as const
+contextrooter:{name:"ContextRooter",code:"contextrooter",group:"utils",root:"contextRooter"},
+looper:{name:"Looper",code:"looper",group:"utils",root:"looper"},} as const

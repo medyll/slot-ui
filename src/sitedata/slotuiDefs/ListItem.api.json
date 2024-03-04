@@ -170,13 +170,13 @@
     {
       "name": "__default__",
       "default": true,
-      "fallback": "<slot name=\"primary\">\r\n\t\t\t\t\t\t<slot name=\"listItemPrimary\">\r\n\t\t\t\t\t\t\t{null_to_empty(primary)}\r\n\t\t\t\t\t\t</slot>\r\n\t\t\t\t\t</slot>",
+      "fallback": "<slot name=\"primary\">\r\n\t\t\t\t\t\t<slot name=\"listItemPrimary\">\r\n\t\t\t\t\t\t\t{primary ?? ''}\r\n\t\t\t\t\t\t</slot>\r\n\t\t\t\t\t</slot>",
       "slot_props": "{}"
     },
     {
       "name": "action",
       "default": false,
-      "fallback": "{null_to_empty(action)}",
+      "fallback": "{action ?? ''}",
       "slot_props": "{}"
     },
     {
@@ -188,13 +188,13 @@
     {
       "name": "listItemAction",
       "default": false,
-      "fallback": "<slot name=\"action\">\r\n\t\t\t\t{null_to_empty(action)}\r\n\t\t\t</slot>",
+      "fallback": "<slot name=\"action\">\r\n\t\t\t\t{action ?? ''}\r\n\t\t\t</slot>",
       "slot_props": "{}"
     },
     {
       "name": "listItemContent",
       "default": false,
-      "fallback": "<div class=\"listItemContent\">\r\n\t\t\t<div>\r\n\t\t\t\t<slot\r\n\t\t\t\t\t><slot name=\"primary\">\r\n\t\t\t\t\t\t<slot name=\"listItemPrimary\">\r\n\t\t\t\t\t\t\t{null_to_empty(primary)}\r\n\t\t\t\t\t\t</slot>\r\n\t\t\t\t\t</slot></slot\r\n\t\t\t\t>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"itemSecondary\">\r\n\t\t\t\t<slot name=\"listItemSecondary\"\r\n\t\t\t\t\t><slot name=\"secondary\">\r\n\t\t\t\t\t\t{null_to_empty(secondary)}\r\n\t\t\t\t\t</slot></slot\r\n\t\t\t\t>\r\n\t\t\t</div>\r\n\t\t</div>",
+      "fallback": "<div class=\"listItemContent\">\r\n\t\t\t<div>\r\n\t\t\t\t<slot\r\n\t\t\t\t\t><slot name=\"primary\">\r\n\t\t\t\t\t\t<slot name=\"listItemPrimary\">\r\n\t\t\t\t\t\t\t{primary ?? ''}\r\n\t\t\t\t\t\t</slot>\r\n\t\t\t\t\t</slot></slot\r\n\t\t\t\t>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"itemSecondary\">\r\n\t\t\t\t<slot name=\"listItemSecondary\"\r\n\t\t\t\t\t><slot name=\"secondary\">\r\n\t\t\t\t\t\t{secondary ?? ''}\r\n\t\t\t\t\t</slot></slot\r\n\t\t\t\t>\r\n\t\t\t</div>\r\n\t\t</div>",
       "slot_props": "{}"
     },
     {
@@ -206,25 +206,25 @@
     {
       "name": "listItemPrimary",
       "default": false,
-      "fallback": "{null_to_empty(primary)}",
+      "fallback": "{primary ?? ''}",
       "slot_props": "{}"
     },
     {
       "name": "listItemSecondary",
       "default": false,
-      "fallback": "<slot name=\"secondary\">\r\n\t\t\t\t\t\t{null_to_empty(secondary)}\r\n\t\t\t\t\t</slot>",
+      "fallback": "<slot name=\"secondary\">\r\n\t\t\t\t\t\t{secondary ?? ''}\r\n\t\t\t\t\t</slot>",
       "slot_props": "{}"
     },
     {
       "name": "primary",
       "default": false,
-      "fallback": "<slot name=\"listItemPrimary\">\r\n\t\t\t\t\t\t\t{null_to_empty(primary)}\r\n\t\t\t\t\t\t</slot>",
+      "fallback": "<slot name=\"listItemPrimary\">\r\n\t\t\t\t\t\t\t{primary ?? ''}\r\n\t\t\t\t\t\t</slot>",
       "slot_props": "{}"
     },
     {
       "name": "secondary",
       "default": false,
-      "fallback": "{null_to_empty(secondary)}",
+      "fallback": "{secondary ?? ''}",
       "slot_props": "{}"
     }
   ],

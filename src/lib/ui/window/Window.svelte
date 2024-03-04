@@ -2,7 +2,7 @@
 
 <script lang="ts">
 	import { wStore } from '$lib/ui/window/store.js';
-	import { SvelteComponent, onDestroy } from 'svelte';
+	import { type SvelteComponent, onDestroy } from 'svelte';
 	import Button from '$lib/base/button/Button.svelte';
 	import Icon from '$lib/base/icon/Icon.svelte';
 	import type { ElementProps } from '$lib/types/index.js';

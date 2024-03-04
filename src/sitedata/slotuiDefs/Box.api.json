@@ -137,13 +137,13 @@
     {
       "name": "__default__",
       "default": true,
-      "fallback": "{@html null_to_empty(content)}",
+      "fallback": "{@html content ?? ''}",
       "slot_props": "{}"
     },
     {
       "name": "boxBottomZone",
       "default": false,
-      "fallback": "{@html null_to_empty(bottomZone)}",
+      "fallback": "{@html bottomZone ?? ''}",
       "slot_props": "{}"
     },
     {
@@ -155,11 +155,11 @@
     {
       "name": "titleBarTitle",
       "default": false,
-      "fallback": "{null_to_empty(title)}",
+      "fallback": "{title ?? ''}",
       "slot_props": "{ slot: titleBarTitle }"
     }
   ],
-  "events": [{ "type": "dispatched", "name": "box:closed", "detail": "null" }],
+  "events": [],
   "typedefs": [],
   "rest_props": { "type": "Element", "name": "div" }
 }

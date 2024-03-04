@@ -3,7 +3,6 @@
 <script lang="ts">
 	import sanitizeHtml from 'sanitize-html';
 	import type { Data } from './$types.js';
-	import { custom_event, getContext, setContext } from 'svelte';
 	import { writable, type Writable } from 'svelte/store';
 	import DataListCell from './DataListCell.svelte';
 	import type { DataCellType, DataListStoreType } from './types.js';
@@ -23,12 +22,12 @@
 	const dataListContext = getContext<Writable<DataListStoreType>>('dataListContext');
 
 	function handleClick(item: Data) {
-		const event = custom_event('datalist:click', item, { bubbles: true });
+		const event = new CustomEvent('datalist:click', { detail: item, bubbles: true });
 		if (element) element.dispatchEvent(event);
 	}
 
 	function handleSelect(item: Data) {
-		const event = custom_event('datalist:select', item, { bubbles: true });
+		const event = new CustomEvent('datalist:select', { detail: item, bubbles: true });
 		if (element) element.dispatchEvent(event);
 	}
 

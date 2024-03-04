@@ -1,5 +1,4 @@
 export { default as Alert } from '$lib/base/alert/Alert.svelte';
-export { default as Alourt } from '$lib/base/alert/Alourt.svelte';
 export { default as Avatar } from '$lib/base/avatar/Avatar.svelte';
 export { default as Backdrop } from '$lib/base/backdrop/Backdrop.svelte';
 export { default as Badge } from '$lib/base/badge/Badge.svelte';
@@ -77,3 +76,4 @@ export { default as ToolBar } from '$lib/ui/toolBar/ToolBar.svelte';
 export { default as Tree } from '$lib/ui/tree/Tree.svelte';
 export { default as Window } from '$lib/ui/window/Window.svelte';
 export { default as ContextRooter } from '$lib/utils/contextRooter/ContextRooter.svelte';
+export { default as Looper } from '$lib/utils/looper/Looper.svelte';

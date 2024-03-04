@@ -3,6 +3,17 @@
   "filePath": "src/lib/ui/window/Window.svelte",
   "props": [
     {
+      "name": "outer",
+      "kind": "let",
+      "type": "boolean",
+      "value": "true",
+      "isFunction": false,
+      "isFunctionDeclaration": false,
+      "isRequired": false,
+      "constant": false,
+      "reactive": false
+    },
+    {
       "name": "frameId",
       "kind": "let",
       "description": "Id of the component's instance",
@@ -317,6 +328,16 @@
       "reactive": false
     },
     {
+      "name": "componentInstance",
+      "kind": "let",
+      "description": "private",
+      "isFunction": false,
+      "isFunctionDeclaration": false,
+      "isRequired": true,
+      "constant": false,
+      "reactive": true
+    },
+    {
       "name": "actions",
       "kind": "const",
       "type": "{     close: () => {         open = false;         if (onClose)             onClose();         delete $wStore.instances[frameId];         if (removeFromDomOnClose && self)             self.$destroy();     },     setActive: () => {         if ($wStore.activeFrame !== frameId)             $wStore.activeFrame = frameId;     } }",
@@ -333,13 +354,13 @@
     {
       "name": "__default__",
       "default": true,
-      "fallback": "{#key component}\r\n\t\t\t\t\t{#if component}\r\n\t\t\t\t\t\t<svelte:component this={component} {...componentProps} bind:formRef />\r\n\t\t\t\t\t{/if}\r\n\t\t\t\t{/key}\r\n\t\t\t\t{#if contentHTML}\r\n\t\t\t\t\t{@html contentHTML}\r\n\t\t\t\t{/if}",
+      "fallback": "{#key component}\r\n\t\t\t\t\t\t{#if component}\r\n\t\t\t\t\t\t\t<svelte:component this={component} {...componentProps} bind:formRef />\r\n\t\t\t\t\t\t{/if}\r\n\t\t\t\t\t{/key}\r\n\t\t\t\t\t{#if contentHTML}\r\n\t\t\t\t\t\t{@html contentHTML}\r\n\t\t\t\t\t{/if}",
       "slot_props": "{}"
     },
     {
       "name": "windowButtonZone",
       "default": false,
-      "fallback": "<div class=\"buttonZone\">\r\n\t\t\t\t\t{#if !hideCloseButton}\r\n\t\t\t\t\t\t<Button naked icon={iconClose} on:click={actions.close}>Close</Button>\r\n\t\t\t\t\t{/if}\r\n\t\t\t\t\t{#if !hideCancelButton}\r\n\t\t\t\t\t\t<Button naked icon=\"ant-design:ellipsis-outlined\" on:click={handleCancel}\r\n\t\t\t\t\t\t\t>Cancel\r\n\t\t\t\t\t\t</Button>\r\n\t\t\t\t\t{/if}\r\n\t\t\t\t\t{#if !hideAcceptButton}\r\n\t\t\t\t\t\t<Button icon={iconValidate} on:click={handleValidate}>Validate</Button>\r\n\t\t\t\t\t{/if}\r\n\t\t\t\t</div>",
+      "fallback": "<div class=\"buttonZone\">\r\n\t\t\t\t\t\t{#if !hideCloseButton}\r\n\t\t\t\t\t\t\t<Button naked icon={iconClose} on:click={actions.close}>Close</Button>\r\n\t\t\t\t\t\t{/if}\r\n\t\t\t\t\t\t{#if !hideCancelButton}\r\n\t\t\t\t\t\t\t<Button naked icon=\"ant-design:ellipsis-outlined\" on:click={handleCancel}\r\n\t\t\t\t\t\t\t\t>Cancel\r\n\t\t\t\t\t\t\t</Button>\r\n\t\t\t\t\t\t{/if}\r\n\t\t\t\t\t\t{#if !hideAcceptButton}\r\n\t\t\t\t\t\t\t<Button icon={iconValidate} on:click={handleValidate}>Validate</Button>\r\n\t\t\t\t\t\t{/if}\r\n\t\t\t\t\t</div>",
       "slot_props": "{}"
     },
     {

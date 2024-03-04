@@ -6,7 +6,7 @@
       "name": "title",
       "kind": "let",
       "type": "string",
-      "value": "\"not set\"",
+      "value": "'not set'",
       "isFunction": false,
       "isFunctionDeclaration": false,
       "isRequired": false,
@@ -48,8 +48,8 @@
     {
       "name": "actions",
       "kind": "const",
-      "type": "{     load: (args) => { }, }",
-      "value": "{     load: (args) => { }, }",
+      "type": "{     load: (args) => { } }",
+      "value": "{     load: (args) => { } }",
       "isFunction": false,
       "isFunctionDeclaration": false,
       "isRequired": false,
@@ -62,7 +62,7 @@
     {
       "name": "__default__",
       "default": true,
-      "slot_props": "{ panelId: any, actions: {     load: (args) => { }, } }"
+      "slot_props": "{ panelId: any, actions: {     load: (args) => { } } }"
     },
     { "name": "panelButtonNext", "default": false, "slot_props": "{}" },
     { "name": "panelButtonPrevious", "default": false, "slot_props": "{}" }

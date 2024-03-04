@@ -100,7 +100,7 @@
     {
       "name": "__default__",
       "default": true,
-      "fallback": "{#if content}\r\n\t\t\t<div class=\"chipperContent\">{@html null_to_empty(content)}</div>\r\n\t\t{/if}",
+      "fallback": "{#if content}\r\n\t\t\t<div class=\"chipperContent\">{@html content ?? ''}</div>\r\n\t\t{/if}",
       "slot_props": "{}"
     },
     {

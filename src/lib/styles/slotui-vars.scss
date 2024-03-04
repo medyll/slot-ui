@@ -19,15 +19,15 @@
     --sld-color-foreground-alpha-mid: color-mix(in srgb, var(--sld-color-foreground), transparent 50%);
     --sld-color-foreground-alpha-high: color-mix(in srgb, var(--sld-color-foreground), transparent 90%);
 
+    --sld-color-background-darken-low: color-mix(in srgb, var(--sld-color-background), #999 10%);
+    --sld-color-background-darken-mid: color-mix(in srgb, var(--sld-color-background), #999 40%);
+    --sld-color-background-darken-high: color-mix(in srgb, var(--sld-color-background), #999 80%);
+
+    --sld-color-foreground-darken-low: color-mix(in srgb, var(--sld-color-foreground), #999 10%);
+    --sld-color-foreground-darken-mid: color-mix(in srgb, var(--sld-color-foreground), #999 40%);
+    --sld-color-foreground-darken-high: color-mix(in srgb, var(--sld-color-foreground), #999 80%);
+
     --sld-color-border: color-mix(in srgb, var(--sld-color-foreground), transparent 70%);
-
-    [data-theme="dark"] {
-        --sld-color-foreground: #ffffff;
-        --sld-color-background: #27323a;
-        --sld-color-paper: #3a3b3b;
-
-        --sld-color-border: color-mix(in srgb, var(--sld-color-foreground), transparent 60%);
-    }
 
     --sld-theme-gap-tiny: 1.5rem;
 
@@ -38,6 +38,14 @@
     --sld-selected-background-color: var(--sld-color-primary-alpha-high);
     --sld-selected-border-color: var(--sld-color-primary);
     --sld-selected-shadow: var(--box-shad-4);
+}
+:root.dark,
+:root[data-theme="dark"] {
+    --sld-color-foreground: #ffffff;
+    --sld-color-background: #27323a;
+    --sld-color-paper: #3a3b3b;
+
+    --sld-color-border: color-mix(in srgb, var(--sld-color-foreground), transparent 60%);
 }
 
 button {
@@ -73,4 +81,8 @@ ul.listRoot {
     --sld-list-item-padding: 0;
     --sld-list-item-radius: 4px;
     --sld-list-item-selected-background: var(--sld-selected-background-color);
+}
+
+.cartoucheControl {
+    --sld-control-height: 1rem;
 }

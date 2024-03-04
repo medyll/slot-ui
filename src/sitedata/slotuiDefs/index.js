@@ -45,6 +45,8 @@ export { default as ListItemApi } from './ListItem.api.json';
 export { default as ListTitleApi } from './ListTitle.api.json';
 export { default as LoaderApi } from './Loader.api.json';
 export { default as LoginApi } from './Login.api.json';
+export { default as LoopApi } from './Loop.api.json';
+export { default as LooperApi } from './Looper.api.json';
 export { default as MenuApi } from './Menu.api.json';
 export { default as MenuContextAgentApi } from './MenuContextAgent.api.json';
 export { default as MenuItemApi } from './MenuItem.api.json';

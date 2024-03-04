@@ -3,6 +3,9 @@ declare const __propDef: {
     props: {
         component?: string | undefined;
         cite?: string | undefined;
+        children?: ((this: void) => typeof import("svelte").SnippetReturn & {
+            _: "functions passed to {@render ...} tags must use the `Snippet` type imported from \"svelte\"";
+        }) | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;

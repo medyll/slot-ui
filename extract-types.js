@@ -37,7 +37,6 @@ class FileProcessor {
 				directory + '/**index.ts',
 				directory + '/**.demo.svelte',
 				directory + '/**Demo.svelte',
-				directory + '/**Alourt*',
 				directory + '/**preview.svelte',
 				directory + '/**sitedata*',
 				directory + '/**.md',
@@ -148,6 +147,53 @@ async function slotUiCatalogB() {
 	);
 }
 
+/**
+ * generate the demo slotuiCatalog.ts file
+ */
+async function slotUiDemoCatalog() {
+	const svelteFiles = glob.sync('./src/lib/**/*.demo.svelte');
+	const excludePatterns = ['.preview','.wip', '.js'];
+
+	const indexContent = svelteFiles
+		.map((file) => {
+			if (excludePatterns.some((pattern) => file.includes(pattern))) return;
+			const group = file.split('/')[3];
+			const comp = file.split('\\').slice(-1).toString()?.replace(/\./g, '');
+			const compName = file.split('/').slice(-1)[0].split('.')[0];
+			const dir = file.split('/').slice(-2, -1);
+			const code = compName.toLowerCase();
+			return `${code}:{component:${compName},name:"${compName}",code:"${code}",group:"${group}",root:"${dir}"},`;
+		})
+		.filter((f) => f)
+		.join('\n');
+
+	console.log(await generateDemoIndex());
+	// write file
+	fs.writeFileSync(
+		path.join(__dirname, 'src/sitedata/slotuiDemoCatalog.ts'),
+		`${await generateDemoIndex()};\r export const slotuiDemoCatalog = {${indexContent}} as const`
+	);
+}
+
+// slotuiDemoComponents
+async function generateDemoIndex() {
+	const svelteFiles = glob.sync('./src/lib/**/*.demo.svelte', {
+		ignore: ['./src/lib/**/*.{preview,wip,js}.svelte']
+	});
+
+	const indexContent = svelteFiles
+		.map((file) => {
+			if (!file) return;
+			file = file.replace('./src/lib/', '$lib/');
+			const compName = file.split('/').slice(-1)[0].split('.')[0];
+			return `import  ${path.basename(compName, '.svelte')} from '${file}';`;
+		})
+		.filter((f) => f)
+		.join('\n');
+ 
+	return indexContent;
+
+}
 const readFile = (fileName) => {
 	return fs.readFileSync(fileName, 'utf8');
 };
@@ -402,6 +448,7 @@ function main() {
 	new FileProcessor().makeIndexFile();
 	createMethods();
 	slotUiCatalogB();
+	slotUiDemoCatalog(); 
 	generateSvelteIndex();
 }
 

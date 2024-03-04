@@ -1,10 +1,21 @@
 {
-  "moduleName": "DataListHead",
-  "filePath": "src/lib/data/dataList/DataListHead.svelte",
+  "moduleName": "Loop",
+  "filePath": "src/lib/utils/loop/Loop.svelte",
   "props": [
     {
-      "name": "style",
+      "name": "data",
       "kind": "let",
+      "isFunction": false,
+      "isFunctionDeclaration": false,
+      "isRequired": true,
+      "constant": false,
+      "reactive": false
+    },
+    {
+      "name": "class",
+      "kind": "let",
+      "type": "string",
+      "value": "''",
       "isFunction": false,
       "isFunctionDeclaration": false,
       "isRequired": false,
@@ -12,20 +23,10 @@
       "reactive": false
     },
     {
-      "name": "element",
-      "kind": "let",
-      "type": "null | HTMLDivElement",
-      "isFunction": false,
-      "isFunctionDeclaration": false,
-      "isRequired": false,
-      "constant": false,
-      "reactive": true
-    },
-    {
-      "name": "stickyHeader",
+      "name": "naked",
       "kind": "let",
       "type": "boolean",
-      "value": "true",
+      "value": "false",
       "isFunction": false,
       "isFunctionDeclaration": false,
       "isRequired": false,
@@ -33,11 +34,11 @@
       "reactive": false
     },
     {
-      "name": "onSort",
+      "name": "title",
       "kind": "let",
-      "type": "() => { }",
-      "value": "() => { }",
-      "isFunction": true,
+      "type": "string",
+      "value": "''",
+      "isFunction": false,
       "isFunctionDeclaration": false,
       "isRequired": false,
       "constant": false,
@@ -46,10 +47,11 @@
   ],
   "moduleExports": [],
   "slots": [
+    { "name": "__default__", "default": true, "slot_props": "{ item: any }" },
     {
-      "name": "__default__",
-      "default": true,
-      "fallback": "{#if $dataListContext.hasColumnsProps}\r\n\t\t\t{#each Object.values($dataListContext.columns) as column}\r\n\t\t\t\t<DataListCell noWrap={true} field={column.field}>\r\n\t\t\t\t\t{column.fieldTitle ?? column.field}\r\n\t\t\t\t</DataListCell>\r\n\t\t\t{/each}\r\n\t\t{/if}",
+      "name": "title",
+      "default": false,
+      "fallback": "{title}",
       "slot_props": "{}"
     }
   ],

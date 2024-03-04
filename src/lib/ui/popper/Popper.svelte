@@ -1,7 +1,7 @@
 <svelte:options accessors={true} />
 
 <script lang="ts">
-	import { onMount, SvelteComponent } from 'svelte';
+	import { onMount, type SvelteComponent } from 'svelte';
 	import { stickTo, type StickToPositionType } from '$lib/uses/stickTo/stickTo.js';
 	import { clickAway } from '$lib/uses/clickAway/clickAway.js';
 	import { popperList } from '$lib/ui/popper/actions.js';
