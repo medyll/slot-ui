@@ -3,10 +3,21 @@
 	import Icon from '$lib/base/icon/Icon.svelte';
 	import type { SvelteComponent } from 'svelte';
 	import Button from '$lib/base/button/Button.svelte';
+	import type { IconProps } from '@iconify/svelte';
+
+	type CartoucheClasses = {
+		control: string;
+		controlIcon: string;
+		controlLabel: string;
+		content: string;
+	};
 
 	let className: string | undefined = undefined;
 	/**  className off the root component  */
 	export { className as class };
+	/**  classNames off the whole component  */
+	export let classes: CartoucheClasses = {} as CartoucheClasses;
+
 	/**  css style off the root component  */
 	export let style: string | undefined = undefined;
 	/** element root HTMLDivElement props  */
@@ -18,13 +29,14 @@
 	export let secondary: string | undefined = undefined;
 
 	export let icon: string | undefined = undefined;
+	export let iconProps: IconProps = {} as IconProps;
 	/** can be set as a prop or as a className */
 	export let stacked: boolean = false;
 	export const component: SvelteComponent | undefined = undefined;
 	export let componentProps: Record<string, any> = {};
 
 	/** State of content is preserved while visibility is toggled */
-	export let keepCartoucheContent: boolean = false;
+	export let keepCartoucheContent: boolean = true;
 	/** show the title divider line */
 	export let showTitleDivider: boolean = false;
 	/** show the default border style */
@@ -60,15 +72,15 @@
 	data-bordered={bordered ?? false}
 	{style}
 >
-	<div class="cartoucheControl" on:click={actions.toggle}>
-		{#if icon || $$slots.cartoucheIcon}
-			<div class="icon pad-l-1">
+	<div class="control {classes.control}" on:click={actions.toggle}>
+		{#if icon || iconProps || $$slots.cartoucheIcon}
+			<div class="controlIcon {classes.controlIcon}">
 				<slot name="cartoucheIcon">
-					<Icon {icon} />
+					<Icon {icon} {...iconProps} />
 				</slot>
 			</div>
 		{/if}
-		<div class="cartoucheLabel pad-l-1">
+		<div class="controlLabel {classes.controlLabel}">
 			{#if primary || $$slots.primarySlot}
 				<slot name="primarySlot">{primary}</slot>
 				<div><slot name="secondarySlot">{secondary ?? ''}</slot></div>
@@ -91,7 +103,7 @@
 		</div>
 	</div>
 	{#if isOpen || keepCartoucheContent}
-		<div aria-expanded={isOpen} class="cartoucheContent" transition:slide|global>
+		<div aria-expanded={isOpen} class="content {classes.content}" transition:slide|global>
 			{#if component}
 				<svelte:component this={component} {...componentProps} />
 			{/if}

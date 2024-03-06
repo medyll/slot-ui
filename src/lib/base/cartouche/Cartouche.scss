@@ -21,18 +21,23 @@
     }
   }
 
-  .cartoucheControl {
+  .control {
     display: flex;
     gap: 8px;
     background-color: var(--sld-color-background);
     align-items: center;
-    padding: 0.5rem 0.25rem;
+    padding: 1rem 0.25rem;
     &:hover {
       background-color: var(--sld-color-background-darken-low);
     }
 
-    .cartoucheLabel {
+    .controlIcon {
+      padding: 0 0.5rem;
+    }
+
+    .controlLabel {
       cursor: pointer;
+      padding: 0 0.5rem;
     }
 
     .chevron {
@@ -44,7 +49,7 @@
     }
   }
 
-  .cartoucheContent {
+  .content {
     overflow: hidden;
     background-color: var(--sld-color-background);
     content-visibility: auto;
