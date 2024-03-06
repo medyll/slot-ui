@@ -7,7 +7,7 @@
       "kind": "let",
       "isFunction": false,
       "isFunctionDeclaration": false,
-      "isRequired": true,
+      "isRequired": false,
       "constant": false,
       "reactive": false
     },
@@ -61,6 +61,28 @@
       "type": "string",
       "value": "''",
       "isFunction": false,
+      "isFunctionDeclaration": false,
+      "isRequired": false,
+      "constant": false,
+      "reactive": false
+    },
+    {
+      "name": "metaData",
+      "kind": "let",
+      "type": "{}",
+      "value": "{}",
+      "isFunction": false,
+      "isFunctionDeclaration": false,
+      "isRequired": false,
+      "constant": false,
+      "reactive": false
+    },
+    {
+      "name": "onChange",
+      "kind": "let",
+      "type": "(val, metaData) => { }",
+      "value": "(val, metaData) => { }",
+      "isFunction": true,
       "isFunctionDeclaration": false,
       "isRequired": false,
       "constant": false,

@@ -13,6 +13,18 @@
       "reactive": false
     },
     {
+      "name": "classes",
+      "kind": "let",
+      "description": "classNames off the whole component",
+      "type": "{}",
+      "value": "{}",
+      "isFunction": false,
+      "isFunctionDeclaration": false,
+      "isRequired": false,
+      "constant": false,
+      "reactive": false
+    },
+    {
       "name": "style",
       "kind": "let",
       "description": "css style off the root component",
@@ -66,6 +78,17 @@
       "reactive": false
     },
     {
+      "name": "iconProps",
+      "kind": "let",
+      "type": "{}",
+      "value": "{}",
+      "isFunction": false,
+      "isFunctionDeclaration": false,
+      "isRequired": false,
+      "constant": false,
+      "reactive": false
+    },
+    {
       "name": "stacked",
       "kind": "let",
       "description": "can be set as a prop or as a className",
@@ -102,7 +125,7 @@
       "kind": "let",
       "description": "State of content is preserved while visibility is toggled",
       "type": "boolean",
-      "value": "false",
+      "value": "true",
       "isFunction": false,
       "isFunctionDeclaration": false,
       "isRequired": false,
@@ -164,7 +187,7 @@
     {
       "name": "cartoucheIcon",
       "default": false,
-      "fallback": "<Icon {icon} />",
+      "fallback": "<Icon {icon} {...iconProps} />",
       "slot_props": "{}"
     },
     {

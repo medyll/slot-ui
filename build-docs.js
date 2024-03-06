@@ -1,378 +1,455 @@
-import fs, { mkdir } from 'fs';
+import fs from 'fs';
 import path from 'path';
+import micromatch from 'micromatch';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+import sveld from 'sveld';
+import { svelte as sveltePlugin } from '@sveltejs/vite-plugin-svelte';
+import * as svelte from 'svelte/compiler';
+import sveltePreprocess from 'svelte-preprocess';
+import { svelte2tsx } from 'svelte2tsx';
+import svelteConfig from './svelte.config.js';
+import { vitePreprocess, loadSvelteConfig } from '@sveltejs/vite-plugin-svelte';
+const { ComponentParser } = sveld;
+import glob from 'glob';
+// import * as pkg from './package.json';
+import ts from 'typescript';
+import { loadConfigFromFile } from 'vite';
+import fsx from 'fs-extra';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-import * as url from 'url';
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
-
-const srcPackage = path.join(__dirname, 'dist');
-const srcLibDir = path.join(__dirname, 'src', 'lib');
-
-const dirPath = path.join('src',  'sitedata');
-// const dirPath = path.join('src','sitedata');
-const libShort = '$lib';
-
-let fileHead = '';
-
-mkdir(dirPath, { recursive: true }, () => {});
-
-const getAllFiles = function (dirPath, fragment = 'demo.svelte', arrayOfFiles = []) {
-	let files = fs.readdirSync(dirPath);
-	let cleanPath = dirPath.replace(srcLibDir, '');
-
-	files.forEach(function (file) {
-		const tDir = dirPath.replace(path.join(__dirname), '');
-
-		if (fs.statSync(path.join(dirPath, file)).isDirectory()) {
-			arrayOfFiles = getAllFiles(path.join(dirPath, file), fragment, arrayOfFiles);
-		} else {
-			if (file.includes(fragment)) {
-				 console.log(fragment,path.join(cleanPath, file))
-				arrayOfFiles.push(path.join(cleanPath, file));
-			}
-		}
-	});
-	return arrayOfFiles;
-};
-
-const dirTree = (filename) => {
-	const stats = fs.lstatSync(filename);
-	const info = {
-		path: filename,
-		name: path.basename(filename)
-	};
-
-	if (stats.isDirectory()) {
-		info.type = 'folder';
-		info.children = fs.readdirSync(filename).map((child) => {
-			return dirTree(`${filename}/${child}`);
-		});
-	} else {
-		fileHead += 'import ';
-		info.type = 'file';
-	}
-	return info;
-};
-
-function createFile(fileList) {
-	return fileList
-		?.map((fl) => {
-			const comp = dotToCamelCase(fl).split('\\').slice(-1).toString()?.replace(/\./g, '');
-			const src = libShort + fl.replace(/\\/g, '/');
-			return `import ${dotToCamelCase(comp)} from "${src}";\rexport {${dotToCamelCase(comp)}} ; `;
-		})
-		.join('\r\n');
-}
-
-/** convert object to text file content  export const = [{}] */
-/** @deprecated  */
-function createObject(fileList, exportName = 'slotUiComponentList') {
-	const start = `export const ${exportName} = [ `;
-	const middle = fileList
-		?.map((fl) => {
-			const group = fl.split('\\')[1];
-			const comp = dotToCamelCase(fl).split('\\').slice(-1).toString()?.replace(/\./g, '');
-			const compName = dotToCamelCase(fl).split('\\').slice(-1)[0].split('.')[0];
-			const code = compName.toLowerCase();
-
-			const src = fl.replace(/\\/g, '/');
-
-			return `{name:"${compName}",code:"${code}",component:${comp},group:"${group}"}`;
-		})
-		.join(',\r\n');
-
-	const end = ' ] ';
-
-	return start + middle + end;
-}
-
-/** convert object to text file content  export const = [{}] */
-function createComponentList(fileList, exportName = 'slotUiComponentList') {
-	const start = `export const ${exportName} = { `;
-	const middle = fileList
-		?.map((fl) => {
-			const group = fl.split('\\')[1];
-			const comp = fl.split('\\').slice(-1).toString()?.replace(/\./g, '');
-			const compName = fl.split('\\').slice(-1)[0].split('.')[0];
-			const code = compName.toLowerCase();
-
-			const src = fl.replace(/\\/g, '/');
-
-			return `${code}:{name:"${compName}",code:"${code}",group:"${group}"}`;
-		})
-		.join(',\r\n');
-
-	const end = ' } as const';
-
-	return start + middle + end;
-}
 function dotToCamelCase(str) {
 	return str.replace(/\.(\w)/g, function (match, letter) {
 		return letter.toUpperCase();
 	});
 }
-/** writes .md and api.md from packageDir  */
-function createMethods(fileList) {
-	mkdir(dirPath + '/api', { recursive: true }, () => {});
-	let keyDone = {};
+class FileProcessor {
+	/**
+	 *
+	 * @param {string} directory
+	 * @param {string} target
+	 * @returns  {Array.<FileInfo>}
+	 */
+	_recursiveListSvelteFile(directory, target) {
+		const files = glob.sync(directory + '/*', {
+			ignore: [
+				directory + '/**index.ts',
+				directory + '/**.demo.svelte',
+				directory + '/**Demo.svelte',
+				directory + '/**preview.svelte',
+				directory + '/**sitedata*',
+				directory + '/**.md',
+				directory + '/**.scss*',
+				directory + '/**wip*',
+				directory + '/**Example.svelte',
+				directory + '/**indexApi*',
+				directory + '/**Readme*'
+			]
+		});
 
-	let objImport = [];
-	let objObj = [];
-	let objApiImport = [];
-	let objApiObj = [];
+		let svelteFiles = [];
+		files.forEach((file) => {
+			if (fsx.statSync(file).isDirectory()) {
+				svelteFiles = svelteFiles.concat(this._recursiveListSvelteFile(file, target));
+			} else {
+				let cleanPath = path.normalize(file.replace(target, ''));
 
-	fileList.forEach((file) => {
-		try {
-			const data = fs.readFileSync(file, 'utf8');
-			let newData = data.replace(/declare/g, '');
-			// if (comp.includes("Tree"))
-
-			let frag = data.match(/__propDef:([^.]*)};([^.]*)export/gm);
-
-			const pathc = [...file.split('\\').slice(0, -1)].join('\\').split('\\dist')[1];
-			const comp = file.split('\\').slice(-1)[0].split('.')[0];
-			const newContent = frag?.[0]?.replace(/export/gm, '');
-
-			const pathApi = srcLibDir + pathc + '\\' + comp + '.api.md';
-			const srcApi = ('$lib' + pathc + '\\' + comp + '.api.md').replace(/\\/g, '/');
-			const pathDoc = srcLibDir + pathc + '\\' + comp + '.md';
-			const srcDoc = ('$lib' + pathc + '\\' + comp + '.md').replace(/\\/g, '/');
-
-			const collectedComps = [];
-			//console.log(pathc, srcApi, srcDoc)
-			if (
-				!keyDone[comp.toLowerCase()] &&
-				!file.toLowerCase().includes('demo') &&
-				!file.toLowerCase().includes('preview')
-			) {
-				objImport.push(`import ${comp}ReadMe from "${srcDoc}";\r export {${comp}ReadMe};`);
-				objObj.push(`${comp.toLowerCase()}:${comp}ReadMe`);
-
-				collectedComps.push(`${comp}ReadMe`);
-
-				objApiImport.push(`import ${comp}ApiReadMe from "${srcApi}"`);
-				objApiObj.push(`${comp.toLowerCase()}Api:${comp}ApiReadMe`);
-
-				// array uniques
-				objObj.filter((v, i, a) => a.indexOf(v) === i);
-				objImport.filter((v, i, a) => a.indexOf(v) === i);
-				objApiImport.filter((v, i, a) => a.indexOf(v) === i);
-				objApiObj.filter((v, i, a) => a.indexOf(v) === i);
-
-				fs.writeFileSync(pathApi, '```' + data + '\r\n ```');
-
-				fs.writeFileSync(pathDoc, newContent ? '```ts \r\n' + newContent + '\r\n ```' : 'missing');
-				/* fs.writeFileSync(
-					pathc + '\\' + comp + '.api.md',
-					'```' + data + '\r\n ```'
-				); */
-				keyDone[comp.toLowerCase()] = true;
+				svelteFiles.push({
+					path: cleanPath,
+					file: path.basename(file),
+					moduleName: path.basename(file).replace(/\.[^/.]+$/, '')
+				});
 			}
-		} catch (e) {
-			// console.log(e)
-		}
-	});
-	// write catalog object
-	const finalObj = `export const componentReadMe = {${objObj.join(',\r\n')}}`;
-	const finalApiObj = `export const componentApiReadMe = {${objApiObj.join(',\r\n')}}`;
+		});
+		return svelteFiles;
+	}
 
-	objApiImport = objApiImport.filter((v, i, a) => a.indexOf(v) === i);
+	/**
+	 *
+	 * @param {Array.<FileInfo>} fileInfoList
+	 */
+	_writeExportFromFileInfoList(fileInfoList) {
+		let exportString = '// Reexport of entry components\n';
+		fileInfoList.forEach((fileInfo) => {
+			let file = fileInfo.file;
+			let moduleName = this.dotToCamelCase(fileInfo.moduleName);
+			let path = fileInfo.path.replace(/\\/g, '/').replace('.ts', '.js');
+			let isSvelteFile = file.endsWith('.svelte');
 
-	fs.writeFileSync(dirPath + '/api/indexApi.ts', objImport.join(';\r\n') + ';\r\n\r\n' + finalObj);
+			if (!isSvelteFile) {
+				exportString += `export * from '$lib${path}';\n`;
+			} else {
+				exportString += `export { default as ${moduleName} } from '$lib${path}';\n`;
+			}
+			console.log('exported', moduleName);
+		});
+		fsx.writeFileSync('./src/lib/index.ts', exportString);
+	}
+
+	makeIndexFile() {
+		let fileInfoList = this._recursiveListSvelteFile('./src/lib', './src/lib');
+		this._writeExportFromFileInfoList(fileInfoList);
+	}
+
+	dotToCamelCase(str) {
+		return str.replace(/\.([a-z])/g, function (g) {
+			return g[1].toUpperCase();
+		});
+	}
+}
+
+/**
+ * generate the indexApi.ts file
+ * @deprecated
+ */
+async function createMethods() {
+	const svelteFiles = glob.sync('./src/lib/**/*.md');
+	const excludePatterns = ['.preview', '.demo', '.wip', '.js'];
+
+	const indexContent = svelteFiles
+		.map((file) => {
+			if (excludePatterns.some((pattern) => file.includes(pattern))) return;
+			file = file.replace('./src/lib/', '$lib/');
+			return `export { default as ${dotToCamelCase(path.basename(file, '.md'))} } from '${file}';`;
+		})
+		.filter((f) => f)
+		.join('\n');
+
+	fs.writeFileSync(path.join(__dirname, 'src/sitedata/api/indexApi.ts'), indexContent);
+	//fs.writeFileSync(path.join(__dirname, 'src/lib/slotuiCatalog.ts'), `export const slotuiCatalog = {${indexContent}} as const`);
+}
+
+/**
+ * generate the slotuiCatalog.ts file
+ */
+async function slotUiCatalogB() {
+	const svelteFiles = glob.sync('./src/lib/**/*.svelte');
+	const excludePatterns = ['.preview', '.demo', '.wip', '.js'];
+
+	const indexContent = svelteFiles
+		.map((file) => {
+			if (excludePatterns.some((pattern) => file.includes(pattern))) return;
+			const group = file.split('/')[3];
+			const comp = file.split('\\').slice(-1).toString()?.replace(/\./g, '');
+			const compName = file.split('/').slice(-1)[0].split('.')[0];
+			const dir = file.split('/').slice(-2, -1);
+			const code = compName.toLowerCase();
+			return `${code}:{name:"${compName}",code:"${code}",group:"${group}",root:"${dir}"},`;
+		})
+		.filter((f) => f)
+		.join('\n');
+
+	// write file
 	fs.writeFileSync(
-		dirPath + '/api/indexApiFull.ts',
-		objApiImport.join(';\r\n') + ';\r\n\r\n' + finalApiObj
+		path.join(__dirname, 'src/sitedata/slotuiCatalog.ts'),
+		`export const slotuiCatalog = {${indexContent}} as const`
 	);
 }
 
-function extractPropDefFromString(fileContent) {
-	const propDefRegex = /__propDef:\s*({[\s\S]+?});/g;
-	const propDefMatch = propDefRegex.exec(fileContent);
+/**
+ * generate the demo slotuiCatalog.ts file
+ */
+async function slotUiDemoCatalog() {
+	const svelteFiles = glob.sync('./src/lib/**/*.demo.svelte');
+	const excludePatterns = ['.preview','.wip', '.js'];
 
-	if (!propDefMatch) {
-		throw new Error('__propDef not found in string');
-	}
+	const indexContent = svelteFiles
+		.map((file) => {
+			if (excludePatterns.some((pattern) => file.includes(pattern))) return;
+			const group = file.split('/')[3];
+			const comp = file.split('\\').slice(-1).toString()?.replace(/\./g, '');
+			const compName = file.split('/').slice(-1)[0].split('.')[0];
+			const dir = file.split('/').slice(-2, -1);
+			const code = compName.toLowerCase();
+			return `${code}:{component:${compName},name:"${compName}",code:"${code}",group:"${group}",root:"${dir}"},`;
+		})
+		.filter((f) => f)
+		.join('\n');
 
-	const propDefString = propDefMatch[1];
+	console.log(await generateDemoIndex());
+	// write file
+	fs.writeFileSync(
+		path.join(__dirname, 'src/sitedata/slotuiDemoCatalog.ts'),
+		`${await generateDemoIndex()};\r export const slotuiDemoCatalog = {${indexContent}} as const`
+	);
+}
 
-	const propsRegex = /props:\s*({[\s\S]+?}),/g;
-	const propsMatch = propsRegex.exec(propDefString);
+// slotuiDemoComponents
+async function generateDemoIndex() {
+	const svelteFiles = glob.sync('./src/lib/**/*.demo.svelte', {
+		ignore: ['./src/lib/**/*.{preview,wip,js}.svelte']
+	});
 
-	if (!propsMatch) {
-		throw new Error('props not found in __propDef');
-	}
+	const indexContent = svelteFiles
+		.map((file) => {
+			if (!file) return;
+			file = file.replace('./src/lib/', '$lib/');
+			const compName = file.split('/').slice(-1)[0].split('.')[0];
+			return `import  ${path.basename(compName, '.svelte')} from '${file}';`;
+		})
+		.filter((f) => f)
+		.join('\n');
+ 
+	return indexContent;
 
-	const propsString = propsMatch[1];
-	const props = eval(`(${propsString})`);
+}
+const readFile = (fileName) => {
+	return fs.readFileSync(fileName, 'utf8');
+};
 
-	const eventsRegex = /events:\s*({[\s\S]+?}),/g;
-	const eventsMatch = eventsRegex.exec(propDefString);
+async function process(fileName) {
+	const config = await loadConfigFromFile({ command: 'build' }, './vite.config.js');
+	const plugin = sveltePlugin(config.config.plugins.find((plugin) => plugin.name === 'svelte'))[0];
+	fs.writeFileSync('./src/transform.js', plugin.toString());
 
-	if (!eventsMatch) {
-		throw new Error('events not found in __propDef');
-	}
+	const configPath = ts.findConfigFile('./', ts.sys.fileExists, 'tsconfig.json');
+	if (!configPath) throw new Error("Could not find a valid 'tsconfig.json'.");
+	//console.log(configPath);
+	const readConfigFile = ts.readConfigFile(configPath, readFile);
 
-	const eventsString = eventsMatch[1];
-	const events = eval(`(${eventsString})`);
+	// console.log(readConfigFile.config.extends);
 
-	const slotsRegex = /slots:\s*({[\s\S]+?})/g;
-	const slotsMatch = slotsRegex.exec(propDefString);
+	const readConfigFileExt = ts.readConfigFile(readConfigFile.config.extends, readFile);
 
-	if (!slotsMatch) {
-		throw new Error('slots not found in __propDef');
-	}
-
-	const slotsString = slotsMatch[1];
-	const slots = eval(`(${slotsString})`);
-
-	const result = {
-		props,
-		events,
-		slots
+	const tsOpt = {
+		...readConfigFileExt.config,
+		...readConfigFile.config,
+		compilerOptions: {
+			...readConfigFileExt.config.compilerOptions,
+			...readConfigFile.config.compilerOptions
+		}
 	};
 
-	return result;
-}
+	try {
+		let contents = fs.readFileSync(fileName, 'utf-8');
+		const scriptContent = contents.match(/<script[^>]*>([\s\S]*?)<\/script>/i)[1];
 
-function fromPropDefStringToJSON(str = '') {
-	const startIndex = str.indexOf('declare const __propDef: {');
-	const endIndex = str.lastIndexOf('};');
-	const relevantStr = str.substring(startIndex, endIndex + 3);
-	const lines = relevantStr.split('\n');
+		// console.log(contents);
 
-	const props = {};
-	const events = {};
-	const slots = {};
-	let currentSection = 'props'; // can be  "props" | "events" | "slots"
-	let currentComment = ''; // to store the comment of the current property
+		/* const test = await svelte.preprocess(contents,[sveltePreprocess()],{filename:fileName});
+		console.log(test.code) */
 
-	for (const line of lines) {
-		if (line.includes('props: {')) {
-			currentSection = 'props';
-		} else if (line.includes('events: {')) {
-			currentSection = 'events';
-		} else if (line.includes('slots: {')) {
-			currentSection = 'slots';
-		} else if (line.includes('};')) {
-			break;
-		} else if (line.trim().startsWith('/**')) {
-			currentComment = line
-				.trim()
-				.replace(/\/\*\*\s*/, '')
-				.replace(/\s*\*\//, '');
-		} else {
-			let [key, value = ''] = line
-				.trim()
-				.replace(/;/, '')
-				.split(':')
-				.map((v) => v.trim());
+		/* const preprocessed = (await preprocess(contents, preprocessor, { filename })).code;
+		contents = strip_lang_tags(preprocessed); */
 
-			const typeMatch = value.match(/\w+/);
+		return;
+		const ast = svelte.parse(contents, {
+			filename: fileName,
+			dev: true
+		});
 
-			let type = 'any';
-			let defaultValue = '';
-			let optional = false;
+		console.log(ast);
 
-			if (key.includes('?')) {
-				optional = true;
-				key = key.replace('?', '');
+		// Compiler le fichier Svelte
+
+		///const result = await plugin.transform(contents, fileName);
+		// fs.writeFileSync('./src/transform.js', result);
+		const transp = ts.transpileModule(scriptContent, tsOpt);
+		/* const compiled = svelte.compile(contents, {
+			dev: true,
+			filename: fileName,
+			generate: 'dom',
+			preserveComments: true
+		}); 
+		 fs.writeFileSync(path.resolve(__dirname, 'src/transform.js'), compiled.js.code);  */
+
+		//console.log(compiled)
+
+		const jsCode = await svelte
+			.preprocess(contents, sveltePreprocess({ script: true, style: true, sourceMap: false }), {
+				filename: fileName
+			})
+			.then((processed) => {
+				const compiled = svelte.compile(processed.code, {
+					dev: true,
+					filename: fileName,
+					generate: 'dom',
+					accessors: true,
+					preserveComments: true
+				});
+				return compiled.js.code;
+			});
+		fs.writeFileSync(path.resolve(__dirname, 'src/transform.js'), jsCode);
+
+		/* const data = new ComponentParser({
+			verbose: false
+		}).parseSvelteComponent(jsCode, {
+			filePath: fileName,
+			moduleName: fileName
+		}); */
+		return;
+		/* const transp = ts.transpileModule(jsCode, {
+			compilerOptions: {
+				module: ts.ModuleKind.ESNext,
+				target: ts.ScriptTarget.ESNext
 			}
+		}); */
 
-			if (typeMatch) {
-				type = typeMatch[0];
-				const defaultValueMatch = value.match(/=.*/);
-				if (defaultValueMatch) {
-					defaultValue = defaultValueMatch[0].replace(/=\s*/, '');
-				}
-			}
-			if (currentSection === 'props') {
-				props[key] = { type, defaultValue, comments: currentComment, optional };
-				currentComment = '';
-			} else if (currentSection === 'events') {
-				events[key] = { type, comments: currentComment };
-				currentComment = '';
-			} else if (currentSection === 'slots') {
-				slots[key] = { type, comments: currentComment };
-				currentComment = '';
-			}
-		}
+		// console.log(raw);
+		/* const data = new ComponentParser({
+			verbose: false
+		}).parseSvelteComponent(transp.outputText, {
+			filePath: fileName,
+			moduleName: fileName
+		}); */
+	} catch (e) {
+		console.error('error converting file ', fileName);
+		throw e;
 	}
-
-	return { props, events, slots };
 }
 
-function createReadme(fileList) {
-	mkdir(dirPath + '/api', { recursive: true }, () => {});
-	let keyDone = {};
-
-	let objImport = [];
-	let objObj = [];
-	let objApiImport = [];
-	let objApiObj = [];
-
-	fileList.forEach((file) => {
-		try {
-			const data = fs.readFileSync(file, 'utf8');
-			let newData = data.replace(/declare/g, '');
-			let frag = data.match(/__propDef:([^.]*)};([^.]*)export/gm);
-
-			const comp = file.split('\\').slice(-1)[0].split('.')[0];
-			const newContent = frag?.[0]?.replace(/export/gm, '');
-
-			const src = ('$sitedata/api/' + comp + '.md').replace(/\\/g, '/');
-			const srcApiFull = ('$sitedata/api/' + comp + '.api.md').replace(/\\/g, '/');
-
-			if (
-				!keyDone[comp.toLowerCase()] &&
-				!file.toLowerCase().includes('demo') &&
-				!file.toLowerCase().includes('preview')
-			) {
-				objImport.push(`import ${comp}ReadMe from "${src}"`);
-				objObj.push(`${comp.toLowerCase()}:${comp}ReadMe`);
-
-				objApiImport.push(`import ${comp}ApiReadMe from "${srcApiFull}"`);
-				objApiObj.push(`${comp.toLowerCase()}Api:${comp}ApiReadMe`);
-
-				keyDone[comp.toLowerCase()] = true;
-			}
-		} catch (e) {}
+async function useSvelte2Tsx() {
+	const svelteFiles = glob.sync('./src/lib/**/Button.svelte', {
+		//ignore: ['./src/lib/**/Alert.demo.svelte']
 	});
-	// write catalog object
-	const finalObj = `export const componentReadMe = {${objObj.join(',\r\n')}}`;
-	const finalApiObj = `export const componentApiReadMe = {${objApiObj.join(',\r\n')}}`;
+	let content;
+	svelteFiles.forEach((fileName) => {
+		process(fileName);
+	});
+	return;
+	const jsonDir = svelteFiles
+		.map((file) => {
+			return `export { default as ${dotToCamelCase(path.basename(file))} } from './${path.basename(
+				file
+			)}';`;
+		})
+		.filter((f) => f)
+		.join('\n'); /* const data = new ComponentParser({
+						verbose: false
+					}).parseSvelteComponent(processed.code, {
+						filePath: fileName,
+						moduleName: fileName
+					}); */
+	fs.writeFileSync(path.join(__dirname, `${config.slotuiDefs}/index.js`), jsonDir);
+	/* 
 
-	fs.writeFileSync(dirPath + '/api/indexApi.ts', objImport.join(';\r\n') + ';\r\n\r\n' + finalObj);
-	fs.writeFileSync(
-		dirPath + '/api/indexApiFull.ts',
-		objApiImport.join(';\r\n') + ';\r\n\r\n' + finalApiObj
-	);
+					
+	fs.writeFileSync(path.join(__dirname, `${config.tsxFiles}/index.js`), jsonDir); */
+
+	/* sveld.sveld({
+		input:  `${config.tsxFiles}/index.js`,
+		verbose: false,
+		glob: false,
+		types: false,
+		json: true,
+		jsonOptions: {
+			outDir: `${config.slotuiDefs}`
+		},
+		markdown: false,
+		markdownOptions: {
+			outDir: './src/sitedata',
+			write: true
+		} 
+	}); */
+
+	/* try {
+		sveld.sveld({
+			input: './src/lib/svelte-index.js',
+			verbose: false,
+			glob: true,
+			types: false,
+			json: true,
+			jsonOptions: {
+				outDir: `${config.slotuiDefs}`
+			},
+			markdown: false,
+			markdownOptions: {
+				outDir: './src/sitedata',
+				write: true
+			}
+		});
+
+		const jsonFiles = glob.sync(`${config.slotuiDefs}/*.json`);
+		const jsonDir = jsonFiles
+			.map((file) => {
+				return `export { default as ${dotToCamelCase(
+					path.basename(file, '.json')
+				)} } from './${path.basename(file, '.json')}.json';`;
+			})
+			.filter((f) => f)
+			.join('\n');
+
+		fs.writeFileSync(path.join(__dirname, `${config.slotuiDefs}/index.js`), jsonDir);
+	} catch (err) {
+		console.error(err); 
+	} */
 }
 
-// create a file
+async function generateSvelteIndex() {
+	const svelteFiles = glob.sync('./src/lib/**/*.svelte', {
+		ignore: ['./src/lib/**/*.{demo,preview,wip,js}.svelte']
+	});
 
-const resultProps = getAllFiles(srcPackage, 'svelte.d.ts');
-// write methods from packaged components
-// createMethods(resultProps);
-console.log(dirPath, 'component.api.md and component.md creation');
-// createReadme(resultProps);
-console.log(dirPath, 'index files for component.api.md and component.md');
+	const indexContent = svelteFiles
+		.map((file) => {
+			if (!file) return;
+			file = file.replace('./src/lib/', '$lib/');
+			return `export { default as ${path.basename(file, '.svelte')} } from '${file}';`;
+		})
+		.filter((f) => f)
+		.join('\n');
 
-const result = getAllFiles(srcLibDir, 'demo.svelte');
-// console.log(result)
-const resultPreview = getAllFiles(srcLibDir, 'preview.svelte');
-// write old component list
-fs.writeFileSync(
-	dirPath + '/componentList.ts',
-	createFile(result) + ' \r\n ' + createObject(result, 'slotUiComponentList')
-);
-// write new component list
-/* fs.writeFileSync(
-	path.join('src', 'lib') + '/slotuiCatalog.ts',
-	createComponentList(result, 'slotuiCatalog')
-); */
-console.log(dirPath, 'Documentation files created into /componentList.ts');
+	fs.writeFileSync(path.resolve(__dirname, 'src/lib/svelte-index.js'), indexContent);
+	fs.writeFileSync(path.resolve(__dirname, `${config.sitedata}/slotuiComponents.ts`), indexContent);
 
-fs.writeFileSync(
-	dirPath + '/componentPreviewList.ts',
-	createFile(resultPreview) + ' \r\n ' + createObject(resultPreview, 'slotUiComponentPreviewList')
-);
-console.log(dirPath, 'Preview files created into /componentPreviewList.ts');
+	//console.log(ComponentParser)
+
+	try {
+		sveld.sveld({
+			input: './src/lib/svelte-index.js',
+			verbose: false,
+			glob: true,
+			types: false,
+			typesOptions: {
+				outDir: `${config.slotuiDefs}`
+			},
+			json: true,
+			jsonOptions: {
+				outDir: `${config.slotuiDefs}`
+			},
+			markdown: false,
+			markdownOptions: {
+				outDir: './src/sitedata',
+				write: true
+			}
+		});
+
+		const jsonFiles = glob.sync(`${config.slotuiDefs}/*.json`);
+		const jsonDir = jsonFiles
+			.map((file) => {
+				return `export { default as ${dotToCamelCase(
+					path.basename(file, '.json')
+				)} } from './${path.basename(file, '.json')}.json';`;
+			})
+			.filter((f) => f)
+			.join('\n');
+
+		fs.writeFileSync(path.join(__dirname, `${config.slotuiDefs}/index.js`), jsonDir);
+		fs.unlinkSync(path.resolve(__dirname, 'src/lib/svelte-index.js'));
+	} catch (err) {
+		console.error(err);
+		// try running with svelte2tsx, descriptions will be missing
+	}
+}
+
+const config = {
+	sitedata: './src/sitedata',
+	tsxFiles: './src/sitedata/tsx',
+	slotuiDefs: './src/sitedata/slotuiDefs'
+};
+
+function main() {
+	fs.mkdirSync(config.slotuiDefs, { recursive: true });
+	fs.mkdirSync(config.tsxFiles, { recursive: true });
+
+	/* useSvelte2Tsx(); */
+
+	new FileProcessor().makeIndexFile();
+	createMethods();
+	slotUiCatalogB();
+	slotUiDemoCatalog(); 
+	generateSvelteIndex();
+}
+
+main();

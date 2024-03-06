@@ -7,6 +7,7 @@
 		"build": "vite build && npm run package",
 		"preview": "vite preview",
 		"package": "svelte-kit sync && svelte-package && publint",
+		"package:watch": "svelte-kit sync && svelte-package --watch",
 		"prepublishOnly": "npm run package",
 		"test": "npm run test:integration && npm run test:unit",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -15,14 +16,14 @@
 		"format": "prettier --write .",
 		"test:integration": "playwright test",
 		"test:unit": "vitest",
-		"build-docs": "node build-docs.js",
 		"prepare": "husky install",
 		"release": "standard-version",
 		"release:alpha": "standard-version --prerelease alpha",
 		"release:beta": "standard-version --prerelease beta",
 		"release:minor": "standard-version --release-as minor",
 		"publish": "npm run package",
-		"slotui-book": "nodemon --watch ./src/lib --watch ./extract-types.js --ignore **/docs/** --ignore ./src/lib/svelte.index.js --ext svelte --delay 2.5 extract-types.js"
+		"build-docs": "node build-docs.js",
+		"build-docs:watch": "nodemon --watch ./src/lib --watch ./build-docs.js --ignore **/docs/** --ignore ./src/lib/svelte.index.js --ext svelte --ext scss --delay 2.5 build-docs.js"
 	},
 	"exports": {
 		".": {
@@ -91,6 +92,7 @@
 		"svelte-check": "^3.6.0",
 		"svelte-use-form": "^2.10.0",
 		"svelte2tsx": "^0.7.0",
+		"ts-node": "^10.9.2",
 		"tslib": "^2.4.1",
 		"typescript": "^5.0.0",
 		"unocss": "^0.58.5",
