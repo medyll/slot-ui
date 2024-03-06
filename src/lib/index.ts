@@ -35,6 +35,7 @@ export * from '$lib/base/stepper/types.js';
 export { default as TitleBar } from '$lib/base/titleBar/TitleBar.svelte';
 export { default as Virtualize } from '$lib/base/virtualize/Virtualize.svelte';
 export * from '$lib/componentCite.js';
+export * from '$lib/csss/csss.js';
 export { default as DataList } from '$lib/data/dataList/DataList.svelte';
 export { default as DataListCell } from '$lib/data/dataList/DataListCell.svelte';
 export { default as DataListeContext } from '$lib/data/dataList/DataListeContext.svelte';

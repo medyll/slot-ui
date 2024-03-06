@@ -55,14 +55,7 @@
     }
   ],
   "moduleExports": [],
-  "slots": [
-    {
-      "name": "__default__",
-      "default": true,
-      "fallback": "<svelte:component this={component} {componentArgs} />",
-      "slot_props": "{ activeParams: {\r\n\t\t\t\t\t\t\t\t\t\t...activeParams,\r\n\t\t\t\t\t\t\t\t\t\t...multiple[tiple][params]\r\n\t\t\t\t\t\t\t\t\t} }"
-    }
-  ],
+  "slots": [],
   "events": [],
   "typedefs": []
 }
