@@ -13,6 +13,8 @@
 	export let multiple: Record<string, any> | undefined = {};
 
 	let activeParams = { ...componentArgs };
+
+	$: console.log(component);
 </script>
 
 {#if title}
@@ -24,32 +26,7 @@
 		<div class="pad-2 border-r flex-v flex-align-bottom">
 			<Icon icon="cib:svelte" />
 		</div>
-		<div class="pad-2">
-			{#if multiple}
-				<div class="flex-h flex-align-middle flex-wrap gap-medium">
-					{#each Object.keys(multiple) as tiple}
-						{#each Object.keys(multiple[tiple]) as params}
-							<div>
-								<slot
-									activeParams={{
-										...activeParams,
-										...multiple[tiple][params]
-									}}
-								>
-									<svelte:component this={component} {componentArgs} {...multiple[tiple][params]} />
-								</slot>
-								<div class="pad-2 text-center">{tiple} {params}</div>
-							</div>
-							<div class="border-r pad-tb-4" />
-						{/each}
-					{/each}
-				</div>
-			{:else}
-				<slot {activeParams}>
-					<svelte:component this={component} {componentArgs} />
-				</slot>
-			{/if}
-		</div>
+		<div class="pad-2">ss</div>
 	</div>
 	<div class="border-b" />
 	<div class="flex-h marg-t-2">
