@@ -6,4 +6,3 @@ export type SorterFieldType = {
 };
 
 export type SortItem = {};
-export type Data = Record<string, any>;

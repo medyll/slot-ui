@@ -1,7 +1,8 @@
 <script lang="ts">
 	import Button from '$lib/base/button/Button.svelte';
 	import { dataOp } from '$lib/engine/utils.js';
-	import type { SortItem, Data } from './types.js';
+	import type { Data } from '$lib/types/index.js';
+	import type { SortItem } from './types.js';
 
 	/** Sorter mode */
 	export let sorterMode: 'button' | 'menu' | 'free' = 'button';
