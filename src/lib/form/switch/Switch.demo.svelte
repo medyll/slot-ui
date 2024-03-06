@@ -49,7 +49,9 @@
 	let isOpen = false;
 </script>
 
-<ComponentExample component="Switch">
+<Switch name={'switcher'}></Switch>
+
+<!-- <ComponentExample component="Switch">
 	<div class="flex-v gap-large">
 		<DemoPage code={codeSlot} component="Switch" title="Using slots">
 			<Demoer {parametersSlot} {componentArgsSlot} let:activeParams>
@@ -59,4 +61,4 @@
 			</Demoer>
 		</DemoPage>
 	</div>
-</ComponentExample>
+</ComponentExample> -->
