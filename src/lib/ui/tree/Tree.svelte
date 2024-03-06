@@ -150,7 +150,7 @@
 		border: 1px solid transparent;
 		padding: 0.5rem;
 		padding-left: var(--tree-level);
-		border-radius: var(--radius-tiny);
+		border-radius: var(--sld-radius-tiny);
 		display: flex;
 		align-items: center;
 		width: 100%;

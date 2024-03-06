@@ -135,7 +135,7 @@
 	@import '../../styles/slotui-vars.scss';
 	@import '../../styles/presets.scss';
 	.popper {
-		border-radius: var(--css-popper-radius, var(--radius-tiny));
+		border-radius: var(--css-popper-radius, var(--sld-radius-tiny));
 		overflow: hidden;
 		position: fixed;
 		box-shadow: var(--box-shad-4);

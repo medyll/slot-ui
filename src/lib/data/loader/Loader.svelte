@@ -109,7 +109,7 @@
 
 		.loaderBox {
 			box-shadow: var(--box-shad-1);
-			border-radius: var(--radius-tiny);
+			border-radius: var(--sld-radius-tiny);
 			border: 1px solid var(--sld-color-foreground-alpha-high);
 			padding: 1rem 0;
 			min-width: 128px;
@@ -122,7 +122,7 @@
 			align-items: center;
 
 			.message {
-				border-radius: var(--radius-small);
+				border-radius: var(--sld-radius-small);
 				border-bottom: 1px solid;
 				border-color: var(--sld-color-primary);
 				padding: var(--box-density-1) var(--box-density-2);
