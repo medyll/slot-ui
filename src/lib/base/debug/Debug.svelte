@@ -1,6 +1,4 @@
 <script lang="ts">
-	export * as DebugTypes from './Debug.svelte';
-
 	import Cartouche from '$lib/base/cartouche/Cartouche.svelte';
 	import type TabsItemsProps from '$lib/navigation/tabs/Tabs.svelte';
 
