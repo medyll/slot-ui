@@ -100,27 +100,6 @@ class FileProcessor {
 }
 
 /**
- * generate the indexApi.ts file
- * @deprecated
- */
-async function createMethods() {
-	const svelteFiles = glob.sync('./src/lib/**/*.md');
-	const excludePatterns = ['.preview', '.demo', '.wip', '.js'];
-
-	const indexContent = svelteFiles
-		.map((file) => {
-			if (excludePatterns.some((pattern) => file.includes(pattern))) return;
-			file = file.replace('./src/lib/', '$lib/');
-			return `export { default as ${dotToCamelCase(path.basename(file, '.md'))} } from '${file}';`;
-		})
-		.filter((f) => f)
-		.join('\n');
-
-	fs.writeFileSync(path.join(__dirname, 'src/sitedata/api/indexApi.ts'), indexContent);
-	//fs.writeFileSync(path.join(__dirname, 'src/lib/slotuiCatalog.ts'), `export const slotuiCatalog = {${indexContent}} as const`);
-}
-
-/**
  * generate the slotuiCatalog.ts file
  */
 async function slotUiCatalogB() {
@@ -197,6 +176,16 @@ async function generateDemoIndex() {
 const readFile = (fileName) => {
 	return fs.readFileSync(fileName, 'utf8');
 };
+
+async function useSvelte2Tsx() {
+	const svelteFiles = glob.sync('./src/lib/**/Button.svelte', {
+		//ignore: ['./src/lib/**/Alert.demo.svelte']
+	});
+	let content;
+	svelteFiles.forEach((fileName) => {
+		process(fileName);
+	});
+}
 
 async function process(fileName) {
 	const config = await loadConfigFromFile({ command: 'build' }, './vite.config.js');
@@ -299,82 +288,7 @@ async function process(fileName) {
 	}
 }
 
-async function useSvelte2Tsx() {
-	const svelteFiles = glob.sync('./src/lib/**/Button.svelte', {
-		//ignore: ['./src/lib/**/Alert.demo.svelte']
-	});
-	let content;
-	svelteFiles.forEach((fileName) => {
-		process(fileName);
-	});
-	return;
-	const jsonDir = svelteFiles
-		.map((file) => {
-			return `export { default as ${dotToCamelCase(path.basename(file))} } from './${path.basename(
-				file
-			)}';`;
-		})
-		.filter((f) => f)
-		.join('\n'); /* const data = new ComponentParser({
-						verbose: false
-					}).parseSvelteComponent(processed.code, {
-						filePath: fileName,
-						moduleName: fileName
-					}); */
-	fs.writeFileSync(path.join(__dirname, `${config.slotuiDefs}/index.js`), jsonDir);
-	/* 
 
-					
-	fs.writeFileSync(path.join(__dirname, `${config.tsxFiles}/index.js`), jsonDir); */
-
-	/* sveld.sveld({
-		input:  `${config.tsxFiles}/index.js`,
-		verbose: false,
-		glob: false,
-		types: false,
-		json: true,
-		jsonOptions: {
-			outDir: `${config.slotuiDefs}`
-		},
-		markdown: false,
-		markdownOptions: {
-			outDir: './src/sitedata',
-			write: true
-		} 
-	}); */
-
-	/* try {
-		sveld.sveld({
-			input: './src/lib/svelte-index.js',
-			verbose: false,
-			glob: true,
-			types: false,
-			json: true,
-			jsonOptions: {
-				outDir: `${config.slotuiDefs}`
-			},
-			markdown: false,
-			markdownOptions: {
-				outDir: './src/sitedata',
-				write: true
-			}
-		});
-
-		const jsonFiles = glob.sync(`${config.slotuiDefs}/*.json`);
-		const jsonDir = jsonFiles
-			.map((file) => {
-				return `export { default as ${dotToCamelCase(
-					path.basename(file, '.json')
-				)} } from './${path.basename(file, '.json')}.json';`;
-			})
-			.filter((f) => f)
-			.join('\n');
-
-		fs.writeFileSync(path.join(__dirname, `${config.slotuiDefs}/index.js`), jsonDir);
-	} catch (err) {
-		console.error(err); 
-	} */
-}
 
 async function generateSvelteIndex() {
 	const svelteFiles = glob.sync('./src/lib/**/*.svelte', {
@@ -446,7 +360,6 @@ function main() {
 	/* useSvelte2Tsx(); */
 
 	new FileProcessor().makeIndexFile();
-	createMethods();
 	slotUiCatalogB();
 	slotUiDemoCatalog(); 
 	generateSvelteIndex();
