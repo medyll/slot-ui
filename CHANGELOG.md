@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0-beta.0](https://github.com/medyll/slot-ui/compare/v0.1.1...v0.2.0-beta.0) (2024-03-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* Demoer now shows its content
+* Demoer now shows its content
+
+### Features
+
+* listitem styling ([4631c8e](https://github.com/medyll/slot-ui/commit/4631c8ec76616fed6dd2be5a3a46cbf0ff7d84e7))
+
+
+### Bug Fixes
+
+* Demoer now shows its content ([6697041](https://github.com/medyll/slot-ui/commit/669704160c367afc2fd6d0dbf5075ec09eac3ead))
+* Demoer now shows its content ([7a1751a](https://github.com/medyll/slot-ui/commit/7a1751acd8ce9b1df2b48f97bc1da005f9aae1c8))
+
 ### [0.1.1](https://github.com/medyll/slot-ui/compare/v0.1.1-beta.2...v0.1.1) (2024-03-02)
 
 
