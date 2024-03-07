@@ -10,7 +10,7 @@
 	import type { SorterFieldType } from '$lib/data/sorter/types.js';
 
 	type Data = Record<string, any>;
-	// set store
+	// set stores
 	const listStore = createListStore();
 	setContext('listStateContext', listStore);
 
@@ -24,6 +24,7 @@
 	 * css style off the root component
 	 * @type {string | undefined}
 	 */
+
 	export let style: string | undefined = undefined;
 	/**
 	 * element root HTMLDivElement props
@@ -134,7 +135,7 @@
 					};
 				});
 			} catch (e) {
-				console.log(e);
+				console.log(e, 'red');
 			}
 		}
 	}

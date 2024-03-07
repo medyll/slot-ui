@@ -4,7 +4,9 @@
 ul.listRoot {
   display: flex;
   flex-direction: column;
+  align-items: end;
   padding: var(--sld-list-padding);
+  gap: 2px;
 }
 
 ul.listRoot:focus {
@@ -19,14 +21,17 @@ li.listItem {
   align-items: center;
   position: relative;
   border-radius: var(--sld-list-item-radius);
-  max-width: 100%;
-
+  width: 100%;
+  height: 36px;
+  min-height: 36px;
+  border: 1px solid transparent;
+  align-self: flex-start;
   .listItemContent {
     flex: 1;
     min-width: auto;
     overflow: hidden;
     padding: 0;
-    padding-left: 0.5rem;
+    padding-left: 1rem;
 
     [slot="listItemPrimary"] {
       text-overflow: ellipsis;
@@ -84,13 +89,16 @@ li.listItem {
 
   &.selected,
   &[data-selected="true"] {
+    border: none;
+    background-color: var(--sld-color-background-darken-mid);
     .listItemChip {
       position: absolute;
+      min-height: 16px;
       height: 50%;
-      width: 4px;
+      width: 3px;
       background-color: var(--sld-color-primary);
       border-radius: 8px;
-      left: 1px;
+      left: 0;
       border: 1px solid var(--sld-color-primary-alpha-mid);
     }
   }
