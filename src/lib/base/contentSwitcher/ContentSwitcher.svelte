@@ -1,22 +1,49 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
 	import IconButton from '$lib/base/button/IconButton.svelte';
 	import Button from '$lib/base/button/Button.svelte';
+	import type { CommonProps } from '$lib/types/index.js';
+	import type { Snippet } from 'svelte';
 
-	/*  common slotUi exports*/
-	let className = '';
-	export { className as class };
-	export let element: HTMLDivElement | null = null; //
-	export let style: string | null = null;
-	/*  end slotUi exports*/
+	type ContentSwitcherProps = CommonProps & {
+		/** className off the root component */
+		class?: string;
 
-	export let icon: string = 'toggle';
-	export let iconback: string = 'chevron-left';
+		/** element root HTMLDivElement props */
+		element?: HTMLDivElement | null;
 
-	export let parent: HTMLElement | undefined = undefined;
+		/** css style off the root component */
+		style?: string | null;
+
+		/** icon for the switcher */
+		icon: string;
+
+		/** icon for the back action */
+		iconback: string;
+
+		/** parent element of the switcher */
+		parent?: HTMLElement | undefined;
+		slots: {
+			contentSwitcherIcon: Snippet;
+			switcherSlot: Snippet;
+			contentSwitcherReveal: Snippet;
+		};
+	};
+
+	let {
+		class: className = '',
+		element = null,
+		style = null,
+		icon = 'toggle',
+		iconback = 'chevron-left',
+		parent = undefined,
+		slots
+	} = $props<ContentSwitcherProps>();
 
 	let visibleSate: boolean = false;
 	let thisRef: any;
-	let realParent: HTMLElement;
+	let realParent: HTMLElement | null = $derived(parent ?? element?.parentElement ?? null);
 
 	function handleClick(event: MouseEvent) {
 		visibleSate = !visibleSate;
@@ -35,40 +62,34 @@
 			element.appendChild(thisRef);
 		}
 	}
-
-	$: if (element) {
-		if (!parent) {
-			realParent = element.parentElement;
-		} else {
-			realParent = parent;
-		}
-	}
 </script>
 
 <div class={className} {style} on:click={handleClick}>
-	<slot name="contentSwitcherIcon">
-		<slot name="switcherSlot">
-			<IconButton style="aspect-ratio:1/1" {icon} iconFontSize="small" />
-		</slot>
-	</slot>
+	{#if slots?.contentSwitcherIcon}
+		{@render slots.contentSwitcherIcon()}
+	{:else}
+		<IconButton style="aspect-ratio:1/1" {icon} iconFontSize="small" />
+	{/if}
 </div>
 <div bind:this={element} style="display:none">
 	<div
 		bind:this={thisRef}
-		class="flex-h flex-align-middle root"
+		class="flex-h flex-align-middle contentSwitcher"
 		style="width:100%;flex:1;position: relative"
 	>
 		<div on:click={handleClick}>
 			<Button ratio="1/1" icon={iconback} iconFontSize="small" />
 		</div>
-		<slot name="contentSwitcherReveal" />
+		{#if slots?.contentSwitcherReveal}
+			{@render slots.contentSwitcherReveal()}
+		{/if}
 	</div>
 </div>
 
 <style lang="scss">
 	@import '../../styles/slotui-vars.scss';
 	@import '../../styles/presets.scss';
-	.root {
+	.contentSwitcher {
 		min-width: auto;
 		max-width: 100%;
 		gap: 0.5rem;
