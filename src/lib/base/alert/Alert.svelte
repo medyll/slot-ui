@@ -16,43 +16,62 @@
 	};
 
 	type Props = {
-		element: HTMLDivElement;
-		class: String;
+		element?: HTMLDivElement;
+		class?: String;
 		/** type of levels 
 		@type {'success' | 'info' | 'error' | 'warning' | 'alert' | 'discrete'}
 		*/
-		level: LevelType;
+		level?: LevelType;
 		/** message to be shown */
-		message: string | undefined;
+		message?: string;
 		/** make the alert draggable */
-		isDraggable: boolean;
+		draggable?: boolean;
 		/** show or hide the alert */
-		isOpen: boolean;
+		isOpen?: boolean;
 		/** component actions
 		 * @type {Record<'open'|'toggle' | 'close', Function>}
 		 */
-		actions: Record<'open' | 'toggle' | 'close', Function>;
-		children: Snippet;
+		actions?: Record<'open' | 'toggle' | 'close', Function>;
+		children?: Snippet;
+		topButtonSlot?: Snippet;
+		messageSlot?: Snippet;
+		buttonZoneSlot?: Snippet;
+		buttonCloseSlot?: Snippet;
 	};
 
 	let {
 		element,
 		class: className,
-		level,
+		level = 'info',
 		message,
-		isDraggable,
+		draggable = false,
 		isOpen,
 		actions = alertActions,
-		children
+		children,
+		topButtonSlot,
+		messageSlot,
+		buttonZoneSlot,
+		buttonCloseSlot
 	} = $props<Props>();
 
-	const handleClick = (event: PointerEvent) => {
-		if (event?.target?.attributes['data-close']) {
+	const handleClick = (event: Event) => {
+		if (event?.target?.getAttribute('data-close')) {
 			event.stopPropagation();
 			actions.close();
 			new CustomEvent('alert:closed');
 		}
 	};
+
+	$effect(() => {
+		if (element) {
+			element.addEventListener('click', handleClick, true);
+		}
+		return () => {
+			if (element) {
+				element.removeEventListener('click', handleClick);
+			}
+		};
+	});
 
 	function open() {
 		isOpen = true;
@@ -65,14 +84,9 @@
 	}
 </script>
 
+<!-- on:click={handleClick} -->
 {#if isOpen}
-	<div
-		bind:this={element}
-		transition:fade|global
-		class="alert shad-4 {className}"
-		on:click={handleClick}
-		role="button"
-	>
+	<div {draggable} bind:this={element} transition:fade|global class="alert shad-4 {className}">
 		<div class="pad-1 ftdr border-b-2 border-color-scheme-{level}">
 			<div class="flex-h flex-align-middle">
 				<div class="pad-1">
@@ -80,30 +94,41 @@
 				</div>
 				<div class="pad-1 flex-main flex-h flex-align-middle">
 					<div class="flex-main">
-						{@render children()}
-						<slot>{message}</slot>
+						{#if children}
+							{@render children()}
+						{:else}
+							{message}
+						{/if}
 					</div>
-					<slot name="topButtonSlot" />
-					<Button
-						size="auto"
-						icon="window-close"
-						naked
-						on:click={() => {
-							isOpen = !isOpen;
-						}}
-					/>
+					{#if topButtonSlot}
+						{@render topButtonSlot()}
+					{/if}
+					<div data-close>
+						{#if buttonCloseSlot}
+							{@render buttonCloseSlot()}
+						{:else}
+							<Button
+								size="auto"
+								icon="window-close"
+								naked
+								onclick={() => {
+									isOpen = !isOpen;
+								}}
+							/>
+						{/if}
+					</div>
 				</div>
 			</div>
-			{#if $$slots.messageSlot}
+			{#if messageSlot}
 				<Divider />
 				<div class="pad-1">
-					<slot name="messageSlot" />
+					{@render messageSlot()}
 				</div>
 			{/if}
 		</div>
-		{#if $$slots.buttonZoneSlot}
-			<div class="pad-tb-1 pad-ii-2 flex-h flex-align-right">
-				<slot name="buttonZoneSlot" />
+		{#if buttonZoneSlot}
+			<div class="pad-tb-1 pad-ii-2 flex-h flex-align-right" role="button">
+				{@render buttonZoneSlot()}
 			</div>
 		{/if}
 	</div>

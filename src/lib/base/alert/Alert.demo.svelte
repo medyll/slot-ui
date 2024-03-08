@@ -17,7 +17,8 @@
 	};
 
 	let componentArgs = {
-		level: 'info'
+		level: 'info',
+		isOpen: true
 	};
 
 	let componentArgs2 = {
@@ -35,6 +36,7 @@
 <Alert />	`;
 </script>
 
+<Alert message="red" isOpen={true} />
 <ComponentExample
 	component="Alert"
 	cite="Then they were informed, then they were messaged, then they were alerted. Br Jhons, 1752"
@@ -42,10 +44,12 @@
 	<DemoPage title="Using slots" component="Alert" code={code1}>
 		<Demoer {parameters} {componentArgs} let:activeParams>
 			<div class="flex-h flex-wrap flex-align-middle gap-medium">
-				<Alert {...activeParams}>Simple alert</Alert>
+				<Alert {...activeParams}>hi !</Alert>
 				<Alert {...activeParams}>
 					Simple alert with a button
-					<Button slot="topButtonSlot">button</Button>
+					{#snippet topButtonSlot()}
+						<Button>button</Button>
+					{/snippet}
 				</Alert>
 				<Alert
 					{...activeParams}
