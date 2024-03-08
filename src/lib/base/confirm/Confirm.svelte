@@ -1,41 +1,74 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import Button from '$lib/base/button/Button.svelte';
-	import { onDestroy } from 'svelte';
+	import { onDestroy, type Snippet } from 'svelte';
+	import type { CommonProps } from '$lib/types/index.js';
 
-	let className: string | undefined = undefined;
-	/**  className off the root component  */
-	export { className as class };
-	/**  css style off the root component  */
-	export let style: string | undefined = undefined;
-	/** element initial HTMLDivElement props  */
-	export let initialRef: HTMLElement | null = null; //
-	/** element onfirm HTMLDivElement props  */
-	export let contentRef: HTMLElement | null = null; //
+	let step: string = 'initial';
 
-	/** text displayed on confirm button */
-	export let tooltipInitial: string | null = null;
-	/** text displayed on confirm button */
-	export let primaryInitial: string = '';
-	/** icon displayed on the confirm button */
-	export let iconInitial: string = '';
-	/** color of the icon displayed on the confirm button */
-	export let iconColorInitial: string = 'inherit';
+	type ConfirmProps = CommonProps & {
+		/** class off the root component */
+		class?: string;
 
-	/** text displayed on confirm button */
-	export let primary: string = 'confirm';
-	/** icon displayed on the confirm button */
-	export let icon: string = 'check-circle-outline';
-	/** color of the icon displayed on the confirm button
+		/** css style off the root component */
+		style?: string;
+
+		/** element initial HTMLDivElement props */
+		initialRef?: HTMLElement | null;
+
+		/** element confirm HTMLDivElement props */
+		contentRef?: HTMLElement | null;
+
+		/** text displayed on initial button */
+		tooltipInitial?: string | null;
+
+		/** text displayed on initial button */
+		primaryInitial: string;
+
+		/** icon displayed on the initial button */
+		iconInitial: string;
+
+		/** color of the icon displayed on the initial button */
+		iconColorInitial: string;
+
+		/** text displayed on confirm button */
+		primary: string;
+
+		/** icon displayed on the confirm button */
+		icon: string;
+
+		/** color of the icon displayed on the confirm button
 	@type string
 	 */
-	export let iconColor: string = 'green';
+		iconColor: string;
 
-	/** action initiated on confirmation*/
-	export let action: () => void = () => {};
-	let step: string = 'initial';
-	/** icon to display for back action */
-	export let iconCancel: string = 'chevron-left';
+		/** action initiated on confirmation */
+		action: () => void;
+
+		/** icon to display for back action */
+		iconCancel: string;
+		slots: {
+			initial: Snippet;
+		};
+	};
+
+	let {
+		class: className = '',
+		style = '',
+		initialRef = null,
+		contentRef = null,
+		tooltipInitial = null,
+		primaryInitial = '',
+		iconInitial = '',
+		iconColorInitial = 'inherit',
+		primary = 'confirm',
+		icon = 'check-circle-outline',
+		iconColor = 'green',
+		action = () => {},
+		iconCancel = 'chevron-left',
+		children,
+		slots
+	} = $props<ConfirmProps>();
 
 	function handleClickInitial(event: any) {
 		event.preventDefault();
@@ -86,9 +119,11 @@
 		<span on:click={handleClickCancel}>
 			<Button naked icon={iconCancel} title="cancel" />
 		</span>
-		<slot>
+		{#if children}
+			{@render children()}
+		{:else}
 			<Button on:click={handleAction} {iconColor} {icon} size="auto" {primary} focus />
-		</slot>
+		{/if}
 	</span>
 {/if}
 
