@@ -1,27 +1,41 @@
-<script lang="ts">
-	let className: string | undefined = undefined;
-	/**  className off the root component  */
-	export { className as class };
-	/**  css style off the root component  */
-	export let style: string | undefined = undefined;
-	/** element root HTMLDivElement props  */
-	export let element: HTMLDivElement | null = null;
-	/** position of the chipper
-  @type {'top' | 'bottom' | 'left' | 'right'}
-   */
-	export let position: 'top' | 'bottom' | 'left' | 'right' = 'bottom';
-	/** theme color of the chip
-  @type {'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger' | 'light' | 'medium' | 'dark'}
-   */
-	export let bgTheme: string | undefined = 'primary';
-	/** css color code for the chip */
-	export let color: string | undefined = '';
-	/** text or html is slot is not used */
-	export let content: string | undefined = '';
-	/** show or hide the chip */
-	export let showChip: boolean = true;
+<svelte:options accessors={true} runes={true} />
 
-	$: cssColor = color ?? (bgTheme ? `var(--sld-color-${bgTheme})` : '');
+<script lang="ts">
+	type ChipperProps = {
+		/** className off the root component */
+		class?: string;
+		/** css style off the root component */
+		style?: string;
+		/** element root HTMLDivElement props */
+		element?: HTMLDivElement | null;
+		/** position of the chipper
+		@type {'top' | 'bottom' | 'left' | 'right'}
+		*/
+		position: 'top' | 'bottom' | 'left' | 'right';
+		/** theme color of the chip
+		@type {'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger' | 'light' | 'medium' | 'dark'}
+		*/
+		bgTheme?: string;
+		/** css color code for the chip */
+		color?: string;
+		/** text or html is slot is not used */
+		content?: string;
+		/** show or hide the chip */
+		showChip: boolean;
+	};
+
+	let {
+		class: className = '',
+		style = '',
+		element = null,
+		position = 'bottom',
+		bgTheme = 'primary',
+		color = '',
+		content = '',
+		showChip = true
+	} = $props<ChipperProps>();
+
+	const cssColor = $derived(color ?? (bgTheme ? `var(--sld-color-${bgTheme})` : ''));
 </script>
 
 <div
