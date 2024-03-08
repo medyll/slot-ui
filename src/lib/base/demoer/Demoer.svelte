@@ -52,7 +52,7 @@
 				</div>
 			{:else if component}
 				<svelte:component this={component} {componentArgs} {activeParams} />
-			{:else}tert
+			{:else}
 				<slot {activeParams} />
 			{/if}
 		</div>

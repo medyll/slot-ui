@@ -1,23 +1,37 @@
-<script lang="ts">
-	import Icon from '$lib/base/icon/Icon.svelte';
-	/*  common slotUi exports*/
-	let className = '';
-	export { className as class };
-	export let element: HTMLDivElement | null = null;
-	/*  end slotUi exports*/
+<svelte:options runes={true} />
 
-	/** icon name 	*/
-	export let icon: string = 'icon-park-outline:avatar';
-	/**
-	 * size of the avatar
-	 * @type {'tiny' | 'small' | 'medium' | 'large' | 'full'}
-	 */
-	export let size: 'tiny' | 'small' | 'medium' | 'large' | 'full' = 'large';
-	/**
-	 * size of the icon
-	 * @type {'tiny' | 'small' | 'medium' | 'large' | 'full'}
-	 */
-	export let iconSize: 'tiny' | 'small' | 'medium' | 'default' | 'large' | 'big' = 'large';
+<script lang="ts">
+	import type { Snippet } from 'svelte';
+	import Icon from '$lib/base/icon/Icon.svelte';
+
+	type Props = {
+		/** icon name 	*/
+		icon?: string;
+		/**
+		 * size of the avatar
+		 * @type {'tiny' | 'small' | 'medium' | 'large' | 'full'}
+		 */
+		size?: 'tiny' | 'small' | 'medium' | 'large' | 'full';
+		/**
+		 * size of the icon
+		 * @type {'tiny' | 'small' | 'medium' | 'large' | 'full'}
+		 */
+		iconSize?: 'tiny' | 'small' | 'medium' | 'default' | 'large' | 'big';
+		element?: HTMLDivElement;
+		class?: string;
+		children?: Snippet;
+		avatarBadge?: Snippet;
+	};
+
+	let {
+		icon = 'icon-park-outline:avatar',
+		size,
+		iconSize,
+		class: className = '',
+		element,
+		children,
+		avatarBadge
+	} = $props<Props>();
 
 	const sizes = {
 		tiny: '2rem',
@@ -33,10 +47,14 @@
 	class="avatar {className}"
 	style="width:{sizes[size]};height:{sizes[size]}"
 >
-	<slot name="avatarBadge" />
-	<slot>
+	{#if avatarBadge}
+		{@render avatarBadge()}
+	{/if}
+	{#if children}
+		{@render children()}
+	{:else}
 		<Icon {icon} fontSize={iconSize} />
-	</slot>
+	{/if}
 </div>
 
 <style lang="scss">
