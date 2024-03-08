@@ -58,7 +58,7 @@
 
 	let openPoppOpt: UsePopperProps;
 
-	$: openPoppOpt = {
+	openPoppOpt = {
 		parentNode: element,
 		component: actionComponent,
 		componentProps: componentProps ?? {},

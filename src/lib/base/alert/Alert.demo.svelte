@@ -36,7 +36,6 @@
 <Alert />	`;
 </script>
 
-<Alert message="red" isOpen={true} />
 <ComponentExample
 	component="Alert"
 	cite="Then they were informed, then they were messaged, then they were alerted. Br Jhons, 1752"
