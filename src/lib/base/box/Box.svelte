@@ -1,36 +1,64 @@
 <script lang="ts">
 	import TitleBar from '$lib/base/titleBar/TitleBar.svelte';
 	import Icon from '$lib/base/icon/Icon.svelte';
+	import type { CommonProps } from '$lib/types/index.js';
+	import type { Snippet } from 'svelte';
 
 	let className = '';
 	export { className as class };
-	export let element: HTMLDivElement | null = null;
-	export let style: string = '';
 
-	/** is the content visible */
-	export let isOpen: boolean = true;
-	/** show a working closer icon */
-	export let showCloseControl: boolean = true;
-	/** used to activate the slotui.TitleBar component */
-	export let hasMenu: boolean = false;
-	/** text to be shown in the title bar */
-	export let title: string | undefined = undefined;
-	/** alternative to iconSlot, icon to be used with the internat iconify component */
-	export let icon: string | undefined = undefined;
-	export let iconFamily: string | undefined = undefined;
-	/** alternative to contentSlot,  content to be shown in the main area */
-	export let content: string | undefined = undefined;
-	/** alternative to slot.bottomZone, content to be shown in the bottom button zone */
-	export let bottomZone: string | undefined = undefined;
-
-	/** component actions
-	 * @type {Record<'open'|'toggle' | 'close', Function>}
-	 */
-	export const actions: Record<'open' | 'toggle' | 'close', Function> = {
-		open,
-		toggle,
-		close
+	type Props = CommonProps & {
+		element: HTMLDivElement;
+		style: string;
+		/** is the content visible */
+		isOpen: boolean;
+		/** show a working closer icon */
+		showCloseControl: boolean;
+		/** used to activate the slotui.TitleBar component */
+		hasMenu: boolean;
+		/** text to be shown in the title bar */
+		title: string | undefined;
+		/** alternative to iconSlot, icon to be used with the internat iconify component */
+		icon: string | undefined;
+		iconFamily: string | undefined;
+		/** alternative to contentSlot,  content to be shown in the main area */
+		content: string | undefined;
+		/** alternative to slot.bottomZone, content to be shown in the bottom button zone */
+		bottomZone: string | undefined;
+		/** component actions
+		 * @type {Record<'open'|'toggle' | 'close', Function>}
+		 */
+		actions: Record<'open' | 'toggle' | 'close', Function>;
+		restProps: HTMLDivElement['attributes'];
+		slots: {
+			titleBarTitle: Snippet;
+			titleBarIcon: Snippet;
+			boxBottomZone: Snippet;
+		};
+		events: Record<string, any>;
 	};
+
+	let {
+		element,
+		style = '',
+		isOpen = true,
+		showCloseControl = true,
+		hasMenu = false,
+		title = undefined,
+		icon = undefined,
+		iconFamily = undefined,
+		content = undefined,
+		bottomZone = undefined,
+		actions = {
+			open,
+			toggle,
+			close
+		},
+		restProps = {},
+		children,
+		slots = { titleBarTitle: undefined, titleBarIcon: undefined, boxBottomZone: undefined },
+		events = {}
+	} = $props<Props>();
 
 	function open() {
 		isOpen = true;
@@ -41,24 +69,37 @@
 	function close() {
 		isOpen = false;
 	}
-	$: closer = !showCloseControl ? {} : { onClose: () => actions.close() };
+
+	let closer = !showCloseControl ? {} : { onClose: () => actions.close() };
 </script>
 
 {#if isOpen}
-	<div class="boxRoot shad-3 flex-v {className}" {style} {...$$restProps}>
+	<div bind:this={element} class="boxRoot shad-3 flex-v {className}" {style} {...restProps}>
 		<TitleBar {hasMenu} {...closer}>
-			<slot name="titleBarTitle" slot="titleBarTitle">{title ?? ''}</slot>
-			<slot name="titleBarIcon" slot="titleBarIcon">
-				{#if icon}
-					<Icon {icon} {iconFamily} />
-				{/if}
-			</slot>
+			{#if slots.titleBarTitle}
+				{slots.titleBarTitle()}
+			{:else}
+				{title ?? ''}
+			{/if}
+			{#if slots.titleBarIcon}
+				{slots.titleBarIcon()}
+			{:else if icon}
+				<Icon {icon} {iconFamily} />
+			{/if}
 		</TitleBar>
 		<div class="boxContent flex-main">
-			<slot>{@html content ?? ''}</slot>
+			{#if children}
+				{@render children()}
+			{:else if content}
+				{@html content ?? ''}
+			{/if}
 		</div>
 		<div class="boxButtonSlot">
-			<slot name="boxBottomZone">{@html bottomZone ?? ''}</slot>
+			{#if slots.boxBottomZone}
+				{@render slots.boxBottomZone()}
+			{:else}
+				{@html bottomZone ?? ''}
+			{/if}
 		</div>
 	</div>
 {/if}
