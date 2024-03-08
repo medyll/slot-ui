@@ -3,11 +3,25 @@
 	import 'prismjs/plugins/normalize-whitespace/prism-normalize-whitespace';
 	import 'prism-svelte';
 	import Icon from '$lib/base/icon/Icon.svelte';
+	import type { Snippet } from 'svelte';
 
-	export let title: undefined = undefined;
-	export let code: string = '';
-	export let subTitle: undefined = undefined;
-	export let component: string | undefined = undefined;
+	type DemoerCodeProps = {
+		title?: string;
+		code: string;
+		subTitle?: string;
+		component?: string;
+		slots: {
+			code: Snippet;
+		};
+	};
+
+	let {
+		title = undefined,
+		code = '',
+		subTitle = undefined,
+		component = undefined,
+		slots
+	} = $props<DemoerCodeProps>();
 
 	Prism.plugins.NormalizeWhitespace.setDefaults({
 		'remove-trailing': true,
@@ -25,15 +39,17 @@
 </script>
 
 <div>
-	{#if code || $$slots.code}
+	{#if code || slots.code}
 		<h6 class="border-b w-medium pad flex-h flex-align-middle gap-small">
 			<Icon icon="mdi:code" /> code
 		</h6>
 		{#if title}<div class="text-bold pad pad-l-4">- {title}</div>{/if}
 		<div class="marg-l-2 dsp-block-inline radius-small pad-ii-2">
-			<slot name="code">
+			{#if slots.code}
+				{@render slots.code()}
+			{:else}
 				<pre><code lang="language-svelte">{@html highlighted}</code></pre>
-			</slot>
+			{/if}
 		</div>
 	{/if}
 </div>
