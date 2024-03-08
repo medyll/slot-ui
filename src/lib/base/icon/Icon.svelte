@@ -2,34 +2,58 @@
 	import Icon from '@iconify/svelte';
 	import type { ElementProps } from '$lib/types/index.js';
 	import { uiPresets } from '$lib/engine/presets.js';
-	/*  common slotUi exports*/
-	let className: string | undefined = undefined;
-	/**  className off the root component  */
-	export { className as class };
-	/**  css style off the root component  */
-	export let style: string | undefined = undefined;
-	/** element root HTMLDivElement props  */
-	export let element: HTMLDivElement | null | any = null;
-	/*  end slotUi exports*/
 
-	/** icon name
-	 * @type {string}
-	 */
-	export let icon: string = 'question';
-	export let iconFamily: string = 'mdi'; // fa-solid // mdi
-	/** icon size
-	 * @type {'small' | 'medium' | 'large' | 'xlarge'}
-	 */
-	export let fontSize: ElementProps['sizeType'] = 'small';
+	type IconProps = {
+		/** className off the root component */
+		class?: string;
 
-	export let rotate: boolean = false;
-	export let color: string | undefined = undefined;
+		/** css style off the root component */
+		style?: string;
 
-	export let rotation: number = 0;
+		/** element root HTMLDivElement props */
+		element?: HTMLDivElement | null | any;
+
+		/**
+		 * icon name
+		 * @type {string}
+		 */
+		icon: string;
+
+		/** icon family */
+		iconFamily: string;
+
+		/**
+		 * icon size
+		 * @type {'small' | 'medium' | 'large' | 'xlarge'}
+		 */
+		fontSize: ElementProps['sizeType'];
+
+		/** rotate icon */
+		rotate: boolean;
+
+		/** icon color */
+		color?: string;
+
+		/** icon rotation */
+		rotation: number;
+	};
+
+	let {
+		class: className,
+		style,
+		element = null,
+		icon = 'question',
+		iconFamily = 'mdi',
+		fontSize = 'small',
+		rotate = false,
+		color,
+		rotation = 0,
+		...restProps
+	} = $props<IconProps>();
 
 	const sizes: Record<ElementProps['sizeType'], number> = uiPresets.iconSize;
 
-	$: iconName = icon.includes(':') ? icon : `${iconFamily}:${icon}`;
+	const iconName = $derived(icon.includes(':') ? icon : `${iconFamily}:${icon}`);
 </script>
 
 {#key rotation}
@@ -41,7 +65,7 @@
 		]};color:{color};{style};transform:({rotation}deg)"
 		on:click
 		icon={iconName}
-		{...$$restProps}
+		{...restProps}
 	/>
 {/key}
 
