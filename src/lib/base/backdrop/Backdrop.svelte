@@ -1,26 +1,12 @@
-<svelte:options accessors />
+<svelte:options runes={true} accessors />
 
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import Icon from '$lib/base/icon/Icon.svelte';
-	/*  common slotUi exports*/
-	let className = '';
-	export { className as class };
-	export let element: HTMLDivElement | null = null;
-	export let style: string | undefined = undefined;
-	/** show or hide the backdrop */
-	export let isOpen: boolean = false;
-	/** if in loading state, it will show a loading icon or $$slots.loadingSlot */
-	export let isLoading = false;
-	/** 
-    css position mode of the backdrop
-    @type {'absolute' | 'fixed' | 'relative'}  
-  */
-	export let flow: 'absolute' | 'fixed' | 'relative' = 'fixed';
-	/** auto-close backdrop on click */
-	export let autoClose: boolean = false;
+	import type { CommonProps } from '$lib/types/index.js';
+
 	/** Backdrop controller */
-	export const actions = {
+	const actionsnope = {
 		close: () => {
 			isOpen = false;
 		},
@@ -28,6 +14,54 @@
 			isOpen = true;
 		}
 	};
+
+	type Props = CommonProps & {
+		/** backdrop class */
+		class?: string;
+		/** backdrop style */
+		style?: string;
+		/** 
+			css position mode of the backdrop
+			@type {'absolute' | 'fixed' | 'relative'}  
+		*/
+		flow?: 'absolute' | 'fixed' | 'relative';
+		/** auto-close backdrop on click */
+		autoClose?: boolean;
+		/** show or hide the backdrop */
+		isOpen?: boolean;
+		/** if in loading state, it will show a loading icon or $$slots.loadingSlot */
+		isLoading?: boolean;
+		/** backdrop actions */
+		actions?: Record<'open' | 'close', Function>;
+		element?: HTMLDivElement;
+		elementContent?: HTMLDivElement;
+		elementContentInner?: HTMLDivElement;
+		classes?: {
+			backdrop?: string;
+			backdropContent?: string;
+			backdropContentInner?: string;
+		};
+	};
+	let {
+		class: className,
+		style,
+		flow = 'fixed',
+		autoClose = false,
+		isOpen = false,
+		isLoading = false,
+		actions = actionsnope,
+		element,
+		elementContent,
+		elementContentInner,
+		classes = {}
+	} = $props<Props>();
+
+	$effect(() => {
+		element?.addEventListener('click', testAutoClose);
+		elementContentInner?.addEventListener('click', (event) => {
+			event.stopPropagation();
+		});
+	});
 
 	function testAutoClose() {
 		if (autoClose) isOpen = false;
@@ -38,12 +72,13 @@
 	<div
 		in:fade|global
 		out:fade|global
-		on:click
 		bind:this={element}
-		class="backdropRoot {className}"
+		class="backdrop {className}"
 		style="position:{flow};{style}"
+		role="dialog"
+		tabindex="-1"
 	>
-		<div on:click={testAutoClose} class="backdropContent pos-abs h-full w-full">
+		<div bind:this={elementContent} class="backdropContent pos-abs h-full w-full">
 			{#if isLoading}
 				<div class="flex-h flex-align-middle-center">
 					<slot name="backdropLoading">
@@ -51,12 +86,7 @@
 					</slot>
 				</div>
 			{:else}
-				<div
-					class="backdropContentInner"
-					on:click={(event) => {
-						event.stopPropagation();
-					}}
-				>
+				<div class="backdropContentInner" bind:this={elementContentInner}>
 					<slot />
 				</div>
 			{/if}
@@ -67,7 +97,7 @@
 <style lang="scss">
 	@import '../../styles/slotui-vars.scss';
 	@import '../../styles/presets.scss';
-	.backdropRoot {
+	.backdrop {
 		z-index: 10000;
 		height: 100%;
 		width: 100%;

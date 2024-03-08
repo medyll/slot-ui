@@ -21,3 +21,8 @@ export interface ElementProps {
 export type Data = Record<string, any>;
 
 export type iconProps = IconProps;
+
+export type CommonProps = {
+	class?: string;
+	style?: string;
+};
