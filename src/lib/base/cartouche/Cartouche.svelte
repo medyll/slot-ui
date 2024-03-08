@@ -1,9 +1,12 @@
+<svelte:options runes={true} accessors={true} />
+
 <script lang="ts">
 	import { slide } from 'svelte/transition';
 	import Icon from '$lib/base/icon/Icon.svelte';
 	import type { SvelteComponent } from 'svelte';
 	import Button from '$lib/base/button/Button.svelte';
 	import type { IconProps } from '@iconify/svelte';
+	import type { CommonProps } from '$lib/types/index.js';
 
 	type CartoucheClasses = {
 		control: string;
@@ -12,45 +15,60 @@
 		content: string;
 	};
 
-	let className: string | undefined = undefined;
-	/**  className off the root component  */
-	export { className as class };
-	/**  classNames off the whole component  */
-	export let classes: CartoucheClasses = {} as CartoucheClasses;
-
-	/**  css style off the root component  */
-	export let style: string | undefined = undefined;
-	/** element root HTMLDivElement props  */
-	export let element: HTMLDivElement | null = null;
-
-	/** displayed title of the cartouche */
-	export let primary: string = '';
-	/** displayed sub title of the cartouche */
-	export let secondary: string | undefined = undefined;
-
-	export let icon: string | undefined = undefined;
-	export let iconProps: IconProps = {} as IconProps;
-	/** can be set as a prop or as a className */
-	export let stacked: boolean = false;
-	export const component: SvelteComponent | undefined = undefined;
-	export let componentProps: Record<string, any> = {};
-
-	/** State of content is preserved while visibility is toggled */
-	export let keepCartoucheContent: boolean = true;
-	/** show the title divider line */
-	export let showTitleDivider: boolean = false;
-	/** show the default border style */
-	export let bordered: boolean = true;
-
-	export let isOpen: boolean = false;
-	/** component actions
-	 * @type {Record<'open'|'toggle' | 'close', Function>}
-	 */
-	export const actions: Record<'open' | 'toggle' | 'close', Function> = {
-		open,
-		toggle,
-		close
+	type CartoucheProps = CommonProps & {
+		/** className off the root component */
+		class?: string;
+		/** classNames off the whole component */
+		classes: CartoucheClasses;
+		/** css style off the root component */
+		style?: string;
+		/** element root HTMLDivElement props */
+		element?: HTMLDivElement;
+		/** displayed title of the cartouche */
+		primary: string;
+		/** displayed sub title of the cartouche */
+		secondary?: string;
+		icon?: string;
+		iconProps: IconProps;
+		/** can be set as a prop or as a className */
+		stacked: boolean;
+		component?: SvelteComponent;
+		componentProps: Record<string, any>;
+		/** State of content is preserved while visibility is toggled */
+		keepCartoucheContent: boolean;
+		/** show the title divider line */
+		showTitleDivider: boolean;
+		/** show the default border style */
+		bordered: boolean;
+		isOpen: boolean;
+		/** component actions
+		 * @type {Record<'open'|'toggle' | 'close', Function>}
+		 */
+		actions: Record<'open' | 'toggle' | 'close', Function>;
 	};
+
+	let {
+		class: className = '',
+		classes = {} as CartoucheClasses,
+		style = undefined,
+		element = null,
+		primary = '',
+		secondary = undefined,
+		icon = undefined,
+		iconProps = {} as IconProps,
+		stacked = false,
+		component = undefined,
+		componentProps = {},
+		keepCartoucheContent = true,
+		showTitleDivider = false,
+		bordered = true,
+		isOpen = false,
+		actions = {
+			open,
+			toggle,
+			close
+		}
+	} = $props<CartoucheProps>();
 
 	function open() {
 		isOpen = true;
@@ -62,7 +80,7 @@
 		isOpen = false;
 	}
 
-	$: chevronIcon = !isOpen ? 'chevron-down' : 'chevron-up';
+	const chevronIcon = !isOpen ? 'chevron-down' : 'chevron-up';
 </script>
 
 <div
