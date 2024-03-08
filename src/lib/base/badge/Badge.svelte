@@ -1,20 +1,20 @@
-<script lang="ts">
-	/*  common slotUi exports*/
-	let className = '';
-	export { className as class };
-	export let element: HTMLDivElement | null = null;
-	/*  end slotUi exports*/
+<svelte:options accessors={true} runes={true} />
 
-	export let value: number;
-	export let ceiling: number;
-	/**
-	 * position of the badge
-	 * @type {{ x: 'left' | 'right' | 'center'; y: 'top' | 'bottom' | 'center' }}
-	 */
-	export let position: { x: 'left' | 'right' | 'center'; y: 'top' | 'bottom' | 'center' } = {
-		x: 'right',
-		y: 'top'
+<script lang="ts">
+	import type { CommonProps } from '$lib/types/index.js';
+
+	type Props = CommonProps & {
+		value: number;
+		ceiling: number;
+		element: HTMLDivElement;
+		/**
+		 * position of the badge
+		 * @type {{ x: 'left' | 'right' | 'center'; y: 'top' | 'bottom' | 'center' }}
+		 */
+		position: { x: 'left' | 'right' | 'center'; y: 'top' | 'bottom' | 'center' };
 	};
+
+	let { value, ceiling, element, position = { x: 'right', y: 'top' }, children } = $props<Props>();
 
 	const xM = {
 		left: 'left:0',
@@ -30,7 +30,11 @@
 
 {#if value > ceiling}
 	<div bind:this={element} class="badge" style="{xM[position.x]};{yM[position.y]}">
-		<slot>{value}</slot>
+		{#if children}
+			{@render children()}
+		{:else}
+			{value}
+		{/if}
 	</div>
 {/if}
 

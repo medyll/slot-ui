@@ -1,4 +1,5 @@
 import type { IconProps } from '@iconify/svelte';
+import type { Snippet } from 'svelte';
 
 export type TIcon = string;
 
@@ -25,4 +26,5 @@ export type iconProps = IconProps;
 export type CommonProps = {
 	class?: string;
 	style?: string;
+	children?: Snippet;
 };
