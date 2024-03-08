@@ -1,42 +1,50 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
+	import type { Snippet } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import Divider from '$lib/base/divider/Divider.svelte';
 	import Button from '$lib/base/button/Button.svelte';
 	/** @restProps {button} */
 
-	/*  common slotUi exports*/
-
-	let className = '';
-	/**
-	 *  className off the root component
-	 */
-	export { className as class };
-	/**
-	 *  element root HTMLDivElement props
-	 */
-	export let element: HTMLDivElement | null = null;
-	/*  end slotUi exports*/
-
 	type LevelType = 'success' | 'info' | 'error' | 'warning' | 'alert' | 'discrete';
 
-	/** type of levels 
-		@type {'success' | 'info' | 'error' | 'warning' | 'alert' | 'discrete'}
-	*/
-	export let level: LevelType = 'info';
-	/** message to be shown */
-	export let message: string | undefined = undefined;
-	/** make the alert draggable */
-	export let isDraggable: boolean = false;
-	/** show or hide the alert */
-	export let isOpen: boolean = true;
-	/** component actions
-	 * @type {Record<'open'|'toggle' | 'close', Function>}
-	 */
-	export const actions: Record<'open' | 'toggle' | 'close', Function> = {
+	const alertActions: Record<'open' | 'toggle' | 'close', Function> = {
 		open,
 		toggle,
 		close
 	};
+
+	type Props = {
+		element: HTMLDivElement;
+		class: String;
+		/** type of levels 
+		@type {'success' | 'info' | 'error' | 'warning' | 'alert' | 'discrete'}
+		*/
+		level: LevelType;
+		/** message to be shown */
+		message: string | undefined;
+		/** make the alert draggable */
+		isDraggable: boolean;
+		/** show or hide the alert */
+		isOpen: boolean;
+		/** component actions
+		 * @type {Record<'open'|'toggle' | 'close', Function>}
+		 */
+		actions: Record<'open' | 'toggle' | 'close', Function>;
+		children: Snippet;
+	};
+
+	let {
+		element,
+		class: className,
+		level,
+		message,
+		isDraggable,
+		isOpen,
+		actions = alertActions,
+		children
+	} = $props<Props>();
 
 	const handleClick = (event: PointerEvent) => {
 		if (event?.target?.attributes['data-close']) {
@@ -72,6 +80,7 @@
 				</div>
 				<div class="pad-1 flex-main flex-h flex-align-middle">
 					<div class="flex-main">
+						{@render children()}
 						<slot>{message}</slot>
 					</div>
 					<slot name="topButtonSlot" />
