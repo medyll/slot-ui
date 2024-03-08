@@ -1,14 +1,26 @@
 <script lang="ts">
 	import type { ElementProps } from '$lib/types/index.js';
 
-	/*  common slotUi exports*/
-	let className = '';
-	export { className as class };
-	export let element: HTMLDivElement | null = null;
-	/*  end slotUi exports*/
+	type PaperProps = {
+		/** className off the root component */
+		class?: string;
 
-	export let density: ElementProps['density'] = 'default';
-	export let style: string = '';
+		/** css style off the root component */
+		style?: string;
+
+		/** element root HTMLDivElement props */
+		element?: HTMLDivElement | null;
+
+		/** margins applied to paper */
+		density: ElementProps['density'];
+	};
+
+	let {
+		class: className = '',
+		style = '',
+		element = null,
+		density = 'default'
+	} = $props<PaperProps>();
 
 	let densityClass = {
 		none: '',
