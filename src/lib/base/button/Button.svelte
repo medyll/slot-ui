@@ -1,97 +1,130 @@
 <script lang="ts">
 	/** @restProps { button} */
 	import { popper, type UsePopperProps } from '$lib/ui/popper/usePopper.js';
-	import type { ElementProps } from '$lib/types/index.js';
+	import type { CommonProps, ElementProps } from '$lib/types/index.js';
 	import Divider from '$lib/base/divider/Divider.svelte';
 	import Menu from '$lib/ui/menu/Menu.svelte';
 	import Popper from '$lib/ui/popper/Popper.svelte';
 	import Icon from '$lib/base/icon/Icon.svelte';
 	import { autofocus } from '$lib/uses/autofocus/autofocus.js';
+	import type { Snippet } from 'svelte';
+
+	type Props = CommonProps & {
+		element: HTMLButtonElement;
+		/** button type */
+		type: 'button' | 'submit' | 'reset';
+		/** icon as a parameter */
+		icon: string | undefined;
+		/** icon as a parameter*/
+		iconFamily: string | undefined;
+		/** icon color as a parameter*/
+		iconColor: string;
+		/** endIcon as a parameter */
+		endIcon: string | undefined;
+		/** endIcon color as a parameter*/
+		endIconColor: string;
+		/**
+		 * endIcon
+		 * @type {'auto' | 'tiny' | 'small' | 'medium' | 'large' | 'full'}
+		 */
+		endIconSize: string;
+		/** background color theme */
+		bgTheme: string | undefined;
+		/** paramters for usePopper */
+		usePopper: UsePopperProps | undefined;
+		/** show loading state */
+		loading: boolean;
+		/** show chip */
+		showChip: boolean;
+		/** show / hide popper, when $$slots.popper exists */
+		popperOpen: boolean;
+		/** button style contained */
+		contained: boolean | undefined;
+		/** button style bordered */
+		bordered: boolean | undefined;
+		/** button style link */
+		link: boolean | undefined;
+		/** button style link */
+		naked: boolean | undefined;
+		/**
+		 * with of the button using  presets
+		 * @type {'auto' | 'tiny' | 'small' | 'medium' | 'large' | 'full'}
+		 */
+		size: ElementProps['sizeType'] | 'full';
+		/**
+		 * density of the button, using preset values
+		 * @type {'default' | 'dense' | 'extra-dense'}
+		 */
+		density: ElementProps['density'];
+		/** add ellipsis on overflowed text */
+		nowrap: boolean;
+		/**
+		 * height of the button, using preset values
+		 * @type {'auto' | 'tiny' | 'small' | 'medium' | 'large' | 'full'}
+		 */
+		height: string;
+		/**  button selected */
+		selected: boolean;
+		/**  give focus to button on display */
+		focus: boolean;
+		/** action button css style */
+		actionStyle: string | undefined;
+		/** whole container css style */
+		htmlRootStyle?: string | undefined;
+		primary?: string | undefined;
+		secondary?: string | undefined;
+		/** reverse the order of the button zone*/
+		reverse: boolean;
+		/** aspect ratio of the button */
+		ratio?: string;
+		slots?: {
+			buttonPopper?: Snippet;
+			buttonStart?: Snippet;
+			buttonEnd?: Snippet;
+			buttonLoadingIcon?: Snippet;
+		};
+		restProps: HTMLButtonElement['attributes'];
+	};
+
+	let {
+		class: className,
+		element,
+		style,
+		type: buttonType = 'button',
+		icon,
+		iconFamily = 'mdi',
+		iconColor = '#666',
+		endIcon,
+		endIconColor = '#666',
+		endIconSize = 'small',
+		bgTheme,
+		usePopper,
+		loading,
+		showChip,
+		popperOpen,
+		contained,
+		bordered,
+		link,
+		naked,
+		size = 'auto',
+		density = 'default',
+		nowrap,
+		height = 'default',
+		selected = false,
+		focus = false,
+		actionStyle,
+		htmlRootStyle,
+		primary,
+		secondary,
+		reverse = false,
+		ratio = 'auto',
+		slots = {},
+		children,
+		...restProps
+	} = $props<Props>();
 
 	let presetDefault = 'bordered contained';
-	/*  common slotUi exports  */
-	let className = '';
-	export { className as class };
-	export let element: HTMLButtonElement | null = null; //
-	export let style: string | null = null;
-	/*  end slotUi exports*/
-	let buttonType = 'button';
-	export { buttonType as type };
-	/** icon as a parameter */
-	export let icon: string | undefined = undefined;
-	/** icon as a parameter*/
-	export let iconFamily: string | undefined = 'mdi';
-	/** icon color as a parameter*/
-	export let iconColor: string = '#666';
-	let red;
-	/** endIcon as a parameter */
-	export let endIcon: string | undefined = undefined;
-	/** endIcon color as a parameter*/
-	export let endIconColor: string = '#666';
-	/**
-	 * endIcon
-	 * @type {'auto' | 'tiny' | 'small' | 'medium' | 'large' | 'full'}
-	 */
-	export let endIconSize: string = 'small';
 
-	/** background color theme */
-	export let bgTheme: string | undefined = undefined;
-	/** paramters for usePopper */
-	export let usePopper: UsePopperProps | undefined = undefined;
-	/** show loading state */
-	export let loading: boolean = false;
-	/** show chip */
-	export let showChip: boolean = false;
-	/** show / hide popper, when $$slots.popper exists */
-	export let popperOpen: boolean = false;
-	/** button style contained */
-	export let contained: boolean | undefined = undefined;
-	/** button style bordered */
-	export let bordered: boolean | undefined = undefined;
-	/** button style link */
-	export let link: boolean | undefined = undefined;
-	/** button style link */
-	export let naked: boolean | undefined = undefined;
-
-	/**
-	 * with of the button using  presets
-	 * @type {'auto' | 'tiny' | 'small' | 'medium' | 'large' | 'full'}
-	 */
-	export let size: ElementProps['sizeType'] | 'full' = 'auto';
-	/**
-	 * density of the button, using preset values
-	 * @type {'default' | 'dense' | 'extra-dense'}
-	 */
-	export let density: ElementProps['density'] = 'default';
-	/** add ellipsis on overflowed text */
-	export let nowrap: boolean = false;
-
-	/**
-	 * height of the button, using preset values
-	 * @type {'auto' | 'tiny' | 'small' | 'medium' | 'large' | 'full'}
-	 */
-	export let height: string = 'default';
-	/**  button selected */
-	export let selected: boolean = false;
-	/**  give focus to button on display */
-	export let focus: boolean = false;
-
-	/** action button css style */
-	export let actionStyle: string | undefined = undefined;
-	/** whole container css style */
-	export let htmlRootStyle: string | undefined = undefined;
-
-	export let primary: string | undefined = undefined;
-	export let secondary: string | undefined = undefined;
-
-	/** reverse the order of the button zone*/
-	export let reverse: boolean = false;
-
-	/** aspect ratio of the button */
-	export let ratio: string = 'auto';
-
-	// slots
-	export let buttonStart: string | undefined = undefined;
 	if (contained || bordered || link || naked) presetDefault = '';
 
 	let containerRef;
@@ -152,38 +185,40 @@
 		{naked}
 		{selected}
 		{presetDefault}
-		{...$$restProps}
+		{...restProps}
 		data-width={size}
 		style:background="var(--sld-color-{bgTheme})"
 		style:color={bgTheme ? 'white' : ''}
 		style:aspect-ratio={ratio}
 	>
 		<div class="innerButton">
-			{#if $$slots.buttonStart || icon}
+			{#if slots.buttonStart || icon}
 				<div class="buttonStart">
-					<slot name="buttonStart">
-						{#if icon}
-							<Icon fontSize="small" {icon} color={iconColor} {iconFamily} />
-						{/if}
-					</slot>
+					{#if slots.buttonStart}
+						{@render slots.buttonStart()}
+					{:else if icon}
+						<Icon fontSize="small" {icon} color={iconColor} {iconFamily} />
+					{/if}
 				</div>
 			{/if}
-			{#if $$slots.default ?? primary}
+			{#if children ?? primary}
 				<div class="central">
 					<slot>{primary ?? ''}</slot>
 				</div>
 			{/if}
-			{#if $$slots.buttonEnd || endIcon}
+			{#if slots.buttonEnd || endIcon}
 				<div class="action">
-					<slot name="buttonEnd">
-						<Icon fontSize="small" icon={endIcon} color={endIconColor} />
-					</slot>
+					{#if slots.buttonEnd}
+						{@render slots.buttonEnd()}
+					{:else}
+						<Icon fontSize={endIconSize} {endIcon} color={endIconColor} />
+					{/if}
 				</div>
 			{/if}
 		</div>
 		{#if loading}
 			<div
-				on:click={(event) => {
+				onclick={(event) => {
 					event.preventDefault();
 					event.stopPropagation();
 				}}
@@ -191,9 +226,11 @@
 			>
 				<div class="flex-h flex-align-middle gap-tiny">
 					<div>
-						<slot name="buttonLoadingIcon">
+						{#if slots.buttonLoadingIcon}
+							{@render slots.buttonLoadingIcon()}
+						{:else}
 							<Icon icon="loading" rotate />
-						</slot>
+						{/if}
 					</div>
 					<div>loading</div>
 				</div>
@@ -203,7 +240,7 @@
 			<span class="chip" />
 		{/if}
 	</button>
-	{#if element && $$slots.buttonPopper}
+	{#if element && slots.buttonPopper}
 		<svelte:self
 			contained
 			style="position:relative;height:100%;{actionStyle}"
@@ -218,17 +255,13 @@
 		/>
 		{#if popperOpen}
 			<Popper code="button" {...actionArgs} parentNode={element}>
-				<slot name="buttonPopper" />
+				{#if slots.buttonPopper}
+					{@render slots.buttonPopper()}
+				{/if}
 			</Popper>
 		{/if}
 	{/if}
 </div>
-{#if secondary}
-	<div style={`display:block;width:${element?.style?.width}px`}>
-		<Divider />
-		{@html secondary}
-	</div>
-{/if}
 
 <style lang="scss">
 	@import './Button.scss';
