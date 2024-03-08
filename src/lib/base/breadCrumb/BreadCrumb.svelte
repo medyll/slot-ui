@@ -1,4 +1,7 @@
 <script lang="ts">
+	import type { CommonProps } from '$lib/types/index.js';
+	import type { Snippet } from 'svelte';
+
 	interface BreadListType {
 		action?: () => void;
 		breads?: BreadListItemType[];
@@ -9,24 +12,28 @@
 		icon: string;
 		link?: string;
 		data?: Record<string, any>;
+		children: Snippet;
 	}
 
-	/*  common slotUi exports*/
-	let className: string | undefined = undefined;
-	/**
-	 * css className to apply
-	 */
-	export { className as class };
-	export let element: HTMLElement | null = null;
-	/*  end slotUi exports*/
+	type Props = CommonProps & {
+		/** breadCrumb class */
+		class?: string;
+		/** breadCrumb style */
+		style?: string;
+		/** breadCrumb list */
+		breadList: BreadListType[];
+		element: HTMLElement;
+	};
 
-	export const breadList: BreadListType[] = [];
+	let { class: className, element, children, style, breadList = [] } = $props<Props>();
 </script>
 
-<nav bind:this={element} class="breadCrumb {className ?? ''}">
+<nav bind:this={element} class="breadCrumb {className ?? ''}" {style}>
 	<ul>
 		<li class="bread">
-			<slot />
+			{#if children}
+				{@render children()}
+			{/if}
 		</li>
 	</ul>
 </nav>
