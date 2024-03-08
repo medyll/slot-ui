@@ -1,44 +1,43 @@
 <script lang="ts">
+	/** @restProps { button} */
 	import Icon from '$lib/base/icon/Icon.svelte';
+	import type { CommonProps } from '$lib/types/index.js';
 	import { openPopper } from '$lib/ui/popper/actions.js';
 
-	/*  common slotUi exports*/
-	let className = '';
-	export { className as class };
-	export let element: HTMLButtonElement | null = null;
-	/*  end slotUi exports*/
+	type Props = CommonProps & {
+		icon?: string;
+		element?: HTMLButtonElement;
+		actionComponent?: any;
+		actionComponentProps?: any;
+	};
 
-	export let icon: string = 'faList';
-	export let actionComponent: any;
-	export let actionComponentProps: any;
-
-	let buttonRef;
+	let {
+		icon: iconProp,
+		element,
+		class: className = '',
+		actionComponent,
+		actionComponentProps,
+		...restProps
+	} = $props<Props>();
 
 	const onActionClick = (event: PointerEvent) => {
 		event.stopPropagation();
 		openPopper('settingActions', {
-			parentNode: buttonRef,
+			parentNode: element,
 			component: actionComponent,
 			componentProps: actionComponentProps ?? {}
 		});
 	};
 </script>
 
-<div bind:this={element} class="buttonWrapper" on:click>
-	<button bind:this={buttonRef}>
-		<Icon fontSize="small" icon="faList" />
-		{#if actionComponent}
-			<span class="action" on:click={onActionClick}>
-				<Icon icon="chevron-right" fontSize="tiny" />
-			</span>
-		{/if}
-	</button>
-	{#if $$slots.default}
-		<div class="pad-tb-1 text-center">
-			<slot />
-		</div>
+<button on:click bind:this={element}>
+	<Icon fontSize="small" icon="faList" />
+	{#if actionComponent}
+		<span role="button" class="action" on:click={onActionClick}>
+			<Icon icon="chevron-right" fontSize="tiny" />
+		</span>
 	{/if}
-</div>
+</button>
 
 <style lang="scss">
 	@import 'ButtonAction';
