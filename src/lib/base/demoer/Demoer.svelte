@@ -1,4 +1,4 @@
-<svelte:options accessors={true} />
+<svelte:options accessors={true} runes={true} />
 
 <script lang="ts">
 	import Button from '$lib/base/button/Button.svelte';
@@ -6,15 +6,19 @@
 	import Switch from '$lib/form/switch/Switch.svelte';
 	import type { DemoerParameters } from './types.js';
 
-	export let title: string | undefined = undefined;
-	export let parameters: Record<string, Record<string, DemoerParameters>> = {};
-	export let componentArgs: Record<string, any> | undefined = {};
-	export let component: any | undefined = undefined;
-	export let multiple: Record<string, any> | undefined = {};
+	type Props = {
+		title: string | undefined;
+		parameters: Record<string, Record<string, DemoerParameters>>;
+		componentArgs: Record<string, any> | undefined;
+		component: any | undefined;
+		multiple: Record<string, any> | undefined;
+	};
+
+	let { title, parameters, componentArgs, component, multiple = {} } = $props<Props>();
 
 	let activeParams = { ...componentArgs };
 
-	$: console.log(component);
+	$inspect(Object.entries(multiple).length);
 </script>
 
 {#if title}
@@ -26,7 +30,32 @@
 		<div class="pad-2 border-r flex-v flex-align-bottom">
 			<Icon icon="cib:svelte" />
 		</div>
-		<div class="pad-2">ss</div>
+		<div class="pad-2">
+			{#if Object.entries(multiple).length > 0}sssssssssssssssssssssss
+				<div class="flex-h flex-align-middle flex-wrap gap-medium">
+					{#each Object.keys(multiple) as tiple}
+						{#each Object.keys(multiple[tiple]) as params}
+							<div>
+								<slot
+									activeParams={{
+										...activeParams,
+										...multiple[tiple][params]
+									}}
+								/>
+								<!-- <svelte:component this={component} {componentArgs} {...multiple[tiple][params]} /> -->
+
+								<div class="pad-2 text-center">{tiple} {params}</div>
+							</div>
+							<div class="border-r pad-tb-4" />
+						{/each}
+					{/each}
+				</div>
+			{:else if component}
+				<svelte:component this={component} {componentArgs} {activeParams} />
+			{:else}tert
+				<slot {activeParams} />
+			{/if}
+		</div>
 	</div>
 	<div class="border-b" />
 	<div class="flex-h marg-t-2">
