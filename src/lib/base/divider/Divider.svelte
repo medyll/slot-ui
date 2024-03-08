@@ -3,29 +3,51 @@
 	import type { ElementProps } from '$lib/types/index.js';
 	import { uiPresets } from '$lib/engine/presets.js';
 
-	let className: string | undefined = undefined;
-	/**  className off the root component  */
-	export { className as class };
-	/**  css style off the root component  */
-	export let style: string | undefined = undefined;
-	/** element root HTMLDivElement props  */
-	export let element: HTMLDivElement | null = null;
+	type DividerProps = {
+		/** className off the root component */
+		class?: string;
 
-	/** margins applied to divider 
-	 @type {'none' | 'tight' | 'default' | 'medium' | 'kind'}
-	*/
-	export let density: ElementProps['density'] = 'default';
-	/** default direction of the divider 
-	@type {'vertical' | 'horizontal'} */
-	export let direction: 'vertical' | 'horizontal' = 'horizontal';
-	/** expansion of the divider
-	@type {'full' | 'padded' | 'centered'}
-	 */
-	export let expansion: ElementProps['expansion'] = 'full';
-	/** give shadow to divider */
-	export let shadow: boolean = false;
-	/** give color to divider */
-	export let color: string | null = '';
+		/** css style off the root component */
+		style?: string;
+
+		/** element root HTMLDivElement props */
+		element?: HTMLDivElement | null;
+
+		/**
+		 * margins applied to divider
+		 * @type {'none' | 'tight' | 'default' | 'medium' | 'kind'}
+		 */
+		density?: 'none' | 'tight' | 'default' | 'medium' | 'kind';
+
+		/**
+		 * default direction of the divider
+		 * @type {'vertical' | 'horizontal'}
+		 */
+		direction?: 'vertical' | 'horizontal';
+
+		/**
+		 * expansion of the divider
+		 * @type {'full' | 'padded' | 'centered'}
+		 */
+		expansion?: 'full' | 'padded' | 'centered';
+
+		/** give shadow to divider */
+		shadow?: boolean;
+
+		/** give color to divider */
+		color?: string | null;
+	};
+
+	let {
+		class: className = '',
+		style = '',
+		element = null,
+		density = 'default',
+		direction = 'horizontal',
+		expansion = 'full',
+		shadow = false,
+		color
+	} = $props<DividerProps>();
 
 	let extensionClass = {
 		horizontal: {
@@ -42,12 +64,12 @@
 
 	let addStyle: string = style ?? '';
 
-	$: shadowClass = shadow ? 'shad-3' : '';
+	const shadowClass = $derived(shadow ? 'shad-3' : '');
 
-	$: if (color) addStyle += `--sld-color-border:${color};`;
+	if (color) addStyle += `--sld-color-border:${color};`;
 
 	// set height od divider when direction === vertical in a flex env
-	$: if (
+	if (
 		direction === 'vertical' &&
 		(element?.nextElementSibling ?? element?.previousElementSibling)
 	) {
