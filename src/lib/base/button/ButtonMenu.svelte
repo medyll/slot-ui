@@ -7,28 +7,36 @@
 	import type { SvelteComponent } from 'svelte';
 	import type { PopperPositionType } from '$lib/ui/popper/types.js';
 	import type { IMenuItemProps, IMenuProps } from '$lib/ui/menu/types.js';
-	import type { ElementProps } from '$lib/types/index.js';
 	import type { UsePopperProps } from '$lib/ui/popper/usePopper.js';
 
-	export let icon: string = 'list';
-	export let menuData: IMenuItemProps[] = [];
-	export let actionComponent: SvelteComponent | any = Menu;
-	export let menuProps: IMenuProps = {
-		menuList: menuData,
-		menuItemsList: menuData,
-		onMenuItemClick: () => {
-			console.log('redfered');
-		}
+	type Props = {
+		icon: string;
+		menuData: IMenuItemProps[];
+		actionComponent: SvelteComponent | any;
+		menuProps: IMenuProps;
+		/*  menuPosition
+		 * @type {"TC" | "TL" | "TR" | "BC" | "BL" | "BR"}
+		 */
+		menuPosition: PopperPositionType;
+		class: string;
+		element: HTMLElement;
 	};
-	/*  menuPosition
-	 * @type {"TC" | "TL" | "TR" | "BC" | "BL" | "BR"}
-	 */
-	export let menuPosition: PopperPositionType = 'BC';
 
-	let className = '';
-	export { className as class };
-	export let element: HTMLElement | null = null as HTMLElement;
-	/*  end slotUi exports*/
+	let {
+		icon = 'list',
+		menuData = [],
+		actionComponent = Menu,
+		element,
+		menuProps = {
+			menuList: menuData,
+			menuItemsList: menuData,
+			onMenuItemClick: () => {
+				console.log('...');
+			}
+		},
+		menuPosition = 'BC',
+		class: className
+	} = $props<Props>();
 
 	let componentProps = menuProps
 		? menuProps
@@ -48,8 +56,6 @@
 		});
 	};
 
-	// on:menu:item:clicked
-	// on:click={onActionClick}
 	let openPoppOpt: UsePopperProps;
 
 	$: openPoppOpt = {
@@ -59,11 +65,7 @@
 		position: 'BC',
 		disabled: false
 	};
-
-	// usePopperOpt={openPoppOpt}
 </script>
-
-<!-- {@debug componentProps} -->
 
 <IconButton
 	class={'ButtonMenu ' + className}
