@@ -1,3 +1,5 @@
+<svelte:options accessors={true} runes={true} />
+
 <script lang="ts">
 	import Icon from '@iconify/svelte';
 	import type { ElementProps } from '$lib/types/index.js';

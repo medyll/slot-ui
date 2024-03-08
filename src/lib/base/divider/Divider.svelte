@@ -1,3 +1,5 @@
+<svelte:options accessors={true} runes={true} />
+
 <script lang="ts">
 	/** extends button */
 	import type { ElementProps } from '$lib/types/index.js';

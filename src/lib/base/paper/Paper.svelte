@@ -1,3 +1,5 @@
+<svelte:options accessors={true} runes={true} />
+
 <script lang="ts">
 	import type { ElementProps } from '$lib/types/index.js';
 
