@@ -1,3 +1,5 @@
+<svelte:options runes={true} />
+
 <script lang="ts">
 	import Prism from 'prismjs';
 	import 'prismjs/plugins/normalize-whitespace/prism-normalize-whitespace';

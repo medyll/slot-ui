@@ -1,10 +1,27 @@
 <script lang="ts">
 	import Icon from '$lib/base/icon/Icon.svelte';
+	import type { Snippet } from 'svelte';
 	import DemoerCode from './DemoerCode.svelte';
-	export let title: undefined = undefined;
-	export let code: string = '';
-	export let subTitle: undefined = undefined;
-	export let component: string | undefined = undefined;
+	import type { CommonProps } from '$lib/types/index.js';
+
+	type DemoPageProps = CommonProps & {
+		title: string;
+		code: string;
+		subTitle?: string;
+		component?: string;
+		slots: {
+			code: Snippet;
+		};
+	};
+
+	let {
+		title = '',
+		code = '',
+		subTitle = undefined,
+		component = undefined,
+		children,
+		slots
+	} = $props<DemoPageProps>();
 
 	let codeT = subTitle ? subTitle : `component ${component} demo ${title?.toLowerCase()}`;
 </script>
@@ -17,14 +34,19 @@
 				<Icon icon="mdi:eye" />{codeT}
 			</h6>
 			<div class="pad-l-2 pos-rel">
+				{#if children}
+					{@render children()}
+				{/if}
 				<slot />
 			</div>
 		</div>
-		{#if code || $$slots.code}
+		{#if code || slots.code}
 			<div class="w-tiers">
-				<slot name="code">
+				{#if slots.code}
+					{@render slots.code()}
+				{:else}
 					<DemoerCode {code} />
-				</slot>
+				{/if}
 			</div>
 		{/if}
 	</div>
