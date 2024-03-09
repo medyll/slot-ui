@@ -15,8 +15,12 @@
 		close
 	};
 
+	/** component actions
+	 * @type {Record<'open'|'toggle' | 'close', Function>}
+	 */
+	export const actions: Record<'open' | 'toggle' | 'close', Function> = alertActions;
+
 	type Props = {
-		element?: HTMLDivElement;
 		class?: String;
 		/** type of levels 
 		@type {'success' | 'info' | 'error' | 'warning' | 'alert' | 'discrete'}
@@ -28,10 +32,8 @@
 		draggable?: boolean;
 		/** show or hide the alert */
 		isOpen?: boolean;
-		/** component actions
-		 * @type {Record<'open'|'toggle' | 'close', Function>}
-		 */
-		actions?: Record<'open' | 'toggle' | 'close', Function>;
+		/**  */
+		element: HTMLDivElement;
 		children?: Snippet;
 		topButtonSlot?: Snippet;
 		messageSlot?: Snippet;
@@ -40,18 +42,17 @@
 	};
 
 	let {
-		element,
 		class: className,
 		level = 'info',
 		message,
 		draggable = false,
 		isOpen,
-		actions = alertActions,
 		children,
 		topButtonSlot,
 		messageSlot,
 		buttonZoneSlot,
-		buttonCloseSlot
+		buttonCloseSlot,
+		element
 	} = $props<Props>();
 
 	const handleClick = (event: Event) => {
@@ -74,7 +75,7 @@
 	});
 
 	function open() {
-		isOpen = true;
+		isOpen = true; 
 	}
 	function toggle() {
 		isOpen = !isOpen;

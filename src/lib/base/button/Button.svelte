@@ -1,3 +1,4 @@
+<svelte:options accessors={true} runes={true} />
 <script lang="ts">
 	/** @restProps { button} */
 	import { popper, type UsePopperProps } from '$lib/ui/popper/usePopper.js';
@@ -128,11 +129,19 @@
 	if (contained || bordered || link || naked) presetDefault = '';
 
 	let containerRef;
-	// for action
-	let actionArgs: any;
 	let actionComponent = Menu;
 	let actionComponentProps = {};
 	let actionContent = '';
+	// for action 
+	let actionArgs  = $derived( {
+		code: 'node', 
+		parentNode: element,
+		component: actionComponent,
+		componentProps: actionComponentProps ?? {},
+		position: 'BL',
+		content: actionContent,
+		disabled: false
+	});
 
 	if (contained || bordered || link) {
 		presetDefault = '';
@@ -146,22 +155,12 @@
 		if (focus) return autofocus(node);
 	}
 
-	$: if (usePopper) {
+	/* $: if (usePopper) {
 		usePopper.disabled = false;
 		usePopper.parentNode = element;
 	} else {
 		usePopper = { disabled: true };
-	}
-
-	$: actionArgs = {
-		code: 'node',
-		parentNode: element,
-		component: actionComponent,
-		componentProps: actionComponentProps ?? {},
-		position: 'BL',
-		content: actionContent,
-		disabled: false
-	};
+	} */
 </script>
 
 <div bind:this={containerRef} style="position:relative;display:flex;{htmlRootStyle}">
