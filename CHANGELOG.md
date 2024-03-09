@@ -2,6 +2,49 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0-beta.1](https://github.com/medyll/slot-ui/compare/v0.2.0-beta.0...v0.2.0-beta.1) (2024-03-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* svelte 5
+
+### Features
+
+* Alert migrated to svelte 5 snippets ([7d4b418](https://github.com/medyll/slot-ui/commit/7d4b418d6b5e37c3c29e20587f6d22d7c322195d))
+* Avatar migrated to svelte 5 snippets ([e3f6c51](https://github.com/medyll/slot-ui/commit/e3f6c51cf8973e43ae1d9bca876a25a6fb86a07a))
+* Backdrop migrated to svelte 5 snippets ([37818a8](https://github.com/medyll/slot-ui/commit/37818a856b87c3bc0f3080b37bb60b79a3898c4b))
+* Badge  migrated to svelte 5 snippets ([37a1572](https://github.com/medyll/slot-ui/commit/37a1572395df5aae1dd18e159ba6d029fdc891f7))
+* Box  migrated to svelte 5 snippets ([7f98510](https://github.com/medyll/slot-ui/commit/7f9851089701e2c7fb58b2650025340cfbe603d1))
+* BreadCrumb  migrated to svelte 5 snippets ([5e03b0a](https://github.com/medyll/slot-ui/commit/5e03b0aac4bb27ebf5dfccf72ab1c4ad23f94d52))
+* Button  migrated to svelte 5 snippets ([458fa0f](https://github.com/medyll/slot-ui/commit/458fa0fdc434d96bb1dd9291505917a9caac454e))
+* ButtonAction  migrated to svelte 5 snippets ([d08fa41](https://github.com/medyll/slot-ui/commit/d08fa41c3dc3b09a2ca3e17ab1d70d52fdf151d0))
+* ButtonMenu  migrated to svelte 5 snippets ([dda3b8e](https://github.com/medyll/slot-ui/commit/dda3b8e8b3498e4171bce8c4776dc152cb3c8d67))
+* Cartouche  migrated to svelte 5 snippets ([a7920ec](https://github.com/medyll/slot-ui/commit/a7920ecd0a47441f9acdabd7ca6b4afbad39f28d))
+* Chipper  migrated to svelte 5 snippets ([c0b5cbd](https://github.com/medyll/slot-ui/commit/c0b5cbd4cc3f7a4f09d5351caeb11a65216dac7e))
+* Columner  migrated to svelte 5 snippets ([a8d9f1c](https://github.com/medyll/slot-ui/commit/a8d9f1cd4e654666431b3aec3c9194a2e613d242))
+* Confirm  migrated to svelte 5 snippets ([5729298](https://github.com/medyll/slot-ui/commit/5729298942de755987dca1cb0119351dd0d8f8ea))
+* ContentSwitcher  migrated to svelte 5 snippets ([7d943fa](https://github.com/medyll/slot-ui/commit/7d943faf545d14dfe654bec1c8bc633d45b05468))
+* DemoerCode  migrated to svelte 5 snippets ([75c7d03](https://github.com/medyll/slot-ui/commit/75c7d032038f95f8086273d009fee0f720ad3b4c))
+* DemoPage  migrated to svelte 5 snippets ([aa680e3](https://github.com/medyll/slot-ui/commit/aa680e3b42464d1dc7ce682b75a06df4fe011d61))
+* Divider  migrated to svelte 5 snippets ([5a55722](https://github.com/medyll/slot-ui/commit/5a55722385c8857220b706a8ed8afb3f4857e9df))
+* Icon  migrated to svelte 5 snippets ([823af02](https://github.com/medyll/slot-ui/commit/823af02f90b3737a1dcd716e04eb69d3d96b4140))
+* migrated Alert to svelte 5 runes ([7a2d011](https://github.com/medyll/slot-ui/commit/7a2d01177a8a51d13bbba79db10dcc202ce4a540))
+* new component slot ([1c8be32](https://github.com/medyll/slot-ui/commit/1c8be32aa8e469c6c8eb63dbc02db97e9d60b419))
+* Paper  migrated to svelte 5 snippets ([2b83f43](https://github.com/medyll/slot-ui/commit/2b83f43b78a75d54046897264d717dbf122d06b2))
+* Slider  migrated to svelte 5 snippets ([7ed2651](https://github.com/medyll/slot-ui/commit/7ed26518006845a2578709965bfd07a6d11c8e8f))
+* Stepper  migrated to svelte 5 snippets ([28a08fb](https://github.com/medyll/slot-ui/commit/28a08fb08fdb2cfd977d0d5c1e538945c6bb8a99))
+* svelte 5 ([9bc6243](https://github.com/medyll/slot-ui/commit/9bc624398a669ae7b9aacff42a975b6aaf2cb083))
+* TitleBar  migrated to svelte 5 snippets ([a8c13b1](https://github.com/medyll/slot-ui/commit/a8c13b1e04d02126d0e180c961fa89dcd12d1bb6))
+
+
+### Bug Fixes
+
+* bad runes declarations ([2d3665a](https://github.com/medyll/slot-ui/commit/2d3665a47130635e23b83a0c840684d7437a482b))
+* debug missing ([f9ac6af](https://github.com/medyll/slot-ui/commit/f9ac6af8240522a50f3bf8fb357a87ad90c6be5b))
+* Demoer migrated to snippets ([b53837e](https://github.com/medyll/slot-ui/commit/b53837ea1b6015b97c652d66ee989d97eb151c9c))
+* missing runes declaration ([6ac8709](https://github.com/medyll/slot-ui/commit/6ac8709ccd3a58d2c9bf375ae60aa32848829a7e))
+
 ## [0.2.0-beta.0](https://github.com/medyll/slot-ui/compare/v0.1.1...v0.2.0-beta.0) (2024-03-07)
 
 
