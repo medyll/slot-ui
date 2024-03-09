@@ -1,23 +1,45 @@
 <script lang="ts">
+	import type { CommonProps } from '$lib/types/index.js';
+	import type { Snippet } from 'svelte';
 	import type { StepType, StepperOrientation } from './types.js';
 
-	/** Number of steps */
-	export let steps: StepType[] = [];
-	/** orientation of the stepper */
-	export let stepperOrientation: StepperOrientation = 'horizontal';
-	/** Actual active step */
-	export let activeStep: number = 0;
-	/** exported actions for component */
 	export const actions = {
 		setActiveStep: function (step: number) {
 			activeStep = step ?? 0;
 		}
 	};
+
+	type StepperProps = CommonProps & {
+		/** Number of steps
+		 * @type {StepType[]}
+		 */
+		steps: StepType[];
+
+		/** orientation of the stepper
+		 * @type {'horizontal' | 'vertical'}
+		 */
+		stepperOrientation: StepperOrientation;
+
+		/** Actual active step */
+		activeStep: number;
+		children: Snippet<[{ step: StepType; index: number }]>;
+	};
+
+	let {
+		steps = [],
+		stepperOrientation = 'horizontal',
+		activeStep = 0,
+		children
+	} = $props<StepperProps>();
 </script>
 
-<div class="stepper">
+<div class="stepper" {stepperOrientation}>
 	{#each steps as step, index}
-		<div title={step.text} class="step" />
+		{#if children}
+			{@render children({ step, index })}
+		{:else}
+			<div title={step.text} class="step" />
+		{/if}
 	{/each}
 </div>
 
@@ -25,6 +47,10 @@
 	@import '../../styles/slotui-vars.scss';
 	@import '../../styles/presets.scss';
 	.stepper {
+		display: flex;
+		&.vertical {
+			flex-direction: column;
+		}
 		.step {
 			padding: 0.5rem;
 			background-color: red;
