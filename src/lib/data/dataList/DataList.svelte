@@ -1,7 +1,7 @@
-<svelte:options accessors={true} />
+<svelte:options runes={true} accessors={true} />
 
 <script lang="ts">
-	import { getContext, hasContext, setContext } from 'svelte';
+	import { getContext, hasContext, setContext, type Snippet } from 'svelte';
 	import { writable, type Writable } from 'svelte/store';
 	import DataListRow from './DataListRow.svelte';
 	import type { DataCellType, DataListStoreType, groupByOptions } from './types.js';
@@ -13,61 +13,118 @@
 	import ContextRooter from '../../utils/contextRooter/ContextRooter.svelte';
 	import sanitizeHtml from 'sanitize-html';
 
-	/*  common slotUi exports*/
-	let className = '';
-	export { className as class };
-	export let element: HTMLDivElement | null = null;
-
-	export let style: string | undefined = undefined;
-	/** show or hide the dataList body */
-	export let hideBody: boolean = false;
-	/** show or hide the dataList headere */
-	export let showHeader: boolean = true;
-	/** is the datalist sortable */
-	export let isSortable: boolean = true;
-	/** order on which the sorted list is sorted */
-	export let sortByOrder: 'asc' | 'desc' | 'none' | string = 'none';
-	/** group field on which data will be grouped, can use dot notation as dot path */
-	export let groupByField: string | string[] | undefined = undefined;
-	/** options used when props.groupByField is defined */
-	export let groupByOptions: groupByOptions = {
-		showMainHeader: true,
-		showSubGroupsHeader: true,
-		showEmptyGroup: false
-	};
-
-	export let fieldValue: any;
-	/** field used for selection*/
-	export let selectorField: string = 'id';
-	/** field value used for selection*/
-	export let selectorFieldValue: any | undefined = undefined;
-	/** binding, used when multiple buttons*/
-	export let activeCommonSortField: string = '';
-	/** set noWrap = true to have ellipsis on all cells content*/
-	export let noWrap: boolean = true;
-	/** set noWrap = true to have ellipsis on all header cells content*/
-	export let noWrapHeader: boolean = true;
-	/** represents your data types used to display values */
-	export let dataTypes: Record<string, any> | undefined = undefined;
-	/** data to loop  trought */
-	export let data: any[] = [];
-	/** used only if data is provided */
-	export let idField: string | undefined = undefined;
-	/** columns declaration */
-	export let columns: Record<string, DataCellType> = {};
-
-	export let virtualizer: boolean = false; /** @deprecated */
-	export let isLoading: boolean = false;
-
-	let hidedGroups: Data = {};
-
-	let sortedData: any[];
-	$: sortedData = data?.filter((x) => x);
-
-	export let sortingIcons = {
+	export const sortingIcons = {
 		default: ['mdi:dots-horizontal', 'mdi:sort-bool-ascending', 'mdi:sort-bool-descending'],
 		numeric: ['mdi:dots-horizontal', 'mdi:sort-bool-ascending', 'mdi:sort-bool-descending']
 	};
+
+	type DataListProps = {
+		/** className off the root component */
+		class?: string;
+
+		/** css style off the root component */
+		style?: string;
+
+		/** element root HTMLDivElement props */
+		element?: HTMLDivElement | null;
+
+		/** show or hide the dataList header */
+		showHeader: boolean;
+
+		/** is the datalist sortable */
+		isSortable: boolean;
+
+		/** order on which the sorted list is sorted */
+		sortByOrder: 'asc' | 'desc' | 'none' | string;
+
+		/** group field on which data will be grouped, can use dot notation as dot path */
+		groupByField?: string | string[];
+
+		/** options used when props.groupByField is defined */
+		groupByOptions: groupByOptions;
+
+		/** field used for selection */
+		selectorField: string;
+
+		fieldValue: any;
+
+		/** field value used for selection */
+		selectorFieldValue?: any;
+
+		/** binding, used when multiple buttons */
+		activeCommonSortField: string;
+
+		/** set noWrap = true to have ellipsis on all cells content */
+		noWrap: boolean;
+
+		/** set noWrap = true to have ellipsis on all header cells content */
+		noWrapHeader: boolean;
+
+		/** represents your data types used to display values */
+		dataTypes?: Record<string, any>;
+
+		/** data to loop through */
+		data: any[];
+
+		/** used only if data is provided */
+		idField?: string;
+
+		/** columns declaration */
+		columns: Record<string, DataCellType>;
+
+		/** Virtualizer instance for the list */
+		virtualizer: boolean;
+
+		/** Loading state of the list */
+		isLoading: boolean;
+
+		slots: {
+			dataListCell?: Snippet<[{ fieldType: string; fieldName: string; fieldValue: any }]>;
+			groupTitleSlot?: Snippet<[{ item: Data }]>;
+		};
+	};
+
+	let {
+		class: className = '',
+		style = '',
+		element = null,
+		showHeader = true,
+		isSortable = true,
+		sortByOrder = 'none',
+		groupByField = undefined,
+		groupByOptions = {
+			showMainHeader: true,
+			showSubGroupsHeader: true,
+			showEmptyGroup: false
+		},
+		selectorField = 'id',
+		selectorFieldValue = undefined,
+		activeCommonSortField = '',
+		noWrap = true,
+		noWrapHeader = true,
+		dataTypes = undefined,
+		data = [],
+		idField = undefined,
+		columns = {},
+		virtualizer = false,
+		isLoading = false,
+		fieldValue,
+		slots
+	} = $props<DataListProps>();
+
+	let hidedGroups: Data = {};
+
+	let sortedData: any[] = $derived(data?.filter((x) => x));
+
+	let groups = $derived(
+		groupByField
+			? dataOp.groupBy(data, groupByField, {
+					keepUngroupedData: Boolean(groupByOptions.showEmptyGroup)
+				})
+			: {}
+	);
+
+	let dataListContext: Writable<DataListStoreType>;
 
 	if (hasContext('dataListContext')) {
 		getContext<Writable<DataListStoreType>>('dataListContext');
@@ -138,14 +195,6 @@
 			: dataOp.resolveDotPath(data, field);
 		return sanitizeHtml(ret);
 	}
-
-	$: groups = groupByField
-		? dataOp.groupBy(data, groupByField, {
-				keepUngroupedData: Boolean(groupByOptions.showEmptyGroup)
-			})
-		: {};
-
-	let dataListContext: Writable<DataListStoreType>;
 </script>
 
 <ContextRooter bind:contextRoot={dataListContext} contextKey="dataListContext" />
@@ -159,7 +208,9 @@
 			{@const item = groups[red]}
 			<div class="flex-v">
 				<div class="">
-					<slot name="groupTitleSlot" {item}>
+					{#if slots.groupTitleSlot}
+						{@render slots.groupTitleSlot({ item })}
+					{:else}
 						<div
 							class="flex-h flex-align-middle pad gap-medium groupHead"
 							on:click={() => {
@@ -182,12 +233,18 @@
 								/>
 							</div>
 						</div>
-					</slot>
+					{/if}
 				</div>
 				<div class="flex-main pos-rel">
 					{#if !hidedGroups[red]}
 						<svelte:self {...groupProps}>
-							<slot
+							{#if slots.dataListCell}
+								{@render slots.dataListCell({ fieldType, fieldName, fieldValue })}
+							{/if}
+							{#if slots.groupTitleSlot}
+								{@render slots.groupTitleSlot({ item: {} })}
+							{/if}
+							<!-- <slot
 								name="dataListCell"
 								let:fieldType
 								let:fieldName
@@ -197,7 +254,7 @@
 								{fieldValue}
 								slot="dataListCell"
 							/>
-							<slot slot="groupTitleSlot" />
+							<slot slot="groupTitleSlot" /> -->
 						</svelte:self>
 					{/if}
 				</div>
@@ -219,46 +276,44 @@
 					<DataListHead />
 				</slot>
 			{/if}
-			{#if !hideBody}
-				{#each sortedData as item}
-					<slot rawData={item} {item}>
-						<DataListRow
-							class={item[selectorField] === selectorFieldValue ? 'theme-bg-paper' : ''}
-							data={item}
-						>
-							{#if $dataListContext.hasColumnsProps}
-								{#each Object.keys($dataListContext.columns) as inItem}
-									<slot
-										name="dataListCell"
-										fieldName={$dataListContext.columns[inItem]?.field}
-										fieldType={$dataListContext.columns[inItem]?.fieldType}
-										fieldRawValue={sanitizeHtml(
-											checkGetter({ ...$dataListContext.columns }, inItem, item)
-										)}
-										fieldValue={sanitizeHtml(
-											checkGetter({ ...$dataListContext.columns }, inItem, item)
-										)}
-									/>
-								{/each}
-							{:else}
-								{#each Object.keys(item) as inItem}
-									<slot
-										name="dataListCell"
-										fieldName="{$dataListContext.columns[inItem]?.field}}"
-										fieldType={$dataListContext.columns[inItem]?.fieldType}
-										fieldRawValue={sanitizeHtml(
-											checkGetter({ ...$dataListContext.columns }, inItem, item)
-										)}
-										fieldValue={sanitizeHtml(
-											checkGetter({ ...$dataListContext.columns }, inItem, item)
-										)}
-									/>
-								{/each}
-							{/if}
-						</DataListRow>
-					</slot>
-				{/each}
-			{/if}
+			{#each sortedData as item}
+				<slot rawData={item} {item}>
+					<DataListRow
+						class={item[selectorField] === selectorFieldValue ? 'theme-bg-paper' : ''}
+						data={item}
+					>
+						{#if $dataListContext.hasColumnsProps}
+							{#each Object.keys($dataListContext.columns) as inItem}
+								<slot
+									name="dataListCell"
+									fieldName={$dataListContext.columns[inItem]?.field}
+									fieldType={$dataListContext.columns[inItem]?.fieldType}
+									fieldRawValue={sanitizeHtml(
+										checkGetter({ ...$dataListContext.columns }, inItem, item)
+									)}
+									fieldValue={sanitizeHtml(
+										checkGetter({ ...$dataListContext.columns }, inItem, item)
+									)}
+								/>
+							{/each}
+						{:else}
+							{#each Object.keys(item) as inItem}
+								<slot
+									name="dataListCell"
+									fieldName="{$dataListContext.columns[inItem]?.field}}"
+									fieldType={$dataListContext.columns[inItem]?.fieldType}
+									fieldRawValue={sanitizeHtml(
+										checkGetter({ ...$dataListContext.columns }, inItem, item)
+									)}
+									fieldValue={sanitizeHtml(
+										checkGetter({ ...$dataListContext.columns }, inItem, item)
+									)}
+								/>
+							{/each}
+						{/if}
+					</DataListRow>
+				</slot>
+			{/each}
 		{/if}
 		<slot name="dataListFooter" />
 	</div>
