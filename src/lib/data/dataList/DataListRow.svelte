@@ -2,13 +2,13 @@
 
 <script lang="ts">
 	import sanitizeHtml from 'sanitize-html';
-	import type { Data } from './$types.js';
+	import type { Data } from '$lib/types/index.js';
 	import { writable, type Writable } from 'svelte/store';
 	import DataListCell from './DataListCell.svelte';
 	import type { DataCellType, DataListStoreType } from './types.js';
 	import type { RowType } from './types.js';
 	import { dataOp } from '$lib/engine/utils.js';
-
+	import { getContext, setContext } from 'svelte';
 	let className = '';
 	export { className as class };
 	export let element: HTMLDivElement | undefined = undefined;

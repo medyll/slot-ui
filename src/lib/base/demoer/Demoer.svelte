@@ -17,8 +17,6 @@
 	let { title, parameters, componentArgs, component, multiple = {} } = $props<Props>();
 
 	let activeParams = { ...componentArgs };
-
-	$inspect(Object.entries(multiple).length);
 </script>
 
 {#if title}

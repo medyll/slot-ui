@@ -1,3 +1,5 @@
+<svelte:options runes={true} accessors={true} />
+
 <script lang="ts">
 	import DataList from '$lib/data/dataList/DataList.svelte';
 	import DataListRow from '$lib/data/dataList/DataListRow.svelte';

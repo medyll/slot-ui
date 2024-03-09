@@ -39,12 +39,11 @@
 				{#if children}
 					{@render children()}
 				{/if}
-				<slot />
 			</div>
 		</div>
-		{#if code || slots.code}
+		{#if code || slots?.code}
 			<div class="w-tiers">
-				{#if slots.code}
+				{#if slots?.code}
 					{@render slots.code()}
 				{:else}
 					<DemoerCode {code} />

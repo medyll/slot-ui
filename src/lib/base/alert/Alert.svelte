@@ -75,7 +75,7 @@
 	});
 
 	function open() {
-		isOpen = true; 
+		isOpen = true;
 	}
 	function toggle() {
 		isOpen = !isOpen;

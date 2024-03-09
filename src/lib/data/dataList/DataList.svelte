@@ -10,7 +10,7 @@
 	import Icon from '$lib/base/icon/Icon.svelte';
 	import Button from '$lib/base/button/Button.svelte';
 	import type { Data } from '$lib/types/index.js';
-	import ContextRooter from '../../utils/contextRooter/ContextRooter.svelte';
+	import ContextRooter from '$lib/utils/contextRooter/ContextRooter.svelte';
 	import sanitizeHtml from 'sanitize-html';
 
 	export const sortingIcons = {
@@ -78,10 +78,9 @@
 		/** Loading state of the list */
 		isLoading: boolean;
 
-		slots: {
-			dataListCell?: Snippet<[{ fieldType: string; fieldName: string; fieldValue: any }]>;
-			groupTitleSlot?: Snippet<[{ item: Data }]>;
-		};
+		slots: {};
+		dataListCell?: Snippet<[{ fieldType: string; fieldName: string; fieldValue: any }]>;
+		groupTitleSlot?: Snippet<[{ item: Data }]>;
 	};
 
 	let {
@@ -109,10 +108,14 @@
 		virtualizer = false,
 		isLoading = false,
 		fieldValue,
-		slots
+		slots,
+		dataListCell,
+		groupTitleSlot
 	} = $props<DataListProps>();
 
 	let hidedGroups: Data = {};
+
+	$inspect(data);
 
 	let sortedData: any[] = $derived(data?.filter((x) => x));
 
@@ -162,9 +165,9 @@
 			sortByOrder = e.detail.order;
 
 			if (e.detail.order === 'none') {
-				sortedData = data;
+				//sortedData = data;
 			} else {
-				sortedData = dataOp.sortBy(data, e.detail.field, e.detail.order);
+				//sortedData = dataOp.sortBy(data, e.detail.field, e.detail.order);
 			}
 		}
 	}
@@ -244,17 +247,6 @@
 							{#if slots.groupTitleSlot}
 								{@render slots.groupTitleSlot({ item: {} })}
 							{/if}
-							<!-- <slot
-								name="dataListCell"
-								let:fieldType
-								let:fieldName
-								let:fieldValue
-								{fieldType}
-								{fieldName}
-								{fieldValue}
-								slot="dataListCell"
-							/>
-							<slot slot="groupTitleSlot" /> -->
 						</svelte:self>
 					{/if}
 				</div>
@@ -340,21 +332,4 @@
 			}
 		}
 	}
-
-	// $nb-cols: 5;
-
-	/* .ma_classe {
-  display: grid;
-  grid-template-columns: repeat($nb-cols, 1fr);
-  grid-auto-rows: minmax(100px, auto);
-
-  & > .ligne {
-    grid-column: 1 / -1;
-    // any other properties
-  }
-  
-  & > .ligne .cellule {
-    // any properties
-  }
-} */
 </style>
