@@ -9,7 +9,8 @@
 		{ id: 3, name: 'you', surname: 'are', lastname: 'groot' }
 	];
 
-	let findData: any;
+	let filteredData: any = [];
+	$inspect(filteredData);
 </script>
 
 <ComponentExample
@@ -22,17 +23,11 @@ Maifield, 1996"
 		<div class="flex-v gap-medium">
 			<h6>Default props</h6>
 			<div>
-				<Finder class="marg-b" style="width:200px" bind:filteredData={findData} {data} />
+				<Finder class="marg-b" style="width:200px" bind:filteredData {data} />
 			</div>
 			<h6>Automatic fields menu</h6>
 			<div>
-				<Finder
-					class="marg-b"
-					showSortMenu={true}
-					style="width:200px"
-					bind:filteredData={findData}
-					{data}
-				/>
+				<Finder class="marg-b" showSortMenu={true} style="width:200px" bind:filteredData {data} />
 			</div>
 		</div>
 	</div>
@@ -41,7 +36,7 @@ Maifield, 1996"
 		<h5>Results</h5>
 		<div class="flex-h gap-medium">
 			<!-- <div class="w-large flex-main"><Jsoner {data} /></div> -->
-			<div class="w-large flex-main"><Jsoner data={findData} /></div>
+			<div class="w-large flex-main"><Jsoner data={filteredData} /></div>
 		</div>
 	</div>
 </ComponentExample>
