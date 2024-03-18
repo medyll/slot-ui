@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0-beta.2](https://github.com/medyll/slot-ui/compare/v0.2.0-beta.1...v0.2.0-beta.2) (2024-03-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgraded to latest
+
+### Features
+
+* Finder  migrated to svelte 5 snippets ([f8d8b45](https://github.com/medyll/slot-ui/commit/f8d8b45d3ca024431cbdcda27bf1328892e97eb0))
+
+
+### Bug Fixes
+
+* upgraded to latest ([060121c](https://github.com/medyll/slot-ui/commit/060121c0898b735fefdcd81830fdda9c4ec40cea))
+
 ## [0.2.0-beta.1](https://github.com/medyll/slot-ui/compare/v0.2.0-beta.0...v0.2.0-beta.1) (2024-03-09)
 
 
