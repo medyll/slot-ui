@@ -1,4 +1,4 @@
-<svelte:options runes={true} />
+<svelte:options accessors={true} runes={true} />
 
 <script lang="ts">
 	import type { Snippet } from 'svelte';

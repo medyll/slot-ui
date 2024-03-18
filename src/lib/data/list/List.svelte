@@ -2,7 +2,7 @@
 	import type { LisItemProps } from './types.js';
 	import ListItem from './ListItem.svelte';
 	import { setContext } from 'svelte';
-	import { createListStore } from './store.js';
+	import { createListStore } from './store.svelte.js';
 	import type { ElementProps } from '$lib/types/index.js';
 	import Icon from '$lib/base/icon/Icon.svelte';
 	import ListTitle from './ListTitle.svelte';
