@@ -6,36 +6,76 @@
 	import Divider from '$lib/base/divider/Divider.svelte';
 	import Icon from '$lib/base/icon/Icon.svelte';
 	import type { IMenuItemProps, IMenuProps } from './types.js';
-	import type { ElementProps } from '$lib/types/index.js';
+	import type { CommonProps, ElementProps } from '$lib/types/index.js';
 	import type { Writable } from 'svelte/store';
 
-	/*  common slotUi exports*/
-	let className = '';
-	export { className as class };
-	export let element: HTMLElement | undefined = undefined;
-	/*  end slotUi exports*/
-
-	export let text: string | undefined = undefined;
-	/** text props, shown on the right side of the menuItem*/
-	export let action: string | undefined = undefined;
-	export let icon: IMenuItemProps['icon'] | undefined = undefined;
-	export let iconColor: string | undefined = undefined;
-	export let iconSize: ElementProps['sizeType'] | undefined = 'small';
-	export let divider: IMenuItemProps['divider'] = false;
-	export let dividerBefore: IMenuItemProps['divider'] = false;
-	export let data: Record<string, any> = { empty: 'menu item data' };
-	/** highlight menu item when selected*/
-	export let selected: boolean | undefined = undefined;
-	export let onMenuItemClick: Function = () => {};
-	/** position in the list */
-	export let itemIndex: number | undefined = undefined;
-
-	let mounted: boolean = false;
+	let mounted: boolean = $state(false);
 	const menuStateContext = getContext<Writable<IMenuProps>>('menuStateContext');
 
-	/** internal use component instance*/
-	export let component: any = null;
-	export let outer = true;
+	type MenuItemProps = CommonProps & {
+		/** className off the root component */
+		class?: string;
+
+		/** element root HTMLDivElement props */
+		element?: HTMLElement | null;
+
+		/** text displayed in the menu item */
+		text?: string;
+
+		/** text props, shown on the right side of the menuItem */
+		action?: string;
+
+		/** icon displayed in the menu item */
+		icon?: IMenuItemProps['icon'];
+
+		/** color of the icon */
+		iconColor?: string;
+
+		/** size of the icon */
+		iconSize?: ElementProps['sizeType'];
+
+		/** whether to show a divider after the menu item */
+		divider?: IMenuItemProps['divider'];
+
+		/** whether to show a divider before the menu item */
+		dividerBefore?: IMenuItemProps['divider'];
+
+		/** data associated with the menu item */
+		data?: Record<string, any>;
+
+		/** whether the menu item is selected */
+		selected?: boolean;
+
+		/** function to be called when the menu item is clicked */
+		onMenuItemClick?: Function;
+
+		/** position in the list */
+		itemIndex?: number;
+		/** component to be rendered in the menu item */
+		component?: any;
+
+		/** whether the menu item is outer */
+		outer: boolean;
+	};
+
+	let {
+		class: className = '',
+		element = null,
+		text = undefined,
+		action = undefined,
+		icon = undefined,
+		iconColor = undefined,
+		iconSize = 'small',
+		divider = false,
+		dividerBefore = false,
+		data = { empty: 'menu item data' },
+		selected = undefined,
+		onMenuItemClick = () => {},
+		itemIndex = undefined,
+		component = null,
+		outer = true,
+		children = undefined
+	} = $props() as MenuItemProps;
 
 	if (icon || $$slots.iconSlot) {
 		$menuStateContext.hasIcon = true;
@@ -45,18 +85,10 @@
 		$menuStateContext.selectedIndex = itemIndex;
 	}
 
-	onMount(() => {
-		mounted = true;
-		$menuStateContext.menuItemsInstances?.push(component);
-		// if no data and no listItem, create index
-		if (!itemIndex) {
-			itemIndex = $menuStateContext.menuItemsInstances?.length - 1;
+	$effect(() => {
+		if (mounted) {
+			$menuStateContext.menuItemsInstances?.push(component);
 		}
-
-		//element.addEventListener("click", handleClick);
-		return () => {
-			//element.removeEventListener("click", handleClick);
-		};
 	});
 
 	const handleClick = () => () => {
@@ -73,7 +105,45 @@
 	};
 </script>
 
-{#if outer}
+{#if dividerBefore}
+	<li>
+		<slot name="divider"><Divider density="tight" expansion="centered" /></slot>
+	</li>
+{/if}
+<li
+	class="menuItem {className}"
+	data-selected={($menuStateContext.selectedIndex
+		? $menuStateContext.selectedIndex === itemIndex
+		: undefined) ?? undefined}
+	role="menuitem"
+	bind:this={element}
+	on:click={handleClick}
+>
+	{#if $menuStateContext?.hasIcon}
+		<div class="menuItemIcon">
+			<slot name="menuItemStart">
+				<slot name="iconSlot">
+					<Icon {icon} color={iconColor} fontSize={iconSize} />
+				</slot>
+			</slot>
+		</div>
+	{/if}
+	<div class="menuItemText">
+		{@render children?.()}
+	</div>
+	{#if $$slots.actionSlot || action}
+		<div class="menuItemActions">
+			<slot name="menuItemEnd"><slot name="actionSlot">{action}</slot></slot>
+		</div>
+	{/if}
+</li>
+{#if divider}
+	<li>
+		<slot name="menuItemDivider"><Divider density="tight" expansion="padded" /></slot>
+	</li>
+{/if}
+
+<!-- {#if outer}
 	<svelte:self bind:this={component} outer={false} />
 {:else}
 	{#if dividerBefore}
@@ -100,6 +170,8 @@
 			</div>
 		{/if}
 		<div class="menuItemText">
+			chil
+			{@render children?.()}
 			<slot>
 				<slot name="menuItemText">{text ?? ''}</slot>
 			</slot>
@@ -115,7 +187,7 @@
 			<slot name="menuItemDivider"><Divider density="tight" expansion="padded" /></slot>
 		</li>
 	{/if}
-{/if}
+{/if} -->
 
 <style global lang="scss">
 	@import 'menu';

@@ -22,22 +22,22 @@
 		icon: string;
 
 		/** icon family */
-		iconFamily: string;
+		iconFamily?: string;
 
 		/**
 		 * icon size
 		 * @type {'small' | 'medium' | 'large' | 'xlarge'}
 		 */
-		fontSize: ElementProps['sizeType'];
+		fontSize?: ElementProps['sizeType'];
 
 		/** rotate icon */
-		rotate: boolean;
+		rotate?: boolean;
 
 		/** icon color */
 		color?: string;
 
 		/** icon rotation */
-		rotation: number;
+		rotation?: number;
 	};
 
 	let {
@@ -51,7 +51,7 @@
 		color,
 		rotation = 0,
 		...restProps
-	} = $props<IconProps>();
+	} = $props() as IconProps;
 
 	const sizes: Record<ElementProps['sizeType'], number> = uiPresets.iconSize;
 

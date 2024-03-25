@@ -1,9 +1,9 @@
 <svelte:options accessors={true} runes={true} />
+
 <script lang="ts">
 	/** @restProps { button} */
 	import { popper, type UsePopperProps } from '$lib/ui/popper/usePopper.js';
 	import type { CommonProps, ElementProps } from '$lib/types/index.js';
-	import Divider from '$lib/base/divider/Divider.svelte';
 	import Menu from '$lib/ui/menu/Menu.svelte';
 	import Popper from '$lib/ui/popper/Popper.svelte';
 	import Icon from '$lib/base/icon/Icon.svelte';
@@ -11,40 +11,40 @@
 	import type { Snippet } from 'svelte';
 
 	type Props = CommonProps & {
-		element: HTMLButtonElement;
+		element?: HTMLButtonElement;
 		/** button type */
-		type: 'button' | 'submit' | 'reset';
+		type?: 'button' | 'submit' | 'reset';
 		/** icon as a parameter */
 		icon: string | undefined;
 		/** icon as a parameter*/
-		iconFamily: string | undefined;
+		iconFamily?: string | undefined;
 		/** icon color as a parameter*/
-		iconColor: string;
+		iconColor?: string;
 		/** endIcon as a parameter */
-		endIcon: string | undefined;
+		endIcon?: string | undefined;
 		/** endIcon color as a parameter*/
-		endIconColor: string;
+		endIconColor?: string;
 		/**
 		 * endIcon
 		 * @type {'auto' | 'tiny' | 'small' | 'medium' | 'large' | 'full'}
 		 */
-		endIconSize: string;
+		endIconSize?: string;
 		/** background color theme */
-		bgTheme: string | undefined;
+		bgTheme?: string | undefined;
 		/** paramters for usePopper */
-		usePopper: UsePopperProps | undefined;
+		usePopper?: UsePopperProps | undefined;
 		/** show loading state */
-		loading: boolean;
+		loading?: boolean;
 		/** show chip */
-		showChip: boolean;
+		showChip?: boolean;
 		/** show / hide popper, when $$slots.popper exists */
-		popperOpen: boolean;
+		popperOpen?: boolean;
 		/** button style contained */
-		contained: boolean | undefined;
+		contained?: boolean | undefined;
 		/** button style bordered */
-		bordered: boolean | undefined;
+		bordered?: boolean | undefined;
 		/** button style link */
-		link: boolean | undefined;
+		link?: boolean | undefined;
 		/** button style link */
 		naked: boolean | undefined;
 		/**
@@ -84,6 +84,7 @@
 			buttonEnd?: Snippet;
 			buttonLoadingIcon?: Snippet;
 		};
+		onclick?: (event: MouseEvent) => void;
 		restProps: HTMLButtonElement['attributes'];
 	};
 
@@ -121,8 +122,9 @@
 		ratio = 'auto',
 		slots = {},
 		children,
+		onclick,
 		...restProps
-	} = $props<Props>();
+	} = $props() as Props;
 
 	let presetDefault = 'bordered contained';
 
@@ -132,9 +134,9 @@
 	let actionComponent = Menu;
 	let actionComponentProps = {};
 	let actionContent = '';
-	// for action 
-	let actionArgs  = $derived( {
-		code: 'node', 
+	// for action
+	let actionArgs = $derived({
+		code: 'node',
 		parentNode: element,
 		component: actionComponent,
 		componentProps: actionComponentProps ?? {},
@@ -170,7 +172,7 @@
 		bind:this={element}
 		use:popper={usePopper}
 		use:useAutoFocus
-		on:click
+		{onclick}
 		on:clickAway={() => {
 			popperOpen = false;
 		}}
@@ -210,7 +212,7 @@
 					{#if slots.buttonEnd}
 						{@render slots.buttonEnd()}
 					{:else}
-						<Icon fontSize={endIconSize} {endIcon} color={endIconColor} />
+						<Icon fontSize={endIconSize} icon={endIcon} color={endIconColor} />
 					{/if}
 				</div>
 			{/if}
