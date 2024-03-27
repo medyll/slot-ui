@@ -61,7 +61,7 @@
 		transform: translate(-50%, 0);
 		width: 50%;
 		background-color: blue;
-		border-radius: 16px;
+		border-radius: var(--sld-radius-large);
 		bottom: 0px;
 	}
 </style>

@@ -1,0 +1,25 @@
+.alert {
+  position: relative;
+  min-width: 350px;
+  display: inline-block;
+  border-radius: var(--sld-radius-small);
+  border: 1px solid var(--sld-color-border);
+  background-color: var(--sld-color-background);
+  overflow: hidden;
+}
+.alert .dot {
+  display: inline-block;
+  padding: 0.25rem;
+  border: 1px solid var(--sld-color-border);
+  border-radius: var(--sld-radius-small);
+  margin-right: 1rem;
+  transform: translate(-50%, 0);
+}
+.alert .close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  border-radius: var(--sld-radius-small);
+  margin: 0.25rem;
+  padding: 0.25rem;
+}

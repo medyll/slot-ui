@@ -1,4 +1,4 @@
-@import "../../styles/slotui-vars.scss";
+// @import "../../styles/slotui-vars.scss";
 @import "../../styles/presets.scss";
 
 ul.listRoot {
@@ -94,7 +94,7 @@ li.listItem {
       height: 50%;
       width: 3px;
       background-color: var(--sld-color-primary);
-      border-radius: 8px;
+      border-radius: var(--sld-radius-med);
       left: 0;
       border: 1px solid var(--sld-color-primary-alpha-mid);
     }

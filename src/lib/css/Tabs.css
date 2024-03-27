@@ -1,0 +1,58 @@
+.tabsRoot {
+  position: relative;
+  display: flex;
+}
+.tabsRoot[data-orientation=horizontal] ul {
+  flex-direction: column;
+}
+.tabsRoot[data-orientation=vertical] {
+  flex-direction: column;
+}
+
+.tabsNav {
+  padding: 0.25rem 0;
+  border-bottom: 1px solid var(--sld-tabs-nav-border-color, var(--sld-color-primary-alpha-high));
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.tabsNav[data-orientation=horizontal] {
+  flex-direction: column;
+}
+.tabsNav .tabsRail {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+.tabsNav .tabsRail > div {
+  padding: var(--box-density-preset-small);
+  min-width: 48px;
+  cursor: pointer;
+}
+.tabsNav .tabsRail > div.active {
+  font-weight: bold;
+}
+.tabsNav .tabsContent {
+  background-color: var(--sld-color-background);
+  position: relative;
+  width: 100%;
+}
+.tabsNav .tabsActiveCellContainer {
+  top: auto;
+  position: relative;
+  min-height: 4px;
+  transition: all 0.25s;
+}
+
+.tabSlot {
+  border-radius: var(--sld-radius-small);
+  min-height: 4px;
+  background-color: var(--sld-color-primary);
+  width: 100%;
+  position: absolute;
+  transition: all 0.25s;
+  z-index: 200;
+}

@@ -1,0 +1,372 @@
+.actionButton {
+  height: 100%;
+  width: var(--w-tiny);
+  cursor: pointer;
+}
+.actionButton:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.button,
+button,
+button[contained=true],
+input[type=button],
+input[type=submit] {
+  text-align: var(--sld-button-text-align);
+  font-size: var(--sld-button-font-size);
+  border-radius: var(--sld-button-radius);
+  border: 0.5px solid var(--sld-button-border-color);
+  background: var(--sld-button-background);
+  color: var(--sld-color-foreground);
+  padding: var(--sld-button-padding);
+  outline: var(--sld-button-border-width) solid var(--sld-button-border-color);
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.1s;
+  position: relative;
+  overflow: hidden;
+}
+.button[data-height=tiny],
+button[data-height=tiny],
+button[contained=true][data-height=tiny],
+input[type=button][data-height=tiny],
+input[type=submit][data-height=tiny] {
+  height: calc(1rem - var(--sld-border-bottom-size, 2px));
+  padding: 0;
+}
+.button[data-height=small],
+button[data-height=small],
+button[contained=true][data-height=small],
+input[type=button][data-height=small],
+input[type=submit][data-height=small] {
+  height: calc(1.9rem - var(--sld-border-bottom-size, 2px));
+}
+.button[data-height=default],
+button[data-height=default],
+button[contained=true][data-height=default],
+input[type=button][data-height=default],
+input[type=submit][data-height=default] {
+  height: calc(2.5rem - var(--sld-border-bottom-size, 2px));
+}
+.button[data-height=large],
+button[data-height=large],
+button[contained=true][data-height=large],
+input[type=button][data-height=large],
+input[type=submit][data-height=large] {
+  height: calc(4rem - var(--sld-border-bottom-size, 2px));
+}
+.button[borderless=true],
+button[borderless=true],
+button[contained=true][borderless=true],
+input[type=button][borderless=true],
+input[type=submit][borderless=true] {
+  border: 0px solid none;
+}
+.button[data-width=tiny],
+button[data-width=tiny],
+button[contained=true][data-width=tiny],
+input[type=button][data-width=tiny],
+input[type=submit][data-width=tiny] {
+  width: 2rem;
+}
+.button[data-width=small],
+button[data-width=small],
+button[contained=true][data-width=small],
+input[type=button][data-width=small],
+input[type=submit][data-width=small] {
+  width: 6rem;
+}
+.button[data-width=medium],
+button[data-width=medium],
+button[contained=true][data-width=medium],
+input[type=button][data-width=medium],
+input[type=submit][data-width=medium] {
+  width: 8rem;
+}
+.button[data-width=default],
+button[data-width=default],
+button[contained=true][data-width=default],
+input[type=button][data-width=default],
+input[type=submit][data-width=default] {
+  width: 12rem;
+}
+.button[data-width=large],
+button[data-width=large],
+button[contained=true][data-width=large],
+input[type=button][data-width=large],
+input[type=submit][data-width=large] {
+  width: 16rem;
+}
+.button[data-width=full],
+button[data-width=full],
+button[contained=true][data-width=full],
+input[type=button][data-width=full],
+input[type=submit][data-width=full] {
+  width: 100%;
+}
+.button[data-width=auto],
+button[data-width=auto],
+button[contained=true][data-width=auto],
+input[type=button][data-width=auto],
+input[type=submit][data-width=auto] {
+  width: auto;
+}
+.button[data-height=tiny],
+button[data-height=tiny],
+button[contained=true][data-height=tiny],
+input[type=button][data-height=tiny],
+input[type=submit][data-height=tiny] {
+  height: calc(1rem - var(--sld-border-bottom-size, 2px));
+  padding: 0;
+}
+.button[data-height=small],
+button[data-height=small],
+button[contained=true][data-height=small],
+input[type=button][data-height=small],
+input[type=submit][data-height=small] {
+  height: calc(1.9rem - var(--sld-border-bottom-size, 2px));
+}
+.button[data-height=default],
+button[data-height=default],
+button[contained=true][data-height=default],
+input[type=button][data-height=default],
+input[type=submit][data-height=default] {
+  height: calc(2.5rem - var(--sld-border-bottom-size, 2px));
+}
+.button[data-height=large],
+button[data-height=large],
+button[contained=true][data-height=large],
+input[type=button][data-height=large],
+input[type=submit][data-height=large] {
+  height: calc(4rem - var(--sld-border-bottom-size, 2px));
+}
+.button[borderless=true],
+button[borderless=true],
+button[contained=true][borderless=true],
+input[type=button][borderless=true],
+input[type=submit][borderless=true] {
+  border: 0px solid none;
+}
+.button[disabled],
+button[disabled],
+button[contained=true][disabled],
+input[type=button][disabled],
+input[type=submit][disabled] {
+  color: var(--color-gray-800);
+  border-color: none;
+  opacity: 0.4;
+}
+.button:hover,
+button:hover,
+button[contained=true]:hover,
+input[type=button]:hover,
+input[type=submit]:hover {
+  outline: var(--sld-button-border-width) solid var(--sld-button-hover-border-color);
+  box-shadow: var(--sld-button-hover-shadow);
+}
+.button:active,
+button:active,
+button[contained=true]:active,
+input[type=button]:active,
+input[type=submit]:active {
+  outline: 0.5px solid var(--sld-button-active-border-color, var(--sld-color-primary)) !important;
+  box-shadow: var(--sld-button-active-shadow);
+}
+.button:focus,
+button:focus,
+button[contained=true]:focus,
+input[type=button]:focus,
+input[type=submit]:focus {
+  outline: 0.5px solid var(--sld-button-active-border-color, var(--sld-color-primary)) !important;
+  box-shadow: var(--sld-button-focus-shadow);
+}
+.button[nowrap],
+button[nowrap],
+button[contained=true][nowrap],
+input[type=button][nowrap],
+input[type=submit][nowrap] {
+  color: " ";
+}
+.button[selected=true],
+button[selected=true],
+button[contained=true][selected=true],
+input[type=button][selected=true],
+input[type=submit][selected=true] {
+  box-shadow: var(--box-shad-3);
+  border: 0.5px solid var(--sld-color-paper-alpha-low);
+  background-color: transparent;
+  font-weight: bold;
+}
+.button[bordered=true],
+button[bordered=true],
+button[contained=true][bordered=true],
+input[type=button][bordered=true],
+input[type=submit][bordered=true] {
+  color: var(--sld-color-foreground);
+  border: 0.5px solid var(--sld-color-primary-alpha-low);
+  box-shadow: var(--box-shad-1);
+}
+.button[bordered=true]:hover,
+button[bordered=true]:hover,
+button[contained=true][bordered=true]:hover,
+input[type=button][bordered=true]:hover,
+input[type=submit][bordered=true]:hover {
+  border: 0.5px solid var(--sld-color-primary);
+}
+.button[contained=true],
+button[contained=true],
+button[contained=true][contained=true],
+input[type=button][contained=true],
+input[type=submit][contained=true] {
+  color: var(--sld-color-foreground);
+  background-color: var(--sld-color-paper-alpha-low);
+}
+.button[contained=true]:hover,
+button[contained=true]:hover,
+button[contained=true][contained=true]:hover,
+input[type=button][contained=true]:hover,
+input[type=submit][contained=true]:hover {
+  background-color: var(--sld-color-primary) !important;
+  color: white;
+}
+.button[contained=true]:focus,
+button[contained=true]:focus,
+button[contained=true][contained=true]:focus,
+input[type=button][contained=true]:focus,
+input[type=submit][contained=true]:focus {
+  outline: 0;
+  background-color: var(--sld-color-background-alpha-mid);
+}
+.button[link=true],
+button[link=true],
+button[contained=true][link=true],
+input[type=button][link=true],
+input[type=submit][link=true] {
+  color: var(--sld-color-primary);
+  text-decoration: underline;
+  text-underline-offset: 0.35rem;
+  cursor: pointer;
+}
+.button[link=true]:hover,
+button[link=true]:hover,
+button[contained=true][link=true]:hover,
+input[type=button][link=true]:hover,
+input[type=submit][link=true]:hover {
+  text-decoration: underline;
+}
+.button[naked=true],
+button[naked=true],
+button[contained=true][naked=true],
+input[type=button][naked=true],
+input[type=submit][naked=true] {
+  color: inherit;
+  background-color: transparent !important;
+  border: 0.5px solid transparent;
+  cursor: pointer;
+}
+.button[naked=true]:hover, .button[naked=true]:active, .button[naked=true]:focus,
+button[naked=true]:hover,
+button[naked=true]:active,
+button[naked=true]:focus,
+button[contained=true][naked=true]:hover,
+button[contained=true][naked=true]:active,
+button[contained=true][naked=true]:focus,
+input[type=button][naked=true]:hover,
+input[type=button][naked=true]:active,
+input[type=button][naked=true]:focus,
+input[type=submit][naked=true]:hover,
+input[type=submit][naked=true]:active,
+input[type=submit][naked=true]:focus {
+  background-color: transparent !important;
+  border: 0.5px solid transparent;
+  color: inherit;
+}
+.button.loading .loadingButtonZone,
+button.loading .loadingButtonZone,
+button[contained=true].loading .loadingButtonZone,
+input[type=button].loading .loadingButtonZone,
+input[type=submit].loading .loadingButtonZone {
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  max-height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: var(--css-background-color, var(--sld-color-paper));
+  color: var(--css-background-color, var(--sld-color-secondary));
+  backdrop-filter: blur(3px);
+}
+.button .innerButton,
+button .innerButton,
+button[contained=true] .innerButton,
+input[type=button] .innerButton,
+input[type=submit] .innerButton {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-width: auto;
+  align-items: center;
+  justify-content: center;
+}
+.button .innerButton .buttonStart,
+button .innerButton .buttonStart,
+button[contained=true] .innerButton .buttonStart,
+input[type=button] .innerButton .buttonStart,
+input[type=submit] .innerButton .buttonStart {
+  padding: 0 var(--box-density-preset-tiny, 0.25rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.button .innerButton .central,
+button .innerButton .central,
+button[contained=true] .innerButton .central,
+input[type=button] .innerButton .central,
+input[type=submit] .innerButton .central {
+  flex: 1;
+  min-width: 0;
+  padding: 0 0.5rem;
+  text-align: var(--sld-button-text-align);
+}
+.button .innerButton .action,
+button .innerButton .action,
+button[contained=true] .innerButton .action,
+input[type=button] .innerButton .action,
+input[type=submit] .innerButton .action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: var(--w-tiny);
+  padding: 0 0.5rem;
+  cursor: pointer;
+}
+.button .innerButton .action:hover,
+button .innerButton .action:hover,
+button[contained=true] .innerButton .action:hover,
+input[type=button] .innerButton .action:hover,
+input[type=submit] .innerButton .action:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.button .chip,
+button .chip,
+button[contained=true] .chip,
+input[type=button] .chip,
+input[type=submit] .chip {
+  position: absolute;
+  z-index: 2;
+  height: 3px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 50%;
+  background-color: var(--css-button-chip-color, var(--sld-color-primary));
+  border-radius: var(--sld-radius-large);
+  bottom: 2px;
+}

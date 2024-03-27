@@ -1,4 +1,4 @@
-@import "../../styles/slotui-vars.scss";
+// @import "../../styles/slotui-vars.scss";
 @import "../../styles/presets.scss";
 
 .boxRoot {
@@ -6,7 +6,7 @@
   min-width: 320px;
   background-color: var(--sld-color-background);
   border-bottom: 1px solid var(--sld-color-primary);
-  border-radius: 6px;
+  border-radius: var(--sld-radius-small);
   display: inline-block;
   .boxContent {
   }

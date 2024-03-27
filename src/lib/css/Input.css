@@ -1,0 +1,81 @@
+input {
+  border: var(--sld-input-border-width) solid var(--sld-input-border-color);
+  border-bottom: var(--sld-input-border-bottom-width) solid var(--sld-input-border-bottom-color);
+  border-radius: var(--sld-input-radius);
+  padding: var(--sld-input-padding);
+  box-shadow: var(--sld-input-shadow);
+  background-color: var(--sld-input-background);
+  color: var(--sld-color-foreground);
+}
+input [error] {
+  border-bottom: red;
+}
+input[data-height=tiny] {
+  height: calc(1rem - var(--sld-border-bottom-size, 2px));
+  padding: 0;
+}
+input[data-height=small] {
+  height: calc(1.9rem - var(--sld-border-bottom-size, 2px));
+}
+input[data-height=default] {
+  height: calc(2.5rem - var(--sld-border-bottom-size, 2px));
+}
+input[data-height=large] {
+  height: calc(4rem - var(--sld-border-bottom-size, 2px));
+}
+input[borderless=true] {
+  border: 0px solid none;
+}
+input[data-width=tiny] {
+  width: 2rem;
+}
+input[data-width=small] {
+  width: 6rem;
+}
+input[data-width=medium] {
+  width: 8rem;
+}
+input[data-width=default] {
+  width: 12rem;
+}
+input[data-width=large] {
+  width: 16rem;
+}
+input[data-width=full] {
+  width: 100%;
+}
+input[data-width=auto] {
+  width: auto;
+}
+input:hover {
+  border-color: var(--sld-hover-border-color);
+  background-color: var(--sld-color-primary-alpha-low);
+}
+
+.inputStart {
+  position: absolute;
+  height: 100%;
+  max-height: 100%;
+  width: 24px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: var(--sld-input-radius, var(--sld-radius-small));
+}
+
+.inputEnd {
+  position: absolute;
+  right: 0;
+  height: 100%;
+  max-height: 100%;
+  width: 24px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  border-radius: var(--sld-input-radius, var(--sld-radius-small));
+}

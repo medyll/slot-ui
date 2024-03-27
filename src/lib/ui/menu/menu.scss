@@ -1,4 +1,4 @@
-@import "../../styles/slotui-vars.scss";
+// @import "../../styles/slotui-vars.scss";
 @import "../../styles/presets.scss";
 
 .menu {
@@ -7,12 +7,11 @@
   padding: 0.25rem;
   cursor: pointer;
   display: inline-block;
-  //background-color: var(--sld-color-background);
   color: var(--sld-color-foreground);
 
   &.bordered {
     border: 0.5px solid rgba(255, 255, 255, 0.1);
-    border-radius: 6px;
+    border-radius: var(--sld-radius-small);
   }
 
   &.density-tight {
@@ -35,7 +34,7 @@
 }
 
 .menuItem {
-  border-radius: 6px;
+  border-radius: var(--sld-radius-small);
   overflow: hidden;
   display: flex;
   align-items: center;

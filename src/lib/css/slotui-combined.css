@@ -1,0 +1,1197 @@
+/** Alert.scss -----*/ 
+.alert {
+  position: relative;
+  min-width: 350px;
+  display: inline-block;
+  border-radius: var(--sld-radius-small);
+  border: 1px solid var(--sld-color-border);
+  background-color: var(--sld-color-background);
+  overflow: hidden;
+}
+.alert .dot {
+  display: inline-block;
+  padding: 0.25rem;
+  border: 1px solid var(--sld-color-border);
+  border-radius: var(--sld-radius-small);
+  margin-right: 1rem;
+  transform: translate(-50%, 0);
+}
+.alert .close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  border-radius: var(--sld-radius-small);
+  margin: 0.25rem;
+  padding: 0.25rem;
+}
+/** Avatar.scss -----*/ 
+.avatar {
+  position: relative;
+  border-radius: var(--css-avatar-radius, 20%);
+  border: 1px solid var(--css-avatar-border-color, var(--sld-color-border));
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+/** Badge.scss -----*/ 
+.badge {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid red;
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+}
+.badge .hidden {
+  transform: scale(0, 0);
+}
+/** Box.scss -----*/ 
+.boxRoot {
+  min-height: 160px;
+  min-width: 320px;
+  background-color: var(--sld-color-background);
+  border-bottom: 1px solid var(--sld-color-primary);
+  border-radius: var(--sld-radius-small);
+  display: inline-block;
+}
+.boxRoot .boxButtonZone {
+  display: flex;
+  gap: --theme-gap-tiny;
+  text-align: right;
+  padding: 0.5rem;
+  justify-content: end;
+}
+/** BreadCrumb.scss -----*/ 
+.breadCrumb ul {
+  display: flex;
+}
+/** Button.scss -----*/ 
+.actionButton {
+  height: 100%;
+  width: var(--w-tiny);
+  cursor: pointer;
+}
+.actionButton:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.button,
+button,
+button[contained=true],
+input[type=button],
+input[type=submit] {
+  text-align: var(--sld-button-text-align);
+  font-size: var(--sld-button-font-size);
+  border-radius: var(--sld-button-radius);
+  border: 0.5px solid var(--sld-button-border-color);
+  background: var(--sld-button-background);
+  color: var(--sld-color-foreground);
+  padding: var(--sld-button-padding);
+  outline: var(--sld-button-border-width) solid var(--sld-button-border-color);
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.1s;
+  position: relative;
+  overflow: hidden;
+}
+.button[data-height=tiny],
+button[data-height=tiny],
+button[contained=true][data-height=tiny],
+input[type=button][data-height=tiny],
+input[type=submit][data-height=tiny] {
+  height: calc(1rem - var(--sld-border-bottom-size, 2px));
+  padding: 0;
+}
+.button[data-height=small],
+button[data-height=small],
+button[contained=true][data-height=small],
+input[type=button][data-height=small],
+input[type=submit][data-height=small] {
+  height: calc(1.9rem - var(--sld-border-bottom-size, 2px));
+}
+.button[data-height=default],
+button[data-height=default],
+button[contained=true][data-height=default],
+input[type=button][data-height=default],
+input[type=submit][data-height=default] {
+  height: calc(2.5rem - var(--sld-border-bottom-size, 2px));
+}
+.button[data-height=large],
+button[data-height=large],
+button[contained=true][data-height=large],
+input[type=button][data-height=large],
+input[type=submit][data-height=large] {
+  height: calc(4rem - var(--sld-border-bottom-size, 2px));
+}
+.button[borderless=true],
+button[borderless=true],
+button[contained=true][borderless=true],
+input[type=button][borderless=true],
+input[type=submit][borderless=true] {
+  border: 0px solid none;
+}
+.button[data-width=tiny],
+button[data-width=tiny],
+button[contained=true][data-width=tiny],
+input[type=button][data-width=tiny],
+input[type=submit][data-width=tiny] {
+  width: 2rem;
+}
+.button[data-width=small],
+button[data-width=small],
+button[contained=true][data-width=small],
+input[type=button][data-width=small],
+input[type=submit][data-width=small] {
+  width: 6rem;
+}
+.button[data-width=medium],
+button[data-width=medium],
+button[contained=true][data-width=medium],
+input[type=button][data-width=medium],
+input[type=submit][data-width=medium] {
+  width: 8rem;
+}
+.button[data-width=default],
+button[data-width=default],
+button[contained=true][data-width=default],
+input[type=button][data-width=default],
+input[type=submit][data-width=default] {
+  width: 12rem;
+}
+.button[data-width=large],
+button[data-width=large],
+button[contained=true][data-width=large],
+input[type=button][data-width=large],
+input[type=submit][data-width=large] {
+  width: 16rem;
+}
+.button[data-width=full],
+button[data-width=full],
+button[contained=true][data-width=full],
+input[type=button][data-width=full],
+input[type=submit][data-width=full] {
+  width: 100%;
+}
+.button[data-width=auto],
+button[data-width=auto],
+button[contained=true][data-width=auto],
+input[type=button][data-width=auto],
+input[type=submit][data-width=auto] {
+  width: auto;
+}
+.button[data-height=tiny],
+button[data-height=tiny],
+button[contained=true][data-height=tiny],
+input[type=button][data-height=tiny],
+input[type=submit][data-height=tiny] {
+  height: calc(1rem - var(--sld-border-bottom-size, 2px));
+  padding: 0;
+}
+.button[data-height=small],
+button[data-height=small],
+button[contained=true][data-height=small],
+input[type=button][data-height=small],
+input[type=submit][data-height=small] {
+  height: calc(1.9rem - var(--sld-border-bottom-size, 2px));
+}
+.button[data-height=default],
+button[data-height=default],
+button[contained=true][data-height=default],
+input[type=button][data-height=default],
+input[type=submit][data-height=default] {
+  height: calc(2.5rem - var(--sld-border-bottom-size, 2px));
+}
+.button[data-height=large],
+button[data-height=large],
+button[contained=true][data-height=large],
+input[type=button][data-height=large],
+input[type=submit][data-height=large] {
+  height: calc(4rem - var(--sld-border-bottom-size, 2px));
+}
+.button[borderless=true],
+button[borderless=true],
+button[contained=true][borderless=true],
+input[type=button][borderless=true],
+input[type=submit][borderless=true] {
+  border: 0px solid none;
+}
+.button[disabled],
+button[disabled],
+button[contained=true][disabled],
+input[type=button][disabled],
+input[type=submit][disabled] {
+  color: var(--color-gray-800);
+  border-color: none;
+  opacity: 0.4;
+}
+.button:hover,
+button:hover,
+button[contained=true]:hover,
+input[type=button]:hover,
+input[type=submit]:hover {
+  outline: var(--sld-button-border-width) solid var(--sld-button-hover-border-color);
+  box-shadow: var(--sld-button-hover-shadow);
+}
+.button:active,
+button:active,
+button[contained=true]:active,
+input[type=button]:active,
+input[type=submit]:active {
+  outline: 0.5px solid var(--sld-button-active-border-color, var(--sld-color-primary)) !important;
+  box-shadow: var(--sld-button-active-shadow);
+}
+.button:focus,
+button:focus,
+button[contained=true]:focus,
+input[type=button]:focus,
+input[type=submit]:focus {
+  outline: 0.5px solid var(--sld-button-active-border-color, var(--sld-color-primary)) !important;
+  box-shadow: var(--sld-button-focus-shadow);
+}
+.button[nowrap],
+button[nowrap],
+button[contained=true][nowrap],
+input[type=button][nowrap],
+input[type=submit][nowrap] {
+  color: " ";
+}
+.button[selected=true],
+button[selected=true],
+button[contained=true][selected=true],
+input[type=button][selected=true],
+input[type=submit][selected=true] {
+  box-shadow: var(--box-shad-3);
+  border: 0.5px solid var(--sld-color-paper-alpha-low);
+  background-color: transparent;
+  font-weight: bold;
+}
+.button[bordered=true],
+button[bordered=true],
+button[contained=true][bordered=true],
+input[type=button][bordered=true],
+input[type=submit][bordered=true] {
+  color: var(--sld-color-foreground);
+  border: 0.5px solid var(--sld-color-primary-alpha-low);
+  box-shadow: var(--box-shad-1);
+}
+.button[bordered=true]:hover,
+button[bordered=true]:hover,
+button[contained=true][bordered=true]:hover,
+input[type=button][bordered=true]:hover,
+input[type=submit][bordered=true]:hover {
+  border: 0.5px solid var(--sld-color-primary);
+}
+.button[contained=true],
+button[contained=true],
+button[contained=true][contained=true],
+input[type=button][contained=true],
+input[type=submit][contained=true] {
+  color: var(--sld-color-foreground);
+  background-color: var(--sld-color-paper-alpha-low);
+}
+.button[contained=true]:hover,
+button[contained=true]:hover,
+button[contained=true][contained=true]:hover,
+input[type=button][contained=true]:hover,
+input[type=submit][contained=true]:hover {
+  background-color: var(--sld-color-primary) !important;
+  color: white;
+}
+.button[contained=true]:focus,
+button[contained=true]:focus,
+button[contained=true][contained=true]:focus,
+input[type=button][contained=true]:focus,
+input[type=submit][contained=true]:focus {
+  outline: 0;
+  background-color: var(--sld-color-background-alpha-mid);
+}
+.button[link=true],
+button[link=true],
+button[contained=true][link=true],
+input[type=button][link=true],
+input[type=submit][link=true] {
+  color: var(--sld-color-primary);
+  text-decoration: underline;
+  text-underline-offset: 0.35rem;
+  cursor: pointer;
+}
+.button[link=true]:hover,
+button[link=true]:hover,
+button[contained=true][link=true]:hover,
+input[type=button][link=true]:hover,
+input[type=submit][link=true]:hover {
+  text-decoration: underline;
+}
+.button[naked=true],
+button[naked=true],
+button[contained=true][naked=true],
+input[type=button][naked=true],
+input[type=submit][naked=true] {
+  color: inherit;
+  background-color: transparent !important;
+  border: 0.5px solid transparent;
+  cursor: pointer;
+}
+.button[naked=true]:hover, .button[naked=true]:active, .button[naked=true]:focus,
+button[naked=true]:hover,
+button[naked=true]:active,
+button[naked=true]:focus,
+button[contained=true][naked=true]:hover,
+button[contained=true][naked=true]:active,
+button[contained=true][naked=true]:focus,
+input[type=button][naked=true]:hover,
+input[type=button][naked=true]:active,
+input[type=button][naked=true]:focus,
+input[type=submit][naked=true]:hover,
+input[type=submit][naked=true]:active,
+input[type=submit][naked=true]:focus {
+  background-color: transparent !important;
+  border: 0.5px solid transparent;
+  color: inherit;
+}
+.button.loading .loadingButtonZone,
+button.loading .loadingButtonZone,
+button[contained=true].loading .loadingButtonZone,
+input[type=button].loading .loadingButtonZone,
+input[type=submit].loading .loadingButtonZone {
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  max-height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: var(--css-background-color, var(--sld-color-paper));
+  color: var(--css-background-color, var(--sld-color-secondary));
+  backdrop-filter: blur(3px);
+}
+.button .innerButton,
+button .innerButton,
+button[contained=true] .innerButton,
+input[type=button] .innerButton,
+input[type=submit] .innerButton {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-width: auto;
+  align-items: center;
+  justify-content: center;
+}
+.button .innerButton .buttonStart,
+button .innerButton .buttonStart,
+button[contained=true] .innerButton .buttonStart,
+input[type=button] .innerButton .buttonStart,
+input[type=submit] .innerButton .buttonStart {
+  padding: 0 var(--box-density-preset-tiny, 0.25rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.button .innerButton .central,
+button .innerButton .central,
+button[contained=true] .innerButton .central,
+input[type=button] .innerButton .central,
+input[type=submit] .innerButton .central {
+  flex: 1;
+  min-width: 0;
+  padding: 0 0.5rem;
+  text-align: var(--sld-button-text-align);
+}
+.button .innerButton .action,
+button .innerButton .action,
+button[contained=true] .innerButton .action,
+input[type=button] .innerButton .action,
+input[type=submit] .innerButton .action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: var(--w-tiny);
+  padding: 0 0.5rem;
+  cursor: pointer;
+}
+.button .innerButton .action:hover,
+button .innerButton .action:hover,
+button[contained=true] .innerButton .action:hover,
+input[type=button] .innerButton .action:hover,
+input[type=submit] .innerButton .action:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.button .chip,
+button .chip,
+button[contained=true] .chip,
+input[type=button] .chip,
+input[type=submit] .chip {
+  position: absolute;
+  z-index: 2;
+  height: 3px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 50%;
+  background-color: var(--css-button-chip-color, var(--sld-color-primary));
+  border-radius: var(--sld-radius-large);
+  bottom: 2px;
+}
+/** ButtonAction.scss -----*/ 
+.buttonWrapper {
+  color: white;
+  display: inline-block;
+  position: relative;
+  width: 64px;
+}
+.buttonWrapper button {
+  padding: 16px 16px;
+  display: block;
+  width: 64px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+}
+.buttonWrapper button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.buttonWrapper button .action {
+  position: absolute;
+  display: block;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.1);
+  width: 30%;
+  padding: 0.5rem;
+}
+.buttonWrapper button .action:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+/** ButtonMenu.scss -----*/ 
+.buttonActionRoot {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+}
+
+.buttonText {
+  text-align: center;
+}
+
+.button {
+  display: block;
+  width: 64px;
+}
+.button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.action {
+  position: absolute;
+  display: block;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.1);
+  width: 30%;
+  padding: 0.5rem;
+}
+.action:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+/** Cartouche.scss -----*/ 
+.cartouche {
+  border-radius: var(--sld-radius-small);
+  overflow: hidden;
+}
+.cartouche[data-bordered=true] {
+  border: 1px solid var(--sld-color-foreground-alpha-high);
+}
+.cartouche.stacked {
+  border-radius: 0;
+}
+.cartouche.stacked:first-child {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+.cartouche.stacked:last-child {
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+.cartouche .control {
+  display: flex;
+  gap: 8px;
+  background-color: var(--sld-color-background);
+  align-items: center;
+  padding: 1rem 0.25rem;
+}
+.cartouche .control:hover {
+  background-color: var(--sld-color-background-darken-low);
+}
+.cartouche .control .controlIcon {
+  padding: 0 0.5rem;
+}
+.cartouche .control .controlLabel {
+  cursor: pointer;
+  padding: 0 0.5rem;
+}
+.cartouche .control .chevron {
+  cursor: pointer;
+}
+.cartouche .control .divider {
+  border-bottom: 1px solid var(--sld-color-foreground-alpha-mid);
+}
+.cartouche .content {
+  overflow: hidden;
+  background-color: var(--sld-color-background);
+  content-visibility: auto;
+}
+.cartouche .content[aria-expanded=false] {
+  display: none;
+}
+.cartouche .content[aria-expanded=true] {
+  border-top: 1px solid var(--sld-color-foreground-alpha-high);
+}
+/** Divider.scss -----*/ 
+hr {
+  border: none;
+  border-top: 1px solid var(--sld-color-border, var(--sld-color-foreground-alpha-high, #333));
+  background-color: var(--sld-color-border, var(--sld-color-foreground-alpha-mid, #333));
+  display: block;
+}
+hr.vertical {
+  width: 1px;
+  border-right: 1px solid var(--sld-color-border, var(--sld-color-foreground-alpha-mid, #333));
+}
+/** DataList.scss -----*/ 
+[data-theme=dark] {
+  --sld-color-border: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme=light] {
+  --sld-color-border: rgba(0, 0, 0, 0.1);
+}
+
+.dataList {
+  height: 100%;
+  position: relative;
+}
+
+.dataListHead {
+  margin: 0.5rem 0;
+  align-items: stretch;
+  height: 32px;
+  z-index: 100;
+  background-color: var(--sld-color-paper-alpha-low);
+  backdrop-filter: blur(20px);
+  border-radius: var(--sld-radius-tiny);
+  box-shadow: var(--box-shad-1);
+  border: 1px solid var(--sld-color-border);
+}
+.dataListHead .dataListCell {
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  border-right: 1px solid var(--sld-color-border);
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.dataListHead .dataListCell:last-of-type {
+  border-right: 1px solid transparent;
+}
+.dataListHead .dataListCell[data-sortable=true] {
+  cursor: pointer;
+}
+.dataListHead .dataListCell[data-sortable=true]:hover {
+  background-color: var(--sld-color-primary-alpha);
+}
+.dataListHead .dataListCell .cellHeader {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  width: 100%;
+}
+.dataListHead .dataListCell .cellHeader .cellHeaderContent {
+  flex: 1;
+  overflow: hidden;
+  padding: 0 8px;
+}
+.dataListRow {
+  border-bottom: 1px solid var(--sld-color-border);
+  /* border-radius: var(--sld-radius-small);
+  		margin: 0.25rem 0; */
+}
+.dataListRow:last-of-type {
+  border-bottom: 1px solid transparent;
+}
+.dataListRow:hover {
+  background-color: var(--sld-color-paper);
+}
+.dataListRow[data-selected=true] {
+  background-color: var(--sld-color-primary);
+}
+.dataListRow[data-selected=true] .dataListCell {
+  color: white;
+}
+.dataListRow .dataListCell {
+  padding: 0.5rem 0.5rem;
+  color: var(--sld-color-foreground);
+  border-right: 1px solid var(--sld-color-border);
+}
+.dataListRow .dataListCell:last-of-type {
+  border-right: 1px solid transparent;
+}
+.dataListRow .dataListCell[data-noWrap=true] {
+  display: box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  /* display: -webkit-box;
+  		-webkit-line-clamp: 1;
+  		-webkit-box-orient: vertical; */
+}
+/** List.scss -----*/ 
+ul.listRoot {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  padding: var(--sld-list-padding);
+  gap: 2px;
+}
+
+ul.listRoot:focus {
+  outline: 0;
+  outline-offset: -4px;
+}
+
+li.listItemTitle,
+li.listItem {
+  display: flex;
+  align-items: center;
+  position: relative;
+  border-radius: var(--sld-list-item-radius);
+  width: 100%;
+  height: 36px;
+  min-height: 36px;
+  border: 1px solid transparent;
+  align-self: flex-start;
+}
+li.listItemTitle.density-none, li.listItemTitle[data-density=none],
+li.listItem.density-none,
+li.listItem[data-density=none] {
+  padding: 0;
+}
+li.listItemTitle.density-tight, li.listItemTitle[data-density=tight],
+li.listItem.density-tight,
+li.listItem[data-density=tight] {
+  padding: 0.5rem 0;
+}
+li.listItemTitle.density-small, li.listItemTitle[data-density=small],
+li.listItem.density-small,
+li.listItem[data-density=small] {
+  padding: 0.75rem 0;
+}
+li.listItemTitle.density-default, li.listItemTitle[data-density=default],
+li.listItem.density-default,
+li.listItem[data-density=default] {
+  padding: 1rem 0;
+}
+li.listItemTitle.density-kind, li.listItemTitle[data-density=kind],
+li.listItem.density-kind,
+li.listItem[data-density=kind] {
+  padding: 1.5rem 0;
+}
+li.listItemTitle.density-unset, li.listItemTitle[data-density=unset],
+li.listItem.density-unset,
+li.listItem[data-density=unset] {
+  padding: auto;
+}
+li.listItemTitle .listItemContent,
+li.listItem .listItemContent {
+  flex: 1;
+  min-width: auto;
+  overflow: hidden;
+  padding: 0;
+  padding-left: 1rem;
+}
+li.listItemTitle .listItemContent [slot=listItemPrimary],
+li.listItem .listItemContent [slot=listItemPrimary] {
+  text-overflow: ellipsis;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+}
+li.listItemTitle .listItemContent [slot=listItemSecondary],
+li.listItem .listItemContent [slot=listItemSecondary] {
+  opacity: 0.8;
+  text-overflow: ellipsis;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+}
+li.listItemTitle [slot=listItemAction],
+li.listItem [slot=listItemAction] {
+  padding: 0 0.5rem;
+}
+li.listItemTitle [slot=listItemIcon],
+li.listItem [slot=listItemIcon] {
+  text-align: center;
+  width: 2rem;
+  min-width: 2rem;
+  overflow: hidden;
+  opacity: 0.8;
+}
+
+li.listItemTitle {
+  position: sticky;
+  margin-top: 0px !important;
+  top: 0px;
+  z-index: 1;
+}
+
+[slot=listFooter] {
+  position: sticky;
+  margin-bottom: 0px !important;
+  bottom: 0px;
+  background-color: var(--sld-color-background-alpha-low);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  z-index: 1;
+}
+
+li.listItem:hover {
+  border-color: var(--sld-hover-border-color);
+  background-color: var(--sld-color-primary-alpha-low);
+}
+li.listItem.selected, li.listItem[data-selected=true] {
+  border-color: var(--sld-selected-border-color);
+  background-color: var(--sld-selected-background-color);
+  box-shadow: var(--sld-selected-shadow);
+}
+li.listItem.density-none, li.listItem[data-density=none] {
+  padding: 0;
+}
+li.listItem.density-tight, li.listItem[data-density=tight] {
+  padding: 0.5rem 0;
+}
+li.listItem.density-small, li.listItem[data-density=small] {
+  padding: 0.75rem 0;
+}
+li.listItem.density-default, li.listItem[data-density=default] {
+  padding: 1rem 0;
+}
+li.listItem.density-kind, li.listItem[data-density=kind] {
+  padding: 1.5rem 0;
+}
+li.listItem.density-unset, li.listItem[data-density=unset] {
+  padding: auto;
+}
+li.listItem.selected, li.listItem[data-selected=true] {
+  border: none;
+  background-color: var(--sld-color-background-darken-mid);
+}
+li.listItem.selected .listItemChip, li.listItem[data-selected=true] .listItemChip {
+  position: absolute;
+  min-height: 16px;
+  height: 50%;
+  width: 3px;
+  background-color: var(--sld-color-primary);
+  border-radius: var(--sld-radius-med);
+  left: 0;
+  border: 1px solid var(--sld-color-primary-alpha-mid);
+}
+/** Input.scss -----*/ 
+input {
+  border: var(--sld-input-border-width) solid var(--sld-input-border-color);
+  border-bottom: var(--sld-input-border-bottom-width) solid var(--sld-input-border-bottom-color);
+  border-radius: var(--sld-input-radius);
+  padding: var(--sld-input-padding);
+  box-shadow: var(--sld-input-shadow);
+  background-color: var(--sld-input-background);
+  color: var(--sld-color-foreground);
+}
+input [error] {
+  border-bottom: red;
+}
+input[data-height=tiny] {
+  height: calc(1rem - var(--sld-border-bottom-size, 2px));
+  padding: 0;
+}
+input[data-height=small] {
+  height: calc(1.9rem - var(--sld-border-bottom-size, 2px));
+}
+input[data-height=default] {
+  height: calc(2.5rem - var(--sld-border-bottom-size, 2px));
+}
+input[data-height=large] {
+  height: calc(4rem - var(--sld-border-bottom-size, 2px));
+}
+input[borderless=true] {
+  border: 0px solid none;
+}
+input[data-width=tiny] {
+  width: 2rem;
+}
+input[data-width=small] {
+  width: 6rem;
+}
+input[data-width=medium] {
+  width: 8rem;
+}
+input[data-width=default] {
+  width: 12rem;
+}
+input[data-width=large] {
+  width: 16rem;
+}
+input[data-width=full] {
+  width: 100%;
+}
+input[data-width=auto] {
+  width: auto;
+}
+input:hover {
+  border-color: var(--sld-hover-border-color);
+  background-color: var(--sld-color-primary-alpha-low);
+}
+
+.inputStart {
+  position: absolute;
+  height: 100%;
+  max-height: 100%;
+  width: 24px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: var(--sld-input-radius, var(--sld-radius-small));
+}
+
+.inputEnd {
+  position: absolute;
+  right: 0;
+  height: 100%;
+  max-height: 100%;
+  width: 24px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  border-radius: var(--sld-input-radius, var(--sld-radius-small));
+}
+/** Select.scss -----*/ 
+.selectRoot {
+  background-color: var(--sld-color-background);
+  height: 160px;
+  width: 160px;
+  border-radius: var(--sld-radius-small);
+}
+/** switch.scss -----*/ 
+.switch {
+  --sld-switch-border-radius: var(--sld-radius-large);
+  --sld-switch-background: var(--sld-color-paper);
+  --sld-switch-checked-background: var(--sld-color-primary);
+}
+
+label {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  min-width: 42px;
+}
+
+.switch {
+  display: inline-block;
+  position: relative;
+  border-radius: var(--sld-switch-border-radius);
+  overflow: hidden;
+  cursor: pointer;
+}
+.switch :hover .switchHandle {
+  background-color: var(--sld-color-secondary) !important;
+}
+.switch :has(input:checked) {
+  background-color: var(--sld-switch-checked-background);
+}
+.switch .switchGutter {
+  border: 1px solid var(--sld-color-primary-alpha-low);
+  border-radius: var(--sld-switch-border-radius);
+  padding: 3px;
+  background-color: var(--sld-switch-background);
+}
+.switch .switchGutter input {
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: -50px;
+  left: -50px;
+}
+.switch .switchGutter input:checked + .switchHandle {
+  left: calc(100% - 16px);
+  border-color: var(--sld-color-secondary-alpha-mid);
+  box-shadow: var(--box-shad-3);
+  background-color: var(--sld-color-background);
+}
+.switch .switchGutter input + .switchHandle {
+  position: relative;
+  display: block;
+  width: 16px;
+  height: 16px;
+  background: white;
+  border-radius: var(--sld-switch-border-radius);
+  left: 0;
+  transition: all 0.1s;
+  background-color: var(--sld-color-primary);
+  border: 1px solid var(--sld-color-secondary-alpha-low);
+  box-shadow: var(--box-shad-1);
+}
+.switch .switchGutter .test {
+  ratios: 2 3 aspect(7);
+  box: width(1px, 3) height(1px);
+  border: radius() shadow() top(radius());
+  gutters: gap() padding();
+}
+/** Drawer.scss -----*/ 
+.drawer {
+  color: var(--css-drawer-color, inherit);
+  background-color: var(--sld-drawer-bg-color, var(--sld-color-paper-alpha-low));
+  backdrop-filter: var(--sld-drawer-backdrop-blur, blur(0px));
+  z-index: 3000;
+  box-shadow: var(--box-shad-3);
+  border-left: 1px solid var(--sld-drawer-border-color, var(--sld-color-primary-alpha));
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.1s;
+}
+.drawer .opener {
+  position: absolute;
+  z-index: 8600;
+}
+.drawer .header {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+}
+.drawer .header .title {
+  font-size: large;
+}
+.drawer .content {
+  flex: 1;
+  position: relative;
+}
+/** Tabs.scss -----*/ 
+.tabsRoot {
+  position: relative;
+  display: flex;
+}
+.tabsRoot[data-orientation=horizontal] ul {
+  flex-direction: column;
+}
+.tabsRoot[data-orientation=vertical] {
+  flex-direction: column;
+}
+
+.tabsNav {
+  padding: 0.25rem 0;
+  border-bottom: 1px solid var(--sld-tabs-nav-border-color, var(--sld-color-primary-alpha-high));
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.tabsNav[data-orientation=horizontal] {
+  flex-direction: column;
+}
+.tabsNav .tabsRail {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+.tabsNav .tabsRail > div {
+  padding: var(--box-density-preset-small);
+  min-width: 48px;
+  cursor: pointer;
+}
+.tabsNav .tabsRail > div.active {
+  font-weight: bold;
+}
+.tabsNav .tabsContent {
+  background-color: var(--sld-color-background);
+  position: relative;
+  width: 100%;
+}
+.tabsNav .tabsActiveCellContainer {
+  top: auto;
+  position: relative;
+  min-height: 4px;
+  transition: all 0.25s;
+}
+
+.tabSlot {
+  border-radius: var(--sld-radius-small);
+  min-height: 4px;
+  background-color: var(--sld-color-primary);
+  width: 100%;
+  position: absolute;
+  transition: all 0.25s;
+  z-index: 200;
+}
+/** presets.scss -----*/ 
+
+/** slotui-vars.scss -----*/ 
+:root {
+  --sld-radius-tiny: 2px;
+  --sld-radius-small: 4px;
+  --sld-radius-med: 8px;
+  --sld-radius-large: 16px;
+}
+
+:root {
+  --sld-color-primary: #98b148;
+  --sld-color-secondary: #55492b;
+  --sld-color-tertiary: #9999cc;
+  --sld-color-foreground: #333333;
+  --sld-color-background: #ffffff;
+  --sld-color-paper: #f1f1f1;
+  --sld-color-primary-alpha-low: color-mix(in srgb, var(--sld-color-primary), transparent 50%);
+  --sld-color-secondary-alpha-mid: color-mix(in srgb, var(--sld-color-secondary), transparent 50%);
+  --sld-color-tertiary-alpha-mid: color-mix(in srgb, var(--sld-color-tertiary), transparent 50%);
+  --sld-color-background-alpha-low: color-mix(in srgb, var(--sld-color-background), transparent 10%);
+  --sld-color-background-alpha-mid: color-mix(in srgb, var(--sld-color-background), transparent 50%);
+  --sld-color-background-alpha-high: color-mix(in srgb, var(--sld-color-background), transparent 90%);
+  --sld-color-foreground-alpha-low: color-mix(in srgb, var(--sld-color-foreground), transparent 10%);
+  --sld-color-foreground-alpha-mid: color-mix(in srgb, var(--sld-color-foreground), transparent 50%);
+  --sld-color-foreground-alpha-high: color-mix(in srgb, var(--sld-color-foreground), transparent 90%);
+  --sld-color-background-darken-low: color-mix(in srgb, var(--sld-color-background), #999 10%);
+  --sld-color-background-darken-mid: color-mix(in srgb, var(--sld-color-background), #999 40%);
+  --sld-color-background-darken-high: color-mix(in srgb, var(--sld-color-background), #999 80%);
+  --sld-color-foreground-darken-low: color-mix(in srgb, var(--sld-color-foreground), #999 10%);
+  --sld-color-foreground-darken-mid: color-mix(in srgb, var(--sld-color-foreground), #999 40%);
+  --sld-color-foreground-darken-high: color-mix(in srgb, var(--sld-color-foreground), #999 80%);
+  --sld-color-border: color-mix(in srgb, var(--sld-color-foreground), transparent 70%);
+  --sld-theme-gap-tiny: 1.5rem;
+  --sld-hover-background-color: var(--sld-color-secondary-alpha-mid);
+  --sld-hover-border-color: var(--sld-color-foreground-alpha-high);
+  --sld-hover-shadow: var(--box-shad-3);
+  --sld-selected-background-color: var(--sld-color-primary-alpha-mid);
+  --sld-selected-border-color: var(--sld-color-primary);
+  --sld-selected-shadow: var(--box-shad-4);
+}
+
+:root.dark,
+:root[data-theme=dark] {
+  --sld-color-foreground: #ffffff;
+  --sld-color-background: #27323a;
+  --sld-color-paper: #3a3b3b;
+  --sld-color-border: color-mix(in srgb, var(--sld-color-foreground), transparent 60%);
+}
+
+button {
+  --sld-button-font-size: 11px;
+  --sld-button-radius: var(--sld-radius-small);
+  --sld-button-border-color: transparent;
+  --sld-button-border-width: 1px;
+  --sld-button-text-align: center;
+  --sld-button-padding: 0;
+  --sld-button-background: var(--sld-color-primary);
+  --sld-button-hover-border-color: var(--sld-color-primary);
+  --sld-button-active-border-color: var(--sld-color-primary);
+  --sld-button-focus-border-color: var(--sld-color-primary);
+  --sld-button-hover-shadow: var(--box-shad-3);
+  --sld-button-active-shadow: var(--box-shad-4);
+  --sld-button-focus-shadow: var(--box-shad-4);
+}
+
+input {
+  --sld-input-background: var(--sld-color-background-alpha-high);
+  --sld-input-border-width: 1px;
+  --sld-input-border-color: var(--sld-color-foreground-alpha-mid);
+  --sld-input-border-bottom-width: 2px;
+  --sld-input-border-bottom-color: var(--sld-color-primary-darker, rgb(208, 191, 151));
+  --sld-input-radius: var(--sld-radius-small);
+  --sld-input-padding: 0 0.5rem;
+  --sld-input-shadow: inset 0px 0px 3px 1px rgba(51, 51, 51, 0.1);
+}
+
+ul.listRoot {
+  --sld-list-padding: 0;
+  --sld-list-item-padding: 0;
+  --sld-list-item-radius: var(--sld-radius-small);
+  --sld-list-item-selected-background: var(--sld-selected-background-color);
+}
+
+.cartoucheControl {
+  --sld-control-height: 69px;
+}
+/** menu.scss -----*/ 
+.menu {
+  margin: 0;
+  min-width: 150px;
+  padding: 0.25rem;
+  cursor: pointer;
+  display: inline-block;
+  color: var(--sld-color-foreground);
+}
+.menu.bordered {
+  border: 0.5px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--sld-radius-small);
+}
+.menu.density-tight .menuItem {
+  padding: 0.25rem 0;
+}
+.menu.density-default .menuItem {
+  padding: 0.5rem 0;
+}
+.menu.density-kind .menuItem {
+  padding: 1rem 0;
+}
+
+.menuItem {
+  border-radius: var(--sld-radius-small);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  border: 1px solid transparent;
+}
+.menuItem:hover {
+  border-color: var(--sld-hover-border-color);
+  background-color: var(--sld-color-primary-alpha-low);
+}
+.menuItem.selected, .menuItem[data-selected=true] {
+  border-color: var(--sld-selected-border-color);
+  background-color: var(--sld-selected-background-color);
+  box-shadow: var(--sld-selected-shadow);
+}
+.menuItem .menuItemIcon {
+  width: 16px;
+  max-width: 16px;
+  text-align: center;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.menuItem .menuItemText {
+  flex: 1;
+  margin-left: 1rem;
+}
+.menuItem .menuItemActions {
+  display: block;
+}
+.menuItem.density-kind {
+  padding: 1rem 0;
+}
+/** tree.scss -----*/ 
+

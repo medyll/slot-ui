@@ -72,7 +72,7 @@
 			display: block;
 			position: absolute;
 			z-index: 2;
-			border-radius: 16px;
+			border-radius: var(--sld-radius-large);
 			transition: all 0.25s;
 			max-height: 100%;
 			background-color: var(--css-button-chip-color, var(--sld-color-primary));

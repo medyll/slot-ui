@@ -83,7 +83,7 @@
 	}
 
 	.buttonPole {
-		border-radius: 4px;
+		border-radius: var(--sld-radius-small);
 		border: 1px solid rgba(208, 191, 151, 0.3);
 		padding: 0.5rem;
 	}

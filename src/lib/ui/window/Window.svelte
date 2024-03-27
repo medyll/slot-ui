@@ -188,7 +188,7 @@
 	@import '../../styles/presets.scss';
 	.window {
 		display: block;
-		border-radius: 6px;
+		border-radius: var(--sld-radius-small);
 		background-color: var(--sld-color-background);
 		color: var(--sld-color-foreground);
 		border: 1px solid rgba(255, 255, 255, 0.1);

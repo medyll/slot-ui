@@ -52,14 +52,14 @@
 {#if icon || endIcon || inputType === 'search' || $$slots.inputStart || $$slots.inputEnd}
 	<div style="position:relative;display:block">
 		{#if icon || $$slots.inputStart}
-			<div class="inpuStart">
+			<div class="inputStart">
 				<slot name="inputStart">
 					<Icon {icon} style="max-width:100%;max-height:100%;color:{iconColor}" />
 				</slot>
 			</div>
 		{/if}
 		{#if $$slots.inputEnd || endIcon || inputType === 'search'}
-			<div class="inpuEnd">
+			<div class="inputEnd">
 				{#if $$slots.inputEnd || endIcon}
 					<slot name="inputEnd">
 						<Icon icon={endIcon} style="max-width:100%;max-height:100%;color:{endIconColor}" />

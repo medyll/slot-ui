@@ -1,7 +1,3 @@
-* {
-    box-sizing: border-box;
-}
-
 @mixin input-sizes-presets {
     &[data-height="tiny"] {
         height: calc(1rem - var(--sld-border-bottom-size, 2px));

@@ -1,0 +1,57 @@
+.menu {
+  margin: 0;
+  min-width: 150px;
+  padding: 0.25rem;
+  cursor: pointer;
+  display: inline-block;
+  color: var(--sld-color-foreground);
+}
+.menu.bordered {
+  border: 0.5px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--sld-radius-small);
+}
+.menu.density-tight .menuItem {
+  padding: 0.25rem 0;
+}
+.menu.density-default .menuItem {
+  padding: 0.5rem 0;
+}
+.menu.density-kind .menuItem {
+  padding: 1rem 0;
+}
+
+.menuItem {
+  border-radius: var(--sld-radius-small);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  border: 1px solid transparent;
+}
+.menuItem:hover {
+  border-color: var(--sld-hover-border-color);
+  background-color: var(--sld-color-primary-alpha-low);
+}
+.menuItem.selected, .menuItem[data-selected=true] {
+  border-color: var(--sld-selected-border-color);
+  background-color: var(--sld-selected-background-color);
+  box-shadow: var(--sld-selected-shadow);
+}
+.menuItem .menuItemIcon {
+  width: 16px;
+  max-width: 16px;
+  text-align: center;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.menuItem .menuItemText {
+  flex: 1;
+  margin-left: 1rem;
+}
+.menuItem .menuItemActions {
+  display: block;
+}
+.menuItem.density-kind {
+  padding: 1rem 0;
+}

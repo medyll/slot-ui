@@ -1,4 +1,4 @@
-@import "../../styles/slotui-vars.scss";
+// @import "../../styles/slotui-vars.scss";
 @import "../../styles/presets.scss";
 [data-theme="dark"] {
 	--sld-color-border: rgba(255, 255, 255, 0.1);
@@ -63,7 +63,7 @@
 	// display: flex;
 	border-bottom: 1px solid var(--sld-color-border);
 	// margin: 0 0.5rem;
-	/* border-radius: 6px;
+	/* border-radius: var(--sld-radius-small);
 			margin: 0.25rem 0; */
 
 	// content-visibility: auto;

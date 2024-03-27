@@ -1,4 +1,4 @@
-@import "../../styles/slotui-vars.scss";
+// @import "../../styles/slotui-vars.scss";
 @import "../../styles/presets.scss";
 
 .tabsRoot {
@@ -56,7 +56,7 @@
 }
 
 .tabSlot {
-  border-radius: 6px;
+  border-radius: var(--sld-radius-small);
   min-height: 4px;
   background-color: var(--sld-color-primary);
   width: 100%;

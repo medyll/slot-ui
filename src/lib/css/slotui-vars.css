@@ -1,0 +1,84 @@
+:root {
+  --sld-radius-tiny: 2px;
+  --sld-radius-small: 4px;
+  --sld-radius-med: 8px;
+  --sld-radius-large: 16px;
+}
+
+:root {
+  --sld-color-primary: #98b148;
+  --sld-color-secondary: #55492b;
+  --sld-color-tertiary: #9999cc;
+  --sld-color-foreground: #333333;
+  --sld-color-background: #ffffff;
+  --sld-color-paper: #f1f1f1;
+  --sld-color-primary-alpha-low: color-mix(in srgb, var(--sld-color-primary), transparent 50%);
+  --sld-color-secondary-alpha-mid: color-mix(in srgb, var(--sld-color-secondary), transparent 50%);
+  --sld-color-tertiary-alpha-mid: color-mix(in srgb, var(--sld-color-tertiary), transparent 50%);
+  --sld-color-background-alpha-low: color-mix(in srgb, var(--sld-color-background), transparent 10%);
+  --sld-color-background-alpha-mid: color-mix(in srgb, var(--sld-color-background), transparent 50%);
+  --sld-color-background-alpha-high: color-mix(in srgb, var(--sld-color-background), transparent 90%);
+  --sld-color-foreground-alpha-low: color-mix(in srgb, var(--sld-color-foreground), transparent 10%);
+  --sld-color-foreground-alpha-mid: color-mix(in srgb, var(--sld-color-foreground), transparent 50%);
+  --sld-color-foreground-alpha-high: color-mix(in srgb, var(--sld-color-foreground), transparent 90%);
+  --sld-color-background-darken-low: color-mix(in srgb, var(--sld-color-background), #999 10%);
+  --sld-color-background-darken-mid: color-mix(in srgb, var(--sld-color-background), #999 40%);
+  --sld-color-background-darken-high: color-mix(in srgb, var(--sld-color-background), #999 80%);
+  --sld-color-foreground-darken-low: color-mix(in srgb, var(--sld-color-foreground), #999 10%);
+  --sld-color-foreground-darken-mid: color-mix(in srgb, var(--sld-color-foreground), #999 40%);
+  --sld-color-foreground-darken-high: color-mix(in srgb, var(--sld-color-foreground), #999 80%);
+  --sld-color-border: color-mix(in srgb, var(--sld-color-foreground), transparent 70%);
+  --sld-theme-gap-tiny: 1.5rem;
+  --sld-hover-background-color: var(--sld-color-secondary-alpha-mid);
+  --sld-hover-border-color: var(--sld-color-foreground-alpha-high);
+  --sld-hover-shadow: var(--box-shad-3);
+  --sld-selected-background-color: var(--sld-color-primary-alpha-mid);
+  --sld-selected-border-color: var(--sld-color-primary);
+  --sld-selected-shadow: var(--box-shad-4);
+}
+
+:root.dark,
+:root[data-theme=dark] {
+  --sld-color-foreground: #ffffff;
+  --sld-color-background: #27323a;
+  --sld-color-paper: #3a3b3b;
+  --sld-color-border: color-mix(in srgb, var(--sld-color-foreground), transparent 60%);
+}
+
+button {
+  --sld-button-font-size: 11px;
+  --sld-button-radius: var(--sld-radius-small);
+  --sld-button-border-color: transparent;
+  --sld-button-border-width: 1px;
+  --sld-button-text-align: center;
+  --sld-button-padding: 0;
+  --sld-button-background: var(--sld-color-primary);
+  --sld-button-hover-border-color: var(--sld-color-primary);
+  --sld-button-active-border-color: var(--sld-color-primary);
+  --sld-button-focus-border-color: var(--sld-color-primary);
+  --sld-button-hover-shadow: var(--box-shad-3);
+  --sld-button-active-shadow: var(--box-shad-4);
+  --sld-button-focus-shadow: var(--box-shad-4);
+}
+
+input {
+  --sld-input-background: var(--sld-color-background-alpha-high);
+  --sld-input-border-width: 1px;
+  --sld-input-border-color: var(--sld-color-foreground-alpha-mid);
+  --sld-input-border-bottom-width: 2px;
+  --sld-input-border-bottom-color: var(--sld-color-primary-darker, rgb(208, 191, 151));
+  --sld-input-radius: var(--sld-radius-small);
+  --sld-input-padding: 0 0.5rem;
+  --sld-input-shadow: inset 0px 0px 3px 1px rgba(51, 51, 51, 0.1);
+}
+
+ul.listRoot {
+  --sld-list-padding: 0;
+  --sld-list-item-padding: 0;
+  --sld-list-item-radius: var(--sld-radius-small);
+  --sld-list-item-selected-background: var(--sld-selected-background-color);
+}
+
+.cartoucheControl {
+  --sld-control-height: 69px;
+}

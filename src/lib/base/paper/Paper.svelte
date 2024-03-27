@@ -42,6 +42,6 @@
 	.paper {
 		color: var(--sld-color-foreground);
 		background-color: var(--sld-color-paper);
-		border-radius: 6px;
+		border-radius: var(--sld-radius-small);
 	}
 </style>

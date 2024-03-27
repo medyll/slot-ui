@@ -1,0 +1,28 @@
+.drawer {
+  color: var(--css-drawer-color, inherit);
+  background-color: var(--sld-drawer-bg-color, var(--sld-color-paper-alpha-low));
+  backdrop-filter: var(--sld-drawer-backdrop-blur, blur(0px));
+  z-index: 3000;
+  box-shadow: var(--box-shad-3);
+  border-left: 1px solid var(--sld-drawer-border-color, var(--sld-color-primary-alpha));
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.1s;
+}
+.drawer .opener {
+  position: absolute;
+  z-index: 8600;
+}
+.drawer .header {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+}
+.drawer .header .title {
+  font-size: large;
+}
+.drawer .content {
+  flex: 1;
+  position: relative;
+}

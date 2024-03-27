@@ -1,4 +1,5 @@
 <svelte:options accessors={true} runes={true} />
+
 <script lang="ts">
 	import type { CommonProps } from '$lib/types/index.js';
 	import type { Snippet } from 'svelte';
@@ -32,7 +33,6 @@
 		activeStep = 0,
 		children
 	} = $props<StepperProps>();
-	
 </script>
 
 <div class="stepper" {stepperOrientation}>
@@ -56,7 +56,7 @@
 		.step {
 			padding: 0.5rem;
 			background-color: red;
-			border-radius: 10px;
+			border-radius: var(--sld-radius-med);
 			margin-top: 10px;
 
 			&.active {

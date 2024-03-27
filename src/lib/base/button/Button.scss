@@ -1,5 +1,5 @@
 @import "../../styles/presets.scss";
-@import "../../styles/slotui-vars.scss";
+// @import "../../styles/slotui-vars.scss";
 
 .actionButton {
     height: 100%;
@@ -185,7 +185,7 @@ input[type="submit"] {
         transform: translate(-50%, 0);
         width: 50%;
         background-color: var(--css-button-chip-color, var(--sld-color-primary));
-        border-radius: 16px;
+        border-radius: var(--sld-radius-large);
         bottom: 2px;
     }
 }

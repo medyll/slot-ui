@@ -1,6 +1,3 @@
-// @import "../../styles/slotui-vars.scss";
-@import "../../styles/presets.scss";
-
 .selectRoot {
   background-color: var(--sld-color-background);
   height: 160px;
